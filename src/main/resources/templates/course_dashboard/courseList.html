@@ -83,7 +83,7 @@
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
 							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
-							<a href="./CourseController" class="dropdown-item">課程管理</a>
+							<a href="@{/courses}" class="dropdown-item">課程管理</a>
 							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
                         </div>
                     </div>
@@ -124,33 +124,36 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">廣告紀錄</h6>
-                        <button type="button" class="btn btn-primary mb-0" id="btn-toCreate">新增紀錄</button>
+                        <h6 class="mb-0">課程資訊</h6>
+                        <button type="button" class="btn btn-primary mb-0" id="btn-toCreateCourse">新增課程</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0">
+                        <table id="table_id" class="table align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
-                                    <th scope="col">廣告編號</th>
-                                    <th scope="col">刊登公司統編</th>
-                                    <th scope="col">價格(萬)</th>
-                                    <th scope="col">刊登開始時間</th>
-                                    <th scope="col">刊登結束時間</th>
-                                    <th scope="col">備註</th>
-                                    <th scope="col">修改</th>
+                                    <th scope="col">編號</th>
+                                    <th scope="col">類別</th>
+                                    <th scope="col">名稱</th>
+                                    <th scope="col">講師</th>
+                                    <th scope="col">上架時間</th>
+                                    <th scope="col">評分</th>
+                                    <th scope="col">價錢</th>
+									<th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="event:${events}">
-                                	<td th:text="${event.eventId}"></td>
-                                	<td th:text="${event.compId}"></td>
-                                	<td th:text="${event.price}"></td>
-                                	<td th:text="${#dates.format(event.postStart, 'yyyy-MM-dd')}"></td>
-                                	<td th:text="${#dates.format(event.postEnd, 'yyyy-MM-dd')}"></td>
-                                	<td th:text="${event.remark}"></td>
+                                <tr th:each="course:${courseList}">
+                                	<td th:text="${course.courseNo}"></td>
+                                	<td th:text="${course.courseCategory}"></td>
+                                	<td th:text="${course.courseName}"></td>
+                                	<td th:text="${course.lecturer}"></td>
+                                	<td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>
+                                	<td th:text="${course.score}"></td>
+                                	<td th:text="${course.price}"></td>
                                 	<td>
-                                		<a class="btn btn-outline-primary m-0 btn-eventUpdate" th:href="@{event/}+${event.eventId}">更新</a>
-                                        <a class="btn btn-outline-danger m-0" th:id="${event.eventId}" onclick="del(this.id)">刪除</a>
+                                		<a class="btn btn-outline-primary m-0" th:href="@{courses/detail/}+${course.courseNo}">詳細</a>
+                                		<a class="btn btn-outline-primary m-0 btn-courseUpdate" th:href="@{toUpdatePage/}+${course.courseNo}">更新</a>
+                                        <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>
                                 	</td>
                                 </tr>
                             </tbody>
@@ -194,8 +197,9 @@
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/js/checkEventForm.js}" src="js/checkEventForm.js"></script>
+    <script th:src="@{/js/checkCourseForm.js}" src="js/checkCourseForm.js"></script>
     <script>
-        function del(id) {
+        function deleteByNo(courseNo) {
 		Swal.fire({
 			title: '確認是否刪除?',
 			text: "刪除後將無法回復!",
@@ -215,10 +219,10 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/event/'+id,
+                        url: '/courses/'+courseNo,
                         type: 'DELETE',
                         success: function(result) {
-                            window.location.href='./events'
+                            window.location.href='./courses'
                         }
                     });
 				}, 1500)

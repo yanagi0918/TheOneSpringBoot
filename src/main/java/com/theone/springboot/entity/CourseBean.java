@@ -31,7 +31,6 @@ public class CourseBean {
 	private Double score;
 	private Integer price;
 	
-	
 	public CourseBean() {
 	}
 	
@@ -137,6 +136,5 @@ public class CourseBean {
 				+ ", coursePicUrl=" + coursePicUrl + ", courseVedioUrl=" + courseVedioUrl + ", score=" + score
 				+ ", price=" + price + "]";
 	}
-	
 	
 }
