@@ -82,7 +82,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
+							<a th:href="@{/dashboard/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
 							<a href="./CourseController" class="dropdown-item">課程管理</a>
 							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
                         </div>
@@ -125,7 +125,7 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">新增紀錄</h6>
-                        <form th:action="@{/event}" action="./EventsManager" method="post" enctype="multipart/form-data" id="form">
+                        <form th:action="@{/dashboard/event}" action="./EventsManager" method="post" enctype="multipart/form-data" id="form">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">刊登公司統編</label>
                                 <div class="col-sm-8">

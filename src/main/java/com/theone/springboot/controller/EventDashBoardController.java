@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import com.theone.springboot.entity.Event;
 import com.theone.springboot.service.EventService;
 
 @Controller
+@RequestMapping("/dashboard")
 public class EventDashBoardController {
 
 	@Autowired
@@ -51,7 +53,7 @@ public class EventDashBoardController {
 
 		eventService.saveOrUpdate(event);
 
-		return "redirect:/events";
+		return "redirect:/dashboard/events";
 	}
 
 	@GetMapping("/event/{id}")

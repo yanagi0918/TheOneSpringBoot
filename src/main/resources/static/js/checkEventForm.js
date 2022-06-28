@@ -29,16 +29,13 @@ $(function() {
 		}
 	}
 
-	$('.btn-eventUpdate').click(function() {
-		location.href = `./EventsManager?UpdateId=${$(this).val()}`;
-	})
 	
 	$('#btn-toCreate').click(function() {
-		location.href = "/event";
+		location.href = "/dashboard/event";
 	})
 	
 	$('#btn-goBack').click(function() {
-		location.href = "/events";
+		location.href = "/dashboard/events";
 	})
 
 	$('#btn-submit').click(function() {
