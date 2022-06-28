@@ -83,7 +83,7 @@
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
 							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
-							<a href="./CourseController" class="dropdown-item">課程管理</a>
+							<a th:href="@{/courses}" class="dropdown-item">課程管理</a>
 							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
                         </div>
                     </div>
@@ -124,21 +124,33 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">新增紀錄</h6>
-                        <form th:action="@{/event}" action="./EventsManager" method="post" enctype="multipart/form-data" id="form">
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">刊登公司統編</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="compId" maxlength="8" required id="compId">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">價格(萬)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="price" maxlength="10" required id="price">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
+                        <h6 class="mb-4">新增課程</h6>
+                        <form th:action="@{/courses}" method="post" enctype="multipart/form-data" id="form" onsubmit="return checkCourseForm()">
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">課程名稱</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="courseName"
+										maxlength="20" required id="courseName">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">課程分類</label>
+								<div class="col-sm-8">
+									<select name="courseCategory" required id="courseCategory">
+										<option value="英文證照">英文證照</option>
+										<option value="日語證照">日語證照</option>
+										<option value="韓語證照">韓語證照</option>
+										<option value="生涯轉換與轉業">生涯轉換與轉業</option>
+										<option value="自我認知">自我認知</option>
+										<option value="求職技巧">求職技巧</option>
+										<option value="就業市場現況與趨勢">就業市場現況與趨勢</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">廣告圖</label>
                                 <div class="col-sm-8 text-center">
                                     <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="#" alt="請選擇廣告圖" style="width: 320px; height: 200px;">

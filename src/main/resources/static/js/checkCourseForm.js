@@ -11,7 +11,6 @@ $(document).ready(function () {
 
 
 $(function () {
-
 	$('#btn-toCreateCourse').click(function() {
 			location.href = "/toCreatePage";
 		})
