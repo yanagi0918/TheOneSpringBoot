@@ -1,8 +1,5 @@
 package com.theone.springboot.controller;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.service.CompanyService;
@@ -20,7 +16,7 @@ import com.theone.springboot.service.CompanyService;
 
 @RequestMapping("/company")
 @Controller
-public class CompanyServlet {
+public class CompanyDashBoardController {
 	
 	@Autowired
 	private CompanyService companyService;
@@ -38,22 +34,8 @@ public class CompanyServlet {
     }
 	
 	@PostMapping("/saveCompany")
-	public String saveCustomer(@ModelAttribute("company") Company company ,Model m) {
+	public String saveCustomer(@ModelAttribute("company") Company company) {
 		
-		//設定輸入錯誤
-		Map<String, String> errorMsg = new HashMap<String, String>();
-		m.addAttribute("error", errorMsg);
-		//讀取資料
-		int compid=company.getCompid();
-		
-		//判斷新增是否錯誤
-		if(companyService.isDup(compid)) {
-			errorMsg.put("compid", "帳號(統編)重複，請重新輸入新帳號");
-		}
-		
-		if(!errorMsg.isEmpty()){
-			return "CompanyCreate";
-		}
 		companyService.saveOrUpdate(company);
 		return "redirect:/company/list";
 	}

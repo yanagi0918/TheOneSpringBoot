@@ -124,105 +124,81 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">資料內容</h6>
-                        <div class="row mb-3">
-                                    <input type="hidden"  class="form-control" name="comppk" id="comppk" th:value="${companydeatail.comppk}" readonly="readonly">
-                            </div>
-                            <form>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">帳號(統編)</label>
-                                <div class="col-sm-8">
-                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" th:value="${companydeatail.compid}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">密碼</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="compwd"  id="compwd" th:value="${companydeatail.compwd}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司名稱</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="corpname"  id="corpname" th:value="${companydeatail.corpname}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">負責人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="owner" id="owner" th:value="${companydeatail.owner}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">產業</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="industry"  id="industry" th:value="${companydeatail.industry}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="contact"  id="contact" th:value="${companydeatail.contact}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡電話</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="comptele" id="comptele" th:value="${companydeatail.comptele}" readonly="readonly">
-                                </div>
-                            </div>
-                        
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">傳真號碼</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="fax" id="fax" th:value="${companydeatail.fax}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司地址</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="compaddress"  id="compaddress" th:value="${companydeatail.compaddress}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">員工人數</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="empnumber"  required id="empnumber" th:value="${companydeatail.empnumber}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司網站</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" id="website" th:value="${companydeatail.website}" readonly="readonly">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">資本額</label>
-                                <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" th:value="${companydeatail.capital}" readonly="readonly">  
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='../list'; return false;">返回</button>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                        <h1 class="mb-4">更新職缺</h1>
+<form th:action="@{/job/saveJob}" action="/jobupdate" method='post' enctype="multipart/form-data" >
+<div class="row mb-3">
+<input type='hidden' name='job_id' th:value="${jobupdate.job_id}"/>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">統一編號:</label>
+<div class="col-sm-8">
+<input type='text' name='' th:value="${jobupdate.comp_id}" disabled class="form-control"/>
+<input type='hidden' name='comp_id' th:value="${jobupdate.comp_id}"/>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">職缺名稱:</label>
+<div class="col-sm-8">
+<input type='text' name='title' th:value="${jobupdate.title}"  class="form-control" required/>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">職缺性質:</label>
+<div class="col-sm-8">
+<select name='job_description' class="form-select" >
+<option selected th:text="${jobupdate.job_description}"></option>
+<option>全職</option>
+<option>兼職</option>
+<option>工讀</option>
+<option>其他</option>
+</select>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">職缺條件:</label>
+<div class="col-sm-8">
+<input type='text' name='qualification' th:value="${jobupdate.qualification}" class="form-control" required/>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">需要人數:</label>
+<div class="col-sm-8">
+<input type='text' name='required_number' th:value="${jobupdate.required_number}" class="form-control" required/>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-2 col-form-label">每月薪資:</label>
+<div class="col-sm-8">  
+<select name='salary' class="form-select">
+<option selected th:text="${jobupdate.salary}"></option>
+<option>面議</option>
+<option>25000以下</option>
+<option>30001~35000</option>
+<option>35001~40000</option>
+<option>40001~45000</option>
+<option>45001~50000</option>
+<option>50001~55000</option>
+<option>55000以上</option>
+</select>
+</div>
+</div>
+<div class="center">
+                            <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='../list'; return false;">取消</button>
+</div>
+                        </form>
                     </div>
                 </div>
             </div>
             <!-- Content End -->
-            
-            <!-- Footer Start -->
+
+			<!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
@@ -255,7 +231,8 @@
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:src="@{/js/checkCompanyForm.js}" src="js/checkCompanyForm.js"></script>
+    <script th:src="@{/js/checkJobForm.js}" src="js/checkJobForm.js"></script>
+
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>
 
