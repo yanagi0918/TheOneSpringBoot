@@ -82,9 +82,9 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item">廣告管理</a>
+							<a th:href="@{/dashboard/events}" href="./EventsManager" class="dropdown-item">廣告管理</a>
 							<a href="./CourseController" class="dropdown-item">課程管理</a>
-							<a th:href="@{/orders}" href="./OrdersManager" class="dropdown-item active">訂單管理</a>
+							<a th:href="@{/Order/orders}" href="./OrdersManager" class="dropdown-item active">訂單管理</a>
                         </div>
                     </div>
                 </div>
@@ -218,7 +218,7 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/order/'+id,
+                        url: '/Order/order/'+id,
                         type: 'DELETE',
                         success: function(result) {
                             window.location.href='./orders'

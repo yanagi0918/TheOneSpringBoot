@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Table(name = "Order_Table")
 @Component
 public class Order{
-//	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
@@ -25,7 +24,6 @@ public class Order{
 	private String productId;
 	private Integer totalPrice;
 	@Column(columnDefinition = "Date")
-//	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	private Date orderDate;
 	private String state;
 

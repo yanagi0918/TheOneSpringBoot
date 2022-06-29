@@ -21,11 +21,11 @@ $('#OrdercorrectInput').click(function () {
 	})
 	
 	$('#btn-toCreate').click(function() {
-		location.href = "/order";
+		location.href = "/Order/order";
 	})
 	
     $('#btn-goBack').click(function() {
-		location.href = "/orders";
+		location.href = "/Order/orders";
 	})
 	
 
