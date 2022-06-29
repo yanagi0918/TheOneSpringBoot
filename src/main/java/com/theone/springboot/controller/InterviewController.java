@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
@@ -27,35 +28,33 @@ import com.theone.springboot.service.InterviewService;
 
 
 @Controller
-
+@RequestMapping("/interview")
 public class InterviewController {
 	
 	@Autowired
 	private InterviewService interviewService;
 
 	
-	@GetMapping("/intvs")
+	@GetMapping("/intvlist")
 	public String getIntvs(Model model) {
 		List<Interview> intvs = interviewService.getAllInterviews();
 		model.addAttribute("Interview",intvs);
-		System.out.println("List<Employee> emps");
-		return "intvs";
+		return "interview_dashboard/intvlist";
 	}
 
 	@GetMapping("/intv")
 	public String toCreate() {
-		return "intvCreate";
+		return "interview_dashboard/intvCreate";
 	}
 
-	@PostMapping("/intv")
+	@PostMapping("/saveintv")
 	public String saveOrUpdate(@ModelAttribute Interview intv) {
 		
 		Timestamp ts=new Timestamp(System.currentTimeMillis());
 		intv.setCreateTime(ts);
 		interviewService.saveOrUpdate(intv);
 		
-		System.out.println("String add(Employee emp)");
-		return "redirect:/intvs";
+		return "redirect:/interview/intvlist";
 	}
 
 	@GetMapping("/intv/{id}")
