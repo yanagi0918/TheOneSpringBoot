@@ -3,6 +3,7 @@ package com.theone.springboot.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Interview {
 	@Column(columnDefinition = "Date")
 	private Date intTime;
 
-	private Timestamp createTime;
+	private LocalDateTime createTime;
 
 	private String compName;
 
@@ -45,7 +46,7 @@ public class Interview {
 	public Interview() {
 	}
 
-	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
+	public Interview(Integer cvNo, Date intTime, LocalDateTime createTime, String compName, String jobName, String offer,
 			String test, String qA, String share, Integer compScore, String userId) {
 		super();
 		this.cvNo = cvNo;
@@ -77,11 +78,11 @@ public class Interview {
 		this.intTime = intTime;
 	}
 
-	public Timestamp getCreateTime() {
+	public LocalDateTime getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
 
