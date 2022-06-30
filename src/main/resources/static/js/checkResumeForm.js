@@ -1,3 +1,17 @@
+$(function() {
+		
+		$('#correctInput').click(function() {
+		$('#user_id').val('A123456789')
+		$('#edu').val('大學')
+		$('#school').val('國立東華大學')
+		$('#dept').val('國際企業學系')
+		$('#work_exp').val('數據分析')
+		$('#skills').val('多益825')
+	});
+
+//test
+
+
 
 function checkResumeForm() {
 	let checkResumeForm = true;
@@ -10,8 +24,10 @@ function checkResumeForm() {
 		checkResumeForm = false;
 		return checkResumeForm;
 	}
-	
-		$('.btn-resumeUpdate').click(function() {
+		
+}
+
+	$('.btn-resumeUpdate').click(function() {
 		location.href = `./ResumeServlet?UpdateId=${$(this).val()}`;
 	})
 	
@@ -22,4 +38,6 @@ function checkResumeForm() {
 	$('#btn-goBack').click(function() {
 		location.href = "/resumes";
 	})
-}
+	
+});	
+	
