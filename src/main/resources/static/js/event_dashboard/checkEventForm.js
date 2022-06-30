@@ -1,4 +1,7 @@
 $(function() {
+	$('#btn-goBack').click(function() {
+		location.href = "/dashboard/events";
+	})
 
 	$('#eventWrongInput').click(function() {
 		$('#compId').val('1234567A')
@@ -28,16 +31,30 @@ $(function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
 	
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/event";
+	
+	$('#compId').keyup(function() {
+		let compIdRegex = /^\d{8}$/;
+		if (!compIdRegex.test($("#compId").val())) {
+			$('#compId').attr("class","form-control is-invalid")
+		}else{
+			$('#compId').attr("class","form-control is-valid")
+		}
 	})
 	
-	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/events";
+	$('#price').keyup(function() {
+		let priceRegex = /^\d+$/;
+		if (!priceRegex.test($("#price").val())) {
+			$('#price').attr("class","form-control is-invalid")
+		}else{
+			$('#price').attr("class","form-control is-valid")
+		}
 	})
-
+	
+	
+	
+	
+/*
 	$('#btn-submit').click(function() {
 		let warningStr = "";
 		let checkEventForm = true;
@@ -45,13 +62,19 @@ $(function() {
 		let compIdRegex = /^\d{8}$/;
 		if (!compIdRegex.test($("#compId").val())) {
 			warningStr += "刊登公司統編為8位數字" + "<br>";
+			$('#compId').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#compId').attr("class","form-control is-valid")
 		}
 
 		let priceRegex = /^\d+$/;
 		if (!priceRegex.test($("#price").val())) {
 			warningStr += "價格只能輸入有效數字" + "<br>";
+			$('#price').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#price').attr("class","form-control is-valid")
 		}
 
 		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
@@ -111,7 +134,7 @@ $(function() {
 				html: warningStr,
 			})
 		}
-	})
+	})*/
 
 });
 
