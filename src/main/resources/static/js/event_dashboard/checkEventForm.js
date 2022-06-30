@@ -97,11 +97,11 @@ $(function() {
 						icon: 'success',
 						title: '已完成!',
 						showConfirmButton: false,
-						timer: 1500
+						timer: 800
 					})
 					setTimeout(() => {
 						$('#form').submit();
-					}, 1500)
+					}, 800)
 				}
 			})
 		} else {
