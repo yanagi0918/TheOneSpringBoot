@@ -36,9 +36,11 @@ public class InterviewController {
 
 	
 	@GetMapping("/intvlist")
+
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
+
 		return "interview_dashboard/intvlist";
 	}
 
@@ -62,6 +64,7 @@ public class InterviewController {
 		Interview intv = interviewService.getInterview(id).get();
 		model.addAttribute("intvs", intv);
 		return "interview_dashboard/intvupdate";
+
 	}
 	
 	@ResponseBody

@@ -17,9 +17,9 @@ $(function() {
 		$('#point').val('300')
 	})
 
-	//$('.btn-memberUpdate').click(function() {
-	//	location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
-	//})
+	$('.btn-memberUpdate').click(function() {
+		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
+	})
 
 $("#imgInp").change(function() {
 		readURL(this);
@@ -39,11 +39,11 @@ $("#imgInp").change(function() {
 
 
 	$('#btn-toCreate').click(function() {
-		location.href = "/member";
+		location.href = "/dashboard/member";
 	})
 
 	$('#btn-goBack').click(function() {
-		location.href = "/members";
+		location.href = "/dashboard/members";
 	})
 
 	$('#btn-submit').click(function() {
@@ -63,7 +63,6 @@ $("#imgInp").change(function() {
 		}
 		
 		return checkMemberForm;
-
 	})
 
 });
