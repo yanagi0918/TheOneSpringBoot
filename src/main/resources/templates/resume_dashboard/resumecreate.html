@@ -141,7 +141,7 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*學歷:</label>
 							<div class="col-sm-8">
-								<select name="edu" class="form-select">
+								<select name="edu" class="form-select" id="edu">
 									<option>大學</option>
 									<option>科技大學</option>
 									<option>研究所</option>
@@ -154,20 +154,20 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*畢業學校:</label>
 							<div class="col-sm-8">
-								<input type="text" name="school" class="form-control" required />
+								<input type="text" name="school" class="form-control" id="school" required />
 							</div>
 						</div>
 
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*畢業科系:</label>
 							<div class="col-sm-8">
-								<input type="text" name="dept" class="form-control" required />
+								<input type="text" name="dept" class="form-control" id="dept" required />
 							</div>
 						</div>
 						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">*自傳/工作經驗:</label>
+							<label class="col-sm-2 col-form-label" >*自傳/工作經驗:</label>
 							<div class="col-sm-8">
-								<textarea name="work_exp"
+								<textarea name="work_exp" id="work_exp"
 									placeholder="請輸入自傳及過往工作,可包含
 1.自傳									
 2.公司名稱
@@ -180,7 +180,7 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">取得證照:</label>
 							<div class="col-sm-8">
-								<textarea name="skills" placeholder="請輸入已取得證照" cols="63"  rows="4"></textarea>
+								<textarea name="skills" placeholder="請輸入已取得證照" cols="63"  rows="4" id="skills"></textarea>
 							</div>
 						</div>
 
@@ -189,6 +189,7 @@
 							<button type="submit" class="btn btn-primary" name="create"	value="confirm"  id="btn-submit">新增履歷</button>
 							<button type="reset" class="btn btn-primary" >清除內容</button>
 							 <button type="button" class="btn btn-primary" id="btn-goBack">取消新增</button>
+							 <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>
 						</div>
 					</form>
 				</div>
