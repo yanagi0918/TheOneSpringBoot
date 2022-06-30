@@ -14,7 +14,7 @@ import com.theone.springboot.entity.Company;
 import com.theone.springboot.service.CompanyService;
 
 
-@RequestMapping("/company")
+@RequestMapping("/dashboard/company")
 @Controller
 public class CompanyDashBoardController {
 	
@@ -37,7 +37,7 @@ public class CompanyDashBoardController {
 	public String saveCustomer(@ModelAttribute("company") Company company) {
 		
 		companyService.saveOrUpdate(company);
-		return "redirect:/company/list";
+		return "redirect:/dashboard/company/list";
 	}
 	
 	@GetMapping("/companydeatail/{pk}")
@@ -56,7 +56,7 @@ public class CompanyDashBoardController {
 	@GetMapping("/delete/{pk}")
 	public String processDelete(@PathVariable("pk") Integer deleteId){
 		companyService.deleteCompany(deleteId);
-		return "redirect:/company/list";
+		return "redirect:/dashboard/company/list";
 	}
 	
 }
