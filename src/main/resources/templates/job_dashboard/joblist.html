@@ -175,7 +175,7 @@
 									<td th:text="${jobs.comp_id}"></td>
 									<td>
 										<a class="btn btn-outline-primary m-0 " th:href="@{showupdateinformation/}+${jobs.job_id}">更新</a> 
-										<a class="btn btn-outline-danger m-0 "  th:href="@{delete/}+${jobs.job_id}" onclick="return deleteForm()">刪除</a>
+										<a class="btn btn-outline-danger m-0 "  th:href="@{delete/}+${jobs.job_id}" onclick="if (!(confirm('確定要刪除嗎?'))) return false">刪除</a>
 									</td>
 								</tr>
 							</tbody>

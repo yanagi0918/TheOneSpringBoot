@@ -11,6 +11,15 @@ function checkCompanyForm() {
 		return checkJobForm;
 	}
 	
+	let pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
+	if (!pattern.test($("#website").val())) {
+		Swal.fire('Warning!',
+			'網站格式錯誤',
+			'warning');
+		checkJobForm = false;
+		return checkJobForm;
+	}
+	
 	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
 	if (!pwdRegex.test($("#compwd").val())) {
 	Swal.fire('Warning!',
@@ -39,11 +48,12 @@ function checkCompanyForm() {
 	}
 
 	return checkResult;
+	
 
 }
 
 
-$('#wrongInput').click(function() {
+$('#wrongCompany').click(function() {
 	$('#compid').val('A7654321')
 	$('#compwd').val('abc')
 	$('#corpname').val('麥噹勞')
@@ -54,12 +64,12 @@ $('#wrongInput').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
 	$('#empnumber').val('300人')
-	$('#website').val('www.giigle.com')
+	$('#website').val('http//123.456')
 	$('#capital').val('1200萬')
 
 })
 
-$('#correctInput').click(function() {
+$('#correctCompany').click(function() {
 	$('#compid').val('87654321')
 	$('#compwd').val('Aabc123zzz')
 	$('#corpname').val('啃得機')
@@ -70,8 +80,21 @@ $('#correctInput').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
 	$('#empnumber').val('300')
-	$('#website').val('www.giigle.com')
+	$('#website').val('http://www.giigle.com')
 	$('#capital').val('1200萬')
+})
+$('#companyUpdate').click(function() {
+	$('#compwd').val('Aabc123zzz')
+	$('#corpname').val('XX株式會社')
+	$('#owner').val('陳先生')
+	$('#industry').val('服務業')
+	$('#contact').val('林小姐')
+	$('#comptele').val('0977101565')
+	$('#fax').val('07-1325462')
+	$('#compaddress').val('台北市大安區26號')
+	$('#empnumber').val('199')
+	$('#website').val('https://www.amaazzon.com')
+	$('#capital').val('1300萬')
 })
 $(document).ready( function () {
     $('#lee').DataTable();
