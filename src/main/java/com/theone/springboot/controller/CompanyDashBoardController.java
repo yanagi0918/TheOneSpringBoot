@@ -1,5 +1,7 @@
 package com.theone.springboot.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +36,16 @@ public class CompanyDashBoardController {
     }
 	
 	@PostMapping("/saveCompany")
-	public String saveCustomer(@ModelAttribute("company") Company company) {
+	public String saveCustomer(@ModelAttribute("company") Company company,Model m) {
+		Map<String, String> errors = new HashMap<String, String>();
+		m.addAttribute("errors", errors);
+		Integer compId =company.getCompid();
+		if(companyService.isDup(compId)==false) {
+			errors.put("compid", "用戶名稱重複");
+			return "company_dashboard/companycreate";
+//			throw new IllegalArgumentException("用戶名稱重複");
+		}
+		
 		
 		companyService.saveOrUpdate(company);
 		return "redirect:/dashboard/company/list";
