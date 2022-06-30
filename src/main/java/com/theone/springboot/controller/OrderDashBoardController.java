@@ -15,7 +15,7 @@ import com.theone.springboot.entity.Order;
 import com.theone.springboot.service.OrderService;
 
 @Controller
-@RequestMapping("/Order")
+@RequestMapping("/dashboard")
 public class OrderDashBoardController {
 	
 	@Autowired
