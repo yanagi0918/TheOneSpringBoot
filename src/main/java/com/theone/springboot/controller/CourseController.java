@@ -27,11 +27,15 @@ import com.theone.springboot.service.CourseService;
 @Controller
 public class CourseController  {
 	
-	@Autowired
-	private CourseService courseService;
+	private final CourseService courseService;
 	
+	private final ServletContext context;
+
 	@Autowired
-	private ServletContext context;
+	public CourseController(CourseService courseService, ServletContext context) {
+		this.courseService = courseService;
+		this.context = context;
+	}
 
 	@GetMapping("/courses")
 	public String findAllCourse(Model model) {
@@ -66,8 +70,8 @@ public class CourseController  {
 	@GetMapping("/toUpdatePage/{courseNo}")
 	public String toUpdate(@PathVariable Integer courseNo, Model model) {
 		Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
-		model.addAttribute("courseBean", findCourse.orElseThrow());
-		return "course_dashboard/courseUpdCheck";
+		model.addAttribute("CourseBean", findCourse.orElseThrow());
+		return "course_dashboard/courseUpdate";
 	}
 
 	@PostMapping("/courses")

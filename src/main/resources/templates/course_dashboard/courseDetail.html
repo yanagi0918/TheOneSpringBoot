@@ -131,100 +131,95 @@
         <div class="container-fluid pt-4 px-4">
             <div class="col-sm-12 col-xl-10">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">新增課程</h6>
-                    <form th:action="@{/courses}" method="post" enctype="multipart/form-data" id="form">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">課程名稱</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="courseName"
-                                       maxlength="20" required id="courseName">
-                            </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">更新課程資訊</h6>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">課程編號</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="courseNo"
+                                   th:value="${CourseBean.courseNo}" readonly="readonly">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">課程分類</label>
-                            <div class="col-sm-8">
-                                <select name="courseCategory" required id="courseCategory">
-                                    <option value="英文證照">英文證照</option>
-                                    <option value="日語證照">日語證照</option>
-                                    <option value="韓語證照">韓語證照</option>
-                                    <option value="生涯轉換與轉業">生涯轉換與轉業</option>
-                                    <option value="自我認知">自我認知</option>
-                                    <option value="求職技巧">求職技巧</option>
-                                    <option value="就業市場現況與趨勢">就業市場現況與趨勢</option>
-                                </select>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">課程分類</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="courseCategory"
+                                   th:value="${CourseBean.courseCategory}" readonly="readonly">
+
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">課程介紹</label>
-                            <div class="col-sm-8">
-							<textarea name="courseIntroduction" class="form-control" id="courseIntroduction"
-                                      placeholder="介紹最多100個字" maxlength="100" cols="62" rows="5"
-                                      required></textarea>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">課程名稱</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="courseName"
+                                   th:value="${CourseBean.courseName}" readonly="readonly">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">講師</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="lecturer" maxlength="10" required
-                                       id="lecturer">
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">課程介紹</label>
+                        <div class="col-sm-8">
+                            <textarea name="courseIntroduction" class="form-control" placeholder="課程介紹..." cols="62" rows="5"
+                                      th:field="${CourseBean.courseIntroduction}" readonly="readonly"></textarea>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">上架時間</label>
-                            <div class="col-sm-8">
-                                <input  type="date" class="form-control" name="date" maxlength="15" id="date"
-                                       required>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">講師</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="lecturer"
+                                   th:value="${CourseBean.lecturer}" readonly="readonly">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">課程圖</label>
-                            <div class="col-sm-8 text-center">
-                                <img class="img-fluid mx-auto mb-4" id="preview_img" src="#" alt="請選擇課程圖"
-                                     style="width: 320px; height: 200px;">
-
-                                <input class="form-control" type="file" name="imgURL" id="imgInput"
-                                       accept="image/jpeg, image/png">
-
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">上架時間</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="date"
+                                   th:value="${CourseBean.date}" readonly="readonly">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">影片位置</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="courseVedio" required
-                                       id="courseVedio">
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">課程圖</label>
+                        <div class="col-sm-8">
+                            <img class="img-fluid mx-auto mb-4" id="preview_img"
+                                th:src="${CourseBean.coursePicUrl}"
+                                 alt="" style="width: 320px; height: 200px;" >
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">評分</label>
-                            <div class="col-sm-8" id="divScore">
-                                <input type="text" class="form-control" name="score" maxlength="5"
-                                       placeholder="0~9.9" id="score" required>
-                            </div>
-                            <span id="score_check"></span>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">影片位置</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="courseVedio"
+                                   th:value="${CourseBean.courseVedioUrl}" readonly="readonly">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">價錢</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="price" maxlength="5" required
-                                       id="price">
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">評分</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="score"
+                                   th:value="${CourseBean.score}" readonly="readonly">
                         </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">價錢</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="price"
+                                   th:value="${CourseBean.price}" readonly="readonly">
+                        </div>
+                    </div>
 
                         <div>
-                            <button type="button" class="btn btn-primary" id="btn-submit">確認新增</button>
-                            <button type="reset" class="btn btn-primary" name="reset" >清空輸入</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>
-                            <button type="button" class="btn btn-primary" id="btn-cancel">取消</button>
+                            <a class="btn btn-primary" th:href="@{'/toUpdatePage/'+${CourseBean.courseNo}}">更新</a>
+                            <button class="btn btn-primary" type="button" id="btn-cancel">取消</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
