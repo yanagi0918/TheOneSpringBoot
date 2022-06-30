@@ -125,61 +125,75 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">修改紀錄</h6>
-                        <form th:action="@{/event}" action="./EventsManager" method="post" enctype="multipart/form-data" id="form">
+                        <form th:action="@{/interview/saveintv}" action="./InterController" method="post" id="form">
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">廣告編號</label>
+                                <label class="col-sm-2 col-form-label">編號</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="eventId" th:value="${event.eventId}" readonly id="eventId">
+                                    <input type="text" class="form-control" name="cvNo" th:value="${intv.cvNo}" readonly id="cvNo">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">刊登公司統編</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="compId" th:value="${event.compId}" maxlength="8" required id="compId">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">價格(萬)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="price" th:value="${event.price}" maxlength="10" required id="price">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">廣告圖</label>
-                                <div class="col-sm-8 text-center">
-                                    <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" th:src="${event.imgUrl}" alt="請選擇廣告圖" style="width: 320px; height: 200px;">
-                                    <input type="hidden" class="form-control" name="imgUrl" th:value="${event.imgUrl}">
-                                    <input class="form-control" type="file" name="imageFile" id="imgInp" accept="image/jpeg, image/png">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">廣告連結</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="eventLinkUrl" th:value="${event.eventLinkUrl}" required id="eventLinkURL">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">刊登開始時間</label>
-                                <div class="col-sm-8">
-                                    <input type="date" class="form-control" name="postStart" th:value="${#dates.format(event.postStart, 'yyyy-MM-dd')}" required id="postStart">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">刊登結束時間</label>
-                                <div class="col-sm-8">
-                                    <input type="date" class="form-control" name="postEnd" th:value="${#dates.format(event.postEnd, 'yyyy-MM-dd')}" required id="postEnd">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">備註</label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" placeholder="備註最多50個字" id="floatingTextarea" style="height: 100px;" name="remark" maxlength="50" th:text="${event.remark}"></textarea>
-                                </div>
-                            </div>
+				<label>會員帳號</label>
+				<div class="col-sm-8 text-center">
+				<input type="text" class="form-control"
+					name="userId" required placeholder="帳號為身份證字號" id="userId" th:value="${intv.userId}">
+			</div></div>
+			<div class="row mb-3">
+				<label>面試時間</label> 
+				<div class="col-sm-8 text-center">
+				<input type="date" class="form-control"	name="intTime" id="intTime" required th:value="${intv.intTime}">
+<!-- 				 <input type="hidden" class="form-control" name="createdTime"> -->
+			</div></div>
+			<div class="row mb-3">
+				<label>公司名稱</label> 
+				<div class="col-sm-8 text-center">
+				<input type="text" class="form-control"	name="compName" id="compName" size="10" th:value="${intv.compName}" >
+			</div></div>
+			<div class="row mb-3">
+				<label>工作內容</label> 
+				<div class="col-sm-8 text-center">
+				<input type="text" class="form-control"	name="jobName" maxlength="8" required id="jobName" size="10" th:value="${intv.jobName}">
+			</div></div>
+
+			<div class="row mb-3">
+				<label>是否錄取</label> 
+				<div class="col-sm-8 text-center">
+				<input type="radio" name="offer" value="1"
+					id="offer">是 <input type="radio" name="offer" value="2"
+					id="offer">否
+			</div></div>
+			<div class="row mb-3">
+				<label>有無測驗</label> 
+				<div class="col-sm-8 text-center">
+				<input type="radio" name="test" value="1"
+					id="test">有 <input type="radio" name="test" value="2"
+					id="test">無
+			</div></div>
+			<div class="row mb-3">
+				<label>考官QA</label>
+				<div class="col-sm-8 text-center">
+				<textarea class="form-control" placeholder="備註最多50字" id="qA"
+					style="height: 150px;" name="qA" maxlength="50" th:text="${intv.qA}"></textarea>
+			</div></div>
+			<div class="row mb-3">
+				<label>心得分享</label>
+				<div class="col-sm-8 text-center">
+				<textarea class="form-control" placeholder="備註最多600字" id="share"
+					style="height: 150px;" name="share" maxlength="600" th:text="${intv.share}"></textarea>
+			</div></div>
+			<div class="row mb-3">
+				<label>評分該公司</label> 
+				<div class="col-sm-8 text-center">
+			<input type="radio" name="compScore" id="compScore" value="1" ${intv.compScore==1?'checked':'' }>1 
+			<input type="radio" name="compScore" id="compScore" value="2" ${intv.compScore==2?'checked':'' }>2 
+			<input type="radio" name="compScore" id="compScore" value="3" ${intv.compScore==3?'checked':'' }>3 
+			<input type="radio" name="compScore" id="compScore" value="4" ${intv.compScore==4?'checked':'' }>4
+			<input type="radio" name="compScore" id="compScore" value="5" ${intv.compScore==5?'checked':'' }>5
+			</div></div>
                             <button type="button" class="btn btn-primary" value="1" id="btn-submit">確認修改</button>
                             <button type="button" class="btn btn-primary" id="btn-goBack">取消</button>
-                            <button type="button" class="btn btn-primary" id="eventWrongInput">錯誤輸入</button>
-                            <button type="button" class="btn btn-primary" id="eventCorrectInput">正確輸入</button>
+<!--                             <button type="button" class="btn btn-primary" id="eventWrongInput">錯誤輸入</button> -->
+<!--                             <button type="button" class="btn btn-primary" id="eventCorrectInput">正確輸入</button> -->
                         </form>
                     </div>
                 </div>

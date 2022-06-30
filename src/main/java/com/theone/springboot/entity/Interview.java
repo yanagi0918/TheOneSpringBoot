@@ -4,6 +4,7 @@ package com.theone.springboot.entity;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Interview {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cvNo;
 
+	@Column(columnDefinition = "Date")
 	private Date intTime;
 
 	private Timestamp createTime;
@@ -41,6 +43,22 @@ public class Interview {
 	private String userId;
 
 	public Interview() {
+	}
+
+	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
+			String test, String qA, String share, Integer compScore, String userId) {
+		super();
+		this.cvNo = cvNo;
+		this.intTime = intTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.jobName = jobName;
+		this.offer = offer;
+		this.test = test;
+		this.QA = qA;
+		this.share = share;
+		this.compScore = compScore;
+		this.userId = userId;
 	}
 
 	public Integer getCvNo() {
