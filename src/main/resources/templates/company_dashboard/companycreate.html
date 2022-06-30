@@ -128,7 +128,7 @@
                         <div class="row mb-3">
                                     <input type="hidden"  class="form-control" name="comppk" id="comppk" value="0">
                             </div>
-                        <form th:action="@{/company/saveCompany}" action="/saveCompany" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()">
+                        <form th:action="@{/company/saveCompany}" action="companycreate.html" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()">
                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
@@ -217,8 +217,8 @@
                             <button type="submit" class="btn btn-primary" name="create" value="confirm">新增</button>
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
-                      	    <button type="button" class="btn btn-primary" id="wrongInput">輸入錯誤範例</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>  
+                      	    <button type="button" class="btn btn-primary" id="wrongCompany">錯誤範例</button>
+                            <button type="button" class="btn btn-primary" id="correctCompany">一鍵輸入</button>  
                             
                             </form>
                     </div>

@@ -147,7 +147,7 @@ color:lightgray;
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺名稱:</label>
 <div class="col-sm-8">
-<input type="text" name="title" class="form-control" required/> 
+<input type="text" name="title" id="title" class="form-control" required/> 
 </div>
 </div>
 
@@ -166,14 +166,14 @@ color:lightgray;
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺條件:</label>
 <div class="col-sm-8">
-<input type="text" name="qualification" class="form-control" required/>
+<input type="text" name="qualification" id="qualification" class="form-control" required/>
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">需要人數:</label>
 <div class="col-sm-8">
-<input type="text" name="required_number" class="form-control" required/> 
+<input type="text" name="required_number" id="required_number" class="form-control" required/> 
 </div>
 </div>
 
@@ -199,6 +199,7 @@ color:lightgray;
                             <button type="submit" class="btn btn-primary" name="create" value="confirm">新增</button>
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
+							<button type="button" class="btn btn-primary" id="jobInput">一鍵輸入</button>
 </div>                            
                             </form>
                     </div>

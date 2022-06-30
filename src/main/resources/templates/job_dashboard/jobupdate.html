@@ -141,7 +141,7 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺名稱:</label>
 <div class="col-sm-8">
-<input type='text' name='title' th:value="${jobupdate.title}"  class="form-control" required/>
+<input type='text' name='title' id="title" th:value="${jobupdate.title}"  class="form-control" required/>
 </div>
 </div>
 
@@ -161,14 +161,14 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺條件:</label>
 <div class="col-sm-8">
-<input type='text' name='qualification' th:value="${jobupdate.qualification}" class="form-control" required/>
+<input type='text' name='qualification' id="qualification" th:value="${jobupdate.qualification}" class="form-control" required/>
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">需要人數:</label>
 <div class="col-sm-8">
-<input type='text' name='required_number' th:value="${jobupdate.required_number}" class="form-control" required/>
+<input type='text' name='required_number' id="required_number" th:value="${jobupdate.required_number}" class="form-control" required/>
 </div>
 </div>
 
@@ -191,6 +191,7 @@
 <div class="center">
                             <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>
                             <button type="button" class="btn btn-primary" onclick="window.location.href='../list'; return false;">取消</button>
+                            <button type="button" class="btn btn-primary" id="jobUpdate">一鍵輸入</button>
 </div>
                         </form>
                     </div>
