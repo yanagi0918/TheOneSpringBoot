@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ee0e2d1-79c7-404e-9d01-52024d191c1d" name="Changes" comment="20220629-1">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/theone/springboot/controller/CourseDashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/theone/springboot/controller/CourseDashBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/theone/springboot/entity/CourseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/theone/springboot/entity/CourseBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/theone/springboot/service/impl/CourseServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/theone/springboot/service/impl/CourseServicelmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/course_dashboard/checkCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/course_dashboard/checkCourseForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseCreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseCreate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseUpdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course_dashboard/courseUpdate.html" afterDir="false" />
-    </list>
+    <list default="true" id="6ee0e2d1-79c7-404e-9d01-52024d191c1d" name="Changes" comment="20220629-1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +149,7 @@
       <workItem from="1656577077230" duration="2361000" />
       <workItem from="1656579908131" duration="874000" />
       <workItem from="1656580873900" duration="2730000" />
-      <workItem from="1656597580552" duration="12332000" />
+      <workItem from="1656597580552" duration="12569000" />
     </task>
     <task id="LOCAL-00001" summary="20220629-1">
       <created>1656437878589</created>
