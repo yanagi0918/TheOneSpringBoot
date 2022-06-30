@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Free HTML Templates" name="keywords">
+<meta content="Free HTML Templates" name="description">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Handlee|Josefin+Sans:300,600&amp;display=swap">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="shortcut icon" type="image/x-icon"
+	href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="image/x-icon"
+	href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+	color="#111" />
+<link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet">
+</head>
+<body>
+
+	<!-- welcome card -->
+	<div class="container">
+		<div class="card-wrap">
+			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<div class="card-body">
+					<h2 class="card-title">WELCOME</h2>
+					<p>Welcome to the login page</p>
+					<br>
+					<div class="btn-wrap">
+						<a class="btn btn-lg btn-member js-btn" data-target="member">Member</a>
+						<a class="btn btn-lg btn-company js-btn" data-target="company">Company</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Member card -->
+			<section class="forms-section card card--member" id="member">
+				<h1 class="section-title">Member Form</h1>
+				<div class="forms">
+					<!-- Member login -->
+					<div class="form-wrapper is-active">
+						<button type="button" class="switcher-member switcher-login">
+							Login <span class="underline"></span>
+						</button>
+						<form class="form form-login shadow card-body">
+							<fieldset>
+								<div class="input-block card-body">
+									<h2 class="card-title">Welcome Back!</h2>
+									<p>
+										To keep connected with us<br />please login with your
+										personal info
+									</p>
+									<p class="badge-wrap">
+										<a class="badge"><i class="fab fa-facebook-f"></i></a><a
+											class="badge"><i class="fab fa-google"></i></a><a
+											class="badge"><i class="fab fa-twitter"></i></a><a
+											class="badge"><i class="fab fa-github"></i></a>
+									</p>
+									<p>or use your account</p>
+								</div>
+								<div>
+									<form>
+										<div class="form-group">
+											<input class="form-control" type="text"
+												placeholder="Identity Number" required="required" />
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="password"
+												placeholder="Password" required="required" />
+										</div>
+										<p>
+											<a>Forgot your password?</a>
+										</p>
+									</form>
+									<button class="btn btn-lg">LOGIN</button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<button class="btn btn-back js-btn" data-target="welcome">
+						<i class="fas fa-angle-left"></i>
+					</button>
+
+					<!-- Member SignUp -->
+					<div class="form-wrapper">
+						<button type="button" class="switcher-member switcher-signup">
+							Sign Up <span class="underline"></span>
+						</button>
+						<form class="form form-signup shadow card-body">
+							<fieldset>
+								<div class="input-block card-body">
+									<h2 class="card-title">Create Account</h2>
+									<p class="card-text">
+										Enter your personal details<br />and start journey with us
+									</p>
+									<p class="badge-wrap">
+										<a class="badge"><i class="fab fa-facebook-f"></i></a><a
+											class="badge"><i class="fab fa-google"></i></a><a
+											class="badge"><i class="fab fa-twitter"></i></a><a
+											class="badge"><i class="fab fa-github"></i></a>
+									</p>
+									<p>or use your identity number for registration</p>
+								</div>
+								<div>
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="Name"
+											required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text"
+											placeholder="Identity Number" required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="email" placeholder="Email"
+											required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="password"
+											placeholder="Password" required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="password"
+											placeholder="Comfirm Password" required="required" />
+									</div>
+									<button class="btn btn-lg">SIGN UP</button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</section>
+
+			<!-- Company card -->
+			<section class="forms-section card card--company" id="company">
+				<h1 class="section-title">Company Form</h1>
+				<div class="forms">
+					<div class="form-wrapper is-active">
+						<button type="button" class="switcher-company switcher-login">
+							Login <span class="underline"></span>
+						</button>
+						<form class="form form-login shadow card-body">
+							<!-- Company login -->
+							<fieldset>
+								<div class="input-block card-body">
+									<h2 class="card-title">Welcome Back!</h2>
+									<p>
+										To keep connected with us<br />please login with your
+										personal info
+									</p>
+									<p class="badge-wrap">
+										<a class="badge"><i class="fab fa-facebook-f"></i></a><a
+											class="badge"><i class="fab fa-google"></i></a><a
+											class="badge"><i class="fab fa-twitter"></i></a><a
+											class="badge"><i class="fab fa-github"></i></a>
+									</p>
+									<p>or use your account</p>
+								</div>
+								<div>
+									<form>
+										<div class="form-group">
+											<input class="form-control" type="text"
+												placeholder="Tax ID Number" required="required" />
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="password"
+												placeholder="Password" required="required" />
+										</div>
+										<p>
+											<a>Forgot your password?</a>
+										</p>
+									</form>
+									<button class="btn btn-lg">LOGIN</button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<button class="btn btn-back js-btn" data-target="welcome">
+						<i class="fas fa-angle-left"></i>
+					</button>
+
+					<!-- Company SignUp -->
+					<div class="form-wrapper">
+						<button type="button" class="switcher-company switcher-signup">
+							Sign Up <span class="underline"></span>
+						</button>
+						<form class="form form-signup shadow card-body">
+							<fieldset>
+								<div class="input-block card-body">
+									<h2 class="card-title">Create Account</h2>
+									<p class="card-text">
+										Enter your personal details<br />and start journey with us
+									</p>
+									<p class="badge-wrap">
+										<a class="badge"><i class="fab fa-facebook-f"></i></a><a
+											class="badge"><i class="fab fa-google"></i></a><a
+											class="badge"><i class="fab fa-twitter"></i></a><a
+											class="badge"><i class="fab fa-github"></i></a>
+									</p>
+									<p>or use your identity number for registration</p>
+								</div>
+								<div>
+									<div class="form-group">
+										<input class="form-control" type="text"
+											placeholder="Company Name" required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text"
+											placeholder="Tax ID Number" required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="password"
+											placeholder="Password" required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="password"
+											placeholder="Comfirm Password" required="required" />
+									</div>
+									<button class="btn btn-lg">SIGN UP</button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+<script th:src="@{/js/login.js}" src="login.js"></script>
+
+</html>
