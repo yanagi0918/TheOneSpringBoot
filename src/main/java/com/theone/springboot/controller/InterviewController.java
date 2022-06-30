@@ -36,9 +36,9 @@ public class InterviewController {
 
 	
 	@GetMapping("/intvlist")
-	public String getIntvs(Model model) {
-		List<Interview> intvs = interviewService.getAllInterviews();
-		model.addAttribute("Interview",intvs);
+	public String getIntvListPage(Model model) {
+		List<Interview> Allintvs = interviewService.getAllInterviews();
+		model.addAttribute("intvs",Allintvs);
 		return "interview_dashboard/intvlist";
 	}
 
@@ -48,10 +48,10 @@ public class InterviewController {
 	}
 
 	@PostMapping("/saveintv")
-	public String saveOrUpdate(@ModelAttribute Interview intv) {
+	public String saveOrUpdate( Interview intv) {
 		
-		Timestamp ts=new Timestamp(System.currentTimeMillis());
-		intv.setCreateTime(ts);
+//		Timestamp ts=new Timestamp(System.currentTimeMillis());
+//		intv.setCreateTime(ts);
 		interviewService.saveOrUpdate(intv);
 		
 		return "redirect:/interview/intvlist";
@@ -60,8 +60,8 @@ public class InterviewController {
 	@GetMapping("/intv/{id}")
 	public String toUpdate(@PathVariable Integer id, Model model) {
 		Interview intv = interviewService.getInterview(id).get();
-		model.addAttribute("intv", intv);
-		return "intvupdate";
+		model.addAttribute("intvs", intv);
+		return "interview_dashboard/intvupdate";
 	}
 	
 	@ResponseBody
@@ -71,18 +71,18 @@ public class InterviewController {
 		return "ok";
 	}
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder, WebRequest request) {
-		// java.util.Date
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		dateFormat.setLenient(false);
-		CustomDateEditor ce = new CustomDateEditor(dateFormat, true); 
-		binder.registerCustomEditor(Date.class, ce);
-		// java.sql.Date		
-		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat2.setLenient(false);
-		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true); 
-		binder.registerCustomEditor(java.sql.Date.class, ce2);
-	}
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder, WebRequest request) {
+//		// java.util.Date
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		dateFormat.setLenient(false);
+//		CustomDateEditor ce = new CustomDateEditor(dateFormat, true); 
+//		binder.registerCustomEditor(Date.class, ce);
+//		// java.sql.Date		
+//		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+//		dateFormat2.setLenient(false);
+//		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true); 
+//		binder.registerCustomEditor(java.sql.Date.class, ce2);
+//	}
 	
 }

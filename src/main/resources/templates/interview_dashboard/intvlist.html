@@ -141,16 +141,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="intv:${intvlist}">
+                                <tr th:each="intv:${intvs}">
                                 	<td th:text="${intv.cvNo}"></td>
-                                	<td th:text="$${intv.userId}"></td>
+                                	<td th:text="${intv.userId}"></td>
                                 	<td th:text="${intv.intTime}"></td>
                                 	<td th:text="${intv.compName}"></td>
                                 	<td th:text="${intv.jobName}"></td>
                                 	<td th:text="${intv.compScore}"></td>
                                 	<td>
                                 		<a class="btn btn-outline-secondary m-0 " th:href="@{intvshow/}+${intv.cvNo}">查看</a>
-                                		<a class="btn btn-outline-primary m-0 " th:href="@{showupdateinformation/}+${companies.comppk}">更新</a>
+                                		<a class="btn btn-outline-primary m-0 " th:href="@{intv/}+${intv.cvNo}">更新</a>
                                 		<a class="btn btn-outline-danger m-0 " th:id="${intv.cvNo}" onclick="del(this.id)">刪除</a>
                                 	</td>
                                 </tr>

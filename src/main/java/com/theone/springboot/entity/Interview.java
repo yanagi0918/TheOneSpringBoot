@@ -3,6 +3,7 @@ package com.theone.springboot.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Interview {
 
 	private Date intTime;
 
-	private Timestamp createTime;
+	private LocalDateTime createTime;
 
 	private String compName;
 
@@ -59,11 +60,11 @@ public class Interview {
 		this.intTime = intTime;
 	}
 
-	public Timestamp getCreateTime() {
+	public LocalDateTime getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
 
