@@ -151,8 +151,7 @@
 				<div class="bg-light text-center rounded p-4">
 					<div class="d-flex align-items-center justify-content-between mb-4">
 						<h1 class="mb-0">所有履歷</h1>
-						<button type="button" class="btn btn-primary mb-0"
-							id="btn-toCreate" onclick="location.href = '/resume'">新增履歷</button>
+						<button type="button" class="btn btn-primary mb-0" id="btn-toCreate" >新增履歷</button>
 					</div>
 
 					<table class="table align-middle table-bordered table-hover mb-0">
@@ -179,12 +178,10 @@
 								<td	th:text="${resume.skills}"></td>
 								<td	th:text="${resume.user_id}"></td>
 								<td>
-									<button type="button" class="btn btn-outline-primary m-0 btn-resumeUpdate"
-										th:href="@{resume/}+${resume.resume_id}">更新</button>
+									<a  class="btn btn-outline-primary m-0 btn-resumeUpdate" th:href="@{resume/}+${resume.resume_id}">更新</a>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-danger m-0"
-										th:id="${resume.resume_id}" onclick="del(this.id)">刪除</button>
+									<a  class="btn btn-outline-danger m-0" th:id="${resume.resume_id}" onclick="del(this.id)">刪除</a>
 								</td>
 							</tr>
 						</tbody>
