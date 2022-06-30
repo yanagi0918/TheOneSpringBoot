@@ -25,7 +25,8 @@ public class Interview {
 	@Column(columnDefinition = "Date")
 	private Date intTime;
 
-	private LocalDateTime createTime;
+	@Column(columnDefinition = "TIMESTAMP")
+	private Timestamp createTime;
 
 	private String compName;
 
@@ -46,7 +47,7 @@ public class Interview {
 	public Interview() {
 	}
 
-	public Interview(Integer cvNo, Date intTime, LocalDateTime createTime, String compName, String jobName, String offer,
+	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
 			String test, String qA, String share, Integer compScore, String userId) {
 		super();
 		this.cvNo = cvNo;
@@ -78,11 +79,11 @@ public class Interview {
 		this.intTime = intTime;
 	}
 
-	public LocalDateTime getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(LocalDateTime createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 
