@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.theone.springboot.entity.Job;
 import com.theone.springboot.service.JobService;
 
-@RequestMapping("/job")
+@RequestMapping("/dashboard/job")
 @Controller	
 public class JobDashBoardController {
 	@Autowired
@@ -35,7 +35,7 @@ public class JobDashBoardController {
 	@PostMapping("/saveJob")
 	private String saveJob(@ModelAttribute("job") Job job){
 		jobService.saveOrUpdate(job);
-		return "redirect:/job/list";
+		return "redirect:/dashboard/job/list";
 	}
 	
 	@GetMapping("/showupdateinformation/{pk}")
@@ -48,7 +48,7 @@ public class JobDashBoardController {
 	@GetMapping("/delete/{pk}")
 	private String processDelete(@PathVariable("pk") Integer deleteId){
 		jobService.delete(deleteId);
-		return "redirect:/job/list";
+		return "redirect:/dashboard/job/list";
 	}
 
 }

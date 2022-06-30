@@ -1,3 +1,19 @@
+  $(function() {
+    $('.register-submit').on('click', function() {
+      $.ajax({
+        data : {
+          account: $('#compid').val()
+        },
+        success: function(res) {
+          if(res=='1') {
+            alert('申請帳號重複，請輸入其他帳號');
+          }
+        }
+      });
+    });
+  });
+
+
 function checkCompanyForm() {
 	let checkResult = true;
 	let checkJobForm = true;

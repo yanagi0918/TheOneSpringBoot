@@ -33,91 +33,19 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+        <div th:replace="~{common/dashboard::spinner}"></div>
         <!-- Spinner End -->
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-light navbar-light">
-                <a href="./MemberServlet" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary">The One</h3>
-                </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">Admin</h6>
-                    </div>
-                </div>
-                <div class="navbar-nav w-100">
-                	<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./MemberServlet" class="dropdown-item">會員管理</a>
-							<a href="./ResumeServlet" class="dropdown-item">履歷管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-building me-2"></i><b>企業</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/company/list}" href="./companylist" class="dropdown-item">公司管理</a>
-							<a th:href="@{/job/list}" href="./joblist" class="dropdown-item">職缺管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./InterViewServletDS" class="dropdown-item">面試經驗談</a>
-							<a href="./CommentsManager" class="dropdown-item">評論管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
-							<a href="./CourseController" class="dropdown-item">課程管理</a>
-							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <div th:replace="~{common/dashboard::sidebar(4)}"></div>
         <!-- Sidebar End -->
 
 
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Admin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="Login.jsp" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <div th:replace="~{common/dashboard::navbar}"></div>
             <!-- Navbar End -->
             
             <!-- Content Start -->
@@ -125,7 +53,7 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h1 class="mb-4">更新職缺</h1>
-<form th:action="@{/job/saveJob}" action="/jobupdate" method='post' enctype="multipart/form-data" >
+<form th:action="@{/dashboard/job/saveJob}" action="/jobupdate" method='post' enctype="multipart/form-data" >
 <div class="row mb-3">
 <input type='hidden' name='job_id' th:value="${jobupdate.job_id}"/>
 </div>
@@ -148,12 +76,11 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺性質:</label>
 <div class="col-sm-8">
-<select name='job_description' class="form-select" >
-<option selected th:text="${jobupdate.job_description}"></option>
-<option>全職</option>
-<option>兼職</option>
-<option>工讀</option>
-<option>其他</option>
+<select name='job_description' class="form-select" th:field="${jobupdate.job_description}" th:value="${jobupdate.job_description}">
+<option th:selected="${jobupdate.job_description =='全職'}" value="全職">全職</option>
+<option th:selected="${jobupdate.job_description =='兼職'}" value="兼職">兼職</option>
+<option th:selected="${jobupdate.job_description =='工讀'}" value="工讀">工讀</option>
+<option th:selected="${jobupdate.job_description =='其他'}" value="其他">其他</option>
 </select>
 </div>
 </div>
@@ -175,16 +102,15 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">每月薪資:</label>
 <div class="col-sm-8">  
-<select name='salary' class="form-select">
-<option selected th:text="${jobupdate.salary}"></option>
-<option>面議</option>
-<option>25000以下</option>
-<option>30001~35000</option>
-<option>35001~40000</option>
-<option>40001~45000</option>
-<option>45001~50000</option>
-<option>50001~55000</option>
-<option>55000以上</option>
+<select name='salary' class="form-select" th:field="${jobupdate.salary}" th:value="${jobupdate.salary}">
+<option th:selected="${jobupdate.salary =='面議'}" value="面議">面議</option>
+<option th:selected="${jobupdate.salary =='25000以下'}" value="25000以下">25000以下</option>
+<option th:selected="${jobupdate.salary =='30001~35000'}" value="30001~35000">30001~35000</option>
+<option th:selected="${jobupdate.salary =='35001~40000'}" value="35001~40000">35001~40000</option>
+<option th:selected="${jobupdate.salary =='40001~45000'}" value="40001~45000">40001~45000</option>
+<option th:selected="${jobupdate.salary =='45001~50000'}" value="45001~50000">45001~50000</option>
+<option th:selected="${jobupdate.salary =='50001~55000'}" value="50001~55000">50001~55000</option>
+<option th:selected="${jobupdate.salary =='55000以上'}" value="55000以上">55000以上</option>
 </select>
 </div>
 </div>
@@ -232,7 +158,7 @@
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/checkJobForm.js}" src="js/checkJobForm.js"></script>
+    <script th:src="@{/js/job_dashboard/checkJobForm.js}" src="js/job_dashboard/checkJobForm.js"></script>
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>
