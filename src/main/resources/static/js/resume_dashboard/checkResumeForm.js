@@ -12,7 +12,6 @@ $(function() {
 
 
 
-
 function checkResumeForm() {
 	let checkResumeForm = true;
 
@@ -32,11 +31,11 @@ function checkResumeForm() {
 	})
 	
 	$('#btn-toCreate').click(function() {
-		location.href = "/resume";
+		location.href = "/dashboard/resume";
 	})
 	
 	$('#btn-goBack').click(function() {
-		location.href = "/resumes";
+		location.href = "/dashboard/resumes";
 	})
 	
 });	
