@@ -70,7 +70,7 @@
                                     <th scope="col">上架時間</th>
                                     <th scope="col">評分</th>
                                     <th scope="col">價錢</th>
-<!--									<th scope="col"></th>-->
+									<th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,8 +83,8 @@
                                 	<td th:text="${course.score}"></td>
                                 	<td th:text="${course.price}"></td>
                                 	<td>
-                                		<a class="btn btn-outline-primary m-0" th:href="@{'/courses/detail/'+${course.courseNo}}">詳細</a>
-                                		<a class="btn btn-outline-primary m-0 btn-courseUpdate" th:href="@{'/toUpdatePage/'+${course.courseNo}}">更新</a>
+                                		<a class="btn btn-outline-success m-0" th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">詳細</a>
+                                		<a class="btn btn-outline-primary m-0 btn-courseUpdate" th:href="@{'/dashboard/toUpdatePage/'+${course.courseNo}}">更新</a>
                                         <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>
                                 	</td>
                                 </tr>
@@ -151,10 +151,10 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/courses/'+courseNo,
+                        url: '/dashboard/courses/'+courseNo,
                         type: 'DELETE',
                         success: function(result) {
-                            window.location.href='./courses'
+                            window.location.href='/dashboard/courses'
                         }
                     });
 				}, 1500)

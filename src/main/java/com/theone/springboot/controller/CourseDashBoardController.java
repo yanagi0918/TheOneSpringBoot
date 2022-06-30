@@ -2,6 +2,8 @@ package com.theone.springboot.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,11 +11,14 @@ import java.util.Optional;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.theone.springboot.entity.CourseBean;
@@ -26,12 +31,9 @@ public class CourseDashBoardController {
 
     private final CourseService courseService;
 
-    private final ServletContext context;
-
-    @Autowired
-    public CourseDashBoardController(CourseService courseService, ServletContext context) {
+//    @Autowired
+    public CourseDashBoardController(CourseService courseService) {
         this.courseService = courseService;
-        this.context = context;
     }
 
     @GetMapping("/courses")
@@ -54,7 +56,6 @@ public class CourseDashBoardController {
     public String showDetail(@PathVariable Integer courseNo, Model model) {
         Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
         model.addAttribute("CourseBean", findCourse.orElseThrow());
-        model.addAttribute("contextPath", context.getContextPath());
         return "course_dashboard/courseDetail";
 
     }
@@ -74,13 +75,13 @@ public class CourseDashBoardController {
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
-        File savedFile = new File("target\\classes\\static\\courseImg\\", imageFile.getName());
+        String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         if (mf.getOriginalFilename().length() != 0) {
-            mf.transferTo(savedFile);
-            CourseBean.setCoursePicUrl("courseImg" + File.separator + imageFile.getName());
+            mf.transferTo(new File(savedFilePath));
+            CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
         courseService.saveOrUpdate(CourseBean);
-        return "redirect:/courses";
+        return "redirect:/dashboard/courses";
     }
 
     @DeleteMapping("/courses/{courseNo}")
@@ -88,6 +89,15 @@ public class CourseDashBoardController {
     public ResponseEntity<CourseBean> deleteCourseByNo(@PathVariable Integer courseNo) {
         courseService.deleteCourse(courseNo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+        // java.sql.Date
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
+        binder.registerCustomEditor(java.sql.Date.class, ce);
     }
 
 }
