@@ -38,7 +38,7 @@ public class InterviewController {
 	@GetMapping("/intvlist")
 	public String getIntvs(Model model) {
 		List<Interview> intvs = interviewService.getAllInterviews();
-		model.addAttribute("Interview",intvs);
+		model.addAttribute(intvs);
 		return "interview_dashboard/intvlist";
 	}
 
@@ -58,8 +58,8 @@ public class InterviewController {
 	}
 
 	@GetMapping("/intv/{id}")
-	public String toUpdate(@PathVariable Integer id, Model model) {
-		Interview intv = interviewService.getInterview(id).get();
+	public String toUpdate(@PathVariable("id") Integer cvNo, Model model) {
+		Interview intv = interviewService.getInterview(cvNo).get();
 		model.addAttribute("intv", intv);
 		return "intvupdate";
 	}
