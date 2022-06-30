@@ -86,7 +86,48 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">購買課程</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="productId" th:value="${order.productId }" required id="productId" placeholder="請輸入課程 例:1,2,3,4">
+<!--                                     <input type="text" class="form-control" name="productId" th:value="${order.productId }" required id="productId" placeholder="請輸入課程 例:1,2,3,4"> -->
+                                <select class="form-select mb-3" aria-label="Default select example" name="productId" th:field='${order.productId}' th:value='${order.productId}' required id="productId">
+									  <optgroup label="英文證照">
+									    <option th:selected="${order.productId =='IELTS 雅思檢定班'}" value="IELTS 雅思檢定班">IELTS 雅思檢定班</option>
+									    <option th:selected="${order.productId =='TOEIC 多益檢定班'}" value="TOEIC 多益檢定班">TOEIC 多益檢定班</option>
+									    <option th:selected="${order.productId =='GEPT 全民英檢初級班'}" value="GEPT 全民英檢初級班">GEPT 全民英檢初級班</option>
+									    <option th:selected="${order.productId =='TOEFL 多福iBT檢定班'}" value="TOEFL 多福iBT檢定班">TOEFL 多福iBT檢定班</option>
+									  </optgroup>
+									  <optgroup label="日語證照">
+									    <option th:selected="${order.productId =='JLPT N2 日檢養成班'}" value="JLPT N2 日檢養成班">JLPT N2 日檢養成班</option>
+									    <option th:selected="${order.productId =='JLPT N3 日檢養成班'}" value="JLPT N3 日檢養成班">JLPT N3 日檢養成班</option>
+									    <option th:selected="${order.productId =='JLPT N4 日檢養成班'}" value="JLPT N4 日檢養成班">JLPT N4 日檢養成班</option>
+									    <option th:selected="${order.productId =='JLPT N5 日檢養成班'}" value="JLPT N5 日檢養成班">JLPT N5 日檢養成班</option>
+									  </optgroup>
+									  <optgroup label="韓語證照">
+									    <option th:selected="${order.productId =='TOPIK I  韓語初級檢定班'}" value="TOPIK I  韓語初級檢定班">TOPIK I  韓語初級檢定班</option>
+									    <option th:selected="${order.productId =='TOPIK II  韓語中、高級檢定班'}" value="TOPIK II  韓語中、高級檢定班">TOPIK II  韓語中、高級檢定班</option>
+									  </optgroup>
+									  <optgroup label="生涯轉換與轉業">
+									    <option th:selected="${order.productId =='中高齡職涯發展專班-中高齡職涯續航'}" value="中高齡職涯發展專班-中高齡職涯續航">中高齡職涯發展專班-中高齡職涯續航</option>
+									    <option th:selected="${order.productId =='女力新勢力-女性二度就業機會與挑戰'}" value="女力新勢力-女性二度就業機會與挑戰">女力新勢力-女性二度就業機會與挑戰</option>
+									    <option th:selected="${order.productId =='中高齡職涯發展專班-再創職涯高峰-談轉業與轉職'}" value="中高齡職涯發展專班-再創職涯高峰-談轉業與轉職">中高齡職涯發展專班-再創職涯高峰-談轉業與轉職</option>
+									    <option th:selected="${order.productId =='中高階再創風華專班-衝突管理與團隊合作'}" value="中高階再創風華專班-衝突管理與團隊合作">中高階再創風華專班-衝突管理與團隊合作</option>
+									  </optgroup>
+									  <optgroup label="自我認知">
+									    <option th:selected="${order.productId =='求職計劃書撰寫(實作課程)'}" value="求職計劃書撰寫(實作課程)">求職計劃書撰寫(實作課程)</option>
+									    <option th:selected="${order.productId =='創造自我價值、工作優勢及就業優勢'}" value="創造自我價值、工作優勢及就業優勢">創造自我價值、工作優勢及就業優勢</option>
+									    <option th:selected="${order.productId =='職場升級版大躍進-職場心理健康'}" value="職場升級版大躍進-職場心理健康">職場升級版大躍進-職場心理健康</option>
+									    <option th:selected="${order.productId =='創造雙贏的職場人際學'}" value="創造雙贏的職場人際學">創造雙贏的職場人際學</option>
+									  </optgroup>
+									  <optgroup label="求職技巧">
+									    <option th:selected="${order.productId =='淺談面試技巧'}" value="淺談面試技巧">淺談面試技巧</option>
+									    <option th:selected="${order.productId =='履歷表撰寫實作班'}" value="履歷表撰寫實作班">履歷表撰寫實作班</option>
+									    <option th:selected="${order.productId =='面試技巧實戰營(實作課程)'}" value="面試技巧實戰營(實作課程)">面試技巧實戰營(實作課程)</option>
+									    <option th:selected="${order.productId =='個人工作競爭力SWOT分析'}" value="個人工作競爭力SWOT分析">個人工作競爭力SWOT分析</option>
+									  </optgroup>
+									  <optgroup label="就業市場現況與趨勢">
+									    <option th:selected="${order.productId =='職場勞動權益，停看聽'}" value="職場勞動權益，停看聽">職場勞動權益，停看聽</option>
+									    <option th:selected="${order.productId =='產業發展與就業趨勢'}" value="產業發展與就業趨勢">產業發展與就業趨勢</option>
+									    <option th:selected="${order.productId =='多元化就業新契機'}" value="多元化就業新契機">多元化就業新契機</option>
+									    <option th:selected="${order.productId =='就業競爭力強化'}" value="就業競爭力強化">就業競爭力強化</option>
+									  </optgroup>
                                 </div>
                             </div>
                             
