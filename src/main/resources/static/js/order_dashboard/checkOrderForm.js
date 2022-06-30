@@ -3,7 +3,7 @@ $(function () {
     $('#OrderwrongInput').click(function () {
     $('#userId').val('12A345675')
     $('#orderDate').val('2022-05-20')
-    $("#state").val(2);
+    $("#state").val('保留');
     $('#productId').val('1,2,3,4')
     $('#totalPrice').val('6666K')
 })
@@ -11,7 +11,7 @@ $(function () {
 $('#OrdercorrectInput').click(function () {
     $('#userId').val('J123456789')
     $('#orderDate').val('2022-05-23')
-    $("#state").val(1); 
+    $("#state").val('完成'); 
     $('#productId').val('1,2,3,4,5')
     $('#totalPrice').val('86000')
 })
