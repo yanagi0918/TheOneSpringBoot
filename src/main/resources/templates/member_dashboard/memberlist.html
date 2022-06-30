@@ -150,7 +150,7 @@
                                     <td>
                                         <a class="btn btn-outline-primary m-0" th:href="@{member/}+${member.idNumber}">修改會員</a>
                                        
-                                        <button type="button" class="btn btn-outline-danger m-0" th:id="${member.idNumber}" onclick="del(this.id)">刪除會員</button>
+                                        <a class="btn btn-outline-danger m-0" th:id="${member.idNumber}" onclick="del(this.id)">刪除會員</a>
                                     </td>
                                 </tr>
                             </tbody>
