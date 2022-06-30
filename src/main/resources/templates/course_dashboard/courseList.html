@@ -22,102 +22,35 @@
     <!-- Libraries Stylesheet -->
     <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    
+
     <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+
+    <!-- dataTables Stylesheet 上程-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div th:replace="~{common/dashboard::spinner}"></div>
+    <!-- Spinner End -->
 
 
-        <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-light navbar-light">
-                <a href="./MemberServlet" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary">The One</h3>
-                </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">Admin</h6>
-                    </div>
-                </div>
-                <div class="navbar-nav w-100">
-                	<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./MemberServlet" class="dropdown-item">會員管理</a>
-							<a href="./ResumeServlet" class="dropdown-item">履歷管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-building me-2"></i><b>企業</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./CompanyServlet" class="dropdown-item">公司管理</a>
-							<a href="./JobController" class="dropdown-item">職缺管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./InterViewServletDS" class="dropdown-item">面試經驗談</a>
-							<a href="./CommentsManager" class="dropdown-item">評論管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
-							<a th:href="@{/courses}" class="dropdown-item">課程管理</a>
-							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- Sidebar End -->
+    <!-- Sidebar Start -->
+    <div th:replace="~{common/dashboard::sidebar(8)}"></div>
+    <!-- Sidebar End -->
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Admin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="Login.jsp" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- Navbar End -->
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <div th:replace="~{common/dashboard::navbar}"></div>
+        <!-- Navbar End -->
             
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
@@ -195,8 +128,8 @@
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/checkEventForm.js}" src="js/checkEventForm.js"></script>
-    <script th:src="@{/js/checkCourseForm.js}" src="js/checkCourseForm.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> //datatables
+    <script th:src="@{/js/course_dashboard/checkCourseForm.js}" src="js/checkCourseForm.js"></script>
     <script>
         function deleteByNo(courseNo) {
 		Swal.fire({
