@@ -33,91 +33,19 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+        <div th:replace="~{common/dashboard::spinner}"></div>
         <!-- Spinner End -->
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-light navbar-light">
-                <a href="./MemberServlet" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary">The One</h3>
-                </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">Admin</h6>
-                    </div>
-                </div>
-                <div class="navbar-nav w-100">
-                	<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./MemberServlet" class="dropdown-item">會員管理</a>
-							<a href="./ResumeServlet" class="dropdown-item">履歷管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-building me-2"></i><b>企業</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./CompanyServlet" class="dropdown-item">公司管理</a>
-							<a href="./JobController" class="dropdown-item">職缺管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a href="./InterViewServletDS" class="dropdown-item">面試經驗談</a>
-							<a href="./CommentsManager" class="dropdown-item">評論管理</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
-                        <div class="dropdown-menu bg-transparent border-0">
-							<a th:href="@{/events}" href="./EventsManager" class="dropdown-item active">廣告管理</a>
-							<a href="./CourseController" class="dropdown-item">課程管理</a>
-							<a href="./OrderManager" class="dropdown-item">訂單管理</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
         <!-- Sidebar End -->
 
 
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" th:src="@{/img/user.jpg}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Admin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="Login.jsp" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <div th:replace="~{common/dashboard::navbar}"></div>
             <!-- Navbar End -->
             
             <!-- Content Start -->
@@ -125,78 +53,52 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">修改紀錄</h6>
-                         <form th:action="@{/interview/saveintv}" action="/saveintv" method="post" >
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">編號</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="cvNo" th:value="${intvs.cvNo}" readonly id="cvNo">
-                                </div>
-                            </div>
-                             <div class="row mb-3">
+                         <form th:action="@{/interview/saveintv}" action="/saveintv" th:object="${intvs}" method="post" onsubmit="return checkIntvForm()" >
+                            
+                                <label >編號</label><br>
+                                
+                                    <input type="text"  name="cvNo" th:value="*{cvNo}" readonly id="cvNo">
+                                
+                            
+                <div class="row mb-3">
 				<label>會員帳號</label>
 				<div class="col-sm-8 text-center">
 				<input type="text" class="form-control"
-					name="userId" required placeholder="帳號為身份證字號" id="userId" th:value="${intvs.userId}">
+					name="userId" required placeholder="帳號為身份證字號" id="userId" th:value="*{userId}" readonly>
 			</div></div>
 			<div class="row mb-3">
 				<label>面試時間</label> 
 				<div class="col-sm-8 text-center">
 				<input type="date" class="form-control"
-					name="intTime" id="intTime" required>
-				 <input type="hidden" class="form-control" name="createdTime" >
+					name="intTime" id="intTime" required th:value="*{intTime}" readonly>
+<!-- 				 <input type="date" class="form-control" name="createdTime" th:value="*{createdTime}" readonly > -->
 			</div></div>
 			<div class="row mb-3">
 				<label>公司名稱</label> 
 				<div class="col-sm-8 text-center">
 				<input type="text" class="form-control"
-					name="compName" id="compName" size="10" th:value="${intvs.compName}" >
+					name="compName" id="compName" size="10" th:value="*{compName}" readonly>
 			</div></div>
 			<div class="row mb-3">
 				<label>工作內容</label> 
 				<div class="col-sm-8 text-center">
 				<input type="text" class="form-control"
-					name="jobName" maxlength="8" required id="jobName" size="10" th:value="${intvs.jobName}">
-			</div></div>
-
-			<div class="row mb-3">
-				<label>是否錄取</label> 
-				<div class="col-sm-8 text-center">
-				<input type="radio" name="offer" value="1"
-					id="offer">是 <input type="radio" name="offer" value="2"
-					id="offer">否
-			</div></div>
-			<div class="row mb-3">
-				<label>有無測驗</label> 
-				<div class="col-sm-8 text-center">
-				<input type="radio" name="test" value="1"
-					id="test">有 <input type="radio" name="test" value="2"
-					id="test">無
+					name="jobName" maxlength="8" required id="jobName" size="10" th:value="*{jobName}" readonly>
 			</div></div>
 			<div class="row mb-3">
 				<label>考官QA</label>
 				<div class="col-sm-8 text-center">
 				<textarea class="form-control" placeholder="備註最多50字" id="qA"
-					style="height: 150px;" name="qA" maxlength="50" th:text="${intvs.qA}"></textarea>
+					style="height: 150px;" name="qA" maxlength="50" th:text="*{qA}" readonly></textarea>
 			</div></div>
 			<div class="row mb-3">
 				<label>心得分享</label>
 				<div class="col-sm-8 text-center">
 				<textarea class="form-control" placeholder="備註最多600字" id="share"
-					style="height: 150px;" name="share" maxlength="600" th:text="${intvs.share}"></textarea>
+					style="height: 150px;" name="share" maxlength="600" th:text="*{share}" readonly></textarea>
 			</div></div>
-			<div class="row mb-3">
-				<label>評分該公司</label> 
-				<div class="col-sm-8 text-center">
-				<input type="radio" name="compScore"id="compScore" value="1">1 
-				<input type="radio"	name="compScore"id="compScore" value="2">2 
-				<input type="radio" name="compScore" id="compScore"value="3">3 
-				<input type="radio" name="compScore" id="compScore"value="4">4 
-				<input type="radio" name="compScore" id="compScore"value="5">5
-			</div></div>
-                            <button type="button" class="btn btn-primary" value="1" id="btn-submit">確認修改</button>
+		
                             <button type="button" class="btn btn-primary" id="btn-goBack">取消</button>
-<!--                             <button type="button" class="btn btn-primary" id="eventWrongInput">錯誤輸入</button> -->
-<!--                             <button type="button" class="btn btn-primary" id="eventCorrectInput">正確輸入</button> -->
                         </form>
                     </div>
                 </div>
@@ -236,7 +138,7 @@
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/checkCompanyForm.js}" src="js/checkCompanyForm.js"></script>
+    <script th:src="@{/js/interview_dashboard/checkInterviewForm.js}" src="js/interview_dashboard/checkInterviewForm.js"></script>
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>
