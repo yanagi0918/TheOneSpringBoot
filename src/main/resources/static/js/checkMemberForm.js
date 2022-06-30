@@ -17,9 +17,9 @@ $(function() {
 		$('#point').val('300')
 	})
 
-	$('.btn-memberUpdate').click(function() {
-		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
-	})
+	//$('.btn-memberUpdate').click(function() {
+	//	location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
+	//})
 
 	$('#btn-toCreate').click(function() {
 		location.href = "/member";
@@ -44,6 +44,8 @@ $(function() {
 			alert("會員點數只能輸入阿拉伯整數");
 			checkMemberForm = false;
 		}
+		
+		return checkMemberForm;
 
 	})
 
