@@ -19,5 +19,7 @@ public class TestController {
 	public String testStatic() {
 		return "test";
 	}
+	
+	
 
 }
