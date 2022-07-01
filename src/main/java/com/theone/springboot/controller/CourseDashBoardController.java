@@ -74,6 +74,7 @@ public class CourseDashBoardController {
 
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
+        System.out.println(CourseBean);
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
         //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());

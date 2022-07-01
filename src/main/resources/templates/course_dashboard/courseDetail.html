@@ -116,7 +116,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">影片位置</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="courseVedio"
+                            <input type="text" class="form-control" name="courseVedioUrl"
                                    th:value="${CourseBean.courseVedioUrl}" readonly="readonly">
                         </div>
                     </div>
@@ -138,8 +138,8 @@
                     </div>
 
                          <div style="text-align: center">
-                            <a class="btn btn-primary" th:href="@{'/dashboard/toUpdatePage/'+${CourseBean.courseNo}}">更新</a>
-                            <button class="btn btn-primary" type="button" id="btn-cancel">取消</button>
+                            <a class="btn btn-outline-primary" th:href="@{'/dashboard/toUpdatePage/'+${CourseBean.courseNo}}">更新</a>
+                            <button class="btn btn-outline-danger" type="button" id="btn-cancel">取消</button>
                         </div>
                 </div>
             </div>
