@@ -19,8 +19,6 @@ public interface MemberService {
 	
 	Member getByUserid(String userid);
 	
-	Member getByTele(String tele);
-	
 	
 	
 }

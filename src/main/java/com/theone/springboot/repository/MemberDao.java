@@ -10,6 +10,6 @@ public interface MemberDao extends JpaRepository<Member, Integer> {
 	
 	Member getByUserid(String userid);
 	
-	Member getByTele(String tele);
+	
 
 }
