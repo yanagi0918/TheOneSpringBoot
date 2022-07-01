@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public boolean isDup(Integer compid) {
 		
-		return companyDao.existsById(compid);
+		return companyDao.findById(compid) != null;
 	}
 	@Override
 	public Company saveOrUpdate(Company company) {

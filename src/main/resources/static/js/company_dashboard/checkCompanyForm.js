@@ -1,18 +1,3 @@
-  $(function() {
-    $('.register-submit').on('click', function() {
-      $.ajax({
-        data : {
-          account: $('#compid').val()
-        },
-        success: function(res) {
-          if(res=='1') {
-            alert('申請帳號重複，請輸入其他帳號');
-          }
-        }
-      });
-    });
-  });
-
 
 function checkCompanyForm() {
 	let checkResult = true;
@@ -36,10 +21,18 @@ function checkCompanyForm() {
 		return checkJobForm;
 	}
 	
-	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 	if (!pwdRegex.test($("#compwd").val())) {
 	Swal.fire('Warning!',
 			'密碼格式錯誤!',
+			'warning');
+		checkJobForm = false;
+		return checkJobForm;
+	}
+	
+	if (!pwdRegex.test($("#pwdagain").val())) {
+	Swal.fire('Warning!',
+			'再次輸入密碼的格式錯誤!',
 			'warning');
 		checkJobForm = false;
 		return checkJobForm;
@@ -71,7 +64,8 @@ function checkCompanyForm() {
 
 $('#wrongCompany').click(function() {
 	$('#compid').val('A7654321')
-	$('#compwd').val('abc')
+	$('#compwd').val('abc123')
+	$('#pwdagain').val('abc123')
 	$('#corpname').val('麥噹勞')
 	$('#owner').val('麥先生')
 	$('#industry').val('服務業')
@@ -88,10 +82,11 @@ $('#wrongCompany').click(function() {
 $('#correctCompany').click(function() {
 	$('#compid').val('87654321')
 	$('#compwd').val('Aabc123zzz')
-	$('#corpname').val('啃得機')
-	$('#owner').val('啃先生')
+	$('#pwdagain').val('Aabc123zzz')
+	$('#corpname').val('幸福企業有限公司')
+	$('#owner').val('吳先生')
 	$('#industry').val('服務業')
-	$('#contact').val('啃小姐')
+	$('#contact').val('白小姐')
 	$('#comptele').val('0939393939')
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
@@ -100,7 +95,7 @@ $('#correctCompany').click(function() {
 	$('#capital').val('1200萬')
 })
 $('#companyUpdate').click(function() {
-	$('#compwd').val('Aabc123zzz')
+	$('#compwd').val('Az145145')
 	$('#corpname').val('XX株式會社')
 	$('#owner').val('陳先生')
 	$('#industry').val('服務業')
@@ -116,16 +111,42 @@ $(document).ready( function () {
     $('#lee').DataTable();
 } );
 
+$('#lee').DataTable({
+    "lengthMenu": [5, 10, 15,20]
+});
+
 
 //密碼顯示或是隱藏
 
 	 function ShowPwd() {
             var x = document.getElementById("compwd");
+            var pwdagain = document.getElementById("pwdagain");
+            
             if (x.type === "password") {
                 x.type = "text";
             } else {
                 x.type = "password";
             }
+            
+            if (pwdagain.type === "password") {
+                pwdagain.type = "text";
+            } else {
+                pwdagain.type = "password";
+            }
 
 	}
+//確認兩次密碼
+
+          function validate() {
+              var pwd1 = document.getElementById("compwd").value;
+              var pwd2 = document.getElementById("pwdagain").value;
+             if(pwd1 == pwd2) {
+               document.getElementById("msg").innerHTML="<font color='green'>正確</font>";
+               document.getElementById("submit").disabled = false;
+              }
+              else {
+               document.getElementById("msg").innerHTML="<font color='red'>密碼不相同，再輸入一次</font>";
+                document.getElementById("submit").disabled = true;
+              }
+          }
 	
