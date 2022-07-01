@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -23,9 +24,11 @@ public class Comment{
 	private Integer share_id;
 	
 	@Column(name = "ref_time", columnDefinition = "Date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ref_time;
 	
 	@Column(name = "create_time", columnDefinition = "Date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date create_time;
 	
 	@Column(name = "comp_name")
