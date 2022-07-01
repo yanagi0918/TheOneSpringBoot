@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.theone.springboot.entity.Comment;
-import com.theone.springboot.repository.CommentRepository;
+import com.theone.springboot.repository.CommentDao;
 import com.theone.springboot.service.CommentService;
 
 @Service
@@ -15,31 +15,31 @@ import com.theone.springboot.service.CommentService;
 public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
-	CommentRepository commentRepository;
+	CommentDao commentDao;
 
 	@Override
 	public boolean existsById (Integer pk) {
-		return commentRepository.existsById(pk);
+		return commentDao.existsById(pk);
 	}
 
 	@Override
 	public Comment saveOrUpdate(Comment comment) {
-		return commentRepository.save(comment);
+		return commentDao.save(comment);
 	}
 
 	@Override
 	public Iterable<Comment> findAll() {
-		return commentRepository.findAll();
+		return commentDao.findAll();
 	}
 
 	@Override
 	public Optional<Comment> findById(Integer pk) {
-		return commentRepository.findById(pk);
+		return commentDao.findById(pk);
 	}
 
 	@Override
 	public void deleteById(Integer pk) {
-		commentRepository.deleteById(pk);
+		commentDao.deleteById(pk);
 	}
 
 }

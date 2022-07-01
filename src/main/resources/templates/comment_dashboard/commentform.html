@@ -109,7 +109,7 @@
 							data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
 						<div class="dropdown-menu bg-transparent border-0">
 							<a href="./InterViewServletDS" class="dropdown-item">面試經驗談</a> <a
-								href="/dashboard/CommentsManager" class="dropdown-item">評論管理</a>
+								href="/dashboard/comments" class="dropdown-item">評論管理</a>
 						</div>
 					</div>
 					<div class="nav-item dropdown">
@@ -167,7 +167,7 @@
 					<div class="bg-light rounded h-100 p-4">
 						<h6 th:text="${comment.share_id != null} ? '編輯評論' : '新增評論'"></h6>
 						<form
-							th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentConfirm'"
+							th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentInsert'"
 							method="post" id="form" th:modelAttribute="comment">
 							<div class="row mb-3">
 								<div class="row mb-3">
@@ -181,15 +181,22 @@
 										</tr>
 										<tr>
 											<th>新增時間:</th>
-											<td><input class="form-control" type="text"
-												th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
+											<td><input type="date" class="form-control" 
+												th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
 												name="create_time" readonly></td>
 											<th>帳號:</th>
-											<td><input type="radio" id="anonymous" name="user">匿名
-												<input type="radio" id="user" name="user">會員</td>
-											<td colspan="2"><input type="text" class="form-control"
-												style="display: none;" id="user_id" name="user_id"
-												th:value="${comment.user_id}" placeholder="請輸入帳號"></td>
+											<td th:if="${comment.user_id == null}">
+												<input type="radio" id="anonymous" name="user" >匿名
+												<input type="radio" id="user" name="user" >會員
+											</td>
+											<td th:if="${comment.user_id != null}">
+												<input type="radio" id="anonymous" name="user" th:checked="${comment.user_id.contains('匿名')} ? 'checked'">匿名
+												<input type="radio" id="user" name="user" th:checked="${!comment.user_id.contains('匿名')} ? 'checked'">會員
+											</td>
+											<td colspan="2">
+												<input type="text" class="form-control" th:style="${comment.user_id != null && comment.user_id.contains('匿名') ? 'display: none' : 'display: block'}"
+												id="user_id" name="user_id"	th:value="${comment.user_id}" placeholder="請輸入帳號">
+											</td>
 										</tr>
 										<tr>
 											<th>公司名稱:</th>
@@ -205,8 +212,8 @@
 											</td>
 											<th>參考時間:</th>
 											<td><input type="date" class="form-control"
-												name="ref_time" id="ref_time" th:value="${comment.ref_time}"
-												th:max="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
+												name="ref_time" id="ref_time" th:value="${#dates.format(comment.ref_time, 'yyyy-MM-dd')}"
+												th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 											</td>
 										</tr>
 										<tr>
@@ -285,19 +292,19 @@
 							</div>
 							<div align="center">
 								<!-- 						th:switch="${comment != null}" onclick="location.href='/dashboard/CommentConfirm'"-->
-								<a th:if="${comment.share_id != null}"
-									th:href="@{/dashboard/CommentUpdate/{id}(id=${comment.share_id})}"
-									class="btn btn-primary m-0">編輯</a>
-								<!-- 							<button type="submit" th:if="${comment.user_id != null}" -->
-								<!-- 								class="btn btn-primary" name="submit" value="更新" -->
-								<!-- 								onclick="location.href='/dashboard/CommentUpdate'">更新</button> -->
+<!-- 								<a th:if="${comment.share_id != null}" -->
+<!-- 									th:href="@{/dashboard/CommentUpdate}" -->
+<!-- 									class="btn btn-primary m-0">編輯</a> 
+									onclick="location.href='/dashboard/CommentUpdate'"-->
+								<button type="submit" th:if="${comment.user_id != null}"
+									class="btn btn-primary" name="submit" value="更新">更新</button>
 								<button type="button" th:if="${comment.share_id == null}"
 									class="btn btn-outline-dark" name="oneInput" value="一鍵輸入"
 									id="OneInput">範例</button>
 								<button type="submit" th:if="${comment.share_id == null}"
-									class="btn btn-primary" name="new" value="新增" formaction="/dashboard/CommentConfirm" >新增</button>
+									class="btn btn-primary" name="new" value="新增">新增</button>
 								<button type="button" class="btn btn-secondary"
-									onclick="location.href='/dashboard/CommentsManager'">取消</button>
+									onclick="location.href='/dashboard/comments'">取消</button>
 
 							</div>
 						</form>
@@ -354,9 +361,9 @@
 			th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 			src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script th:src="@{/js/jquery.raty.js}" src="js/jquery.raty.js"></script>
-		<script th:src="@{/js/checkCommentForm.js}"
-			src="js/checkCommentForm.js"></script>
+		<script th:src="@{/js/comment_dashboard/jquery.raty.js}" src="js/comment_dashboard/jquery.raty.js"></script>
+		<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
+			src="js/comment_dashboard/checkCommentForm.js"></script>
 
 		<!-- Template Javascript -->
 		<script th:src="@{/js/main.js}" src="js/main.js"></script>
