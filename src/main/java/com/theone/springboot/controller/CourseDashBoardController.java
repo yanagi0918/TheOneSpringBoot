@@ -75,15 +75,25 @@ public class CourseDashBoardController {
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
-        String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
+        //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
+        File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
         if (mf.getOriginalFilename().length() != 0) {
-            mf.transferTo(new File(savedFilePath));
+            mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/dashboard/courses";
     }
 
+    public File uploadDirInit() {
+        String savedFilePath = new File("target\\classes\\static\\courseImg\\").getAbsolutePath();
+        File uploadDir = new File(savedFilePath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+        return uploadDir;
+    }
+//123
     @DeleteMapping("/courses/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> deleteCourseByNo(@PathVariable Integer courseNo) {
