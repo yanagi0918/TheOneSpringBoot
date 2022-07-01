@@ -18,7 +18,7 @@ function checkJobForm() {
 			'warning');
 		checkJobForm = false;
 		return checkJobForm;
-	}
+	}//123
 	
 	
 }
