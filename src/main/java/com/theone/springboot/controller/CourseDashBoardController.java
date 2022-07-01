@@ -93,7 +93,11 @@ public class CourseDashBoardController {
         }
         return uploadDir;
     }
+<<<<<<< HEAD
 //123456
+=======
+//1234
+>>>>>>> Vincent
     @DeleteMapping("/courses/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> deleteCourseByNo(@PathVariable Integer courseNo) {
