@@ -10,9 +10,8 @@ $(function () {
         location.href = "/dashboard/courses";
     })
 
-	//function deleteByNo(courseNo) {
-	$('#delete').on('click',function () {
-		var courseNo = $('#deletevalue').val();
+	$('.btn-courseDelete').click(function () {
+		let courseNo = this.value;
 		console.log(courseNo);
 		Swal.fire({
 			title: '確認是否刪除?',
