@@ -1,8 +1,0 @@
-DELETE http://localhost:8080/courses/{{courseNo}}
-
-###
-
-DELETE http://localhost:8080/courses/{courseNo}
-
-###
-
