@@ -37,14 +37,14 @@ public class CompanyDashBoardController {
 	
 	@PostMapping("/saveCompany")
 	public String saveCustomer(@ModelAttribute("company") Company company,Model m) {
-		Map<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
-		Integer compId =company.getCompid();
-		if(companyService.isDup(compId)==false) {
-			errors.put("compid", "用戶名稱重複");
-			return "company_dashboard/companycreate";
-//			throw new IllegalArgumentException("用戶名稱重複");
-		}
+//		Map<String, String> errors = new HashMap<String, String>();
+//		m.addAttribute("errors", errors);
+//		Integer compId =company.getCompid();
+//		if(companyService.isDup(compId)==false) {
+//			errors.put("compid", "用戶名稱重複");
+//			return "company_dashboard/companycreate";
+////			throw new IllegalArgumentException("用戶名稱重複");
+//		}
 		
 		
 		companyService.saveOrUpdate(company);

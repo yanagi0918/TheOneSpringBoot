@@ -29,7 +29,7 @@ import com.theone.springboot.service.InterviewService;
 
 
 @Controller
-@RequestMapping("/interview")
+@RequestMapping("/dashboard")
 public class InterviewController {
 	
 	@Autowired

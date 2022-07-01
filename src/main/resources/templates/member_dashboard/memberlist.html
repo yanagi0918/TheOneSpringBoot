@@ -28,6 +28,9 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+    
+    <!-- datatable的CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -57,7 +60,7 @@
                         <button type="button" class="btn btn-primary mb-0" id="btn-toCreate">新增會員</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0">
+                        <table class="table align-middle table-bordered table-hover mb-0" id="table_id">
                             <thead>
                                 <tr class="text-dark">
                                 	<th scope="col">會員編號</th>
@@ -125,6 +128,8 @@
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/js/member_dashboard/checkMemberForm.js}" src="js/checkMemberForm.js"></script>
+    <!-- datatable的script -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script>
         function del(id) {
 		Swal.fire({
