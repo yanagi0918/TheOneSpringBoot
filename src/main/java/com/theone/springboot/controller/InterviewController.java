@@ -59,7 +59,7 @@ public class InterviewController {
 		intv.setCreateTime(ts);
 		interviewService.saveOrUpdate(intv);
 		
-		return "redirect:/interview/intvlist";
+		return "redirect:/dashboard/intvlist";
 	}
 
 	@GetMapping("/intv/{id}")
