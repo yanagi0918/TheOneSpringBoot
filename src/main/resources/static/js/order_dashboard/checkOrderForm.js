@@ -236,12 +236,34 @@ $('#OrdercorrectInput').click(function () {
   				'請輸入正確身分證字號',
   				'error'
 			)
+			$('#userId').attr("class","form-control is-invalid")
         checkOrderForm = false;
-        return checkOrderForm;
-    }
+   		 }else{
+			$('#userId').attr("class","form-control is-valid")
+		 }
+		
     if ($('#orderDate').val() == "") {
 			warningStr += "請輸入日期" + "<br>";
+			$('#orderDate').attr("class","form-control is-invalid")
 			checkOrderForm = false;
+		}else{
+			$('#orderDate').attr("class","form-control is-valid")
+		}
+		
+	if ($('#state').val() == "") {
+			warningStr += "請輸入狀態" + "<br>";
+			$('#state').attr("class","form-control is-invalid")
+			checkOrderForm = false;
+		}else{
+			$('#state').attr("class","form-control is-valid")
+		}
+		
+	if ($('#productId').val() == "") {
+			warningStr += "請輸入課程" + "<br>";
+			$('#productId').attr("class","form-control is-invalid")
+			checkOrderForm = false;
+		}else{
+			$('#productId').attr("class","form-control is-valid")
 		}
 
     let priceRegex = /^\d*$/;
@@ -251,9 +273,11 @@ $('#OrdercorrectInput').click(function () {
   				'總價只能輸入有效數字',
   				'error'
 			)
+		$('#totalPrice').attr("class","form-control is-invalid")
         checkOrderForm = false;
-        return checkOrderForm;
-    } 
+   		 }else{
+			$('#totalPrice').attr("class","form-control is-valid")
+		}
 
 		let confirmStr = '確認修改訂單?';
 		if ($('#btn-submit').val() == 0) {
