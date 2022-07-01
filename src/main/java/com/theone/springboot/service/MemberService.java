@@ -17,6 +17,10 @@ public interface MemberService {
 
 	void deleteMember(Integer pk);
 	
+	Member getByUserid(String userid);
+	
+	Member getByTele(String tele);
+	
 	
 	
 }

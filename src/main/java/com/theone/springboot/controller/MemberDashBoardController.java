@@ -39,6 +39,18 @@ public class MemberDashBoardController {
 		return "member_dashboard/memberlist";
 	}
 	
+	@ResponseBody
+	@GetMapping("/member/user/{userid}")
+	public Member aaa(@PathVariable("userid")String userid) {
+		return memberService.getByUserid(userid);
+	}
+	
+	@ResponseBody
+	@GetMapping("/member/tele/{tele}")
+	public Member bb(@PathVariable("tele")String tele) {
+		return memberService.getByTele(tele);
+	}
+	
 	@GetMapping("/member")
 	public String toCreatePage() {
 		return "member_dashboard/membercreate";
