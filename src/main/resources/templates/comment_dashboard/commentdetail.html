@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>THE ONE</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+
+	<!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+
+	<!-- jQuery Raty -->
+	<link th:href="@{/css/jquery.raty.css}" href="css/jquery.raty.css"
+		rel="stylesheet">
+	<!-- 莊詠筑 -->
+	
+	<!-- Data Table -->
+	<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+		rel="stylesheet">
+	<!-- 莊詠筑 -->
+	
+</head>
+<body>
+	<div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div th:replace="~{common/dashboard::spinner}"></div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div th:replace="~{common/dashboard::sidebar(7)}"></div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <div th:replace="~{common/dashboard::navbar}"></div>
+            <!-- Navbar End -->
+            
+			<!-- Content Start -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="col-sm-12 col-xl-10">
+					<div class="bg-light rounded h-100 p-4">
+						<div align="center">
+							<h2>評論內容</h2>
+						</div>
+						<!-- 						<form -->
+						<!-- 		enctype="multipart/form-data"					th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentConfirm'" -->
+						<!-- 							method="post" id="form" th:modelAttribute="comment"> -->
+						<form th:action="@{/dashboard/CommentInsert}"
+							method="post" th:modelAttribute="comment" th:object="${comment}" id="form">
+							<div align="center">
+								<table
+									class="table table-light align-middle table-bordered table-hover mb-0">
+									<tr>
+										<td>編號:</td>
+										<td th:text="${comment.share_id}"></td>
+										<td>新增時間:</td>
+										<td
+											th:text="${#calendars.format(comment.create_time, 'yyyy-MM-dd')}"></td>
+										<td>帳號:</td>
+										<td th:text="${comment.user_id}"></td>
+									</tr>
+									<tr>
+										<td>公司名稱:</td>
+										<td th:text="${comment.comp_name}"></td>
+										<td>公司評分:</td>
+										<td id="confirmComp"
+											th:attr="data-score=${comment.comp_score}"></td>
+										<td>參考時間:</td>
+										<td
+											th:text="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"></td>
+									</tr>
+									<tr>
+										<td>職位:</td>
+										<td th:text="${comment.job_name}"></td>
+										<td>職務型態:</td>
+										<td th:text="${comment.job_description}"></td>
+										<td>職位評分:</td>
+										<td id="confirmJob"
+											th:attr="data-score=${comment.job_score}"></td>
+									</tr>
+									<tr>
+										<td>表定工時:</td>
+										<td th:text="${comment.std_hour}"></td>
+										<td>實際工時:</td>
+										<td th:text="${comment.real_hour}"></td>
+										<td>加班頻率:</td>
+										<td th:text="${comment.over_freq}"></td>
+									</tr>
+									<tr>
+										<td>服務年資:</td>
+										<td th:text="${comment.seniority}"></td>
+										<td>總年資:</td>
+										<td th:text="${comment.total_seniority}"></td>
+										<td colspan="2"></td>
+									</tr>
+									<tr>
+										<td>月薪:</td>
+										<td th:text="${comment.monthly_salary}"></td>
+										<td>年薪:</td>
+										<td th:text="${comment.yearly_salary}"></td>
+										<td>獎金次數:</td>
+										<td th:text="${comment.bonus_count}"></td>
+									</tr>
+									<tr>
+										<td>心得分享:</td>
+										<td colspan="6" th:text="${comment.share}"></td>
+									</tr>
+								</table>
+							</div>
+							<br>
+							<div align="center">
+<!-- 															onclick="form.action='/dashboard/CommentInsert'" -->
+								<button th:if="${comment.share_id == null}" type="submit"
+									class="btn btn-primary" name="submit" form="form" value="送出">確認</button>
+<!-- 									<a th:if="${comment.share_id == null}" -->
+<!-- 									th:href="@{/dashboard/CommentInsert}" -->
+<!-- 									class="btn btn-primary m-0">確認</a> -->
+								<button th:if="${comment.share_id == null}" type="button"
+									class="btn btn-secondary"
+									onclick="location.href='/dashboard/comments'">取消</button>
+								<a th:if="${comment.share_id != null}"
+									th:href="@{/dashboard/CommentEdit/{id}(id=${comment.share_id})}"
+									class="btn btn-primary m-0">編輯</a>
+								<button th:if="${comment.share_id != null}" type="button"
+									class="btn btn-secondary"
+									onclick="location.href='/dashboard/comments'">返回</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- 	Content End -->
+
+			<!-- Footer Start -->
+            <div th:replace="~{common/dashboard::footer}"></div>
+            <!-- Footer End -->
+		</div>
+		<!-- Content End -->
+
+
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
+
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script th:src="@{/lib/chart/chart.min.js}"
+		src="lib/chart/chart.min.js"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"
+		src="lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"
+		src="lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
+		src="lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script
+		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/comment_dashboard/jquery.raty.js}" src="js/comment_dashboard/jquery.raty.js"></script>
+	<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
+		src="js/comment_dashboard/checkCommentForm.js"></script>
+
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="js/main.js"></script>
+</body>
+</html>

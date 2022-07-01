@@ -23,12 +23,41 @@ $(function() {
 					location.href = `/dashboard/CommentDelete?id=${$(this).val()}`;
 				}, 1500)
 			} else {
-				location.href = './CommentsManager'
+				location.href = './comments'
 			}
 
 		})
 
 	});
+	
+	$('.comment-new').click(function() {
+		Swal.fire({
+			title: '提示',
+			text: '確定要新增?',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '確定',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已新增!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					$('#form').submit();
+				}, 1500)
+			} else {
+			}
+
+		})
+
+	});
+
 });
 
 
@@ -110,7 +139,7 @@ $(function() {
 })
 
 //Star rating js
-$.raty.path = '../img';
+$.raty.path = '/img';
 
 $(function() {
 
@@ -150,12 +179,12 @@ $(function() {
 
 //One key input js
 $('#OneInput').click(function() {
+	$('#user_id').show()
 	$('#user_id').val('A123456789')
 	$('#comp_name').val('狗來富寵物廣場')
 	$('#ref_time').val('2000-01-01')
 	$('#job_name').val('美容師')
 	$('#job_description option[value="全職"]').attr('selected', 'selected')
-	$('#user_id').show()
 	$('#user').attr('checked', 'checked')
 	$('#std_hour').val('10')
 	$('#real_hour').val('12')
