@@ -10,7 +10,41 @@ $(function () {
         location.href = "/dashboard/courses";
     })
 
-    //$('#delete').on('click',function () {
+	//function deleteByNo(courseNo) {
+	$('#delete').on('click',function () {
+		var courseNo = $('#deletevalue').val();
+		console.log(courseNo);
+		Swal.fire({
+			title: '確認是否刪除?',
+			text: "刪除後將無法回復!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '永久刪除',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已刪除!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					$.ajax({
+						url: '/dashboard/courses/'+courseNo,
+						type: 'DELETE',
+						success: function(result) {
+							window.location.href='/dashboard/courses'
+						}
+					});
+				}, 1500)
+			}
+		})
+	})
+
+//     $('#delete').on('click',function () {
 //     $('.btn-courseDelete').on('click', function () {
 //         Swal.fire({
 //             title: '警告',
@@ -170,8 +204,19 @@ $(function () {
 	$(document).ready(function () {
 		$('#table_id').DataTable(
 			{
+				initComplete : function() {
+					$("#example_filter").detach().appendTo('#new-search-area');
+				},
+
 				columnDefs: [
-					{orderable: false, targets: 7}
+					{orderable: false, targets: 7},
+					{
+						"targets":[ 0,1, 2,3,4,5,6 ],
+						"className": "text-center",
+					},
+					{
+						"search": "text-center"
+					}
 				],
 				"language":{
 					"processing": "處理中...",
