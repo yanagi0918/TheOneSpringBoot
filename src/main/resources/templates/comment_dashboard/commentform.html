@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -50,6 +51,12 @@
 	rel="stylesheet">
 <!-- 莊詠筑 -->
 
+<style>
+/*for validation*/
+.error {
+	color: #F00;
+}
+</style>
 </head>
 <body>
 	<div class="container-xxl position-relative bg-white d-flex p-0">
@@ -103,7 +110,7 @@
 							data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
 						<div class="dropdown-menu bg-transparent border-0">
 							<a href="./InterViewServletDS" class="dropdown-item">面試經驗談</a> <a
-								href="./CommentsManager" class="dropdown-item">評論管理</a>
+								href="/dashboard/CommentsManager" class="dropdown-item">評論管理</a>
 						</div>
 					</div>
 					<div class="nav-item dropdown">
@@ -157,61 +164,144 @@
 
 			<!-- Content Start -->
 			<div class="container-fluid pt-4 px-4">
-				<div class="bg-light text-center rounded p-4">
-					<div class="d-flex align-items-center justify-content-between mb-4">
-						<h6 class="mb-0">公司職位評論</h6>
-						<div class="form-control-sm w-75 rounded-pill bg-white">
-							<span class="float-start mx-1 my-2 rounded-circle"> <i
-								class="fa-solid fa-magnifying-glass"></i>
-							</span>
-							<div class="">
-								<input
-									class="form-control float-start bg-transparent border-0 w-75 searchBar"
-									type="search" data-table="order-table" placeholder="搜尋...">
-							</div>
-						</div>
+				<div class="col-sm-12 col-xl-11">
+					<div class="bg-light rounded h-100 p-4">
+						<h6 th:text="${comment.share_id != null} ? '編輯評論' : '新增評論'"></h6>
+						<form
+							th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentConfirm'"
+							method="post" id="form" th:modelAttribute="comment">
+							<div class="row mb-3">
+								<div class="row mb-3">
 
-						<button type="button" class="btn btn-primary mb-0"
-							onclick="location.href='/dashboard/CommentNew'">新增評論</button>
-					</div>
-					<div class="container">
-						<table
-							class="table align-middle table-bordered order-table mb-0 compact cell-border hover"
-							id="commentTable" style="width: 100%">
-							<thead>
-								<tr class="text-dark">
-									<th>編號</th>
-									<th>參考時間</th>
-									<th>公司名稱</th>
-									<th>公司評分</th>
-									<th>職位</th>
-									<th>職位評分</th>
-									<th>心得分享</th>
-									<th>動作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="comment : ${listComment} ">
-									<td th:text="${comment.share_id}"></td>
-									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.comp_name}"></td>
-									<td class="listComp" data-score=""
-										th:attr="data-score=${comment.comp_score}"></td>
-									<td th:text="${comment.job_name}"></td>
-									<td class="listJob" data-score=""
-										th:attr="data-score=${comment.job_score}"></td>
-									<td th:text="${comment.share}"></td>
-									<td><a
-										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.share_id})}"
-										class="btn btn-outline-info m-0">內容</a> <a
-										th:href="@{/dashboard/CommentEdit/{id}(id=${comment.share_id})}"
-										class="btn btn-outline-primary m-0">修改</a> 
-										<button type="button"
-										class="btn btn-outline-danger m-0 comment-delete"
-										th:value='${comment.share_id}'>刪除</button>
-								</tr>
-							</tbody>
-						</table>
+									<table class="table-responsive">
+										<tr th:if="${comment.share_id != null}">
+											<th>評論編號:</th>
+											<td><input type="text" name="share_id"
+												class="form-control" th:value="${comment.share_id}" readonly>
+											</td>
+										</tr>
+										<tr>
+											<th>新增時間:</th>
+											<td><input class="form-control" type="text"
+												th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
+												name="create_time" readonly></td>
+											<th>帳號:</th>
+											<td><input type="radio" id="anonymous" name="user">匿名
+												<input type="radio" id="user" name="user">會員</td>
+											<td colspan="2"><input type="text" class="form-control"
+												style="display: none;" id="user_id" name="user_id"
+												th:value="${comment.user_id}" placeholder="請輸入帳號"></td>
+										</tr>
+										<tr>
+											<th>公司名稱:</th>
+											<td><input type="text" class="form-control"
+												id="comp_name" name="comp_name"
+												th:value="${comment.comp_name}" placeholder="請輸入公司名稱"></td>
+											<th>公司評分:</th>
+											<td th:switch="${comp_score==null}">
+												<div th:case="true" id="compScore" data-score="5"></div>
+												<div th:case="false" id="compScore"
+													th:data-score="${comment.comp_score}"></div> <input
+												type="hidden" id="comp_score" name="comp_score">
+											</td>
+											<th>參考時間:</th>
+											<td><input type="date" class="form-control"
+												name="ref_time" id="ref_time" th:value="${comment.ref_time}"
+												th:max="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
+											</td>
+										</tr>
+										<tr>
+											<th>職位:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.job_name}" name="job_name" id="job_name"
+												placeholder="請輸入職位名稱"></td>
+											<th>職務型態:</th>
+											<td><select class="form-select" name="job_description"
+												id="job_description" size="1">
+													<option value="" selected>請選擇</option>
+													<option value="全職"
+														th:selected="${comment.job_description== '全職'}">全職</option>
+													<option value="兼職"
+														th:selected="${comment.job_description== '兼職'}">兼職</option>
+													<option value="工讀"
+														th:selected="${comment.job_description== '工讀'}">工讀</option>
+													<option value="實習"
+														th:selected="${comment.job_description== '實習'}">實習</option>
+											</select></td>
+											<th>職位評分:</th>
+											<td th:switch="${job_score==null}">
+												<div th:case="true" id="jobScore" data-score="5"></div>
+												<div th:case="false" id="jobScore"
+													th:data-score="${comment.job_score}"></div> <input
+												type="hidden" id="job_score" name="job_score">
+											</td>
+										</tr>
+										<tr>
+											<th>表定工時:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.std_hour}" id="std_hour" name="std_hour"
+												placeholder="小時/日"></td>
+											<th>實際工時:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.real_hour}" id="real_hour"
+												name="real_hour" placeholder="小時/日"></td>
+											<th>加班頻率:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.over_freq}" id="over_freq"
+												name="over_freq" placeholder="天/周"></td>
+										</tr>
+										<tr>
+											<th>服務年資:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.seniority}" id="seniority"
+												name="seniority" placeholder="年"></td>
+											<th>總年資:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.total_seniority}" id="total_seniority"
+												name="total_seniority" placeholder="年"></td>
+										</tr>
+										<tr>
+											<th>月薪(元):</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.monthly_salary}" id="monthly_salary"
+												name="monthly_salary" placeholder="元/月"></td>
+											<th>年薪(萬元):</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.yearly_salary}" id="yearly_salary"
+												name="yearly_salary" placeholder="萬元/年"></td>
+											<th>獎金次數:</th>
+											<td><input type="text" class="form-control"
+												th:value="${comment.bonus_count}" id="bonus_count"
+												name="bonus_count" placeholder="次/年"></td>
+										</tr>
+										<tr>
+											<th>心得分享:</th>
+											<td colspan="6"><textarea class="form-control"
+													id="share" name="share" rows="6" cols="90"
+													th:text="${comment.share}"></textarea>
+										</tr>
+
+									</table>
+								</div>
+							</div>
+							<div align="center">
+								<!-- 						th:switch="${comment != null}" onclick="location.href='/dashboard/CommentConfirm'"-->
+								<a th:if="${comment.share_id != null}"
+									th:href="@{/dashboard/CommentUpdate/{id}(id=${comment.share_id})}"
+									class="btn btn-primary m-0">編輯</a>
+								<!-- 							<button type="submit" th:if="${comment.user_id != null}" -->
+								<!-- 								class="btn btn-primary" name="submit" value="更新" -->
+								<!-- 								onclick="location.href='/dashboard/CommentUpdate'">更新</button> -->
+								<button type="button" th:if="${comment.share_id == null}"
+									class="btn btn-outline-dark" name="oneInput" value="一鍵輸入"
+									id="OneInput">範例</button>
+								<button type="submit" th:if="${comment.share_id == null}"
+									class="btn btn-primary" name="new" value="新增" formaction="/dashboard/CommentConfirm" >新增</button>
+								<button type="button" class="btn btn-secondary"
+									onclick="location.href='/dashboard/CommentsManager'">取消</button>
+
+							</div>
+						</form>
 					</div>
 				</div>
 				<!-- 	Content End -->

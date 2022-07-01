@@ -38,7 +38,7 @@
 
 
         <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
+        <div th:replace="~{common/dashboard::sidebar(5)}"></div>
         <!-- Sidebar End -->
 
 
@@ -53,10 +53,12 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">修改紀錄</h6>
-                         <form th:action="@{/interview/saveintv}" action="/saveintv" th:object="${intvs}" method="post" onsubmit="return checkIntvForm()" >
+                         <form th:action="@{/dashboard/saveintv}" action="/saveintv" th:object="${intvs}" method="post" onsubmit="return checkIntvForm()" >
+                            
+                            
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">編號</label>
-                                <div class="col-sm-8">
+                                <label >編號</label>
+                                <div class="col-sm-8 text-center" >
                                     <input type="text" class="form-control" name="cvNo" th:value="*{cvNo}" readonly id="cvNo">
                                 </div>
                             </div>
@@ -64,7 +66,7 @@
 				<label>會員帳號</label>
 				<div class="col-sm-8 text-center">
 				<input type="text" class="form-control"
-					name="userId" required placeholder="帳號為身份證字號" id="userId" th:value="*{userId}">
+					name="userId" required placeholder="帳號為身份證字號" id="userId" th:value="*{userId}" readonly>
 			</div></div>
 			<div class="row mb-3">
 				<label>面試時間</label> 
@@ -72,6 +74,11 @@
 				<input type="date" class="form-control"
 					name="intTime" id="intTime" required th:value="*{intTime}">
 <!-- 				 <input type="date" class="form-control" name="createdTime" th:value="*{createdTime}" readonly > -->
+			</div></div>
+			<div class="row mb-3">
+				<label>內容建立時間</label> 
+				<div class="col-sm-8 text-center">
+				<input type="text" class="form-control"	name="createTime" id="createTime" required th:value="*{createTime}" readonly>
 			</div></div>
 			<div class="row mb-3">
 				<label>公司名稱</label> 
@@ -113,14 +120,14 @@
 			<div class="row mb-3">
 				<label>評分該公司</label> 
 				<div class="col-sm-8 text-center">
-				<input type="radio" th:checked="*{compScore=='1'}" name="compScore" id="compScore" value="1">1 
-				<input type="radio"	th:checked="*{compScore=='2'}" name="compScore" id="compScore" value="2">2 
-				<input type="radio" th:checked="*{compScore=='3'}" name="compScore" id="compScore" value="3">3 
-				<input type="radio" th:checked="*{compScore=='4'}" name="compScore" id="compScore" value="4">4 
-				<input type="radio" th:checked="*{compScore=='5'}" name="compScore" id="compScore" value="5">5
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="1" >1 
+				<input type="radio"	th:field="*{compScore}" name="compScore" id="compScore" value="2" >2 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="3" >3 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="4" >4 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="5" >5
 			</div></div>
                             <button type=submit class="btn btn-primary" name="update" id="btn-submit">確認修改</button>
-                            <button type="button" class="btn btn-primary" id="btn-goBack">取消</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='../intvlist'; return false;">取消</button>
  							<button type="button" class="btn btn-primary" id="InterviewwrongInput">輸入錯誤範例</button>
               				<button type="button" class="btn btn-primary" id="InterviewcorrectInput">一鍵輸入</button>  
                         </form>

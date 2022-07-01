@@ -29,7 +29,7 @@ import com.theone.springboot.service.InterviewService;
 
 
 @Controller
-@RequestMapping("/interview")
+@RequestMapping("/dashboard")
 public class InterviewController {
 	
 	@Autowired
@@ -37,7 +37,6 @@ public class InterviewController {
 
 	
 	@GetMapping("/intvlist")
-
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
@@ -59,7 +58,7 @@ public class InterviewController {
 		intv.setCreateTime(ts);
 		interviewService.saveOrUpdate(intv);
 		
-		return "redirect:/interview/intvlist";
+		return "redirect:/dashboard/intvlist";
 	}
 
 	@GetMapping("/intv/{id}")
@@ -77,13 +76,13 @@ public class InterviewController {
 		
 	}
 	@ResponseBody
-	@DeleteMapping("/delete/{cvNo}")
-	public String delete(@PathVariable("cvNo")Integer cvNo) {
-		interviewService.deleteInterview(cvNo);
+	@DeleteMapping("/delete/{id}")
+	public String delete(@PathVariable("id")Integer id) {
+		interviewService.deleteInterview(id);
 		return "ok";
 	}
 	
-	@InitBinder
+	@InitBinder 
 	public void initBinder(WebDataBinder binder, WebRequest request) {
 		// java.util.Date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

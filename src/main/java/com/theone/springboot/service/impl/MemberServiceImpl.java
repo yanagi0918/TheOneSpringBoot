@@ -43,6 +43,12 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(Integer pk) {
 		memberDao.deleteById(pk);
 	}
-	
+
+	@Override
+	public Member getByUserid(String userid) {
+		return memberDao.getByUserid(userid);
+	}
+
+
 	
 }

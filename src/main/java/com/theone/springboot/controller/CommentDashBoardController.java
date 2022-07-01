@@ -17,43 +17,42 @@ import com.theone.springboot.service.CommentService;
 
 @Controller
 @RequestMapping("/dashboard")
-public class CommentController {
+public class CommentDashBoardController {
 	
 	@Autowired
 	CommentService commentService;
 	
 	// 所有評論list
-	@RequestMapping("/CommentsManager")
+	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		model.addAttribute("listComment", commentService.findAll());
-		return "comment_dashboard/CommentDashBoard";
+		return "comment_dashboard/commentlist";
 	}
 
 	// 新增評論
 	@PostMapping("/CommentInsert")
 	public String addComment(@ModelAttribute("comment") Comment comment, Model model) {
 		commentService.saveOrUpdate(comment);
-		return "redirect:./CommentsManager";
+		return "redirect:./comments";
 	}
 
 	// 刪除評論
 	@GetMapping(value = "/CommentDelete")
 	public String deleteComment(@RequestParam("id") Integer id) {
 		commentService.deleteById(id);
-		return "redirect:./CommentsManager";
+		return "redirect:./comments";
 	}
 	//更新評論
-	@RequestMapping("/CommentUpdate/{id}")
-	public String updateComment(@PathVariable("id") Integer id, @ModelAttribute("comment") Comment comment, Model model) {
-		comment.setShare_id(id);
+	@RequestMapping("/CommentUpdate")
+	public String updateComment(@ModelAttribute("comment") Comment comment) {
 		commentService.saveOrUpdate(comment);
-		return "redirect:/dashboard/CommentsManager";
+		return "redirect:/dashboard/comments";
 	}
 
 	// 送出新增評價的空白表單
 	@RequestMapping("/CommentNew")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
-		return "comment_dashboard/CommentForm";
+		return "comment_dashboard/commentform";
 	}
 	
 	// 送出新增評價的空白表單
@@ -61,7 +60,7 @@ public class CommentController {
 	public String showEditForm(@PathVariable("id") Integer id, Model model) {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
-		return "comment_dashboard/CommentForm";
+		return "comment_dashboard/commentform";
 	}
 	
 	// 送出評價的詳細資料
@@ -69,13 +68,13 @@ public class CommentController {
 	public String showDetailForm(@PathVariable("id") Integer id, Model model) {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
-		return "comment_dashboard/CommentConfirm";
+		return "comment_dashboard/commentdetail";
 	}
 
 	// 確認新增評論的資料
 	@RequestMapping("/CommentConfirm")
 	public String showConfirmForm(@ModelAttribute("comment") Comment comment) {
-		return "comment_dashboard/CommentConfirm";
+		return "comment_dashboard/commentdetail";
 	}
 
 }

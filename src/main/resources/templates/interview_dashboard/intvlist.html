@@ -38,7 +38,7 @@
 
 
         <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
+        <div th:replace="~{common/dashboard::sidebar(5)}"></div>
         <!-- Sidebar End -->
 
 
@@ -144,7 +144,7 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/interview/delete/'+id,
+                        url: '/dashboard/delete/'+id,
                         type: 'DELETE',
                         success: function(result) {
                             window.location.href='./intvlist'

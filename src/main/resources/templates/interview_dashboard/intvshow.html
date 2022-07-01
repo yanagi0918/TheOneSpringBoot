@@ -38,7 +38,7 @@
 
 
         <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
+        <div th:replace="~{common/dashboard::sidebar(5)}"></div>
         <!-- Sidebar End -->
 
 
@@ -53,12 +53,14 @@
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">修改紀錄</h6>
-                         <form th:action="@{/interview/saveintv}" action="/saveintv" th:object="${intvs}" method="post" onsubmit="return checkIntvForm()" >
+                         <form th:action="@{/dashboard/saveintv}" action="/saveintv" th:object="${intvs}" method="post" onsubmit="return checkIntvForm()" >
                             
-                                <label >編號</label><br>
-                                
-                                    <input type="text"  name="cvNo" th:value="*{cvNo}" readonly id="cvNo">
-                                
+ 				<div class="row mb-3">
+                <label >編號</label>
+                <div class="col-sm-8 text-center" >
+                <input type="text" class="form-control" name="cvNo" th:value="*{cvNo}" readonly id="cvNo">
+                </div>
+                </div>                                
                             
                 <div class="row mb-3">
 				<label>會員帳號</label>
@@ -71,8 +73,13 @@
 				<div class="col-sm-8 text-center">
 				<input type="date" class="form-control"
 					name="intTime" id="intTime" required th:value="*{intTime}" readonly>
-<!-- 				 <input type="date" class="form-control" name="createdTime" th:value="*{createdTime}" readonly > -->
 			</div></div>
+			<div class="row mb-3">
+				<label>內容建立時間</label> 
+				<div class="col-sm-8 text-center">
+				<input type="text" class="form-control"	name="createTime" id="createTime" required th:value="*{createTime}" readonly>
+			</div></div>
+			
 			<div class="row mb-3">
 				<label>公司名稱</label> 
 				<div class="col-sm-8 text-center">
@@ -86,6 +93,18 @@
 					name="jobName" maxlength="8" required id="jobName" size="10" th:value="*{jobName}" readonly>
 			</div></div>
 			<div class="row mb-3">
+				<label>是否錄取</label> 
+				<div class="col-sm-8 text-center">
+				<input type="radio" th:checked="*{offer=='1'}" name="offer" value="1"   id="offer" onclick="return false">是 
+				<input type="radio" th:checked="*{offer=='2'}" name="offer" value="2" 	id="offer" onclick="return false">否
+			</div></div>
+			<div class="row mb-3">
+				<label>有無測驗</label> 
+				<div class="col-sm-8 text-center">
+				<input type="radio" th:checked="*{test=='1'}"name="test" value="1"id="test" onclick="return false">有 
+				<input type="radio" th:checked="*{test=='2'}"name="test" value="2"id="test" onclick="return false">無
+			</div></div>
+			<div class="row mb-3">
 				<label>考官QA</label>
 				<div class="col-sm-8 text-center">
 				<textarea class="form-control" placeholder="備註最多50字" id="qA"
@@ -97,8 +116,16 @@
 				<textarea class="form-control" placeholder="備註最多600字" id="share"
 					style="height: 150px;" name="share" maxlength="600" th:text="*{share}" readonly></textarea>
 			</div></div>
-		
-                            <button type="button" class="btn btn-primary" id="btn-goBack">取消</button>
+			<div class="row mb-3">
+				<label>評分該公司</label> 
+				<div class="col-sm-8 text-center">
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="1" onclick="return false">1 
+				<input type="radio"	th:field="*{compScore}" name="compScore" id="compScore" value="2" onclick="return false">2 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="3" onclick="return false">3 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="4" onclick="return false">4 
+				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="5" onclick="return false">5
+			</div></div>
+                            <button type="button" class="btn btn-primary"  onclick="window.location.href='../intvlist'; return false;">取消</button>
                         </form>
                     </div>
                 </div>
