@@ -10,9 +10,12 @@ $(function () {
         location.href = "/dashboard/courses";
     })
 
+
+	
 	$('.btn-courseDelete').click(function () {
-		let courseNo = this.value;
+		let courseNo = this.id;
 		console.log(courseNo);
+		
 		Swal.fire({
 			title: '確認是否刪除?',
 			text: "刪除後將無法回復!",
