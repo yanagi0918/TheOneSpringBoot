@@ -21,7 +21,7 @@ $(function() {
 		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
 	})
 
-$("#imgInp").change(function() {
+	$("#imgInp").change(function() {
 		readURL(this);
 	});
 	function readURL(input) {
@@ -45,29 +45,63 @@ $("#imgInp").change(function() {
 	$('#btn-goBack').click(function() {
 		location.href = "/dashboard/members";
 	})
+	
 
 	$('#btn-submit').click(function() {
 		let checkMemberForm = true;
 
 		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
 		if (!IdRegex.test($("#userid").val())) {
-			console.log($("#userid").val())
-			alert("請輸入正確身分證字號");
+			Swal.fire({
+				title: '提示!',
+				text: "請輸入正確身分證字號",
+				icon: 'warning',
+			})
 			checkMemberForm = false;
 		}
 
 		let pointRegex = /^\d+$/;
 		if (!pointRegex.test($("#point").val())) {
-			alert("會員點數只能輸入阿拉伯整數");
+			Swal.fire({
+				title: '提示!',
+				text: "\"會員點數\"只能輸入阿拉伯整數",
+				icon: 'warning',
+			})
 			checkMemberForm = false;
 		}
+		
+		let birthday = new Date($("#birth").val());
+  		let nowDate = new Date();
+ 		 if (birthday > nowDate) {
+   		Swal.fire({
+   		 title: '提示!',
+   		 text: "\"生日\"不可在未來",
+   		 icon: 'warning',
+  		 })
+   			checkMemberForm = false;
+  }
 		
 		return checkMemberForm;
 	})
 
 });
 
+//datatable
 
 $(document).ready( function () {
     $('#table_id').DataTable();
 } );
+
+
+//密碼顯示或是隱藏
+
+	 function ShowPwd() {
+            var x = document.getElementById("pwd");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+
+	}
+	
