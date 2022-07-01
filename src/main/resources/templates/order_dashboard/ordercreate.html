@@ -64,7 +64,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">訂單日期</label>
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control" name="orderDate" required id="orderDate">
+                                    <input type="date" class="form-control" name="orderDate" required id="orderDate"
+                                    th:min="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -100,15 +101,15 @@
 									    <option>TOPIK II  韓語中、高級檢定班</option>
 									  </optgroup>
 									  <optgroup label="生涯轉換與轉業">
-									    <option>中高齡職涯發展專班-中高齡職涯續航</option>
-									    <option>女力新勢力-女性二度就業機會與挑戰</option>
-									    <option>中高齡職涯發展專班-再創職涯高峰-談轉業與轉職</option>
-									    <option>中高階再創風華專班-衝突管理與團隊合作</option>
+									    <option>中高齡職涯發展專班</option>
+									    <option>女性二度就業機會與挑戰</option>
+									    <option>職涯發展專班-轉業與轉職</option>
+									    <option>中高階再創風華專班</option>
 									  </optgroup>
 									  <optgroup label="自我認知">
 									    <option>求職計劃書撰寫(實作課程)</option>
-									    <option>創造自我價值、工作優勢及就業優勢</option>
-									    <option>職場升級版大躍進-職場心理健康</option>
+									    <option>工作優勢及就業優勢</option>
+									    <option>職場心理健康</option>
 									    <option>創造雙贏的職場人際學</option>
 									  </optgroup>
 									  <optgroup label="求職技巧">

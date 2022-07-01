@@ -69,7 +69,8 @@
                              <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">訂單日期</label>
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control" name="orderDate" th:value="${#dates.format(order.orderDate, 'yyyy-MM-dd')}" required id="orderDate">
+                                    <input type="date" class="form-control" name="orderDate" th:value="${#dates.format(order.orderDate, 'yyyy-MM-dd')}" required id="orderDate"
+                                    th:min="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -105,15 +106,15 @@
 									    <option th:selected="${order.productId =='TOPIK II  韓語中、高級檢定班'}" value="TOPIK II  韓語中、高級檢定班">TOPIK II  韓語中、高級檢定班</option>
 									  </optgroup>
 									  <optgroup label="生涯轉換與轉業">
-									    <option th:selected="${order.productId =='中高齡職涯發展專班-中高齡職涯續航'}" value="中高齡職涯發展專班-中高齡職涯續航">中高齡職涯發展專班-中高齡職涯續航</option>
-									    <option th:selected="${order.productId =='女力新勢力-女性二度就業機會與挑戰'}" value="女力新勢力-女性二度就業機會與挑戰">女力新勢力-女性二度就業機會與挑戰</option>
-									    <option th:selected="${order.productId =='中高齡職涯發展專班-再創職涯高峰-談轉業與轉職'}" value="中高齡職涯發展專班-再創職涯高峰-談轉業與轉職">中高齡職涯發展專班-再創職涯高峰-談轉業與轉職</option>
-									    <option th:selected="${order.productId =='中高階再創風華專班-衝突管理與團隊合作'}" value="中高階再創風華專班-衝突管理與團隊合作">中高階再創風華專班-衝突管理與團隊合作</option>
+									    <option th:selected="${order.productId =='中高齡職涯發展專班'}" value="中高齡職涯發展專班">中高齡職涯發展專班</option>
+									    <option th:selected="${order.productId =='女性二度就業機會與挑戰'}" value="女性二度就業機會與挑戰">女性二度就業機會與挑戰</option>
+									    <option th:selected="${order.productId =='職涯發展專班-轉業與轉職'}" value="職涯發展專班-轉業與轉職">職涯發展專班-轉業與轉職</option>
+									    <option th:selected="${order.productId =='中高階再創風華專班'}" value="中高階再創風華專班">中高階再創風華專班</option>
 									  </optgroup>
 									  <optgroup label="自我認知">
 									    <option th:selected="${order.productId =='求職計劃書撰寫(實作課程)'}" value="求職計劃書撰寫(實作課程)">求職計劃書撰寫(實作課程)</option>
-									    <option th:selected="${order.productId =='創造自我價值、工作優勢及就業優勢'}" value="創造自我價值、工作優勢及就業優勢">創造自我價值、工作優勢及就業優勢</option>
-									    <option th:selected="${order.productId =='職場升級版大躍進-職場心理健康'}" value="職場升級版大躍進-職場心理健康">職場升級版大躍進-職場心理健康</option>
+									    <option th:selected="${order.productId =='工作優勢及就業優勢'}" value="工作優勢及就業優勢">工作優勢及就業優勢</option>
+									    <option th:selected="${order.productId =='職場心理健康'}" value="職場心理健康">職場心理健康</option>
 									    <option th:selected="${order.productId =='創造雙贏的職場人際學'}" value="創造雙贏的職場人際學">創造雙贏的職場人際學</option>
 									  </optgroup>
 									  <optgroup label="求職技巧">
