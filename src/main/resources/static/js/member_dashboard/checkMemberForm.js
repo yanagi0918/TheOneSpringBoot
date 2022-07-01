@@ -1,6 +1,7 @@
 $(function() {
 	$('#wrongInput').click(function() {
 		$('#userid').val('33A2345678')
+		$('#email').val('lin.gmail')
 		$('#point').val('三百點')
 	})
 
@@ -68,7 +69,11 @@ $(function() {
 				icon: 'warning',
 			})
 			checkMemberForm = false;
+			return checkMemberForm;
 		}
+		
+		
+		
 		
 		let birthday = new Date($("#birth").val());
   		let nowDate = new Date();
@@ -79,10 +84,25 @@ $(function() {
    		 icon: 'warning',
   		 })
    			checkMemberForm = false;
+   			return checkMemberForm;
   }
 		
-		return checkMemberForm;
+		
+	let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+ 	 if(!regex.test($("#email").val())) {
+   	 	Swal.fire({
+   		 title: '提示!',
+   		 text: "\"請輸入正確email\"",
+   		 icon: 'warning',
+  		 })
+   	 	checkMemberForm = false;
+   	 	return checkMemberForm;
+		}
+	
 	})
+
+
+
 
 });
 
