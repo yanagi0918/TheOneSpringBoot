@@ -76,9 +76,9 @@ public class InterviewController {
 		
 	}
 	@ResponseBody
-	@DeleteMapping("/delete/{cvNo}")
-	public String delete(@PathVariable("cvNo")Integer cvNo) {
-		interviewService.deleteInterview(cvNo);
+	@DeleteMapping("/delete/{id}")
+	public String delete(@PathVariable("id")Integer id) {
+		interviewService.deleteInterview(id);
 		return "ok";
 	}
 	
