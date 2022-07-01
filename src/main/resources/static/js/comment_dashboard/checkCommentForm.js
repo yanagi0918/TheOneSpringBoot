@@ -45,6 +45,7 @@ $(function() {
 				Swal.fire({
 					icon: 'success',
 					title: '已新增!',
+					showConfirmButton: false,
 					timer: 1500
 				})
 				setTimeout(() => {
