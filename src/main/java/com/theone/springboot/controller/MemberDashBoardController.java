@@ -45,11 +45,7 @@ public class MemberDashBoardController {
 		return memberService.getByUserid(userid);
 	}
 	
-	@ResponseBody
-	@GetMapping("/member/tele/{tele}")
-	public Member bb(@PathVariable("tele")String tele) {
-		return memberService.getByTele(tele);
-	}
+	
 	
 	@GetMapping("/member")
 	public String toCreatePage() {

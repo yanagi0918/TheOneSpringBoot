@@ -49,10 +49,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getByUserid(userid);
 	}
 
-	@Override
-	public Member getByTele(String tele) {
-		return memberDao.getByTele(tele);
-	}
-	
+
 	
 }
