@@ -66,3 +66,8 @@ $("#imgInp").change(function() {
 	})
 
 });
+
+
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
