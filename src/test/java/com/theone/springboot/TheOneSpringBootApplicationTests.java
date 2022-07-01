@@ -1,28 +1,30 @@
 package com.theone.springboot;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.theone.springboot.entity.Member;
-import com.theone.springboot.repository.MemberDao;
+import com.theone.springboot.entity.Event;
+import com.theone.springboot.repository.EventDao;
 
-import antlr.collections.List;
 
 @SpringBootTest
 class TheOneSpringBootApplicationTests {
 	
 	@Autowired
-	MemberDao memberDao;
+	EventDao eventDao;
 	
 	@Test
 	public void testJPA() {
-		Member users = memberDao.getByUserid("Z200000000");
-			System.out.println(users);
+		List<Event> events = eventDao.findByCompId("12345678");
+		System.out.println("==================================");
+		for (Event event : events) {
+			System.out.println(event);
+		}
+		System.out.println("==================================");
 	}
 
-	@Test
-	void contextLoads() {
-	}
 
 }

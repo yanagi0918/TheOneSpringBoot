@@ -1,19 +1,22 @@
 $(function() {
+	$('#btn-goBack').click(function() {
+		location.href = "/dashboard/events";
+	})
 
 	$('#eventWrongInput').click(function() {
 		$('#compId').val('1234567A')
 		$('#price').val('500W')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
-		$('#postStart').val('2022-05-20')
-		$('#postEnd').val('2022-05-15')
+		$('#postStart').val('2022-08-20')
+		$('#postEnd').val('2022-08-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
 		$('#compId').val('12345678')
 		$('#price').val('500')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
-		$('#postStart').val('2022-05-15')
-		$('#postEnd').val('2022-05-20')
+		$('#postStart').val('2022-08-15')
+		$('#postEnd').val('2022-08-20')
 	})
 
 	$("#imgInp").change(function() {
@@ -28,53 +31,137 @@ $(function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
 	
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/event";
+	//事件資料檢查
+	$('#compId').keyup(function() {
+		let compIdRegex = /^\d{8}$/;
+		if (!compIdRegex.test($("#compId").val())) {
+			$('#compId').attr("class","form-control is-invalid")
+		}else{
+			$('#compId').attr("class","form-control is-valid")
+		}
 	})
 	
-	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/events";
+	$('#price').keyup(function() {
+		let priceRegex = /^\d+$/;
+		if (!priceRegex.test($("#price").val())) {
+			$('#price').attr("class","form-control is-invalid")
+		}else{
+			$('#price').attr("class","form-control is-valid")
+		}
 	})
-
+	
+	$('#imgInp').change(function() {
+		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
+			$('#imgInp').attr("class","form-control is-invalid")
+		}else{
+			$('#imgInp').attr("class","form-control is-valid")
+		}
+	})
+	
+	$('#eventLinkURL').keyup(function() {
+		if ($('#eventLinkURL').val() == "") {
+			$('#eventLinkURL').attr("class","form-control is-invalid")
+		}else{
+			$('#eventLinkURL').attr("class","form-control is-valid")
+		}
+	})
+	
+	
+	$('#postStart').change(function() {
+		let postStartDate = new Date($("#postStart").val());
+		if ($('#postStart').val() == "") {
+			$('#postStartError').text("請輸入刊登開始日期")
+			$('#postStart').attr("class","form-control is-invalid")
+		} else if(postStartDate < new Date()){
+			$('#postStartError').text("刊登開始日期不可設於今日之前")
+			$('#postStart').attr("class","form-control is-invalid")
+		} else {
+			$('#postStart').attr("class","form-control is-valid")
+		}
+	})
+	
+	$('#postEnd').change(function() {
+		let postStartDate = new Date($("#postStart").val());
+		let postEndDate = new Date($("#postEnd").val());
+		if ($('#postEnd').val() == "") {
+			$('#postEndError').text("請輸入刊登結束日期")
+			$('#postEnd').attr("class","form-control is-invalid")
+		}else if (postStartDate > postEndDate) {
+			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
+			$('#postEnd').attr("class","form-control is-invalid")
+		}else{
+			$('#postEnd').attr("class","form-control is-valid")
+		}
+	})
+	
+	
+	
+	
+	//submit資料確認
 	$('#btn-submit').click(function() {
-		let warningStr = "";
 		let checkEventForm = true;
+		//let warningStr = "";
 
 		let compIdRegex = /^\d{8}$/;
 		if (!compIdRegex.test($("#compId").val())) {
-			warningStr += "刊登公司統編為8位數字" + "<br>";
+			$('#compId').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#compId').attr("class","form-control is-valid")
 		}
 
 		let priceRegex = /^\d+$/;
 		if (!priceRegex.test($("#price").val())) {
-			warningStr += "價格只能輸入有效數字" + "<br>";
+			$('#price').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#price').attr("class","form-control is-valid")
 		}
 
 		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
-			warningStr += "請輸入廣告圖" + "<br>";
+			$('#imgInp').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#imgInp').attr("class","form-control is-valid")
 		}
-
+		
 		if ($('#eventLinkURL').val() == "") {
-			warningStr += "請輸入廣告連結" + "<br>";
+			$('#eventLinkURL').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#eventLinkURL').attr("class","form-control is-valid")
 		}
 
-		if ($('#postStart').val() == "" || $('#postEnd').val() == "") {
-			warningStr += "請輸入日期" + "<br>";
-			checkEventForm = false;
-		}
 
 		let postStartDate = new Date($("#postStart").val());
 		let postEndDate = new Date($("#postEnd").val());
-		if (postStartDate > postEndDate) {
-			warningStr += "刊登開始日期不可於刊登結束日期之後" + "<br>";
+		if ($('#postStart').val() == "") {
+			$('#postStartError').text("請輸入刊登開始日期")
+			$('#postStart').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		} else if (postStartDate < new Date()) {
+			$('#postStartError').text("刊登開始日期不可設於今日之前")
+			$('#postStart').attr("class","form-control is-invalid")
+			checkEventForm = false;
+		} else {
+			$('#postStart').attr("class","form-control is-valid")
 		}
+		
+		
+		if ($('#postEnd').val() == "") {
+			$('#postEndError').text("請輸入刊登結束日期")
+			$('#postEnd').attr("class","form-control is-invalid")
+			checkEventForm = false;
+		}else if (postStartDate > postEndDate) {
+			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
+			$('#postEnd').attr("class","form-control is-invalid")
+			checkEventForm = false;
+		}else{
+			$('#postEnd').attr("class","form-control is-valid")
+		}
+
+
 
 		let confirmStr = '確認修改廣告?';
 		if ($('#btn-submit').val() == 0) {
@@ -108,7 +195,7 @@ $(function() {
 			Swal.fire({
 				icon: 'error',
 				title: '格式錯誤',
-				html: warningStr,
+				html: '',
 			})
 		}
 	})
