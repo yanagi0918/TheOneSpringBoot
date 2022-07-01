@@ -7,16 +7,16 @@ $(function() {
 		$('#compId').val('1234567A')
 		$('#price').val('500W')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
-		$('#postStart').val('2022-05-20')
-		$('#postEnd').val('2022-05-15')
+		$('#postStart').val('2022-08-20')
+		$('#postEnd').val('2022-08-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
 		$('#compId').val('12345678')
 		$('#price').val('500')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
-		$('#postStart').val('2022-05-15')
-		$('#postEnd').val('2022-05-20')
+		$('#postStart').val('2022-08-15')
+		$('#postEnd').val('2022-08-20')
 	})
 
 	$("#imgInp").change(function() {
@@ -69,17 +69,26 @@ $(function() {
 	
 	
 	$('#postStart').change(function() {
+		let postStartDate = new Date($("#postStart").val());
 		if ($('#postStart').val() == "") {
+			$('#postStartError').text("請輸入刊登開始日期")
 			$('#postStart').attr("class","form-control is-invalid")
-		}else{
+		} else if(postStartDate < new Date()){
+			$('#postStartError').text("刊登開始日期不可設於今日之前")
+			$('#postStart').attr("class","form-control is-invalid")
+		} else {
 			$('#postStart').attr("class","form-control is-valid")
 		}
 	})
 	
-	
 	$('#postEnd').change(function() {
+		let postStartDate = new Date($("#postStart").val());
+		let postEndDate = new Date($("#postEnd").val());
 		if ($('#postEnd').val() == "") {
 			$('#postEndError').text("請輸入刊登結束日期")
+			$('#postEnd').attr("class","form-control is-invalid")
+		}else if (postStartDate > postEndDate) {
+			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
 			$('#postEnd').attr("class","form-control is-invalid")
 		}else{
 			$('#postEnd').attr("class","form-control is-valid")
@@ -98,41 +107,58 @@ $(function() {
 		if (!compIdRegex.test($("#compId").val())) {
 			$('#compId').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#compId').attr("class","form-control is-valid")
 		}
 
 		let priceRegex = /^\d+$/;
 		if (!priceRegex.test($("#price").val())) {
 			$('#price').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#price').attr("class","form-control is-valid")
 		}
 
 		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
 			$('#imgInp').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#imgInp').attr("class","form-control is-valid")
 		}
 		
 		if ($('#eventLinkURL').val() == "") {
 			$('#eventLinkURL').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#eventLinkURL').attr("class","form-control is-valid")
 		}
 
+
+		let postStartDate = new Date($("#postStart").val());
+		let postEndDate = new Date($("#postEnd").val());
 		if ($('#postStart').val() == "") {
+			$('#postStartError').text("請輸入刊登開始日期")
 			$('#postStart').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		} else if (postStartDate < new Date()) {
+			$('#postStartError').text("刊登開始日期不可設於今日之前")
+			$('#postStart').attr("class","form-control is-invalid")
+			checkEventForm = false;
+		} else {
+			$('#postStart').attr("class","form-control is-valid")
 		}
+		
 		
 		if ($('#postEnd').val() == "") {
 			$('#postEndError').text("請輸入刊登結束日期")
 			$('#postEnd').attr("class","form-control is-invalid")
 			checkEventForm = false;
-		}
-
-		let postStartDate = new Date($("#postStart").val());
-		let postEndDate = new Date($("#postEnd").val());
-		if (postStartDate > postEndDate) {
-			$('#postEndError').text("刊登開始日期不可於刊登結束日期之後")
+		}else if (postStartDate > postEndDate) {
+			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
 			$('#postEnd').attr("class","form-control is-invalid")
 			checkEventForm = false;
+		}else{
+			$('#postEnd').attr("class","form-control is-valid")
 		}
 
 
@@ -169,7 +195,7 @@ $(function() {
 			Swal.fire({
 				icon: 'error',
 				title: '格式錯誤',
-				html: warningStr,
+				html: '',
 			})
 		}
 	})
