@@ -67,7 +67,16 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">密碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="compwd"  id="compwd" th:value="${companyupdate.compwd}"  >
+                                    <input type="password" class="form-control" maxlength="15" name="compwd"  id="compwd" th:value="${companyupdate.compwd}"  placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)">
+                               		<input type="checkbox" onclick="ShowPwd()">顯示密碼
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">確認密碼</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control pwd2" maxlength="15" required id="pwdagain" placeholder="(再輸入一次密碼)" onkeyup="validate()">
+                                    <span id="msg"></span>
                                 </div>
                             </div>
                             
@@ -102,14 +111,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">聯絡電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="comptele" id="comptele" th:value="${companyupdate.comptele}"  >
+                                    <input type="text" class="form-control" name="comptele" id="comptele" th:value="${companyupdate.comptele}" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)" >
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">傳真號碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="fax" id="fax" th:value="${companyupdate.fax}"  >
+                                    <input type="text" class="form-control" name="fax" id="fax" th:value="${companyupdate.fax}" placeholder="選填" >
                                 </div>
                             </div>
                             
@@ -123,7 +132,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">員工人數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="empnumber"  required id="empnumber" th:value="${companyupdate.empnumber}"  >
+                                    <input type="text" class="form-control" name="empnumber"  required id="empnumber" th:value="${companyupdate.empnumber}" placeholder="(請輸入阿拉伯整數，如2500)" >
                                 </div>
                             </div>
                             
@@ -137,7 +146,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">資本額</label>
                                 <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" th:value="${companyupdate.capital}"  >  
+                                <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" th:value="${companyupdate.capital}" placeholder="(請輸入公司資本額，如1250萬)" >  
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>

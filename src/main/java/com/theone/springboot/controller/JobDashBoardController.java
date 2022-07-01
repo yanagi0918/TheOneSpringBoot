@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Job;
 import com.theone.springboot.service.JobService;
@@ -38,6 +40,13 @@ public class JobDashBoardController {
 		return "redirect:/dashboard/job/list";
 	}
 	
+	@GetMapping("/jobdeatail/{pk}")
+	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
+		Job jobdeatail = jobService.getJob(detailId).get();
+		m.addAttribute("jobdeatail",jobdeatail);
+		return "job_dashboard/jobdetail";
+	}
+	
 	@GetMapping("/showupdateinformation/{pk}")
 	private String showupdateinformation(@PathVariable("pk") Integer updateId,Model m){
 		Job jobupdate = jobService.getJob(updateId).get();
@@ -45,10 +54,11 @@ public class JobDashBoardController {
 		return "job_dashboard/jobupdate";
 	}
 
-	@GetMapping("/delete/{pk}")
-	private String processDelete(@PathVariable("pk") Integer deleteId){
-		jobService.delete(deleteId);
-		return "redirect:/dashboard/job/list";
+	@ResponseBody
+	@DeleteMapping("/delete/{id}")
+	private String processDelete(@PathVariable("id") Integer id){
+		jobService.delete(id);
+		return "ok";
 	}
 
 }
