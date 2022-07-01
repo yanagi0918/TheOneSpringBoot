@@ -25,7 +25,6 @@ public class Interview {
 	@Column(columnDefinition = "Date")
 	private Date intTime;
 
-	@Column(columnDefinition = "TIMESTAMP")
 	private Timestamp createTime;
 
 	private String compName;
