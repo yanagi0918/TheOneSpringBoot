@@ -10,7 +10,7 @@ $(function() {
 		$('#username').val('唐洋基')
 		$('#gender').val('男')
 		$('#birth').val('2022-05-20')
-		$('#tele').val('02-87654321')
+		$('#tele').val('0287654321')
 		$('#phone').val('0910654321')
 		$('#address').val('台東縣蘭嶼鄉25號')
 		$('#email').val('hiremeplz@gmail.com')
@@ -104,4 +104,23 @@ $(document).ready( function () {
             }
 
 	}
+	
+
+//只准輸入數字
+ function my_key(e) {
+          var key;
+          if (window.event) {
+            key = e.keyCode;
+          } else if (e.which) {
+            key = e.which;
+          } else {
+            return true;
+          }
+          if (8 == key || 46 == key) {//8:backspace 46:delete (倒退鍵和刪除鍵也允許作用)
+            return true;
+          }
+          var keychar = String.fromCharCode(key);
+          var reg = /\d/;
+          return reg.test(keychar);
+        }
 	

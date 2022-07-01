@@ -100,8 +100,8 @@
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">住宅電話</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" maxlength="11" name="tele"
-							required id="tele" placeholder="(02-87654321)">
+						<input type="text" class="form-control" maxlength="10" name="tele"
+							required id="tele" placeholder="(開頭加區碼，如02)" onkeypress="return my_key(event)">
 					</div>
 				</div>
 
@@ -109,7 +109,7 @@
 					<label class="col-sm-2 col-form-label">手機</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" maxlength="10"
-							name="phone" required id="phone">
+							name="phone" required id="phone" onkeypress="return my_key(event)">
 					</div>
 				</div>
 

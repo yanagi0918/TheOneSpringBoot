@@ -15,11 +15,6 @@ function checknull(id) {
 
 
 
-
-
-
-
-
 $(function() {
 		
 		$('#correctInput').click(function() {
@@ -59,16 +54,16 @@ $('#btn-submit').click(function() {
 
 	
 	
-//	let work_expRegex = "";
-//		if (work_expRegex.test($"#work_expRegex").val()) === "") {
-//			Swal.fire({
-//				title: '提示!',
-//				text: "\"自傳/工作經驗\"不得為空",
-//				icon: 'warning',
-//			})
-//			checkMemberForm = false;
-//			return checkResumeForm;
-//		}
+	let work_expRegex = /^[]$/;
+		if (work_expRegex.test($("#work_exp").val())) {
+			Swal.fire({
+				title: '提示!',
+				text: "\"自傳/工作經驗\"不得為空",
+				icon: 'warning',
+			})
+			checkMemberForm = false;
+			return checkResumeForm;
+		}
 	
 	})
 	

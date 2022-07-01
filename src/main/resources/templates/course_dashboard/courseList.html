@@ -88,7 +88,7 @@
                                 		<a class="btn btn-outline-success m-0" th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">詳細</a>
                                 		<a class="btn btn-outline-primary m-0 btn-courseUpdate" th:href="@{'/dashboard/toUpdatePage/'+${course.courseNo}}">更新</a>
 <!--                                        <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>-->
-                                        <a class="btn btn-outline-danger m-0 btn-courseDelete" th:value="${course.courseNo}" id="delete">刪除</a>
+                                        <a class="btn btn-outline-danger m-0 btn-courseDelete" th:id="${course.courseNo}" id="" >刪除</a>
                                         <input type="hidden" th:value="${course.courseNo}" id="deletevalue"/>
                                 	</td>
                                 </tr>

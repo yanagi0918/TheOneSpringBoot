@@ -61,10 +61,10 @@
 							<label class="col-sm-2 col-form-label">*身分證字號:</label>
 							<div class="col-sm-8">
 								<input type="hidden" class="form-control" name="resume_id" value="0" id="resume_id">
-								<input type="text" name="user_id" maxlength="10" id="user_id"  class="form-control" required onblur="checknull(this)"/>
+								<input type="text" name="user_id" maxlength="10" id="user_id"  class="form-control" required onsubmit="return checknull(this)"/>
 							</div>
 						</div>
-						
+<!-- 						onblur="checknull(this)" -->
 						
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*學歷:</label>
@@ -82,20 +82,20 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*畢業學校:</label>
 							<div class="col-sm-8">
-								<input type="text" name="school" class="form-control" id="school" required onblur="checknull(this)" />
+								<input type="text" name="school" class="form-control" id="school" required onsubmit="return checknull(this)" />
 							</div>
 						</div>
 
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">*畢業科系:</label>
 							<div class="col-sm-8">
-								<input type="text" name="dept" class="form-control" id="dept" required onblur="checknull(this)" />
+								<input type="text" name="dept" class="form-control" id="dept" required onsubmit="return checknull(this)" />
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label" >*自傳/工作經驗:</label>
 							<div class="col-sm-8">
-								<textarea name="work_exp" id="work_exp" onblur="checknull(this)"
+								<textarea name="work_exp" id="work_exp" onsubmit="return checknull(this)"
 									placeholder="請輸入自傳及過往工作,可包含
 1.自傳									
 2.公司名稱
