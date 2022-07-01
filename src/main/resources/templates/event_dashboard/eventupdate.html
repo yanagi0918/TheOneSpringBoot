@@ -64,12 +64,14 @@
                                 <label class="col-sm-2 col-form-label">刊登公司統編</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="compId" th:value="${event.compId}" maxlength="8" required id="compId">
+                                    <div class="invalid-feedback">刊登公司統編為8位數字</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">價格(萬)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="price" th:value="${event.price}" maxlength="10" required id="price">
+                                    <div class="invalid-feedback">價格只能輸入有效數字</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -78,24 +80,28 @@
                                     <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" th:src="${event.imgUrl}" alt="請選擇廣告圖" style="width: 320px; height: 200px;">
                                     <input type="hidden" class="form-control" name="imgUrl" th:value="${event.imgUrl}">
                                     <input class="form-control" type="file" name="imageFile" id="imgInp" accept="image/jpeg, image/png">
+                                    <div class="invalid-feedback">請輸入廣告圖</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">廣告連結</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="eventLinkUrl" th:value="${event.eventLinkUrl}" required id="eventLinkURL">
+                                    <div class="invalid-feedback">請輸入廣告連結</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">刊登開始時間</label>
                                 <div class="col-sm-8">
                                     <input type="date" class="form-control" name="postStart" th:value="${#dates.format(event.postStart, 'yyyy-MM-dd')}" required id="postStart">
+                                    <div class="invalid-feedback">請輸入刊登開始日期</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">刊登結束時間</label>
                                 <div class="col-sm-8">
                                     <input type="date" class="form-control" name="postEnd" th:value="${#dates.format(event.postEnd, 'yyyy-MM-dd')}" required id="postEnd">
+                                    <div class="invalid-feedback" id="postEndError">請輸入刊登結束日期</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
