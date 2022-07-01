@@ -28,8 +28,6 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
-    <!-- dataTables.css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -51,46 +49,64 @@
             <!-- Navbar End -->
             
             <!-- Content Start -->
-             <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4" >
-                        <h6 class="mb-0">訂單紀錄</h6>
-                        <button type="button" class="btn btn-primary mb-0" id="btn-toCreate">新增訂單</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0" id="table_id">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">訂單編號</th>
-                                    <th scope="col">訂單日期</th>
-                                    <th scope="col">狀態</th>
-                                    <th scope="col">會員帳號</th>
-                                    <th scope="col">課程編號</th>
-                                    <th scope="col">總價</th>
-                                    <th scope="col">修改/刪除</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="order:${orders}">
-                                    <td th:text="${order.orderId }"></td>
-									<td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd')}"></td>
-									<td th:text="${order.state}"></td>
-									<td th:text="${order.userId}"></td>
-									<td th:text="${order.productId}"></td>
-									<td th:text="${order.totalPrice}"></td>
-                                    <td>
-                                        <a class="btn btn-outline-secondary m-0" th:href="@{Order/}+${order.orderId}">查看</a>
-                                        <a class="btn btn-outline-primary m-0 btn-orderUpdate" th:href="@{order/}+${order.orderId}">修改</a>
-                                        <a class="btn btn-outline-danger m-0"  onclick="del(this.id)" th:id="${order.orderId}">刪除</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+           <div class="container-fluid pt-4 px-4">
+                <div class="col-sm-12 col-xl-10">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">查看訂單</h6>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">訂單編號</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="orderId" th:value='${Order.orderId }' readonly id="orderId">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">會員帳號</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userId"  th:value='${Order.userId }' maxlength="10" required id="userId" readonly="readonly">
+                                </div>
+                            </div>
+                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">訂單日期</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" name="orderDate" th:value="${#dates.format(Order.orderDate, 'yyyy-MM-dd')}" required id="orderDate"
+                                    th:min="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}" readonly="readonly">
+                                </div>
+                            </div>
+                            
+                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">狀態</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="state" th:value='${Order.state}' maxlength="9" required id="state" readonly="readonly">
+                                </div>
+                            </div>
+                            
+                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">狀態</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="productId" th:value='${Order.productId}' maxlength="9" required id="productId" readonly="readonly">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">總價</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="totalPrice" th:value='${Order.totalPrice }' maxlength="9" required id="totalPrice" readonly="readonly">
+                                </div>
+                            </div>
+                            
+<!--                             <a class="btn btn-outline-primary m-0 btn-orderUpdate" th:href="@{/dashboard/order/+${order.orderId}}">修改</a> -->
+                            <button type="button" class="btn btn-danger m-2" id="btn-goBack">返回</button>
                     </div>
                 </div>
             </div>
             <!-- Content End -->
-            
+			<script>
+ 				window.onload=function(){
+  				var selecten = document.getElementById("${orderForUpdate.state}");
+  				selecten.selected=true
+ 				}
+			</script>
+
 			<!-- Footer Start -->
             <div th:replace="~{common/dashboard::footer}"></div>
             <!-- Footer End -->
@@ -114,41 +130,6 @@
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/js/order_dashboard/checkOrderForm.js}" src="js/checkOrderForm.js"></script>
-	<!-- dataTables.js -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script>
-        function del(id) {
-		Swal.fire({
-			title: '確認是否刪除?',
-			text: "刪除後將無法回復!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: '永久刪除',
-			cancelButtonText: '取消'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire({
-					icon: 'success',
-					title: '已刪除!',
-					showConfirmButton: false,
-					timer: 1500
-				})
-				setTimeout(() => {
-					$.ajax({
-                        url: '/dashboard/order/'+id,
-                        type: 'DELETE',
-                        success: function(result) {
-                            window.location.href='./orders'
-                        }
-                    });
-				}, 1500)
-			}
-		})
-	    }
-        
-    </script>
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>

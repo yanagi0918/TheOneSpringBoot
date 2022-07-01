@@ -66,5 +66,12 @@ public class OrderDashBoardController {
         CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
         binder.registerCustomEditor(java.util.Date.class, ce);
     }
+	
+	@GetMapping(path = "/Order/{id}")
+	public String processDetail(@PathVariable("id") Integer id, Model model){
+		Order order = orderService.getOrder(id).get();
+		model.addAttribute("Order", order);
+		return "order_dashboard/orderdetail";
+	}
 
 }
