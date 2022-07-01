@@ -32,32 +32,32 @@
                 </div>
                 <div class="navbar-nav w-100">
                 	<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
+                        <a href="#" class="nav-link dropdown-toggle" th:class="(${highlight}==1)or(${highlight}==2)?'nav-link dropdown-toggle active':'nav-link dropdown-toggle'" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
-							<a href="" class="dropdown-item">會員管理</a>
-							<a href="" class="dropdown-item">履歷管理</a>
+							<a th:href="@{/dashboard/members}" class="dropdown-item" th:class="${highlight}==1?'dropdown-item active':'dropdown-item'">會員管理</a>
+							<a th:href="@{/dashboard/resumes}" class="dropdown-item" th:class="${highlight}==2?'dropdown-item active':'dropdown-item'">履歷管理</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-building me-2"></i><b>企業</b></a>
+                        <a href="#" class="nav-link dropdown-toggle" th:class="(${highlight}==3)or(${highlight}==4)?'nav-link dropdown-toggle active':'nav-link dropdown-toggle'" data-bs-toggle="dropdown"><i class="bi bi-building me-2"></i><b>企業</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
-							<a href="" class="dropdown-item">公司管理</a>
-							<a href="" class="dropdown-item">職缺管理</a>
+							<a th:href="@{/dashboard/company/list}" class="dropdown-item" th:class="${highlight}==3?'dropdown-item active':'dropdown-item'">公司管理</a>
+							<a th:href="@{/dashboard/job/list}" class="dropdown-item" th:class="${highlight}==4?'dropdown-item active':'dropdown-item'">職缺管理</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
+                        <a href="#" class="nav-link dropdown-toggle" th:class="(${highlight}==5)or(${highlight}==6)?'nav-link dropdown-toggle active':'nav-link dropdown-toggle'" data-bs-toggle="dropdown"><i class="bi bi-chat-dots me-2"></i><b>討論區</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
-							<a href="" class="dropdown-item">面試經驗談</a>
-							<a href="" class="dropdown-item">評論管理</a>
+							<a th:href="@{/dashboard/intvlist}" class="dropdown-item" th:class="${highlight}==5?'dropdown-item active':'dropdown-item'">面試經驗談</a>
+							<a th:href="@{/dashboard/CommentsManager}" class="dropdown-item" th:class="${highlight}==6?'dropdown-item active':'dropdown-item'">評論管理</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" th:class="${highlight}==7?'nav-link dropdown-toggle active':'nav-link dropdown-toggle'" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
+                        <a href="#" class="nav-link dropdown-toggle" th:class="(${highlight}==7)or(${highlight}==8)or(${highlight}==9)?'nav-link dropdown-toggle active':'nav-link dropdown-toggle'" data-bs-toggle="dropdown"><i class="bi bi-cart4 me-2"></i><b>收費項目</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
 							<a th:href="@{/dashboard/events}" class="dropdown-item" th:class="${highlight}==7?'dropdown-item active':'dropdown-item'">廣告管理</a>
-							<a href="" class="dropdown-item">課程管理</a>
-							<a href="" class="dropdown-item">訂單管理</a>
+							<a th:href="@{/dashboard/courses}" class="dropdown-item" th:class="${highlight}==8?'dropdown-item active':'dropdown-item'">課程管理</a>
+							<a th:href="@{/dashboard/orders}" class="dropdown-item" th:class="${highlight}==9?'dropdown-item active':'dropdown-item'">訂單管理</a>
                         </div>
                     </div>
                 </div>

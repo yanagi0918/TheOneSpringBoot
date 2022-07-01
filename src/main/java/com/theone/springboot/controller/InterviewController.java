@@ -37,7 +37,6 @@ public class InterviewController {
 
 	
 	@GetMapping("/intvlist")
-
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
