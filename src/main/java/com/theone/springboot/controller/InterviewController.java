@@ -83,7 +83,7 @@ public class InterviewController {
 		return "ok";
 	}
 	
-	@InitBinder
+	@InitBinder 
 	public void initBinder(WebDataBinder binder, WebRequest request) {
 		// java.util.Date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
