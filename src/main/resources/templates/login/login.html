@@ -48,7 +48,7 @@
 						<button type="button" class="switcher-member switcher-login">
 							Login <span class="underline"></span>
 						</button>
-						<form class="form form-login shadow card-body">
+						<form th:action="@{/login}" th:method="post" class="form form-login shadow card-body">
 							<fieldset>
 								<div class="input-block card-body">
 									<h2 class="card-title">Welcome Back!</h2>
@@ -67,18 +67,18 @@
 								<div>
 									<form>
 										<div class="form-group">
-											<input class="form-control" type="text"
+											<input th:name="username" class="form-control" type="text"
 												placeholder="Identity Number" required="required" />
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password"
+											<input th:name="password" class="form-control" type="password"
 												placeholder="Password" required="required" />
 										</div>
 										<p>
 											<a>Forgot your password?</a>
 										</p>
 									</form>
-									<button class="btn btn-lg">LOGIN</button>
+									<button type="submit" class="btn btn-lg">LOGIN</button>
 								</div>
 							</fieldset>
 						</form>
@@ -231,6 +231,6 @@
 		</div>
 	</div>
 </body>
-<script th:src="@{/js/login.js}" src="login.js"></script>
+<script th:src="@{/js/login/login.js}" src="login.js"></script>
 
 </html>
