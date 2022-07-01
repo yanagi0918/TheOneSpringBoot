@@ -7,7 +7,9 @@ function checkJobForm() {
 			'warning');
 		checkJobForm = false;
 		return checkJobForm;
+
 	}
+
 }
 
 $('#jobInput').click(function() {
