@@ -44,7 +44,7 @@ public class OrderDashBoardController {
 		orderService.saveOrUpdate(order);
 		return "redirect:orders";
 	}
-
+	
 	@GetMapping(path = "/order/{id}")
 	public String processUpdate(@PathVariable("id") Integer id, Model model){
 		Order order = orderService.getOrder(id).get();
@@ -52,12 +52,15 @@ public class OrderDashBoardController {
 		return "order_dashboard/orderupdate";
 	}
 	
+	//刪除
 	@ResponseBody
 	@DeleteMapping(path = "/order/{id}")
 	public String processDelete(@PathVariable("id")Integer id) {
 		orderService.deleteOrder(id);
 		return "ok";
 	}
+	
+	//日期
 	@InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
         // java.sql.Date
@@ -67,6 +70,7 @@ public class OrderDashBoardController {
         binder.registerCustomEditor(java.util.Date.class, ce);
     }
 	
+	//查看頁面
 	@GetMapping(path = "/Order/{id}")
 	public String processDetail(@PathVariable("id") Integer id, Model model){
 		Order order = orderService.getOrder(id).get();

@@ -252,18 +252,18 @@ $('#OrdercorrectInput').click(function () {
 		
 	if ($('#state').val() == "") {
 			warningStr += "請輸入狀態" + "<br>";
-			$('#state').attr("class","form-control is-invalid")
+			$('#state').attr("class","form-select is-invalid")
 			checkOrderForm = false;
 		}else{
-			$('#state').attr("class","form-control is-valid")
+			$('#state').attr("class","form-select is-valid")
 		}
 		
 	if ($('#productId').val() == "") {
 			warningStr += "請輸入課程" + "<br>";
-			$('#productId').attr("class","form-control is-invalid")
+			$('#productId').attr("class","form-select is-invalid")
 			checkOrderForm = false;
 		}else{
-			$('#productId').attr("class","form-control is-valid")
+			$('#productId').attr("class","form-select is-valid")
 		}
 
     let priceRegex = /^\d*$/;
