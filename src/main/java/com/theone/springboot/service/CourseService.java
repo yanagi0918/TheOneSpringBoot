@@ -11,6 +11,8 @@ public interface CourseService {
 	
 	CourseBean saveOrUpdate(CourseBean courseBean);
 
+	CourseBean findByCourseName(String courseName);
+
 	List<CourseBean> findAllCourses();
 	
 	Optional<CourseBean> findCourse(Integer pk);

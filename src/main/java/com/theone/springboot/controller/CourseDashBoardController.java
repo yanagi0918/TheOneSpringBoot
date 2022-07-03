@@ -43,6 +43,19 @@ public class CourseDashBoardController {
         return "course_dashboard/courseList";
     }
 
+//    test
+    @GetMapping("/courses/checkName")
+    @ResponseBody
+    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
+        String courseName = courseBean.getCourseName();
+        CourseBean bean = courseService.findByCourseName(courseName);
+        if(bean==null){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
+        }
+    }
+
     @GetMapping("/courses/{courseNo}")
     public String findCourseByNo(@PathVariable Integer courseNo, Model model) {
         List<CourseBean> courseList = new ArrayList<CourseBean>();
