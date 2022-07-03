@@ -1,13 +1,9 @@
 $(function () {
 
-
-
-    //前往新增視圖
     $('#btn-toCreateCourse').click(function () {
         location.href = "/dashboard/toCreatePage";
     })
 
-    //取消回去courselist
     $('#btn-cancel').on('click', function () {
         location.href = "/dashboard/courses";
     })
@@ -45,110 +41,6 @@ $(function () {
             }
         })
     })
-
-    //表單驗證 function (valid class set attribute )
-    function validateScore() {
-        let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
-        if ($("#score").val() === "") {
-            $('#score').attr("class", "form-control is-invalid")
-            return false;
-        } else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
-            $('#scoreError').text("評分格式不符，請輸入0~9.9")
-            $('#score').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#score').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validatePrice() {
-        let priceRegex = /^\d+$/;
-        if ($("#price").val() === "") {
-            $('#price').attr("class", "form-control is-invalid")
-            return false;
-        } else if (!priceRegex.test($("#price").val())) {
-            $('#priceError').text("價格格式不符，請重新輸入")
-            $('#price').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#price').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validateDate() {
-        let postDate = new Date($("#date").val());
-        let nowDate = new Date();
-        if ($('#date').val() == "") {
-            $('#dateError').text("請輸入上架日期!!")
-            $('#date').attr("class", "form-control is-invalid")
-            return false;
-        } else if (postDate < nowDate) {
-            $('#dateError').text("上架日期不可設定於今日之前!!")
-            $('#date').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#date').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validateImg() {
-        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
-            $('#imgInp').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#imgInp').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validateName() {
-        if ($('#courseName').val() == "") {
-            $('#courseName').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#courseName').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validateIntroduction() {
-        if ($('#courseIntroduction').val() == "") {
-            $('#courseIntroduction').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#courseIntroduction').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validatelecturer() {
-        if ($('#lecturer').val() == "") {
-            $('#lecturer').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#lecturer').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-    function validateVedio() {
-        if ($('#courseVedio').val() == "") {
-            $('#courseVedio').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#courseVedio').attr("class", "form-control is-valid")
-            return true;
-        }
-    }
-
-    //驗證包
-    function checkPackage() {
-        let checkResult =false;
-        checkResult = validateName();
-        checkResult = validateIntroduction();
-        checkResult = validatelecturer();
-        checkResult = validateVedio();
-        checkResult = validateScore();
-        checkResult = validatePrice();
-        checkResult = validateDate();
-        return checkResult;
-    }
 
 
     //課程資料keyup event
@@ -217,121 +109,6 @@ $(function () {
             })
         }
     })
-    // //submit 確認(create & update)
-    // $('#btn-submit').on('click', function () {
-    //
-    //     let checkResult = true;
-    //
-    //     if ($('#courseName').val() == "") {
-    //         $('#courseName').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#courseName').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     if ($('#courseIntroduction').val() == "") {
-    //         $('#courseIntroduction').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#courseIntroduction').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     if ($('#lecturer').val() == "") {
-    //         $('#lecturer').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#lecturer').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     if ($('#courseVedio').val() == "") {
-    //         $('#courseVedio').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#courseVedio').attr("class", "form-control is-valid")
-    //     }
-    //
-    //
-    //     let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
-    //     if ($("#score").val() == "") {
-    //         $('#score').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
-    //         $('#scoreError').text("評分格式不符，請輸入0~9.9")
-    //         $('#score').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#score').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     let priceRegex = /^\d+$/;
-    //     if ($("#price").val() == "") {
-    //         $('#price').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else if (!priceRegex.test($("#price").val())) {
-    //         $('#priceError').text("價格格式不符，請重新輸入")
-    //         $('#price').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#price').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     let postDate = new Date($("#date").val());
-    //     let nowDate = new Date();
-    //     if ($('#date').val() == "") {
-    //         $('#dateError').text("請輸入上架日期!!")
-    //         $('#date').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else if (postDate < nowDate) {
-    //         // Swal.fire({
-    //         // 	title: '提示!',
-    //         // 	text: "\"上架日期\"不可在今日之前",
-    //         // 	icon: 'warning',
-    //         // })
-    //         $('#dateError').text("上架日期不可設定於今日之前!!")
-    //         $('#date').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#price').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
-    //         $('#imgInp').attr("class", "form-control is-invalid")
-    //         checkResult = false;
-    //     } else {
-    //         $('#imgInp').attr("class", "form-control is-valid")
-    //     }
-    //
-    //     if (checkResult) {
-    //         Swal.fire({
-    //             title: '確認送出!?',
-    //             text: "",
-    //             icon: 'question',
-    //             showCancelButton: true,
-    //             confirmButtonColor: '#3085d6',
-    //             cancelButtonColor: '#d33',
-    //             confirmButtonText: '確定',
-    //             cancelButtonText: '取消'
-    //         }).then((result) => {
-    //             if (result.isConfirmed) {
-    //                 Swal.fire({
-    //                     icon: 'success',
-    //                     title: '完成!',
-    //                     showConfirmButton: false,
-    //                     timer: 800
-    //                 })
-    //                 setTimeout(() => {
-    //                     $('#form').submit();
-    //                 }, 800)
-    //             }
-    //         })
-    //     } else {
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: '表單格式錯誤',
-    //             html: ''
-    //         })
-    //     }
-    // })
 
     //圖片上傳同步顯示
     $("#imgInput").change(function () {
@@ -346,6 +123,140 @@ $(function () {
             }
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    //表單驗證 function (valid class set attribute )
+    function validateScore() {
+        let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
+        if ($("#score").val() === "") {
+            $('#score').attr("class", "form-control is-invalid")
+            return false;
+        } else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
+            $('#scoreError').text("評分格式不符，請輸入0~9.9")
+            $('#score').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#score').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validatePrice() {
+        let priceRegex = /^\d+$/;
+        if ($("#price").val() === "") {
+            $('#price').attr("class", "form-control is-invalid")
+            return false;
+        } else if (!priceRegex.test($("#price").val())) {
+            $('#priceError').text("價格格式不符，請重新輸入")
+            $('#price').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#price').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateDate() {
+        let postDate = new Date($("#date").val());
+        let nowDate = new Date();
+        if ($('#date').val() == "") {
+            $('#dateError').text("請輸入上架日期!!")
+            $('#date').attr("class", "form-control is-invalid")
+            return false;
+        } else if (postDate < nowDate) {
+            $('#dateError').text("上架日期不可設定於今日之前!!")
+            $('#date').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#date').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateImg() {
+        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
+            $('#imgInp').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#imgInp').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function checkName() {
+        var courseName = $('#courseName').val();
+        var postData = {"courseName": courseName};
+        let check = false
+        $.ajax({
+            type: "post",
+            url: "/dashboard/courses/checkName",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                if (data != null) {
+                    $('#nameError').text(`提示：與課程編號 ${data.courseNo} 的名稱重複，換個更響亮的名稱吧 !`)
+                    $('#courseName').attr("class", "form-control is-invalid")
+                    $('#lecturererror').attr("name", "tofalse")
+                }
+            }
+        })
+    }
+
+    function validateName() {
+        checkName();
+        if ($('#courseName').val() == "") {
+            $('#courseName').attr("class", "form-control is-invalid")
+            return false;
+        } else if ($('#lecturererror').name == "tofalse") {
+            return false;
+        } else {
+            $('#courseName').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateIntroduction() {
+        if ($('#courseIntroduction').val() == "") {
+            $('#courseIntroduction').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#courseIntroduction').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validatelecturer() {
+        if ($('#lecturer').val() == "") {
+            $('#lecturer').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#lecturer').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateVedio() {
+        if ($('#courseVedio').val() == "") {
+            $('#courseVedio').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#courseVedio').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    //驗證包
+    function checkPackage() {
+        let checkResult = false;
+        checkResult = validateName();
+        checkResult = validateIntroduction();
+        checkResult = validatelecturer();
+        checkResult = validateVedio();
+        checkResult = validateScore();
+        checkResult = validatePrice();
+        checkResult = validateDate();
+        return checkResult;
     }
 
     //一鍵輸入
