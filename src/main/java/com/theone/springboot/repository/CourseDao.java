@@ -6,5 +6,6 @@ import com.theone.springboot.entity.CourseBean;
 
 public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
-	
+    CourseBean getByCourseName(String courseName);
+
 }

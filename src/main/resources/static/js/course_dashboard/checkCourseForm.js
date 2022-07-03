@@ -1,15 +1,14 @@
 $(function () {
 
-    //前往新增視圖
     $('#btn-toCreateCourse').click(function () {
         location.href = "/dashboard/toCreatePage";
     })
 
-    //取消回去courselist
     $('#btn-cancel').on('click', function () {
         location.href = "/dashboard/courses";
     })
 
+    //刪除AJAX
     $('.btn-courseDelete').click(function () {
         let courseNo = this.id;
         console.log(courseNo);
@@ -44,78 +43,31 @@ $(function () {
     })
 
 
-    //課程資料檢查(valid class set attribute )
+    //課程資料keyup event
     $('#score').keyup(function () {
-        let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
-        if ($("#score").val()==""){
-            $('#score').attr("class", "form-control is-invalid")
-        }
-        else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
-            $('#scoreError').text("評分格式不符，請輸入0~9.9")
-            $('#score').attr("class", "form-control is-invalid")
-        } else {
-            $('#score').attr("class", "form-control is-valid")
-        }
+        validateScore();
     })
     $('#price').keyup(function () {
-        let priceRegex = /^\d+$/;
-        if ($("#price").val()==""){
-            $('#price').attr("class", "form-control is-invalid")
-        }
-        else if (!priceRegex.test($("#price").val())) {
-            $('#priceError').text("價格格式不符，請重新輸入")
-            $('#price').attr("class", "form-control is-invalid")
-        } else {
-            $('#price').attr("class", "form-control is-valid")
-        }
+        validatePrice();
     })
     $('#date').change(function () {
-        let postDate = new Date($("#date").val());
-        let nowDate = new Date();
-        if ($('#date').val() == "") {
-            $('#dateError').text("請輸入上架日期!!")
-            $('#date').attr("class", "form-control is-invalid")
-        } else if (postDate < nowDate) {
-            $('#dateError').text("上架日期不可設定於今日之前!!")
-            $('#date').attr("class", "form-control is-invalid")
-        } else {
-            $('#date').attr("class", "form-control is-valid")
-        }
+        validateDate();
     })
     $('#imgInp').change(function () {
-        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
-            $('#imgInp').attr("class", "form-control is-invalid")
-        } else {
-            $('#imgInp').attr("class", "form-control is-valid")
-        }
+        validateImg();
     })
     $('#courseName').keyup(function () {
-        if ($('#courseName').val() == "") {
-            $('#courseName').attr("class", "form-control is-invalid")
-        } else {
-            $('#courseName').attr("class", "form-control is-valid")
-        }
+        validateName();
+
     })
     $('#courseIntroduction').keyup(function () {
-        if ($('#courseIntroduction').val() == "") {
-            $('#courseIntroduction').attr("class", "form-control is-invalid")
-        } else {
-            $('#courseIntroduction').attr("class", "form-control is-valid")
-        }
+        validateIntroduction();
     })
     $('#lecturer').keyup(function () {
-        if ($('#lecturer').val() == "") {
-            $('#lecturer').attr("class", "form-control is-invalid")
-        } else {
-            $('#lecturer').attr("class", "form-control is-valid")
-        }
+        validatelecturer();
     })
     $('#courseVedio').keyup(function () {
-        if ($('#courseVedio').val() == "") {
-            $('#courseVedio').attr("class", "form-control is-invalid")
-        } else {
-            $('#courseVedio').attr("class", "form-control is-valid")
-        }
+        validateVedio();
     })
 
 
@@ -124,84 +76,7 @@ $(function () {
 
         let checkResult = true;
 
-        if ($('#courseName').val() == "") {
-            $('#courseName').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#courseName').attr("class", "form-control is-valid")
-        }
-
-        if ($('#courseIntroduction').val() == "") {
-            $('#courseIntroduction').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#courseIntroduction').attr("class", "form-control is-valid")
-        }
-
-        if ($('#lecturer').val() == "") {
-            $('#lecturer').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#lecturer').attr("class", "form-control is-valid")
-        }
-
-        if ($('#courseVedio').val() == "") {
-            $('#courseVedio').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#courseVedio').attr("class", "form-control is-valid")
-        }
-
-        let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
-        if ($("#score").val() == "") {
-            $('#score').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
-            $('#scoreError').text("評分格式不符，請輸入0~9.9")
-            $('#score').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#score').attr("class", "form-control is-valid")
-        }
-
-        let priceRegex = /^\d+$/;
-        if ($("#price").val() == "") {
-            $('#price').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else if (!priceRegex.test($("#price").val())) {
-            $('#priceError').text("價格格式不符，請重新輸入")
-            $('#price').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#price').attr("class", "form-control is-valid")
-        }
-
-        let postDate = new Date($("#date").val());
-        let nowDate = new Date();
-        if ($('#date').val() == "") {
-            $('#dateError').text("請輸入上架日期!!")
-            $('#date').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else if (postDate < nowDate) {
-            // Swal.fire({
-            // 	title: '提示!',
-            // 	text: "\"上架日期\"不可在今日之前",
-            // 	icon: 'warning',
-            // })
-            $('#dateError').text("上架日期不可設定於今日之前!!")
-            $('#date').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#price').attr("class", "form-control is-valid")
-        }
-
-        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
-            $('#imgInp').attr("class", "form-control is-invalid")
-            checkResult = false;
-        } else {
-            $('#imgInp').attr("class", "form-control is-valid")
-        }
-
+        checkResult = checkPackage();
 
         if (checkResult) {
             Swal.fire({
@@ -250,6 +125,140 @@ $(function () {
         }
     }
 
+    //表單驗證 function (valid class set attribute )
+    function validateScore() {
+        let scoreRegex = /^[\d.]+$/;  //let scoreRegex = /[0-9]+(.[0-9])/;
+        if ($("#score").val() === "") {
+            $('#score').attr("class", "form-control is-invalid")
+            return false;
+        } else if (!scoreRegex.test($("#score").val()) || $("#score").val() >= 10) {
+            $('#scoreError').text("評分格式不符，請輸入0~9.9")
+            $('#score').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#score').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validatePrice() {
+        let priceRegex = /^\d+$/;
+        if ($("#price").val() === "") {
+            $('#price').attr("class", "form-control is-invalid")
+            return false;
+        } else if (!priceRegex.test($("#price").val())) {
+            $('#priceError').text("價格格式不符，請重新輸入")
+            $('#price').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#price').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateDate() {
+        let postDate = new Date($("#date").val());
+        let nowDate = new Date();
+        if ($('#date').val() == "") {
+            $('#dateError').text("請輸入上架日期!!")
+            $('#date').attr("class", "form-control is-invalid")
+            return false;
+        } else if (postDate < nowDate) {
+            $('#dateError').text("上架日期不可設定於今日之前!!")
+            $('#date').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#date').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateImg() {
+        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
+            $('#imgInp').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#imgInp').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function checkName() {
+        var courseName = $('#courseName').val();
+        var postData = {"courseName": courseName};
+        let check = false
+        $.ajax({
+            type: "post",
+            url: "/dashboard/courses/checkName",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                if (data != null) {
+                    $('#nameError').text(`提示：與課程編號 ${data.courseNo} 的名稱重複，換個更響亮的名稱吧 !`)
+                    $('#courseName').attr("class", "form-control is-invalid")
+                    $('#lecturererror').attr("name", "tofalse")
+                }
+            }
+        })
+    }
+
+    function validateName() {
+        checkName();
+        if ($('#courseName').val() == "") {
+            $('#courseName').attr("class", "form-control is-invalid")
+            return false;
+        } else if ($('#lecturererror').name == "tofalse") {
+            return false;
+        } else {
+            $('#courseName').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateIntroduction() {
+        if ($('#courseIntroduction').val() == "") {
+            $('#courseIntroduction').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#courseIntroduction').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validatelecturer() {
+        if ($('#lecturer').val() == "") {
+            $('#lecturer').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#lecturer').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    function validateVedio() {
+        if ($('#courseVedio').val() == "") {
+            $('#courseVedio').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#courseVedio').attr("class", "form-control is-valid")
+            return true;
+        }
+    }
+
+    //驗證包
+    function checkPackage() {
+        let checkResult = false;
+        checkResult = validateName();
+        checkResult = validateIntroduction();
+        checkResult = validatelecturer();
+        checkResult = validateVedio();
+        checkResult = validateScore();
+        checkResult = validatePrice();
+        checkResult = validateDate();
+        return checkResult;
+    }
+
     //一鍵輸入
     $('#correctInput').click(function () {
         $('#courseName').val('面試必勝10招')
@@ -261,17 +270,19 @@ $(function () {
         $('#courseVedio').val('url')
         $('#score').val('9.9')
         $('#price').val('1999')
+        checkPackage();
     })
     $('#wrongInput').click(function () {
         $('#courseName').val('面試必勝100招')
         $('#courseCategory').val('求職技巧')
         $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')
-        $('#lecturer').val('王大陸')
+        $('#lecturer').val('')
         $('#date').val('2022-01-01')
         $('#coursePic').val('url')
         $('#courseVedio').val('url')
         $('#score').val('11')
         $('#price').val('abc')
+        checkPackage();
     })
 
     //DataTable
@@ -482,6 +493,7 @@ $(function () {
     });
 
 })
+
 //     $('#delete').on('click',function () {
 //     $('.btn-courseDelete').on('click', function () {
 //         Swal.fire({

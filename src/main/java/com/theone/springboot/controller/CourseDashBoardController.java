@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,16 +32,28 @@ public class CourseDashBoardController {
 
     private final CourseService courseService;
 
-//    @Autowired
+    //    @Autowired
     public CourseDashBoardController(CourseService courseService) {
         this.courseService = courseService;
     }
 
     @GetMapping("/courses")
     public String findAllCourse(Model model) {
-		List<CourseBean> courseList = courseService.findAllCourses();
+        List<CourseBean> courseList = courseService.findAllCourses();
         model.addAttribute("courseList", courseList);
         return "course_dashboard/courseList";
+    }
+
+    //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
+    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
+        CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
+        if (bean != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
     }
 
     @GetMapping("/courses/{courseNo}")
