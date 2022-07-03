@@ -143,4 +143,27 @@ $(document).ready( function () {
           var reg = /\d/;
           return reg.test(keychar);
         }
+
+//確認帳號是否重複
+ function checkUserId(){
+	var userid = document.getElementById("userid").value;
+	$.ajax({
+		type:"POST",
+		url:"CheckMember",
+		data:"userid=" + userid,
+		success:function(data){
+			if(data== true){
+				document.getElementById("userid").innerHTML = "<font color = 'green'>帳號可用</font>";
+				return true;
+			}else{
+				document.getElementById("userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
+				return false;			
+			}
+		}
+	});
+	
+	
+	
+	
+}
 	
