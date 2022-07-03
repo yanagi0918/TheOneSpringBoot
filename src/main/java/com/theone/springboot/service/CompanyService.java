@@ -18,4 +18,6 @@ public interface CompanyService {
 	
 	void deleteCompany(Integer pk);
 	
+	Company getByCompid(Integer compid);
+	
 }

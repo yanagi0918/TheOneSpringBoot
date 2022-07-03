@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
@@ -39,6 +40,15 @@ public class CompanyDashBoardController {
 	public String saveCustomer(@ModelAttribute("company") Company company,Model m) {
 		companyService.saveOrUpdate(company);
 		return "redirect:/dashboard/company/list";
+	}
+	
+	@PostMapping(value = "/CheckUser")
+	public @ResponseBody boolean checkUser(@RequestParam Integer compid) {
+		Company company = companyService.getByCompid(compid);
+		if (company == null) {
+			return true;
+		}
+		return false;
 	}
 	
 	@GetMapping("/companydeatail/{pk}")

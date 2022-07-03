@@ -1,34 +1,111 @@
+function checkcompid() {
+	var compid = document.getElementById("compid").value;
+	let compIdRegex = /^\d{8}$/;
+	var compidck = compIdRegex.test(compid);
+	if(compidck){
+		document.getElementById("s_userName").innerHTML = "<font color='green'></font>";
+	$.ajax({
+		type: "POST",
+		url: "CheckUser",
+		data: "compid=" + compid,
+		success: function(data) {
+			if (data == true) {
+				document.getElementById("show_compid").innerHTML = "<font color='green'>帳號可用</font>";
+				document.getElementById('submit').disabled = false;
+				return true;
+			} else {
+				document.getElementById("show_compid").innerHTML = "<font color='red'>請更換</font>";
+				document.getElementById('submit').disabled = true;
+				return false;
+			}
+		}
+	});
+}else{
+	document.getElementById("s_userName").innerHTML = "<font color='red'>帳號格式錯誤</font>";
+	document.getElementById('submit').disabled=true;
+	return false;
+}
+}
+
+function checkcompwd() {
+	var compwd = document.getElementById("compwd").value;
+	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+	var flag5 = pwdRegex.test(compwd);
+			if (flag5) {
+				document.getElementById("show_compwd").innerHTML = "<font color='green'></font>";
+				document.getElementById('submit').disabled = false;
+				return true;
+			} else {
+				document.getElementById("show_compwd").innerHTML = "<font color='red'>格式錯誤</font>";
+				document.getElementById('submit').disabled = true;
+				return false;
+			}
+		}
+
+function checkcomptele() {
+	var comptele = document.getElementById("comptele").value;
+	let ce = /^[0-9]{10}$/g;
+	var compteleck = ce.test(comptele);
+			if (compteleck) {
+				document.getElementById("show_comptele").innerHTML = "<font color='green'></font>";
+				document.getElementById('submit').disabled = false;
+				return true;
+			} else {
+				document.getElementById("show_comptele").innerHTML = "<font color='red'>格式錯誤</font>";
+				document.getElementById('submit').disabled = true;
+				return false;
+			}
+		}
+
+function checkwebsite() {
+	var website = document.getElementById("website").value;
+	let pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
+	var websiteck = pattern.test(website);
+			if (websiteck) {
+				document.getElementById("show_website").innerHTML = "<font color='green'></font>";
+				document.getElementById('submit').disabled = false;
+				return true;
+			} else {
+				document.getElementById("show_website").innerHTML = "<font color='red'>格式錯誤</font>";
+				document.getElementById('submit').disabled = true;
+				return false;
+			}
+		}
+
+function checkempnumber() {
+	var empnumber = document.getElementById("empnumber").value;
+	let EmpNumRegex = /^\d+$/;
+	var empnumberck = EmpNumRegex.test(empnumber);
+			if (empnumberck) {
+				document.getElementById("show_empnumber").innerHTML = "<font color='green'></font>";
+				document.getElementById('submit').disabled = false;
+				return true;
+			} else {
+				document.getElementById("show_empnumber").innerHTML = "<font color='red'>格式錯誤</font>";
+				document.getElementById('submit').disabled = true;
+				return false;
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function checkCompanyForm() {
 	let checkResult = true;
 	let checkJobForm = true;
-	
-	let compIdRegex = /^\d{8}$/;
-	if (!compIdRegex.test($("#compid").val())) {
-		Swal.fire('Warning!',
-			'統編為8個數字!',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}
-	
-	let pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
-	if (!pattern.test($("#website").val())) {
-		Swal.fire('Warning!',
-			'網站格式錯誤',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}
-	
-	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-	if (!pwdRegex.test($("#compwd").val())) {
-	Swal.fire('Warning!',
-			'密碼格式錯誤!',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}
 	
 	if (!pwdRegex.test($("#pwdagain").val())) {
 	Swal.fire('Warning!',
@@ -38,23 +115,7 @@ function checkCompanyForm() {
 		return checkJobForm;
 	}
 	
-	let comptele = /^[0-9]{10}$/g;
-	if(!comptele.test($("#comptele").val())){
-		Swal.fire('Warning!',
-			'電話格式錯誤!',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}	
-	
-	let EmpNumRegex = /^\d+$/;
-	if (!EmpNumRegex.test($("#empnumber").val())) {
-		Swal.fire('Warning!',
-			'員工人數只能輸入阿拉伯整數!',
-			'warning');
-		checkResult = false;
-		return checkResult;
-	}
+
 
 	return checkResult;
 	

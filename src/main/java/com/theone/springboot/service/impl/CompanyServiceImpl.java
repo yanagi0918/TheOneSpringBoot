@@ -46,6 +46,11 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		companyDao.deleteById(pk);
 	}
+	@Override
+	public Company getByCompid(Integer compid) {
+		
+		return companyDao.getByCompid(compid);
+	}
 	
 
 }

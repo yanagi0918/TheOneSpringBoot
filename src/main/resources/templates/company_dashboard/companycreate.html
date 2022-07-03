@@ -56,18 +56,21 @@
                         <div class="row mb-3">
                                     <input type="hidden"  class="form-control" name="comppk" id="comppk" value="0">
                             </div>
-                        <form th:action="@{/dashboard/company/saveCompany}" action="companycreate.html" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()">
+                        <form th:action="@{/dashboard/company/saveCompany}" action="companycreate.html" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()" id="form">
                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
-                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" required>
+                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" required onblur="checkcompid()">
+                                    <span id="s_userName"></span>
+                                    <span id="show_compid"></span>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">密碼</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control pwd1" maxlength="15" name="compwd" required id="compwd" placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)">
+                                    <input type="password" class="form-control pwd1" maxlength="15" name="compwd" required id="compwd" placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)" onblur="checkcompwd()">
+                                	<span id="show_compwd"></span>
                                 	<input type="checkbox" onclick="ShowPwd()">顯示密碼
                                 </div>
                             </div>
@@ -111,7 +114,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">聯絡電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="10" name="comptele" id="comptele" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)">
+                                    <input type="text" class="form-control" maxlength="10" name="comptele" id="comptele" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)" onblur="checkcomptele()">
+                                	<span id="show_comptele"></span>
                                 </div>
                             </div>
                         
@@ -132,14 +136,16 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">員工人數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="7" name="empnumber"  required id="empnumber" placeholder="(請輸入阿拉伯整數，如2500)">
+                                    <input type="text" class="form-control" maxlength="7" name="empnumber"  required id="empnumber" placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
+                                	<span id="show_empnumber"></span>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">公司網站</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" id="website" placeholder="選填">
+                                    <input type="text" class="form-control" name="website" id="website" placeholder="選填" onblur="checkwebsite()">
+                                    <span id="show_website"></span>
                                 </div>
                             </div>
                             
@@ -150,7 +156,7 @@
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary register-submit" name="create" value="confirm">新增</button>
+                            <button type="submit" class="btn btn-primary register-submit" name="create" value="confirm" id="submit">新增</button>
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
                       	    <button type="button" class="btn btn-primary" id="wrongCompany">錯誤範例</button>
@@ -196,6 +202,7 @@
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/js/company_dashboard/checkCompanyForm.js}" src="js/company_dashboard/checkCompanyForm.js"></script>
+    
     
 
     <!-- Template Javascript -->
