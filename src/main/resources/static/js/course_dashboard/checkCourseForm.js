@@ -195,6 +195,7 @@ $(function () {
             data: JSON.stringify(postData),
             success: function (data) {
                 if (data != null) {
+                    console.log(data)
                     $('#nameError').text(`提示：與課程編號 ${data.courseNo} 的名稱重複，換個更響亮的名稱吧 !`)
                     $('#courseName').attr("class", "form-control is-invalid")
                     $('#lecturererror').attr("name", "tofalse")
