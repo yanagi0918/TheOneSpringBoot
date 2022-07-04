@@ -1,212 +1,270 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>THE ONE</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<title>THE ONE</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+	href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link
+	th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+	href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div th:replace="~{common/dashboard::spinner}"></div>
-        <!-- Spinner End -->
+	<div class="container-xxl position-relative bg-white d-flex p-0">
+		<!-- Spinner Start -->
+		<div th:replace="~{common/dashboard::spinner}"></div>
+		<!-- Spinner End -->
 
 
-        <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
-        <!-- Sidebar End -->
+		<!-- Sidebar Start -->
+		<div th:replace="~{common/dashboard::sidebar(3)}"></div>
+		<!-- Sidebar End -->
 
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <div th:replace="~{common/dashboard::navbar}"></div>
-            <!-- Navbar End -->
-            
-            <!-- Content Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="col-sm-12 col-xl-10">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">新增公司</h6>
-                        <div class="row mb-3">
-                                    <input type="hidden"  class="form-control" name="comppk" id="comppk" value="0">
-                            </div>
-                        <form th:action="@{/dashboard/company/saveCompany}" action="companycreate.html" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()" id="form">
-                           <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">帳號(統編)</label>
-                                <div class="col-sm-8">
-                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" required onblur="checkcompid()">
-                                    <span id="s_userName"></span>
-                                    <span id="show_compid"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">密碼</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control pwd1" maxlength="15" name="compwd" required id="compwd" placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)" onblur="checkcompwd()">
-                                	<span id="show_compwd"></span>
-                                	<input type="checkbox" onclick="ShowPwd()">顯示密碼
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">確認密碼</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control pwd2" maxlength="15" required id="pwdagain" placeholder="(再輸入一次密碼)" onkeyup="validate()">
-                                    <span id="msg"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司名稱</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="corpname" required id="corpname">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">負責人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="owner" id="owner">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">產業</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="10" name="industry" required id="industry">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="5" name="contact" required id="contact">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡電話</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="10" name="comptele" id="comptele" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)" onblur="checkcomptele()">
-                                	<span id="show_comptele"></span>
-                                </div>
-                            </div>
-                        
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">傳真號碼</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="11" name="fax" id="fax" placeholder="選填">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司地址</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="30" name="compaddress" required id="compaddress">
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">員工人數</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="7" name="empnumber"  required id="empnumber" placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
-                                	<span id="show_empnumber"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司網站</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" id="website" placeholder="選填" onblur="checkwebsite()">
-                                    <span id="show_website"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">資本額</label>
-                                <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital" required id="capital" placeholder="(請輸入公司資本額，如1250萬)">  
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary register-submit" name="create" value="confirm" id="submit">新增</button>
-                            <button type="reset" class="btn btn-primary">還原</button>
-                          	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
-                      	    <button type="button" class="btn btn-primary" id="wrongCompany">錯誤範例</button>
-                            <button type="button" class="btn btn-primary" id="correctCompany">一鍵輸入</button>  
-                            
-                            </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Content End -->
+		<!-- Content Start -->
+		<div class="content">
+			<!-- Navbar Start -->
+			<div th:replace="~{common/dashboard::navbar}"></div>
+			<!-- Navbar End -->
+
+			<!-- Content Start -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="col-sm-12 col-xl-10">
+					<div class="bg-light rounded h-100 p-4">
+						<h6 class="mb-4">新增公司</h6>
+						<div class="row mb-3">
+							<input type="hidden" class="form-control" name="comppk"
+								id="comppk" value="0">
+						</div>
+						<form th:action="@{/dashboard/company/saveCompany}"
+							action="companycreate.html" method="post"
+							enctype="multipart/form-data"
+							onsubmit="return checkCompanyForm()" id="form">
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">帳號(統編)</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="8"
+										name="compid" id="compid" required onblur="checkcompid()">
+									<span id="s_userName"></span> <span id="show_compid"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">密碼</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control pwd1" maxlength="15"
+										name="compwd" required id="compwd"
+										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)"
+										onblur="checkcompwd()"> <span id="show_compwd"></span>
+									<input type="checkbox" onclick="ShowPwd()">顯示密碼
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">確認密碼</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control pwd2" maxlength="15"
+										required id="pwdagain" placeholder="(再輸入一次密碼)"
+										onkeyup="validate()"> <span id="msg"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司名稱</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="15"
+										name="corpname" required id="corpname">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">負責人</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="15"
+										name="owner" id="owner">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">產業</label>
+								<div class="col-sm-8">
+									<select name="industry" class="form-select" id="industry">
+                                        <option value="">金融業</option>
+                                        <option value="">科技業</option>
+                                        <option value="">文教相關</option>
+                                        <option value="">餐飲服務</option>
+                                        <option value="">旅遊相關</option>
+                                        <option value="">運輸倉儲</option>
+                                        <option value="">一般服務業</option>
+                                        <option value="">建築及不動產</option>
+                                        <option value="">政治及宗教相關</option>
+                                        <option value="">醫療保健及環境衛生</option>
+                                        <option value="">礦業及土石開發採取</option>
+                                        <option value="">批發零售及傳直銷產業</option>
+                                        <option value="">法律/會計/顧問/研發/設計業</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">聯絡人</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="5"
+										name="contact" required id="contact">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">聯絡電話</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="10"
+										name="comptele" id="comptele"
+										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)"
+										onblur="checkcomptele()"> <span id="show_comptele"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">傳真號碼</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="11"
+										name="fax" id="fax" placeholder="選填">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司地址</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="30"
+										name="compaddress" required id="compaddress">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">員工人數</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="7"
+										name="empnumber" required id="empnumber"
+										placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
+									<span id="show_empnumber"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司網站</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="website"
+										id="website" placeholder="選填" onblur="checkwebsite()">
+									<span id="show_website"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">資本額</label>
+								<div class="col-sm-8 text-center">
+									<input type="text" class="form-control" maxlength="10"
+										name="capital" required id="capital"
+										placeholder="(請輸入公司資本額，如1250萬)">
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary register-submit"
+								name="create" value="confirm" id="submit"
+								onsubmit="return returncheck()">新增</button>
+							<button type="reset" class="btn btn-primary">還原</button>
+							<button type="button" class="btn btn-primary"
+								onclick="window.location.href='list'; return false;">取消</button>
+							<button type="button" class="btn btn-primary" id="wrongCompany">錯誤範例</button>
+							<button type="button" class="btn btn-primary" id="correctCompany">一鍵輸入</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- Content End -->
 
 			<!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">The One</a>, All Right Reserved.
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
-        </div>
-        <!-- Content End -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded-top p-4">
+					<div class="row">
+						<div class="col-12 col-sm-6 text-center text-sm-start">
+							&copy; <a href="#">The One</a>, All Right Reserved.
+						</div>
+						<div class="col-12 col-sm-6 text-center text-sm-end">
+							Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer End -->
+		</div>
+		<!-- Content End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/lib/chart/chart.min.js}" src="lib/chart/chart.min.js"></script>
-    <script th:src="@{/lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
-    <script th:src="@{/lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
-    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/company_dashboard/checkCompanyForm.js}" src="js/company_dashboard/checkCompanyForm.js"></script>
-    
-    
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/lib/chart/chart.min.js}"
+		src="lib/chart/chart.min.js"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"
+		src="lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"
+		src="lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
+		src="lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script
+		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
+		src="js/company_dashboard/checkCompanyForm.js"></script>
 
-    <!-- Template Javascript -->
-    <script th:src="@{/js/main.js}" src="js/main.js"></script>
+
+
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="js/main.js"></script>
 
 </body>
 </html>

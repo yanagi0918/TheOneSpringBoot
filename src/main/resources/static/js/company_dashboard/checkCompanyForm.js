@@ -1,3 +1,6 @@
+function returncheck(){
+	return checkcompid()&&checkcompwd()&&checkcomptele()&&checkwebsite()&&checkempnumber();
+}
 function checkcompid() {
 	var compid = document.getElementById("compid").value;
 	let compIdRegex = /^\d{8}$/;
@@ -129,7 +132,6 @@ $('#wrongCompany').click(function() {
 	$('#pwdagain').val('abc123')
 	$('#corpname').val('麥噹勞')
 	$('#owner').val('麥先生')
-	$('#industry').val('服務業')
 	$('#contact').val('麥小姐')
 	$('#comptele').val('0939-39-3939')
 	$('#fax').val('07-1325462')
@@ -146,7 +148,6 @@ $('#correctCompany').click(function() {
 	$('#pwdagain').val('Aabc123zzz')
 	$('#corpname').val('幸福企業有限公司')
 	$('#owner').val('吳先生')
-	$('#industry').val('服務業')
 	$('#contact').val('白小姐')
 	$('#comptele').val('0939393939')
 	$('#fax').val('07-1325462')
@@ -159,7 +160,6 @@ $('#companyUpdate').click(function() {
 	$('#compwd').val('Az145145')
 	$('#corpname').val('XX株式會社')
 	$('#owner').val('陳先生')
-	$('#industry').val('服務業')
 	$('#contact').val('林小姐')
 	$('#comptele').val('0977101565')
 	$('#fax').val('07-1325462')

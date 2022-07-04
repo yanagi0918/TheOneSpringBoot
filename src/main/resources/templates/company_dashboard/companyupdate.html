@@ -1,200 +1,280 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>THE ONE</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<title>THE ONE</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+	href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link
+	th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+	href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div th:replace="~{common/dashboard::spinner}"></div>
-        <!-- Spinner End -->
+	<div class="container-xxl position-relative bg-white d-flex p-0">
+		<!-- Spinner Start -->
+		<div th:replace="~{common/dashboard::spinner}"></div>
+		<!-- Spinner End -->
 
 
-        <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(3)}"></div>
-        <!-- Sidebar End -->
+		<!-- Sidebar Start -->
+		<div th:replace="~{common/dashboard::sidebar(3)}"></div>
+		<!-- Sidebar End -->
 
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <div th:replace="~{common/dashboard::navbar}"></div>
-            <!-- Navbar End -->
-            
-            <!-- Content Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="col-sm-12 col-xl-10">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">修改公司資訊</h6>
-                        <form th:action="@{/dashboard/company/saveCompany}" action="companyupdate.html" method="post" enctype="multipart/form-data" onsubmit="return checkCompanyForm()">
-                        	<div class="row mb-3">
-                                    <input type="hidden"  class="form-control" name="comppk" id="comppk" th:value="${companyupdate.comppk}"  >
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">帳號(統編)</label>
-                                <div class="col-sm-8">
-                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" th:value="${companyupdate.compid}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">密碼</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" maxlength="15" name="compwd"  id="compwd" th:value="${companyupdate.compwd}"  placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)">
-                               		<input type="checkbox" onclick="ShowPwd()">顯示密碼
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">確認密碼</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control pwd2" maxlength="15" required id="pwdagain" placeholder="(再輸入一次密碼)" onkeyup="validate()">
-                                    <span id="msg"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司名稱</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="corpname"  id="corpname" th:value="${companyupdate.corpname}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">負責人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="owner" id="owner" th:value="${companyupdate.owner}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">產業</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="industry"  id="industry" th:value="${companyupdate.industry}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡人</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="contact"  id="contact" th:value="${companyupdate.contact}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">聯絡電話</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="comptele" id="comptele" th:value="${companyupdate.comptele}" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)" >
-                                </div>
-                            </div>
-                        
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">傳真號碼</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="fax" id="fax" th:value="${companyupdate.fax}" placeholder="選填" >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司地址</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="compaddress"  id="compaddress" th:value="${companyupdate.compaddress}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">員工人數</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="empnumber"  required id="empnumber" th:value="${companyupdate.empnumber}" placeholder="(請輸入阿拉伯整數，如2500)" >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">公司網站</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" id="website" th:value="${companyupdate.website}"  >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">資本額</label>
-                                <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" th:value="${companyupdate.capital}" placeholder="(請輸入公司資本額，如1250萬)" >  
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='../list'; return false;">取消</button>
-                            <button type="button" class="btn btn-primary" id="companyUpdate">一鍵修改</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Content End -->
+		<!-- Content Start -->
+		<div class="content">
+			<!-- Navbar Start -->
+			<div th:replace="~{common/dashboard::navbar}"></div>
+			<!-- Navbar End -->
+
+			<!-- Content Start -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="col-sm-12 col-xl-10">
+					<div class="bg-light rounded h-100 p-4">
+						<h6 class="mb-4">修改公司資訊</h6>
+						<form th:action="@{/dashboard/company/saveCompany}"
+							action="companyupdate.html" method="post"
+							enctype="multipart/form-data"
+							onsubmit="return checkCompanyForm()">
+							<div class="row mb-3">
+								<input type="hidden" class="form-control" name="comppk"
+									id="comppk" th:value="${companyupdate.comppk}">
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">帳號(統編)</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" maxlength="8"
+										name="compid" id="compid" th:value="${companyupdate.compid}"
+										onblur="checkcompid()"> <span id="s_userName"></span>
+									<span id="show_compid"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">密碼</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control" maxlength="15"
+										name="compwd" id="compwd" th:value="${companyupdate.compwd}"
+										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)"
+										onblur="checkcompwd()"> <span id="show_compwd"></span>
+									<input type="checkbox" onclick="ShowPwd()">顯示密碼
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">確認密碼</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control pwd2" maxlength="15"
+										required id="pwdagain" placeholder="(再輸入一次密碼)"
+										onkeyup="validate()"> <span id="msg"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司名稱</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="corpname"
+										id="corpname" th:value="${companyupdate.corpname}">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">負責人</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="owner" id="owner"
+										th:value="${companyupdate.owner}">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">產業</label>
+								<div class="col-sm-8">
+									<select name='industry' class="form-select"
+										th:field="${companyupdate.industry}"
+										th:value="${companyupdate.industry}" id="industry">
+										<option th:selected="${companyupdate.industry =='金融業'}"
+											value="金融業">金融業</option>
+										<option th:selected="${companyupdate.industry =='科技業'}"
+											value="科技業">科技業</option>
+										<option th:selected="${companyupdate.industry =='文教相關'}"
+											value="文教相關">文教相關</option>
+										<option th:selected="${companyupdate.industry =='餐飲服務'}"
+											value="餐飲服務">餐飲服務</option>
+										<option th:selected="${companyupdate.industry =='旅遊相關'}"
+											value="旅遊相關">旅遊相關</option>
+										<option th:selected="${companyupdate.industry =='運輸倉儲'}"
+											value="運輸倉儲">其他</option>
+										<option th:selected="${companyupdate.industry =='一般服務業'}"
+											value="一般服務業">一般服務業</option>
+										<option th:selected="${companyupdate.industry =='建築及不動產'}"
+											value="建築及不動產">建築及不動產</option>
+										<option th:selected="${companyupdate.industry =='政治及宗教相關'}"
+											value="政治及宗教相關">政治及宗教相關</option>
+										<option th:selected="${companyupdate.industry =='醫療保健及環境衛生'}"
+											value="醫療保健及環境衛生">醫療保健及環境衛生</option>
+										<option th:selected="${companyupdate.industry =='礦業及土石開發採取'}"
+											value="礦業及土石開發採取">礦業及土石開發採取</option>
+										<option th:selected="${companyupdate.industry =='批發零售及傳直銷產業'}"
+											value="批發零售及傳直銷產業">批發零售及傳直銷產業</option>
+										<option th:selected="${companyupdate.industry =='法律/會計/顧問/研發/設計業'}"
+											value="法律/會計/顧問/研發/設計業">法律/會計/顧問/研發/設計業</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">聯絡人</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="contact"
+										id="contact" th:value="${companyupdate.contact}">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">聯絡電話</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="comptele"
+										id="comptele" th:value="${companyupdate.comptele}"
+										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)"
+										onblur="checkcomptele()"> <span id="show_comptele"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">傳真號碼</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="fax" id="fax"
+										th:value="${companyupdate.fax}" placeholder="選填">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司地址</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="compaddress"
+										id="compaddress" th:value="${companyupdate.compaddress}">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">員工人數</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="empnumber"
+										required id="empnumber" th:value="${companyupdate.empnumber}"
+										placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
+									<span id="show_empnumber"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">公司網站</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="website"
+										id="website" th:value="${companyupdate.website}"
+										onblur="checkwebsite()"> <span id="show_website"></span>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">資本額</label>
+								<div class="col-sm-8 text-center">
+									<input type="text" class="form-control" maxlength="10"
+										name="capital" id="capital"
+										th:value="${companyupdate.capital}"
+										placeholder="(請輸入公司資本額，如1250萬)">
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary" name="update"
+								value="confirm">修改</button>
+							<button type="button" class="btn btn-primary"
+								onclick="window.location.href='../list'; return false;">取消</button>
+							<button type="button" class="btn btn-primary" id="companyUpdate">一鍵修改</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- Content End -->
 
 			<!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">The One</a>, All Right Reserved.
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
-        </div>
-        <!-- Content End -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded-top p-4">
+					<div class="row">
+						<div class="col-12 col-sm-6 text-center text-sm-start">
+							&copy; <a href="#">The One</a>, All Right Reserved.
+						</div>
+						<div class="col-12 col-sm-6 text-center text-sm-end">
+							Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer End -->
+		</div>
+		<!-- Content End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/lib/chart/chart.min.js}" src="lib/chart/chart.min.js"></script>
-    <script th:src="@{/lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
-    <script th:src="@{/lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
-    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/company_dashboard/checkCompanyForm.js}" src="js/company_dashboard/checkCompanyForm.js"></script>
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/lib/chart/chart.min.js}"
+		src="lib/chart/chart.min.js"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"
+		src="lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"
+		src="lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
+		src="lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script
+		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
+		src="js/company_dashboard/checkCompanyForm.js"></script>
 
-    <!-- Template Javascript -->
-    <script th:src="@{/js/main.js}" src="js/main.js"></script>
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="js/main.js"></script>
 
 </body>
 </html>
