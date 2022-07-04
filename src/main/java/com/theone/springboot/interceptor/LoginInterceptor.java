@@ -14,14 +14,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String uri = request.getRequestURI();
 
-//		if (uri.contains("dashboard")) {
-//			String loginUser = (String) request.getSession().getAttribute("loginUser");
-//			if (null == loginUser) {
-//				response.sendRedirect(request.getContextPath() + "/login");
-//				return false;
-//			}
-//			return true;
-//		}
+		if (uri.contains("dashboard")) {
+			String loginUser = (String) request.getSession().getAttribute("loginUser");
+			if (null == loginUser) {
+				response.sendRedirect(request.getContextPath() + "/login");
+				return false;
+			}
+			return true;
+		}
 		return true;
 	}
 
