@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class Member {
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Integer idNumber;
+	@Column(unique = true)
 	 private String userid;
 	 private String pwd;
 	 private String username;

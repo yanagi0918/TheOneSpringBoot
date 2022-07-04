@@ -59,6 +59,13 @@ $(function() {
 				icon: 'warning',
 			})
 			checkMemberForm = false;
+			return checkMemberForm;
+			
+//		if(!function checkUserId()){
+//			
+//		}
+//			checkMemberForm = false;
+		
 		}
 
 		let pointRegex = /^\d+$/;
@@ -153,10 +160,12 @@ $(document).ready( function () {
 		data:"userid=" + userid,
 		success:function(data){
 			if(data== true){
-				document.getElementById("userid").innerHTML = "<font color = 'green'>帳號可用</font>";
+				document.getElementById("show_userid").innerHTML = "<font color = 'green'>帳號沒有重複</font>";
+				document.getElementById("btn-submit").disabled =false;
 				return true;
 			}else{
-				document.getElementById("userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
+				document.getElementById("show_userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
+				document.getElementById("btn-submit").disabled =true;
 				return false;			
 			}
 		}

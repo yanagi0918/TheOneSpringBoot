@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -40,11 +41,11 @@ public class MemberDashBoardController {
 		return "member_dashboard/memberlist";
 	}
 	
-	@ResponseBody
-	@GetMapping("/member/user/{userid}")
-	public Member aaa(@PathVariable("userid")String userid) {
-		return memberService.getByUserid(userid);
-	}
+//	@ResponseBody
+//	@GetMapping("/member/user/{userid}")
+//	public Member aaa(@PathVariable("userid")String userid) {
+//		return memberService.getByUserid(userid);
+//	}
 	
 	
 	
@@ -99,8 +100,10 @@ public class MemberDashBoardController {
 	public @ResponseBody boolean checkMember(@RequestParam String userid) {
 		Member member = memberService.getByUserid(userid);
 		if(member == null) {
+			System.out.println("in");
 			return true;
 		}
+		System.out.println("out");
 		return false;
 	}
 	
