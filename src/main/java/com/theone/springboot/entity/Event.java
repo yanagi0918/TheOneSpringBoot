@@ -28,6 +28,7 @@ public class Event {
 	@Column(columnDefinition = "Date")
 	private Date postEnd;
 	private String remark;
+	private Integer state;
 
 	public Event() {
 	}
@@ -96,11 +97,19 @@ public class Event {
 		this.remark = remark;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "EventBean [eventId=" + eventId + ", compId=" + compId + ", price=" + price + ", imgUrl=" + imgUrl
+		return "Event [eventId=" + eventId + ", compId=" + compId + ", price=" + price + ", imgUrl=" + imgUrl
 				+ ", eventLinkUrl=" + eventLinkUrl + ", postStart=" + postStart + ", postEnd=" + postEnd + ", remark="
-				+ remark + "]";
+				+ remark + ", state=" + state + "]";
 	}
 
 }
