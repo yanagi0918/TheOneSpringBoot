@@ -51,6 +51,5 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		return companyDao.getByCompid(compid);
 	}
-	
 
 }

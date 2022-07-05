@@ -87,8 +87,9 @@
 									<input type="password" class="form-control pwd1" maxlength="15"
 										name="compwd" required id="compwd"
 										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)"
-										onblur="checkcompwd()"> <span id="show_compwd"></span>
+										onblur="checkcompwd()"> 
 									<input type="checkbox" onclick="ShowPwd()">顯示密碼
+										<span id="show_compwd"></span>
 								</div>
 							</div>
 
@@ -121,19 +122,19 @@
 								<label class="col-sm-2 col-form-label">產業</label>
 								<div class="col-sm-8">
 									<select name="industry" class="form-select" id="industry">
-                                        <option value="">金融業</option>
-                                        <option value="">科技業</option>
-                                        <option value="">文教相關</option>
-                                        <option value="">餐飲服務</option>
-                                        <option value="">旅遊相關</option>
-                                        <option value="">運輸倉儲</option>
-                                        <option value="">一般服務業</option>
-                                        <option value="">建築及不動產</option>
-                                        <option value="">政治及宗教相關</option>
-                                        <option value="">醫療保健及環境衛生</option>
-                                        <option value="">礦業及土石開發採取</option>
-                                        <option value="">批發零售及傳直銷產業</option>
-                                        <option value="">法律/會計/顧問/研發/設計業</option>
+                                        <option >金融業</option>
+                                        <option >科技業</option>
+                                        <option >文教相關</option>
+                                        <option >餐飲服務</option>
+                                        <option >旅遊相關</option>
+                                        <option>運輸倉儲</option>
+                                        <option >一般服務業</option>
+                                        <option >建築及不動產</option>
+                                        <option>政治及宗教相關</option>
+                                        <option>醫療保健及環境衛生</option>
+                                        <option>礦業及土石開發採取</option>
+                                        <option >批發零售及傳直銷產業</option>
+                                        <option >法律/會計/顧問/研發/設計業</option>
 									</select>
 								</div>
 							</div>
@@ -202,7 +203,7 @@
 
 							<button type="submit" class="btn btn-primary register-submit"
 								name="create" value="confirm" id="submit"
-								onsubmit="return returncheck()">新增</button>
+								onclick="returncheck()">新增</button>
 							<button type="reset" class="btn btn-primary">還原</button>
 							<button type="button" class="btn btn-primary"
 								onclick="window.location.href='list'; return false;">取消</button>
