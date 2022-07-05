@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Event;
+import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.EventService;
 
 @Controller
@@ -32,6 +34,9 @@ public class EventDashBoardController {
 
 	@Autowired
 	EventService eventService;
+	
+	@Autowired
+	CompanyService companyService;
 
 	@GetMapping("/events")
 	public String toEventListPage(Model model) {
@@ -78,7 +83,16 @@ public class EventDashBoardController {
 	}
 	
 	
-	
+	@ResponseBody
+	@GetMapping("/event/compid_exist/{compid}")
+	public boolean checkUser(@PathVariable("compid") Integer compid) {
+		Company company = companyService.getByCompid(compid);
+		if (company == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
