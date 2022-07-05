@@ -38,6 +38,9 @@ color:lightgray;
 textarea {
   resize : none;
 }
+.error {
+	color: #F00;
+}
 </style> 
 </head>
 
@@ -68,18 +71,18 @@ textarea {
 <h6>皆須確實填寫!</h6>
 <div>
 
-<form th:action="@{/dashboard/job/saveJob}" action="saveJob" method="post" enctype="multipart/form-data" onsubmit="return checkJobForm()">  
+<form th:action="@{/dashboard/job/saveJob}" action="saveJob" method="post" enctype="multipart/form-data" onsubmit="return checkJobForm()" id="jobcreateform">  
  <div class="row mb-3">
 <label class="col-sm-2 col-form-label">統一編號:</label>
 <div class="col-sm-8">
-<input type="text"  name=comp_id maxlength="8" id="comp_id" class="form-control" required autofocus/>
+<input type="text"  name=comp_id maxlength="8" id="comp_id" class="form-control"  autofocus/>
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺名稱:</label>
 <div class="col-sm-8">
-<input type="text" name="title" id="title" class="form-control" required/> 
+<input type="text" name="title" id="title" class="form-control" /> 
 </div>
 </div>
 
@@ -98,14 +101,14 @@ textarea {
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺條件:</label>
 <div class="col-sm-8">
-<input type="text" name="qualification" maxlength="4" id="qualification" class="form-control" required/>
+<input type="text" name="qualification"  id="qualification" class="form-control" />
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">需要人數:</label>
 <div class="col-sm-8">
-<input type="text" name="required_number" id="required_number" class="form-control" required/> 
+<input type="text" name="required_number" id="required_number" class="form-control" placeholder="僅可輸入數字" /> 
 </div>
 </div>
 
@@ -129,7 +132,7 @@ textarea {
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">工作內容:</label>
 <div class="col-sm-8">
-<textarea rows="8" cols="8" id="description" name="description" class="form-control" required placeholder="請輸入不超過200字" maxlength="200"></textarea>
+<textarea rows="8" cols="8" id="description" name="description" class="form-control"  placeholder="請輸入不超過500字" maxlength="500"></textarea>
 </div>
 </div>
 
@@ -139,6 +142,7 @@ textarea {
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
 							<button type="button" class="btn btn-primary" id="jobInput">一鍵輸入</button>
+							<button type="button" class="btn btn-primary" id="jobwrongInput">錯誤示範</button>
 </div>                            
                             </form>
                     </div>
@@ -179,6 +183,8 @@ textarea {
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
     <script th:src="@{/js/job_dashboard/checkJobForm.js}" src="js/job_dashboard/checkJobForm.js"></script>
 
     <!-- Template Javascript -->

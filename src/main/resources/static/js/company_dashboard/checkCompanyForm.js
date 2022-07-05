@@ -1,10 +1,61 @@
+$(function(){
+	$('#companycreateform').validate({
+		rules:{
+			compid: {
+				required: true,
+				maxlength:8,
+				minlength:8,
+				digits:true,
+			},
+			compwd: {
+				required: true,
+				maxlength:15,
+				minlength:8,
+			},
+			ckeckpwd: {
+				required: true,
+				equalTo:"#compwd",
+			},
+			corpname: {
+				required: true,
+			},
+			contact: {
+				required: true,
+			},
+			compaddress: {
+				required: true,
+			},
+			empnumber: {
+				required: true,
+				digits:true,
+			},
+			capital: {
+				required: true,
+			},
+			website: {
+				url:true
+			},
+			comptele: {
+				digits:true,
+			},
+			
+			
+			
+		},
+		
+		
+		
+	})
+	
+})
+
+
+
+
 function returncheck(){
 	let returncheck = false;
 	 returncheck=checkcompid();
 	 returncheck=checkcompwd();
-	 returncheck=checkcomptele();
-	 returncheck=checkwebsite();
-	 returncheck=checkempnumber();
 	 return returncheck;
 }
 function checkcompid() {
@@ -46,51 +97,6 @@ function checkcompwd() {
 				return true;
 			} else {
 				document.getElementById("show_compwd").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkcomptele() {
-	var comptele = document.getElementById("comptele").value;
-	let ce = /^[0-9]{10}$/g;
-	var compteleck = ce.test(comptele);
-			if (compteleck) {
-				document.getElementById("show_comptele").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_comptele").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkwebsite() {
-	var website = document.getElementById("website").value;
-	let pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
-	var websiteck = pattern.test(website);
-			if (websiteck) {
-				document.getElementById("show_website").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_website").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkempnumber() {
-	var empnumber = document.getElementById("empnumber").value;
-	let EmpNumRegex = /^\d+$/;
-	var empnumberck = EmpNumRegex.test(empnumber);
-			if (empnumberck) {
-				document.getElementById("show_empnumber").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_empnumber").innerHTML = "<font color='red'>格式錯誤</font>";
 				document.getElementById('submit').disabled = true;
 				return false;
 			}

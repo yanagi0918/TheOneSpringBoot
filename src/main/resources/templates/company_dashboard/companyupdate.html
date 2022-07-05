@@ -67,7 +67,7 @@
 						<form th:action="@{/dashboard/company/saveCompany}"
 							action="companyupdate.html" method="post"
 							enctype="multipart/form-data"
-							onsubmit="return checkCompanyForm()">
+							onsubmit="return checkCompanyForm()" id="companycreateform">
 							<div class="row mb-3">
 								<input type="hidden" class="form-control" name="comppk"
 									id="comppk" th:value="${companyupdate.comppk}">
@@ -98,7 +98,7 @@
 								<label class="col-sm-2 col-form-label">確認密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd2" maxlength="15"
-										required id="pwdagain" placeholder="(再輸入一次密碼)"
+										  id="pwdagain" placeholder="(再輸入一次密碼)"
 										onkeyup="validate()"> <span id="msg"></span>
 								</div>
 							</div>
@@ -193,7 +193,7 @@
 								<label class="col-sm-2 col-form-label">員工人數</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="empnumber"
-										required id="empnumber" th:value="${companyupdate.empnumber}"
+										  id="empnumber" th:value="${companyupdate.empnumber}"
 										placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
 									<span id="show_empnumber"></span>
 								</div>
@@ -271,6 +271,8 @@
 		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
 		src="js/company_dashboard/checkCompanyForm.js"></script>
 

@@ -1,3 +1,76 @@
+$(function(){
+	$('#jobcreateform').validate({
+		rules:{
+			comp_id: {
+				required: true,
+				maxlength:8,
+				minlength:8,
+				digits:true,
+			},
+			title: {
+				required: true,
+			},
+			qualification: {
+				required: true,
+			},
+			required_number: {
+				required: true,
+				digits:true,
+			},
+			description: {
+				required: true,
+				maxlength:500
+			},
+			
+			
+			
+			
+			
+		},
+		
+		
+		
+	})
+	
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function checkJobForm() {
 	let checkJobForm = true;
 	
@@ -29,6 +102,14 @@ $('#jobInput').click(function() {
 	$('#qualification').val('相關領域工作2年經驗')
 	$('#required_number').val('5')
 	$('#description').val('1.蒐集並釐清專案需求、進行系統分析設計並提供解決方案 \n2.梳理使用者需求內容，進行系統或線上問題分析與討論 \n3.依據BA文件及需求訪談會議紀錄進行系統分析設計，並與系統設計師溝通系統分析規格 \n4.產製SA系統分析文件、使用案例、功能規格設計文件')
+})
+
+$('#jobwrongInput').click(function() {
+	$('#comp_id').val('Z1234567')
+	$('#title').val('')
+	$('#qualification').val('')
+	$('#required_number').val('5人')
+	$('#description').val('')
 })
 
 $('#jobUpdate').click(function() {
