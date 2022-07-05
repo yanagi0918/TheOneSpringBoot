@@ -223,7 +223,33 @@ $('#OrdercorrectInput').click(function () {
     "zeroRecords": "沒有符合的資料"
 	}
 	});
-	} );
+});
+
+//Form rule
+$(function() {
+
+	$('#form').validate({
+		rules: {
+			userId: {
+				required: true,
+			},
+			totalPrice: {
+				required: true,
+				digits: true,
+				range: [0, 9],
+			},
+		},
+//		messages: {
+//			job_description: {
+//				required: '請選擇類別',
+//			},
+//			monthly_salary: {
+//				digits: '請輸入大於0的整數',
+//			},
+//		},
+	})
+
+})
 
 	$('#btn-submit').click(function() {
 		let warningStr = "";
