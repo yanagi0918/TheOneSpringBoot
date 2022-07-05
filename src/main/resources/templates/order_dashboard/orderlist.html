@@ -67,7 +67,7 @@
                                     <th scope="col">會員帳號</th>
                                     <th scope="col">課程編號</th>
                                     <th scope="col">總價</th>
-                                    <th scope="col">修改/刪除</th>
+                                    <th scope="col">查看/修改/刪除</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,7 +116,8 @@
     <script th:src="@{/js/order_dashboard/checkOrderForm.js}" src="js/checkOrderForm.js"></script>
 	<!-- dataTables.js -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script>
+   
+
         function del(id) {
 		Swal.fire({
 			title: '確認是否刪除?',
