@@ -4,7 +4,6 @@ $(function() {
 		$('#email').val('lin.gmail')
 		$('#point').val('三百點')
 	})
-
 	$('#correctInput').click(function() {
 //		$('#userid').val('Z123456789')
 		$('#pwd').val('abc123zzz')
@@ -17,24 +16,12 @@ $(function() {
 		$('#email').val('hiremeplz@gmail.com')
 		$('#point').val('300')
 	})
-
 	$('.btn-memberUpdate').click(function() {
 		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
 	})
-
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/member";
-	})
-
-	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/members";
-	})
-
-//圖片上傳同步顯示
 	$("#imgInp").change(function() {
 		readURL(this);
-	})
-	
+	});
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -44,18 +31,15 @@ $(function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
-
-
-
-
-
-
-
-
-//欄位驗證
-
-
+	$('#btn-toCreate').click(function() {
+		location.href = "/dashboard/member";
+	})
+	$('#btn-goBack').click(function() {
+		location.href = "/dashboard/members";
+	})
+	
+	$('#btn-submit').click(function() {
+		let checkMemberForm = true;
 		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
 		if (!IdRegex.test($("#userid").val())) {
 			Swal.fire({
@@ -65,7 +49,6 @@ $(function() {
 			})
 			checkMemberForm = false;
 			return checkMemberForm;
-		
 		}
 
 		let pointRegex = /^\d+$/;
@@ -95,8 +78,8 @@ $(function() {
   }
 		
 		
-	let emailregex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
- 	 if(!emailregex.test($("#email").val())) {
+	let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+ 	 if(!regex.test($("#email").val())) {
    	 	Swal.fire({
    		 title: '提示!',
    		 text: "\"請輸入正確email\"",
@@ -106,67 +89,22 @@ $(function() {
    	 	return checkMemberForm;
 		}
 	
-
-
-
-
-
-
-//驗證包
-function checkPackage() {
-        let checkMemberForm = false;
-        checkMemberForm = validateName();
-        checkMemberForm = validateIntroduction();
-        checkMemberForm = validatelecturer();
-        checkMemberForm = validateVedio();
-        checkMemberForm = validateScore();
-        checkMemberForm = validatePrice();
-        checkMemberForm = validateDate();
-        return checkMemberForm;
-    }
-
-
-
-//表單送出檢查
-	$('#btn-submit').click(function() {
-		let checkMemberForm = true;
-		
-		checkMemberForm = checkPackage();
-
-	
-	
-	
-
+	})
 });
-
-
-
-
-
-
-
-
-
 //datatable
-
 $(document).ready( function () {
     $('#table_id').DataTable();
 } );
-
-
 //密碼顯示或是隱藏
-
-function ShowPwd() {
-  var x = document.getElementById("pwd");
-   	if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-        }
-
+	 function ShowPwd() {
+            var x = document.getElementById("pwd");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
 	}
 	
-
 //只准輸入數字
  function my_key(e) {
           var key;
@@ -184,7 +122,6 @@ function ShowPwd() {
           var reg = /\d/;
           return reg.test(keychar);
         }
-
 //確認帳號是否重複
  function checkUserId(){
 	var userid = document.getElementById("userid").value;
@@ -194,23 +131,20 @@ function ShowPwd() {
 		data:"userid=" + userid,
 		success:function(data){
 			if(data== true){
+				document.getElementById("userid").innerHTML = "<font color = 'green'>帳號可用</font>";
 				document.getElementById("show_userid").innerHTML = "<font color = 'green'>帳號沒有重複</font>";
 				document.getElementById("btn-submit").disabled =false;
 				return true;
 			}else{
+				document.getElementById("userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
 				document.getElementById("show_userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
 				document.getElementById("btn-submit").disabled =true;
 				return false;			
 			}
 		}
-	})
+	});
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-});
