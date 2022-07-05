@@ -186,7 +186,7 @@ $(function () {
     function checkName() {
         var courseName = $('#courseName').val();
         var postData = {"courseName": courseName};
-        let check = false
+        var test;
         $.ajax({
             type: "post",
             url: "/dashboard/courses/checkName",
@@ -195,10 +195,11 @@ $(function () {
             data: JSON.stringify(postData),
             success: function (data) {
                 if (data != null) {
-                    console.log(data)
                     $('#nameError').text(`提示：與課程編號 ${data.courseNo} 的名稱重複，換個更響亮的名稱吧 !`)
                     $('#courseName').attr("class", "form-control is-invalid")
-                    $('#lecturererror').attr("name", "tofalse")
+                    $('#btn-submit').attr("disabled",true);
+                }else {
+                    $('#btn-submit').attr("disabled",false);
                 }
             }
         })
@@ -206,10 +207,9 @@ $(function () {
 
     function validateName() {
         checkName();
+        console.log($('#courseName').attr("class"));
         if ($('#courseName').val() == "") {
             $('#courseName').attr("class", "form-control is-invalid")
-            return false;
-        } else if ($('#lecturererror').name == "tofalse") {
             return false;
         } else {
             $('#courseName').attr("class", "form-control is-valid")
