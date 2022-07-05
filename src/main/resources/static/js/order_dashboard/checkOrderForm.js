@@ -232,21 +232,19 @@ $(function() {
 		rules: {
 			userId: {
 				required: true,
+				regex: '/^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/',
 			},
 			totalPrice: {
 				required: true,
 				digits: true,
-				range: [0, 9],
+				range: [0, 9999999999],
 			},
 		},
-//		messages: {
-//			job_description: {
-//				required: '請選擇類別',
-//			},
-//			monthly_salary: {
-//				digits: '請輸入大於0的整數',
-//			},
-//		},
+		messages: {
+			userId: {
+				required: '請輸入正確的身分證',
+			},
+		},
 	})
 
 })
