@@ -39,6 +39,14 @@
 
 <!-- Template Stylesheet -->
 <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+<style>
+.error{
+color:red;
+}
+.center {
+            text-align: center;
+        }
+</style>
 </head>
 
 <body>
@@ -71,12 +79,12 @@
 						<form th:action="@{/dashboard/company/saveCompany}"
 							action="companycreate.html" method="post"
 							enctype="multipart/form-data"
-							onsubmit="return checkCompanyForm()" id="form">
+							onsubmit="return checkCompanyForm()" id="companycreateform">
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">帳號(統編)</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="8"
-										name="compid" id="compid" required onblur="checkcompid()">
+										name="compid" id="compid"  onblur="checkcompid()">
 									<span id="s_userName"></span> <span id="show_compid"></span>
 								</div>
 							</div>
@@ -85,20 +93,21 @@
 								<label class="col-sm-2 col-form-label">密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd1" maxlength="15"
-										name="compwd" required id="compwd"
-										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)"
+										name="compwd"  id="compwd"
+										placeholder="(八到十五字符，至少一個大寫字母，一個小寫字母和一個數字)"
 										onblur="checkcompwd()"> 
-									<input type="checkbox" onclick="ShowPwd()">顯示密碼
 										<span id="show_compwd"></span>
 								</div>
 							</div>
-
+							<div class="center">
+									<input type="checkbox" onclick="ShowPwd()">顯示密碼
+							</div>
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">確認密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd2" maxlength="15"
 										required id="pwdagain" placeholder="(再輸入一次密碼)"
-										onkeyup="validate()"> <span id="msg"></span>
+										onkeyup="validate()" name="ckeckpwd"> <span id="msg"></span>
 								</div>
 							</div>
 
@@ -106,7 +115,7 @@
 								<label class="col-sm-2 col-form-label">公司名稱</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="15"
-										name="corpname" required id="corpname">
+										name="corpname"  id="corpname">
 								</div>
 							</div>
 
@@ -143,7 +152,7 @@
 								<label class="col-sm-2 col-form-label">聯絡人</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="5"
-										name="contact" required id="contact">
+										name="contact"  id="contact">
 								</div>
 							</div>
 
@@ -169,7 +178,7 @@
 								<label class="col-sm-2 col-form-label">公司地址</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="30"
-										name="compaddress" required id="compaddress">
+										name="compaddress"  id="compaddress">
 								</div>
 							</div>
 
@@ -177,8 +186,8 @@
 								<label class="col-sm-2 col-form-label">員工人數</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="7"
-										name="empnumber" required id="empnumber"
-										placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
+										name="empnumber"  id="empnumber"
+										placeholder="(請只輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
 									<span id="show_empnumber"></span>
 								</div>
 							</div>
@@ -196,7 +205,7 @@
 								<label class="col-sm-2 col-form-label">資本額</label>
 								<div class="col-sm-8 text-center">
 									<input type="text" class="form-control" maxlength="10"
-										name="capital" required id="capital"
+										name="capital"  id="capital"
 										placeholder="(請輸入公司資本額，如1250萬)">
 								</div>
 							</div>
@@ -259,8 +268,11 @@
 		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
 		src="js/company_dashboard/checkCompanyForm.js"></script>
+		
 
 
 
