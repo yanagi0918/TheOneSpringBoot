@@ -9,4 +9,6 @@ import com.theone.springboot.entity.Comment;
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 
+
+
 }

@@ -8,4 +8,6 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     CourseBean getByCourseName(String courseName);
 
+
+
 }
