@@ -45,6 +45,18 @@ public class JobServiceImpl implements JobService{
 
 		jobDao.deleteById(pk);
 	}
+	@Override
+	public List<Job> getByJobdescription(String jobdescription) {
+		return jobDao.getByJobdescription(jobdescription);
+	}
+	@Override
+	public List<Job> getBySalary(String salary) {
+		return jobDao.getBySalary(salary);
+	}
+	@Override
+	public List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary) {
+		return getByJobdescriptionAndSalary(jobdescription, salary);
+	}
 
 
 }

@@ -14,7 +14,7 @@ public class Job implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer job_id;
 	private String title;
-	private String job_description;
+	private String jobdescription;
 	private String qualification;
 	private Integer required_number;
 	private String salary;
@@ -46,12 +46,12 @@ public class Job implements Serializable{
 		this.title = title;
 	}
 
-	public String getJob_description() {
-		return job_description;
+	public String getJobdescription() {
+		return jobdescription;
 	}
 
-	public void setJob_description(String job_description) {
-		this.job_description = job_description;
+	public void setJobdescription(String jobdescription) {
+		this.jobdescription = jobdescription;
 	}
 
 	public String getQualification() {
@@ -86,23 +86,23 @@ public class Job implements Serializable{
 		this.comp_id = comp_id;
 	}
 
-	public Job(Integer job_id, String title, String job_description, String qualification, Integer required_number,
+	public Job(Integer job_id, String title, String jobdescription, String qualification, Integer required_number,
 			String salary, String description, String comp_id) {
 		super();
 		this.job_id = job_id;
 		this.title = title;
-		this.job_description = job_description;
+		this.jobdescription = jobdescription;
 		this.qualification = qualification;
 		this.required_number = required_number;
 		this.salary = salary;
 		this.description = description;
 		this.comp_id = comp_id;
 	}
-	public Job(String title, String job_description, String qualification, Integer required_number, String salary, String description,
+	public Job(String title, String jobdescription, String qualification, Integer required_number, String salary, String description,
 			String comp_id) {
 		super();
 		this.title = title;
-		this.job_description = job_description;
+		this.jobdescription = jobdescription;
 		this.qualification = qualification;
 		this.required_number = required_number;
 		this.salary = salary;

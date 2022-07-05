@@ -36,9 +36,21 @@ $(function() {
 	$('#compId').keyup(function() {
 		let compIdRegex = /^\d{8}$/;
 		if (!compIdRegex.test($("#compId").val())) {
+			$('#compIdError').text("刊登公司統編為8位數字")
 			$('#compId').attr("class","form-control is-invalid")
 		}else{
-			$('#compId').attr("class","form-control is-valid")
+			$.ajax({
+                 url: '/dashboard/event/compid_exist/'+$('#compId').val(),
+                 type: 'GET',
+                 success: function(data) {
+					if (data==true) {
+						$('#compId').attr("class","form-control is-valid")
+					}else{
+						$('#compIdError').text("此公司尚未註冊")
+						$('#compId').attr("class","form-control is-invalid")
+					}
+                 }
+            });
 		}
 	})
 	
@@ -102,13 +114,27 @@ $(function() {
 	$('#btn-submit').click(function() {
 		let checkEventForm = true;
 		//let warningStr = "";
-
+		
 		let compIdRegex = /^\d{8}$/;
 		if (!compIdRegex.test($("#compId").val())) {
+			$('#compIdError').text("刊登公司統編為8位數字")
 			$('#compId').attr("class","form-control is-invalid")
 			checkEventForm = false;
 		}else{
-			$('#compId').attr("class","form-control is-valid")
+			$.ajax({
+                 url: '/dashboard/event/compid_exist/'+$('#compId').val(),
+                 type: 'GET',
+                 async: false,
+                 success: function(data) {
+					if (data==true) {
+						$('#compId').attr("class","form-control is-valid")
+					}else{
+						$('#compIdError').text("此公司尚未註冊")
+						$('#compId').attr("class","form-control is-invalid")
+						checkEventForm = false;
+					}
+                 }
+            });
 		}
 
 		let priceRegex = /^\d+$/;
@@ -167,7 +193,7 @@ $(function() {
 		if ($('#btn-submit').val() == 0) {
 			confirmStr = '確認新增廣告?';
 		}
-
+		
 		if (checkEventForm) {
 			Swal.fire({
 				title: confirmStr,

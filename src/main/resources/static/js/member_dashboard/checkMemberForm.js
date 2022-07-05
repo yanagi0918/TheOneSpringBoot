@@ -6,7 +6,7 @@ $(function() {
 	})
 
 	$('#correctInput').click(function() {
-		$('#userid').val('Z123456789')
+//		$('#userid').val('Z123456789')
 		$('#pwd').val('abc123zzz')
 		$('#username').val('唐洋基')
 		$('#gender').val('男')
@@ -22,9 +22,19 @@ $(function() {
 		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
 	})
 
+	$('#btn-toCreate').click(function() {
+		location.href = "/dashboard/member";
+	})
+
+	$('#btn-goBack').click(function() {
+		location.href = "/dashboard/members";
+	})
+
+//圖片上傳同步顯示
 	$("#imgInp").change(function() {
 		readURL(this);
-	});
+	})
+	
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -39,17 +49,12 @@ $(function() {
 
 
 
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/member";
-	})
 
-	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/members";
-	})
-	
 
-	$('#btn-submit').click(function() {
-		let checkMemberForm = true;
+
+
+//欄位驗證
+
 
 		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
 		if (!IdRegex.test($("#userid").val())) {
@@ -60,11 +65,6 @@ $(function() {
 			})
 			checkMemberForm = false;
 			return checkMemberForm;
-			
-//		if(!function checkUserId()){
-//			
-//		}
-//			checkMemberForm = false;
 		
 		}
 
@@ -95,8 +95,8 @@ $(function() {
   }
 		
 		
-	let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
- 	 if(!regex.test($("#email").val())) {
+	let emailregex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+ 	 if(!emailregex.test($("#email").val())) {
    	 	Swal.fire({
    		 title: '提示!',
    		 text: "\"請輸入正確email\"",
@@ -106,12 +106,46 @@ $(function() {
    	 	return checkMemberForm;
 		}
 	
-	})
 
 
 
+
+
+
+//驗證包
+function checkPackage() {
+        let checkMemberForm = false;
+        checkMemberForm = validateName();
+        checkMemberForm = validateIntroduction();
+        checkMemberForm = validatelecturer();
+        checkMemberForm = validateVedio();
+        checkMemberForm = validateScore();
+        checkMemberForm = validatePrice();
+        checkMemberForm = validateDate();
+        return checkMemberForm;
+    }
+
+
+
+//表單送出檢查
+	$('#btn-submit').click(function() {
+		let checkMemberForm = true;
+		
+		checkMemberForm = checkPackage();
+
+	
+	
+	
 
 });
+
+
+
+
+
+
+
+
 
 //datatable
 
@@ -122,13 +156,13 @@ $(document).ready( function () {
 
 //密碼顯示或是隱藏
 
-	 function ShowPwd() {
-            var x = document.getElementById("pwd");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
+function ShowPwd() {
+  var x = document.getElementById("pwd");
+   	if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+        }
 
 	}
 	
@@ -169,10 +203,14 @@ $(document).ready( function () {
 				return false;			
 			}
 		}
-	});
-	
-	
-	
-	
+	})
 }
-	
+
+
+
+
+
+
+
+
+});

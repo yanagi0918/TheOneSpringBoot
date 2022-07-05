@@ -1,5 +1,62 @@
+$(function(){
+	$('#companycreateform').validate({
+		rules:{
+			compid: {
+				required: true,
+				maxlength:8,
+				minlength:8,
+				digits:true,
+			},
+			compwd: {
+				required: true,
+				maxlength:15,
+				minlength:8,
+			},
+			ckeckpwd: {
+				required: true,
+				equalTo:"#compwd",
+			},
+			corpname: {
+				required: true,
+			},
+			contact: {
+				required: true,
+			},
+			compaddress: {
+				required: true,
+			},
+			empnumber: {
+				required: true,
+				digits:true,
+			},
+			capital: {
+				required: true,
+			},
+			website: {
+				url:true
+			},
+			comptele: {
+				digits:true,
+			},
+			
+			
+			
+		},
+		
+		
+		
+	})
+	
+})
+
+
+
+
 function returncheck(){
-	return checkcompid()&&checkcompwd()&&checkcomptele()&&checkwebsite()&&checkempnumber();
+	let returncheck = false;
+	 returncheck=checkcompid();
+	 returncheck=checkcompwd();
+	 return returncheck;
 }
 function checkcompid() {
 	var compid = document.getElementById("compid").value;
@@ -45,67 +102,6 @@ function checkcompwd() {
 			}
 		}
 
-function checkcomptele() {
-	var comptele = document.getElementById("comptele").value;
-	let ce = /^[0-9]{10}$/g;
-	var compteleck = ce.test(comptele);
-			if (compteleck) {
-				document.getElementById("show_comptele").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_comptele").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkwebsite() {
-	var website = document.getElementById("website").value;
-	let pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
-	var websiteck = pattern.test(website);
-			if (websiteck) {
-				document.getElementById("show_website").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_website").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkempnumber() {
-	var empnumber = document.getElementById("empnumber").value;
-	let EmpNumRegex = /^\d+$/;
-	var empnumberck = EmpNumRegex.test(empnumber);
-			if (empnumberck) {
-				document.getElementById("show_empnumber").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_empnumber").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function checkCompanyForm() {
 	let checkResult = true;
 	let checkJobForm = true;
@@ -143,7 +139,6 @@ $('#wrongCompany').click(function() {
 })
 
 $('#correctCompany').click(function() {
-	$('#compid').val('87654321')
 	$('#compwd').val('Aabc123zzz')
 	$('#pwdagain').val('Aabc123zzz')
 	$('#corpname').val('幸福企業有限公司')

@@ -74,18 +74,18 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺名稱:</label>
 <div class="col-sm-8">
-<input type='text' name='title' id="title" th:value="${jobupdate.title}"  class="form-control" required/>
+<input type='text' name='title' id="title" th:value="${jobupdate.title}"  class="form-control"  />
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺性質:</label>
 <div class="col-sm-8">
-<select name='job_description' class="form-select" th:field="${jobupdate.job_description}" th:value="${jobupdate.job_description}">
-<option th:selected="${jobupdate.job_description =='全職'}" value="全職">全職</option>
-<option th:selected="${jobupdate.job_description =='兼職'}" value="兼職">兼職</option>
-<option th:selected="${jobupdate.job_description =='工讀'}" value="工讀">工讀</option>
-<option th:selected="${jobupdate.job_description =='其他'}" value="其他">其他</option>
+<select name='jobdescription' class="form-select" th:field="${jobupdate.jobdescription}" th:value="${jobupdate.jobdescription}">
+<option th:selected="${jobupdate.jobdescription =='全職'}" value="全職">全職</option>
+<option th:selected="${jobupdate.jobdescription =='兼職'}" value="兼職">兼職</option>
+<option th:selected="${jobupdate.jobdescription =='工讀'}" value="工讀">工讀</option>
+<option th:selected="${jobupdate.jobdescription =='其他'}" value="其他">其他</option>
 </select>
 </div>
 </div>
@@ -93,14 +93,14 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺條件:</label>
 <div class="col-sm-8">
-<input type='text' name='qualification' id="qualification" th:value="${jobupdate.qualification}" class="form-control" required/>
+<input type='text' name='qualification' id="qualification" th:value="${jobupdate.qualification}" class="form-control"  />
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">需要人數:</label>
 <div class="col-sm-8">
-<input type='text' name='required_number' id="required_number" th:value="${jobupdate.required_number}" class="form-control" required/>
+<input type='text' name=' _number' id=" _number" th:value="${jobupdate. _number}" class="form-control"  />
 </div>
 </div>
 
@@ -123,7 +123,7 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">工作內容:</label>
 <div class="col-sm-8">
-<textarea rows="8" cols="8" id="description" name="description" class="form-control" required th:field="${jobupdate.description}" placeholder="請輸入不超過200字" maxlength="200"></textarea>
+<textarea rows="8" cols="8" id="description" name="description" class="form-control"   th:field="${jobupdate.description}" placeholder="請輸入不超過500字" maxlength="200"></textarea>
 </div>
 </div>
 <div class="center">
@@ -170,6 +170,8 @@
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
     <script th:src="@{/js/job_dashboard/checkJobForm.js}" src="js/job_dashboard/checkJobForm.js"></script>
 
     <!-- Template Javascript -->
