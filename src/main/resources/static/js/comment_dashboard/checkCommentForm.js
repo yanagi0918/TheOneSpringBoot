@@ -29,7 +29,7 @@ $(function() {
 		})
 
 	});
-	
+
 	$('.comment-new').click(function() {
 		Swal.fire({
 			title: '提示',
@@ -178,26 +178,27 @@ $(function() {
 
 
 //One key input js
-$('#OneInput').click(function() {
-	$('#user_id').show()
-	$('#user_id').val('A123456789')
-	$('#comp_name').val('狗來富寵物廣場')
-	$('#ref_time').val('2000-01-01')
-	$('#job_name').val('美容師')
-	$('#job_description option[value="全職"]').attr('selected', 'selected')
-	$('#user').attr('checked', 'checked')
-	$('#std_hour').val('10')
-	$('#real_hour').val('12')
-	$('#over_freq').val('2')
-	$('#seniority').val('5')
-	$('#total_seniority').val('7')
-	$('#seniority').val('5')
-	$('#monthly_salary').val('40000')
-	$('#yearly_salary').val('55')
-	$('#bonus_count').val('2')
-	$('#share').val('老闆親切，加班可報')
-})
-
+$(function() {
+	$('#OneInput').click(function() {
+		$('#user_id').show()
+		$('#user_id').val('A123456789')
+		$('#comp_name').val('狗來富寵物廣場')
+		$('#ref_time').val('2000-01-01')
+		$('#job_name').val('美容師')
+		$('#job_description option[value="全職"]').attr('selected', 'selected')
+		$('#user').attr('checked', 'checked')
+		$('#std_hour').val('10')
+		$('#real_hour').val('12')
+		$('#over_freq').val('2')
+		$('#seniority').val('5')
+		$('#total_seniority').val('7')
+		$('#seniority').val('5')
+		$('#monthly_salary').val('40000')
+		$('#yearly_salary').val('55')
+		$('#bonus_count').val('2')
+		$('#share').val('老闆親切，加班可報')
+	})
+});
 //anonymous/user show
 
 $(function() {
