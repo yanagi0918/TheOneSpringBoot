@@ -66,7 +66,7 @@
 
 
 		<!-- Sidebar Start -->
-		<div th:replace="~{common/dashboard::sidebar(7)}"></div>
+		<div th:replace="~{common/dashboard::sidebar(6)}"></div>
 		<!-- Sidebar End -->
 
 
@@ -100,11 +100,18 @@
 												th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
 												name="create_time" readonly></td>
 											<th>帳號:</th>
-											<td><input type="radio" id="anonymous" name="user">匿名
-												<input type="radio" id="user" name="user">會員</td>
-											<td colspan="2"><input type="text" class="form-control"
-												style="display: none;" id="user_id" name="user_id"
-												th:value="${comment.user_id}" placeholder="請輸入帳號"></td>
+											<td th:if="${comment.user_id == null}">
+												<input type="radio" id="anonymous" name="user" >匿名
+												<input type="radio" id="user" name="user" >會員
+											</td>
+											<td th:if="${comment.user_id != null}">
+												<input type="radio" id="anonymous" name="user" th:checked="${comment.user_id.contains('匿名')} ? 'checked'">匿名
+												<input type="radio" id="user" name="user" th:checked="${!comment.user_id.contains('匿名')} ? 'checked'">會員
+											</td>
+											<td colspan="2">
+												<input type="text" class="form-control" th:style="${comment.user_id != null && comment.user_id.contains('匿名') ? 'display: none' : 'display: block'}"
+												id="user_id" name="user_id"	th:value="${comment.user_id}" placeholder="請輸入帳號">
+											</td>
 										</tr>
 										<tr>
 											<th>公司名稱:</th>
