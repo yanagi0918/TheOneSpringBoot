@@ -1,5 +1,11 @@
 function returncheck(){
-	return checkcompid()&&checkcompwd()&&checkcomptele()&&checkwebsite()&&checkempnumber();
+	let returncheck = false;
+	 returncheck=checkcompid();
+	 returncheck=checkcompwd();
+	 returncheck=checkcomptele();
+	 returncheck=checkwebsite();
+	 returncheck=checkempnumber();
+	 return returncheck;
 }
 function checkcompid() {
 	var compid = document.getElementById("compid").value;
@@ -90,22 +96,6 @@ function checkempnumber() {
 			}
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function checkCompanyForm() {
 	let checkResult = true;
 	let checkJobForm = true;
@@ -143,7 +133,6 @@ $('#wrongCompany').click(function() {
 })
 
 $('#correctCompany').click(function() {
-	$('#compid').val('87654321')
 	$('#compwd').val('Aabc123zzz')
 	$('#pwdagain').val('Aabc123zzz')
 	$('#corpname').val('幸福企業有限公司')
