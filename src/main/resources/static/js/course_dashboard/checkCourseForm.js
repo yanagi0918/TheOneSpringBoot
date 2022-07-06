@@ -263,6 +263,7 @@ $(function () {
         }
         return checkResult;
     }
+
     //一鍵輸入
     $('#correctInput').click(function () {
         $('#courseName').val('面試必勝10招')
@@ -297,9 +298,9 @@ $(function () {
                 //     $("#example_filter").detach().appendTo('#new-search-area');
                 // },
                 columnDefs: [
-                    {orderable: false, targets: 7},
+                    {orderable: false, targets: [5, 6]},
                     {
-                        "targets": [0, 1, 2, 3, 4, 5, 6],
+                        "targets": [0, 1, 2, 3, 4, 5],
                         "className": "text-center",
                     },
                     {
