@@ -99,6 +99,15 @@ public class CourseDashBoardController {
         return "redirect:/dashboard/courses";
     }
 
+    @PutMapping("/courses")
+    @ResponseBody
+    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean){
+        CourseBean courseBean = courseService.findCourse(CourseBean.getCourseNo()).orElseThrow();
+        courseBean.setStatus(CourseBean.getStatus());
+        courseService.saveOrUpdate(courseBean);
+        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+    }
+
     public File uploadDirInit() {
         String savedFilePath = new File("target\\classes\\static\\courseImg\\").getAbsolutePath();
         File uploadDir = new File(savedFilePath);
