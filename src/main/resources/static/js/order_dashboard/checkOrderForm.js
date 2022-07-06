@@ -28,6 +28,7 @@ $('#OrdercorrectInput').click(function () {
 		location.href = "/dashboard/orders";
 	})
 	
+	//datatable
 	$(document).ready( function () {
     $('#table_id').DataTable({
 	columnDefs: [
@@ -230,19 +231,10 @@ $(function() {
 
 	$('#form').validate({
 		rules: {
-			userId: {
-				required: true,
-				regex: '/^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/',
-			},
 			totalPrice: {
 				required: true,
 				digits: true,
 				range: [0, 9999999999],
-			},
-		},
-		messages: {
-			userId: {
-				required: '請輸入正確的身分證',
 			},
 		},
 	})
@@ -250,10 +242,10 @@ $(function() {
 })
 
 	$('#btn-submit').click(function() {
-		let warningStr = "";
 		let checkOrderForm = true;
-
-		 let IdRegex = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
+		
+		//會員
+		let IdRegex = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
     if (!IdRegex.test($("#userId").val())) {
 			Swal.fire(
   				'格式錯誤',
@@ -266,30 +258,31 @@ $(function() {
 			$('#userId').attr("class","form-control is-valid")
 		 }
 		
+		//日期
     if ($('#orderDate').val() == "") {
-			warningStr += "請輸入日期" + "<br>";
 			$('#orderDate').attr("class","form-control is-invalid")
 			checkOrderForm = false;
 		}else{
 			$('#orderDate').attr("class","form-control is-valid")
 		}
 		
+		//狀態
 	if ($('#state').val() == "") {
-			warningStr += "請輸入狀態" + "<br>";
 			$('#state').attr("class","form-select is-invalid")
 			checkOrderForm = false;
 		}else{
 			$('#state').attr("class","form-select is-valid")
 		}
 		
+		//課程
 	if ($('#productId').val() == "") {
-			warningStr += "請輸入課程" + "<br>";
 			$('#productId').attr("class","form-select is-invalid")
 			checkOrderForm = false;
 		}else{
 			$('#productId').attr("class","form-select is-valid")
 		}
-
+		
+		//總價
     let priceRegex = /^\d*$/;
     if (!priceRegex.test($("#totalPrice").val())) {
 		Swal.fire(
@@ -331,13 +324,7 @@ $(function() {
 					}, 1500)
 				}
 			})
-		} else {
-			Swal.fire({
-				icon: 'error',
-				title: '格式錯誤',
-				html: warningStr,
-			})
-		}
+		} 
 	})
 
 });
