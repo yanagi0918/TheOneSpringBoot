@@ -48,4 +48,9 @@ public class EventServiceImpl implements EventService {
 		eventDao.deleteById(pk);
 	}
 
+	@Override
+	public List<Event> findByCompId(String compId) {
+		return eventDao.findByCompId(compId);
+	}
+
 }

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.theone.springboot.entity.Company;
+
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -16,12 +18,23 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		if (uri.contains("dashboard")) {
 			String loginUser = (String) request.getSession().getAttribute("loginUser");
-			if (null == loginUser) {
+			if (!"admin".equals(loginUser)) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}
 			return true;
 		}
+
+		if (uri.contains("enterprise")) {
+			Company loginEnterprise = (Company) request.getSession().getAttribute("loginEnterprise");
+			if (loginEnterprise == null) {
+				response.sendRedirect(request.getContextPath() + "/login");
+				return false;
+			}
+			return true;
+		}
+		
+		
 		return true;
 	}
 

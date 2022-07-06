@@ -1,27 +1,27 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-         <title>Job board HTML-5 Template </title>
+         <title>The One</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link rel="manifest" href="">
+		<link rel="shortcut icon" type="image/x-icon" href="">
 
 		<!-- CSS here -->
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="assets/css/price_rangs.css">
-            <link rel="stylesheet" href="assets/css/flaticon.css">
-            <link rel="stylesheet" href="assets/css/slicknav.css">
-            <link rel="stylesheet" href="assets/css/animate.min.css">
-            <link rel="stylesheet" href="assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="assets/css/themify-icons.css">
-            <link rel="stylesheet" href="assets/css/slick.css">
-            <link rel="stylesheet" href="assets/css/nice-select.css">
-            <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/style.css}">
    </head>
 
    <body>
@@ -31,14 +31,13 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img th:src="@{/assets/img/logo/logo.png}" alt="">
                 </div>
             </div>
         </div>
     </div>
     <!-- Preloader Start -->
     <header>
-        <!-- Header Start -->
         <!-- Header Start -->
         <div class="header-area header-transparrent">
             <div class="headder-top header-sticky">
@@ -47,7 +46,7 @@
                          <div class="col-lg-3 col-md-2">
                              <!-- Logo -->
                              <div class="logo">
-                                 <a href="index.html"><img src="assets/img/logo/theone.png" alt=""></a>
+                                 <a href="#"><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                              </div>  
                          </div>
                          <div class="col-lg-9 col-md-9">
@@ -88,7 +87,7 @@
 
         <!-- Hero Area Start-->
         <div class="slider-area ">
-            <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/event_application.jpg">
+            <div class="single-slider section-overly slider-height2 d-flex align-items-center" th:data-background="@{/assets/img/hero/event_application.jpg}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -105,10 +104,6 @@
         <div class="job-listing-area pt-120 pb-120">
             <div class="container">
                 <div class="row">
-                    <!-- Left content -->
-                    
-                    
-                    
                     <!-- Right content -->
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <!-- Featured_job_start -->
@@ -118,79 +113,37 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="count-job mb-35">
-                                            <span>共 3 筆</span>
+                                            <span>共 [[${total}]] 筆</span>
                                             <!-- Select job items start -->
-                                            <a href="event_application.html" class="genric-btn primary e-large">申請廣告</a>
+                                            <a th:href="@{/enterprise/event}" class="genric-btn primary e-large">申請廣告</a>
                                             <!--  Select job items End-->
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Count of Job list End -->
                                 <!-- single-job-content -->
-                                <div class="single-job-items mb-30">
+                                <div th:each="event:${events}" class="single-job-items mb-30">
                                     <div class="job-items">
                                         <div class="job-tittle job-tittle2">
-                                            <a href="#">
+                                            <a th:href="${event.eventLinkUrl}">
                                                 <h4>職缺連結</h4>
                                             </a>
                                             <ul>
-                                                <li>廣告編號:1</li>
-                                                <li>上架日期:2022/08/15</li>
-                                                <li>下架日期:2022/08/20</li>
-                                                <li>價格:$3500</li>
+                                                <li th:text="${'廣告編號:'+event.eventId}"></li>
+                                                <li th:text="${'上架日期:'+#dates.format(event.postStart, 'yyyy/MM/dd')}"></li>
+                                                <li th:text="${'下架日期:'+#dates.format(event.postEnd, 'yyyy/MM/dd')}"></li>
+                                                <li th:text="${'價格:'+event.price}"></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="f-right">
-                                        <button class="genric-btn info-border circle">審核中</button>
-                                        <a href="event_detail.html" class="genric-btn primary circle">查看</a>
-                                        <a href="" class="genric-btn danger circle">撤銷申請</a>
-                                    </div>
-                                </div>
-
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="job-tittle job-tittle2">
-                                            <a href="#">
-                                                <h4>職缺連結</h4>
-                                            </a>
-                                            <ul>
-                                                <li>廣告編號:2</li>
-                                                <li>上架日期:2022/08/15</li>
-                                                <li>下架日期:2022/08/20</li>
-                                                <li>價格:$4500</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="f-right">
-                                        <button class="genric-btn success-border circle">審核通過</button>
+                                    	<button th:if="${event.state==0}" class="genric-btn info-border circle">審核中</button>
+                                    	<button th:if="${event.state==1}" class="genric-btn success-border circle">審核通過</button>
+                                    	<button th:if="${event.state==2}" class="genric-btn danger-border circle">已退件</button>
                                         <a href="" class="genric-btn primary circle">查看</a>
-                                        <a href="" class="genric-btn danger circle">撤銷申請</a>
+                                        <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
                                     </div>
                                 </div>
-
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="job-tittle job-tittle2">
-                                            <a href="#">
-                                                <h4>職缺連結</h4>
-                                            </a>
-                                            <ul>
-                                                <li>廣告編號:3</li>
-                                                <li>上架日期:2022/08/15</li>
-                                                <li>下架日期:2022/08/20</li>
-                                                <li>價格:$3500</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="f-right">
-                                        <button class="genric-btn danger-border circle">已退件</button>
-                                        <a href="" class="genric-btn primary circle">查看</a>
-                                        <a href="" class="genric-btn danger circle">撤銷申請</a>
-                                    </div>
-                                </div>
-                                
-                                
                             </div>
                         </section>
                         <!-- Featured_job_end -->
@@ -280,38 +233,76 @@
 	<!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
 		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
+		<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+        <script th:src="@{/assets/js/popper.min.js}"></script>
+        <script th:src="@{/assets/js/bootstrap.min.js}"></script>
 	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+        <script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
 
-		<!-- Jquery Slick , Owl-Carousel Range -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
-        <script src="./assets/js/price_rangs.js"></script>
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/assets/js/slick.min.js}"></script>
+        <script th:src="@{/assets/js/price_rangs.js}"></script>
+        
 		<!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-		<script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
+        <script th:src="@{/assets/js/wow.min.js}"></script>
+		<script th:src="@{/assets/js/animated.headline.js}"></script>
+        <script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
 
 		<!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-		<script src="./assets/js/jquery.sticky.js"></script>
+        <script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+        <script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/assets/js/jquery.sticky.js}"></script>
         
         <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+        <script th:src="@{/assets/js/contact.js}"></script>
+        <script th:src="@{/assets/js/jquery.form.js}"></script>
+        <script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+        <script th:src="@{/assets/js/mail-script.js}"></script>
+        <script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
+        <script th:src="@{/assets/js/plugins.js}"></script>
+        <script th:src="@{/assets/js/main.js}"></script>
+        
+        <!-- Sweet Alert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <script>
+        function del(id) {
+		Swal.fire({
+			title: '確認是否撤銷?',
+			text: "撤銷後將無法回復!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '撤銷',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已撤銷!',
+					showConfirmButton: false,
+					timer: 800
+				})
+				setTimeout(() => {
+					$.ajax({
+                        url: '/enterprise/event/'+id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            window.location.href='./events'
+                        }
+                    });
+				}, 800)
+			}
+		})
+	    }
+        
+    </script>
         
     </body>
 </html>
