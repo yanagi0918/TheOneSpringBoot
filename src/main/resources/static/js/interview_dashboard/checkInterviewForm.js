@@ -45,7 +45,31 @@ $('#InterviewcorrectInput').click(function () {
 })
 
 		
+//Star rating js
+$.raty.path = '/img';
 
+$(function() {
+
+	$('#compScore').raty({
+		targetScore: '#compScore',
+	});
+
+	$('#oneInput').raty({
+		score: 5
+	});
+
+	$('td.listComp').raty({
+		readOnly: true,
+		starOff: 'star-off-small.png',
+		starOn: 'star-on-small.png'
+	});
+
+
+
+	$('#confirmComp').raty({
+		readOnly: true
+	});
+})
 
 
 
