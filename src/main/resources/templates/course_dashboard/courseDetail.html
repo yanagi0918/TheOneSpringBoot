@@ -97,6 +97,14 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">狀態</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="status"
+                                   th:value="${CourseBean.status}" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">上架時間</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="date"

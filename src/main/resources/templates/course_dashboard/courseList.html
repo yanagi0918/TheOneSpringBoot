@@ -33,7 +33,6 @@
 
     <!-- dataTables Stylesheet 上程-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <!--    <link th:href="@{/css/jquery.dataTables.min.css}" href="css/jquery.dataTables.min.css" rel="stylesheet">-->
 
 </head>
 
@@ -59,8 +58,14 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">課程資訊</h6>
-                    <button type="button" class="btn btn-primary mb-0" id="btn-toCreateCourse">新增課程</button>
+                    <h5 class="mb-0">課程資訊</h5>
+                    <div type="button" class="fa-3x" id="btn-toCreateCourse">
+                        <i class="fa-solid fa-circle-plus fa-beat"
+                           style="--fa-animation-duration: 2.5s;--fa-beat-scale: 1.2;"></i>
+                    </div>
+                    <!--                    <button type="button" class="btn btn-primary mb-0" id="btn-toCreateCourse">-->
+                    <!--                        新增課程-->
+                    <!--                    </button>-->
                 </div>
                 <div class="table-responsive">
                     <div id="new-search-area"></div>
@@ -68,24 +73,60 @@
                         <thead>
                         <tr class="text-dark">
                             <th scope="col">編號</th>
-                            <th scope="col" class="test">類別</th>
+                            <th scope="col">類別</th>
                             <th scope="col">名稱</th>
                             <th scope="col">講師</th>
                             <th scope="col">上架時間</th>
-                            <th scope="col">評分</th>
-                            <th scope="col">價錢</th>
+                            <!--                            <th scope="col">評分</th>-->
+                            <!--                            <th scope="col">價錢</th>-->
+                            <th scope="col">狀態</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="course:${courseList}">
-                            <td th:text="${course.courseNo}"></td>
+                            <td th:text="${course.courseNo}" id="courseNo"></td>
                             <td th:text="${course.courseCategory}"></td>
                             <td th:text="${course.courseName}"></td>
                             <td th:text="${course.lecturer}"></td>
                             <td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>
-                            <td th:text="${course.score}"></td>
-                            <td th:text="${course.price}"></td>
+                            <!--                            <td th:text="${course.score}"></td>-->
+                            <!--                            <td th:text="${course.price}"></td>-->
+                            <td th:switch="${course.status}">
+
+                                <span th:case="'待審核'">
+                                    <span class="btn btn-warning btn-sm " th:text="${course.status}"
+                                          th:id="${course.courseNo}"
+                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                    </span>
+                                </span>
+
+                                <span th:case="'已審核'">
+                                    <span class="btn btn-success btn-sm " th:text="${course.status}"
+                                          th:id="${course.courseNo}"
+                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                    </span>
+                                </span>
+                                <span th:case="'駁回'">
+                                    <span class="btn btn-danger btn-sm " th:text="${course.status}"
+                                          th:id="${course.courseNo}"
+                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                    </span>
+                                </span>
+                                <i class="fa fa-check-circle fa-lg" th:id="${course.courseNo}"
+                                   onclick="statusOkAjax(this.id)"></i>
+                                <i class="fa fa-circle-xmark fa-lg" th:id="${course.courseNo}"
+                                   onclick="statusRejectAjax(this.id)"></i>
+                            </td>
+
+                            <!--                            <td>-->
+                            <!--                                <a class="btn btn-outline-warning m-0" th:text="${course.status}"-->
+                            <!--                                   th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">-->
+                            <!--                                </a>-->
+                            <!--                                <i class="fa fa-check-circle"></i>-->
+                            <!--                                <i class="fa fa-circle-xmark"></i>-->
+                            <!--                            </td>-->
+
                             <td>
                                 <a class="btn btn-outline-success m-0"
                                    th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">詳細</a>
@@ -141,36 +182,92 @@
 //datatables
 <script th:src="@{/js/course_dashboard/checkCourseForm.js}" src="js/checkCourseForm.js"></script>
 <script>
-    // function deleteByNo(courseNo) {
-    // Swal.fire({
-    // 	title: '確認是否刪除?',
-    // 	text: "刪除後將無法回復!",
-    // 	icon: 'warning',
-    // 	showCancelButton: true,
-    // 	confirmButtonColor: '#3085d6',
-    // 	cancelButtonColor: '#d33',
-    // 	confirmButtonText: '永久刪除',
-    // 	cancelButtonText: '取消'
-    // }).then((result) => {
-    // 	if (result.isConfirmed) {
-    // 		Swal.fire({
-    // 			icon: 'success',
-    // 			title: '已刪除!',
-    // 			showConfirmButton: false,
-    // 			timer: 1500
-    // 		})
-    // 		setTimeout(() => {
-    // 			$.ajax({
-    //                 url: '/dashboard/courses/'+courseNo,
-    //                 type: 'DELETE',
-    //                 success: function(result) {
-    //                     window.location.href='/dashboard/courses'
-    //                 }
-    //             });
-    // 		}, 1500)
-    // 	}
-    // })
-    // }
+
+    function statusOkAjax(id) {
+        console.log(id);
+
+        var dataBean = {
+            courseNo: id,
+            status: "已審核"
+        };
+        Swal.fire({
+            title: '審核通過確認!?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定',
+            cancelButtonText: '取消'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '已通過!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                setTimeout(() => {
+                    $.ajax({
+                        type: 'put',
+                        url: '/dashboard/courses',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify(dataBean),
+                        success: function (data) {
+                            let courseNo = data.courseNo;
+                            document.getElementById(courseNo).innerText = data.status;
+                            document.getElementById(courseNo).setAttribute("class", "btn btn-success btn-sm")
+                        }
+                    });
+                }, 100)
+            }
+        })
+
+    }
+
+    function statusRejectAjax(id) {
+        console.log(id);
+
+        var dataBean = {
+            courseNo: id,
+            status: "駁回"
+        };
+        Swal.fire({
+            title: '駁回確認!?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定',
+            cancelButtonText: '取消'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '已駁回!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                setTimeout(() => {
+                    $.ajax({
+                        type: 'put',
+                        url: '/dashboard/courses',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify(dataBean),
+                        success: function (data) {
+                            let courseNo = data.courseNo;
+                            document.getElementById(courseNo).innerText = data.status;
+                            document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm")
+                        }
+                    });
+                }, 100)
+            }
+        })
+
+    }
+
+
 </script>
 
 <!-- Template Javascript -->
@@ -178,3 +275,37 @@
 
 </body>
 </html>
+
+
+<!--ajax delete-->
+
+<!--function deleteByNo(courseNo) {-->
+<!--Swal.fire({-->
+<!--title: '確認是否刪除?',-->
+<!--text: "刪除後將無法回復!",-->
+<!--icon: 'warning',-->
+<!--showCancelButton: true,-->
+<!--confirmButtonColor: '#3085d6',-->
+<!--cancelButtonColor: '#d33',-->
+<!--confirmButtonText: '永久刪除',-->
+<!--cancelButtonText: '取消'-->
+<!--}).then((result) => {-->
+<!--if (result.isConfirmed) {-->
+<!--Swal.fire({-->
+<!--icon: 'success',-->
+<!--title: '已刪除!',-->
+<!--showConfirmButton: false,-->
+<!--timer: 1500-->
+<!--})-->
+<!--setTimeout(() => {-->
+<!--$.ajax({-->
+<!--url: '/dashboard/courses/'+courseNo,-->
+<!--type: 'DELETE',-->
+<!--success: function(result) {-->
+<!--window.location.href='/dashboard/courses'-->
+<!--}-->
+<!--});-->
+<!--}, 1500)-->
+<!--}-->
+<!--})-->
+<!--}-->
