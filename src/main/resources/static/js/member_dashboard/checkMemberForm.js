@@ -1,11 +1,12 @@
 $(function() {
 	$('#wrongInput').click(function() {
 		$('#userid').val('33A2345678')
+		$('#birth').val('2022-08-01')
 		$('#email').val('lin.gmail')
-		$('#point').val('三百點')
 	})
+
 	$('#correctInput').click(function() {
-//		$('#userid').val('Z123456789')
+	//	$('#userid').val('Z123456789')
 		$('#pwd').val('abc123zzz')
 		$('#username').val('唐洋基')
 		$('#gender').val('男')
@@ -14,14 +15,25 @@ $(function() {
 		$('#phone').val('0910654321')
 		$('#address').val('台東縣蘭嶼鄉25號')
 		$('#email').val('hiremeplz@gmail.com')
-		$('#point').val('300')
 	})
+
 	$('.btn-memberUpdate').click(function() {
 		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
 	})
+
+	$('#btn-toCreate').click(function() {
+		location.href = "/dashboard/member";
+	})
+
+	$('#btn-goBack').click(function() {
+		location.href = "/dashboard/members";
+	})
+
+//圖片上傳同步顯示
 	$("#imgInp").change(function() {
 		readURL(this);
-	});
+	})
+	
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -31,80 +43,300 @@ $(function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/member";
-	})
-	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/members";
-	})
-	
-	$('#btn-submit').click(function() {
-		let checkMemberForm = true;
-		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
-		if (!IdRegex.test($("#userid").val())) {
-			Swal.fire({
-				title: '提示!',
-				text: "請輸入正確身分證字號",
-				icon: 'warning',
-			})
-			checkMemberForm = false;
-			return checkMemberForm;
-		}
 
-		let pointRegex = /^\d+$/;
-		if (!pointRegex.test($("#point").val())) {
-			Swal.fire({
-				title: '提示!',
-				text: "\"會員點數\"只能輸入阿拉伯整數",
-				icon: 'warning',
-			})
-			checkMemberForm = false;
-			return checkMemberForm;
-		}
+
+
+
+
+
+
+
+//數字的正規表達式 = /^\d+$/;
+//欄位驗證
+    function checkID() {
+        var userid = $('#userid').val();
+        var postData = {"userid": userid};
+        
+        $.ajax({
+            type: "post",
+            url: "/dashboard/members/checkID",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                if (data != null) {
+                    $('#idError').text(`帳號不可重複 !`)
+                    $('#userid').attr("class", "form-control is-invalid")
+                    $('#btn-submit').attr("disabled",true);
+                }else {
+                    $('#btn-submit').attr("disabled",false);
+                }
+            }
+        })
+    }
+
+//if (!IdRegex.test($("#userid").val()))
+function validateId() {
+		checkID()
+		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
+		 if ($("#userid").val() === "") {
+            $('#userid').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else if (!IdRegex.test($("#userid").val())) {
+            $('#useridError').text("身分證格式不符，請輸入正確身分證字號")
+            $('#userid').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#userid').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        } 
+			
+	}		
+
+
 		
 		
-		
-		
+function validateBirth() {		
 		let birthday = new Date($("#birth").val());
   		let nowDate = new Date();
- 		 if (birthday > nowDate) {
-   		Swal.fire({
-   		 title: '提示!',
-   		 text: "\"生日\"不可在未來",
-   		 icon: 'warning',
-  		 })
-   			checkMemberForm = false;
-   			return checkMemberForm;
-  }
+   		if ($('#birth').val() == "") {
+            $('#birthError').text("請輸入生日!!")
+            $('#birth').attr("class", "form-control is-invalid")
+            return false;
+        } else if (birthday > nowDate) {
+            $('#birthError').text("生日不可在未來!!")
+            $('#birth').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#birth').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }
+function validateTele() {		
+	let teleregex = /^\d+$/;
+ 	 if ($("#tele").val() === "") {
+            $('#tele').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else if(!teleregex.test($("#tele").val())) {
+            $('#teleError').text("請輸入數字")
+            $('#tele').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#tele').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }
+    
+
+function validatePhone() {		
+	let phoneregex = /^\d+$/;
+ 	 if ($("#phone").val() === "") {
+            $('#phone').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else if(!phoneregex.test($("#phone").val())) {
+            $('#phoneError').text("email格式不符，請重新輸入")
+            $('#phone').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#phone').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }    
+  		
+// if(!emailregex.test($("#email").val()))
+function validateEmail() {		
+	let emailregex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+ 	 if ($("#email").val() === "") {
+            $('#email').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else if(!emailregex.test($("#email").val())) {
+            $('#emailError').text("email格式不符，請重新輸入")
+            $('#email').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#email').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }
+
+function validatePwd() {
+        if ($('#pwd').val() == "") {
+            $('#pwd').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#pwd').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }
+    
+function validateUsername() {
+        if ($('#username').val() == "") {
+            $('#username').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#username').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }  
+
+function validateGender() {
+        if ($('#gender').val() == "") {
+            $('#gender').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#gender').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    }  
+
+function validateAddress() {
+        if ($('#address').val() == "") {
+            $('#address').attr("class", "form-control is-invalid")
+            $('#btn-submit').attr("disabled",true);
+            return false;
+        } else {
+            $('#address').attr("class", "form-control is-valid")
+            $('#btn-submit').attr("disabled",false);
+            return true;
+        }
+    } 
+
+
+ //觸發event事件
+    $('#userid').keyup(function () {
+        validateId();
+    })
+    $('#birth').change(function () {
+        validateBirth();
+    })
+	$('#tele').keyup(function () {
+        validateTele();
+    })
+	$('#phone').keyup(function () {
+        validatePhone();
+    })
+
+    $('#email').keyup(function () {
+        validateEmail();
+    })
+    $('#pwd').keyup(function () {
+        validatePwd();
+    })
+    $('#username').keyup(function () {
+        validateUsername();
+    })
+    $('#gender').keyup(function () {
+        validateGender();
+    })
+    $('#address').keyup(function () {
+        validateAddress();
+    })
+    
+     $('#pwdcheck').click(function () {
+        ShowPwd();
+    })
+
+
+//驗證包
+function checkPackage() {
+        let checkMemberForm = false;
+        checkMemberForm = validateId();
+        checkMemberForm = validateBirth();
+        checkMemberForm = validateTele();;
+        checkMemberForm = validatePhone();;
+        checkMemberForm = validateEmail();
+        checkMemberForm = validatePwd();
+        checkMemberForm = validateUsername();
+        checkMemberForm = validateGender();
+        checkMemberForm = validateAddress();
+
+        return checkMemberForm;
+        
+    }
+
+
+
+//表單送出檢查
+	$('#btn-submit').on('click',function() {
+		let checkMemberForm = true;
 		
-		
-	let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
- 	 if(!regex.test($("#email").val())) {
-   	 	Swal.fire({
-   		 title: '提示!',
-   		 text: "\"請輸入正確email\"",
-   		 icon: 'warning',
-  		 })
-   	 	checkMemberForm = false;
-   	 	return checkMemberForm;
-		}
+		checkMemberForm = checkPackage();
+		});
+//		if (checkMemberForm) {
+//            Swal.fire({
+//                title: '確認送出!?',
+//                text: "",
+//                icon: 'question',
+//                showCancelButton: true,
+//                confirmButtonColor: '#3085d6',
+//                cancelButtonColor: '#d33',
+//                confirmButtonText: '確定',
+//                cancelButtonText: '取消'
+//            }).then((result) => {
+//                if (result.isConfirmed) {
+//                    Swal.fire({
+//                        icon: 'success',
+//                        title: '完成!',
+//                        showConfirmButton: false,
+//                        timer: 800
+//                    })
+//                    setTimeout(() => {
+//                        $('#form').submit();
+//                    }, 800)
+//                }
+//            })
+//        } else {
+//            Swal.fire({
+//                icon: 'error',
+//                title: '表單格式錯誤',
+//                html: ''
+//            })
+//        }
+//    });
 	
-	})
-});
+	
+
+
 //datatable
+
 $(document).ready( function () {
     $('#table_id').DataTable();
 } );
+
+
 //密碼顯示或是隱藏
-	 function ShowPwd() {
-            var x = document.getElementById("pwd");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
+
+function ShowPwd() {
+  var x = document.getElementById("pwd");
+   	if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+        }
+
 	}
 	
+
 //只准輸入數字
  function my_key(e) {
           var key;
@@ -122,29 +354,15 @@ $(document).ready( function () {
           var reg = /\d/;
           return reg.test(keychar);
         }
-//確認帳號是否重複
- function checkUserId(){
-	var userid = document.getElementById("userid").value;
-	$.ajax({
-		type:"POST",
-		url:"CheckMember",
-		data:"userid=" + userid,
-		success:function(data){
-			if(data== true){
-				document.getElementById("userid").innerHTML = "<font color = 'green'>帳號可用</font>";
-				document.getElementById("show_userid").innerHTML = "<font color = 'green'>帳號沒有重複</font>";
-				document.getElementById("btn-submit").disabled =false;
-				return true;
-			}else{
-				document.getElementById("userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
-				document.getElementById("show_userid").innerHTML = "<font color = 'red'>此帳號已存在，請更換帳號</font>";
-				document.getElementById("btn-submit").disabled =true;
-				return false;			
-			}
-		}
-	});
-	
-	
-	
-	
-}
+
+
+
+
+
+
+
+
+
+
+
+});
