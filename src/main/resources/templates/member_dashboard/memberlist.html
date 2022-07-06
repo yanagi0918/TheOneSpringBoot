@@ -68,7 +68,7 @@
                                     <th scope="col">密碼</th>
                                     <th scope="col">姓名</th>
                                     <th scope="col">性別</th>
-                                    <th scope="col">會員點數</th>
+<!--                                     <th scope="col">會員點數</th> -->
                                     <th scope="col">修改</th>
                                 </tr>
                             </thead>
@@ -79,7 +79,7 @@
                                     <td th:text="${member.pwd}"></td>
                                     <td th:text="${member.username}"></td>
                                     <td th:text="${member.gender}"></td>
-                                    <td th:text="${member.point}"></td>
+<!--                                     <td th:text="${member.point}"></td> -->
                                     <td>
                                         <a class="btn btn-outline-primary m-0" th:href="@{member/}+${member.idNumber}">修改會員</a>
                                        

@@ -32,7 +32,7 @@ public class Member {
 	 private String phone;
 	 private String address;
 	 private String email;
-	 private Integer point;
+//	 private Integer point;
 	 private String image;
 
 
@@ -126,13 +126,13 @@ public class Member {
 		this.email = email;
 	}
 
-	public Integer getPoint() {
-		return point;
-	}
-
-	public void setPoint(Integer point) {
-		this.point = point;
-	}
+//	public Integer getPoint() {
+//		return point;
+//	}
+//
+//	public void setPoint(Integer point) {
+//		this.point = point;
+//	}
 
 	public String getImage() {
 		return image;
@@ -146,7 +146,7 @@ public class Member {
 	public String toString() {
 		return "Member [idNumber=" + idNumber + ", userid=" + userid + ", pwd=" + pwd + ", username=" + username
 				+ ", gender=" + gender + ", birth=" + birth + ", tele=" + tele + ", phone=" + phone + ", address="
-				+ address + ", email=" + email + ", point=" + point + ", image=" + image + "]";
+				+ address + ", email=" + email + ", image=" + image + "]";
 	}
 	
 	
