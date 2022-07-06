@@ -257,32 +257,17 @@ function validateAddress() {
     })
 
 
-//驗證包
-function checkPackage() {
-        let checkMemberForm = false;
-        checkMemberForm = validateId();
-        checkMemberForm = validateBirth();
-        checkMemberForm = validateTele();;
-        checkMemberForm = validatePhone();;
-        checkMemberForm = validateEmail();
-        checkMemberForm = validatePwd();
-        checkMemberForm = validateUsername();
-        checkMemberForm = validateGender();
-        checkMemberForm = validateAddress();
-
-        return checkMemberForm;
-        
-    }
-
-
-
 //表單送出檢查
 	$('#btn-submit').on('click',function() {
-		let checkMemberForm = true;
 		
+		let checkMemberForm = true;
 		checkMemberForm = checkPackage();
-		});
-//		if (checkMemberForm) {
+		
+		if (checkMemberForm) {
+			$('#form').submit();
+			}
+		});	
+			
 //            Swal.fire({
 //                title: '確認送出!?',
 //                text: "",
@@ -315,7 +300,33 @@ function checkPackage() {
 //    });
 	
 	
-
+//驗證包
+function checkPackage() {
+        let checkMemberForm = false;
+//        checkMemberForm = validateId();
+//        checkMemberForm = validateBirth();
+//        checkMemberForm = validateTele();
+//        checkMemberForm = validatePhone();
+//        checkMemberForm = validateEmail();
+//        checkMemberForm = validatePwd();
+//        checkMemberForm = validateUsername();
+//        checkMemberForm = validateGender();
+//        checkMemberForm = validateAddress();
+        
+        if(	   validateId()
+        	&& validateBirth()
+        	&& validateTele()
+        	&& validatePhone()
+        	&& validateEmail()
+        	&& validatePwd()
+        	&& validateUsername()
+        	&& validateGender()
+        	&& validateAddress()
+        	){
+				return checkMemberForm;
+			}
+        return checkMemberForm;
+    }
 
 //datatable
 
