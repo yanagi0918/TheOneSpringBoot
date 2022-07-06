@@ -15,5 +15,7 @@ public interface EventService {
 	Optional<Event> getEvent(Integer pk);
 
 	void deleteEvent(Integer pk);
+	
+	List<Event> findByCompId(String compId);
 
 }
