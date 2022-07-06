@@ -184,8 +184,6 @@
 <script>
 
     function statusOkAjax(id) {
-        console.log(id);
-
         var dataBean = {
             courseNo: id,
             status: "已審核"
@@ -222,12 +220,9 @@
                 }, 100)
             }
         })
-
     }
 
     function statusRejectAjax(id) {
-        console.log(id);
-
         var dataBean = {
             courseNo: id,
             status: "駁回"
@@ -264,7 +259,6 @@
                 }, 100)
             }
         })
-
     }
 
 

@@ -197,9 +197,9 @@ $(function () {
                 if (data != null) {
                     $('#nameError').text(`提示：與課程編號 ${data.courseNo} 的名稱重複，換個更響亮的名稱吧 !`)
                     $('#courseName').attr("class", "form-control is-invalid")
-                    $('#btn-submit').attr("disabled",true);
-                }else {
-                    $('#btn-submit').attr("disabled",false);
+                    $('#btn-submit').attr("disabled", true);
+                } else {
+                    $('#btn-submit').attr("disabled", false);
                 }
             }
         })
@@ -250,16 +250,19 @@ $(function () {
     //驗證包
     function checkPackage() {
         let checkResult = false;
-        checkResult = validateName();
-        checkResult = validateIntroduction();
-        checkResult = validatelecturer();
-        checkResult = validateVedio();
-        checkResult = validateScore();
-        checkResult = validatePrice();
-        checkResult = validateDate();
+        let v1 = validateName();
+        let v2 = validateIntroduction()
+        let v3 = validatelecturer()
+        let v4 = validateVedio()
+        let v5 = validateScore()
+        let v6 = validatePrice()
+        let v7 = validateDate()
+        if (v1 && v2 && v3 && v4 && v5 && v6 && v7) {
+            checkResult = true;
+            return checkResult
+        }
         return checkResult;
     }
-
     //一鍵輸入
     $('#correctInput').click(function () {
         $('#courseName').val('面試必勝10招')
