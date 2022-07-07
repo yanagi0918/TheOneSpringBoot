@@ -1,83 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>THE ONE</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<title>THE ONE</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+	href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link
+	th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+	href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div th:replace="~{common/dashboard::spinner}"></div>
-        <!-- Spinner End -->
+	<div class="container-xxl position-relative bg-white d-flex p-0">
+		<!-- Spinner Start -->
+		<div th:replace="~{common/dashboard::spinner}"></div>
+		<!-- Spinner End -->
 
 
-        <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(2)}"></div>
-        <!-- Sidebar End -->
+		<!-- Sidebar Start -->
+		<div th:replace="~{common/dashboard::sidebar(2)}"></div>
+		<!-- Sidebar End -->
 
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <div th:replace="~{common/dashboard::navbar}"></div>
-            <!-- Navbar End -->
+		<!-- Content Start -->
+		<div class="content">
+			<!-- Navbar Start -->
+			<div th:replace="~{common/dashboard::navbar}"></div>
+			<!-- Navbar End -->
 
 			<!-- Content Start -->
 			<div class="container-fluid pt-4 px-4">
 				<div class="col-sm-12 col-xl-10">
 					<div class="bg-light rounded h-100 p-4">
 						<h1>更新履歷</h1>
-						<form th:action="@{/dashboard/resume}" action="./ResumeServlet" method="post" id="form">
+						<form th:action="@{/dashboard/resume}" action="./ResumeServlet"
+							method="post" id="form">
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">履歷編號</label>
 								<div class="col-sm-8">
 									<input type='text' name='resume_id'
-										th:value="${resume.resume_id}" readonly
-										id="resume_id" />
+										th:value="${resume.resume_id}" readonly id="resume_id" />
 								</div>
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">身分證字號:</label>
+								<label class="col-sm-2 col-form-label">履歷名稱:</label>
 								<div class="col-sm-8">
-									<input type='text' name='user_id'
-										th:value="${resume.user_id}"
-										class="form-control" readonly id="user_id"/>
+									<input type='text' name='resume_name' th:value="${resume.resume_name}"
+										class="form-control" id="resume_name" />
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">學歷:</label>
 								<div class="col-sm-8">
-									<select name='edu' class="form-select" 
-									th:field="${resume.edu}" th:value="${resume.edu}">
-<!-- 										<option th:"${resume.edu}"></option> -->
+									<select name='edu' class="form-select" th:field="${resume.edu}"
+										th:value="${resume.edu}">
 										<option th:selected="${resume.edu =='大學'}" value="大學">大學</option>
 										<option th:selected="${resume.edu =='科技大學'}" value="科技大學">科技大學</option>
 										<option th:selected="${resume.edu =='研究所'}" value="研究所">研究所</option>
@@ -91,37 +100,46 @@
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">畢業學校:</label>
 								<div class="col-sm-8">
-									<input type='text' name='school'
-										th:value="${resume.school}" class="form-control" />
+									<input type='text' name='school' th:value="${resume.school}"
+										class="form-control" />
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">畢業科系:</label>
 								<div class="col-sm-8">
-									<input type='text' name='dept'
-										th:value="${resume.dept}" class="form-control" />
+									<input type='text' name='dept' th:value="${resume.dept}"
+										class="form-control" />
+								</div>
+							</div>
+							
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">自傳:</label>
+								<div class="col-sm-8">
+									<textarea name="autobiography" id="" cols="63" rows="6"
+										th:text="${resume.autobiography}"></textarea>
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">工作經驗:</label>
 								<div class="col-sm-8">
-									<textarea name="work_exp" id="" cols="63" rows="6" th:text="${resume.work_exp}"></textarea>
+									<textarea name="work_exp" id="" cols="63" rows="6"
+										th:text="${resume.work_exp}"></textarea>
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">取得證照:</label>
 								<div class="col-sm-8">
-									<textarea name="skills" id="" cols="63" rows="4" th:text="${resume.skills}"></textarea>
+									<textarea name="skills" id="" cols="63" rows="4"
+										th:text="${resume.skills}"></textarea>
 								</div>
 							</div>
 							<div class="center">
 								<button type="submit" class="btn btn-primary" name="update"
 									value="confirm" id="btn-submit">確認修改</button>
-								<button type="button" class="btn btn-primary"
-									id="btn-goBack">取消修改</button>
+								<button type="button" class="btn btn-primary" id="btn-goBack">取消修改</button>
 							</div>
 
 						</form>
@@ -173,7 +191,8 @@
 		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:src="@{/js/resume_dashboard/checkResumeForm.js}" src="js/checkResumeForm.js"></script>
+	<script th:src="@{/js/resume_dashboard/checkResumeForm.js}"
+		src="js/checkResumeForm.js"></script>
 
 	<!-- Template Javascript -->
 	<script th:src="@{/js/main.js}" src="js/main.js"></script>

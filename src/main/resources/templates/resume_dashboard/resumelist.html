@@ -63,12 +63,11 @@
 						<thead>
 							<tr class="text-dark">
 								<th scope="col">履歷編號</th>
+								<th scope="col">履歷名稱</th>
 								<th scope="col">學歷</th>
 								<th scope="col">畢業學校</th>
 								<th scope="col">畢業科系</th>
-								<th scope="col">工作經驗</th>
 								<th scope="col">取得證照</th>
-								<th scope="col">身分證字號</th>
 								<th scope="col">更新</th>
 								<th scope="col">刪除</th>
 							</tr>
@@ -76,12 +75,11 @@
 						<tbody>
 							<tr th:each="resume:${resumes}">
 								<td	th:text="${resume.resume_id}"></td>
+								<td	th:text="${resume.resume_name}"></td>
 								<td	th:text="${resume.edu}"></td>
 								<td	th:text="${resume.school}"></td>
 								<td	th:text="${resume.dept}"></td>
-								<td	th:text="${resume.work_exp}"></td>
 								<td	th:text="${resume.skills}"></td>
-								<td	th:text="${resume.user_id}"></td>
 								<td>
 									<a  class="btn btn-outline-primary m-0 btn-resumeUpdate" th:href="@{resume/}+${resume.resume_id}">更新</a>
 								</td>

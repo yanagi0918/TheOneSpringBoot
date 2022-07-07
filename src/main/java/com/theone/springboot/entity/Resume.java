@@ -16,12 +16,15 @@ public class Resume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer resume_id;
+	private String resume_name;
 	private String edu;
 	private String school;
 	private String dept;
+	private String autobiography;
 	private String work_exp;
 	private String skills;
 	private String user_id;
+	private Integer idNumber;
 	
 	public Resume() {
 	}
@@ -32,6 +35,14 @@ public class Resume {
 
 	public void setResume_id(Integer resume_id) {
 		this.resume_id = resume_id;
+	}
+
+	public String getResume_name() {
+		return resume_name;
+	}
+
+	public void setResume_name(String resume_name) {
+		this.resume_name = resume_name;
 	}
 
 	public String getEdu() {
@@ -58,6 +69,14 @@ public class Resume {
 		this.dept = dept;
 	}
 
+	public String getAutobiography() {
+		return autobiography;
+	}
+
+	public void setAutobiography(String autobiography) {
+		this.autobiography = autobiography;
+	}
+
 	public String getWork_exp() {
 		return work_exp;
 	}
@@ -82,11 +101,19 @@ public class Resume {
 		this.user_id = user_id;
 	}
 
+	public Integer getIdNumber() {
+		return idNumber;
+	}
+
+	public void setIdNumber(Integer idNumber) {
+		this.idNumber = idNumber;
+	}
+
 	@Override
 	public String toString() {
-		return "Resume [resume_id=" + resume_id + ", edu=" + edu + ", school=" + school + ", dept=" + dept
-				+ ", work_exp=" + work_exp + ", skills=" + skills + ", user_id=" + user_id + "]";
+		return "Resume [resume_id=" + resume_id + ", resume_name=" + resume_name + ", edu=" + edu + ", school=" + school
+				+ ", dept=" + dept + ", autobiography=" + autobiography + ", work_exp=" + work_exp + ", skills="
+				+ skills + ", user_id=" + user_id + ", idNumber=" + idNumber + "]";
 	}
-	
-	
+
 }
