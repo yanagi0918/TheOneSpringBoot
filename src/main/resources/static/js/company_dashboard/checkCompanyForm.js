@@ -3,18 +3,15 @@ $(function(){
 		rules:{
 			compid: {
 				required: true,
-				maxlength:8,
-				minlength:8,
-				digits:true,
+				checkcompid:true,
 			},
 			compwd: {
 				required: true,
-				maxlength:15,
-				minlength:8,
+				checkcompwd:true,
 			},
 			ckeckpwd: {
 				required: true,
-				equalTo:"#compwd",
+				equalTo:compwd,
 			},
 			corpname: {
 				required: true,
@@ -37,33 +34,34 @@ $(function(){
 			},
 			comptele: {
 				digits:true,
+				required: true,
 			},
 			
 			
 			
 		},
-		
-		
-		
 	})
+$.validator.addMethod("checkcompwd",function(value,element){ 
+var checkcompwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; 
+return this.optional(element)||(checkcompwd.test(value)); 
+},"*請輸入正確的密碼格式！");	
+
+$.validator.addMethod("checkcompid",function(value,element){ 
+var checkcompid = /^\d{8}$/;
+return this.optional(element)||(checkcompid.test(value)); 
+},"*統編為8個數字！");	
+	
 	
 })
-
-
 
 
 function returncheck(){
 	let returncheck = false;
 	 returncheck=checkcompid();
-	 returncheck=checkcompwd();
 	 return returncheck;
 }
 function checkcompid() {
 	var compid = document.getElementById("compid").value;
-	let compIdRegex = /^\d{8}$/;
-	var compidck = compIdRegex.test(compid);
-	if(compidck){
-		document.getElementById("s_userName").innerHTML = "<font color='green'></font>";
 	$.ajax({
 		type: "POST",
 		url: "CheckUser",
@@ -74,51 +72,12 @@ function checkcompid() {
 				document.getElementById('submit').disabled = false;
 				return true;
 			} else {
-				document.getElementById("show_compid").innerHTML = "<font color='red'>請更換</font>";
+				document.getElementById("show_compid").innerHTML = "<font color='red'>帳號重複請更換</font>";
 				document.getElementById('submit').disabled = true;
 				return false;
 			}
 		}
 	});
-}else{
-	document.getElementById("s_userName").innerHTML = "<font color='red'>帳號格式錯誤</font>";
-	document.getElementById('submit').disabled=true;
-	return false;
-}
-}
-
-function checkcompwd() {
-	var compwd = document.getElementById("compwd").value;
-	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-	var flag5 = pwdRegex.test(compwd);
-			if (flag5) {
-				document.getElementById("show_compwd").innerHTML = "<font color='green'></font>";
-				document.getElementById('submit').disabled = false;
-				return true;
-			} else {
-				document.getElementById("show_compwd").innerHTML = "<font color='red'>格式錯誤</font>";
-				document.getElementById('submit').disabled = true;
-				return false;
-			}
-		}
-
-function checkCompanyForm() {
-	let checkResult = true;
-	let checkJobForm = true;
-	
-	if (!pwdRegex.test($("#pwdagain").val())) {
-	Swal.fire('Warning!',
-			'再次輸入密碼的格式錯誤!',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}
-	
-
-
-	return checkResult;
-	
-
 }
 
 
@@ -126,9 +85,9 @@ $('#wrongCompany').click(function() {
 	$('#compid').val('A7654321')
 	$('#compwd').val('abc123')
 	$('#pwdagain').val('abc123')
-	$('#corpname').val('麥噹勞')
-	$('#owner').val('麥先生')
-	$('#contact').val('麥小姐')
+	$('#corpname').val('廣憶有限公司')
+	$('#owner').val('何先生')
+	$('#contact').val('王小姐')
 	$('#comptele').val('0939-39-3939')
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
@@ -141,9 +100,9 @@ $('#wrongCompany').click(function() {
 $('#correctCompany').click(function() {
 	$('#compwd').val('Aabc123zzz')
 	$('#pwdagain').val('Aabc123zzz')
-	$('#corpname').val('幸福企業有限公司')
+	$('#corpname').val('凜東企業有限公司')
 	$('#owner').val('吳先生')
-	$('#contact').val('白小姐')
+	$('#contact').val('黃小姐')
 	$('#comptele').val('0939393939')
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
@@ -153,7 +112,7 @@ $('#correctCompany').click(function() {
 })
 $('#companyUpdate').click(function() {
 	$('#compwd').val('Az145145')
-	$('#corpname').val('XX株式會社')
+	$('#corpname').val('友線株式會社')
 	$('#owner').val('陳先生')
 	$('#contact').val('林小姐')
 	$('#comptele').val('0977101565')
@@ -191,18 +150,3 @@ $('#lee').DataTable({
             }
 
 	}
-//確認兩次密碼
-
-          function validate() {
-              var pwd1 = document.getElementById("compwd").value;
-              var pwd2 = document.getElementById("pwdagain").value;
-             if(pwd1 == pwd2) {
-               document.getElementById("msg").innerHTML="<font color='green'>正確</font>";
-               document.getElementById("submit").disabled = false;
-              }
-              else {
-               document.getElementById("msg").innerHTML="<font color='red'>密碼不相同，再輸入一次</font>";
-                document.getElementById("submit").disabled = true;
-              }
-          }
-	

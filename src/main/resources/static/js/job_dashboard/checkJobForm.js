@@ -109,7 +109,7 @@ $('#jobwrongInput').click(function() {
 	$('#title').val('')
 	$('#qualification').val('')
 	$('#required_number').val('5人')
-	$('#description').val('')
+	$('#description').val('主要負責完成公司承接的軟體程式開發案及後續更新維護等工作。對金融交易有高度興趣者，歡迎加入我們的行列，共同創造高效能、穩定、業界最好的金融交易系統。')
 })
 
 $('#jobUpdate').click(function() {
