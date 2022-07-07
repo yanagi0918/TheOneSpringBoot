@@ -40,12 +40,13 @@
 <!-- Template Stylesheet -->
 <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
 <style>
-.error{
-color:red;
+.error {
+	color: red;
 }
+
 .center {
-            text-align: center;
-        }
+	text-align: center;
+}
 </style>
 </head>
 
@@ -84,8 +85,8 @@ color:red;
 								<label class="col-sm-2 col-form-label">帳號(統編)</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="8"
-										name="compid" id="compid"  onblur="checkcompid()">
-									<span id="s_userName"></span> <span id="show_compid"></span>
+										name="compid" id="compid" onblur="checkcompid()"> <span
+										id="show_compid"></span>
 								</div>
 							</div>
 
@@ -93,21 +94,18 @@ color:red;
 								<label class="col-sm-2 col-form-label">密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd1" maxlength="15"
-										name="compwd"  id="compwd"
-										placeholder="(八到十五字符，至少一個大寫字母，一個小寫字母和一個數字)"
-										onblur="checkcompwd()"> 
-										<span id="show_compwd"></span>
+										name="compwd" id="compwd"
+										placeholder="(八到十五字符，至少一個大寫字母，一個小寫字母和一個數字)">
+									<div>
+										<input type="checkbox" onclick="ShowPwd()">顯示密碼
+									</div>
 								</div>
-							</div>
-							<div class="center">
-									<input type="checkbox" onclick="ShowPwd()">顯示密碼
 							</div>
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">確認密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd2" maxlength="15"
-										required id="pwdagain" placeholder="(再輸入一次密碼)"
-										onkeyup="validate()" name="ckeckpwd"> <span id="msg"></span>
+										required id="pwdagain" placeholder="(再輸入一次密碼)" name="ckeckpwd">
 								</div>
 							</div>
 
@@ -115,7 +113,7 @@ color:red;
 								<label class="col-sm-2 col-form-label">公司名稱</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="15"
-										name="corpname"  id="corpname">
+										name="corpname" id="corpname">
 								</div>
 							</div>
 
@@ -131,19 +129,19 @@ color:red;
 								<label class="col-sm-2 col-form-label">產業</label>
 								<div class="col-sm-8">
 									<select name="industry" class="form-select" id="industry">
-                                        <option >金融業</option>
-                                        <option >科技業</option>
-                                        <option >文教相關</option>
-                                        <option >餐飲服務</option>
-                                        <option >旅遊相關</option>
-                                        <option>運輸倉儲</option>
-                                        <option >一般服務業</option>
-                                        <option >建築及不動產</option>
-                                        <option>政治及宗教相關</option>
-                                        <option>醫療保健及環境衛生</option>
-                                        <option>礦業及土石開發採取</option>
-                                        <option >批發零售及傳直銷產業</option>
-                                        <option >法律/會計/顧問/研發/設計業</option>
+										<option>金融業</option>
+										<option>科技業</option>
+										<option>文教相關</option>
+										<option>餐飲服務</option>
+										<option>旅遊相關</option>
+										<option>運輸倉儲</option>
+										<option>一般服務業</option>
+										<option>建築及不動產</option>
+										<option>政治及宗教相關</option>
+										<option>醫療保健及環境衛生</option>
+										<option>礦業及土石開發採取</option>
+										<option>批發零售及傳直銷產業</option>
+										<option>法律/會計/顧問/研發/設計業</option>
 									</select>
 								</div>
 							</div>
@@ -152,7 +150,7 @@ color:red;
 								<label class="col-sm-2 col-form-label">聯絡人</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="5"
-										name="contact"  id="contact">
+										name="contact" id="contact">
 								</div>
 							</div>
 
@@ -161,8 +159,7 @@ color:red;
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="10"
 										name="comptele" id="comptele"
-										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)"
-										onblur="checkcomptele()"> <span id="show_comptele"></span>
+										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)">
 								</div>
 							</div>
 
@@ -178,7 +175,7 @@ color:red;
 								<label class="col-sm-2 col-form-label">公司地址</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="30"
-										name="compaddress"  id="compaddress">
+										name="compaddress" id="compaddress">
 								</div>
 							</div>
 
@@ -186,9 +183,8 @@ color:red;
 								<label class="col-sm-2 col-form-label">員工人數</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="7"
-										name="empnumber"  id="empnumber"
-										placeholder="(請只輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
-									<span id="show_empnumber"></span>
+										name="empnumber" id="empnumber"
+										placeholder="(請只輸入阿拉伯整數，如2500)">
 								</div>
 							</div>
 
@@ -196,8 +192,7 @@ color:red;
 								<label class="col-sm-2 col-form-label">公司網站</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="website"
-										id="website" placeholder="選填" onblur="checkwebsite()">
-									<span id="show_website"></span>
+										id="website" placeholder="選填">
 								</div>
 							</div>
 
@@ -205,8 +200,7 @@ color:red;
 								<label class="col-sm-2 col-form-label">資本額</label>
 								<div class="col-sm-8 text-center">
 									<input type="text" class="form-control" maxlength="10"
-										name="capital"  id="capital"
-										placeholder="(請輸入公司資本額，如1250萬)">
+										name="capital" id="capital" placeholder="(請輸入公司資本額，如1250萬)">
 								</div>
 							</div>
 
@@ -268,11 +262,13 @@ color:red;
 		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
 		src="js/company_dashboard/checkCompanyForm.js"></script>
-		
+
 
 
 

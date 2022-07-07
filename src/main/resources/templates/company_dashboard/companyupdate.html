@@ -39,6 +39,14 @@
 
 <!-- Template Stylesheet -->
 <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+<style>
+.error {
+	color: red;
+}
+.center {
+	text-align: center;
+}
+</style>
 </head>
 
 <body>
@@ -77,9 +85,7 @@
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="8"
 										name="compid" id="compid" th:value="${companyupdate.compid}"
-										onblur="checkcompid()" readonly> 
-										<span id="s_userName"></span>
-									<span id="show_compid"></span>
+										readonly>
 								</div>
 							</div>
 
@@ -88,9 +94,10 @@
 								<div class="col-sm-8">
 									<input type="password" class="form-control" maxlength="15"
 										name="compwd" id="compwd" th:value="${companyupdate.compwd}"
-										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)"
-										onblur="checkcompwd()"> <span id="show_compwd"></span>
-									<input type="checkbox" onclick="ShowPwd()">顯示密碼
+										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)">
+									<div>
+										<input type="checkbox" onclick="ShowPwd()">顯示密碼
+									</div>
 								</div>
 							</div>
 
@@ -98,8 +105,7 @@
 								<label class="col-sm-2 col-form-label">確認密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd2" maxlength="15"
-										  id="pwdagain" placeholder="(再輸入一次密碼)"
-										onkeyup="validate()"> <span id="msg"></span>
+										required id="pwdagain" placeholder="(再輸入一次密碼)" name="ckeckpwd">
 								</div>
 							</div>
 
@@ -149,7 +155,8 @@
 											value="礦業及土石開發採取">礦業及土石開發採取</option>
 										<option th:selected="${companyupdate.industry =='批發零售及傳直銷產業'}"
 											value="批發零售及傳直銷產業">批發零售及傳直銷產業</option>
-										<option th:selected="${companyupdate.industry =='法律/會計/顧問/研發/設計業'}"
+										<option
+											th:selected="${companyupdate.industry =='法律/會計/顧問/研發/設計業'}"
 											value="法律/會計/顧問/研發/設計業">法律/會計/顧問/研發/設計業</option>
 									</select>
 								</div>
@@ -168,8 +175,7 @@
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="comptele"
 										id="comptele" th:value="${companyupdate.comptele}"
-										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)"
-										onblur="checkcomptele()"> <span id="show_comptele"></span>
+										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)">
 								</div>
 							</div>
 
@@ -193,9 +199,8 @@
 								<label class="col-sm-2 col-form-label">員工人數</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="empnumber"
-										  id="empnumber" th:value="${companyupdate.empnumber}"
-										placeholder="(請輸入阿拉伯整數，如2500)" onblur="checkempnumber()">
-									<span id="show_empnumber"></span>
+										id="empnumber" th:value="${companyupdate.empnumber}"
+										placeholder="(請輸入阿拉伯整數，如2500)">
 								</div>
 							</div>
 
@@ -203,8 +208,7 @@
 								<label class="col-sm-2 col-form-label">公司網站</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="website"
-										id="website" th:value="${companyupdate.website}"
-										onblur="checkwebsite()"> <span id="show_website"></span>
+										id="website" th:value="${companyupdate.website}">
 								</div>
 							</div>
 
@@ -271,8 +275,10 @@
 		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 	<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"
 		src="js/company_dashboard/checkCompanyForm.js"></script>
 
