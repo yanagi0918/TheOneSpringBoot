@@ -8,7 +8,6 @@ $(function() {
 		$('#userid').val('33A2345678')
 		$('#birth').val('2022-08-01')
 		$('#email').val('lin.gmail')
-		//checkPackage();
 	})
 
 	$('#correctInput').click(function() {
@@ -21,7 +20,6 @@ $(function() {
 		$('#phone').val('0910654321')
 		$('#address').val('台東縣蘭嶼鄉25號')
 		$('#email').val('hiremeplz@gmail.com')
-		//checkPackage();
 	})
 
 	$('.btn-memberUpdate').click(function() {
@@ -100,16 +98,13 @@ $(function() {
 		let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
 		if ($("#userid").val() === "") {
 			$('#userid').attr("class", "form-control is-invalid")
-			//    $('#btn-submit').attr("disabled",true);
 			return false;
 		} else if (!IdRegex.test($("#userid").val())) {
 			$('#idError').text("身分證格式不符，請輸入正確身分證字號")
 			$('#userid').attr("class", "form-control is-invalid")
-			//    $('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#userid').attr("class", "form-control is-valid")
-			//   $('#btn-submit').attr("disabled",false);
 			return true;
 		}
 
@@ -132,10 +127,8 @@ $(function() {
 					console.log(data)
 					$('#idError').text('帳號不可重複 !')
 					$('#userid').attr("class", "form-control is-invalid")
-					//   $('#btn-submit').attr("disabled",true);
 					result = false;
 				} else {
-					//  $('#btn-submit').attr("disabled",false);
 					result = true;
 				}
 			}
@@ -147,11 +140,9 @@ $(function() {
 	function validatePwd() {
 		if ($('#pwd').val() == "") {
 			$('#pwd').attr("class", "form-control is-invalid")
-			//  $('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#pwd').attr("class", "form-control is-valid")
-			//  $('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -160,11 +151,9 @@ $(function() {
 	function validateUsername() {
 		if ($('#username').val() == "") {
 			$('#username').attr("class", "form-control is-invalid")
-			// $('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#username').attr("class", "form-control is-valid")
-			//   $('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -173,11 +162,9 @@ $(function() {
 	function validateGender() {
 		if ($('#gender').val() == "") {
 			$('#gender').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#gender').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -192,11 +179,9 @@ $(function() {
 		} else if (birthday > nowDate) {
 			$('#birthError').text("生日不可在未來!!")
 			$('#birth').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#birth').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -206,16 +191,13 @@ $(function() {
 		let teleregex = /^\d+$/;
 		if ($("#tele").val() === "") {
 			$('#tele').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else if (!teleregex.test($("#tele").val())) {
 			$('#teleError').text("請輸入數字")
 			$('#tele').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#tele').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -224,16 +206,13 @@ $(function() {
 		let phoneregex = /^\d+$/;
 		if ($("#phone").val() === "") {
 			$('#phone').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else if (!phoneregex.test($("#phone").val())) {
 			$('#phoneError').text("email格式不符，請重新輸入")
 			$('#phone').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#phone').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -242,11 +221,9 @@ $(function() {
 	function validateAddress() {
 		if ($('#address').val() == "") {
 			$('#address').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#address').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -256,16 +233,13 @@ $(function() {
 		let emailregex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if ($("#email").val() === "") {
 			$('#email').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else if (!emailregex.test($("#email").val())) {
 			$('#emailError').text("email格式不符，請重新輸入")
 			$('#email').attr("class", "form-control is-invalid")
-			//$('#btn-submit').attr("disabled",true);
 			return false;
 		} else {
 			$('#email').attr("class", "form-control is-valid")
-			//$('#btn-submit').attr("disabled",false);
 			return true;
 		}
 	}
@@ -317,19 +291,9 @@ $(function() {
 		let v7 = validateUsername()
 		let v8 = validateGender()
 		let v9 = validateAddress()
-		console.log(v1)
-		console.log(v2)
-		console.log(v3)
-		console.log(v4)
-		console.log(v5)
-		console.log(v6)
-		console.log(v7)
-		console.log(v8)
-		console.log(v9)
 		if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9) {
 			checkMemberForm = true;
 		}
-		console.log('aa'+checkMemberForm)
 		return checkMemberForm;
 	}
 
