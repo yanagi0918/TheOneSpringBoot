@@ -1,0 +1,305 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Job board HTML-5 Template </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	
+	<!-- CSS here -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="assets/css/slicknav.css">
+		<link rel="stylesheet" href="assets/css/price_rangs.css">
+		<link rel="stylesheet" href="assets/css/animate.min.css">
+		<link rel="stylesheet" href="assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+		<link rel="stylesheet" href="assets/css/themify-icons.css">
+		<link rel="stylesheet" href="assets/css/slick.css">
+		<link rel="stylesheet" href="assets/css/nice-select.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+	
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+           <!-- Header Start -->
+	<div class="header-area header-transparrent">
+		<div class="headder-top header-sticky">
+			 <div class="container">
+				 <div class="row align-items-center">
+					 <div class="col-lg-3 col-md-2">
+						 <!-- Logo -->
+						 <div class="logo">
+							 <a href="index.html"><img src="assets/img/logo/theone.png" alt=""></a>
+						 </div>  
+					 </div>
+					 <div class="col-lg-9 col-md-9">
+						 <div class="menu-wrapper">
+							 <!-- Main-menu -->
+							 <div class="main-menu">
+								 <nav class="d-none d-lg-block">
+									 <ul id="navigation">
+										 <li><a href="">首頁</a></li>
+										 <li><a href="">會員資訊</a></li>
+										 <li><a href="">履歷管理</a></li>
+										 <li><a href="">找工作</a></li>
+										 <li><a href="">課程進修</a>
+											 <ul class="submenu">
+												 <li><a href="">講師專區</a></li>
+												 <li><a href="">我的課程</a></li>
+											 </ul>
+										 </li>
+										 <li><a href="">討論區</a>
+											 <ul class="submenu">
+												 <li><a href="">面試經驗談</a></li>
+												 <li><a href="">在職評論</a></li>
+											 </ul>
+										 </li>
+									 </ul>
+								 </nav>
+							 </div>          
+							 <!-- Header-btn -->
+							 <div class="header-btn d-none f-right d-lg-block">
+								 <a href="#" class="btn head-btn2">登出</a>
+							 </div>
+						 </div>
+					 </div>
+					 <!-- Mobile Menu -->
+					 <div class="col-12">
+						 <div class="mobile_menu d-block d-lg-none"></div>
+					 </div>
+				 </div>
+			 </div>
+		</div>
+	</div>
+	 <!-- Header End -->
+    </header>
+	<!-- Hero Area Start-->
+	<div class="slider-area ">
+		<div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>會員資訊</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Hero Area End -->
+	
+	
+	<!-- Start Align Area -->
+	<div class="whole-wrap">
+		<div class="container box_1170">
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<h3 class="mb-30">會員資訊:</h3>
+						<form action="#">
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">照片</label>
+								<div class="col-sm-8 text-center">
+									<img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="assets/memberimages/images.png"
+										alt="請選擇您的照片" style="width: 320px; height: 200px;"> 
+									<!-- <input
+										class="form-control" type="file" name="imageFile" id="imgInp"
+										accept="image/jpeg, image/png" readonly> -->
+								</div>
+							</div>
+							<div class="mt-10">
+								<label>身份證字號(帳號)</label>
+								<input type="text" name="first_name" placeholder="A123456789" value="A123456789" maxlength="10"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'A123456789'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>密碼</label>
+								<input type="password" name="last_name" placeholder="密碼請勿超過15個字元" value="ABC123def" maxlength="15"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '密碼請勿超過15個字元'" required
+									class="form-control" readonly>
+								<input type="checkbox" onclick="ShowPwd()">顯示密碼
+							</div>
+							<div class="mt-10">
+								<label>姓名</label>
+								<input type="text" name="last_name" placeholder="王小明" value="王小明" maxlength="10"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '王小明'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>性別</label>
+								<input type="text" name="last_name" placeholder="男" value="女" maxlength="1"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '男'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>生日</label>
+								<input type="date" name="last_name" placeholder="生日" value="1994-02-28"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '生日'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>住宅電話</label>
+								<input type="text" name="last_name" placeholder="0287654321" value="0287654321" maxlength="10"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '0287654321'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>手機</label>
+								<input type="text" name="last_name" placeholder="0910123456" value="0910123456" maxlength="10"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '0910123456'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>通訊地址</label>
+								<input type="text" name="last_name" placeholder="地址" value="台東縣蘭嶼鄉椰油村"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '地址'" required
+									class="form-control" readonly>
+							</div>
+							<div class="mt-10">
+								<label>E-mail</label>
+								<input type="email" name="EMAIL" placeholder="EEIT45team5@gmail.com" value="EEIT45team5@gmail.com"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'EEIT45team5@gmail.com'" required
+									class="form-control" readonly>
+							</div>
+							<br>
+							<!-- <button type="submit" class="genric-btn primary circle" name="create" value="confirm" id="btn-submit">修改會員資訊</button> -->
+							<a href="yu_updateMember.html" class="genric-btn primary circle">修改會員資料</a>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Align Area -->
+	<footer>
+	   <!-- Footer Start-->
+	   <div class="footer-area footer-bg footer-padding">
+		<div class="container">
+			<div class="row d-flex justify-content-between">
+				<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+				   <div class="single-footer-caption mb-50">
+					 <div class="single-footer-caption mb-30">
+						 <div class="footer-tittle">
+							 <h4>關於我們</h4>
+							 <div class="footer-pera">
+								 <p>幫助求職者找尋理想工作、協助徵才廠商招募優秀人才! 善用The One 就業媒合平台，Choose The One get the right one!</p>
+							</div>
+						 </div>
+					 </div>
+
+				   </div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+					<div class="single-footer-caption mb-50">
+						<div class="footer-tittle">
+							<h4>聯絡我們</h4>
+							<ul>
+								<li><p>地址 :320桃園市中壢區新生路二段421號</p></li>
+								<li><a href="">Phone : +03 453 2632</a></li>
+								<li><a href="">Email : TheOne@gmail.com</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+					<div class="single-footer-caption mb-50">
+						<div class="footer-tittle">
+							<h4>相關連結</h4>
+							<ul>
+								<li><a href="">Facebook</a></li>
+								<li><a href="">Instagram</a></li>
+								<li><a href="">Twitter</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer-bottom area -->
+		<div class="footer-bottom-area footer-bg">
+			<div class="container">
+				<div class="footer-border">
+					 <div class="row d-flex justify-content-between align-items-center">
+						 <div class="col-xl-10 col-lg-10 ">
+							 <div class="footer-copy-right">
+								 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+							 </div>
+						 </div>
+						 <div class="col-xl-2 col-lg-2">
+							 <div class="footer-social f-right">
+								 <a href="#"><i class="fab fa-facebook-f"></i></a>
+								 <a href="#"><i class="fab fa-twitter"></i></a>
+								 <a href="#"><i class="fas fa-globe"></i></a>
+								 <a href="#"><i class="fab fa-behance"></i></a>
+							 </div>
+						 </div>
+					 </div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer End-->
+	</footer>
+	
+<!-- JS here -->
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="./assets/js/owl.carousel.min.js"></script>
+		<script src="./assets/js/slick.min.js"></script>
+		<script src="./assets/js/price_rangs.js"></script>
+		
+		<!-- One Page, Animated-HeadLin -->
+        <script src="./assets/js/wow.min.js"></script>
+		<script src="./assets/js/animated.headline.js"></script>
+		<script src="./assets/js/jquery.magnific-popup.js"></script>
+		
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="./assets/js/jquery.nice-select.min.js"></script>
+		<script src="./assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="./assets/js/contact.js"></script>
+        <script src="./assets/js/jquery.form.js"></script>
+        <script src="./assets/js/jquery.validate.min.js"></script>
+        <script src="./assets/js/mail-script.js"></script>
+        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="./assets/js/plugins.js"></script>
+        <script src="./assets/js/main.js"></script>
+        
+</body>
+</html>
