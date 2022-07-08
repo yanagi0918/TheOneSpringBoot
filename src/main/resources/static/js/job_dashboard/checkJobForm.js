@@ -36,8 +36,34 @@ $(function(){
 
 
 
+//撰寫一個限制字數方法
+var checkStrLengths = function (str, maxLength) {
+    var maxLength = maxLength;
+    var result = 0;
+    if (str && str.length > maxLength) {
+        result = maxLength;
+    } else {
+        result = str.length;
+    }
+    return result;
+}
+//新增監聽輸入
+$(".wishContent").on('input propertychange', function () {
 
+    //獲取輸入內容
+    var userDesc = $(this).val();
 
+    //判斷字數
+    var len;
+    if (userDesc) {
+        len = checkStrLengths(userDesc, 500);
+    } else {
+        len = 0
+    }
+
+    //顯示字數
+    $(".wordsNum").html(len + '/500');
+});
 
 
 
@@ -113,7 +139,7 @@ $('#jobwrongInput').click(function() {
 })
 
 $('#jobUpdate').click(function() {
-	$('#title').val('Java Engineer')
+	$('#title').val('JAVA程式設計師')
 	$('#qualification').val('曾經製作過相關專題')
 	$('#required_number').val('1')
 	$('#description').val('1. 負責 APP 設計及程式開發 \n2. 負責 APP 程式精進與版本更新 \n3. 負責 APP 資安項目開發與調校 \n4. 負責行動 APP 解決方案規劃與設計 \n5. 金融科技之行動領域創新研究 \n6. 其他主管交辦事項')

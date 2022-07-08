@@ -32,6 +32,9 @@
     textarea {
   resize : none;
 }
+.center{
+ text-align:center;
+}
     </style>
 </head>
 
@@ -123,7 +126,8 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">工作內容:</label>
 <div class="col-sm-8">
-<textarea rows="8" cols="8" id="description" name="description" class="form-control"   th:field="${jobupdate.description}" placeholder="請輸入不超過500字" maxlength="200"></textarea>
+<textarea rows="8" cols="8" id="description" name="description" class="form-control wishContent"   th:field="${jobupdate.description}" placeholder="請輸入不超過500字" maxlength="200"></textarea>
+<span class="wordsNum">0/500</span>
 </div>
 </div>
 <div class="center">
