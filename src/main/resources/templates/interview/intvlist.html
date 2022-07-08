@@ -139,16 +139,20 @@
 
                                         </div>
                                         <div class="job-tittle job-tittle2">
-                                            <a href="${intvs.cvNo}">
-                                                <h4>觀看內容</h4>
-                                            </a>
-                                            <div> <img src="assets/img/star/star-on.png"> <img
-                                                    src="assets/img/star/star-on.png"> <img
-                                                    src="assets/img/star/star-on.png">
+                                           
+                                            <ul>
+                                           <li><h4><a th:text="${intv.compName}" th:href="@{intvshow/}+${intv.cvNo}"> </a></h4>
+                                           </li>
+                                           
+                                           </ul>
+                                           
+                                                                                           
+                                            <div class="listComp" data-score=""
+										th:attr="data-score=${intv.compScore}">
                                                 <ul>
-                                                    <li>A123456789</li>
-                                                    <li>職缺:網路小編</li>
-                                                    <li>面試時間:2020-11-20</li>
+                                                    <li th:text="${intv.userId}"></li>
+                                                    <li th:text="'職缺:'+${intv.jobName}"></li>
+                                                    <li th:text="'面試時間:'+${intv.intTime}"></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -157,10 +161,10 @@
                                     <figure>
                                         <div class="items-link items-link2 f-right">
                                             
-                                            <button class="genric-btn primary-border  e-large">編輯</button>
-                                            <button class="genric-btn danger-border  e-large">刪除</button>
+                                            <button class="genric-btn primary-border  e-large"  th:href="@{intv/}+${intv.cvNo}">編輯</button>
+                                            <button class="genric-btn danger-border  e-large"th:id="${intv.cvNo}" onclick="del(this.id)">刪除</button>
                                              
-                                            <figcaption style="font-size: 12px ;">編輯時間:2022-04-30 14:33:20</figcaption>
+                                            <figcaption th:text="'編輯時間:'+${intv.createTime}" style="font-size: 12px "></figcaption>
                                         </div>
                                     </figure>
 
@@ -194,7 +198,7 @@
                             </aside>
 
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">推薦書籍</h3>
+                                <h3 class="widget_title">推薦課程</h3>
                                 <div class="media post_item">
                                     <img src="assets/img/post/post_1.png" alt="post">
                                     <div class="media-body">
@@ -488,10 +492,11 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
+         <script th:src="@{/js/interview_dashboard/jquery.raty.js}" src="js/interview_dashboard/jquery.raty.js"></script>
+    	<script th:src="@{/js/interview_dashboard/checkInterviewForm.js}" src="js/interview_dashboard/checkInterviewForm.js"></script>
         
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
         <script>
         function del(id) {
 		Swal.fire({
