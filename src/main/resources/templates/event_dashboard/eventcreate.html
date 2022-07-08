@@ -62,13 +62,6 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">價格(萬)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="price" maxlength="10" required id="price">
-                                    <div class="invalid-feedback">價格只能輸入有效數字</div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">廣告圖</label>
                                 <div class="col-sm-8 text-center">
                                     <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="#" alt="請選擇廣告圖" style="width: 320px; height: 200px;">
@@ -104,6 +97,7 @@
                                  	<option th:value="0">未審核</option>
                                  	<option th:value="1">審核通過</option>
                                  	<option th:value="2">退件</option>
+                                 	<option th:value="3">已撤銷</option>
                                 </select>       					
                                 </div>
                             </div>

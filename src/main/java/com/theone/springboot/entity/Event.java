@@ -20,7 +20,6 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer eventId;
 	private String compId;
-	private Integer price;
 	private String imgUrl;
 	private String eventLinkUrl;
 	@Column(columnDefinition = "Date")
@@ -28,6 +27,7 @@ public class Event {
 	@Column(columnDefinition = "Date")
 	private Date postEnd;
 	private String remark;
+	// 0:未審核 1:審核通過 2:已退件 3:已撤銷
 	private Integer state;
 
 	public Event() {
@@ -47,14 +47,6 @@ public class Event {
 
 	public void setCompId(String compId) {
 		this.compId = compId;
-	}
-
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
 	}
 
 	public String getImgUrl() {
@@ -107,9 +99,9 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [eventId=" + eventId + ", compId=" + compId + ", price=" + price + ", imgUrl=" + imgUrl
-				+ ", eventLinkUrl=" + eventLinkUrl + ", postStart=" + postStart + ", postEnd=" + postEnd + ", remark="
-				+ remark + ", state=" + state + "]";
+		return "Event [eventId=" + eventId + ", compId=" + compId + ", imgUrl=" + imgUrl + ", eventLinkUrl="
+				+ eventLinkUrl + ", postStart=" + postStart + ", postEnd=" + postEnd + ", remark=" + remark + ", state="
+				+ state + "]";
 	}
 
 }

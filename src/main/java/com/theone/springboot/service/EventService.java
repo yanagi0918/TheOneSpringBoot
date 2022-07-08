@@ -11,10 +11,14 @@ public interface EventService {
 	Event saveOrUpdate(Event event);
 
 	List<Event> getAllEvents();
+	
+	List<Event> findByCompIdAndStateNot(String compId, Integer state);
 
 	Optional<Event> getEvent(Integer pk);
 
 	void deleteEvent(Integer pk);
+	
+	Event revokeEvent(Integer pk);
 	
 	List<Event> findByCompId(String compId);
 

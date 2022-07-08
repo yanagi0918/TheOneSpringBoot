@@ -17,16 +17,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String uri = request.getRequestURI();
 
-		if (uri.contains("dashboard")) {
-			String loginUser = (String) request.getSession().getAttribute("loginUser");
-			if (!"admin".equals(loginUser)) {
+		if (uri.contains("/dashboard")) {
+			String loginAdmin = (String) request.getSession().getAttribute("loginAdmin");
+			if (!"admin".equals(loginAdmin)) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}
 			return true;
 		}
 
-		if (uri.contains("enterprise")) {
+		if (uri.contains("/enterprise")) {
 			Company loginEnterprise = (Company) request.getSession().getAttribute("loginEnterprise");
 			if (loginEnterprise == null) {
 				response.sendRedirect(request.getContextPath() + "/login");
@@ -35,12 +35,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		
-		
-		////////////////////////////////////////
-		
-		
-		if (uri.contains("user")) {
-			Member loginMember = (Member) request.getSession().getAttribute("loginUser");
+		if (uri.contains("/user")) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			if (loginMember == null) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
