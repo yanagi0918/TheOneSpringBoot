@@ -135,11 +135,11 @@
                             <div class="job-items">
                                 <div class="company-img">
                                     <img class="imgsize"
-                                        th:src="@{/assets/img/job/wewantyou.jpg}"
+                                        th:src="@{/assets/img/job/wewantyou.png}"
                                         alt="">
                                 </div>
                                 <div class="job-tittle job-tittle2">
-                                        <h4>餐飲部 - 宴會廳貴賓接待</h4>
+                                        <h4 th:text="${jobdeatail.title}"></h4>
                                     <ul>
                                         <li>台北君林酒店股份有限公司</li>
                                     </ul>
@@ -194,7 +194,7 @@
                            </div>
                           <ul>
                               <li>職缺名稱 : <span>餐飲部 - 宴會廳貴賓接待</span></li>
-                              <li>職缺性質 : <span>全職</span></li>
+                              <li>職缺性質 : <span th:text="${jobdeatail.jobdescription}"></span></li>
                               <li>需要人數 : <span>5</span><span>/人</span></li>
                               <li>每月薪資 :  <span>35001~40000</span><span>/月</span></li>
                           </ul>
