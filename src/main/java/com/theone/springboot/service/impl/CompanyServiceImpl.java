@@ -27,13 +27,11 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 	@Override
 	public Company saveOrUpdate(Company company) {
-//		String salt = UUID.randomUUID().toString();
-//		String md5 = company.getCompwd();
-//		String compwd= DigestUtils.md5DigestAsHex((company.getCompwd()+salt).getBytes());
-//		compwd= DigestUtils.md5DigestAsHex((company.getCompwd()+salt).getBytes());
-//		compwd= DigestUtils.md5DigestAsHex((company.getCompwd()+salt).getBytes());
-//		System.out.println(md5);
-//		System.out.println(compwd);
+		String salt = UUID.randomUUID().toString();
+		String md5 = company.getCompwd();
+		String compwd= DigestUtils.md5DigestAsHex((company.getCompwd()+salt).getBytes());
+		System.out.println(md5);
+		System.out.println(compwd);
 		
 		return companyDao.save(company);
 	}
