@@ -1,27 +1,28 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board HTML-5 Template </title>
+    <title>The One </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/price_rangs.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/imgUpload.css}">
 </head>
 
 <body>
@@ -31,7 +32,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/img/logo/logo.png" alt="">
+                <img th:src="@{/assets/img/logo/logo.png}" alt="">
             </div>
         </div>
     </div>
@@ -46,7 +47,7 @@
                     <div class="col-lg-3 col-md-2">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href=""><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
@@ -55,26 +56,42 @@
                             <div class="main-menu">
                                 <nav class="d-none d-lg-block">
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="job_listing.html">Find a Jobs </a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Page</a>
+                                        <li><a href="">首頁</a></li>
+                                        <li><a href="">找工作</a></li>
+                                        <li><a href="">課程進修</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                                <li><a href="job_details.html">job Details</a></li>
+                                                <li><a href="">所有課程</a>
+                                                    <ul class="submenu">
+                                                        <li>123</li>
+                                                        <li>123</li>
+                                                        <li>123</li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="">收藏</a></li>
+                                                <li><a href="">講師專區</a></li>
+                                                <li><a href="">我的課程</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="">討論區</a>
+                                            <ul class="submenu">
+                                                <li><a href="">面試經驗談</a></li>
+                                                <li><a href="">在職評論</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="">會員中心</a>
+                                            <ul class="submenu">
+                                                <li><a href="">會員資訊</a></li>
+                                                <li><a href="">履歷管理</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Header-btn -->
                             <div class="header-btn d-none f-right d-lg-block">
-                                <a href="#" class="btn head-btn1">Register</a>
-                                <a href="#" class="btn head-btn2">Login</a>
+                                <a href="#" class="btn head-btn2">登出</a>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <!-- Mobile Menu -->
@@ -145,8 +162,8 @@
                                 <p>
                                     留學、移民歐美最重要的英文認證之一，IELTS測試共分聽、說、讀、寫四項科目，針對四項能力由外師進行個別加強衝刺,準備考試不再是無頭蒼蠅，更能針對問題對症下藥，最短時間衝刺多益高分。
                                 </p>
-<!--                                <li></li>-->
-<!--                                <li></li>-->
+                                <!--                                <li></li>-->
+                                <!--                                <li></li>-->
                             </ul>
                         </div>
                     </div>
@@ -175,7 +192,8 @@
                             <h4>公司資訊</h4>
                         </div>
                         <span>The One</span>
-                        <p>發現就業市場(勞資雙方)永遠都有人才媒合需求，但既有的人力銀行無法一站式提供「就業媒合」、「經驗談分享」、「技能進修課程」等求職者迫切需要的資訊，於是構思出The One就業媒合平台。</p>
+                        <p>發現就業市場(勞資雙方)永遠都有人才媒合需求，但既有的人力銀行無法一站式提供「就業媒合」、「經驗談分享」、「技能進修課程」等求職者迫切需要的資訊，於是構思出The
+                            One就業媒合平台。</p>
                         <ul>
                             <li>姓名: <span>連上程 </span></li>
                             <li>網址: <span> Theone.com</span></li>
