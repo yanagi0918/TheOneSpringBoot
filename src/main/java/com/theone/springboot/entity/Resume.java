@@ -23,7 +23,15 @@ public class Resume {
 	private String autobiography;
 	private String work_exp;
 	private String skills;
-	private String user_id;
+	private String userId;
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	private Integer idNumber;
 	
 	public Resume() {
@@ -94,11 +102,11 @@ public class Resume {
 	}
 
 	public String getUser_id() {
-		return user_id;
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUser_id(String userId) {
+		this.userId = userId;
 	}
 
 	public Integer getIdNumber() {
@@ -113,7 +121,7 @@ public class Resume {
 	public String toString() {
 		return "Resume [resume_id=" + resume_id + ", resume_name=" + resume_name + ", edu=" + edu + ", school=" + school
 				+ ", dept=" + dept + ", autobiography=" + autobiography + ", work_exp=" + work_exp + ", skills="
-				+ skills + ", user_id=" + user_id + ", idNumber=" + idNumber + "]";
+				+ skills + ", userId=" + userId + ", idNumber=" + idNumber + "]";
 	}
 
 }

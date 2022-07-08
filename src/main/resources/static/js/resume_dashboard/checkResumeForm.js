@@ -3,6 +3,7 @@ $(function() {
 
 	$('#correctInput').click(function() {
 		$('#resume_name').val('for國貿人員')
+		$('#userId').val('N123456789')
 		$('#edu').val('大學')
 		$('#school').val('國立東華大學')
 		$('#dept').val('國際企業學系')

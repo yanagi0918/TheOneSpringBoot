@@ -2,6 +2,8 @@ package com.theone.springboot.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,45 +14,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Resume;
 import com.theone.springboot.service.ResumeService;
 
 @Controller
-@RequestMapping("/dashboard")
-public class ResumeDashBoardController {
+@RequestMapping("/user")
+public class ResumeUserController {
 
 	@Autowired
 	ResumeService resumeService;
 	
 	@GetMapping(path = "/resumes")
-	public String toResumeListPage(Model model){
-		List<Resume> allresumes = resumeService.getAllResumes();
-		model.addAttribute("resumes", allresumes);
-		return "resume_dashboard/resumelist";
+	public String toResumeListPage(HttpSession session, Model model){
+		Member member = (Member)session.getAttribute("loginUser");
+		String userid = String.valueOf(member.getUserid());
+		List<Resume> resumes = resumeService.findByUserId(userid);
+		model.addAttribute("resumes", resumes);
+		model.addAttribute("total",resumes.size()); //共幾筆
+		return "resume/allResume";
 	}
 	
 	@GetMapping(path = "/resume")
-	public String toCreatePage() {
-		return "resume_dashboard/resumecreate";
+	public String toCreatePage(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("loginUser");
+		model.addAttribute("member",member);
+		return "resume/insertResume";
 	}
 	
 	@PostMapping(path = "/resume")
 	public String saveOrUpdate(Resume resume){
-		System.out.print("''''''''''''");
-		System.out.print(resume);
-		System.out.print(resume.getResume_name());
-		
-		System.out.print("''''''''''''");
 		resumeService.saveOrUpdate(resume);
-		return "redirect:/dashboard/resumes";  
+		return "redirect:/user/resumes";  
 	}
 	
-	@GetMapping("/resume/{id}")
-	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
-		Resume resume = resumeService.getResume(id).get();
-		model.addAttribute("resume", resume);
-		return "resume_dashboard/resumeupdate";
-	}
+//	@GetMapping("/resume/{id}")
+//	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
+//		Resume resume = resumeService.getResume(id).get();
+//		model.addAttribute("resume", resume);
+//		return "resume_dashboard/resumeupdate";
+//	}
 	
 	@ResponseBody
 	@DeleteMapping("/resume/{id}")

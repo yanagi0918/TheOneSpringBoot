@@ -17,7 +17,7 @@ public interface ResumeService {
 
 	void deleteResume(Integer pk);
 	
-	
+	List<Resume> findByUserId(String userId);
 	
 	
 	
