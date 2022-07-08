@@ -70,14 +70,17 @@
                                     <th scope="col">查看/修改/刪除</th>
                                 </tr>
                             </thead>
+            
                             <tbody>
                                 <tr th:each="order:${orders}">
                                     <td th:text="${order.orderId }"></td>
 									<td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd')}"></td>
 									<td th:text="${order.state}"></td>
 									<td th:text="${order.userId}"></td>
-									<td th:text="${order.productId}"></td>
-									<td th:text="${order.totalPrice}"></td>
+<!-- 									<td th:text="${order.productId}"></td> -->
+									<td th:text="${order.courseBean.courseName}"></td>
+<!-- 									<td th:text="${order.totalPrice}"></td> -->
+									<td th:text="${order.courseBean.price}"></td>
                                     <td>
                                         <a class="btn btn-outline-secondary m-0" th:href="@{Order/}+${order.orderId}">查看</a>
                                         <a class="btn btn-outline-primary m-0 btn-orderUpdate" th:href="@{order/}+${order.orderId}">修改</a>

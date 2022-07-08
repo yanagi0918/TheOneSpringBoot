@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.theone.springboot.entity.Order;
+import com.theone.springboot.service.CourseService;
 import com.theone.springboot.service.OrderService;
 
 @Controller
@@ -27,20 +28,27 @@ public class OrderDashBoardController {
 	@Autowired
 	OrderService orderService;
 	
+	@Autowired
+	CourseService courseServicer;
+	
 	@GetMapping(path = "/orders")
 	public String showData(Model model) {
-		List<Order> orders = orderService.getAllOrders();
+		List<Order> orders = orderService.getAllOrders();	
+		model.addAttribute("courseList", courseServicer.findAllCourses());
 		model.addAttribute("orders", orders);
 		return "order_dashboard/orderlist";
 	}
 	
 	@GetMapping(path = "/order")
-	public String toAdd() {
+	public String toAdd(Model model) {
+		model.addAttribute("courseList", courseServicer.findAllCourses());
 		return "order_dashboard/ordercreate";
 	}
 	
 	@PostMapping(path = "/order")
 	public String processCreate(Order order) {
+		System.err.println(order.getProductId());
+		
 		orderService.saveOrUpdate(order);
 		return "redirect:orders";
 	}
@@ -48,6 +56,7 @@ public class OrderDashBoardController {
 	@GetMapping(path = "/order/{id}")
 	public String processUpdate(@PathVariable("id") Integer id, Model model){
 		Order order = orderService.getOrder(id).get();
+		model.addAttribute("courseList", courseServicer.findAllCourses());
 		model.addAttribute("order", order);
 		return "order_dashboard/orderupdate";
 	}

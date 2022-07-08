@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Order;
+import com.theone.springboot.repository.CourseDao;
 import com.theone.springboot.repository.OrderDao;
 import com.theone.springboot.service.OrderService;
 
@@ -18,6 +20,9 @@ public class OrderServiceImpl  implements OrderService{
 	@Autowired
 	OrderDao orderDao;
 	
+	@Autowired
+	CourseDao courseDao;
+	
 	@Override
 	public boolean isDup(Integer pk) {
 		return orderDao.existsById(pk);
@@ -25,6 +30,8 @@ public class OrderServiceImpl  implements OrderService{
 	
 	@Override
 	public Order saveOrUpdate(Order order) {
+		CourseBean course = courseDao.findById(Integer.valueOf(order.getProductId())).get();
+		order.setCourseBean(course);
 		return orderDao.save(order);
 	}
 	
@@ -41,6 +48,19 @@ public class OrderServiceImpl  implements OrderService{
 	@Override
 	public void deleteOrder(Integer pk) {
 		orderDao.deleteById(pk);
+	}
+	
+	@Override
+	public void test() {
+//		CourseBean course = courseDao.findById(1).get();
+//		Order order = new Order();
+//		order.setCourseBean(course);
+//		order.setUserId("t000001");
+//		order.setTotalPrice(10000);
+//		orderDao.save(order);
+		Order order = orderDao.findById(6).get();
+		System.err.println(order.getCourseBean().getCoursePicUrl());
+		
 	}
 	
 }

@@ -2,7 +2,7 @@ $(function () {
     
     $('#OrderwrongInput').click(function () {
     $('#userId').val('12A345675')
-    $('#orderDate').val('2022-07-07')
+    $('#orderDate').val('2022-07-22')
     $("#state").val('保留');
     $('#productId').val('JLPT N2 日檢養成班')
     $('#totalPrice').val('6666K')
@@ -10,7 +10,7 @@ $(function () {
 
 $('#OrdercorrectInput').click(function () {
     $('#userId').val('J123456789')
-    $('#orderDate').val('2022-07-07')
+    $('#orderDate').val('2022-07-22')
     $("#state").val('完成'); 
     $('#productId').val('IELTS 雅思檢定班')
     $('#totalPrice').val('86000')
@@ -240,6 +240,8 @@ $(function() {
 	})
 
 })
+
+
 
 	$('#btn-submit').click(function() {
 		let checkOrderForm = true;
