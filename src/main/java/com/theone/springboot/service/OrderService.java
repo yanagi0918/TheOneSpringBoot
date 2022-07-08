@@ -16,5 +16,7 @@ public interface OrderService {
 	Optional<Order> getOrder(Integer pk);
 
 	void deleteOrder(Integer pk);
+	
+	public void test();
 
 }

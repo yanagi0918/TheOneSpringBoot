@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "Order_Table")
 @Component
-public class Order{
+public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
@@ -26,7 +28,10 @@ public class Order{
 	@Column(columnDefinition = "Date")
 	private Date orderDate;
 	private String state;
-
+	
+	@OneToOne
+    @JoinColumn(name="Order_Course_ID")
+	private CourseBean courseBean;
 	
 	public Order() {	}
 	
@@ -40,6 +45,14 @@ public class Order{
 		this.state = state;
 	}
 
+
+	public CourseBean getCourseBean() {
+		return courseBean;
+	}
+
+	public void setCourseBean(CourseBean courseBean) {
+		this.courseBean = courseBean;
+	}
 
 	public Integer getOrderId() {
 		return orderId;
