@@ -44,6 +44,7 @@ public class ResumeUserController {
 	
 	@PostMapping(path = "/resume")
 	public String saveOrUpdate(Resume resume){
+		System.out.println("有進新增方法!!!!");
 		resumeService.saveOrUpdate(resume);
 		return "redirect:/user/resumes";  
 	}
