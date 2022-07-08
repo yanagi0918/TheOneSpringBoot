@@ -1,17 +1,15 @@
 $(function() {
 	$('#btn-goBack').click(function() {
-		location.href = "/dashboard/events";
+		location.href = "/enterprise/events";
 	})
 
 	$('#eventWrongInput').click(function() {
-		$('#compId').val('1234567A')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
 		$('#postStart').val('2022-08-20')
 		$('#postEnd').val('2022-08-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
-		$('#compId').val('11111111')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
 		$('#postStart').val('2022-08-15')
 		$('#postEnd').val('2022-08-20')
@@ -31,43 +29,6 @@ $(function() {
 	}
 	
 	//事件資料檢查
-	$('#compId').keyup(function() {
-		let compIdRegex = /^\d{8}$/;
-		if (!compIdRegex.test($("#compId").val())) {
-			$('#compIdError').text("刊登公司統編為8位數字")
-			$('#compId').attr("class","form-control is-invalid")
-		}else{
-			$.ajax({
-                 url: '/dashboard/event/compid_exist/'+$('#compId').val(),
-                 type: 'GET',
-                 success: function(data) {
-					if (data==true) {
-						$('#compId').attr("class","form-control is-valid")
-					}else{
-						$('#compIdError').text("此公司尚未註冊")
-						$('#compId').attr("class","form-control is-invalid")
-					}
-                 }
-            });
-		}
-	})
-	/*
-	$('#price').keyup(function() {
-		let priceRegex = /^\d+$/;
-		if (!priceRegex.test($("#price").val())) {
-			$('#price').attr("class","form-control is-invalid")
-		}else{
-			$('#price').attr("class","form-control is-valid")
-		}
-	})
-	*/
-	$('#imgInp').change(function() {
-		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
-			$('#imgInp').attr("class","form-control is-invalid")
-		}else{
-			$('#imgInp').attr("class","form-control is-valid")
-		}
-	})
 	
 	$('#eventLinkURL').keyup(function() {
 		if ($('#eventLinkURL').val() == "") {
@@ -76,7 +37,6 @@ $(function() {
 			$('#eventLinkURL').attr("class","form-control is-valid")
 		}
 	})
-	
 	
 	$('#postStart').change(function() {
 		let postStartDate = new Date($("#postStart").val());
@@ -111,45 +71,11 @@ $(function() {
 	//submit資料確認
 	$('#btn-submit').click(function() {
 		let checkEventForm = true;
-		//let warningStr = "";
-		
-		let compIdRegex = /^\d{8}$/;
-		if (!compIdRegex.test($("#compId").val())) {
-			$('#compIdError').text("刊登公司統編為8位數字")
-			$('#compId').attr("class","form-control is-invalid")
-			checkEventForm = false;
-		}else{
-			$.ajax({
-                 url: '/dashboard/event/compid_exist/'+$('#compId').val(),
-                 type: 'GET',
-                 async: false,
-                 success: function(data) {
-					if (data==true) {
-						$('#compId').attr("class","form-control is-valid")
-					}else{
-						$('#compIdError').text("此公司尚未註冊")
-						$('#compId').attr("class","form-control is-invalid")
-						checkEventForm = false;
-					}
-                 }
-            });
-		}
+		let warningStr = "";
 
-		/*
-		let priceRegex = /^\d+$/;
-		if (!priceRegex.test($("#price").val())) {
-			$('#price').attr("class","form-control is-invalid")
+		if ($('#imgInp').val() == "") {
+			warningStr = "請上傳廣告圖"
 			checkEventForm = false;
-		}else{
-			$('#price').attr("class","form-control is-valid")
-		}
-		*/
-
-		if ($('#imgInp').val() == "" && $('#btn-submit').val() == 0) {
-			$('#imgInp').attr("class","form-control is-invalid")
-			checkEventForm = false;
-		}else{
-			$('#imgInp').attr("class","form-control is-valid")
 		}
 		
 		if ($('#eventLinkURL').val() == "") {
@@ -189,10 +115,7 @@ $(function() {
 
 
 
-		let confirmStr = '確認修改廣告?';
-		if ($('#btn-submit').val() == 0) {
-			confirmStr = '確認新增廣告?';
-		}
+		let confirmStr = '確認新增廣告?';
 		
 		if (checkEventForm) {
 			Swal.fire({
@@ -221,7 +144,7 @@ $(function() {
 			Swal.fire({
 				icon: 'error',
 				title: '格式錯誤',
-				html: '',
+				html: warningStr,
 			})
 		}
 	})

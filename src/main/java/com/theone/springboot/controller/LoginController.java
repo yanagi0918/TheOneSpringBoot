@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,10 +19,8 @@ public class LoginController {
 	@Autowired
 	CompanyService companyService;
 	
-	//vicnet
 	@Autowired
 	MemberService memberService;
-	//vincent
 	
 	@GetMapping("/login")
 	public String toLoginPage() {
@@ -30,32 +29,44 @@ public class LoginController {
 
 	@PostMapping("/memberLogin")
 	public String memberLogin(String username, String password, HttpSession session) {
-		//vincent
 		Member member = memberService.getByUserid(username);
 		if (member != null && password.equals(member.getPwd())) {
-			session.setAttribute("loginUser", member);
-			return "redirect:user/resumes";
+			session.setAttribute("loginMember", member);
+			return "index";
 		}
 		
-		
-		
-		//vincent
 		if ("admin".equals(username) && "12345".equals(password)) {
-			session.setAttribute("loginUser", username);
+			session.setAttribute("loginAdmin", username);
 			return "redirect:dashboard/members";
 		}
 		return "redirect:login";
 	}
+	
+	@GetMapping("/memberLogin")
+	public String memberIndex(HttpSession session, Model model) {
+		if (session.getAttribute("loginMember")!=null) {
+			return "index";
+		}
+		return "redirect:/";
+	}
 
 	@PostMapping("/companyLogin")
-	public String companyLogin(String username, String password, HttpSession session) {
+	public String companyLogin(String username, String password, HttpSession session, Model model) {
 		Integer compId = Integer.parseInt(username);
 		Company company = companyService.getByCompid(compId);
 		if (company != null && password.equals(company.getCompwd())) {
 			session.setAttribute("loginEnterprise", company);
-			return "redirect:enterprise/events";
+			return "redirect:companyLogin";
 		}
 		return "redirect:login";
+	}
+	
+	@GetMapping("/companyLogin")
+	public String companyIndex(HttpSession session, Model model) {
+		if (session.getAttribute("loginEnterprise")!=null) {
+			return "index";
+		}
+		return "redirect:/";
 	}
 
 	@GetMapping("/logout")

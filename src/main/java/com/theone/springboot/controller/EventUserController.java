@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -40,7 +41,7 @@ public class EventUserController {
 	public String toEventListPage(HttpSession session, Model model) {
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		String compid = String.valueOf(company.getCompid());
-		List<Event> events = eventService.findByCompId(compid);
+		List<Event> events = eventService.findByCompIdAndStateNot(compid, 3);
 		model.addAttribute("events",events);
 		model.addAttribute("total",events.size());
 		return "event/event_listing";
@@ -74,7 +75,7 @@ public class EventUserController {
 	@ResponseBody
 	@DeleteMapping("/event/{id}")
 	public String delete(@PathVariable("id") Integer id) {
-		eventService.deleteEvent(id);
+		eventService.revokeEvent(id);
 		return "ok";
 	}
 	

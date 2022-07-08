@@ -53,4 +53,16 @@ public class EventServiceImpl implements EventService {
 		return eventDao.findByCompId(compId);
 	}
 
+	@Override
+	public Event revokeEvent(Integer pk) {
+		Event event = eventDao.findById(pk).get();
+		event.setState(3);
+		return eventDao.save(event);
+	}
+
+	@Override
+	public List<Event> findByCompIdAndStateNot(String compId, Integer state) {
+		return eventDao.findByCompIdAndStateNot(compId, state);
+	}
+
 }

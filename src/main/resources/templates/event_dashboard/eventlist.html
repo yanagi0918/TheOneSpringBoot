@@ -61,7 +61,6 @@
                                 <tr class="text-dark">
                                     <th scope="col">廣告編號</th>
                                     <th scope="col">刊登公司統編</th>
-                                    <th scope="col">價格(萬)</th>
                                     <th scope="col">刊登開始時間</th>
                                     <th scope="col">刊登結束時間</th>
                                     <th scope="col">狀態</th>
@@ -72,10 +71,9 @@
                                 <tr th:each="event:${events}">
                                 	<td th:text="${event.eventId}"></td>
                                 	<td th:text="${event.compId}"></td>
-                                	<td th:text="${event.price}"></td>
                                 	<td th:text="${#dates.format(event.postStart, 'yyyy-MM-dd')}"></td>
                                 	<td th:text="${#dates.format(event.postEnd, 'yyyy-MM-dd')}"></td>
-                                	<td th:text="${(event.state==0)?'未審核':(event.state==1)?'審核通過':'已退件'}"></td>
+                                	<td th:text="${(event.state==0)?'未審核':(event.state==1)?'審核通過':(event.state==2)?'已退件':'已撤銷'}"></td>
                                 	<td>
                                 		<a class="btn btn-outline-primary m-0 btn-eventUpdate" th:href="@{event/}+${event.eventId}">更新</a>
                                         <a class="btn btn-outline-danger m-0" th:id="${event.eventId}" onclick="del(this.id)">刪除</a>
