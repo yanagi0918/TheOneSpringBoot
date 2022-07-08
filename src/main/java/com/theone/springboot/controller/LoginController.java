@@ -8,14 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.theone.springboot.entity.Company;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CompanyService;
+import com.theone.springboot.service.MemberService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	CompanyService companyService;
-
+	
+	//vicnet
+	@Autowired
+	MemberService memberService;
+	//vincent
+	
 	@GetMapping("/login")
 	public String toLoginPage() {
 		return "login/login";
@@ -23,6 +30,16 @@ public class LoginController {
 
 	@PostMapping("/memberLogin")
 	public String memberLogin(String username, String password, HttpSession session) {
+		//vincent
+		Member member = memberService.getByUserid(username);
+		if (member != null && password.equals(member.getPwd())) {
+			session.setAttribute("loginUser", member);
+			return "redirect:user/resumes";
+		}
+		
+		
+		
+		//vincent
 		if ("admin".equals(username) && "12345".equals(password)) {
 			session.setAttribute("loginUser", username);
 			return "redirect:dashboard/members";

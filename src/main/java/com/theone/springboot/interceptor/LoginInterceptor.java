@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.theone.springboot.entity.Company;
+import com.theone.springboot.entity.Member;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -28,6 +29,19 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (uri.contains("enterprise")) {
 			Company loginEnterprise = (Company) request.getSession().getAttribute("loginEnterprise");
 			if (loginEnterprise == null) {
+				response.sendRedirect(request.getContextPath() + "/login");
+				return false;
+			}
+			return true;
+		}
+		
+		
+		////////////////////////////////////////
+		
+		
+		if (uri.contains("user")) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginUser");
+			if (loginMember == null) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}

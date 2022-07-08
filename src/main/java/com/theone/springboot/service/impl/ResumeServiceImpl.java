@@ -51,4 +51,9 @@ public class ResumeServiceImpl implements ResumeService {
 		resumeDao.deleteById(pk);
 	}
 
+	@Override
+	public List<Resume> findByUserId(String userId) {
+		return resumeDao.findByUserId(userId);
+	}
+
 }
