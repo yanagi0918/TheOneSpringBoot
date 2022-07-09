@@ -85,7 +85,7 @@
 <!--                                     <input th:field="*{percentage}" type="text" class="form-control" name="productId" required id="productId" placeholder="請輸入課程 例:1,2,3,4"> -->
 <!--                                 	<input type="hidden" th:each="item : ${courseList}" th:value="${item.price}" th:id="${item.courseNo}"> -->
                                 	<select  class="form-select mb-3" aria-label="Default select example" name="productId" required id="productId">
-                      						<option th:each="item : ${courseList}" th:value="${item.courseNo}" th:label="${item.courseName}" th:text="${item.price}"></option>
+                      						<option th:each="course : ${courseList}" th:value="${course.courseNo}" th:label="${course.courseName}" th:text="${course.price}"></option>
 
 <!-- 									  <optgroup label="英文證照"> -->
 <!-- 									    <option>IELTS 雅思檢定班</option> -->
