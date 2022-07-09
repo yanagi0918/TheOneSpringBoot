@@ -7,15 +7,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.theone.springboot.interceptor.LoginInterceptor;
 
-@Configuration
-public class InterceptorWebMvcConfig implements WebMvcConfigurer {
+//@Configuration
+//public class InterceptorWebMvcConfig implements WebMvcConfigurer {
 	
-	@Autowired
-	LoginInterceptor loginInterceptor;
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginInterceptor);
-	}
-
-}
+//	@Autowired
+//	LoginInterceptor loginInterceptor;
+//	
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(loginInterceptor);
+//	}
+//
+//}
