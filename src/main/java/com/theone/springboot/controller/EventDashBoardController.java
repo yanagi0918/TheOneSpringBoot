@@ -34,7 +34,7 @@ public class EventDashBoardController {
 
 	@Autowired
 	EventService eventService;
-	
+
 	@Autowired
 	CompanyService companyService;
 
@@ -63,6 +63,20 @@ public class EventDashBoardController {
 			imageFile.transferTo(new File(saveFilePath));
 		}
 
+		if (event.getState() == 1 || event.getState() == 2) {
+			String result = null;
+			if (event.getState() == 1) {
+				result = "審核通過";
+			}else {
+				result = "退件";
+			}
+			String msg = "廣告編號: " + event.getEventId() + "\n" +
+						 "審核結果: " + result + "\n" +
+						 "備註: " + event.getRemark() + "\n" +
+						 "連結: http://localhost:8080/enterprise/events";
+			eventService.sendNotifyEmail("aass13172@gmail.com", "TheOne 廣告審核通知", msg);
+		}
+
 		eventService.saveOrUpdate(event);
 
 		return "redirect:/dashboard/events";
@@ -74,32 +88,31 @@ public class EventDashBoardController {
 		model.addAttribute("event", event);
 		return "event_dashboard/eventupdate";
 	}
-	
+
 	@ResponseBody
 	@DeleteMapping("/event/{id}")
 	public String delete(@PathVariable("id") Integer id) {
 		eventService.deleteEvent(id);
 		return "ok";
 	}
-	
-	
+
 	@ResponseBody
 	@GetMapping("/event/compid_exist/{compid}")
 	public boolean checkUser(@PathVariable("compid") Integer compid) {
 		Company company = companyService.getByCompid(compid);
 		if (company == null) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
-	
+
 	@InitBinder
-    public void initBinder(WebDataBinder binder, WebRequest request) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
-        binder.registerCustomEditor(Date.class, ce);
-    }
+	public void initBinder(WebDataBinder binder, WebRequest request) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
+		binder.registerCustomEditor(Date.class, ce);
+	}
 
 }

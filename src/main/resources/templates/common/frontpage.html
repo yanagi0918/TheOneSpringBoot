@@ -36,30 +36,30 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="">首頁</a></li>
-                                            <li><a href="">找工作</a></li>
-                                            <li><a href="">課程進修</a>
+                                            <li><a th:href="@{/}"><span style="font-size: large">首頁</span></a></li>
+                                            <li><a href=""><span style="font-size: large">找工作</span></a></li>
+                                            <li><a href=""><span style="font-size: large">課程進修</span></a>
                                                 <ul class="submenu">
-                                                    <li><a href="">講師專區</a></li>
-                                                    <li><a href="">我的課程</a></li>
+                                                    <li><a href=""><span style="font-size: large">講師專區</span></a></li>
+                                                    <li><a href=""><span style="font-size: large">我的課程</span></a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">討論區</a>
+                                            <li><a href=""><span style="font-size: large">討論區</span></a>
                                                 <ul class="submenu">
-                                                    <li><a href="">面試經驗談</a></li>
-                                                    <li><a href="">職場甘苦談</a></li>
+                                                    <li><a href=""><span style="font-size: large">面試經驗談</span></a></li>
+                                                    <li><a href=""><span style="font-size: large">職場甘苦談</span></a></li>
                                                 </ul>
                                             </li>
-                                            <li th:if="${session.loginEnterprise!=null}"><a href="">企業中心</a>
+                                            <li th:if="${session.loginEnterprise!=null}"><a href=""><span style="font-size: large">企業中心</span></a>
                                                 <ul class="submenu">
-                                                    <li><a href="">職缺管理</a></li>
-                                                    <li><a th:href="@{/enterprise/events}">廣告管理</a></li>
+                                                    <li><a href=""><span style="font-size: large">職缺管理</span></a></li>
+                                                    <li><a th:href="@{/enterprise/events}"><span style="font-size: large">廣告管理</span></a></li>
                                                 </ul>
                                             </li>
-                                            <li th:if="${session.loginMember!=null}"><a href="">會員中心</a>
+                                            <li th:if="${session.loginMember!=null}"><a href=""><span style="font-size: large">會員中心</span></a>
 												<ul class="submenu">
-													<li><a href="">會員資訊</a></li>
-													<li><a th:href="@{/user/resumes}">履歷管理</a></li>
+													<li><a href=""><span style="font-size: large">會員資訊</span></a></li>
+													<li><a th:href="@{/user/resumes}"><span style="font-size: large">履歷管理</span></a></li>
 												</ul>
 											</li>
                                         </ul>
@@ -70,11 +70,11 @@
                                     <a th:href="@{/login}" class="btn head-btn2">登入/註冊</a>
                                 </div>
                                 <div th:if="${session.loginEnterprise!=null}" class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="genric-btn primary-border e-large" th:text="${'Hi! '+session.loginEnterprise.compid}">帳號</a>
+                                    <a href="#" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginEnterprise.compid}">帳號</a>
                                     <a th:href="@{/logout}" class="btn head-btn2">登出</a>
                                 </div>
                                 <div th:if="${session.loginMember!=null}" class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="genric-btn primary-border e-large" th:text="${'Hi! '+session.loginMember.username}">帳號</a>
+                                    <a href="#" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginMember.username}">帳號</a>
                                     <a th:href="@{/logout}" class="btn head-btn2">登出</a>
                                 </div>
                             </div>
