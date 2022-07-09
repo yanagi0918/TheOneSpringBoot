@@ -36,9 +36,6 @@
 	width: 40px;
 	height: 40px;
 }
-span{
-color:gray;
-}
 </style>
 </head>
 
@@ -87,11 +84,11 @@ color:gray;
 													<li><a href="">面試經驗談</a></li>
 													<li><a href="">在職評論</a></li>
 												</ul></li>
-											<li><a href="">企業中心</a>
-												<ul class="submenu">
-													<li><a href="">職缺管理</a></li>
-													<li><a href="">廣告管理</a></li>
-												</ul></li>
+<!-- 											<li><a href="">企業中心</a> -->
+<!-- 												<ul class="submenu"> -->
+<!-- 													<li><a href="">職缺管理</a></li> -->
+<!-- 													<li><a href="">廣告管理</a></li> -->
+<!-- 												</ul></li> -->
 										</ul>
 									</nav>
 								</div>
@@ -216,10 +213,10 @@ color:gray;
 													<h4 th:text="${jobs.title}"></h4>
 												</a>
 												<ul>
-													<span>工作性質:</span>
-													<li th:text="${jobs.jobdescription}"></li>
-													<span>徵才條件:</span>
-													<li th:text="${jobs.qualification}"></li>
+													
+													<li>工作性質:<span th:text="${jobs.jobdescription}"></span></li>
+													
+													<li>徵才條件:<span th:text="${jobs.qualification}"></span></li>
 
 
 
@@ -228,8 +225,7 @@ color:gray;
 													<li class="box" th:text="${jobs.description}"></li>
 												</ul>
 												<ul>
-													<span>薪資:</span>
-													<li th:text="${jobs.salary}"></li>
+													<li>薪資:<span th:text="${jobs.salary}"></span></li>
 												</ul>
 											</div>
 										</div>
