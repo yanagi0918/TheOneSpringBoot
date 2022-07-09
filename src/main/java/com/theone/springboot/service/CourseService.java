@@ -13,6 +13,8 @@ public interface CourseService {
 
 	CourseBean findByCourseName(String courseName);
 
+	List<CourseBean> findByCourseCategory(String courseCategory);
+
 	List<CourseBean> findAllCourses();
 	
 	Optional<CourseBean> findCourse(Integer pk);

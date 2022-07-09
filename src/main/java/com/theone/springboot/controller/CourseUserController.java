@@ -34,11 +34,29 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses")
-    public String findAllCourse(Model model) {
-        List<CourseBean> courseList = courseService.findAllCourses();
-        model.addAttribute("courseList", courseList);
-        return "course/allCustomerList";
+    public String findAllCourse(@RequestParam(required = false) String courseCategory, Model model) {
+        if (courseCategory!=null){
+            List<CourseBean> courseList = courseService.findByCourseCategory(courseCategory);
+            model.addAttribute("courseCategory",courseCategory);
+            model.addAttribute("courseList", courseList);
+            return "course/allCustomerListByCategory";
+        }else {
+            List<CourseBean> courseList = courseService.findAllCourses();
+            model.addAttribute("courseList", courseList);
+            return "course/allCustomerList";
+        }
+
     }
+
+    @GetMapping("/courses/{courseNo}")
+    public String findCourseByNo(@PathVariable Integer courseNo, Model model) {
+        //List<CourseBean> courseList = new ArrayList<CourseBean>();
+        Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
+       // courseList.add(findCourse.orElseThrow());
+        model.addAttribute("CourseBean", findCourse.orElseThrow());
+        return "course/customerDetail";
+    }
+
 
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
     @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,14 +70,7 @@ public class CourseUserController {
         }
     }
 
-    @GetMapping("/courses/{courseNo}")
-    public String findCourseByNo(@PathVariable Integer courseNo, Model model) {
-        List<CourseBean> courseList = new ArrayList<CourseBean>();
-        Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
-        courseList.add(findCourse.orElseThrow());
-        model.addAttribute("courseList", courseList);
-        return "course_dashboard/courseList";
-    }
+
 
     @GetMapping("/courses/detail/{courseNo}")
     public String showDetail(@PathVariable Integer courseNo, Model model) {
@@ -97,7 +108,7 @@ public class CourseUserController {
 
     @PutMapping("/courses")
     @ResponseBody
-    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean){
+    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean) {
         CourseBean courseBean = courseService.findCourse(CourseBean.getCourseNo()).orElseThrow();
         courseBean.setStatus(CourseBean.getStatus());
         courseService.saveOrUpdate(courseBean);

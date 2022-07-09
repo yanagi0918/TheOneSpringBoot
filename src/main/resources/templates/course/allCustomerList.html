@@ -22,6 +22,26 @@
     <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
     <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+
+    <!-- assets_course CSS here -->
+    <!-- Favicon -->
+    <!--    <link href="img/favicon.ico" rel="icon">-->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/assets_course/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/assets_course/css/style.css}" rel="stylesheet">
+
+
 </head>
 
 
@@ -119,164 +139,306 @@
     </div>
 </div>
 <!-- Hero Area End -->
+
+
 <!--================Course Area =================-->
-<section class="blog_area section-padding">
-    <div class="container">
+<!-- Category Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程分類</h5>
+            <h2>精選進修主題</h2>
+        </div>
         <div class="row">
-            <div class="col-lg-8 mb-5 mb-lg-0">
-                <div class="blog_left_sidebar">
-                    <article th:each="course:${courseList}" class="blog_item">
-
-<!--                        這裡-->
-                        <i class="fa fa-facebook-messenger"></i>
-                        <i class="fa fa-list"></i>
-                        <i class="fa fa-list-ol fa-3x"></i>
-                        <i class="fa fa-list-ul fa-lg"></i>
-                        <i class="fa fa-th-list fa-xl"></i>
-
-
-                        <div class="section-top-border">
-                            <h1 th:text="${course.courseCategory}+' '"></h1>
-                        </div>
-
-                        <!-- 識別課程編號-->
-                        <input type="hidden" class="form-control" name="courseNo"
-                               th:value="${course.courseNo}">
-
-                        <div class="blog_item_img">
-                            <a class="d-inline-block" href="#">
-                                <img class="card-img rounded-0" th:src="${course.coursePicUrl}" alt="">
-                            </a>
-                            <div class="blog_item_date">
-                                <h3 th:utext="' &lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt; '+${course.score}+' / 10'"></h3>
-                                <p></p>
-                            </div>
-                        </div>
-                        <div class="blog_details">
-                            <div class="d-inline-block">
-                                <a class="section-top-border" href="single-blog.html">
-                                    <h2>課程名稱</h2>
-                                </a>
-                            </div>
-                            <p th:utext="'&lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; '+${course.lecturer}"></p>
-                            <p th:text="'&lt;i class=&quot;fa fa-calendar-alt&quot;&gt;&lt;/i&gt; 上架時間 '+ ${#dates.format(course.date, 'yyyy-MM-dd')}"></p>
-
-                            <div class="items-link2 items-link f-right">
-                                <!--                                <a style="float:right" href="#" class="genric-btn info-border circle">收藏</a>-->
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                        type="button" id="collection">收藏
-                                </button>
-                            </div>
-
-                            <p th:text="'&lt;i class=&quot;fa fa-money-bill-alt&quot;&gt;&lt;/i&gt;  價錢 NT'+${course.price}"></p>
-
-                        </div>
-                    </article>
-
-                    <nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Previous">
-                                    <i class="ti-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">1</a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Next">
-                                    <i class="ti-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-1.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{/user/courses}">
+                        <h4 class="text-white font-weight-medium">所有課程</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="blog_right_sidebar">
-                    <aside class="single_sidebar_widget search_widget">
-                        <form action="#">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder='Search Keyword'
-                                           onfocus="this.placeholder = ''"
-                                           onblur="this.placeholder = 'Search Keyword'">
-                                    <div class="input-group-append">
-                                        <button class="btns" type="button"><i class="ti-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search
-                            </button>
-                        </form>
-                    </aside>
-                    <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title">課程分類</h4>
-                        <ul class="list cat-list">
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>所有課程</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>英文證照</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>日語證照</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>韓語證照</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>生涯轉換與轉業</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>自我認知</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>求職技巧</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>就業市場現況與趨勢</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </aside>
-                    <aside class="single_sidebar_widget popular_post_widget">
-                        <h3 class="widget_title">好評課程推薦</h3>
-                        <div th:each="courseRecommend:${courseRecommends}" class="media post_item">
-                            <img th:src="@{courseRecommend.coursePicUrl}" alt="post" width="80" height="80">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h3 th:text="${courseRecommend.courseName}"></h3>
-                                </a>
-                                <p th:text="${courseRecommend.lecturer}"></p>
-                            </div>
-                        </div>
-                    </aside>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-2.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=英文證照'}">
+                        <h4 class="text-white font-weight-medium">英文證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-3.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=日語證照'}">
+                        <h4 class="text-white font-weight-medium">日語證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-4.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=韓語證照'}">
+                        <h4 class="text-white font-weight-medium">韓語證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=自我認知'}">
+                        <h4 class="text-white font-weight-medium">自我認知</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=求職技巧'}">
+                        <h4 class="text-white font-weight-medium">求職技巧</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=生涯轉換與轉業'}">
+                        <h4 class="text-white font-weight-medium">生涯轉換與轉業</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{'/user/courses?courseCategory=就業市場現況趨勢'}">
+                        <h4 class="text-white font-weight-medium">就業市場現況趨勢</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+<!-- Category end -->
+<!-- Courses Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程列表</h5>
+            <h2>所有課程</h2>
+
+            <!-- Search Form -->
+            <div class="mb-2 w-25 m-auto">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="輸入課程關鍵字">
+                        <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary"><i
+                                            class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div th:each="course:${courseList}" class="col-lg-4 col-md-6 mb-4">
+                <div class="rounded overflow-hidden mb-2">
+                    <!-- 識別課程編號-->
+                    <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
+
+                    <a th:href="@{'/user/courses/'+${course.courseNo}}">
+                        <img class="img-fluid" th:src="${course.coursePicUrl}" alt=""  src="">
+                    </a>
+                    <div class="bg-secondary p-4">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-table fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.courseCategory}"></h6>
+                            <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
+                        </div>
+                        <a class="h5" th:href="@{'/user/courses/'+${course.courseNo}}"><div th:text="${course.courseName}"></div></a>
+                        <div></div>
+                        <a href=""><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6>
+                        </a>
+                        <div class="border-top mt-4 pt-4">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-user-circle fa- text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.lecturer}"></h6>
+                                <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-star text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.score}"></h6>
+                                <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-dollar-sign fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+'NT'+${course.price}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="col-lg-4 col-md-6 mb-4">-->
+<!--                <div class="rounded overflow-hidden mb-2">-->
+<!--                    <a href="">-->
+<!--                        <img class="img-fluid" th:src="@{/assets_course/img/course-2.jpg}" alt="">-->
+<!--                    </a>-->
+<!--                    <div class="bg-secondary p-4">-->
+<!--                        <div class="d-flex justify-content-between mb-3">-->
+<!--                            <h6 class="m-0"><i class="fa fa-table fa-lg text-primary mr-2"></i>英文認證</h6>-->
+<!--                            <h6 class="m-0"><i class="fa fa-calendar-alt fa-lg text-primary mr-2"></i>2022-01-01</h6>-->
+<!--                        </div>-->
+<!--                        <a class="h5" href="">Web design & development courses for beginner</a>-->
+<!--                        <div></div>-->
+<!--                        <a href="" class="h5"><h6 class="m-0 f-right "><i-->
+<!--                                class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>-->
+<!--                        <div class="border-top mt-4 pt-4">-->
+<!--                            <div class="d-flex justify-content-between">-->
+<!--                                <h6 class="m-0"><i class="fa fa-user-circle fa-lg text-primary mr-2"></i>王大維</h6>-->
+<!--                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5</h6>-->
+<!--                                <h6 class="m-0"><i class="fa fa-dollar-sign fa-lg text-primary mr-2"></i>NT1999</h6>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        </div>
+
+
+        <div class="col-lg-4 mt-5 mt-lg-0">
+            <!-- Recent Post -->
+            <div class="mb-5">
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div class="mb-5">
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
+                <div class="d-flex flex-wrap m-n1">
+                    <a href="" class="btn btn-outline-primary m-1">Design</a>
+                    <a href="" class="btn btn-outline-primary m-1">Development</a>
+                    <a href="" class="btn btn-outline-primary m-1">Marketing</a>
+                    <a href="" class="btn btn-outline-primary m-1">SEO</a>
+                    <a href="" class="btn btn-outline-primary m-1">Writing</a>
+                    <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-lg justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Courses End -->
+
+
+<!--old-->
+<!--<section class="blog_area section-padding">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-8 mb-5 mb-lg-0">-->
+<!--                <div class="blog_left_sidebar">-->
+
+<!--                    <nav class="blog-pagination justify-content-center d-flex">-->
+<!--                        <ul class="pagination">-->
+<!--                            <li class="page-item">-->
+<!--                                <a href="#" class="page-link" aria-label="Previous">-->
+<!--                                    <i class="ti-angle-left"></i>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a href="#" class="page-link">1</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item active">-->
+<!--                                <a href="#" class="page-link">2</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a href="#" class="page-link" aria-label="Next">-->
+<!--                                    <i class="ti-angle-right"></i>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4">-->
+<!--                <div class="blog_right_sidebar">-->
+<!--                    <aside class="single_sidebar_widget search_widget">-->
+<!--                        <form action="#">-->
+<!--                            <div class="form-group">-->
+<!--                                <div class="input-group mb-3">-->
+<!--                                    <input type="text" class="form-control" placeholder='Search Keyword'-->
+<!--                                           onfocus="this.placeholder = ''"-->
+<!--                                           onblur="this.placeholder = 'Search Keyword'">-->
+<!--                                    <div class="input-group-append">-->
+<!--                                        <button class="btns" type="button"><i class="ti-search"></i></button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"-->
+<!--                                    type="submit">Search-->
+<!--                            </button>-->
+<!--                        </form>-->
+<!--                    </aside>-->
+<!--                    <aside class="single_sidebar_widget popular_post_widget">-->
+<!--                        <h3 class="widget_title">好評課程推薦</h3>-->
+<!--                        <div th:each="courseRecommend:${courseRecommends}" class="media post_item">-->
+<!--                            <img th:src="@{courseRecommend.coursePicUrl}" alt="post" width="80" height="80">-->
+<!--                            <div class="media-body">-->
+<!--                                <a href="#">-->
+<!--                                    <h3 th:text="${courseRecommend.courseName}"></h3>-->
+<!--                                </a>-->
+<!--                                <p th:text="${courseRecommend.lecturer}"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </aside>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 <!--================Course Area =================-->
+
+
 <footer>
     <!-- Footer Start-->
     <div class="footer-area footer-bg footer-padding">
@@ -389,6 +551,22 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/assets/js/plugins.js}"></script>
 <script th:src="@{/assets/js/main.js}"></script>
+
+
+<!-- assets_course JS here -->
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets_course/lib/easing/easing.min.js}"></script>
+<script th:src="@{/assets_course/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Contact Javascript File -->
+<script th:src="@{/assets_course/mail/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{/assets_course/mail/contact.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/assets_course/js/main.js}"></script>
+
 
 </body>
 </html>

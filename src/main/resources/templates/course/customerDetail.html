@@ -60,7 +60,7 @@
                                         <li><a href="">找工作</a></li>
                                         <li><a href="">課程進修</a>
                                             <ul class="submenu">
-                                                <li><a href="">所有課程</a>
+                                                <li><a th:href="@{/user/courses}">所有課程</a>
                                                     <!--                                                    <ul class="submenu">-->
                                                     <!--                                                        <li>123</li>-->
                                                     <!--                                                        <li>123</li>-->
@@ -105,7 +105,7 @@
 </header>
 <main>
 
-    <!-- Hero Area Start-->
+    <!-- course Area Start-->
     <div class="slider-area ">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center"
              th:data-background="@{/assets/img/hero/course1.jpg}">
@@ -120,8 +120,10 @@
             </div>
         </div>
     </div>
-    <!-- Hero Area End -->
-    <!-- job post company Start -->
+    <!-- course Area End -->
+
+    <!-- course post  Start -->
+
     <div class="job-post-company pt-120 pb-120">
         <div class="container">
             <div class="row justify-content-between">
@@ -138,7 +140,7 @@
                         <div class="blog_item_img">
                             <img class="card-img rounded-0" th:src="${CourseBean.coursePicUrl}" alt="" id="preview_img">
                             <div class="blog_item_date">
-                                <h3 th:value="${CourseBean.score}+'/ 10'"><i class="fa fa-star"></i> ***8.5 / 10 </h3>
+                                <h3 th:utext="'&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt; '+${CourseBean.score}+' / 10'"></h3>
                                 <p></p>
                             </div>
                         </div>
@@ -149,7 +151,7 @@
                         <div class="post-details1 mb-50">
                             <!-- Small Section Tittle -->
                             <div class="small-section-tittle">
-                                <h2 th:value="${CourseBean.courseName}">***IELTS 雅思檢定班</h2>
+                                <h2 th:utext="${CourseBean.courseName}"></h2>
                             </div>
                         </div>
                         <div class="post-details2  mb-50">
@@ -158,9 +160,7 @@
                                 <h4>課程介紹</h4>
                             </div>
                             <ul>
-                                <li th:value="${CourseBean.courseIntroduction}">
-                                    ***留學、移民歐美最重要的英文認證之一，IELTS測試共分聽、說、讀、寫四項科目，針對四項能力由外師進行個別加強衝刺,準備考試不再是無頭蒼蠅，更能針對問題對症下藥，最短時間衝刺多益高分。
-                                </li>
+                                <li th:utext="${CourseBean.courseIntroduction}"></li>
                                 <!--                                <li></li>-->
                                 <!--                                <li></li>-->
                             </ul>
@@ -176,13 +176,13 @@
                             <h4>課程細項</h4>
                         </div>
                         <ul>
-                            <li>分類 : <span th:value="${CourseBean.courseCategory}">***英文證照</span></li>
-                            <li>講師 : <span th:value="${CourseBean.lecturer}">***王大胖</span></li>
-                            <li>上架時間 : <span th:value="${CourseBean.date}">***2022-08-01</span></li>
-                            <li>價錢 : <span th:value="'NT'+${CourseBean.price}">***NT1999</span></li>
+                            <li>分類 : <span th:utext="${CourseBean.courseCategory}"></span></li>
+                            <li>講師 : <span th:utext="${CourseBean.lecturer}"></span></li>
+                            <li>上架時間 : <span th:utext="${CourseBean.date}"></span></li>
+                            <li>價錢 : <span th:utext="'NT'+${CourseBean.price}"></span></li>
                         </ul>
                         <div class="apply-btn2">
-                            <a href="#" class="btn">馬上購買</a>
+                            <a href="" class="btn" id="btn-buy">馬上購買</a>
                         </div>
                     </div>
                     <div class="post-details4  mb-50">
@@ -204,7 +204,7 @@
             </div>
         </div>
     </div>
-    <!-- job post company End -->
+    <!-- course post  End -->
 
 </main>
 <footer>
