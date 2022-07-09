@@ -19,7 +19,7 @@ public class Job implements Serializable{
 	private Integer required_number;
 	private String salary;
 	private String description;
-	private String comp_id;
+	private String compId;
 	public Job() {}
 	
 	public String getDescription() {
@@ -78,16 +78,16 @@ public class Job implements Serializable{
 		this.salary = salary;
 	}
 
-	public String getComp_id() {
-		return comp_id;
+	public String getCompId() {
+		return compId;
 	}
 
-	public void setComp_id(String comp_id) {
-		this.comp_id = comp_id;
+	public void setCompId(String compId) {
+		this.compId = compId;
 	}
 
 	public Job(Integer job_id, String title, String jobdescription, String qualification, Integer required_number,
-			String salary, String description, String comp_id) {
+			String salary, String description, String compId) {
 		super();
 		this.job_id = job_id;
 		this.title = title;
@@ -96,10 +96,10 @@ public class Job implements Serializable{
 		this.required_number = required_number;
 		this.salary = salary;
 		this.description = description;
-		this.comp_id = comp_id;
+		this.compId = compId;
 	}
 	public Job(String title, String jobdescription, String qualification, Integer required_number, String salary, String description,
-			String comp_id) {
+			String compId) {
 		super();
 		this.title = title;
 		this.jobdescription = jobdescription;
@@ -107,7 +107,7 @@ public class Job implements Serializable{
 		this.required_number = required_number;
 		this.salary = salary;
 		this.description = description;
-		this.comp_id = comp_id;
+		this.compId = compId;
 	}
 	public Job(Integer job_id) {
 		super();

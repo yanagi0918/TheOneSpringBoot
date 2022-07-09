@@ -57,6 +57,10 @@ public class JobServiceImpl implements JobService{
 	public List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary) {
 		return getByJobdescriptionAndSalary(jobdescription, salary);
 	}
+	@Override
+	public List<Job> findByCompId(String compId) {
+		return jobDao.findByCompId(compId);
+	}
 
 
 }

@@ -75,7 +75,8 @@ textarea {
  <div class="row mb-3">
 <label class="col-sm-2 col-form-label">統一編號:</label>
 <div class="col-sm-8">
-<input type="text"  name=comp_id maxlength="8" id="comp_id" class="form-control"  autofocus/>
+<input type="text"  name=compId maxlength="8" id="compId" class="form-control"  onblur="checkcompid()"> 
+<span id="show_compid"></span>
 </div>
 </div>
 
@@ -139,7 +140,7 @@ textarea {
 
 <div class="center">
                             
-                            <button type="submit" class="btn btn-primary" name="create" value="confirm">新增</button>
+                            <button type="submit" class="btn btn-primary" name="create" value="confirm" id="submit">新增</button>
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<button type="button" class="btn btn-primary" onclick="window.location.href='list'; return false;">取消</button>
 							<button type="button" class="btn btn-primary" id="jobInput">一鍵輸入</button>
