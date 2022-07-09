@@ -47,8 +47,6 @@ public class OrderDashBoardController {
 	
 	@PostMapping(path = "/order")
 	public String processCreate(Order order) {
-		System.err.println(order.getProductId());
-		
 		orderService.saveOrUpdate(order);
 		return "redirect:orders";
 	}
