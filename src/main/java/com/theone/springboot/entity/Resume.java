@@ -15,113 +15,135 @@ public class Resume {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer resume_id;
-	private String resume_name;
+	private Integer resumeId;
+	private String resumeName;
 	private String edu;
 	private String school;
 	private String dept;
 	private String autobiography;
-	private String work_exp;
+	private String workExp;
 	private String skills;
 	private String userId;
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	private Integer idNumber;
 	
-	public Resume() {
+	
+	
+	public Integer getResumeId() {
+		return resumeId;
 	}
 
-	public Integer getResume_id() {
-		return resume_id;
+
+
+	public void setResumeId(Integer resumeId) {
+		this.resumeId = resumeId;
 	}
 
-	public void setResume_id(Integer resume_id) {
-		this.resume_id = resume_id;
+
+
+	public String getResumeName() {
+		return resumeName;
 	}
 
-	public String getResume_name() {
-		return resume_name;
+
+
+	public void setResumeName(String resumeName) {
+		this.resumeName = resumeName;
 	}
 
-	public void setResume_name(String resume_name) {
-		this.resume_name = resume_name;
-	}
+
 
 	public String getEdu() {
 		return edu;
 	}
 
+
+
 	public void setEdu(String edu) {
 		this.edu = edu;
 	}
+
+
 
 	public String getSchool() {
 		return school;
 	}
 
+
+
 	public void setSchool(String school) {
 		this.school = school;
 	}
+
+
 
 	public String getDept() {
 		return dept;
 	}
 
+
+
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
+
+
 
 	public String getAutobiography() {
 		return autobiography;
 	}
 
+
+
 	public void setAutobiography(String autobiography) {
 		this.autobiography = autobiography;
 	}
 
-	public String getWork_exp() {
-		return work_exp;
+
+
+	public String getWorkExp() {
+		return workExp;
 	}
 
-	public void setWork_exp(String work_exp) {
-		this.work_exp = work_exp;
+
+
+	public void setWorkExp(String workExp) {
+		this.workExp = workExp;
 	}
+
+
 
 	public String getSkills() {
 		return skills;
 	}
 
+
+
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
 
-	public String getUser_id() {
+
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUser_id(String userId) {
+
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public Integer getIdNumber() {
-		return idNumber;
-	}
 
-	public void setIdNumber(Integer idNumber) {
-		this.idNumber = idNumber;
-	}
 
 	@Override
 	public String toString() {
-		return "Resume [resume_id=" + resume_id + ", resume_name=" + resume_name + ", edu=" + edu + ", school=" + school
-				+ ", dept=" + dept + ", autobiography=" + autobiography + ", work_exp=" + work_exp + ", skills="
-				+ skills + ", userId=" + userId + ", idNumber=" + idNumber + "]";
+		return "Resume [resumeId=" + resumeId + ", resumeName=" + resumeName + ", edu=" + edu + ", school=" + school
+				+ ", dept=" + dept + ", autobiography=" + autobiography + ", workExp=" + workExp + ", skills=" + skills
+				+ ", userId=" + userId + "]";
 	}
+
+
+
+
 
 }

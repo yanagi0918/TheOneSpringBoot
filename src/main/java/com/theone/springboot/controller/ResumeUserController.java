@@ -27,8 +27,8 @@ public class ResumeUserController {
 	
 	@GetMapping(path = "/resumes")
 	public String toResumeListPage(HttpSession session, Model model){
-		Member member = (Member)session.getAttribute("loginUser");
-		String userid = String.valueOf(member.getUserid());
+		Member member = (Member)session.getAttribute("loginMember");
+		String userid = member.getUserid();
 		List<Resume> resumes = resumeService.findByUserId(userid);
 		model.addAttribute("resumes", resumes);
 		model.addAttribute("total",resumes.size()); //共幾筆
@@ -37,15 +37,15 @@ public class ResumeUserController {
 	
 	@GetMapping(path = "/resume")
 	public String toCreatePage(HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("loginUser");
+		Member member = (Member)session.getAttribute("loginMember");
 		model.addAttribute("member",member);
 		return "resume/insertResume";
 	}
 	
 	@PostMapping(path = "/resume")
 	public String saveOrUpdate(Resume resume){
-		System.out.println("有進新增方法!!!!");
 		resumeService.saveOrUpdate(resume);
+		System.err.println(resume);
 		return "redirect:/user/resumes";  
 	}
 	

@@ -81,7 +81,7 @@
 								</div>
 								<!-- Header-btn -->
 								<div class="header-btn d-none f-right d-lg-block">
-									<a href="#" class="btn head-btn2">登出</a>
+									<a th:href="@{/logout}"class="btn head-btn2">登出</a>
 								</div>
 							</div>
 						</div>
@@ -131,9 +131,9 @@
 									<div class="job-tittle">
 										<h2>
 											<input type="hidden" class="form-control" name="resume_id" value="0" id="resume_id"/>
-											<input type="hidden" class="form-control" name="userId" th:value="${resume.userId}" id="userId"/>
+											<input type="hidden" class="form-control" name="userId" th:value="${session.loginMember.userid}" id="userId"/>
 											
-											<input type="text" placeholder="請輸入履歷名稱">
+											<input type="text" placeholder="請輸入履歷名稱" name="resumeName" id="resumeName">
 										</h2>
 										<!-- <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="images.png" alt="請選擇您的照片" style="width: 320px; height: 200px;">  -->
 										<!-- <input class="form-control" type="file" name="imageFile" id="imgInp" accept="image/jpeg, image/png"> -->
@@ -148,14 +148,14 @@
 									<div class="small-section-tittle">
 										<h4>自傳</h4>
 									</div>
-									<textarea name="work_exp" id="work_exp" cols="65" rows="15" placeholder="請輸入自傳" required></textarea>
+									<textarea name="autobiography" id="autobiography" cols="65" rows="15" placeholder="請輸入自傳" required></textarea>
 								</div>
 								<div class="post-details2  mb-50">
 									<!-- Small Section Tittle  -->
 									<div class="small-section-tittle">
 										<h4>工作經驗</h4>
 									</div>
-									<textarea name="work_exp" id="work_exp" cols="65" rows="12" placeholder="請輸入工作經驗" required></textarea>
+									<textarea name="workExp" id="workExp" cols="65" rows="12" placeholder="請輸入工作經驗" required></textarea>
 								</div>
 							</div>
 
@@ -168,11 +168,11 @@
 									<h4>聯絡方式</h4>
 								</div>
 								<ul>
-									<li>姓名 : <span>王小明</span></li>
-									<li>email : <span>EEIT45team5@gmail.com</span></li>
-									<li>手機 : <span>0910654321</span></li>
-									<li>住宅電話 : <span>0287654321</span></li>
-									<li>通訊地址 : <span>台東縣蘭嶼鄉25號</span></li>
+									<li>姓名 : <span th:text="${session.loginMember.username}"></span></li>
+									<li>email : <span th:text="${session.loginMember.email}"></span></li>
+									<li>手機 : <span th:text="${session.loginMember.phone}"></span></li>
+									<li>住宅電話 : <span th:text="${session.loginMember.tele}"></span></li>
+									<li>通訊地址 : <span th:text="${session.loginMember.address}"></span></li>
 								</ul>
 							</div>
 
