@@ -23,11 +23,13 @@
 <link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet">
 </head>
 <body>
-
 	<!-- welcome card -->
 	<div class="container">
 		<div class="card-wrap">
 			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<a class="btn btn-back-home js-btn" th:href="@{/}" > <i
+					class="fa fa-home"></i>
+				</a>
 				<div class="card-body">
 					<h2 class="card-title">WELCOME</h2>
 					<p>Welcome to the login page</p>
@@ -48,7 +50,8 @@
 						<button type="button" class="switcher-member switcher-login">
 							Login <span class="underline"></span>
 						</button>
-						<form th:action="@{/memberLogin}" th:method="post" class="form form-login shadow card-body">
+						<form th:action="@{/memberLogin}" th:method="post"
+							class="form form-login shadow card-body">
 							<fieldset>
 								<div class="input-block card-body">
 									<h2 class="card-title">Welcome Back!</h2>
@@ -71,8 +74,8 @@
 												placeholder="Identity Number" required="required" />
 										</div>
 										<div class="form-group">
-											<input th:name="password" class="form-control" type="password"
-												placeholder="Password" required="required" />
+											<input th:name="password" class="form-control"
+												type="password" placeholder="Password" required="required" />
 										</div>
 										<p>
 											<a>Forgot your password?</a>
@@ -144,7 +147,8 @@
 						<button type="button" class="switcher-company switcher-login">
 							Login <span class="underline"></span>
 						</button>
-						<form th:action="@{/companyLogin}" th:method="post" class="form form-login shadow card-body">
+						<form th:action="@{/companyLogin}" th:method="post"
+							class="form form-login shadow card-body">
 							<!-- Company login -->
 							<fieldset>
 								<div class="input-block card-body">
@@ -168,8 +172,8 @@
 												placeholder="Tax ID Number" required="required" />
 										</div>
 										<div class="form-group">
-											<input th:name="password" class="form-control" type="password"
-												placeholder="Password" required="required" />
+											<input th:name="password" class="form-control"
+												type="password" placeholder="Password" required="required" />
 										</div>
 										<p>
 											<a>Forgot your password?</a>
