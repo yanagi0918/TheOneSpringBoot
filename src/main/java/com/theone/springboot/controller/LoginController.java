@@ -36,9 +36,7 @@ public class LoginController {
 			session.setAttribute("loginUser", member);
 			return "redirect:user/resumes";
 		}
-		
-		
-		
+
 		//vincent
 		if ("admin".equals(username) && "12345".equals(password)) {
 			session.setAttribute("loginUser", username);

@@ -1,29 +1,29 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
-
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board HTML-5 Template </title>
+    <title>The One</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="manifest" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/price_rangs.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 </head>
+
 
 <body>
 <!-- Preloader Start -->
@@ -32,7 +32,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/img/logo/logo.png" alt="">
+                <img th:src="@{/assets/img/logo/logo.png}" alt="">
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                     <div class="col-lg-3 col-md-2">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href=""><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
@@ -56,32 +56,47 @@
                             <div class="main-menu">
                                 <nav class="d-none d-lg-block">
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="job_listing.html">Find a Jobs </a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Page</a>
+                                        <li><a href="">首頁</a></li>
+                                        <li><a href="">找工作</a></li>
+                                        <li><a href="">課程進修</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                                <li><a href="job_details.html">job Details</a></li>
+                                                <li><a th:href="@{/user/courses}">所有課程</a>
+                                                    <!--                                                    <ul class="submenu">-->
+                                                    <!--                                                        <li>123</li>-->
+                                                    <!--                                                        <li>123</li>-->
+                                                    <!--                                                        <li>123</li>-->
+                                                    <!--                                                    </ul>-->
+                                                </li>
+                                                <li><a href="">收藏</a></li>
+                                                <li><a href="">講師專區</a></li>
+                                                <li><a href="">我的課程</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="">討論區</a>
+                                            <ul class="submenu">
+                                                <li><a href="">面試經驗談</a></li>
+                                                <li><a href="">在職評論</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="">會員中心</a>
+                                            <ul class="submenu">
+                                                <li><a href="">會員資訊</a></li>
+                                                <li><a href="">履歷管理</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Header-btn -->
                             <div class="header-btn d-none f-right d-lg-block">
-                                <a href="#" class="btn head-btn1">Register</a>
-                                <a href="#" class="btn head-btn2">Login</a>
+                                <a href="#" class="btn head-btn2">登出</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
                 </div>
             </div>
         </div>
@@ -91,12 +106,12 @@
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-         data-background="assets/img/hero/course1.jpg">
+         th:data-background="@{/assets/img/hero/course1.jpg}">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>TheOne精選課程 </h2>
+                        <h2>TheOne精選課程</h2>
                     </div>
                 </div>
             </div>
@@ -110,23 +125,30 @@
         <div class="row">
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
+                    <article th:each="course:${courseList}" class="blog_item">
 
-                    <article class="blog_item">
+<!--                        這裡-->
+                        <i class="fa fa-facebook-messenger"></i>
+                        <i class="fa fa-list"></i>
+                        <i class="fa fa-list-ol fa-3x"></i>
+                        <i class="fa fa-list-ul fa-lg"></i>
+                        <i class="fa fa-th-list fa-xl"></i>
+
 
                         <div class="section-top-border">
-                            <h1>某某課程分類 ex 英文證照</h1>
+                            <h1 th:text="${course.courseCategory}+' '"></h1>
                         </div>
 
                         <!-- 識別課程編號-->
                         <input type="hidden" class="form-control" name="courseNo"
-                               th:value="${CourseBean.courseNo}">
+                               th:value="${course.courseNo}">
 
                         <div class="blog_item_img">
                             <a class="d-inline-block" href="#">
-                                <img class="card-img rounded-0" src="assets/img/blog/lesson1.jpg" alt="">
+                                <img class="card-img rounded-0" th:src="${course.coursePicUrl}" alt="">
                             </a>
                             <div class="blog_item_date">
-                                <h3><i class="fa fa-star"></i> 8.5 / 10 </h3>
+                                <h3 th:utext="' &lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt; '+${course.score}+' / 10'"></h3>
                                 <p></p>
                             </div>
                         </div>
@@ -136,14 +158,18 @@
                                     <h2>課程名稱</h2>
                                 </a>
                             </div>
-                            <p><i class="fa fa-user"></i> 講師名稱</p>
-                            <p><i class="fa fa-calendar-alt"></i> 上架時間 2020-08-01</p>
+                            <p th:utext="'&lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; '+${course.lecturer}"></p>
+                            <p th:text="'&lt;i class=&quot;fa fa-calendar-alt&quot;&gt;&lt;/i&gt; 上架時間 '+ ${#dates.format(course.date, 'yyyy-MM-dd')}"></p>
+
                             <div class="items-link2 items-link f-right">
-<!--                                <a style="float:right" href="#" class="genric-btn info-border circle">收藏</a>-->
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" >收藏</button>
+                                <!--                                <a style="float:right" href="#" class="genric-btn info-border circle">收藏</a>-->
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                        type="button" id="collection">收藏
+                                </button>
                             </div>
 
-                            <p><i class="fa fa-money-bill-alt"></i> 價錢 NT1999</p>
+                            <p th:text="'&lt;i class=&quot;fa fa-money-bill-alt&quot;&gt;&lt;/i&gt;  價錢 NT'+${course.price}"></p>
+
                         </div>
                     </article>
 
@@ -235,22 +261,13 @@
                     </aside>
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">好評課程推薦</h3>
-                        <div class="media post_item">
-                            <img src="assets/img/post/course.jpg" alt="post" width="80" height="80">
+                        <div th:each="courseRecommend:${courseRecommends}" class="media post_item">
+                            <img th:src="@{courseRecommend.coursePicUrl}" alt="post" width="80" height="80">
                             <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>好評課程名稱...</h3>
+                                <a href="#">
+                                    <h3 th:text="${courseRecommend.courseName}"></h3>
                                 </a>
-                                <p>講師</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="assets/img/post/Hunterlogo.png" alt="post" width="80" height="80">
-                            <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>好評課程名稱...</h3>
-                                </a>
-                                <p>講師</p>
+                                <p th:text="${courseRecommend.lecturer}"></p>
                             </div>
                         </div>
                     </aside>
@@ -269,10 +286,9 @@
                     <div class="single-footer-caption mb-50">
                         <div class="single-footer-caption mb-30">
                             <div class="footer-tittle">
-                                <h4>About Us</h4>
+                                <h4>關於我們</h4>
                                 <div class="footer-pera">
-                                    <p>Heaven frucvitful doesn't cover lesser dvsays appear creeping seasons so
-                                        behold.</p>
+                                    <p>幫助您找尋最適合的工作</p>
                                 </div>
                             </div>
                         </div>
@@ -282,14 +298,11 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Contact Info</h4>
+                            <h4>聯絡我們</h4>
                             <ul>
-                                <li>
-                                    <p>Address :Your address goes
-                                        here, your demo address.</p>
-                                </li>
-                                <li><a href="#">Phone : +8880 44338899</a></li>
-                                <li><a href="#">Email : info@colorlib.com</a></li>
+                                <li><p>地址 :320桃園市中壢區新生路二段421號</p></li>
+                                <li><a href="">Phone : +03 453 2632</a></li>
+                                <li><a href="">Email : TheOne@gmail.com</a></li>
                             </ul>
                         </div>
 
@@ -298,72 +311,13 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Important Link</h4>
+                            <h4>相關連結</h4>
                             <ul>
-                                <li><a href="#"> View Project</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Testimonial</a></li>
-                                <li><a href="#">Proparties</a></li>
-                                <li><a href="#">Support</a></li>
+                                <li><a href="">Facebook</a></li>
+                                <li><a href="">Instagram</a></li>
+                                <li><a href="">Twitter</a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Newsletter</h4>
-                            <div class="footer-pera footer-pera2">
-                                <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
-                            </div>
-                            <!-- Form -->
-                            <div class="footer-form">
-                                <div id="mc_embed_signup">
-                                    <form target="_blank"
-                                          action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                          method="get" class="subscribe_form relative mail_part">
-                                        <input type="email" name="email" id="newsletter-form-email"
-                                               placeholder="Email Address"
-                                               class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                               onblur="this.placeholder = ' Email Address '">
-                                        <div class="form-icon">
-                                            <button type="submit" name="submit" id="newsletter-submit"
-                                                    class="email_icon newsletter-submit button-contactForm"><img
-                                                    src="assets/img/icon/form.png" alt=""></button>
-                                        </div>
-                                        <div class="mt-10 info"></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  -->
-            <div class="row footer-wejed justify-content-between">
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <!-- logo -->
-                    <div class="footer-logo mb-20">
-                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="footer-tittle-bottom">
-                        <span>5000+</span>
-                        <p>Talented Hunter</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="footer-tittle-bottom">
-                        <span>451</span>
-                        <p>Talented Hunter</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <!-- Footer Bottom Tittle -->
-                    <div class="footer-tittle-bottom">
-                        <span>568</span>
-                        <p>Talented Hunter</p>
                     </div>
                 </div>
             </div>
@@ -401,41 +355,40 @@
 </footer>
 
 <!-- JS here -->
-
 <!-- All JS Custom Plugins Link Here here -->
-<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
 <!-- Jquery, Popper, Bootstrap -->
-<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="./assets/js/popper.min.js"></script>
-<script src="./assets/js/bootstrap.min.js"></script>
+<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
 <!-- Jquery Mobile Menu -->
-<script src="./assets/js/jquery.slicknav.min.js"></script>
+<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
 
 <!-- Jquery Slick , Owl-Carousel Plugins -->
-<script src="./assets/js/owl.carousel.min.js"></script>
-<script src="./assets/js/slick.min.js"></script>
-<script src="./assets/js/price_rangs.js"></script>
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/price_rangs.js}"></script>
 
 <!-- One Page, Animated-HeadLin -->
-<script src="./assets/js/wow.min.js"></script>
-<script src="./assets/js/animated.headline.js"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/animated.headline.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
 
 <!-- Scrollup, nice-select, sticky -->
-<script src="./assets/js/jquery.scrollUp.min.js"></script>
-<script src="./assets/js/jquery.nice-select.min.js"></script>
-<script src="./assets/js/jquery.sticky.js"></script>
-<script src="./assets/js/jquery.magnific-popup.js"></script>
+<script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery.sticky.js}"></script>
 
 <!-- contact js -->
-<script src="./assets/js/contact.js"></script>
-<script src="./assets/js/jquery.form.js"></script>
-<script src="./assets/js/jquery.validate.min.js"></script>
-<script src="./assets/js/mail-script.js"></script>
-<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+<script th:src="@{/assets/js/contact.js}"></script>
+<script th:src="@{/assets/js/jquery.form.js}"></script>
+<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/js/mail-script.js}"></script>
+<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
 
 <!-- Jquery Plugins, main Jquery -->
-<script src="./assets/js/plugins.js"></script>
-<script src="./assets/js/main.js"></script>
+<script th:src="@{/assets/js/plugins.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
 
 </body>
 </html>
