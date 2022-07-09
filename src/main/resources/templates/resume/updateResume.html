@@ -128,14 +128,12 @@
                                     <a href="#"><img src="images.png" alt=""></a>
                                 </div> -->
 									<div class="job-tittle">
-										<a href="#">
 											<h2>
-											<input type="hidden" class="form-control" name="resume_id" id="resume_id" value="0"/>
+											<input type="hidden" class="form-control" name="resumeId" id="resumeId" th:value="${resume.resumeId}"/>
 											<input type="hidden" class="form-control" name="userId" id="userId" th:value="${session.loginMember.userid}"/>
 											
 											<input type="text" name="resumeName" id="resumeName" th:value="${resume.resumeName}" placeholder="請輸入履歷名稱" >
 											</h2>
-										</a>
 									</div>
 								</div>
 							</div>
@@ -193,10 +191,10 @@
 									</select>
 									</li>
 									<li>畢業學校 : <input type="text" name="school"
-										class="form-control" id="school" required value="國立台灣大學" />
+										class="form-control" id="school" required th:value="${resume.school}" />
 									</li>
 									<li>畢業科系: <input type="text" name="dept"
-										class="form-control" id="dept" required value="資訊管理系" />
+										class="form-control" id="dept" required th:value="${resume.dept}" />
 									</li>
 								</ul>
 								<hr>
@@ -204,15 +202,12 @@
 									<h4>取得證照:</h4>
 								</div>
 								<ul>
-									<li><textarea name="skills" placeholder="請輸入已取得證照"
-											cols="36" rows="5" id="skills"></textarea></li>
+									<li><textarea name="skills" placeholder="請輸入已取得證照" cols="36" rows="5" id="skills" th:text="${resume.skills}"></textarea></li>
 								</ul>
 								<div class="center">
 									<br> <br>
-									<!-- <button type="submit" class="genric-btn primary circle" name="create"	value="confirm"  id="btn-submit">修改履歷</button> -->
-									<a href="yu_allResume.html" class="genric-btn primary circle">修改履歷</a>
-									<!-- <button type="button" class="genric-btn primary circle" id="btn-goBack">取消修改</button> -->
-									<a href="yu_allResume.html" class="genric-btn primary circle">取消修改</a>
+									<button type="submit" class="genric-btn primary circle" name="create"	value="confirm"  id="btn-submit">修改履歷</button>
+									<button type="button" class="genric-btn primary circle" id="btn-goBack">取消修改</button>
 								</div>
 							</div>
 						</div>
