@@ -73,7 +73,6 @@
 				<div class="col-sm-8 text-center">
 				<input type="date" class="form-control"
 					name="intTime" id="intTime" required th:value="*{intTime}">
-<!-- 				 <input type="date" class="form-control" name="createdTime" th:value="*{createdTime}" readonly > -->
 			</div></div>
 			<div class="row mb-3">
 				<label>內容建立時間</label> 
@@ -108,13 +107,13 @@
 			<div class="row mb-3">
 				<label>考官QA</label>
 				<div class="col-sm-8 text-center">
-				<textarea class="form-control" placeholder="備註最多50字" id="qA"
+				<textarea class="form-control" placeholder="備註最多200字" id="qA"
 					style="height: 150px;" name="qA" maxlength="50" th:text="*{qA}"></textarea>
 			</div></div>
 			<div class="row mb-3">
 				<label>心得分享</label>
 				<div class="col-sm-8 text-center">
-				<textarea class="form-control" placeholder="備註最多600字" id="share"
+				<textarea class="form-control" placeholder="備註最多1000字" id="share"
 					style="height: 150px;" name="share" maxlength="600" th:text="*{share}"></textarea>
 			</div></div>
 			<div class="row mb-3">

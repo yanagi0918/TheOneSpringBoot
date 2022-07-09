@@ -127,7 +127,7 @@
                                                 </select>
                                             </div>
                                             <!--  Select job items End-->
-                                            <button class="genric-btn primary e-large">新增</button>
+                                            <button class="genric-btn primary e-large" onclick="window.location.href='intv'; return false;">分享心得</button>
                                         </div>
                                     </div>
                                 </div>
@@ -161,8 +161,8 @@
                                     <figure>
                                         <div class="items-link items-link2 f-right">
                                             
-                                            <button class="genric-btn primary-border  e-large"  th:href="@{intv/}+${intv.cvNo}">編輯</button>
-                                            <button class="genric-btn danger-border  e-large"th:id="${intv.cvNo}" onclick="del(this.id)">刪除</button>
+                                          <a class="genric-btn primary-border  "  th:href="@{intv/}+${intv.cvNo}">編輯</a>
+                                            <a class="genric-btn danger-border  " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </a>
                                              
                                             <figcaption th:text="'編輯時間:'+${intv.createTime}" style="font-size: 12px "></figcaption>
                                         </div>
@@ -170,7 +170,7 @@
 
                                 </div>
                                 
-                                <button th:text="返回前頁" class="genric-btn primary e-large"></button>
+                                
                             </div>    <span class="lnr lnr-arrow-right"></span>
                             
                           </section>
@@ -518,10 +518,10 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/enterprise/event/'+id,
+						 url: '/enterprise/delete/'+id,
                         type: 'DELETE',
                         success: function(result) {
-                            window.location.href='./events'
+                            window.location.href='./intvlist'
                         }
                     });
 				}, 800)
