@@ -36,11 +36,6 @@ public class ResumeDashBoardController {
 	
 	@PostMapping(path = "/resume")
 	public String saveOrUpdate(Resume resume){
-		System.out.print("''''''''''''");
-		System.out.print(resume);
-		System.out.print(resume.getResume_name());
-		
-		System.out.print("''''''''''''");
 		resumeService.saveOrUpdate(resume);
 		return "redirect:/dashboard/resumes";  
 	}
