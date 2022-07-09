@@ -2,6 +2,7 @@ package com.theone.springboot.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,10 +22,10 @@ import com.theone.springboot.entity.Order;
 import com.theone.springboot.service.CourseService;
 import com.theone.springboot.service.OrderService;
 
-//後台
+//前台
 @Controller
-@RequestMapping("/dashboard")
-public class OrderDashBoardController {
+@RequestMapping("/enterprise")
+public class OrderUserController {
 	
 	@Autowired
 	OrderService orderService;
@@ -34,32 +35,33 @@ public class OrderDashBoardController {
 	
 	@GetMapping(path = "/orders")
 	public String showData(Model model) {
-		List<Order> orders = orderService.getAllOrders();	
+		List<Order> ordersforward = orderService.getAllOrders();	
 		model.addAttribute("courseList", courseServicer.findAllCourses());
-		model.addAttribute("orders", orders);
-		return "order_dashboard/orderlist";
+		model.addAttribute("orders", ordersforward);
+		model.addAttribute("total",ordersforward.size());
+		return "order/order_listing";
 	}
-	
-	@GetMapping(path = "/order")
-	public String toAdd(Model model) {
-		model.addAttribute("courseList", courseServicer.findAllCourses());
-		return "order_dashboard/ordercreate";
-	}
-	
-	@PostMapping(path = "/order")
-	public String processCreate(Order order) {
-		orderService.saveOrUpdate(order);
-		return "redirect:orders";
-	}
-	
-	@GetMapping(path = "/order/{id}")
-	public String processUpdate(@PathVariable("id") Integer id, Model model){
-		Order order = orderService.getOrder(id).get();
-		model.addAttribute("courseList", courseServicer.findAllCourses());
-		model.addAttribute("order", order);
-		return "order_dashboard/orderupdate";
-	}
-	
+//	
+//	@GetMapping(path = "/order")
+//	public String toAdd(Model model) {
+//		model.addAttribute("courseList", courseServicer.findAllCourses());
+//		return "order_dashboard/ordercreate";
+//	}
+//	
+//	@PostMapping(path = "/order")
+//	public String processCreate(Order order) {
+//		orderService.saveOrUpdate(order);
+//		return "redirect:orders";
+//	}
+//	
+//	@GetMapping(path = "/order/{id}")
+//	public String processUpdate(@PathVariable("id") Integer id, Model model){
+//		Order order = orderService.getOrder(id).get();
+//		model.addAttribute("courseList", courseServicer.findAllCourses());
+//		model.addAttribute("order", order);
+//		return "order_dashboard/orderupdate";
+//	}
+//	
 	//刪除
 	@ResponseBody
 	@DeleteMapping(path = "/order/{id}")
@@ -83,7 +85,7 @@ public class OrderDashBoardController {
 	public String processDetail(@PathVariable("id") Integer id, Model model){
 		Order order = orderService.getOrder(id).get();
 		model.addAttribute("Order", order);
-		return "order_dashboard/orderdetail";
+		return "order/order_details";
 	}
 
 }
