@@ -190,14 +190,20 @@ $(function() {
 
 
 		let confirmStr = '確認修改廣告?';
+		let waitingtime = 3000;
+		let text = "審核結果將寄送E-mail通知";
+		let title = "審核結果通知寄送中";
 		if ($('#btn-submit').val() == 0) {
 			confirmStr = '確認新增廣告?';
+			waitingtime = 500;
+			text = '';
+			title = '已完成!';
 		}
 		
 		if (checkEventForm) {
 			Swal.fire({
 				title: confirmStr,
-				text: "",
+				text: text,
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -208,13 +214,11 @@ $(function() {
 				if (result.isConfirmed) {
 					Swal.fire({
 						icon: 'success',
-						title: '已完成!',
+						title: title,
 						showConfirmButton: false,
-						timer: 800
+						timer: waitingtime
 					})
-					setTimeout(() => {
-						$('#form').submit();
-					}, 800)
+					$('#form').submit();
 				}
 			})
 		} else {

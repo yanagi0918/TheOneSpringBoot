@@ -1,5 +1,6 @@
 package com.theone.springboot.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,5 +22,11 @@ public interface EventService {
 	Event revokeEvent(Integer pk);
 	
 	List<Event> findByCompId(String compId);
+	
+	List<Event> findByState(Integer state);
+	
+	List<Event> findByStateAndPostStartBeforeAndPostEndAfter(Integer state, Date beforeToday, Date afterToday);
+	
+	public void sendNotifyEmail(String recipient, String subject, String message);
 
 }
