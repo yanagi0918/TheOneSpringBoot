@@ -23,6 +23,8 @@
 <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
 <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+<!-- jQuery Raty -->
+<link rel="stylesheet" th:href="@{/css/jquery.raty.css}">
 
 <style>
 .blog_right_sidebar .tag_cloud_widget_comment ul li {
@@ -110,22 +112,23 @@
 			<div class="row">
 				<div class="col-lg-8 mb-5 mb-lg-0">
 					<div class="text-heading">
-						<a class="float-left" th:href="@{/comments}">
-							<h6>職場甘苦談</h6>
-						</a>
-						<h6 class="float-left">&nbsp>&nbsp</h6>
-						<a class="" href="comment_list_work-experiences.html">
-							<h6>工作心得</h6>
-						</a>
-						<h6 class="float-left d-none">&nbsp>&nbsp</h6>
-						<a class="d-none" href="single_comment.html">
-							<h6>OO公司XX職缺</h6>
-						</a>
-
+						<div class="blog_area">
+							<a class="float-left" th:href="@{/comments}">
+								<h6>職場甘苦談</h6>
+							</a>
+							<h6 class="float-left">&nbsp>&nbsp</h6>
+							<a class="" href="comment_list_work-experiences.html">
+								<h6>工作心得</h6>
+							</a>
+							<h6 class="float-left d-none">&nbsp>&nbsp</h6>
+							<a class="d-none" th:href="@{/comments/my}">
+								<h6>OO公司XX職缺</h6>
+							</a>
+						</div>
 						<ul class="blog-info-link">
-							<a th:href="@{/comments}" class="genric-btn success-border float-left w-25">
-								總覽</a>
-							<a href="#" class="genric-btn success float-left w-25">統計</a>
+							<a th:href="@{/comments}"
+								class="genric-btn success float-left w-25"> 總覽</a>
+							<a href="#" class="genric-btn success-border float-left w-25">統計</a>
 							<a href="#" class="genric-btn success-border float-left w-25">
 								我的心得</a>
 						</ul>
@@ -145,7 +148,7 @@
 									<h6 class="text-muted"
 										th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
 								</div>
-								<a class="d-inline-block" href="single_comment.html">
+								<a class="d-inline-block" th:href="@{/CommentDetail/{id}(id=${comment.share_id})}">
 									<h2 class="float-left" th:text="${comment.comp_name}"></h2>
 									<h4 class="float-left">&nbsp&nbsp</h4>
 									<h4 class="float-left" th:text="${comment.job_name}"></h4>
@@ -162,19 +165,19 @@
 							</div>
 						</article>
 
-<!-- 						<nav class="blog-pagination justify-content-center d-flex"> -->
-<!-- 							<ul class="pagination"> -->
-<!-- 								<li class="page-item"><a href="#" class="page-link" -->
-<!-- 									aria-label="Previous"> <i class="ti-angle-left"></i> -->
-<!-- 								</a></li> -->
-<!-- 								<li class="page-item"><a href="#" class="page-link">1</a></li> -->
-<!-- 								<li class="page-item active"><a href="#" class="page-link">2</a> -->
-<!-- 								</li> -->
-<!-- 								<li class="page-item"><a href="#" class="page-link" -->
-<!-- 									aria-label="Next"> <i class="ti-angle-right"></i> -->
-<!-- 								</a></li> -->
-<!-- 							</ul> -->
-<!-- 						</nav> -->
+						<!-- 						<nav class="blog-pagination justify-content-center d-flex"> -->
+						<!-- 							<ul class="pagination"> -->
+						<!-- 								<li class="page-item"><a href="#" class="page-link" -->
+						<!-- 									aria-label="Previous"> <i class="ti-angle-left"></i> -->
+						<!-- 								</a></li> -->
+						<!-- 								<li class="page-item"><a href="#" class="page-link">1</a></li> -->
+						<!-- 								<li class="page-item active"><a href="#" class="page-link">2</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li class="page-item"><a href="#" class="page-link" -->
+						<!-- 									aria-label="Next"> <i class="ti-angle-right"></i> -->
+						<!-- 								</a></li> -->
+						<!-- 							</ul> -->
+						<!-- 						</nav> -->
 					</div>
 				</div>
 				<div class="col-lg-4 blog_area">
@@ -182,7 +185,9 @@
 						<aside class="single_sidebar_widget">
 							<form th:action="@{/CommentNew}">
 								<button class="genric-btn success circle w-100 e-larg"
-									type="submit"><i class="fa fa-bullhorn"></i>&nbsp我要分享</button>
+									type="submit">
+									<i class="fa fa-bullhorn"></i>&nbsp我要分享
+								</button>
 							</form>
 						</aside>
 
@@ -277,6 +282,14 @@
 
 	<!-- Sweet Alert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	<!-- raty -->
+	<script th:src="@{/js/comment_dashboard/jquery.raty.js}"></script>
+
+	<!-- Comment Front JS -->
+	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
+
+	
 </body>
 
 </html>
