@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +107,17 @@ public class EventDashBoardController {
 		} else {
 			return true;
 		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/event/chartdata")
+	public int[] getChartData() {
+		int[] chartdata = new int[4];
+		chartdata[0] = eventService.countByState(0);
+		chartdata[1] = eventService.countByState(1);
+		chartdata[2] = eventService.countByState(2);
+		chartdata[3] = eventService.countByState(3);
+		return chartdata;
 	}
 
 	@InitBinder

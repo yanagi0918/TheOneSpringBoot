@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
+import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
 @RequestMapping("/enterprise/job")
@@ -22,14 +23,15 @@ import com.theone.springboot.service.JobService;
 public class JobController {
 	@Autowired
 	private JobService jobService;
+	private CompanyService companyService;
 	
 	
 	@GetMapping("/companylist")
 	private String companyListJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		Integer compid = company.getCompid();
-		List<Job> companyjobs = jobService.findByCompId(compid);
-		m.addAttribute("companyjobs", companyjobs);
+//		List<Job> companyjobs = jobService.findByCompId(compid);
+//		m.addAttribute("companyjobs", companyjobs);
 		return "job/company_job_list";
 	}
 	
@@ -55,7 +57,11 @@ public class JobController {
 	}
 	
 	@GetMapping("/jobdeatail/{pk}")
-	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
+	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m,Company company){
+		m.addAttribute("companylist",companyService.getAllCompanies());
+		List<Job> jobsforward = jobService.getAllJobs();
+		m.addAttribute("jobs",jobsforward);
+		
 		Job jobdeatail = jobService.getJob(detailId).get();
 		m.addAttribute("jobdeatail",jobdeatail);
 		return "job/job_detail";
