@@ -14,5 +14,5 @@ public interface JobDao extends JpaRepository<Job, Integer>{
 	
 	List<Job> getByJobdescriptionAndSalary(String jobdescription,String salary);
 	
-	List<Job> findByCompId(Integer compId);
+//	List<Job> findByCompId(Integer compId);
 }

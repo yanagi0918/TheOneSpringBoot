@@ -1,22 +1,22 @@
-function checkcompid() {
-	var compId = document.getElementById("compId").value;
-	$.ajax({
-		type: "POST",
-		url: "CheckUserFromCompId",
-		data: "compId=" + compId,
-		success: function(data) {
-			if (data == true) {
-				document.getElementById("show_compid").innerHTML = "<font color='red'>此統編不存在，請先註冊</font>";
-				document.getElementById('submit').disabled = true;
-				return true;
-			} else {
-				document.getElementById("show_compid").innerHTML = "<font color='red'></font>";
-				document.getElementById('submit').disabled = false;
-				return false;
-			}
-		}
-	});
-}
+//function checkcompid() {
+//	var compId = document.getElementById("compId").value;
+//	$.ajax({
+//		type: "POST",
+//		url: "CheckUserFromCompId",
+//		data: "compId=" + compId,
+//		success: function(data) {
+//			if (data == true) {
+//				document.getElementById("show_compid").innerHTML = "<font color='red'>此統編不存在，請先註冊</font>";
+//				document.getElementById('submit').disabled = true;
+//				return true;
+//			} else {
+//				document.getElementById("show_compid").innerHTML = "<font color='red'></font>";
+//				document.getElementById('submit').disabled = false;
+//				return false;
+//			}
+//		}
+//	});
+//}
 
 
 
@@ -25,12 +25,12 @@ function checkcompid() {
 $(function(){
 	$('#jobcreateform').validate({
 		rules:{
-			compId: {
-				required: true,
-				maxlength:8,
-				minlength:8,
-				digits:true,
-			},
+//			compId: {
+//				required: true,
+//				maxlength:8,
+//				minlength:8,
+//				digits:true,
+//			},
 			title: {
 				required: true,
 			},
@@ -134,14 +134,14 @@ function checkJobForm() {
 	
 	}
 	
-	let compIdRegex = /^\d{8}$/;
-	if (!compIdRegex.test($("#compId").val())) {
-		Swal.fire('Warning!',
-			'統編為8個數字!',
-			'warning');
-		checkJobForm = false;
-		return checkJobForm;
-	}
+//	let compIdRegex = /^\d{8}$/;
+//	if (!compIdRegex.test($("#compId").val())) {
+//		Swal.fire('Warning!',
+//			'統編為8個數字!',
+//			'warning');
+//		checkJobForm = false;
+//		return checkJobForm;
+//	}
 	
 	
 }

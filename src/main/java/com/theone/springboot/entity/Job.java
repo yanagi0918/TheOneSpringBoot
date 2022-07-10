@@ -1,10 +1,15 @@
 package com.theone.springboot.entity;
 import java.io.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
@@ -19,8 +24,8 @@ public class Job implements Serializable{
 	private Integer required_number;
 	private String salary;
 	private String description;
-	private Integer compId;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="COMPANY_COMPPK")
 	private Company company;
 	
 	public Company getCompany() {
@@ -89,16 +94,10 @@ public class Job implements Serializable{
 		this.salary = salary;
 	}
 
-	public Integer getCompId() {
-		return compId;
-	}
 
-	public void setCompId(Integer compId) {
-		this.compId = compId;
-	}
 
 	public Job(Integer job_id, String title, String jobdescription, String qualification, Integer required_number,
-			String salary, String description, Integer compId) {
+			String salary, String description, Company company) {
 		super();
 		this.job_id = job_id;
 		this.title = title;
@@ -107,10 +106,11 @@ public class Job implements Serializable{
 		this.required_number = required_number;
 		this.salary = salary;
 		this.description = description;
-		this.compId = compId;
+		this.company = company;
 	}
-	public Job(String title, String jobdescription, String qualification, Integer required_number, String salary, String description,
-			Integer compId) {
+
+	public Job(String title, String jobdescription, String qualification, Integer required_number, String salary,
+			String description, Company company) {
 		super();
 		this.title = title;
 		this.jobdescription = jobdescription;
@@ -118,8 +118,9 @@ public class Job implements Serializable{
 		this.required_number = required_number;
 		this.salary = salary;
 		this.description = description;
-		this.compId = compId;
+		this.company = company;
 	}
+
 	public Job(Integer job_id) {
 		super();
 		this.job_id = job_id;
