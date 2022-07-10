@@ -81,12 +81,12 @@
                                                     <li><a href="">在職評論</a></li>
                                                 </ul>
                                             </li>
-<!--                                             <li><a href="">企業中心</a> -->
-<!--                                                 <ul class="submenu"> -->
-<!--                                                     <li><a href="">職缺管理</a></li> -->
-<!--                                                     <li><a href="">廣告管理</a></li> -->
-<!--                                                 </ul> -->
-<!--                                             </li> -->
+                                            <li><a href="">企業中心</a>
+                                                <ul class="submenu">
+                                                    <li><a href="">職缺管理</a></li>
+                                                    <li><a href="">廣告管理</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -141,7 +141,7 @@
                                 <div class="job-tittle job-tittle2">
                                         <h4 th:text="${jobdeatail.getTitle()}"></h4>
                                     <ul>
-<!--                                         <li th:text="${jobdeatail.getCorpname()}"></li> -->
+<!--                                         <li th:text="${jobdeatail.company.corpname}"></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -197,16 +197,17 @@
                            <div class="small-section-tittle">
                                <h4>關於本公司</h4>
                            </div>
-                              <span>台北君林酒店股份有限公司
+                              <span th:text="${session.loginEnterprise.corpname}">
                             </span>
                             <ul>
-                                <li>負責人: <span>吳先生</span></li>
-                                <li>聯絡人: <span>林小姐</span></li>
-                                <li>地址 : <span>新北市土城工業區26號</span></li>
-                                <li>網站: <span>http://www.giigle.com</span></li>
-                                <li>產業別: <span>服務業</span></li>
-                                <li>資本額: <span>1200萬</span></li>
-                                <li>員工人數: <span>300</span><span>/人</span></li>
+                                <li>負責人: <span th:text="${session.loginEnterprise.owner}"></span></li>
+                                <li>聯絡人: <span th:text="${session.loginEnterprise.contact}"></span></li>
+                                <li>聯絡電話: <span th:text="${session.loginEnterprise.comptele}"></span></li>
+                                <li>地址 : <span th:text="${session.loginEnterprise.compaddress}"></span></li>
+                                <li>網站: <span th:text="${session.loginEnterprise.website}"></span></li>
+                                <li>產業別: <span th:text="${session.loginEnterprise.industry}"></span></li>
+                                <li>資本額: <span th:text="${session.loginEnterprise.capital}"></span></li>
+                                <li>員工人數: <span th:text="${session.loginEnterprise.empnumber}"></span><span>/人</span></li>
                             </ul>
                        </div>
                     </div>
