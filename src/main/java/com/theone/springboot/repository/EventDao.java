@@ -16,4 +16,6 @@ public interface EventDao extends JpaRepository<Event, Integer> {
 	List<Event> findByState(Integer state);
 	
 	List<Event> findByStateAndPostStartBeforeAndPostEndAfter(Integer state, Date beforeToday, Date afterToday);
+	
+	int countByState(Integer state);
 }
