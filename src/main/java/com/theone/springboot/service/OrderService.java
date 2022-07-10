@@ -17,6 +17,6 @@ public interface OrderService {
 
 	void deleteOrder(Integer pk);
 	
-//	public void test();
+	void saveOrder(String id);
 
 }

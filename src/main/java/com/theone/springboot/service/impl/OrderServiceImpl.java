@@ -50,10 +50,19 @@ public class OrderServiceImpl  implements OrderService{
 		orderDao.deleteById(pk);
 	}
 	
-//	@Override
-//	public void test() {
+	@Override
+	public void saveOrder(String id) {
+		CourseBean course = courseDao.findById(1).get();
+		Order order = new Order();
+		order.setCourseBean(course);
+		order.setUserId("P1200014937");
+		order.setTotalPrice(10000);
+		order.setOrderId(999);
+		orderDao.save(order);
 //		Order order = orderDao.findById(6).get();
-//		System.err.println(order.getCourseBean().getCoursePicUrl());
-//	}
+		System.err.println(order.getCourseBean().getCoursePicUrl());
+		courseDao.save(course);
+
+	}
 	
 }
