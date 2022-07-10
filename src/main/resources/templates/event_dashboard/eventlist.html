@@ -50,6 +50,25 @@
             
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
+            	<div class="bg-light text-center rounded p-4">
+            		<div class="row g-4">
+            			<div class="col-sm-12 col-xl-6">
+                    		<div class="bg-light rounded h-100 p-4">
+                    			<h6 class="mb-4">審核狀態長條圖</h6>
+                    			<canvas id="bar-chart"></canvas>
+                    		</div>
+                  		</div>
+                  		<div class="col-sm-12 col-xl-6">
+                    		<div class="bg-light rounded h-100 p-4">
+                    			<h6 class="mb-4">審核狀態占比圖</h6>
+                    			<canvas id="doughnut-chart"></canvas>
+                    		</div>
+                    	</div>
+                    </div>
+            	</div>
+            </div>
+            
+            <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">廣告紀錄</h6>
@@ -134,7 +153,7 @@
 					icon: 'success',
 					title: '已刪除!',
 					showConfirmButton: false,
-					timer: 800
+					timer: 600
 				})
 				setTimeout(() => {
 					$.ajax({
@@ -144,7 +163,7 @@
                             window.location.href='./events'
                         }
                     });
-				}, 800)
+				}, 600)
 			}
 		})
 	    }
@@ -153,6 +172,7 @@
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>
+    <script th:src="@{/js/event_dashboard/chart.js}" src="js/main.js"></script>
 
 </body>
 </html>

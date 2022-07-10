@@ -189,15 +189,27 @@ $(function() {
 
 
 
-		let confirmStr = '確認修改廣告?';
-		let waitingtime = 3000;
-		let text = "審核結果將寄送E-mail通知";
-		let title = "審核結果通知寄送中";
+		let confirmStr = '';
+		let waitingtime = 800;
+		let text = "";
+		let title = "";
 		if ($('#btn-submit').val() == 0) {
 			confirmStr = '確認新增廣告?';
-			waitingtime = 500;
+			waitingtime = 800;
 			text = '';
 			title = '已完成!';
+		}
+		
+		if ($('#btn-submit').val() == 1) {
+			confirmStr = '確認修改廣告?';
+		    waitingtime = 800;
+		    text = '';
+		    title = '已完成!';
+		    if ($('#state').val()==1||$('#state').val()==2){
+				waitingtime = 3000;
+				text = "審核結果將寄送E-mail通知";
+		    	title = "審核結果通知寄送中";
+			}
 		}
 		
 		if (checkEventForm) {

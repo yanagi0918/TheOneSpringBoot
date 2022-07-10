@@ -28,5 +28,7 @@ public interface EventService {
 	List<Event> findByStateAndPostStartBeforeAndPostEndAfter(Integer state, Date beforeToday, Date afterToday);
 	
 	public void sendNotifyEmail(String recipient, String subject, String message);
+	
+	int countByState(Integer state);
 
 }
