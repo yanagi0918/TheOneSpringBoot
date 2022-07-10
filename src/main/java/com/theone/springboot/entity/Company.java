@@ -1,6 +1,7 @@
 package com.theone.springboot.entity;
 import java.io.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class Company implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "COMPANY_COMPPK")
  private Integer comppk;
  private Integer compid;
  private String compwd;

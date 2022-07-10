@@ -141,7 +141,7 @@
                                 <div class="job-tittle job-tittle2">
                                         <h4 th:text="${jobdeatail.getTitle()}"></h4>
                                     <ul>
-<!--                                         <li th:text="${jobdeatail.company.corpname}"></li> -->
+                                        <li th:text="${jobs.company.corpname}"></li>
                                     </ul>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                 <li>聯絡人: <span th:text="${session.loginEnterprise.contact}"></span></li>
                                 <li>聯絡電話: <span th:text="${session.loginEnterprise.comptele}"></span></li>
                                 <li>地址 : <span th:text="${session.loginEnterprise.compaddress}"></span></li>
-                                <li>網站: <span th:text="${session.loginEnterprise.website}"></span></li>
+                                <li>信箱: <span th:text="${session.loginEnterprise.website}"></span></li>
                                 <li>產業別: <span th:text="${session.loginEnterprise.industry}"></span></li>
                                 <li>資本額: <span th:text="${session.loginEnterprise.capital}"></span></li>
                                 <li>員工人數: <span th:text="${session.loginEnterprise.empnumber}"></span><span>/人</span></li>

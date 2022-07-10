@@ -68,8 +68,8 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="">首頁</a></li>
-                                            <li><a href="">找工作</a></li>
+                                            <li><a th:href="@{../../}">首頁</a></li>
+                                            <li><a th:href="@{list}">找工作</a></li>
                                             <li><a href="">課程進修</a>
                                                 <ul class="submenu">
                                                     <li><a href="">講師專區</a></li>
@@ -173,8 +173,8 @@
 											</div>
 										</div>
                                     <div class="items-link items-link2 f-right">
-                                        <a th:href="@{showupdateinformation/}+${jobs.job_id}">更新</a>
-                                        <a th:id="${jobs.job_id}" onclick="del(this.id)">刪除</a>
+                                        <a th:href="@{showupdateinformation/}+${jobs.job_id}" class="genric-btn info-border circle">更新</a>
+                                        <a class="genric-btn danger-border circle" th:id="${jobs.job_id}" onclick="del(this.id)">刪除</a>
                                     </div>
 									</div>
 								</div>

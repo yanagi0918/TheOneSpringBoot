@@ -25,12 +25,6 @@
 $(function(){
 	$('#jobcreateform').validate({
 		rules:{
-//			compId: {
-//				required: true,
-//				maxlength:8,
-//				minlength:8,
-//				digits:true,
-//			},
 			title: {
 				required: true,
 			},
@@ -45,9 +39,6 @@ $(function(){
 				required: true,
 				maxlength:500
 			},
-			
-			
-			
 			
 			
 		},
@@ -89,38 +80,6 @@ $(".wishContent").on('input propertychange', function () {
     $(".wordsNum").html(len + '/500');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function checkJobForm() {
 	let checkJobForm = true;
 	
@@ -147,15 +106,15 @@ function checkJobForm() {
 }
 
 $('#jobInput').click(function() {
-	$('#compId').val('87654321')
-	$('#title').val('Java Engineer')
-	$('#qualification').val('相關領域工作2年經驗')
+//	$('#compId').val('87654321')
+	$('#title').val('流程規劃管理師')
+	$('#qualification').val('商業及管理學科類、土木工程相關系所')
 	$('#required_number').val('5')
-	$('#description').val('1.蒐集並釐清專案需求、進行系統分析設計並提供解決方案 \n2.梳理使用者需求內容，進行系統或線上問題分析與討論 \n3.依據BA文件及需求訪談會議紀錄進行系統分析設計，並與系統設計師溝通系統分析規格 \n4.產製SA系統分析文件、使用案例、功能規格設計文件')
+	$('#description').val('1.協調公司各部門內及部門間之合作，與同仁共同規劃作業流程解決方案。\n2.參與資訊系統導入與產品開發，針對新需求進行分析、系統設計。\n3.與團隊進行系統功能測試計畫/案例編寫與測試執行和驗證。\n4.系統功能驗收、上線後教育訓練以及擔任系統操作諮詢窗口。')
 })
 
 $('#jobwrongInput').click(function() {
-	$('#compId').val('Z1234567')
+//	$('#compId').val('Z1234567')
 	$('#title').val('')
 	$('#qualification').val('')
 	$('#required_number').val('5人')
@@ -163,10 +122,10 @@ $('#jobwrongInput').click(function() {
 })
 
 $('#jobUpdate').click(function() {
-	$('#title').val('JAVA程式設計師')
+	$('#title').val('會計人員')
 	$('#qualification').val('曾經製作過相關專題')
 	$('#required_number').val('1')
-	$('#description').val('1. 負責 APP 設計及程式開發 \n2. 負責 APP 程式精進與版本更新 \n3. 負責 APP 資安項目開發與調校 \n4. 負責行動 APP 解決方案規劃與設計 \n5. 金融科技之行動領域創新研究 \n6. 其他主管交辦事項')
+	$('#description').val('1、成本帳務\n2、營業稅申報\n3、營收及一般公開公司上傳資料\n4、應收應付帳務處理\n5、主管交辦事項')
 })
 
 $(document).ready( function () {
