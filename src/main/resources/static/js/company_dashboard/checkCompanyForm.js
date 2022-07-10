@@ -30,7 +30,7 @@ $(function(){
 				required: true,
 			},
 			website: {
-				url:true
+				email:true,
 			},
 			comptele: {
 				digits:true,
@@ -92,7 +92,7 @@ $('#wrongCompany').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
 	$('#empnumber').val('300人')
-	$('#website').val('http//123.456')
+	$('#website').val('ispan100gmail.com')
 	$('#capital').val('1200萬')
 
 })
@@ -107,7 +107,7 @@ $('#correctCompany').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('新北市土城工業區26號')
 	$('#empnumber').val('300')
-	$('#website').val('http://www.giigle.com')
+	$('#website').val('iSpan4505@gmail.com')
 	$('#capital').val('1200萬')
 })
 $('#companyUpdate').click(function() {
@@ -119,7 +119,7 @@ $('#companyUpdate').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('台北市大安區26號')
 	$('#empnumber').val('199')
-	$('#website').val('https://www.amaazzon.com')
+	$('#website').val('iSpan4505@gmail.com')
 	$('#capital').val('1300萬')
 })
 $(document).ready( function () {
