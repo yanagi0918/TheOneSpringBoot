@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.repository.EventDao;
+import com.theone.springboot.service.EventService;
 
 
 @SpringBootTest
@@ -15,6 +16,9 @@ class TheOneSpringBootApplicationTests {
 	
 	@Autowired
 	EventDao eventDao;
+	
+	@Autowired
+	EventService eventService;
 	
 	@Test
 	public void testJPA() {
@@ -24,6 +28,11 @@ class TheOneSpringBootApplicationTests {
 			System.out.println(event);
 		}
 		System.out.println("==================================");
+	}
+	
+	@Test
+	public void testJavaMail() {
+		eventService.sendNotifyEmail("aass13172@gmail.com", "Test subject", "test msg");
 	}
 
 

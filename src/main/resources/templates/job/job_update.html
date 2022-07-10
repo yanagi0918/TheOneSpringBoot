@@ -145,7 +145,7 @@
         <div class="bkcolor">
             <div class="job-listing-area pt-120 pb-120">
                 <div class="container">
-                    <form th:action="@{/dashboard/job/saveJob}" action="/jobupdate" method='post'
+                    <form th:action="@{/enterprise/job/saveJob}" action="/jobupdate" method='post'
                         enctype="multipart/form-data">
                         <div class="row mb-3">
                             <input type='hidden' name='job_id' th:value="${jobupdate.job_id}" />
@@ -154,9 +154,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label">統一編號:</label>
                             <div class="col-sm-8">
-                                <input type='text' name='' th:value="${jobupdate.comp_id}" disabled
+                                <input type='text' name='' th:value="${jobupdate.compId}" disabled
                                     class="form-control" />
-                                <input type='hidden' name='comp_id' th:value="${jobupdate.comp_id}" />
+                                <input type='hidden' name='compId' th:value="${jobupdate.compId}" />
                             </div>
                         </div>
 

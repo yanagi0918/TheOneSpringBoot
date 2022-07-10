@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
+import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
 @RequestMapping("/dashboard/job")
@@ -21,6 +24,8 @@ import com.theone.springboot.service.JobService;
 public class JobDashBoardController {
 	@Autowired
 	private JobService jobService;
+	@Autowired
+	private CompanyService companyService;
 	
 	@GetMapping("/list")
 	private String listJobs(Model m){
@@ -59,6 +64,15 @@ public class JobDashBoardController {
 	private String processDelete(@PathVariable("id") Integer id){
 		jobService.delete(id);
 		return "ok";
+	}
+	
+	@PostMapping(value = "/CheckUserFromCompId")
+	public @ResponseBody boolean CheckUserFromCompId(@RequestParam Integer compId) {
+		Company company = companyService.getByCompid(compId);
+		if (company == null) {
+			return true;
+		}
+		return false;
 	}
 
 }

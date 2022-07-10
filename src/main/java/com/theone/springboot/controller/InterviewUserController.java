@@ -56,6 +56,7 @@ public class InterviewUserController {
 //	        LocalDate date = new LocalDate();
 		Timestamp ts=new Timestamp(System.currentTimeMillis());
 		intv.setCreateTime(ts);
+		System.out.println(ts);
 		interviewService.saveOrUpdate(intv);
 		
 		return "redirect:/enterprise/intvlist";

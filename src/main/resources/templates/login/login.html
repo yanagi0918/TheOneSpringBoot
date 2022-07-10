@@ -27,7 +27,7 @@
 	<div class="container">
 		<div class="card-wrap">
 			<div class="card border-0 shadow card--welcome is-show" id="welcome">
-				<a class="btn btn-back-home js-btn" th:href="@{/}" > <i
+				<a class="btn btn-back-home js-btn" th:href="@{/}"> <i
 					class="fa fa-home"></i>
 				</a>
 				<div class="card-body">
@@ -70,18 +70,26 @@
 								<div>
 									<form>
 										<div class="form-group">
-											<input th:name="username" class="form-control" type="text"
+											<input th:name="username" class="form-control" id="username" type="text"
 												placeholder="Identity Number" required="required" />
 										</div>
 										<div class="form-group">
-											<input th:name="password" class="form-control"
+											<input th:name="password" id="password" class="form-control"
 												type="password" placeholder="Password" required="required" />
 										</div>
 										<p>
 											<a>Forgot your password?</a>
 										</p>
 									</form>
-									<button type="submit" class="btn btn-lg">LOGIN</button>
+									<div class="badge-wrap float-left m-1">
+										<a class="badge my-2" data-toggle="tooltip" title="Quick insert" id="MemberQuick"><i class="fa fa-user-plus"></i></a>
+									</div>
+									<div class="float-left">
+										<button type="submit" class="btn btn-lg my-1">LOGIN</button>
+									</div>
+									<div class="badge-wrap float-left m-1">
+										<a class="badge my-2" data-toggle="tooltip" title="Admin" id="Admin"><i class="fa fa-user-shield"></i></a>
+									</div>
 								</div>
 							</fieldset>
 						</form>
@@ -131,7 +139,12 @@
 										<input class="form-control" type="password"
 											placeholder="Comfirm Password" required="required" />
 									</div>
-									<button class="btn btn-lg">SIGN UP</button>
+									<div class="badge-wrap float-left m-1">
+										<a class="badge" data-toggle="tooltip" title="Quick insert"><i class="fa fa-user-plus"></i></a>
+									</div>
+									<div class="float-left">
+										<button class="btn btn-lg">SIGN UP</button>
+									</div>
 								</div>
 							</fieldset>
 						</form>
@@ -179,7 +192,12 @@
 											<a>Forgot your password?</a>
 										</p>
 									</form>
-									<button type="submit" class="btn btn-lg">LOGIN</button>
+									<div class="badge-wrap float-left m-2">
+										<a class="badge my-2" data-toggle="tooltip" title="Quick insert"><i class="fa fa-user-plus"></i></a>
+									</div>
+									<div class="float-left">
+										<button type="submit" class="btn btn-lg my-2">LOGIN</button>
+									</div>
 								</div>
 							</fieldset>
 						</form>
@@ -225,7 +243,12 @@
 										<input class="form-control" type="password"
 											placeholder="Comfirm Password" required="required" />
 									</div>
-									<button class="btn btn-lg">SIGN UP</button>
+									<div class="badge-wrap float-left m-1">
+										<a class="badge" data-toggle="tooltip" title="Quick insert"><i class="fa fa-user-plus"></i></a>
+									</div>
+									<div class="float-left">
+										<button class="btn btn-lg">SIGN UP</button>
+									</div>
 								</div>
 							</fieldset>
 						</form>
@@ -234,7 +257,8 @@
 			</section>
 		</div>
 	</div>
-</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script th:src="@{/js/login/login.js}" src="login.js"></script>
+</body>
 
 </html>

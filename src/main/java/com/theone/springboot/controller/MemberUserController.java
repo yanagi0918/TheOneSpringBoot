@@ -42,19 +42,16 @@ public class MemberUserController {
 	MemberService memberService;
 	
 	@GetMapping("/members")
-	public String toMemberListPage(Model model) {
+	public String toMemberListPage(Model model) { //類似get request attribute 把資料往前端模板引擎丟
+		//一樣有session狀態才可以看到
+		//使用Member member = memberService.getByUserid取到該會員資訊 
 		List<Member> allMembers = memberService.getAllMembers();
 		model.addAttribute("members", allMembers);
 		return "member_dashboard/memberlist";
 	}
 	
-//	@ResponseBody
-//	@GetMapping("/member/user/{userid}")
-//	public Member aaa(@PathVariable("userid")String userid) {
-//		return memberService.getByUserid(userid);
-//	}
 	
-    //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
+    //ajax (jquery)檢查身分證是否重複，並回傳JSON物件給前端
     @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Member> getByUserid(@RequestBody Member member) {
@@ -96,12 +93,12 @@ public class MemberUserController {
 		return "member_dashboard/memberupdate";
 	}
 	
-	@ResponseBody
-	@DeleteMapping("/member/{id}")
-	public String delete(@PathVariable("id") Integer id) {
-		memberService.deleteMember(id);
-		return "ok";
-	}
+//	@ResponseBody
+//	@DeleteMapping("/member/{id}")
+//	public String delete(@PathVariable("id") Integer id) {
+//		memberService.deleteMember(id);
+//		return "ok";
+//	}
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {

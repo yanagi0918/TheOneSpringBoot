@@ -45,16 +45,16 @@ public class ResumeUserController {
 	@PostMapping(path = "/resume")
 	public String saveOrUpdate(Resume resume){
 		resumeService.saveOrUpdate(resume);
-		System.err.println(resume);
+		
 		return "redirect:/user/resumes";  
 	}
 	
-//	@GetMapping("/resume/{id}")
-//	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
-//		Resume resume = resumeService.getResume(id).get();
-//		model.addAttribute("resume", resume);
-//		return "resume_dashboard/resumeupdate";
-//	}
+	@GetMapping("/resume/{id}")
+	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
+		Resume resume = resumeService.getResume(id).get();
+		model.addAttribute("resume", resume);
+		return "resume/updateResume";
+	}
 	
 	@ResponseBody
 	@DeleteMapping("/resume/{id}")

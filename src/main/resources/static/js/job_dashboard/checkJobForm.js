@@ -1,7 +1,31 @@
+function checkcompid() {
+	var compId = document.getElementById("compId").value;
+	$.ajax({
+		type: "POST",
+		url: "CheckUserFromCompId",
+		data: "compId=" + compId,
+		success: function(data) {
+			if (data == true) {
+				document.getElementById("show_compid").innerHTML = "<font color='red'>此統編不存在，請先註冊</font>";
+				document.getElementById('submit').disabled = true;
+				return true;
+			} else {
+				document.getElementById("show_compid").innerHTML = "<font color='red'></font>";
+				document.getElementById('submit').disabled = false;
+				return false;
+			}
+		}
+	});
+}
+
+
+
+
+
 $(function(){
 	$('#jobcreateform').validate({
 		rules:{
-			comp_id: {
+			compId: {
 				required: true,
 				maxlength:8,
 				minlength:8,
@@ -111,7 +135,7 @@ function checkJobForm() {
 	}
 	
 	let compIdRegex = /^\d{8}$/;
-	if (!compIdRegex.test($("#comp_id").val())) {
+	if (!compIdRegex.test($("#compId").val())) {
 		Swal.fire('Warning!',
 			'統編為8個數字!',
 			'warning');
@@ -123,7 +147,7 @@ function checkJobForm() {
 }
 
 $('#jobInput').click(function() {
-	$('#comp_id').val('87654321')
+	$('#compId').val('87654321')
 	$('#title').val('Java Engineer')
 	$('#qualification').val('相關領域工作2年經驗')
 	$('#required_number').val('5')
@@ -131,7 +155,7 @@ $('#jobInput').click(function() {
 })
 
 $('#jobwrongInput').click(function() {
-	$('#comp_id').val('Z1234567')
+	$('#compId').val('Z1234567')
 	$('#title').val('')
 	$('#qualification').val('')
 	$('#required_number').val('5人')
