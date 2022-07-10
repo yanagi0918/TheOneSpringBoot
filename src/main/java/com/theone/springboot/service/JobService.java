@@ -22,6 +22,6 @@ public interface JobService {
 
 	List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary);
 	
-	List<Job> findByCompId(String compId);
+	List<Job> findByCompId(Integer compid);
 
 }

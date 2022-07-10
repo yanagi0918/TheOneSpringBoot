@@ -1,18 +1,19 @@
 package com.theone.springboot.controller;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
 import com.theone.springboot.service.JobService;
 
@@ -22,6 +23,17 @@ public class JobController {
 	@Autowired
 	private JobService jobService;
 	
+	
+	@GetMapping("/companylist")
+	private String companyListJobs(HttpSession session,Model m){
+		Company company = (Company)session.getAttribute("loginEnterprise");
+		Integer compid = company.getCompid();
+		List<Job> companyjobs = jobService.findByCompId(compid);
+		m.addAttribute("companyjobs", companyjobs);
+		return "job/company_job_list";
+	}
+	
+	
 	@GetMapping("/list")
 	private String listJobs(Model m){
 		List<Job> jobs = jobService.getAllJobs();
@@ -30,14 +42,16 @@ public class JobController {
 	}
 	
 	@GetMapping("/showForm")
-	private String showFormForAdd(Model m){
+	private String showFormForAdd(HttpSession session,Model m){
+		Company company = (Company)session.getAttribute("loginEnterprise");
+		m.addAttribute("company",company);
 		return "job/job_create";
 	}
 	
 	@PostMapping("/saveJob")
-	private String saveJob(@ModelAttribute("job") Job job){
+	private String saveJob(Job job){
 		jobService.saveOrUpdate(job);
-		return "redirect:/enterprise/job/list";
+		return "redirect:/enterprise/job/companylist";
 	}
 	
 	@GetMapping("/jobdeatail/{pk}")
