@@ -65,7 +65,7 @@
 	<div class="slider-area ">
 		<div
 			class="single-slider section-overly slider-height2 d-flex align-items-center"
-			th:data-background="@{/assets/img/hero/comment_box.jpg">
+			data-background="/assets/img/hero/comment_box.jpg">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
@@ -94,7 +94,7 @@
 								</div>
 							</div>
 							<div class="search-form">
-								<a href="#">Go</a>
+								<a href="#"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
 					</div>
@@ -110,7 +110,7 @@
 			<div class="row">
 				<div class="col-lg-8 mb-5 mb-lg-0">
 					<div class="text-heading">
-						<a class="float-left" href="comment_list_overview.html">
+						<a class="float-left" th:href="@{/comments}">
 							<h6>職場甘苦談</h6>
 						</a>
 						<h6 class="float-left">&nbsp>&nbsp</h6>
@@ -123,9 +123,9 @@
 						</a>
 
 						<ul class="blog-info-link">
-							<a href="#" class="genric-btn success-border float-left w-25">
+							<a th:href="@{/comments}" class="genric-btn success-border float-left w-25">
 								總覽</a>
-							<a href="#" class="genric-btn success float-left w-25"> 工作心得</a>
+							<a href="#" class="genric-btn success float-left w-25">統計</a>
 							<a href="#" class="genric-btn success-border float-left w-25">
 								我的心得</a>
 						</ul>
@@ -162,27 +162,27 @@
 							</div>
 						</article>
 
-						<nav class="blog-pagination justify-content-center d-flex">
-							<ul class="pagination">
-								<li class="page-item"><a href="#" class="page-link"
-									aria-label="Previous"> <i class="ti-angle-left"></i>
-								</a></li>
-								<li class="page-item"><a href="#" class="page-link">1</a></li>
-								<li class="page-item active"><a href="#" class="page-link">2</a>
-								</li>
-								<li class="page-item"><a href="#" class="page-link"
-									aria-label="Next"> <i class="ti-angle-right"></i>
-								</a></li>
-							</ul>
-						</nav>
+<!-- 						<nav class="blog-pagination justify-content-center d-flex"> -->
+<!-- 							<ul class="pagination"> -->
+<!-- 								<li class="page-item"><a href="#" class="page-link" -->
+<!-- 									aria-label="Previous"> <i class="ti-angle-left"></i> -->
+<!-- 								</a></li> -->
+<!-- 								<li class="page-item"><a href="#" class="page-link">1</a></li> -->
+<!-- 								<li class="page-item active"><a href="#" class="page-link">2</a> -->
+<!-- 								</li> -->
+<!-- 								<li class="page-item"><a href="#" class="page-link" -->
+<!-- 									aria-label="Next"> <i class="ti-angle-right"></i> -->
+<!-- 								</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</nav> -->
 					</div>
 				</div>
 				<div class="col-lg-4 blog_area">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
-							<form action="comment_form.html">
+							<form th:action="@{/CommentNew}">
 								<button class="genric-btn success circle w-100 e-larg"
-									type="submit">我要分享</button>
+									type="submit"><i class="fa fa-bullhorn"></i>&nbsp我要分享</button>
 							</form>
 						</aside>
 
