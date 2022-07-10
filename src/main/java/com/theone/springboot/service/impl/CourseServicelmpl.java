@@ -40,6 +40,11 @@ public class CourseServicelmpl implements CourseService {
     }
 
     @Override
+    public List<CourseBean> findByLecturer(String lecturer) {
+        return courseDao.getByLecturer(lecturer);
+    }
+
+    @Override
     public List<CourseBean> findAllCourses() {
         return courseDao.findAll();
     }

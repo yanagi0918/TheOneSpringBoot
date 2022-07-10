@@ -12,6 +12,6 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     List<CourseBean> getByCourseCategory(String courseCategory);
 
-
+    List<CourseBean> getByLecturer(String lecturer);
 
 }

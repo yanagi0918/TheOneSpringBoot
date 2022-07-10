@@ -88,7 +88,7 @@
                                                     <!--                                                    </ul>-->
                                                 </li>
                                                 <li><a href="">收藏</a></li>
-                                                <li><a href="">講師專區</a></li>
+                                                <li><a th:href="@{/user/courses/lecturers}">講師專區</a></li>
                                                 <li><a href="">我的課程</a></li>
                                             </ul>
                                         </li>
@@ -252,7 +252,7 @@
                     <!-- 識別課程編號-->
                     <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
 
-                    <a th:href="@{'/user/courses/'+${course.courseNo}}">
+                    <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
                         <img class="img-fluid" th:src="${course.coursePicUrl}" alt=""  src="">
                     </a>
                     <div class="bg-secondary p-4">
@@ -260,7 +260,7 @@
                             <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-table fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.courseCategory}"></h6>
                             <h6 class="m-0" th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
                         </div>
-                        <a class="h5" th:href="@{'/user/courses/'+${course.courseNo}}"><div th:text="${course.courseName}"></div></a>
+                        <a class="h5" th:href="@{'/user/courses?courseNo='+${course.courseNo}}"><div th:text="${course.courseName}"></div></a>
                         <div></div>
                         <a href=""><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6>
                         </a>
