@@ -33,6 +33,10 @@ public class JobServiceImpl implements JobService{
 		job.setCompany(company);
 		return jobDao.save(job);
 	}
+	@Override
+	public Job saveOrUpdate2(Job job) {
+		return jobDao.save(job);
+	}
 
 	@Override
 	public List<Job> getAllJobs() {

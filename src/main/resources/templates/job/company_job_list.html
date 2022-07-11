@@ -84,7 +84,7 @@
                                             </li>
                                             <li><a href="">企業中心</a>
                                                 <ul class="submenu">
-                                                    <li><a href="">職缺管理</a></li>
+                                                    <li><a th:href="@{/enterprise/job/companylist}">職缺管理</a></li>
                                                     <li><a href="">廣告管理</a></li>
                                                 </ul>
                                             </li>
@@ -93,7 +93,7 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div th:if="${session.loginEnterprise!=null}" class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginEnterprise.compid}">帳號</a>
+                                    <a th:href="@{/enterprise/companydetail}" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginEnterprise.compid}">帳號</a>
                                     <a th:href="@{/logout}" class="btn head-btn2">登出</a>
                                 </div>
                             </div>
