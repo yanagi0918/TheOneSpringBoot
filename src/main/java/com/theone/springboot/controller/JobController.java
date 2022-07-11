@@ -1,5 +1,6 @@
 package com.theone.springboot.controller;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
+import com.theone.springboot.repository.JobDao;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
@@ -31,6 +33,12 @@ public class JobController {
 	private String companyListJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		Integer compid = company.getCompid();
+		m.addAttribute("companyList",companyService.getAllCompanies());
+		
+		List<Job> job = jobService.getAllJobs();
+		m.addAttribute("job",job);
+		
+		
 		List<Job> companyjobs = jobService.findByCompId(compid);
 		m.addAttribute("companyjobs", companyjobs);
 		return "job/company_job_list";
@@ -40,6 +48,7 @@ public class JobController {
 	@GetMapping("/list")
 	private String listJobs(Model m){
 		List<Job> jobs = jobService.getAllJobs();
+		m.addAttribute("companyList",companyService.getAllCompanies());
 		m.addAttribute("jobs", jobs);
 		return "job/job_list";
 	}
@@ -59,9 +68,6 @@ public class JobController {
 	
 	@GetMapping("/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m,Company company){
-		List<Job> jobsforward = jobService.getAllJobs();
-		m.addAttribute("companylist",companyService.getAllCompanies());
-		m.addAttribute("jobs",jobsforward);
 		
 		Job jobdeatail = jobService.getJob(detailId).get();
 		m.addAttribute("jobdeatail",jobdeatail);
