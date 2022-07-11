@@ -1,14 +1,18 @@
 package com.theone.springboot.entity;
 import java.io.*;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
 @SuppressWarnings("serial")
 @Entity
 @Component
@@ -30,9 +34,11 @@ public class Company implements Serializable{
  private Integer empnumber;
  private String website;
  private String capital;
-
-
- public Company() {}
+ @OneToMany(mappedBy = "company")
+ private List<Job> jobs;
+ 
+ 
+public Company() {}
 
 public Integer getComppk() {
 	return comppk;

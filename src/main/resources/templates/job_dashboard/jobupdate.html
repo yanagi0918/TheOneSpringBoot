@@ -69,8 +69,8 @@
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">統一編號:</label>
 <div class="col-sm-8">
-<input type='text' name='' th:value="${jobupdate.compId}" disabled class="form-control"/>
-<input type='hidden' name='compId' th:value="${jobupdate.compId}"/>
+<input type='hidden' name='' th:field="${jobupdate.compId}" th:value="${jobupdate.compId}"  class="form-control"/>
+<input type='text' name='' th:value="${jobupdate.company.compid}+${jobupdate.company.corpname}" readonly class="form-control"/>
 </div>
 </div>
 
@@ -180,6 +180,13 @@
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}" src="js/main.js"></script>
+    <script>
+    window.onload=function(){
+    	var osel = document.getElementById("compId");
+    	var ohid = document.getElementById("hid");
+    	ohid.value=osel.value;
+    }
+    </script>
 
 </body>
 </html>
