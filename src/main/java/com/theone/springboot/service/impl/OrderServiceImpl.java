@@ -57,7 +57,8 @@ public class OrderServiceImpl  implements OrderService{
 		Order order = new Order();
 		order.setCourseBean(course);
 		order.setUserId(member.getUserid());
-		order.setTotalPrice(course.getPrice());		
+		order.setTotalPrice(course.getPrice());
+		order.setProductId(course.getCourseName());
 		orderDao.save(order);
 //		Order order = orderDao.findById(6).get();
 		System.err.println(order.getCourseBean().getCoursePicUrl());
