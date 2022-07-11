@@ -116,7 +116,7 @@
 								th:modelAttribute="comment" th:object="${comment}" id="form">
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
-										<a th:if="${session.loginMember.userid == comment.userId}" class="m-2 edit-delete"
+										<a th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" class="m-2 edit-delete"
 											th:href="@{/CommentEdit/{id}(id=${comment.share_id})}"> <i
 											class="fa fa-pencil-alt"></i></a>
 
@@ -185,7 +185,7 @@
 										<span>心得分享</span>
 										<p th:text="${comment.share}"></p>
 									</div>
-									<button th:if="${session.loginMember.userid == comment.userId}" type="button"
+									<button th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
 										th:value='${comment.share_id}'>
 										<i class="fa fa-trash-alt"></i>
