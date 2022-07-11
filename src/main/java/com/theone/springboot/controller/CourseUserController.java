@@ -65,7 +65,7 @@ public class CourseUserController {
 
     @GetMapping("/courses/lecturers")
     public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
-        Member loginUser = (Member) session.getAttribute("loginUser");
+        Member loginUser = (Member) session.getAttribute("loginMember");
         List<CourseBean> courseList  = courseService.findByMember(loginUser);
         model.addAttribute("courseList", courseList);
         return "course/lecturerCourseList";
@@ -115,7 +115,7 @@ public class CourseUserController {
 
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
-        Member loginUser = (Member) session.getAttribute("loginUser");
+        Member loginUser = (Member) session.getAttribute("loginMember");
 
         System.out.println(CourseBean);
 
