@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.theone.springboot.entity.CourseBean;
+import com.theone.springboot.entity.Member;
 
 public interface CourseService {
 
@@ -20,6 +21,8 @@ public interface CourseService {
 	List<CourseBean> findAllCourses();
 	
 	Optional<CourseBean> findCourse(Integer pk);
+
+	List<CourseBean> findByMember(Member member);
 
 	void deleteCourse(Integer pk);
 

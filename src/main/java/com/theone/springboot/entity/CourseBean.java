@@ -1,6 +1,7 @@
 package com.theone.springboot.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -31,6 +32,13 @@ public class CourseBean {
     private Double score;
     private Integer price;
 
+
+    //    VINCENT ONE(member講師) TO MANY(開設多個課程)
+    @ManyToOne
+    @JoinColumn(name = "FK_member_userId")
+    private Member member;
+
+
     public CourseBean() {
     }
 
@@ -46,6 +54,14 @@ public class CourseBean {
         this.courseVedioUrl = courseVedioUrl;
         this.score = score;
         this.price = price;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public Integer getCourseNo() {

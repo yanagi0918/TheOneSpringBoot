@@ -64,12 +64,11 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses/lecturers")
-    public String toCoursesBylecturer(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-//  Member lecturerMember = (Member)request.getSession().getAttribute("");
-//  lecturerMember.getUserid();
-        String lecturer = "王大陸"; //寫死
-        String url = "/user/courses/"+URLEncoder.encode(lecturer,"utf-8");
-        return "redirect:"+url;
+    public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        List<CourseBean> courseList  = courseService.findByMember(loginUser);
+        model.addAttribute("courseList", courseList);
+        return "course/lecturerCourseList";
     }
 
     //講師開課(之後要修改成session)
@@ -115,8 +114,11 @@ public class CourseUserController {
     }
 
     @PostMapping("/courses")
-    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
+    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+
         System.out.println(CourseBean);
+
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
         //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
@@ -124,6 +126,7 @@ public class CourseUserController {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
+        CourseBean.setMember(loginUser);
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";
     }
