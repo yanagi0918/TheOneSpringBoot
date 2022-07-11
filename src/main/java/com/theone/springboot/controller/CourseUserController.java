@@ -64,12 +64,18 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses/lecturers")
-    public String toCoursesBylecturer(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+    public String toCoursesBylecturer(HttpServletRequest request, Model model, HttpSession session) throws UnsupportedEncodingException {
 //  Member lecturerMember = (Member)request.getSession().getAttribute("");
 //  lecturerMember.getUserid();
-        String lecturer = "王大陸"; //寫死
-        String url = "/user/courses/"+URLEncoder.encode(lecturer,"utf-8");
-        return "redirect:"+url;
+        Member loginUser = (Member) session.getAttribute("loginUser");
+
+        List<CourseBean> courseList  = co
+        model.addAttribute("courseList", courseList);
+//        String lecturer = "王大陸"; //寫死
+//        String url = "/user/courses/" + URLEncoder.encode(lecturer, "utf-8");
+
+
+        return "course/lecturerCourseList";
     }
 
     //講師開課(之後要修改成session)
@@ -115,8 +121,8 @@ public class CourseUserController {
     }
 
     @PostMapping("/courses")
-    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf,HttpSession session) throws IOException {
-        Member loginUser = (Member)session.getAttribute("loginUser");
+    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
+        Member loginUser = (Member) session.getAttribute("loginUser");
 
         System.out.println(CourseBean);
 

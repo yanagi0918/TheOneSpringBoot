@@ -3,6 +3,7 @@ package com.theone.springboot.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.theone.springboot.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +55,12 @@ public class CourseServicelmpl implements CourseService {
     public Optional<CourseBean> findCourse(Integer pk) {
         return courseDao.findById(pk);
     }
+
+    @Override
+    public List<CourseBean> findByMember(Member member) {
+        return courseDao.getByMember(member);
+    }
+
 
     @Override
     public void deleteCourse(Integer pk) {
