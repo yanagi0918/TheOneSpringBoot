@@ -36,7 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		
 		if (uri.contains("user")) {
-			Member loginMember = (Member) request.getSession().getAttribute("loginUser");
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			if (loginMember == null) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
