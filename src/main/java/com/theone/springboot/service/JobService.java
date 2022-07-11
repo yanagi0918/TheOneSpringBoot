@@ -27,4 +27,6 @@ public interface JobService {
 	
 	List<Job> findByCompany(Company company);
 
+	Job saveOrUpdate2(Job job);
+
 }

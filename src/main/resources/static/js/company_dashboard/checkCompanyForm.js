@@ -80,6 +80,15 @@ function checkcompid() {
 	});
 }
 
+$('#companyquicksignin').click(function() {
+	$('#compid').val('87654321')
+	$('#compwd').val('Aabc123zzz')
+})
+
+$('#companyquickinsert').click(function() {
+	$('#compwd').val('Az145145')
+	$('#pwdagain').val('Az145145')
+})
 
 $('#wrongCompany').click(function() {
 	$('#compid').val('A7654321')

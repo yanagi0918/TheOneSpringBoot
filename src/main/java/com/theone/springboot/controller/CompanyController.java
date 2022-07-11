@@ -29,18 +29,6 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
-	@GetMapping("/enterprise/company/list")
-	public String listCompanies(Model m) {
-		List<Company> companies = companyService.getAllCompanies();
-		m.addAttribute("companies",companies);
-		return "company/companylist";
-	}
-	
-	@GetMapping("/enterprise/company/showForm")
-    public String showFormForAdd(Model m) {
-        return "company/companycreate";
-    }
-	
 	@PostMapping("/enterprise/company/saveCompany")
 	public String saveCustomer(@ModelAttribute("company") Company company,Model m) {
 		companyService.saveOrUpdate(company);
@@ -64,16 +52,17 @@ public class CompanyController {
 		//放進Session
 		//當session不是空的時候，才能離開登入畫面	
 		
-		return "company/companyupdate";
+		return "company/company_update";
 	}
 	
 	
 	
-	@GetMapping("/enterprise/company/companydeatail/{pk}")
-	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
-		Company companydeatail = companyService.getCompany(detailId).get();
-		m.addAttribute("companydeatail",companydeatail);
-		return "company_detail";
+	@PostMapping("/enterprise/companydetail")
+	@GetMapping("/enterprise/companydetail")
+	public String processShowDetail(HttpSession session,Model m,Company company){
+		company = companyService.saveOrUpdate(company);
+		session.setAttribute("loginEnterprise", company);
+		return "company/company_detail";
 	}
 	@GetMapping("/enterprise/company/showupdateinformation/{pk}")
 	public String showInformaionFromUpdate(@PathVariable("pk") Integer updateId,Model m){
@@ -91,7 +80,7 @@ public class CompanyController {
 	
 	@PostMapping("/enterprise/company")
 	public String update(HttpSession session, Company company) throws IllegalStateException, IOException {
-		Company newcompany = companyService.saveOrUpdate(company);  //前端傳來的參數(新的member)接值存進資料庫，命名為newmember
+		Company newcompany = companyService.saveOrUpdate(company);  //前端傳來的參數(新的company)接值存進資料庫，命名為newcompany
 		session.setAttribute("loginEnterprise", newcompany);		
 		return "company/company_update";
 	}

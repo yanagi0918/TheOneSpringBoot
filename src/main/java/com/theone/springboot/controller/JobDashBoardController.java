@@ -47,6 +47,12 @@ public class JobDashBoardController {
 		return "redirect:/dashboard/job/list";
 	}
 	
+	@PostMapping("/updateJob")
+	private String updateJob(@ModelAttribute("job") Job job){
+		jobService.saveOrUpdate2(job);
+		return "redirect:/dashboard/job/list";
+	}
+	
 	@GetMapping("/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
 		Job jobdeatail = jobService.getJob(detailId).get();
