@@ -35,16 +35,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		
-		if (uri.contains("/user")) {
-			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+
+		if (uri.contains("user")) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginUser");
+
 			if (loginMember == null) {
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}
 			return true;
 		}
-		
-		
 		return true;
 	}
 

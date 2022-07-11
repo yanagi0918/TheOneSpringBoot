@@ -1,8 +1,12 @@
 package com.theone.springboot.service.impl;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -15,9 +19,12 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lowagie.text.DocumentException;
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.repository.EventDao;
 import com.theone.springboot.service.EventService;
+import com.theone.springboot.utils.EventCsvExporter;
+import com.theone.springboot.utils.EventPdfExporter;
 
 @Service
 @Transactional
@@ -27,7 +34,13 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	JavaMailSender mailSender;
-
+	
+	@Autowired
+	EventCsvExporter csvExporter;
+	
+	@Autowired
+	EventPdfExporter pdfExporter;
+	
 	@Override
 	public boolean isDup(Integer pk) {
 		return eventDao.existsById(pk);
@@ -103,6 +116,22 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public int countByState(Integer state) {
 		return eventDao.countByState(state);
+	}
+
+	@Override
+	public void csvExport(Writer writer) {
+		List<Event> events = eventDao.findAll();
+		csvExporter.csvExport(writer, events);
+	}
+
+	@Override
+	public void pdfExport(HttpServletResponse response) {
+		List<Event> events = eventDao.findAll();
+		try {
+			pdfExporter.pdfExport(response, events);
+		} catch (DocumentException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

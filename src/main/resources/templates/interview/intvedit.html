@@ -86,7 +86,7 @@
     <!-- Hero Area Start-->
     <div class="slider-area ">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-            data-background="assets/img/inter/inter.png">
+            th:data-background="@{/assets/img/inter/inter.png}">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -109,8 +109,8 @@
                     <h2 class="contact-title">新增分享</h2>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-contact contact_form" th:action="@{/dashboard/saveintv}" action="/saveintv" method="post" id="form"
-                         onsubmit="return checkIntvForm()" >
+                    <form class="form-contact contact_form" th:action="@{/enterprise/saveintv}" action="/saveintv" method="post" id="form"
+                         onsubmit="return checkIntvFrontForm()" >
                         <div class="row">
 
                             <div class="col-12">
@@ -250,110 +250,110 @@
 
 
 
-                                   <button class="genric-btn info circle arrow" id="InterviewcorrectInput">一鍵輸入<span
+                                   <button class="genric-btn info circle arrow" id="Interviewcorrect">一鍵輸入<span
                                             class="lnr lnr-arrow-right"></span></button>
-                                    <button class="genric-btn danger circle arrow" id="InterviewwrongInput">錯誤輸入<span
+                                    <button class="genric-btn danger circle arrow" id="Interviewwrong">錯誤輸入<span
                                             class="lnr lnr-arrow-right"></span></button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- 右邊欄位Head -->
-                <div class="col-xl-3 col-lg-3 col-md-4">
-                    <div class="blog_right_sidebar">
-                        <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
-                                        <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+               <div class="col-xl-3 col-lg-3 col-md-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder='Search Keyword'
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = 'Search Keyword'">
+                                            <div class="input-group-append">
+                                                <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                        type="submit">Search</button>
+                                </form>
+                            </aside>
+
+                            <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title" th:each="course:${courseList}">推薦課程</h3>
+                                
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_1.png}" alt="">
+                                    <div class="media-body">
+                                        <a href="single-blog.html">
+                                            <h3>教你如何釣魚</h3>
+                                        </a>
+
+                                    </div>
                                 </div>
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
-                            </form>
-                        </aside>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_2.png}" alt="">
+                                    <div class="media-body">
+                                        <a href="single-blog.html">
+                                            <h3>職場就像秀</h3>
+                                        </a>
 
-                        <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">推薦書籍</h3>
-                            <div class="media post_item">
-                                <img src="assets/img/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>教你如何釣魚</h3>
-                                    </a>
-
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="assets/img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>職場就像秀</h3>
-                                    </a>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_3.png}" alt="">
+                                    <div class="media-body">
+                                        <a href="single-blog.html">
+                                            <h3>享受工作</h3>
+                                        </a>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="assets/img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>享受工作</h3>
-                                    </a>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_4.png}" alt="">
+                                    <div class="media-body">
+                                        <a href="single-blog.html">
+                                            <h3>Asteroids telescope</h3>
+                                        </a>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="assets/img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
+                            </aside>
 
-                                </div>
-                            </div>
-                        </aside>
-
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title">廣告</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
+                            <aside class="single_sidebar_widget instagram_feeds">
+                                <h4 class="widget_title">廣告</h4>
+                                <ul class="instagram_row flex-wrap">
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_5.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_6.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </aside>
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title">Newsletter</h4>
                             <form action="#">
@@ -549,8 +549,8 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
-         <script th:src="@{/js/interview_dashboard/jquery.raty.js}" src="js/interview_dashboard/jquery.raty.js"></script>
-    	<script th:src="@{/js/interview_dashboard/checkInterviewForm.js}" src="js/interview_dashboard/checkInterviewForm.js"></script>
+        <script th:src="@{/js/interview_front/jquery.raty.js}" src="js/interview_front/jquery.raty.js"></script>
+    	<script th:src="@{/js/interview_front/checkInterviewForm.js}" src="js/interview_front/checkInterviewForm.js"></script>
 
    
 
