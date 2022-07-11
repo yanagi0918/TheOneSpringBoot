@@ -46,14 +46,16 @@ public class JobController {
 	
 	@GetMapping("/showForm")
 	private String showFormForAdd(HttpSession session,Model m){
-		Company company = (Company)session.getAttribute("loginEnterprise");
-		m.addAttribute("company",company);
+//		Company company = (Company)session.getAttribute("loginEnterprise");
+//		m.addAttribute("company",company);
 		return "job/job_create";
 	}
 	
 	@PostMapping("/saveJob")
-	private String saveJob(Job job){
-		jobService.saveOrUpdate(job);
+	private String saveJob(HttpSession session, Job job){
+		Company loginCompany = (Company)session.getAttribute("loginEnterprise");
+		job.setCompany(loginCompany);
+		jobService.saveOrUpdate2(job);
 		return "redirect:/enterprise/job/companylist";
 	}
 	

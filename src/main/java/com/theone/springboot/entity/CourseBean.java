@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -32,12 +33,20 @@ public class CourseBean {
     private Double score;
     private Integer price;
 
+    public String getUserid() {
+        return userid;
+    }
 
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    private String userid;
     //    VINCENT ONE(member講師) TO MANY(開設多個課程)
     @ManyToOne
     @JoinColumn(name = "FK_member_userId")
+    @JsonBackReference
     private Member member;
-
 
     public CourseBean() {
     }
@@ -154,10 +163,19 @@ public class CourseBean {
 
     @Override
     public String toString() {
-        return "CourseBean [courseNo=" + courseNo + ", courseCategory=" + courseCategory + ", courseName=" + courseName
-                + ", courseIntroduction=" + courseIntroduction + ", lecturer=" + lecturer + ", date=" + date
-                + ", coursePicUrl=" + coursePicUrl + ", courseVedioUrl=" + courseVedioUrl + ", score=" + score
-                + ", price=" + price + "]";
+        return "CourseBean{" +
+                "courseNo=" + courseNo +
+                ", courseCategory='" + courseCategory + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", courseIntroduction='" + courseIntroduction + '\'' +
+                ", lecturer='" + lecturer + '\'' +
+                ", status='" + status + '\'' +
+                ", date=" + date +
+                ", coursePicUrl='" + coursePicUrl + '\'' +
+                ", courseVedioUrl='" + courseVedioUrl + '\'' +
+                ", score=" + score +
+                ", price=" + price +
+                ", userid='" + userid + '\'' +
+                '}';
     }
-
 }

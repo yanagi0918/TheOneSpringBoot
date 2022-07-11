@@ -69,6 +69,9 @@ $(function () {
     $('#courseVedio').keyup(function () {
         validateVedio();
     })
+    $("#userid").keyup(function () {
+        validateId();
+    })
 
 
     //submit 確認(create & update)
@@ -207,7 +210,6 @@ $(function () {
 
     function validateName() {
         checkName();
-        console.log($('#courseName').attr("class"));
         if ($('#courseName').val() == "") {
             $('#courseName').attr("class", "form-control is-invalid")
             return false;
@@ -215,6 +217,23 @@ $(function () {
             $('#courseName').attr("class", "form-control is-valid")
             return true;
         }
+    }
+
+    function validateId() {
+
+        let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
+        if ($("#userid").val() === "") {
+            $('#userid').attr("class", "form-control is-invalid")
+            return false;
+        } else if (!IdRegex.test($("#userid").val())) {
+            $('#idError').text("身分證格式不符，請輸入正確身分證字號")
+            $('#userid').attr("class", "form-control is-invalid")
+            return false;
+        } else {
+            $('#userid').attr("class", "form-control is-valid")
+            return true;
+        }
+
     }
 
     function validateIntroduction() {
@@ -257,7 +276,8 @@ $(function () {
         let v5 = validateScore()
         let v6 = validatePrice()
         let v7 = validateDate()
-        if (v1 && v2 && v3 && v4 && v5 && v6 && v7) {
+        let v8 = validateId()
+        if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8) {
             checkResult = true;
             return checkResult
         }

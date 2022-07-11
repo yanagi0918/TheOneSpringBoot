@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -33,8 +34,8 @@ public class Member {
 
     //	 VINCENT ONE(member講師) TO MANY(開設多個課程)
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false)
+    @JsonManagedReference
     private List<CourseBean> lecturerCourses;
-
 
     //Constructor
     public Member() {

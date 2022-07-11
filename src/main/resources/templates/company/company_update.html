@@ -76,7 +76,7 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/theone.png" alt=""></a>
+                                <a th:href="@{/}"><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -101,7 +101,7 @@
                                             </li>
                                             <li><a href="">企業中心</a>
                                                 <ul class="submenu">
-                                                    <li><a href="">職缺管理</a></li>
+                                                    <li><a th:href="@{/enterprise/job/companylist}">職缺管理</a></li>
                                                     <li><a href="">廣告管理</a></li>
                                                 </ul>
                                             </li>
@@ -110,8 +110,7 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="companydetail.html" class="btn head-btn1">帳號</a>
-                                    <a href="#" class="btn head-btn2">登入/登出</a>
+                                    <a href="#" class="btn head-btn2">登出</a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +129,7 @@
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-                data-background="assets/img/hero/about.jpg">
+                th:data-background="@{/assets/img/job/company.jpg}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -148,19 +147,18 @@
 
         <div class="job-listing-area pt-120 pb-120">
             <div class="container">
-                <form th:action="@{/dashboard/company/saveCompany}"
-							action="companyupdate.html" method="post"
+                <form th:action="@{/enterprise/companydetail}" method="post"
 							enctype="multipart/form-data"
 							onsubmit="return checkCompanyForm()" id="companycreateform">
 							<div class="row mb-3">
 								<input type="hidden" class="form-control" name="comppk"
-									id="comppk" th:value="${companyupdate.comppk}">
+									id="comppk" th:value="${session.loginEnterprise.comppk}">
 							</div>
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">帳號(統編)</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" maxlength="8"
-										name="compid" id="compid" th:value="${companyupdate.compid}"
+										name="compid" id="compid" th:value="${session.loginEnterprise.compid}"
 										readonly>
 								</div>
 							</div>
@@ -169,7 +167,7 @@
 								<label class="col-sm-2 col-form-label">密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control" maxlength="15"
-										name="compwd" id="compwd" th:value="${companyupdate.compwd}"
+										name="compwd" id="compwd" th:value="${session.loginEnterprise.compwd}"
 										placeholder="(最少八個字符，至少一個大寫字母，一個小寫字母和一個數字)">
 									<div>
 										<input type="checkbox" onclick="ShowPwd()">顯示密碼
@@ -181,7 +179,7 @@
 								<label class="col-sm-2 col-form-label">確認密碼</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control pwd2" maxlength="15"
-										required id="pwdagain" placeholder="(再輸入一次密碼)" name="ckeckpwd">
+										required id="pwdagain" placeholder="(再輸入一次密碼)" name="ckeckpwd" th:value="${session.loginEnterprise.compwd}">
 								</div>
 							</div>
 
@@ -189,7 +187,7 @@
 								<label class="col-sm-2 col-form-label">公司名稱</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="corpname"
-										id="corpname" th:value="${companyupdate.corpname}">
+										id="corpname" th:value="${session.loginEnterprise.corpname}">
 								</div>
 							</div>
 
@@ -197,42 +195,41 @@
 								<label class="col-sm-2 col-form-label">負責人</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="owner" id="owner"
-										th:value="${companyupdate.owner}">
+										th:value="${session.loginEnterprise.owner}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">產業</label>
 								<div class="col-sm-8">
-									<select name='industry' class="form-select"
-										th:field="${companyupdate.industry}"
-										th:value="${companyupdate.industry}" id="industry">
-										<option th:selected="${companyupdate.industry =='金融業'}"
+									<select name='industry' class="form-select" 
+										th:value="${session.loginEnterprise.industry}" id="industry">
+										<option th:selected="${session.loginEnterprise.industry =='金融業'}"
 											value="金融業">金融業</option>
-										<option th:selected="${companyupdate.industry =='科技業'}"
+										<option th:selected="${session.loginEnterprise.industry =='科技業'}"
 											value="科技業">科技業</option>
-										<option th:selected="${companyupdate.industry =='文教相關'}"
+										<option th:selected="${session.loginEnterprise.industry =='文教相關'}"
 											value="文教相關">文教相關</option>
-										<option th:selected="${companyupdate.industry =='餐飲服務'}"
+										<option th:selected="${session.loginEnterprise.industry =='餐飲服務'}"
 											value="餐飲服務">餐飲服務</option>
-										<option th:selected="${companyupdate.industry =='旅遊相關'}"
+										<option th:selected="${session.loginEnterprise.industry =='旅遊相關'}"
 											value="旅遊相關">旅遊相關</option>
-										<option th:selected="${companyupdate.industry =='運輸倉儲'}"
+										<option th:selected="${session.loginEnterprise.industry =='運輸倉儲'}"
 											value="運輸倉儲">其他</option>
-										<option th:selected="${companyupdate.industry =='一般服務業'}"
+										<option th:selected="${session.loginEnterprise.industry =='一般服務業'}"
 											value="一般服務業">一般服務業</option>
-										<option th:selected="${companyupdate.industry =='建築及不動產'}"
+										<option th:selected="${session.loginEnterprise.industry =='建築及不動產'}"
 											value="建築及不動產">建築及不動產</option>
-										<option th:selected="${companyupdate.industry =='政治及宗教相關'}"
+										<option th:selected="${session.loginEnterprise.industry =='政治及宗教相關'}"
 											value="政治及宗教相關">政治及宗教相關</option>
-										<option th:selected="${companyupdate.industry =='醫療保健及環境衛生'}"
+										<option th:selected="${session.loginEnterprise.industry =='醫療保健及環境衛生'}"
 											value="醫療保健及環境衛生">醫療保健及環境衛生</option>
-										<option th:selected="${companyupdate.industry =='礦業及土石開發採取'}"
+										<option th:selected="${session.loginEnterprise.industry =='礦業及土石開發採取'}"
 											value="礦業及土石開發採取">礦業及土石開發採取</option>
-										<option th:selected="${companyupdate.industry =='批發零售及傳直銷產業'}"
+										<option th:selected="${session.loginEnterprise.industry =='批發零售及傳直銷產業'}"
 											value="批發零售及傳直銷產業">批發零售及傳直銷產業</option>
 										<option
-											th:selected="${companyupdate.industry =='法律/會計/顧問/研發/設計業'}"
+											th:selected="${session.loginEnterprise.industry =='法律/會計/顧問/研發/設計業'}"
 											value="法律/會計/顧問/研發/設計業">法律/會計/顧問/研發/設計業</option>
 									</select>
 								</div>
@@ -242,7 +239,7 @@
 								<label class="col-sm-2 col-form-label">聯絡人</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="contact"
-										id="contact" th:value="${companyupdate.contact}">
+										id="contact" th:value="${session.loginEnterprise.contact}">
 								</div>
 							</div>
 
@@ -250,7 +247,7 @@
 								<label class="col-sm-2 col-form-label">聯絡電話</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="comptele"
-										id="comptele" th:value="${companyupdate.comptele}"
+										id="comptele" th:value="${session.loginEnterprise.comptele}"
 										placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)">
 								</div>
 							</div>
@@ -259,7 +256,7 @@
 								<label class="col-sm-2 col-form-label">傳真號碼</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="fax" id="fax"
-										th:value="${companyupdate.fax}" placeholder="選填">
+										th:value="${session.loginEnterprise.fax}" placeholder="選填">
 								</div>
 							</div>
 
@@ -267,7 +264,7 @@
 								<label class="col-sm-2 col-form-label">公司地址</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="compaddress"
-										id="compaddress" th:value="${companyupdate.compaddress}">
+										id="compaddress" th:value="${session.loginEnterprise.compaddress}">
 								</div>
 							</div>
 
@@ -275,7 +272,7 @@
 								<label class="col-sm-2 col-form-label">員工人數</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="empnumber"
-										id="empnumber" th:value="${companyupdate.empnumber}"
+										id="empnumber" th:value="${session.loginEnterprise.empnumber}"
 										placeholder="(請輸入阿拉伯整數，如2500)">
 								</div>
 							</div>
@@ -284,7 +281,7 @@
 								<label class="col-sm-2 col-form-label">公司信箱</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="website"
-										id="website" th:value="${companyupdate.website}">
+										id="website" th:value="${session.loginEnterprise.website}">
 								</div>
 							</div>
 
@@ -293,14 +290,12 @@
 								<div class="col-sm-8 text-center">
 									<input type="text" class="form-control" maxlength="10"
 										name="capital" id="capital"
-										th:value="${companyupdate.capital}"
+										th:value="${session.loginEnterprise.capital}"
 										placeholder="(請輸入公司資本額，如1250萬)">
 								</div>
 							</div>
                     <div class="center">
                         <button type="submit" class="btn head-btn2" name="update" value="confirm">修改</button>
-                        <button type="button" class="btn head-btn2"
-                            onclick="window.location.href='companydetail.html'; return false;">取消</button>
                         <button type="button" class="btn head-btn2" id="companyUpdate">一鍵修改</button>
                     </div>
                 </form>
@@ -426,6 +421,11 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
+		<!--         my js -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+		<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"></script>
 
 </body>
 
