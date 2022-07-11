@@ -1,5 +1,6 @@
 package com.theone.springboot.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +58,9 @@ public class OrderServiceImpl  implements OrderService{
 		Order order = new Order();
 		order.setCourseBean(course);
 		order.setUserId(member.getUserid());
-		order.setTotalPrice(course.getPrice());		
+		order.setTotalPrice(course.getPrice());
+		order.setProductId(course.getCourseName());
+		order.setOrderDate(new Date());
 		orderDao.save(order);
 //		Order order = orderDao.findById(6).get();
 		System.err.println(order.getCourseBean().getCoursePicUrl());

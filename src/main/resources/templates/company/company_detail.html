@@ -61,7 +61,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img th:src="@{/assets/img/logo/logo.png}" alt="">
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/theone.png" alt=""></a>
+                                <a href="index.html"><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -101,7 +101,7 @@
                                             </li>
                                             <li><a href="">企業中心</a>
                                                 <ul class="submenu">
-                                                    <li><a href="">職缺管理</a></li>
+                                                   <li><a th:href="@{/enterprise/job/companylist}">職缺管理</a></li>
                                                     <li><a href="">廣告管理</a></li>
                                                 </ul>
                                             </li>
@@ -110,8 +110,8 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="companydetail.html" class="btn head-btn1">註銷</a>
-                                    <a href="#" class="btn head-btn2">登入/登出</a>
+<!--                                     <a th:id="${session.loginEnterprise.comppk}" onclick="del(this.id)" class="btn head-btn1">註銷</a> -->
+                                    <a th:href="@{/logout}" class="btn head-btn2">登出</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-                data-background="assets/img/hero/about.jpg">
+                th:data-background="@{/assets/img/job/company.jpg}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -148,14 +148,14 @@
                 <h1 class="mb-4">我的公司資訊</h1>
                 <div class="row mb-3">
                     <input type="hidden" class="form-control" name="comppk" id="comppk"
-                        th:value="${companydeatail.comppk}" readonly="readonly">
+                        th:value="${session.loginEnterprise.comppk}" readonly="readonly">
                 </div>
-                <form>
+                <form th:action="@{/enterprise/company}" method="post" id="form" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">帳號(統編)</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" maxlength="8" name="compid" id="compid"
-                                th:value="${companydeatail.compid}" readonly="readonly">
+                                th:value="${session.loginEnterprise.compid}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '87654321'" placeholder="87654321">
                         </div>
                     </div>
 
@@ -163,7 +163,10 @@
                         <label class="col-sm-2 col-form-label">密碼</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" maxlength="15" name="compwd" id="compwd"
-                                th:value="${companydeatail.compwd}" readonly="readonly">
+                                th:value="${session.loginEnterprise.compwd}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Aabc123zzz'" placeholder="Aabc123zzz">
+                                <div>
+										<input type="checkbox" onclick="ShowPwd()">隱藏密碼
+									</div>
                         </div>
                     </div>
 
@@ -171,7 +174,7 @@
                         <label class="col-sm-2 col-form-label">公司名稱</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="corpname" id="corpname"
-                                th:value="${companydeatail.corpname}" readonly="readonly">
+                                th:value="${session.loginEnterprise.corpname}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '凜東企業有限公司'" placeholder="凜東企業有限公司">
                         </div>
                     </div>
 
@@ -179,7 +182,7 @@
                         <label class="col-sm-2 col-form-label">負責人</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="owner" id="owner"
-                                th:value="${companydeatail.owner}" readonly="readonly">
+                                th:value="${session.loginEnterprise.owner}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '吳先生'" placeholder="吳先生">
                         </div>
                     </div>
 
@@ -187,7 +190,7 @@
                         <label class="col-sm-2 col-form-label">產業</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="industry" id="industry"
-                                th:value="${companydeatail.industry}" readonly="readonly">
+                                th:value="${session.loginEnterprise.industry}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '金融業'" placeholder="金融業">
                         </div>
                     </div>
 
@@ -195,7 +198,7 @@
                         <label class="col-sm-2 col-form-label">聯絡人</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="contact" id="contact"
-                                th:value="${companydeatail.contact}" readonly="readonly">
+                                th:value="${session.loginEnterprise.contact}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '黃小姐'" placeholder="黃小姐">
                         </div>
                     </div>
 
@@ -203,15 +206,15 @@
                         <label class="col-sm-2 col-form-label">聯絡電話</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="comptele" id="comptele"
-                                th:value="${companydeatail.comptele}" readonly="readonly">
+                                th:value="${session.loginEnterprise.comptele}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '0939393939'" placeholder="0939393939">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">傳真號碼</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="fax" id="fax" th:value="${companydeatail.fax}"
-                                readonly="readonly">
+                            <input type="text" class="form-control" name="fax" id="fax" th:value="${session.loginEnterprise.fax}"
+                                readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '07-1325462'" placeholder="07-1325462">
                         </div>
                     </div>
 
@@ -219,7 +222,7 @@
                         <label class="col-sm-2 col-form-label">公司地址</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="compaddress" id="compaddress"
-                                th:value="${companydeatail.compaddress}" readonly="readonly">
+                                th:value="${session.loginEnterprise.compaddress}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '新北市土城工業區26號'" placeholder="新北市土城工業區26號">
                         </div>
                     </div>
 
@@ -227,7 +230,7 @@
                         <label class="col-sm-2 col-form-label">員工人數</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="empnumber" required id="empnumber"
-                                th:value="${companydeatail.empnumber}" readonly="readonly">
+                                th:value="${session.loginEnterprise.empnumber}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '300'" placeholder="300">
                         </div>
                     </div>
 
@@ -235,7 +238,7 @@
                         <label class="col-sm-2 col-form-label">公司信箱</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="website" id="website"
-                                th:value="${companydeatail.website}" readonly="readonly">
+                                th:value="${session.loginEnterprise.website}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = 'iSpan4505@gmail.com'" placeholder="iSpan4505@gmail.com">
                         </div>
                     </div>
 
@@ -243,14 +246,11 @@
                         <label class="col-sm-2 col-form-label">資本額</label>
                         <div class="col-sm-8 text-center">
                             <input type="text" class="form-control" maxlength="10" name="capital" id="capital"
-                                th:value="${companydeatail.capital}" readonly="readonly">
+                                th:value="${session.loginEnterprise.capital}" readonly="readonly" onfocus="this.placeholder = ''" onblur="this.placeholder = '1200萬'" placeholder="1200萬">
                         </div>
                     </div>
                     <div class="center">
-                        <button type="button" class="btn head-btn2">刊登職缺</button>
-                        <button type="button" class="btn head-btn2">前往修改</button>
-                        <button type="button" class="btn head-btn2"
-                            onclick="window.location.href='../list'; return false;">返回</button>
+                        <button class="btn head-btn2" type="submit">前往修改</button>
                     </div>
                 </form>
 
@@ -380,7 +380,41 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
-
+		<!-- my js -->
+		<script th:src="@{/js/company_dashboard/checkCompanyForm.js}"></script>
+		<script>
+	function del(id) {
+		Swal.fire({
+			title: '確認刪除?',
+			text: "確定刪除!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '刪除',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已刪除!',
+					showConfirmButton: false,
+					timer: 800
+				})
+				setTimeout(() => {
+					$.ajax({
+                        url: '/dashboard/company/delete/'+id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            window.location.href='./list'
+                        }
+                    });
+				}, 800)
+			}
+		})
+	    }
+        
+    </script>
 </body>
 
 </html>

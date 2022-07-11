@@ -86,12 +86,18 @@
 	display: table
 }
 
-.modify-btn {
-}
-
 .modify-btn i {
 	font-size: 16px
 }
+
+/* pagination css */
+
+#comment-pagination .page-item.active .page-link {
+    background-color: #4cd3e3;
+    border-color: #f0e9ff;
+    color: #fff
+}
+
 </style>
 </head>
 
@@ -223,21 +229,11 @@
 								</div>
 							</div>
 						</article>
-
-						<!-- 						<nav class="blog-pagination justify-content-center d-flex"> -->
-						<!-- 							<ul class="pagination"> -->
-						<!-- 								<li class="page-item"><a href="#" class="page-link" -->
-						<!-- 									aria-label="Previous"> <i class="ti-angle-left"></i> -->
-						<!-- 								</a></li> -->
-						<!-- 								<li class="page-item"><a href="#" class="page-link">1</a></li> -->
-						<!-- 								<li class="page-item active"><a href="#" class="page-link">2</a> -->
-						<!-- 								</li> -->
-						<!-- 								<li class="page-item"><a href="#" class="page-link" -->
-						<!-- 									aria-label="Next"> <i class="ti-angle-right"></i> -->
-						<!-- 								</a></li> -->
-						<!-- 							</ul> -->
-						<!-- 						</nav> -->
 					</div>
+					<nav class="blog-pagination justify-content-center d-flex" id="comment-pagination">
+						<ul class="pagination">
+						</ul>
+					</nav>
 				</div>
 				<div class="col-lg-4 blog_area">
 					<div class="blog_right_sidebar">

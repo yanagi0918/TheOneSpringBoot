@@ -1,6 +1,9 @@
 package com.theone.springboot.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,29 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CompanyService;
 
 
-@RequestMapping("/enterprise/company")
+//@RequestMapping("/enterprise/company")
 @Controller
 public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyService;
 	
-	@GetMapping("/list")
-	public String listCompanies(Model m) {
-		List<Company> companies = companyService.getAllCompanies();
-		m.addAttribute("companies",companies);
-		return "company/companylist";
-	}
-	
-	@GetMapping("/showForm")
-    public String showFormForAdd(Model m) {
-        return "company/companycreate";
-    }
-	
-	@PostMapping("/saveCompany")
+	@PostMapping("/enterprise/company/saveCompany")
 	public String saveCustomer(@ModelAttribute("company") Company company,Model m) {
 		companyService.saveOrUpdate(company);
 		return "redirect:/enterprise/company/companydeatail";
@@ -52,24 +44,45 @@ public class CompanyController {
 		return false;
 	}
 	
-	@GetMapping("/companydeatail/{pk}")
-	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
-		Company companydeatail = companyService.getCompany(detailId).get();
-		m.addAttribute("companydeatail",companydeatail);
-		return "company_detail";
+	@PostMapping("/signupcompany")
+	public String signUp(HttpSession session, Company company) throws IllegalStateException, IOException {
+		Company newcompany = companyService.saveOrUpdate(company);  
+		session.setAttribute("loginEnterprise", newcompany);
+		//存進資料庫
+		//放進Session
+		//當session不是空的時候，才能離開登入畫面	
+		
+		return "company/company_update";
 	}
-	@GetMapping("/showupdateinformation/{pk}")
+	
+	
+	
+	@PostMapping("/enterprise/companydetail")
+	@GetMapping("/enterprise/companydetail")
+	public String processShowDetail(HttpSession session,Model m,Company company){
+		company = companyService.saveOrUpdate(company);
+		session.setAttribute("loginEnterprise", company);
+		return "company/company_detail";
+	}
+	@GetMapping("/enterprise/company/showupdateinformation/{pk}")
 	public String showInformaionFromUpdate(@PathVariable("pk") Integer updateId,Model m){
 		Company companyupdate = companyService.getCompany(updateId).get();
 		m.addAttribute("companyupdate",companyupdate);
-		return "company_update";
+		return "company/company_update";
 	}
 	
 	@ResponseBody
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/enterprise/company/delete/{id}")
 	public String processDelete(@PathVariable("id") Integer id){
 		companyService.deleteCompany(id);
 		return "ok";
+	}
+	
+	@PostMapping("/enterprise/company")
+	public String update(HttpSession session, Company company) throws IllegalStateException, IOException {
+		Company newcompany = companyService.saveOrUpdate(company);  //前端傳來的參數(新的company)接值存進資料庫，命名為newcompany
+		session.setAttribute("loginEnterprise", newcompany);		
+		return "company/company_update";
 	}
 	
 }

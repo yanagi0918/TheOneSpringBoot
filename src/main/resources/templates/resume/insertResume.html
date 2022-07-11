@@ -10,7 +10,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 		<!-- CSS here -->
-            <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
         <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
         <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
         <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
@@ -68,7 +68,7 @@
                                 </div> -->
 									<div class="job-tittle">
 										<h2>
-											<input type="hidden" class="form-control" name="resume_id" value="0" id="resume_id"/>
+											<input type="hidden" class="form-control" name="resumeId" value="0" id="resumeId"/>
 											<input type="hidden" class="form-control" name="userId" th:value="${session.loginMember.userid}" id="userId"/>
 											
 											<input type="text" placeholder="請輸入履歷名稱" name="resumeName" id="resumeName">
@@ -148,7 +148,7 @@
 						</div>
 						<div class="center">
 							<br> <br>
-							<button type="submit" class="genric-btn primary circle"
+							<button type="button" class="genric-btn primary circle"
 								name="create" value="confirm" id="btn-submit">新增履歷</button>
 							<button type="reset" class="genric-btn primary circle">清除內容</button>
 							<button type="button" class="genric-btn primary circle"
@@ -282,6 +282,9 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script th:src="@{/assets/js/plugins.js}"></script>
 	<script th:src="@{/assets/js/main.js}"></script>
+	
+	<!-- 禹秀 -->
+	<script th:src="@{/js/resume_front/checkResumeFormForFront.js}"></script>
 
 </body>
 </html>

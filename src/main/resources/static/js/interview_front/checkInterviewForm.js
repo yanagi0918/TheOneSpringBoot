@@ -1,5 +1,5 @@
-function checkIntvFrontForm() {
-	let checkIntvFrontForm = true;
+function checkIntvForm() {
+	let checkIntvForm = true;
 
 	let userID = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
 	if (!userID.test($("#userId").val())) {
@@ -20,7 +20,7 @@ function checkIntvFrontForm() {
 			return checkIntvForm;
 		}
 }
-$('#Interviewwrong').click(function () {
+$('#InterviewwrongInput').click(function () {
      $('#userId').val('123456789')
     $('#intTime').val('2022-12-30')
     $('#compName').val('多拉A夢共和國')
@@ -32,7 +32,7 @@ $('#Interviewwrong').click(function () {
  )
 })
 
-$('#Interviewcorrect').click(function () {
+$('#InterviewcorrectInput').click(function () {
     $('#userId').val('A123456789')
     $('#intTime').val('2022-05-20')
     $('#compName').val('多拉A夢共和國')
@@ -58,7 +58,7 @@ $(function() {
 		score: 5
 	});
 
-	$('td.listComp').raty({
+	$('.listComp').raty({
 		readOnly: true,
 		starOff: 'star-off-small.png',
 		starOn: 'star-on-small.png'
@@ -73,7 +73,36 @@ $(function() {
 
 
 
+
 $(function() {
+	$('#intv_submit').click(function() {
+		Swal.fire({
+			title: '提示',
+			text: '確定要新增?',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '確定',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已新增!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					$('#form').submit();
+				}, 1500)
+			} else {
+			}
+
+		})
+
+	});
+
 
 	$('.btn-intvDelete').click(function() {
 		Swal.fire({
