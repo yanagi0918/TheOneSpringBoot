@@ -64,17 +64,10 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses/lecturers")
-    public String toCoursesBylecturer(HttpServletRequest request, Model model, HttpSession session) throws UnsupportedEncodingException {
-//  Member lecturerMember = (Member)request.getSession().getAttribute("");
-//  lecturerMember.getUserid();
+    public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
         Member loginUser = (Member) session.getAttribute("loginUser");
-
-        List<CourseBean> courseList  = co
+        List<CourseBean> courseList  = courseService.findByMember(loginUser);
         model.addAttribute("courseList", courseList);
-//        String lecturer = "王大陸"; //寫死
-//        String url = "/user/courses/" + URLEncoder.encode(lecturer, "utf-8");
-
-
         return "course/lecturerCourseList";
     }
 

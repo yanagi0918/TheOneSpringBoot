@@ -32,8 +32,9 @@ public class Member {
     private String image;
 
     //	 VINCENT ONE(member講師) TO MANY(開設多個課程)
-    @OneToMany(mappedBy = "member",cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = false)
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false)
     private List<CourseBean> lecturerCourses;
+
 
     //Constructor
     public Member() {
@@ -130,6 +131,7 @@ public class Member {
     public List<CourseBean> getLecturerCourses() {
         return lecturerCourses;
     }
+
     public void setLecturerCourses(List<CourseBean> lecturerCourses) {
         this.lecturerCourses = lecturerCourses;
     }
