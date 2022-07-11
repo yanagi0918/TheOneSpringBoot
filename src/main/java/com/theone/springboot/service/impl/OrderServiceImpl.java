@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.theone.springboot.entity.CourseBean;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 import com.theone.springboot.repository.CourseDao;
 import com.theone.springboot.repository.OrderDao;
@@ -51,18 +52,16 @@ public class OrderServiceImpl  implements OrderService{
 	}
 	
 	@Override
-	public void saveOrder(String id) {
-		CourseBean course = courseDao.findById(1).get();
+	public void saveOrder(String courseid,Member member) {
+		CourseBean course = courseDao.findById(Integer.parseInt(courseid)).get();
 		Order order = new Order();
 		order.setCourseBean(course);
-		order.setUserId("P1200014937");
-		order.setTotalPrice(10000);
-		order.setOrderId(999);
+		order.setUserId(member.getUserid());
+		order.setTotalPrice(course.getPrice());		
 		orderDao.save(order);
 //		Order order = orderDao.findById(6).get();
 		System.err.println(order.getCourseBean().getCoursePicUrl());
-		courseDao.save(course);
-
+		
 	}
 	
 }

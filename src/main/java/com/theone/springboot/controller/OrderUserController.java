@@ -3,6 +3,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.theone.springboot.ecpay.payment.integration.AllInOne;
 import com.theone.springboot.ecpay.payment.integration.domain.AioCheckOutALL;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 import com.theone.springboot.service.CourseService;
 import com.theone.springboot.service.OrderService;
@@ -104,17 +107,18 @@ public class OrderUserController {
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("課程1#課程2");
-		obj.setReturnURL("http://localhost:8080/enterprise/ordersDetail/"+courseid);
+		obj.setReturnURL("http://42.72.134.198:8080/enterprise/ordersDetail/"+courseid);
 		obj.setClientBackURL("http://localhost:8080/enterprise/orders/");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
 	}
 	
-		//查看頁面
+		//新增
 		@GetMapping(path = "/ordersDetail/{id}")
-		public void orderSave(@PathVariable("id") String id){
-			orderService.saveOrder(id);
+		public void orderSave(@PathVariable("id") String id,HttpServletRequest request){
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+			orderService.saveOrder(id,loginMember);
 		}
 
 }
