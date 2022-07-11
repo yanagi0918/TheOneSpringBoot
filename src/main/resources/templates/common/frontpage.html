@@ -58,7 +58,7 @@
                                             </li>
                                             <li th:if="${session.loginMember!=null}"><a href=""><span style="font-size: large">會員中心</span></a>
 												<ul class="submenu">
-													<li><a href=""><span style="font-size: large">會員資訊</span></a></li>
+													<li><a th:href="@{/user/members}"><span style="font-size: large">會員資訊</span></a></li>
 													<li><a th:href="@{/user/resumes}"><span style="font-size: large">履歷管理</span></a></li>
 												</ul>
 											</li>

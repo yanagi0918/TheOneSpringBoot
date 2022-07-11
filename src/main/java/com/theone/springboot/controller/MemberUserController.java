@@ -41,32 +41,23 @@ public class MemberUserController {
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/members")
-	public String toMemberListPage(Model model) { //類似get request attribute 把資料往前端模板引擎丟
+	@GetMapping("/members") //memberInfo
+	public String toMemberListPage(HttpSession session, Model model) { //類似get request attribute 把資料往前端模板引擎丟
 		//一樣有session狀態才可以看到
 		//使用Member member = memberService.getByUserid取到該會員資訊 
-		List<Member> allMembers = memberService.getAllMembers();
-		model.addAttribute("members", allMembers);
-		return "member_dashboard/memberlist";
+		Member member = (Member)session.getAttribute("loginMember");
+		String userid = member.getUserid();
+		Member memberinfo = memberService.getByUserid(userid);
+		model.addAttribute("members", memberinfo);
+		return "member/memberInfo";
 	}
 	
 	
-    //ajax (jquery)檢查身分證是否重複，並回傳JSON物件給前端
-    @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Member> getByUserid(@RequestBody Member member) {
-    	Member bean = memberService.getByUserid(member.getUserid());
-        if (bean != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(bean);
-        } else {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-    }
+//	@GetMapping("/member")//URL路徑會有user，可能是個問題，要再想一下
+//	public String toCreatePage() {
+//		return "member_dashboard/membercreate";
+//	}
 	
-	@GetMapping("/member")
-	public String toCreatePage() {
-		return "member_dashboard/membercreate";
-	}
 	//target下資料夾還沒建立
 	@PostMapping("/member")
 	public String saveOrUpdate(Member member, MultipartFile imageFile) throws IllegalStateException, IOException {
@@ -83,15 +74,15 @@ public class MemberUserController {
 
 		memberService.saveOrUpdate(member);
 
-		return "redirect:/dashboard/members";
+		return "redirect:/user/members";
 	}
 	
-	@GetMapping("/member/{id}")
-	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
-		Member member = memberService.getMember(id).get();
-		model.addAttribute("member", member);
-		return "member_dashboard/memberupdate";
-	}
+//	@GetMapping("/member/{id}")
+//	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
+//		Member member = memberService.getMember(id).get();
+//		model.addAttribute("member", member);
+//		return "member_dashboard/memberupdate";
+//	}
 	
 //	@ResponseBody
 //	@DeleteMapping("/member/{id}")
@@ -120,5 +111,19 @@ public class MemberUserController {
 		System.out.println("out");
 		return false;
 	}
+	
+    //ajax (jquery)檢查身分證是否重複，並回傳JSON物件給前端
+    @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Member> getByUserid(@RequestBody Member member) {
+    	Member bean = memberService.getByUserid(member.getUserid());
+        if (bean != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+    }
+	
+	
 	
 }

@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="">
 		<link rel="shortcut icon" type="image/x-icon" href="">
-
+		
 		<!-- CSS here -->
         <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
         <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
@@ -89,7 +89,40 @@
                                     	<button th:if="${event.state==0}" class="genric-btn info-border circle">審核中</button>
                                     	<button th:if="${event.state==1}" class="genric-btn success-border circle">審核通過</button>
                                     	<button th:if="${event.state==2}" class="genric-btn danger-border circle">已退件</button>
-                                        <a href="" class="genric-btn primary circle">查看</a>
+                                        <a href="#" class="genric-btn primary circle" data-toggle="modal" th:data-target="${'#detail'+event.eventId}">查看</a>
+                                        <div class="modal fade" th:id="${'detail'+event.eventId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" th:text="${'廣告編號:'+event.eventId}">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          													<span aria-hidden="true">&times;</span>
+       													</button>
+                                                    </div>
+                                                    <div class="modal-body">
+														<div class="form-group text-center">
+															<img th:src="${event.imgUrl}" id="image" style="width: 320px; height: 210px;" class="img-fluid">
+														</div>
+														<div class="form-group">
+															<label class="col-form-label">職缺連結:</label>
+															<input th:value="${event.eventLinkUrl}" type="text" disabled class="single-input">
+														</div>
+														<div class="form-group">
+															<label class="col-form-label">上架日期:</label>
+															<input th:value="${#dates.format(event.postStart, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+														</div>
+														<div class="form-group">
+															<label class="col-form-label">下架日期:</label>
+															<input th:value="${#dates.format(event.postEnd, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+														</div>
+														<div class="form-group">
+															<label class="col-form-label">備註:</label>
+															<textarea class="single-textarea" disabled th:text="${event.remark}"></textarea>
+														</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
                                     </div>
                                 </div>

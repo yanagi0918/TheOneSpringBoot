@@ -100,4 +100,9 @@ public class EventServiceImpl implements EventService {
 		}
 	}
 
+	@Override
+	public int countByState(Integer state) {
+		return eventDao.countByState(state);
+	}
+
 }

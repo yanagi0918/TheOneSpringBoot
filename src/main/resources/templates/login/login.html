@@ -103,7 +103,7 @@
 						<button type="button" class="switcher-member switcher-signup">
 							Sign Up <span class="underline"></span>
 						</button>
-						<form class="form form-signup shadow card-body">
+						<form class="form form-signup shadow card-body" th:action="@{/user/member}" th:method="post">
 							<fieldset>
 								<div class="input-block card-body">
 									<h2 class="card-title">Create Account</h2>
@@ -136,14 +136,14 @@
 											placeholder="Password" required="required" />
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="password"
-											placeholder="Comfirm Password" required="required" />
+										<input class="form-control" type="date"
+											placeholder="yyyy-mm-dd" required="required" />
 									</div>
 									<div class="badge-wrap float-left m-1">
 										<a class="badge" data-toggle="tooltip" title="Quick insert"><i class="fa fa-user-plus"></i></a>
 									</div>
 									<div class="float-left">
-										<button class="btn btn-lg">SIGN UP</button>
+										<button class="btn btn-lg" type="submit">SIGN UP</button>
 									</div>
 								</div>
 							</fieldset>
