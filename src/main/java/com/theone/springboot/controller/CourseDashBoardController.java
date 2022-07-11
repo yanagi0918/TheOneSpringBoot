@@ -10,6 +10,8 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
+import com.theone.springboot.entity.Member;
+import com.theone.springboot.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
@@ -31,10 +33,12 @@ import com.theone.springboot.service.CourseService;
 public class CourseDashBoardController {
 
     private final CourseService courseService;
+    private final MemberService memberService;
 
-    //    @Autowired
-    public CourseDashBoardController(CourseService courseService) {
+    @Autowired
+    public CourseDashBoardController(CourseService courseService, MemberService memberService) {
         this.courseService = courseService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/courses")
@@ -88,6 +92,7 @@ public class CourseDashBoardController {
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
         System.out.println(CourseBean);
+        CourseBean.setMember(memberService.getByUserid(CourseBean.getUserid()));
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
         //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
@@ -101,7 +106,7 @@ public class CourseDashBoardController {
 
     @PutMapping("/courses")
     @ResponseBody
-    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean){
+    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean) {
         CourseBean courseBean = courseService.findCourse(CourseBean.getCourseNo()).orElseThrow();
         courseBean.setStatus(CourseBean.getStatus());
         courseService.saveOrUpdate(courseBean);

@@ -75,7 +75,8 @@
                             <th scope="col">類別</th>
                             <th scope="col">名稱</th>
                             <th scope="col">講師</th>
-                            <th scope="col">上架時間</th>
+<!--                            <th scope="col">上架時間</th>-->
+                            <th scope="col">講師帳號</th>
                             <!--                            <th scope="col">評分</th>-->
                             <!--                            <th scope="col">價錢</th>-->
                             <th scope="col">狀態</th>
@@ -88,28 +89,26 @@
                             <td th:text="${course.courseCategory}"></td>
                             <td th:text="${course.courseName}"></td>
                             <td th:text="${course.lecturer}"></td>
-                            <td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>
+<!--                            <td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>-->
                             <!--                            <td th:text="${course.score}"></td>-->
                             <!--                            <td th:text="${course.price}"></td>-->
-                            <td th:switch="${course.status}">
+                            <td th:text="${course.userid}"></td>
+                            <td th:switch="${course.status}" >
 
                                 <span th:case="'待審核'">
                                     <span class="btn btn-warning btn-sm " th:text="${course.status}"
-                                          th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:id="${course.courseNo}">
                                     </span>
                                 </span>
 
                                 <span th:case="'已審核'">
                                     <span class="btn btn-success btn-sm " th:text="${course.status}"
-                                          th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:id="${course.courseNo}">
                                     </span>
                                 </span>
                                 <span th:case="'駁回'">
                                     <span class="btn btn-danger btn-sm " th:text="${course.status}"
-                                          th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:id="${course.courseNo}">
                                     </span>
                                 </span>
                                 <i class="fa fa-check-circle fa-lg" th:id="${course.courseNo}"
@@ -208,8 +207,10 @@
                         data: JSON.stringify(dataBean),
                         success: function (data) {
                             let courseNo = data.courseNo;
+                            console.log(courseNo);
+                            console.log(data.status);
                             document.getElementById(courseNo).innerText = data.status;
-                            document.getElementById(courseNo).setAttribute("class", "btn btn-success btn-sm")
+                            document.getElementById(courseNo).setAttribute("class", "btn btn-success btn-sm");
                         }
                     });
                 }, 100)
@@ -247,8 +248,11 @@
                         data: JSON.stringify(dataBean),
                         success: function (data) {
                             let courseNo = data.courseNo;
+                            console.log(courseNo);
+                            console.log(data.status);
                             document.getElementById(courseNo).innerText = data.status;
-                            document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm")
+                            document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+
                         }
                     });
                 }, 100)
