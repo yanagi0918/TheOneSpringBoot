@@ -59,7 +59,7 @@ public class CommentUserController {
 	@RequestMapping("/CommentUpdate")
 	public String updateComment(@ModelAttribute("comment") Comment comment) {
 		commentService.saveOrUpdate(comment);
-		return "redirect:/ user/comments";
+		return "redirect:/comments";
 	}
 
 	// 送出新增評價的空白表單
@@ -89,5 +89,10 @@ public class CommentUserController {
 	public String showConfirmForm(@ModelAttribute("comment") Comment comment) {
 		return "comment/commentdetail";
 	}
-
+	
+	//討論區分頁
+	@RequestMapping("/forum")
+	public String showForum() {
+		return "interview/page";
+	}
 }

@@ -65,6 +65,36 @@
 	background-color: transparent;
 	border: 0
 }
+
+.comment-link li a {
+    color: black
+}
+
+.comment-link li i,
+.comment-link li span {
+    font-size: 16px;
+    margin-right: 5px;
+    float: left
+}
+
+.comment-link li::after {
+    content: ">";
+    padding-left: 10px;
+    padding-right: 10px;
+    float:left
+}
+
+.comment-link li:last-child::after {
+    display: none
+}
+
+.comment-link::after {
+    content: "";
+    display: block;
+    clear: both;
+    display: table
+    
+}
 </style>
 </head>
 
@@ -100,23 +130,19 @@
 			<div class="row">
 				<div class="col-lg-8 posts-list">
 					<div class="blog_left_sidebar">
-						<a class="float-left" th:href="@{/comments}">
-							<h6>職場甘苦談</h6>
-						</a>
-						<h6 class="float-left">&nbsp>&nbsp</h6>
-						<a class="float-left" href="comment_list_work-experiences.html">
-							<h6>工作心得</h6>
-						</a>
-						<h6 class="float-left">&nbsp>&nbsp</h6>
-						<a href="single_comment.html">
-							<h6>OO公司XX職缺</h6>
-						</a>
+						<ul class="comment-link">
+							<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
+							<li><a th:href="@{/comments}"><span>總覽</span></a></li>
+							<li><a href="single_comment.html"><span th:text="'編號:'+ ${comment.share_id} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
+						</ul>
 						<article class="testimonial-bg border shadow-sm">
 							<form th:action="@{/CommentInsert}" method="post"
 								th:modelAttribute="comment" th:object="${comment}" id="form">
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
-										<a th:if="${session.loginMember.userid == comment.userId}" class="m-2 edit-delete"
+										<a
+											th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+											class="m-2 edit-delete"
 											th:href="@{/CommentEdit/{id}(id=${comment.share_id})}"> <i
 											class="fa fa-pencil-alt"></i></a>
 
@@ -185,7 +211,9 @@
 										<span>心得分享</span>
 										<p th:text="${comment.share}"></p>
 									</div>
-									<button th:if="${session.loginMember.userid == comment.userId}" type="button"
+									<button
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
 										th:value='${comment.share_id}'>
 										<i class="fa fa-trash-alt"></i>

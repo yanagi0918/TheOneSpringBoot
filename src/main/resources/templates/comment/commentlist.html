@@ -51,6 +51,47 @@
 	-webkit-transition: 0.5s;
 	transition: 0.5s
 }
+
+.comment-delete {
+	background-color: transparent;
+	border: 0
+}
+
+.comment-link li a {
+	color: black;
+	line-height: 40px
+}
+
+.comment-link li i, .comment-link li span {
+	font-size: 16px;
+	margin-right: 5px;
+	float: left
+}
+
+.comment-link li::after {
+	content: ">";
+	padding-left: 10px;
+	padding-right: 10px;
+	float: left
+}
+
+.comment-link li:last-child::after {
+	display: none
+}
+
+.comment-link::after {
+	content: "";
+	display: block;
+	clear: both;
+	display: table
+}
+
+.modify-btn {
+}
+
+.modify-btn i {
+	font-size: 16px
+}
 </style>
 </head>
 
@@ -113,30 +154,33 @@
 				<div class="col-lg-8 mb-5 mb-lg-0">
 					<div class="text-heading">
 						<div class="blog_area">
-							<a class="float-left" th:href="@{/comments}">
-								<h6>職場甘苦談</h6>
-							</a>
-							<h6 class="float-left">&nbsp>&nbsp</h6>
-							<a class="" th:href="@{/comments}">
-								<h6>總覽</h6>
-							</a>
-							<h6 class="float-left d-none">&nbsp>&nbsp</h6>
-							<a class="d-none" th:href="@{/comments/my}">
-								<h6>OO公司XX職缺</h6>
-							</a>
+							<ul class="comment-link">
+								<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
+								<li><a th:href="@{/comments}"><span>總覽</span></a></li>
+								<li
+									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
+									href="single_comment.html"><span>分析</span></a></li>
+								<li
+									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
+									href="single_comment.html"><span>OO公司XX職缺</span></a></li>
+								<li th:if="${#httpServletRequest.requestURI == '/comments/my'}"><a
+									th:href="@{/comments/my}"><span>我的分享</span></a></li>
+							</ul>
 						</div>
 						<ul class="blog-info-link">
 							<a th:href="@{/comments}" id="overview"
 								class="genric-btn success-border float-left w-25"> 總覽</a>
-							<a th:href="@{/comments/analysis}" id="analysis" class="genric-btn success-border float-left w-25">統計</a>
-							<a th:if="${session.loginMember!=null}" th:href="@{/comments/my}" id="mycomment" class="genric-btn success-border float-left w-25">
+							<a th:href="@{/comments/analysis}" id="analysis"
+								class="genric-btn success-border float-left w-25">分析</a>
+							<a th:if="${session.loginMember!=null}" th:href="@{/comments/my}"
+								id="mycomment" class="genric-btn success-border float-left w-25">
 								我的心得</a>
 						</ul>
 					</div>
 					<div class="blog_area blog_left_sidebar"
 						th:each="comment : ${listComment} ">
 						<article class="blog_item">
-							<div class="blog_details">
+							<div class="blog_details py-5">
 								<div class="">
 									<a class="float-right text-muted"><i
 										class="fa fa-thumbs-down">噓</i></a>
@@ -148,20 +192,35 @@
 									<h6 class="text-muted"
 										th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
 								</div>
-								<a class="d-inline-block" th:href="@{/CommentDetail/{id}(id=${comment.share_id})}">
+								<a class="d-inline-block"
+									th:href="@{/CommentDetail/{id}(id=${comment.share_id})}">
 									<h2 class="float-left" th:text="${comment.comp_name}"></h2>
 									<h4 class="float-left">&nbsp&nbsp</h4>
 									<h4 class="float-left" th:text="${comment.job_name}"></h4>
 								</a>
 								<p th:text="${comment.share}"></p>
-								<ul class="blog-info-link">
-									<li><span class="listComp text-muted" th:attr="data-score=${comment.comp_score}"><i
-											class="fa fa-building"></i>公司&nbsp&nbsp</span>
-											</li>
+								<ul class="blog-info-link w-50 f-left d-inline">
+									<li><span class="listComp text-muted"
+										th:attr="data-score=${comment.comp_score}"><i
+											class="fa fa-building"></i>公司&nbsp&nbsp</span></li>
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
 											class="fa fa-briefcase"></i>職位&nbsp&nbsp</a></span>
 								</ul>
+								<div class="modify-btn w-50 f-left d-inline">
+									<button type="button"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										class="genric-btn danger circle float-right comment-delete"
+										th:value='${comment.share_id}'>
+										<i class="fa fa-trash-alt"></i>
+									</button>
+									<button type="button"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										class="genric-btn success circle float-right"
+										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.share_id})} + '\''">
+										<i class="fa fa-pencil-alt"></i>
+									</button>
+								</div>
 							</div>
 						</article>
 
@@ -282,14 +341,14 @@
 
 	<!-- Sweet Alert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	
+
 	<!-- raty -->
 	<script th:src="@{/js/comment_dashboard/jquery.raty.js}"></script>
 
 	<!-- Comment Front JS -->
 	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
 
-	
+
 </body>
 
 </html>
