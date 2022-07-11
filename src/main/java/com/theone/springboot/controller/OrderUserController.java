@@ -1,7 +1,9 @@
 package com.theone.springboot.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.theone.springboot.ecpay.payment.integration.AllInOne;
 import com.theone.springboot.ecpay.payment.integration.domain.AioCheckOutALL;
+import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 import com.theone.springboot.service.CourseService;
@@ -95,24 +98,29 @@ public class OrderUserController {
 	
 	//綠界
 	@ResponseBody
-	@PostMapping(path = "/Order/Buy")
-	public String genAioCheckOutALL(@RequestParam(value = "courseid", required = false)String courseid){
-		int r=(int)(Math.random()*1000+1);
-		java.util.Date date=new java.util.Date();
+	@PostMapping(path = "/courses/Buy")
+	public String genAioCheckOutALL(@RequestParam(value = "courseid", required = false)String courseid,HttpServletRequest request){
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		orderService.saveOrder(courseid,loginMember);
+		CourseBean courseBean = courseServicer.findCourse(Integer.valueOf(courseid)).get();
+		int r =(int)(Math.random()*1000+1);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String orderNo = Long.toString(UUID.randomUUID().getMostSignificantBits(),19);
+		System.err.println(orderNo.replace("-", ""));
 		AllInOne all= new AllInOne("");
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("tuk004"+r);
-		obj.setMerchantTradeDate(sdf.format(date));
-		obj.setTotalAmount("55");
+		obj.setMerchantTradeNo(orderNo.replace("-", ""));
+		obj.setMerchantTradeDate(sdf.format(new Date()));
+		obj.setTotalAmount(String.valueOf(courseBean.getPrice()));
 		obj.setTradeDesc("test Description");
-		obj.setItemName("課程1#課程2");
+		obj.setItemName(courseBean.getCourseName());
 		obj.setReturnURL("http://localhost:8080/user/ordersDetail/"+courseid);
 		obj.setClientBackURL("http://localhost:8080/user/orders/");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
 	}
+	
 	
 		//新增
 		@GetMapping(path = "/ordersDetail/{id}")
