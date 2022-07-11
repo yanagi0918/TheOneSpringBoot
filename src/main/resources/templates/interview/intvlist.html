@@ -147,8 +147,7 @@
                                            </ul>
                                            
                                                                                            
-                                            <div class="listComp" data-score=""
-										th:attr="data-score=${intv.compScore}">
+                                            <div class="listComp" data-score=""	th:attr="data-score=${intv.compScore}">
                                                 <ul>
                                                     <li th:text="${intv.userId}"></li>
                                                     <li th:text="'職缺:'+${intv.jobName}"></li>
@@ -198,18 +197,19 @@
                             </aside>
 
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">推薦課程</h3>
+                                <h3 class="widget_title" th:each="course:${courseList}">推薦課程</h3>
+                                
                                 <div class="media post_item">
-                                    <img src="assets/img/post/post_1.png" alt="post">
+                                    <img th:src="@{/assets/img/post/post_1.png}" alt="">
                                     <div class="media-body">
                                         <a href="single-blog.html">
-                                            <h3>教你如何釣魚</h3>
+                                            <h3 >教你如何釣魚</h3>
                                         </a>
 
                                     </div>
                                 </div>
                                 <div class="media post_item">
-                                    <img src="assets/img/post/post_2.png" alt="post">
+                                    <img th:src="@{/assets/img/post/post_2.png}" alt="">
                                     <div class="media-body">
                                         <a href="single-blog.html">
                                             <h3>職場就像秀</h3>
@@ -218,7 +218,7 @@
                                     </div>
                                 </div>
                                 <div class="media post_item">
-                                    <img src="assets/img/post/post_3.png" alt="post">
+                                    <img th:src="@{/assets/img/post/post_3.png}" alt="">
                                     <div class="media-body">
                                         <a href="single-blog.html">
                                             <h3>享受工作</h3>
@@ -227,7 +227,7 @@
                                     </div>
                                 </div>
                                 <div class="media post_item">
-                                    <img src="assets/img/post/post_4.png" alt="post">
+                                    <img th:src="@{/assets/img/post/post_4.png}" alt="">
                                     <div class="media-body">
                                         <a href="single-blog.html">
                                             <h3>Asteroids telescope</h3>
@@ -242,12 +242,12 @@
                                 <ul class="instagram_row flex-wrap">
                                     <li>
                                         <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_5.png}" alt="">
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_6.png}" alt="">
                                         </a>
                                     </li>
                                     <li>
@@ -492,8 +492,8 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
-         <script th:src="@{/js/interview_dashboard/jquery.raty.js}" src="js/interview_dashboard/jquery.raty.js"></script>
-    	<script th:src="@{/js/interview_dashboard/checkInterviewForm.js}" src="js/interview_dashboard/checkInterviewForm.js"></script>
+        <script th:src="@{/js/interview_front/jquery.raty.js}" src="js/interview_front/jquery.raty.js"></script>
+    	<script th:src="@{/js/interview_front/checkInterviewForm.js}" src="js/interview_front/checkInterviewForm.js"></script>
         
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
