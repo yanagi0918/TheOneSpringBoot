@@ -1,15 +1,11 @@
 package com.theone.springboot.entity;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
@@ -18,113 +14,127 @@ import org.springframework.stereotype.Component;
 @Component
 public class Member {
 
-	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Integer idNumber;
-	@Column(unique = true)
-	 private String userid;
-	 private String pwd;
-	 private String username;
-	 private String gender;
-	 @Column(columnDefinition = "Date")
-	 private Date birth;  
-	 private String tele;
-	 private String phone;
-	 private String address;
-	 private String email;
-//	 private Integer point;
-	 private String image;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idNumber;
+    @Column(unique = true)
+    private String userid;
+    private String pwd;
+    private String username;
+    private String gender;
+    @Column(columnDefinition = "Date")
+    private Date birth;
+    private String tele;
+    private String phone;
+    private String address;
+    private String email;
+    //	 private Integer point;
+    private String image;
 
+    //	 VINCENT ONE(member講師) TO MANY(開設多個課程)
+    @OneToMany(mappedBy = "member",cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = false)
+    private List<CourseBean> lecturerCourses;
 
-	 //Constructor
-	 public Member() {}
-	
-	//建立一個帳號密碼驗證的建構子
-	 public Member(String userid, String pwd) {
-			super();
-			this.userid = userid;
-			this.pwd = pwd;
-		}
+    //Constructor
+    public Member() {
+    }
 
-	public Integer getIdNumber() {
-		return idNumber;
-	}
+    //建立一個帳號密碼驗證的建構子
+    public Member(String userid, String pwd) {
+        super();
+        this.userid = userid;
+        this.pwd = pwd;
+    }
 
-	public void setIdNumber(Integer idNumber) {
-		this.idNumber = idNumber;
-	}
+    public Integer getIdNumber() {
+        return idNumber;
+    }
 
-	public String getUserid() {
-		return userid;
-	}
+    public void setIdNumber(Integer idNumber) {
+        this.idNumber = idNumber;
+    }
 
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+    public String getUserid() {
+        return userid;
+    }
 
-	public String getPwd() {
-		return pwd;
-	}
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
+    public String getPwd() {
+        return pwd;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public Date getBirth() {
-		return birth;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
+    public Date getBirth() {
+        return birth;
+    }
 
-	public String getTele() {
-		return tele;
-	}
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
 
-	public void setTele(String tele) {
-		this.tele = tele;
-	}
+    public String getTele() {
+        return tele;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setTele(String tele) {
+        this.tele = tele;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    //	VINCENT ONE(member講師) TO MANY(開設多個課程) start
+    public List<CourseBean> getLecturerCourses() {
+        return lecturerCourses;
+    }
+    public void setLecturerCourses(List<CourseBean> lecturerCourses) {
+        this.lecturerCourses = lecturerCourses;
+    }
+    //	 VINCENT ONE(member講師) TO MANY(開設多個課程) end
+
 
 //	public Integer getPoint() {
 //		return point;
@@ -134,20 +144,20 @@ public class Member {
 //		this.point = point;
 //	}
 
-	public String getImage() {
-		return image;
-	}
+    public String getImage() {
+        return image;
+    }
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-	@Override
-	public String toString() {
-		return "Member [idNumber=" + idNumber + ", userid=" + userid + ", pwd=" + pwd + ", username=" + username
-				+ ", gender=" + gender + ", birth=" + birth + ", tele=" + tele + ", phone=" + phone + ", address="
-				+ address + ", email=" + email + ", image=" + image + "]";
-	}
-	
-	
+    @Override
+    public String toString() {
+        return "Member [idNumber=" + idNumber + ", userid=" + userid + ", pwd=" + pwd + ", username=" + username
+                + ", gender=" + gender + ", birth=" + birth + ", tele=" + tele + ", phone=" + phone + ", address="
+                + address + ", email=" + email + ", image=" + image + "]";
+    }
+
+
 }
