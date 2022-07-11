@@ -67,6 +67,10 @@ public class JobServiceImpl implements JobService{
 	public List<Job> findByCompId(Integer compId) {
 		return jobDao.findByCompId(compId);
 	}
+	@Override
+	public List<Job> findByCompany(Company company) {
+		return jobDao.findByCompany(company);
+	}
 
 
 }

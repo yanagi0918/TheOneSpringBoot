@@ -34,18 +34,10 @@ public class Company implements Serializable{
  private Integer empnumber;
  private String website;
  private String capital;
- 
  @OneToMany(mappedBy = "company")
-private Set<Job> jobs;
-
-public Set<Job> getJobs() {
-	return jobs;
-}
-
-public void setJobs(Set<Job> jobs) {
-	this.jobs = jobs;
-}
-
+ private List<Job> jobs;
+ 
+ 
 public Company() {}
 
 public Integer getComppk() {

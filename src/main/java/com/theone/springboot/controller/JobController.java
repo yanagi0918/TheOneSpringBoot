@@ -28,15 +28,10 @@ public class JobController {
 	
 	
 	@GetMapping("/companylist")
-	private String companyListJobs(HttpSession session,Model m){
+	private String companyJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
-		Integer compid = company.getCompid();
-		
-		List<Job> job = jobService.getAllJobs();
-		m.addAttribute("job",job);
-		
-		
-		m.addAttribute("companyjobs", jobService.findByCompId(compid));
+		List<Job> jobList = jobService.findByCompany(company);
+		m.addAttribute("jobList",jobList);
 		return "job/company_job_list";
 	}
 	
