@@ -1,8 +1,11 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.theone.springboot.entity.Event;
 
@@ -30,5 +33,9 @@ public interface EventService {
 	public void sendNotifyEmail(String recipient, String subject, String message);
 	
 	int countByState(Integer state);
+	
+	void csvExport(Writer writer);
+	
+	void pdfExport(HttpServletResponse response);
 
 }
