@@ -29,7 +29,7 @@ import com.theone.springboot.service.OrderService;
 
 //前台
 @Controller
-@RequestMapping("/enterprise")
+@RequestMapping("/user")
 public class OrderUserController {
 	
 	@Autowired
@@ -104,11 +104,11 @@ public class OrderUserController {
 		AioCheckOutALL obj = new AioCheckOutALL();
 		obj.setMerchantTradeNo("tuk004"+r);
 		obj.setMerchantTradeDate(sdf.format(date));
-		obj.setTotalAmount("50");
+		obj.setTotalAmount("55");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("課程1#課程2");
-		obj.setReturnURL("http://42.72.134.198:8080/enterprise/ordersDetail/"+courseid);
-		obj.setClientBackURL("http://localhost:8080/enterprise/orders/");
+		obj.setReturnURL("http://localhost:8080/user/ordersDetail/"+courseid);
+		obj.setClientBackURL("http://localhost:8080/user/orders/");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;

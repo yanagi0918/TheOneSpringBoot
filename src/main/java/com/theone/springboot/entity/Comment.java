@@ -73,15 +73,16 @@ public class Comment{
 	@Column(name = "share")
 	private String share;
 	
-	@Column(name = "user_id")
-	private String user_id;
+	@Column(name = "userId")
+	private String userId;
+
 
 	public Comment() {
 	}
 
 	public Comment(Integer share_id, Date ref_time,  Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
 			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
-			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
+			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String userId) {
 		this.share_id = share_id;
 		this.ref_time = ref_time;
 		this.create_time = create_time;
@@ -99,13 +100,13 @@ public class Comment{
 		this.yearly_salary = yearly_salary;
 		this.bonus_count = bonus_count;
 		this.share = share;
-		this.user_id = user_id;
+		this.userId = userId;
 
 	}
 
 	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
 			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
-			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
+			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String userId) {
 		this.ref_time = ref_time;
 		this.create_time = create_time;
 		this.comp_name = comp_name;
@@ -122,7 +123,7 @@ public class Comment{
 		this.yearly_salary = yearly_salary;
 		this.bonus_count = bonus_count;
 		this.share = share;
-		this.user_id = user_id;
+		this.userId = userId;
 
 	}
 
@@ -265,14 +266,14 @@ public class Comment{
 		this.share = share;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", create_time=" + create_time + ", comp_name" + comp_name + ", comp_score"
@@ -280,7 +281,7 @@ public class Comment{
 				+ job_description + ", std_hour" + std_hour + ", real_hour" + real_hour + ", over_freq" + over_freq
 				+ ", seniority" + seniority + ", total_seniority" + total_seniority + ", monthly_salary"
 				+ monthly_salary + ", yearly_salary" + yearly_salary + ", bonus_count" + bonus_count + ", share" + share
-				+ ", user_id" + user_id + "]";
+				+ ", userId" + userId + "]";
 
 	}
 

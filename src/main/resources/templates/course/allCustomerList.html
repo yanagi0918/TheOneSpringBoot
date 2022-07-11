@@ -1,0 +1,517 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>The One</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+
+    <!-- assets_course CSS here -->
+    <!-- Favicon -->
+    <!--    <link href="img/favicon.ico" rel="icon">-->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/assets_course/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/assets_course/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img th:src="@{/assets/img/logo/logo.png}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start-->
+<header>
+    <!-- Header Start -->
+    <div class="header-area header-transparrent">
+        <div class="headder-top header-sticky">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-2">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href=""><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="menu-wrapper">
+                            <!-- Main-menu -->
+                            <div class="main-menu">
+                                <nav class="d-none d-lg-block">
+                                    <ul id="navigation">
+                                        <li><a href="">首頁</a></li>
+                                        <li><a href="">找工作</a></li>
+                                        <li><a href="">課程進修</a>
+                                            <ul class="submenu">
+                                                <li><a th:href="@{/user/courses}">所有課程</a>
+<!--                                                    <ul class="submenu">-->
+<!--                                                        <li>123</li>-->
+<!--                                                        <li>123</li>-->
+                                                </li>
+                                                <li><a href="">收藏</a></li>
+                                                <li><a th:href="@{/user/courses/lecturers}">講師專區</a></li>
+                                                <li><a href="">我的課程</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="">討論區</a>
+                                            <ul class="submenu">
+                                                <li><a href="">面試經驗談</a></li>
+                                                <li><a href="">在職評論</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="">會員中心</a>
+                                            <ul class="submenu">
+                                                <li><a href="">會員資訊</a></li>
+                                                <li><a href="">履歷管理</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header-btn -->
+                            <div class="header-btn d-none f-right d-lg-block">
+                                <a href="#" class="btn head-btn2">登出</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+         th:data-background="@{/assets/img/hero/course1.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>TheOne精選課程</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+
+
+<!--================Course Area =================-->
+<!-- Category Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程分類</h5>
+            <h2>精選進修主題</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-1.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{/user/courses}">
+                        <h4 class="text-white font-weight-medium">所有課程</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-2.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=英文證照'}">
+                        <h4 class="text-white font-weight-medium">英文證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-3.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=日語證照'}">
+                        <h4 class="text-white font-weight-medium">日語證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-4.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=韓語證照'}">
+                        <h4 class="text-white font-weight-medium">韓語證照</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=自我認知'}">
+                        <h4 class="text-white font-weight-medium">自我認知</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=求職技巧'}">
+                        <h4 class="text-white font-weight-medium">求職技巧</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=生涯轉換與轉業'}">
+                        <h4 class="text-white font-weight-medium">生涯轉換與轉業</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/user/courses?courseCategory=就業市場現況趨勢'}">
+                        <h4 class="text-white font-weight-medium">就業市場現況趨勢</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Category end -->
+<!-- Courses Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程列表</h5>
+            <h2>所有課程</h2>
+
+            <!-- Search Form -->
+            <div class="mb-2 w-25 m-auto">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="輸入課程關鍵字">
+                        <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div th:each="course:${courseList}" class="col-lg-4 col-md-6 mb-4">
+                <div class="rounded overflow-hidden mb-2">
+                    <!-- 識別課程編號-->
+                    <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
+
+                    <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                        <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
+                    </a>
+                    <div class="bg-secondary p-4">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="m-0"
+                                th:utext="'&lt;i class=&quot;fa fa-table fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.courseCategory}"></h6>
+                            <h6 class="m-0"
+                                th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
+                        </div>
+                        <a class="h5" th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                            <div th:text="${course.courseName}"></div>
+                        </a>
+                        <div></div>
+                        <a href="#"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>
+                        <div class="border-top mt-4 pt-4">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-user-circle fa- text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.lecturer}"></h6>
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-star text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.score}"></h6>
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-dollar-sign fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+'NT'+${course.price}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            <div class="col-lg-4 col-md-6 mb-4">-->
+            <!--                <div class="rounded overflow-hidden mb-2">-->
+            <!--                    <a href="">-->
+            <!--                        <img class="img-fluid" th:src="@{/assets_course/img/course-2.jpg}" alt="">-->
+            <!--                    </a>-->
+            <!--                    <div class="bg-secondary p-4">-->
+            <!--                        <div class="d-flex justify-content-between mb-3">-->
+            <!--                            <h6 class="m-0"><i class="fa fa-table fa-lg text-primary mr-2"></i>英文認證</h6>-->
+            <!--                            <h6 class="m-0"><i class="fa fa-calendar-alt fa-lg text-primary mr-2"></i>2022-01-01</h6>-->
+            <!--                        </div>-->
+            <!--                        <a class="h5" href="">Web design & development courses for beginner</a>-->
+            <!--                        <div></div>-->
+            <!--                        <a href="" class="h5"><h6 class="m-0 f-right "><i-->
+            <!--                                class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>-->
+            <!--                        <div class="border-top mt-4 pt-4">-->
+            <!--                            <div class="d-flex justify-content-between">-->
+            <!--                                <h6 class="m-0"><i class="fa fa-user-circle fa-lg text-primary mr-2"></i>王大維</h6>-->
+            <!--                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5</h6>-->
+            <!--                                <h6 class="m-0"><i class="fa fa-dollar-sign fa-lg text-primary mr-2"></i>NT1999</h6>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+        </div>
+
+
+        <div class="col-lg-4 mt-5 mt-lg-0">
+            <!-- Recent Post -->
+            <div class="mb-5">
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div class="mb-5">
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
+                <div class="d-flex flex-wrap m-n1">
+                    <a href="" class="btn btn-outline-primary m-1">Design</a>
+                    <a href="" class="btn btn-outline-primary m-1">Development</a>
+                    <a href="" class="btn btn-outline-primary m-1">Marketing</a>
+                    <a href="" class="btn btn-outline-primary m-1">SEO</a>
+                    <a href="" class="btn btn-outline-primary m-1">Writing</a>
+                    <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-lg justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Courses End -->
+<!--================Course Area =================-->
+
+
+<footer>
+    <!-- Footer Start-->
+    <div class="footer-area footer-bg footer-padding">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
+                            <div class="footer-tittle">
+                                <h4>關於我們</h4>
+                                <div class="footer-pera">
+                                    <p>幫助您找尋最適合的工作</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>聯絡我們</h4>
+                            <ul>
+                                <li><p>地址 :320桃園市中壢區新生路二段421號</p></li>
+                                <li><a href="">Phone : +03 453 2632</a></li>
+                                <li><a href="">Email : TheOne@gmail.com</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>相關連結</h4>
+                            <ul>
+                                <li><a href="">Facebook</a></li>
+                                <li><a href="">Instagram</a></li>
+                                <li><a href="">Twitter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer-bottom area -->
+    <div class="footer-bottom-area footer-bg">
+        <div class="container">
+            <div class="footer-border">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-xl-10 col-lg-10 ">
+                        <div class="footer-copy-right">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | This template is made with <i class="fa fa-heart"
+                                                                                    aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="footer-social f-right">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
+
+<!-- JS here -->
+<!-- All JS Custom Plugins Link Here here -->
+<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Jquery Mobile Menu -->
+<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/price_rangs.js}"></script>
+
+<!-- One Page, Animated-HeadLin -->
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/animated.headline.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
+
+<!-- Scrollup, nice-select, sticky -->
+<script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery.sticky.js}"></script>
+
+<!-- contact js -->
+<script th:src="@{/assets/js/contact.js}"></script>
+<script th:src="@{/assets/js/jquery.form.js}"></script>
+<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/js/mail-script.js}"></script>
+<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script th:src="@{/assets/js/plugins.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+
+
+<!-- assets_course JS here -->
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets_course/lib/easing/easing.min.js}"></script>
+<script th:src="@{/assets_course/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Contact Javascript File -->
+<script th:src="@{/assets_course/mail/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{/assets_course/mail/contact.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/assets_course/js/main.js}"></script>
+
+
+</body>
+</html>

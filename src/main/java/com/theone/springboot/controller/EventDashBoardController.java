@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -118,6 +118,20 @@ public class EventDashBoardController {
 		chartdata[2] = eventService.countByState(2);
 		chartdata[3] = eventService.countByState(3);
 		return chartdata;
+	}
+	
+	@GetMapping("/events/csvExport")
+	public void csvExport(HttpServletResponse response) throws IOException {
+		response.setContentType("text/csv;charset=UTF-8");
+		response.addHeader("Content-Disposition","attachment; filename=events.csv");
+		eventService.csvExport(response.getWriter());
+	}
+	
+	@GetMapping("/events/pdfExport")
+	public void pdfExport(HttpServletResponse response) throws IOException {
+		response.setContentType("application/pdf;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=events.pdf");
+        eventService.pdfExport(response);
 	}
 
 	@InitBinder

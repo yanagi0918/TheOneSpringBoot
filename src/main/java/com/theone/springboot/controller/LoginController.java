@@ -49,7 +49,7 @@ public class LoginController {
 			session.setAttribute("loginMember", member);
 			return "redirect:/";
 		}
-		
+
 		if ("admin".equals(username) && "12345".equals(password)) {
 			session.setAttribute("loginAdmin", username);
 			return "redirect:dashboard/members";

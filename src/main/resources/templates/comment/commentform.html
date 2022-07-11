@@ -1,0 +1,290 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>The One</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="">
+
+<!-- CSS here -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+<link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+<link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+<link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+<link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+<!-- jQuery Raty -->
+<link rel="stylesheet" th:href="@{/css/jquery.raty.css}">
+
+<style>
+/*for validation*/
+.error {
+	color: #F00;
+}
+
+i {
+	font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+	<!-- Preloader Start -->
+	<div th:replace="~{common/frontpage::preloader}"></div>
+	<!-- Preloader Start -->
+	<header>
+		<!-- Header Start -->
+		<div th:replace="~{common/frontpage::header}"></div>
+		<!-- Header End -->
+	</header>
+	<!-- Hero Area Start-->
+	<div class="slider-area ">
+		<div
+			class="single-slider section-overly slider-height2 d-flex align-items-center"
+			data-background="/assets/img/hero/comment_box.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center ">
+							<h2>揭露職場秘辛</h2>
+							<h4 class="white-color">大聲說出社畜的血和淚</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Hero Area End -->
+	<!--================Blog Area =================-->
+
+	<section class="contact-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<aside class="single_sidebar_widget">
+						<h5 class="float-left p-3 px-5"
+							th:text="${comment.share_id != null} ? '編輯評論' : '新增評論'"></h5>
+						<h5 class="float-left py-3"
+							th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></h5>
+
+						<form th:action="@{/comments}">
+							<button class="genric-btn success radius float-right"
+								type="submit">
+								<i class="fa fa-arrow-left"></i>
+							</button>
+						</form>
+					</aside>
+					<article>
+						<div class="testimonial-bg shadow-sm pt-5 border">
+							<form
+								th:action="${comment.share_id != null} ? '/CommentUpdate' : '/CommentInsert'"
+								method="post" id="form" th:modelAttribute="comment">
+								<table class="table table-borderless">
+									<tr>
+										<td><input type="hidden" class="form-control valid"
+											th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+											name="create_time" readonly></td>
+									</tr>
+									<tr>
+										<th>帳號:</th>
+										<td th:if="${comment.userId == null}"><input
+											type="radio" id="anonymous" name="user">匿名 <input
+											type="radio" id="user" name="user">會員</td>
+										<td th:if="${comment.userId != null}"><input
+											type="radio" id="anonymous" name="user"
+											th:checked="${comment.userId.contains('匿名')} ? 'checked'">匿名
+											<input type="radio" id="user" name="user"
+											th:checked="${!comment.userId.contains('匿名')} ? 'checked'">會員
+										</td>
+										<td colspan="2"><input type="text" class="form-control"
+											th:style="${comment.userId != null && comment.userId.contains('匿名') ? 'display: none' : 'display: block'}"
+											id="userId" name="userId" th:value="${comment.userId}"
+											placeholder="請輸入帳號"></td>
+										<th>參考時間:</th>
+										<td><input type="date" class="form-control"
+											name="ref_time" id="ref_time"
+											th:value="${#dates.format(comment.ref_time, 'yyyy-MM-dd')}"
+											th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+										</td>
+									</tr>
+									<tr>
+										<th>公司名稱:</th>
+										<td><input type="text" class="form-control"
+											id="comp_name" name="comp_name"
+											th:value="${comment.comp_name}" placeholder="請輸入公司名稱"></td>
+										<th>公司評分:</th>
+										<td th:switch="${comp_score==null}">
+											<div th:case="true" id="compScore" data-score="5"></div>
+											<div th:case="false" id="compScore"
+												th:data-score="${comment.comp_score}"></div> <input
+											type="hidden" id="comp_score" name="comp_score">
+										</td>
+
+									</tr>
+									<tr>
+										<th>職位:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.job_name}" name="job_name" id="job_name"
+											placeholder="請輸入職位名稱"></td>
+										<th>職務型態:</th>
+										<td><select class="form-select" name="job_description"
+											id="job_description" size="1">
+												<option value="" selected>請選擇</option>
+												<option value="全職"
+													th:selected="${comment.job_description== '全職'}">全職</option>
+												<option value="兼職"
+													th:selected="${comment.job_description== '兼職'}">兼職</option>
+												<option value="工讀"
+													th:selected="${comment.job_description== '工讀'}">工讀</option>
+												<option value="實習"
+													th:selected="${comment.job_description== '實習'}">實習</option>
+										</select></td>
+										<th>職位評分:</th>
+										<td th:switch="${job_score==null}">
+											<div th:case="true" id="jobScore" data-score="5"></div>
+											<div th:case="false" id="jobScore"
+												th:data-score="${comment.job_score}"></div> <input
+											type="hidden" id="job_score" name="job_score">
+										</td>
+									</tr>
+									<tr>
+										<th>表定工時:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.std_hour}" id="std_hour" name="std_hour"
+											placeholder="小時/日"></td>
+										<th>實際工時:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.real_hour}" id="real_hour"
+											name="real_hour" placeholder="小時/日"></td>
+										<th>加班頻率:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.over_freq}" id="over_freq"
+											name="over_freq" placeholder="天/周"></td>
+									</tr>
+									<tr>
+										<th>服務年資:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.seniority}" id="seniority"
+											name="seniority" placeholder="年"></td>
+										<th>總年資:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.total_seniority}" id="total_seniority"
+											name="total_seniority" placeholder="年"></td>
+									</tr>
+									<tr>
+										<th>月薪(元):</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.monthly_salary}" id="monthly_salary"
+											name="monthly_salary" placeholder="元/月"></td>
+										<th>年薪(萬元):</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.yearly_salary}" id="yearly_salary"
+											name="yearly_salary" placeholder="萬元/年"></td>
+										<th>獎金次數:</th>
+										<td><input type="text" class="form-control"
+											th:value="${comment.bonus_count}" id="bonus_count"
+											name="bonus_count" placeholder="次/年"></td>
+									</tr>
+									<tr>
+										<th>心得分享:</th>
+										<td colspan="6"><textarea class="form-control" id="share"
+												name="share" rows="6" cols="90" th:text="${comment.share}"></textarea>
+									</tr>
+
+								</table>
+								<div align="center">
+									<button type="submit" th:if="${comment.userId != null}"
+										class="genric-btn success-border radius" name="submit"
+										value="更新">更新</button>
+									<button type="button" th:if="${comment.share_id == null}"
+										class="genric-btn primary radius" name="oneInput" value="一鍵輸入"
+										id="OneInput">
+										<i class="fa fa-list"></i>
+									</button>
+									<button type="submit" th:if="${comment.share_id == null}"
+										class="genric-btn success radius" name="new" value="新增">
+										<i class="fa fa-paper-plane"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================Blog Area =================-->
+	<footer>
+		<!-- Footer Start-->
+		<div th:replace="~{common/frontpage::footer}"></div>
+		<!-- Footer End-->
+	</footer>
+
+
+	<!-- JS here -->
+
+	<!-- All JS Custom Plugins Link Here here -->
+	<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
+	<!-- Jquery, Popper, Bootstrap -->
+	<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+	<script th:src="@{/assets/js/popper.min.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<!-- Jquery Mobile Menu -->
+	<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
+
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/assets/js/slick.min.js}"></script>
+	<script th:src="@{/assets/js/price_rangs.js}"></script>
+
+	<!-- One Page, Animated-HeadLin -->
+	<script th:src="@{/assets/js/wow.min.js}"></script>
+	<script th:src="@{/assets/js/animated.headline.js}"></script>
+	<script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
+
+	<!-- Scrollup, nice-select, sticky -->
+	<script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.sticky.js}"></script>
+
+	<!-- contact js -->
+	<script th:src="@{/assets/js/contact.js}"></script>
+	<script th:src="@{/assets/js/jquery.form.js}"></script>
+	<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+	<script th:src="@{/assets/js/mail-script.js}"></script>
+	<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+
+	<!-- Jquery Plugins, main Jquery -->
+	<script th:src="@{/assets/js/plugins.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+
+	<!-- validate -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+
+	<!-- Sweet Alert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- raty -->
+	<script th:src="@{/js/comment_dashboard/jquery.raty.js}"></script>
+
+	<!-- Comment Front JS -->
+	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
+
+
+
+</body>
+
+</html>
