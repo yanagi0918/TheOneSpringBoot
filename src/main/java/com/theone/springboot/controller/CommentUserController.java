@@ -40,6 +40,13 @@ public class CommentUserController {
 		model.addAttribute("listComment", myComments);
 		return "comment/commentlist";
 	}
+	
+	// list分析
+		@RequestMapping("/comments/analysis")
+		public String listAnalysisComments(Model model) {
+			model.addAttribute("listComment", commentService.findAll());
+			return "comment/commentanalysis";
+		}
 
 	// 新增評論
 	@PostMapping("/CommentInsert")
@@ -83,12 +90,12 @@ public class CommentUserController {
 		model.addAttribute("comment", comment);
 		return "comment/commentdetail";
 	}
-
-	// 確認新增評論的資料
-	@RequestMapping("/CommentConfirm")
-	public String showConfirmForm(@ModelAttribute("comment") Comment comment) {
-		return "comment/commentdetail";
-	}
+//
+//	// 確認新增評論的資料
+//	@RequestMapping("/CommentConfirm")
+//	public String showConfirmForm(@ModelAttribute("comment") Comment comment) {
+//		return "comment/commentdetail";
+//	}
 	
 	//討論區分頁
 	@RequestMapping("/forum")

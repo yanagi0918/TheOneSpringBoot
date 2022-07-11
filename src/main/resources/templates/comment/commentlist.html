@@ -27,6 +27,8 @@
 <link rel="stylesheet" th:href="@{/css/jquery.raty.css}">
 
 <style>
+
+/* 熱門標籤 */
 .blog_right_sidebar .tag_cloud_widget_comment ul li {
 	display: inline-block
 }
@@ -52,11 +54,17 @@
 	transition: 0.5s
 }
 
+/* delete button */
 .comment-delete {
 	background-color: transparent;
 	border: 0
 }
 
+.modify-btn i {
+	font-size: 16px
+}
+
+/* 分支連結 */
 .comment-link li a {
 	color: black;
 	line-height: 40px
@@ -86,12 +94,7 @@
 	display: table
 }
 
-.modify-btn i {
-	font-size: 16px
-}
-
 /* pagination css */
-
 #comment-pagination .page-item.active .page-link {
     background-color: #4cd3e3;
     border-color: #f0e9ff;
@@ -211,7 +214,9 @@
 											class="fa fa-building"></i>公司&nbsp&nbsp</span></li>
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
-											class="fa fa-briefcase"></i>職位&nbsp&nbsp</a></span>
+											class="fa fa-briefcase"></i>職位&nbsp&nbsp</span></li>
+									<li><span class="text-muted" th:text="${comment.job_description}"><i
+											class="fa fa-briefcase"></i></span></li>
 								</ul>
 								<div class="modify-btn w-50 f-left d-inline">
 									<button type="button"
