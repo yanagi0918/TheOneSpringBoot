@@ -97,18 +97,18 @@ i {
 									</tr>
 									<tr>
 										<th>帳號:</th>
-										<td th:if="${comment.user_id == null}"><input
+										<td th:if="${comment.userId == null}"><input
 											type="radio" id="anonymous" name="user">匿名 <input
 											type="radio" id="user" name="user">會員</td>
-										<td th:if="${comment.user_id != null}"><input
+										<td th:if="${comment.userId != null}"><input
 											type="radio" id="anonymous" name="user"
-											th:checked="${comment.user_id.contains('匿名')} ? 'checked'">匿名
+											th:checked="${comment.userId.contains('匿名')} ? 'checked'">匿名
 											<input type="radio" id="user" name="user"
-											th:checked="${!comment.user_id.contains('匿名')} ? 'checked'">會員
+											th:checked="${!comment.userId.contains('匿名')} ? 'checked'">會員
 										</td>
 										<td colspan="2"><input type="text" class="form-control"
-											th:style="${comment.user_id != null && comment.user_id.contains('匿名') ? 'display: none' : 'display: block'}"
-											id="user_id" name="user_id" th:value="${comment.user_id}"
+											th:style="${comment.userId != null && comment.userId.contains('匿名') ? 'display: none' : 'display: block'}"
+											id="userId" name="userId" th:value="${comment.userId}"
 											placeholder="請輸入帳號"></td>
 										<th>參考時間:</th>
 										<td><input type="date" class="form-control"
@@ -203,7 +203,7 @@ i {
 
 								</table>
 								<div align="center">
-									<button type="submit" th:if="${comment.user_id != null}"
+									<button type="submit" th:if="${comment.userId != null}"
 										class="genric-btn success-border radius" name="submit"
 										value="更新">更新</button>
 									<button type="button" th:if="${comment.share_id == null}"
@@ -211,7 +211,7 @@ i {
 										id="OneInput">
 										<i class="fa fa-list"></i>
 									</button>
-									<button type="button" th:if="${comment.share_id == null}"
+									<button type="submit" th:if="${comment.share_id == null}"
 										class="genric-btn success radius" name="new" value="新增">
 										<i class="fa fa-paper-plane"></i>
 									</button>

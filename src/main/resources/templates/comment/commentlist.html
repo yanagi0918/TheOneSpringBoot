@@ -117,8 +117,8 @@
 								<h6>職場甘苦談</h6>
 							</a>
 							<h6 class="float-left">&nbsp>&nbsp</h6>
-							<a class="" href="comment_list_work-experiences.html">
-								<h6>工作心得</h6>
+							<a class="" th:href="@{/comments}">
+								<h6>總覽</h6>
 							</a>
 							<h6 class="float-left d-none">&nbsp>&nbsp</h6>
 							<a class="d-none" th:href="@{/comments/my}">
@@ -126,10 +126,10 @@
 							</a>
 						</div>
 						<ul class="blog-info-link">
-							<a th:href="@{/comments}"
-								class="genric-btn success float-left w-25"> 總覽</a>
-							<a href="#" class="genric-btn success-border float-left w-25">統計</a>
-							<a href="#" class="genric-btn success-border float-left w-25">
+							<a th:href="@{/comments}" id="overview"
+								class="genric-btn success-border float-left w-25"> 總覽</a>
+							<a th:href="@{/comments/analysis}" id="analysis" class="genric-btn success-border float-left w-25">統計</a>
+							<a th:if="${session.loginMember!=null}" th:href="@{/comments/my}" id="mycomment" class="genric-btn success-border float-left w-25">
 								我的心得</a>
 						</ul>
 					</div>
@@ -155,12 +155,12 @@
 								</a>
 								<p th:text="${comment.share}"></p>
 								<ul class="blog-info-link">
-									<li><a href="#" class="listComp" data-score=""
-										th:attr="data-score=${comment.comp_score}"><i
-											class="fa fa-building"></i>公司</a></li>
-									<li><a href="#" class="listJob" data-score=""
+									<li><span class="listComp text-muted" th:attr="data-score=${comment.comp_score}"><i
+											class="fa fa-building"></i>公司&nbsp&nbsp</span>
+											</li>
+									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
-											class="fa fa-briefcase"></i>職位</a></li>
+											class="fa fa-briefcase"></i>職位&nbsp&nbsp</a></span>
 								</ul>
 							</div>
 						</article>

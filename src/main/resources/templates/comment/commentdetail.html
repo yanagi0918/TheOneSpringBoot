@@ -23,6 +23,8 @@
 <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
 <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+<!-- jQuery Raty -->
+<link rel="stylesheet" th:href="@{/css/jquery.raty.css}">
 
 <style>
 .blog_right_sidebar .tag_cloud_widget_comment ul li {
@@ -50,13 +52,18 @@
 	transition: 0.5s
 }
 
-i {
-	font-size: 30px;
-	color: gray
+.edit-delete i {
+	font-size: 28px;
+	color: #888888
 }
 
-.modify{
- top:0
+.share-box {
+	height: 400px
+}
+
+.comment-delete {
+	background-color: transparent;
+	border: 0
 }
 </style>
 </head>
@@ -109,9 +116,10 @@ i {
 								th:modelAttribute="comment" th:object="${comment}" id="form">
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
-										<a class="m-2" th:href="@{/CommentEdit/{id}(id=${comment.share_id})}"> 
-										<i class="fa fa-pencil-alt"></i></a>
-										
+										<a th:if="${session.loginMember.userid == comment.userId}" class="m-2 edit-delete"
+											th:href="@{/CommentEdit/{id}(id=${comment.share_id})}"> <i
+											class="fa fa-pencil-alt"></i></a>
+
 									</div>
 									<div class="float-right mt-55">
 										<h6 class="text-muted"
@@ -172,13 +180,16 @@ i {
 										</tr>
 									</table>
 								</div>
-								<div class="white-bg w-100 slider-height2 border">
-									<div class="mx-4 p-3 border">
+								<div class="white-bg w-100 slider-height2">
+									<div class="mx-4 p-3 share-box">
 										<span>心得分享</span>
 										<p th:text="${comment.share}"></p>
 									</div>
-									<a class="comment-delete float-right mb-70  m-2 border" th:value='${comment.share_id}'> 
-										<i class="fa fa-trash-alt"></i></a> 
+									<button th:if="${session.loginMember.userid == comment.userId}" type="button"
+										class="comment-delete float-right mb-70 m-2 edit-delete"
+										th:value='${comment.share_id}'>
+										<i class="fa fa-trash-alt"></i>
+									</button>
 								</div>
 							</form>
 						</article>
@@ -188,9 +199,11 @@ i {
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
-							<form action="comment_form.html">
+							<form th:action="@{/CommentNew}">
 								<button class="genric-btn success circle w-100 e-larg"
-									type="submit">我要分享</button>
+									type="submit">
+									<i class="fa fa-bullhorn"></i>&nbsp我要分享
+								</button>
 							</form>
 						</aside>
 

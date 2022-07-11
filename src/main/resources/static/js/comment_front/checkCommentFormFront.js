@@ -5,7 +5,7 @@ $(function() {
 			user: {
 				required: true,
 			},
-			user_id: {
+			userId: {
 				required: true,
 			},
 			ref_time: {
@@ -96,10 +96,10 @@ $(function() {
 					timer: 1500
 				})
 				setTimeout(() => {
-					location.href = `/dashboard/CommentDelete?id=${$(this).val()}`;
+					location.href = `/CommentDelete?id=${$(this).val()}`;
 				}, 1500)
 			} else {
-				location.href = './comments'
+				//				location.href = '/comments'
 			}
 
 		})
@@ -156,13 +156,13 @@ $(function() {
 		score: 5
 	});
 
-	$('td.listComp').raty({
+	$('.listComp').raty({
 		readOnly: true,
 		starOff: 'star-off-small.png',
 		starOn: 'star-on-small.png'
 	});
 
-	$('td.listJob').raty({
+	$('.listJob').raty({
 		readOnly: true,
 		starOff: 'star-off-small.png',
 		starOn: 'star-on-small.png'
@@ -181,8 +181,8 @@ $(function() {
 //One key input js
 $(function() {
 	$('#OneInput').click(function() {
-		$('#user_id').show()
-		$('#user_id').val('A123456789')
+		$('#userId').show()
+		$('#userId').val('A123456789')
 		$('#comp_name').val('狗來富寵物廣場')
 		$('#ref_time').val('2000-01-01')
 		$('#job_name').val('美容師')
@@ -204,17 +204,31 @@ $(function() {
 
 $(function() {
 	$('#anonymous').click(function() {
-		$('#user_id').val('匿名');
-		$('#user_id').hide();
+		$('#userId').val('匿名');
+		$('#userId').hide();
 	})
 
 	$('#user').click(function() {
-		$('#user_id').val('');
-		$('#user_id').show();
+		$('#userId').val('');
+		$('#userId').show();
 	});
 
 })
 
-$(function(){
-	
-})
+//function bar controller
+$(document).ready(function() {
+	var identifier = window.location.pathname;
+	switch (identifier) {
+		case '/comments':
+			$('#overview').removeClass('success-border').addClass('success');
+			break;
+
+		case '/comments/my':
+			$('#mycomment').removeClass('success-border').addClass('success');
+			break;
+		case '/comments/analysis':
+			$('#analysis').removeClass('success-border').addClass('success');
+			break;
+	}
+
+});

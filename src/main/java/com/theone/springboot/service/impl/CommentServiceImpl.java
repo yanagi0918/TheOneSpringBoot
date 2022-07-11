@@ -1,5 +1,6 @@
 package com.theone.springboot.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void deleteById(Integer pk) {
 		commentDao.deleteById(pk);
+	}
+
+	@Override
+	public List<Comment> findByUserId(String userId) {
+		
+		return commentDao.findByUserId(userId);
 	}
 
 }

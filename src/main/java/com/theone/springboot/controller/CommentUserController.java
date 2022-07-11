@@ -1,5 +1,9 @@
 package com.theone.springboot.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CommentService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/"})
 public class CommentUserController {
 
 	@Autowired
@@ -24,6 +29,15 @@ public class CommentUserController {
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		model.addAttribute("listComment", commentService.findAll());
+		return "comment/commentlist";
+	}
+	
+	// 個人評論list
+	@RequestMapping("/comments/my")
+	public String listMyComments(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("loginMember");
+		List<Comment> myComments = commentService.findByUserId(member.getUserid());
+		model.addAttribute("listComment", myComments);
 		return "comment/commentlist";
 	}
 
@@ -38,7 +52,7 @@ public class CommentUserController {
 	@GetMapping(value = "/CommentDelete")
 	public String deleteComment(@RequestParam("id") Integer id) {
 		commentService.deleteById(id);
-		return "redirect:./comments";
+		return "redirect:/comments";
 	}
 
 	// 更新評論

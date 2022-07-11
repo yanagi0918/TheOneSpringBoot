@@ -69,7 +69,7 @@ $(function() {
 			user: {
 				required: true,
 			},
-			user_id: {
+			userId: {
 				required: true,
 			},
 			ref_time: {
@@ -180,8 +180,8 @@ $(function() {
 //One key input js
 $(function() {
 	$('#OneInput').click(function() {
-		$('#user_id').show()
-		$('#user_id').val('A123456789')
+		$('#userId').show()
+		$('#userId').val('A123456789')
 		$('#comp_name').val('狗來富寵物廣場')
 		$('#ref_time').val('2000-01-01')
 		$('#job_name').val('美容師')
@@ -203,13 +203,13 @@ $(function() {
 
 $(function() {
 	$('#anonymous').click(function() {
-		$('#user_id').val('匿名');
-		$('#user_id').hide();
+		$('#userId').val('匿名');
+		$('#userId').hide();
 	})
 
 	$('#user').click(function() {
-		$('#user_id').val('');
-		$('#user_id').show();
+		$('#userId').val('');
+		$('#userId').show();
 	});
 
 })
