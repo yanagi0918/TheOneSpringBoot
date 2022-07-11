@@ -35,20 +35,33 @@ import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.MemberService;
 
 @Controller
-@RequestMapping("/user")
 public class MemberUserController {
 
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/members") //memberInfo
-	public String toMemberListPage(HttpSession session, Model model) { //類似get request attribute 把資料往前端模板引擎丟
+	@GetMapping("/user/members") 
+	public String toMemberListPage(HttpSession session, Model model) { //Model是類似request getattribute 把資料往前端模板引擎丟
 		//一樣有session狀態才可以看到
-		//使用Member member = memberService.getByUserid取到該會員資訊 
 		Member member = (Member)session.getAttribute("loginMember");
 		String userid = member.getUserid();
-		Member memberinfo = memberService.getByUserid(userid);
+		Member memberinfo = memberService.getByUserid(userid); //取到該會員資料
 		model.addAttribute("members", memberinfo);
+		return "member/memberInfo";
+	}
+	
+	
+	@PostMapping("/user/members") 
+	public String toMemberPage(HttpSession session, MultipartFile imageFile ,Member member) throws IllegalStateException, IOException { 
+		String newFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+		String ImgUrl = "/memberimages/" + newFileName;
+		String saveFilePath = new File("target\\classes\\static\\memberimages\\" + newFileName).getAbsolutePath();
+		if (imageFile.getOriginalFilename().length() != 0) {
+			member.setImage(ImgUrl);
+			imageFile.transferTo(new File(saveFilePath));
+		}
+		Member member1 = memberService.saveOrUpdate(member);  //前端傳來的參數(更新過的member)接值存進資料庫，命名為member1
+		session.setAttribute("loginMember", member1);  //把新的資料setAttribute放進session中
 		return "member/memberInfo";
 	}
 	
@@ -58,38 +71,27 @@ public class MemberUserController {
 //		return "member_dashboard/membercreate";
 //	}
 	
-	//target下資料夾還沒建立
-	@PostMapping("/member")
-	public String saveOrUpdate(Member member, MultipartFile imageFile) throws IllegalStateException, IOException {
-
-		String newFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-		String ImgUrl = "/memberimages/" + newFileName;
-
-		String saveFilePath = new File("target\\classes\\static\\memberimages\\" + newFileName).getAbsolutePath();
-
-		if (imageFile.getOriginalFilename().length() != 0) {
-			member.setImage(ImgUrl);
-			imageFile.transferTo(new File(saveFilePath));
-		}
-
-		memberService.saveOrUpdate(member);
-
-		return "redirect:/user/members";
+	
+	@PostMapping("/signup")
+	public String signUp(HttpSession session, Member member) throws IllegalStateException, IOException {
+		Member newmember = memberService.saveOrUpdate(member);  //前端傳來的參數(新的member)接值存進資料庫，命名為newmember
+		session.setAttribute("loginMember", newmember);
+		//存進資料庫
+		//放進Session
+		//當session不是空的時候，才能離開登入畫面	
+		
+		return "member/updateMember";
 	}
 	
-//	@GetMapping("/member/{id}")
-//	public String toUpdatePage(@PathVariable("id") Integer id, Model model) {
-//		Member member = memberService.getMember(id).get();
-//		model.addAttribute("member", member);
-//		return "member_dashboard/memberupdate";
-//	}
+	@PostMapping("/user/member")
+	public String update(HttpSession session, Member member) throws IllegalStateException, IOException {
+		Member newmember = memberService.saveOrUpdate(member);  //前端傳來的參數(新的member)接值存進資料庫，命名為newmember
+		session.setAttribute("loginMember", newmember);		
+		return "member/updateMember";
+	}
 	
-//	@ResponseBody
-//	@DeleteMapping("/member/{id}")
-//	public String delete(@PathVariable("id") Integer id) {
-//		memberService.deleteMember(id);
-//		return "ok";
-//	}
+	
+	
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
@@ -101,7 +103,7 @@ public class MemberUserController {
     }
 	
 	
-	@PostMapping(value = "/CheckMember")
+	@PostMapping(value = "/user/CheckMember")
 	public @ResponseBody boolean checkMember(@RequestParam String userid) {
 		Member member = memberService.getByUserid(userid);
 		if(member == null) {
@@ -113,7 +115,7 @@ public class MemberUserController {
 	}
 	
     //ajax (jquery)檢查身分證是否重複，並回傳JSON物件給前端
-    @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/user/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Member> getByUserid(@RequestBody Member member) {
     	Member bean = memberService.getByUserid(member.getUserid());
