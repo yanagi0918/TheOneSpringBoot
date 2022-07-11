@@ -3,6 +3,7 @@ package com.theone.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 
 public interface OrderService {
@@ -17,6 +18,6 @@ public interface OrderService {
 
 	void deleteOrder(Integer pk);
 	
-//	public void test();
+	void saveOrder(String id,Member member);
 
 }
