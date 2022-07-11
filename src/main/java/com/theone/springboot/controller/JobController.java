@@ -23,6 +23,7 @@ import com.theone.springboot.service.JobService;
 public class JobController {
 	@Autowired
 	private JobService jobService;
+	@Autowired
 	private CompanyService companyService;
 	
 	
@@ -30,8 +31,8 @@ public class JobController {
 	private String companyListJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		Integer compid = company.getCompid();
-//		List<Job> companyjobs = jobService.findByCompId(compid);
-//		m.addAttribute("companyjobs", companyjobs);
+		List<Job> companyjobs = jobService.findByCompId(compid);
+		m.addAttribute("companyjobs", companyjobs);
 		return "job/company_job_list";
 	}
 	
@@ -58,8 +59,8 @@ public class JobController {
 	
 	@GetMapping("/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m,Company company){
-		m.addAttribute("companylist",companyService.getAllCompanies());
 		List<Job> jobsforward = jobService.getAllJobs();
+		m.addAttribute("companylist",companyService.getAllCompanies());
 		m.addAttribute("jobs",jobsforward);
 		
 		Job jobdeatail = jobService.getJob(detailId).get();

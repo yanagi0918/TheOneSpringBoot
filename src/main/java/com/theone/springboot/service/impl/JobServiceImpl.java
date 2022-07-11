@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
+import com.theone.springboot.repository.CompanyDao;
 import com.theone.springboot.repository.JobDao;
 import com.theone.springboot.service.JobService;
 
@@ -17,6 +19,9 @@ public class JobServiceImpl implements JobService{
 	@Autowired
 	private JobDao jobDao;
 	
+	@Autowired
+	private CompanyDao companyDao;
+	
 	@Override
 	public boolean isDup(Integer pk) {
 		
@@ -24,7 +29,8 @@ public class JobServiceImpl implements JobService{
 	}	
 	@Override
 	public Job saveOrUpdate(Job job) {
-		
+		Company company = companyDao.findById(Integer.valueOf(job.getCompId())).get();
+		job.setCompany(company);
 		return jobDao.save(job);
 	}
 
@@ -57,10 +63,10 @@ public class JobServiceImpl implements JobService{
 	public List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary) {
 		return getByJobdescriptionAndSalary(jobdescription, salary);
 	}
-//	@Override
-//	public List<Job> findByCompId(Integer compId) {
-//		return jobDao.findByCompId(compId);
-//	}
+	@Override
+	public List<Job> findByCompId(Integer compId) {
+		return jobDao.findByCompId(compId);
+	}
 
 
 }

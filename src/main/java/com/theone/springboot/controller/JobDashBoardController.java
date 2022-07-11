@@ -70,13 +70,13 @@ public class JobDashBoardController {
 		return "ok";
 	}
 	
-//	@PostMapping(value = "/CheckUserFromCompId")
-//	public @ResponseBody boolean CheckUserFromCompId(@RequestParam Integer compId) {
-//		Company company = companyService.getByCompid(compId);
-//		if (company == null) {
-//			return true;
-//		}
-//		return false;
-//	}
+	@PostMapping(value = "/CheckUserFromCompId")
+	public @ResponseBody boolean CheckUserFromCompId(@RequestParam Integer compId) {
+		Company company = companyService.getByCompid(compId);
+		if (company == null) {
+			return true;
+		}
+		return false;
+	}
 
 }
