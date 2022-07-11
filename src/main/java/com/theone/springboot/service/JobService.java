@@ -3,6 +3,7 @@ package com.theone.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
 
 public interface JobService {
@@ -22,6 +23,8 @@ public interface JobService {
 
 	List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary);
 	
-//	List<Job> findByCompId(Integer compid);
+	List<Job> findByCompId(Integer compid);
+	
+	List<Job> findByCompany(Company company);
 
 }

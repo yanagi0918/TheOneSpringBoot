@@ -144,7 +144,7 @@
                     <!-- Right content -->
                     <div class="col-xl-9 col-lg-9 col-md-8">
                         <!-- Featured_job_start -->
-                        <ul th:each="jobs:${companyjobs}">
+                        <div th:each="job:${jobList}">
 							<section class="featured-job-area">
 								<div class="container">
 									<div class="single-job-items mb-30">
@@ -154,32 +154,32 @@
 													th:src="@{/assets/img/job/wewantyou.png}" alt="">
 											</div>
 											<div class="job-tittle job-tittle2">
-													<h4 th:text="${jobs.title}"></h4>
+													<h4 th:text="${job.title}"></h4>
 												<ul>
 													
-													<li>工作性質:<span th:text="${jobs.jobdescription}"></span></li>
+													<li>工作性質:<span th:text="${job.jobdescription}"></span></li>
 													
-													<li>徵才條件:<span th:text="${jobs.qualification}"></span></li>
+													<li>徵才條件:<span th:text="${job.qualification}"></span></li>
 
 
 
 												</ul>
 												<ul>
-													<li class="box" th:text="${jobs.description}"></li>
+													<li class="box" th:text="${job.description}"></li>
 												</ul>
 												<ul>
-													<li>薪資:<span th:text="${jobs.salary}"></span></li>
+													<li>薪資:<span th:text="${job.salary}"></span></li>
 												</ul>
 											</div>
 										</div>
                                     <div class="items-link items-link2 f-right">
-                                        <a th:href="@{showupdateinformation/}+${jobs.job_id}" class="genric-btn info-border circle">更新</a>
-                                        <a class="genric-btn danger-border circle" th:id="${jobs.job_id}" onclick="del(this.id)">刪除</a>
+                                        <a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a>
+                                        <a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a>
                                     </div>
 									</div>
 								</div>
 							</section>
-						</ul>
+						</div>
                         <div class="header-btn d-none f-right d-lg-block">
                             <a th:href="@{/enterprise/job/showForm}" class="btn head-btn2">新增職缺</a>
                         </div>

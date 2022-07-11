@@ -49,7 +49,6 @@ public class JobDashBoardController {
 	
 	@GetMapping("/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m){
-		m.addAttribute("companyList",companyService.getAllCompanies());
 		Job jobdeatail = jobService.getJob(detailId).get();
 		m.addAttribute("jobdeatail",jobdeatail);
 		return "job_dashboard/jobdetail";
@@ -57,8 +56,8 @@ public class JobDashBoardController {
 	
 	@GetMapping("/showupdateinformation/{pk}")
 	private String showupdateinformation(@PathVariable("pk") Integer updateId,Model m){
-		m.addAttribute("companyList",companyService.getAllCompanies());
 		Job jobupdate = jobService.getJob(updateId).get();
+		m.addAttribute("companyList",companyService.getAllCompanies());
 		m.addAttribute("jobupdate", jobupdate);
 		return "job_dashboard/jobupdate";
 	}
@@ -70,13 +69,13 @@ public class JobDashBoardController {
 		return "ok";
 	}
 	
-//	@PostMapping(value = "/CheckUserFromCompId")
-//	public @ResponseBody boolean CheckUserFromCompId(@RequestParam Integer compId) {
-//		Company company = companyService.getByCompid(compId);
-//		if (company == null) {
-//			return true;
-//		}
-//		return false;
-//	}
+	@PostMapping(value = "/CheckUserFromCompId")
+	public @ResponseBody boolean CheckUserFromCompId(@RequestParam Integer compId) {
+		Company company = companyService.getByCompid(compId);
+		if (company == null) {
+			return true;
+		}
+		return false;
+	}
 
 }

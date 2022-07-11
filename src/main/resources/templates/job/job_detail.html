@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>The One</title>
+    <title th:text="${jobdeatail.title}"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -92,8 +92,7 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="companydetail.html" class="btn head-btn1">帳號</a>
-                                    <a href="#" class="btn head-btn2">登入/登出</a>
+                                    <a th:href="@{/logout}" class="btn head-btn2">登入/登出</a>
                                 </div>
                             </div>
                         </div>
@@ -139,9 +138,9 @@
                                         alt="">
                                 </div>
                                 <div class="job-tittle job-tittle2">
-                                        <h4 th:text="${jobdeatail.getTitle()}"></h4>
+                                        <h4 th:text="${jobdeatail.title}"></h4>
                                     <ul>
-                                        <li th:text="${jobs.company.corpname}"></li>
+                                        <li th:text="${jobdeatail.company.corpname}"></li>
                                     </ul>
                                 </div>
                             </div>
@@ -197,17 +196,17 @@
                            <div class="small-section-tittle">
                                <h4>關於本公司</h4>
                            </div>
-                              <span th:text="${session.loginEnterprise.corpname}">
+                              <span th:text="${jobdeatail.company.corpname}">
                             </span>
                             <ul>
-                                <li>負責人: <span th:text="${session.loginEnterprise.owner}"></span></li>
-                                <li>聯絡人: <span th:text="${session.loginEnterprise.contact}"></span></li>
-                                <li>聯絡電話: <span th:text="${session.loginEnterprise.comptele}"></span></li>
-                                <li>地址 : <span th:text="${session.loginEnterprise.compaddress}"></span></li>
-                                <li>信箱: <span th:text="${session.loginEnterprise.website}"></span></li>
-                                <li>產業別: <span th:text="${session.loginEnterprise.industry}"></span></li>
-                                <li>資本額: <span th:text="${session.loginEnterprise.capital}"></span></li>
-                                <li>員工人數: <span th:text="${session.loginEnterprise.empnumber}"></span><span>/人</span></li>
+                                <li>負責人: <span th:text="${jobdeatail.company.owner}"></span></li>
+                                <li>聯絡人: <span th:text="${jobdeatail.company.contact}"></span></li>
+                                <li>聯絡電話: <span th:text="${jobdeatail.company.comptele}"></span></li>
+                                <li>地址 : <span th:text="${jobdeatail.company.compaddress}"></span></li>
+                                <li>信箱: <span th:text="${jobdeatail.company.website}"></span></li>
+                                <li>產業別: <span th:text="${jobdeatail.company.industry}"></span></li>
+                                <li>資本額: <span th:text="${jobdeatail.company.capital}"></span></li>
+                                <li>員工人數: <span th:text="${jobdeatail.company.empnumber}"></span><span>/人</span></li>
                             </ul>
                        </div>
                     </div>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.theone.springboot.entity.Comment;
 import com.theone.springboot.entity.Interview;
 import com.theone.springboot.service.InterviewService;
 
@@ -29,14 +30,14 @@ import com.theone.springboot.service.InterviewService;
 
 
 @Controller
-@RequestMapping("/enterprise")
+@RequestMapping({"/"})
 public class InterviewUserController {
 	
 	@Autowired
 	private InterviewService interviewService;
 
 	
-	@GetMapping("/intvlist")
+	@GetMapping("/intvlist")//目錄
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
@@ -44,12 +45,15 @@ public class InterviewUserController {
 		return "interview/intvlist";
 	}
 
-	@GetMapping("/intv")
+	@GetMapping("/intv")//進入新增頁面
 	public String toCreate() {
 		return "interview/intvedit";
 	}
-
-	@PostMapping("/saveintv")
+	
+	
+	
+		//新增資料
+		@PostMapping("/saveintv")
 	public String saveOrUpdate( Interview intv) {
 //		 SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间 
 //	        sdf.applyPattern("yyyy-MM-dd HH:mm:ss"); 
@@ -59,7 +63,7 @@ public class InterviewUserController {
 		System.out.println(ts);
 		interviewService.saveOrUpdate(intv);
 		
-		return "redirect:/enterprise/intvlist";
+		return "redirect:/intvlist";
 	}
 
 	@GetMapping("/intv/{id}")
@@ -69,6 +73,12 @@ public class InterviewUserController {
 		return "interview/intvupdate";
 
 	}
+	// 更新資料
+//			@RequestMapping("/intvUpdate")
+//			public String updateComment(@ModelAttribute("intv") Interview intv) {
+//				interviewService.saveOrUpdate(intv);
+//				return "redirect:/intvlist";
+//			}
 	@GetMapping("/intvshow/{id}")
 	public String toShow(@PathVariable Integer id, Model model) {
 		Interview intv = interviewService.getInterview(id).get();

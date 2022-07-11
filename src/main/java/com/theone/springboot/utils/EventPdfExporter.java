@@ -34,7 +34,7 @@ public class EventPdfExporter {
         font.setSize(18);
         font.setColor(Color.BLUE);
          
-        Paragraph p = new Paragraph("廣告列表", font);
+        Paragraph p = new Paragraph("List of Event", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
          
         document.add(p);
@@ -61,51 +61,34 @@ public class EventPdfExporter {
         Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
         font.setColor(Color.WHITE);
          
-        cell.setPhrase(new Phrase("廣告編號", font));
+        cell.setPhrase(new Phrase("Id", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("公司統編", font));
+        cell.setPhrase(new Phrase("compId", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("廣告圖路徑", font));
+        cell.setPhrase(new Phrase("imgUrl", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("職缺連結", font));
+        cell.setPhrase(new Phrase("eventLinkUrl", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("上架日期", font));
+        cell.setPhrase(new Phrase("postStart", font));
         table.addCell(cell);
         
-        cell.setPhrase(new Phrase("下架日期", font));
+        cell.setPhrase(new Phrase("postEnd", font));
         table.addCell(cell);
         
-        cell.setPhrase(new Phrase("備註", font));
+        cell.setPhrase(new Phrase("remark", font));
         table.addCell(cell);
         
-        cell.setPhrase(new Phrase("狀態", font));
+        cell.setPhrase(new Phrase("state", font));
         table.addCell(cell);
     }
 	
 	private void writeTableData(PdfPTable table, List<Event> events) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         for (Event event : events) {
-        	String state = null;
-			switch (event.getState()) {
-			case 0:
-				state = "未審核";
-				break;
-			case 1:
-				state = "審核通過";
-				break;
-			case 2:
-				state = "已退件";
-				break;
-			case 3:
-				state = "已撤銷";
-				break;
-			default:
-				break;
-			}
             table.addCell(String.valueOf(event.getEventId()));
             table.addCell(event.getCompId());
             table.addCell(event.getImgUrl());
@@ -113,7 +96,7 @@ public class EventPdfExporter {
             table.addCell(sdf.format(event.getPostStart()));
             table.addCell(sdf.format(event.getPostEnd()));
             table.addCell(event.getRemark());
-            table.addCell(state);
+            table.addCell(String.valueOf(event.getState()));
         }
     }
 

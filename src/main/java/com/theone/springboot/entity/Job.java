@@ -1,15 +1,12 @@
 package com.theone.springboot.entity;
 import java.io.*;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
@@ -24,10 +21,19 @@ public class Job implements Serializable{
 	private Integer required_number;
 	private String salary;
 	private String description;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="COMPANY_COMPPK")
+	private Integer compId;
+
+	@ManyToOne
+	@JoinColumn
 	private Company company;
 	
+	public Integer getCompId() {
+		return compId;
+	}
+	
+	public void setCompId(Integer compId) {
+		this.compId = compId;
+	}
 	public Company getCompany() {
 		return company;
 	}
@@ -92,33 +98,6 @@ public class Job implements Serializable{
 
 	public void setSalary(String salary) {
 		this.salary = salary;
-	}
-
-
-
-	public Job(Integer job_id, String title, String jobdescription, String qualification, Integer required_number,
-			String salary, String description, Company company) {
-		super();
-		this.job_id = job_id;
-		this.title = title;
-		this.jobdescription = jobdescription;
-		this.qualification = qualification;
-		this.required_number = required_number;
-		this.salary = salary;
-		this.description = description;
-		this.company = company;
-	}
-
-	public Job(String title, String jobdescription, String qualification, Integer required_number, String salary,
-			String description, Company company) {
-		super();
-		this.title = title;
-		this.jobdescription = jobdescription;
-		this.qualification = qualification;
-		this.required_number = required_number;
-		this.salary = salary;
-		this.description = description;
-		this.company = company;
 	}
 
 	public Job(Integer job_id) {
