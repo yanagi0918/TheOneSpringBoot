@@ -1,30 +1,43 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Job board HTML-5 Template </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="manifest" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="">
+
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/price_rangs.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
     <!--    上程-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- dataTables Stylesheet 上程-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
     <style>
         .panel-title a:after {
@@ -49,7 +62,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/img/logo/logo.png" alt="">
+                <img th:src="@{/assets/img/logo/logo.png}" alt="">
             </div>
         </div>
     </div>
@@ -64,7 +77,7 @@
                     <div class="col-lg-3 col-md-2">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href=""><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
@@ -73,32 +86,45 @@
                             <div class="main-menu">
                                 <nav class="d-none d-lg-block">
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="job_listing.html">Find a Jobs </a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Page</a>
+                                        <li><a href="">首頁</a></li>
+                                        <li><a href="">找工作</a></li>
+                                        <li><a href="">課程進修</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                                <li><a href="job_details.html">job Details</a></li>
+                                                <li><a th:href="@{/user/courses}">所有課程</a>
+                                                    <!--                                                    <ul class="submenu">-->
+                                                    <!--                                                        <li>123</li>-->
+                                                    <!--                                                        <li>123</li>-->
+                                                </li>
+                                                <li><a href="">收藏</a></li>
+                                                <li><a th:href="@{/user/courses/lecturers}">講師專區</a></li>
+                                                <li><a href="">我的課程</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="">討論區</a>
+                                            <ul class="submenu">
+                                                <li><a href="">面試經驗談</a></li>
+                                                <li><a href="">在職評論</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="">會員中心</a>
+                                            <ul class="submenu">
+                                                <li><a href="">會員資訊</a></li>
+                                                <li><a href="">履歷管理</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Header-btn -->
                             <div class="header-btn d-none f-right d-lg-block">
-                                <a href="#" class="btn head-btn1">Register</a>
-                                <a href="#" class="btn head-btn2">Login</a>
+                                <a href="#" class="btn head-btn2">登出</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
                 </div>
             </div>
         </div>
@@ -109,13 +135,12 @@
 
     <!-- Hero Area Start-->
     <div class="slider-area ">
-        <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-             data-background="assets/img/hero/course1.jpg">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center" th:data-background="@{/assets/img/hero/course1.jpg}">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2><i class="fa fa-list"></i><span> </span>講師系統-開課列表</h2>
+                            <h2>TheOne講師開課專區</h2>
                         </div>
                     </div>
                 </div>
@@ -124,19 +149,19 @@
     </div>
     <!-- Hero Area End -->
     <!-- content Start -->
-    <div class="container-fluid pt-4 px-4">
-        <div class="bg-light rounded h-100 p-4">
-
+    <div class="container-fluid pt-4 px-4 mt-10 mb-35">
+        <div class="bg-light rounded p-4 w-75 m-auto">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h3 class="mb-0"><i class="fa fa-list"></i>課程資訊</h3>
-                <!--                <div type="button" class="fa-3x" id="btn-toCreateCourse">-->
-                <!--                    <i class="fa-solid fa-circle-plus fa-beat"-->
-                <!--                       style="&#45;&#45;fa-animation-duration: 2.5s;&#45;&#45;fa-beat-scale: 1.2;">-->
-                <!--                    </i>-->
-                <!--                </div>-->
-                <button type="button" class="genric-btn primary-border radius" id="btn-toCreateCourse">
-                    新增課程
-                </button>
+                <h3 class="mb-0"><i class="fa fa-list"></i> 課程資訊</h3>
+
+                <a href="#" class="fa-3x theme-color" id="btn-toCreateCourse">
+                        <i class="fa-solid fa-circle-plus fa-beat"
+                           style="--fa-animation-duration: 2.5s;--fa-beat-scale: 1.2;">
+                        </i>
+                </a>
+<!--                <button type="button" class="genric-btn primary-border radius shadow-none" id="btn-toCreateCourse">-->
+<!--                    新增課程-->
+<!--                </button>-->
             </div>
             <div class="table-responsive">
                 <div id="new-search-area"></div>
@@ -166,22 +191,22 @@
                         <td th:switch="${course.status}">
 
                                 <span th:case="'待審核'">
-                                    <span class="genric-btn warning circle arrow" th:text="${course.status}"
+                                    <span class="genric-btn warning circle medium" th:text="${course.status}"
                                           th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:href="@{'/user/courses/detail/'+${course.courseNo}}">
                                     </span>
                                 </span>
 
-                            <span th:case="'已審核'">
-                                    <span class="genric-btn success circle" th:text="${course.status}"
+                                 <span th:case="'已審核'">
+                                    <span class="genric-btn success circle medium" th:text="${course.status}"
                                           th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:href="@{'/user/courses/detail/'+${course.courseNo}}">
                                     </span>
                                 </span>
-                            <span th:case="'駁回'">
-                                    <span class="genric-btn danger circle" th:text="${course.status}"
+                                <span th:case="'駁回'">
+                                    <span class="genric-btn danger circle medium" th:text="${course.status}"
                                           th:id="${course.courseNo}"
-                                          th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">
+                                          th:href="@{'/user/courses/detail/'+${course.courseNo}}">
                                     </span>
                                 </span>
                             <!--                            <i class="fa fa-check-circle fa-lg" th:id="${course.courseNo}"-->
@@ -200,34 +225,32 @@
 
                         <td>
                             <a class="genric-btn info-border circle"
-                               th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">詳細</a>
+                               th:href="@{'/user/courses/detail/'+${course.courseNo}}">詳細</a>
                             <a class="genric-btn success-border circle btn-courseUpdate"
-                               th:href="@{'/dashboard/toUpdatePage/'+${course.courseNo}}">更新</a>
+                               th:href="@{'/user/toUpdatePage/'+${course.courseNo}}">更新</a>
                             <!-- <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>-->
                             <a class="genric-btn danger-border circle btn-courseDelete" th:id="${course.courseNo}"
                                id="">刪除</a>
                         </td>
 
-
                     </tr>
-                    <tr th:each="course:${courseList}">
-                        <div class="" role="tab" id="headingOne">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                       href="#collapseOne"
-                                                       aria-expanded="true" aria-controls="collapseOne"> info</a></h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             >
-                            <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                Food truck
-                                quinoa nesciunt laborum eiusmod.
-                            </div>
-                        </div>
-                    </tr>
-
-
+<!--                    collapse test-->
+<!--                    <tr th:each="course:${courseList}">-->
+<!--                        <div class="" role="tab" id="headingOne">-->
+<!--                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"-->
+<!--                                                       href="#collapseOne"-->
+<!--                                                       aria-expanded="true" aria-controls="collapseOne"> info</a></h4>-->
+<!--                        </div>-->
+<!--                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"-->
+<!--                             >-->
+<!--                            <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life-->
+<!--                                accusamus terry-->
+<!--                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.-->
+<!--                                Food truck-->
+<!--                                quinoa nesciunt laborum eiusmod.-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -246,10 +269,9 @@
                     <div class="single-footer-caption mb-50">
                         <div class="single-footer-caption mb-30">
                             <div class="footer-tittle">
-                                <h4>About Us</h4>
+                                <h4>關於我們</h4>
                                 <div class="footer-pera">
-                                    <p>Heaven frucvitful doesn't cover lesser dvsays appear creeping seasons so
-                                        behold.</p>
+                                    <p>幫助您找尋最適合的工作</p>
                                 </div>
                             </div>
                         </div>
@@ -259,14 +281,11 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Contact Info</h4>
+                            <h4>聯絡我們</h4>
                             <ul>
-                                <li>
-                                    <p>Address :Your address goes
-                                        here, your demo address.</p>
-                                </li>
-                                <li><a href="#">Phone : +8880 44338899</a></li>
-                                <li><a href="#">Email : info@colorlib.com</a></li>
+                                <li><p>地址 :320桃園市中壢區新生路二段421號</p></li>
+                                <li><a href="">Phone : +03 453 2632</a></li>
+                                <li><a href="">Email : TheOne@gmail.com</a></li>
                             </ul>
                         </div>
 
@@ -275,72 +294,13 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Important Link</h4>
+                            <h4>相關連結</h4>
                             <ul>
-                                <li><a href="#"> View Project</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Testimonial</a></li>
-                                <li><a href="#">Proparties</a></li>
-                                <li><a href="#">Support</a></li>
+                                <li><a href="">Facebook</a></li>
+                                <li><a href="">Instagram</a></li>
+                                <li><a href="">Twitter</a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Newsletter</h4>
-                            <div class="footer-pera footer-pera2">
-                                <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
-                            </div>
-                            <!-- Form -->
-                            <div class="footer-form">
-                                <div id="mc_embed_signup">
-                                    <form target="_blank"
-                                          action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                          method="get" class="subscribe_form relative mail_part">
-                                        <input type="email" name="email" id="newsletter-form-email"
-                                               placeholder="Email Address"
-                                               class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                               onblur="this.placeholder = ' Email Address '">
-                                        <div class="form-icon">
-                                            <button type="submit" name="submit" id="newsletter-submit"
-                                                    class="email_icon newsletter-submit button-contactForm"><img
-                                                    src="assets/img/icon/form.png" alt=""></button>
-                                        </div>
-                                        <div class="mt-10 info"></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  -->
-            <div class="row footer-wejed justify-content-between">
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <!-- logo -->
-                    <div class="footer-logo mb-20">
-                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="footer-tittle-bottom">
-                        <span>5000+</span>
-                        <p>Talented Hunter</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <div class="footer-tittle-bottom">
-                        <span>451</span>
-                        <p>Talented Hunter</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                    <!-- Footer Bottom Tittle -->
-                    <div class="footer-tittle-bottom">
-                        <span>568</span>
-                        <p>Talented Hunter</p>
                     </div>
                 </div>
             </div>
@@ -378,45 +338,48 @@
 </footer>
 
 <!-- JS here -->
-
 <!-- All JS Custom Plugins Link Here here -->
-<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
 <!-- Jquery, Popper, Bootstrap -->
-<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="./assets/js/popper.min.js"></script>
-<script src="./assets/js/bootstrap.min.js"></script>
+<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
 <!-- Jquery Mobile Menu -->
-<script src="./assets/js/jquery.slicknav.min.js"></script>
+<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
 
 <!-- Jquery Slick , Owl-Carousel Plugins -->
-<script src="./assets/js/owl.carousel.min.js"></script>
-<script src="./assets/js/slick.min.js"></script>
-<script src="./assets/js/price_rangs.js"></script>
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/price_rangs.js}"></script>
 
 <!-- One Page, Animated-HeadLin -->
-<script src="./assets/js/wow.min.js"></script>
-<script src="./assets/js/animated.headline.js"></script>
-<script src="./assets/js/jquery.magnific-popup.js"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/animated.headline.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
 
 <!-- Scrollup, nice-select, sticky -->
-<script src="./assets/js/jquery.scrollUp.min.js"></script>
-<script src="./assets/js/jquery.nice-select.min.js"></script>
-<script src="./assets/js/jquery.sticky.js"></script>
+<script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery.sticky.js}"></script>
 
 <!-- contact js -->
-<script src="./assets/js/contact.js"></script>
-<script src="./assets/js/jquery.form.js"></script>
-<script src="./assets/js/jquery.validate.min.js"></script>
-<script src="./assets/js/mail-script.js"></script>
-<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+<script th:src="@{/assets/js/contact.js}"></script>
+<script th:src="@{/assets/js/jquery.form.js}"></script>
+<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/js/mail-script.js}"></script>
+<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
 
 <!-- Jquery Plugins, main Jquery -->
-<script src="./assets/js/plugins.js"></script>
-<script src="./assets/js/main.js"></script>
+<script th:src="@{/assets/js/plugins.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
 
 <!--上程-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/assets/js/course_user/checkCourseForm.js}" src=""></script>
+<!--<script th:src="@{/js/course_dashboard/checkCourseForm.js}" src="js/checkCourseForm.js"></script>-->
 
 </body>
 </html>

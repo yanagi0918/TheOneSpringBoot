@@ -20,10 +20,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css"
-          rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
-          href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
 
     <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
@@ -59,14 +57,14 @@
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h5 class="mb-0">課程資訊</h5>
-                    <div type="button" class="fa-3x" id="btn-toCreateCourse">
+
+                    <a href="#" class="fa-3x theme-color" id="btn-toCreateCourse">
                         <i class="fa-solid fa-circle-plus fa-beat"
-                           style="--fa-animation-duration: 2.5s;--fa-beat-scale: 1.2;">
+                           style="--fa-animation-duration: 2.5s;--fa-beat-scale: 1.15;">
                         </i>
-                    </div>
-                    <!--                     <button type="button" class="btn btn-primary mb-0" id="btn-toCreateCourse"> -->
-                    <!--                         新增課程 -->
-                    <!--                     </button> -->
+                    </a>
+<!--                 <button type="button" class="btn btn-primary mb-0" id="btn-toCreateCourse">新增課程</button>-->
+
                 </div>
                 <div class="table-responsive">
                     <div id="new-search-area"></div>
@@ -174,10 +172,8 @@
 <script th:src="@{/lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
-<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
-        src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
-        src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script th:src="@{/js/course_dashboard/checkCourseForm.js}" src="js/checkCourseForm.js"></script>
