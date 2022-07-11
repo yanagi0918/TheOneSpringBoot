@@ -115,8 +115,11 @@ public class CourseUserController {
     }
 
     @PostMapping("/courses")
-    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
+    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf,HttpSession session) throws IOException {
+        Member loginUser = (Member)session.getAttribute("loginUser");
+
         System.out.println(CourseBean);
+
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
         //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
@@ -124,6 +127,7 @@ public class CourseUserController {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
+        CourseBean.setMember(loginUser);
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";
     }

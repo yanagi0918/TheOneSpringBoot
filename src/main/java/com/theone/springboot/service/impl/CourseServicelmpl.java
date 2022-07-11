@@ -26,6 +26,7 @@ public class CourseServicelmpl implements CourseService {
 
     @Override
     public CourseBean saveOrUpdate(CourseBean courseBean) {
+
         return courseDao.save(courseBean);
     }
 
