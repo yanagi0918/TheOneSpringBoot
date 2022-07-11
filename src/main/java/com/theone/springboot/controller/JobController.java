@@ -1,6 +1,5 @@
 package com.theone.springboot.controller;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
-import com.theone.springboot.repository.JobDao;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
@@ -33,22 +31,20 @@ public class JobController {
 	private String companyListJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		Integer compid = company.getCompid();
-		m.addAttribute("companyList",companyService.getAllCompanies());
 		
 		List<Job> job = jobService.getAllJobs();
 		m.addAttribute("job",job);
 		
 		
-		List<Job> companyjobs = jobService.findByCompId(compid);
-		m.addAttribute("companyjobs", companyjobs);
+		m.addAttribute("companyjobs", jobService.findByCompId(compid));
 		return "job/company_job_list";
 	}
 	
 	
 	@GetMapping("/list")
 	private String listJobs(Model m){
-		List<Job> jobs = jobService.getAllJobs();
 		m.addAttribute("companyList",companyService.getAllCompanies());
+		List<Job> jobs = jobService.getAllJobs();
 		m.addAttribute("jobs", jobs);
 		return "job/job_list";
 	}

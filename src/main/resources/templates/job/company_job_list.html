@@ -154,27 +154,27 @@
 													th:src="@{/assets/img/job/wewantyou.png}" alt="">
 											</div>
 											<div class="job-tittle job-tittle2">
-													<h4 th:text="${companyjobs.title}"></h4>
+													<h4 th:text="${companyjobs.job.title}"></h4>
 												<ul>
 													
-													<li>工作性質:<span th:text="${jobs.jobdescription}"></span></li>
+													<li>工作性質:<span th:text="${jobs.job.jobdescription}"></span></li>
 													
-													<li>徵才條件:<span th:text="${jobs.qualification}"></span></li>
+													<li>徵才條件:<span th:text="${jobs.job.qualification}"></span></li>
 
 
 
 												</ul>
 												<ul>
-													<li class="box" th:text="${job.description}"></li>
+													<li class="box" th:text="${jobs.job.description}"></li>
 												</ul>
 												<ul>
-													<li>薪資:<span th:text="${job.salary}"></span></li>
+													<li>薪資:<span th:text="${jobs.job.salary}"></span></li>
 												</ul>
 											</div>
 										</div>
                                     <div class="items-link items-link2 f-right">
-                                        <a th:href="@{showupdateinformation/}+${jobs.job_id}" class="genric-btn info-border circle">更新</a>
-                                        <a class="genric-btn danger-border circle" th:id="${jobs.job_id}" onclick="del(this.id)">刪除</a>
+                                        <a th:href="@{showupdateinformation/}+${jobs.job.job_id}" class="genric-btn info-border circle">更新</a>
+                                        <a class="genric-btn danger-border circle" th:id="${jobs.job.job_id}" onclick="del(this.id)">刪除</a>
                                     </div>
 									</div>
 								</div>
