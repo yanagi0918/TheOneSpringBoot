@@ -23,6 +23,10 @@
     <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
     <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    
+    <script th:src="@{/js/order_dashboard/checkOrderForm.js}" src="js/checkOrderForm.js"></script>
+    <!-- dataTables.css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -80,14 +84,8 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
-                                    <select name="select">
-                                        <option value="">英文證照</option>
-                                        <option value="">日語證照</option>
-                                        <option value="">韓語證照</option>
-                                        <option value="">生涯轉換與轉業</option>
-                                        <option value="">自我認知</option>
-                                        <option value="">求職技巧</option>
-                                        <option value="">就業市場現況與趨勢</option>
+                                    <select name="productId" required id="productId">
+                                    <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseCategory}"></option>
                                     </select>
                                 </div>
                                 <!--  Select job items End-->
@@ -96,19 +94,19 @@
                                     <div class="small-section-tittle2">
                                         <h4>訂單狀態</h4>
                                     </div>
-                                    <label class="container">完成
+                                    <label class="container">已付款
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="container">取消
+                                    <label class="container">待審核
                                         <input type="checkbox" checked="checked active">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="container">保留
+                                    <label class="container">成功退款
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="container">等待付款
+                                    <label class="container">駁回申請
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
@@ -122,33 +120,8 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
-                                    <select name="select">
-                                        <option value="">IELTS 雅思檢定班</option>
-                                        <option value="">TOEIC 多益檢定班</option>
-                                        <option value="">GEPT 全民英檢初級班</option>
-                                        <option value="">TOEFL 多福iBT檢定班 </option>
-                                        <option value="">JLPT N2 日檢養成班</option>
-                                        <option value="">JLPT N3 日檢養成班</option>
-                                        <option value="">JLPT N4 日檢養成班</option>
-                                        <option value="">JLPT N5 日檢養成班</option>
-                                        <option value="">TOPIK I 韓語初級檢定班</option>
-                                        <option value="">TOPIK II 韓語中、高級檢定班</option>
-                                        <option value="">中高齡職涯發展專班</option>
-                                        <option value="">女性二度就業機會與挑戰</option>
-                                        <option value="">職涯發展專班-轉業與轉職</option>
-                                        <option value="">中高階再創風華專班</option>
-                                        <option value="">求職計劃書撰寫(實作課程)</option>
-                                        <option value="">工作優勢及就業優勢</option>
-                                        <option value="">職場心理健康</option>
-                                        <option value="">創造雙贏的職場人際學</option>
-                                        <option value="">淺談面試技巧</option>
-                                        <option value="">履歷表撰寫實作班</option>
-                                        <option value="">面試技巧實戰營(實作課程)</option>
-                                        <option value="">個人工作競爭力SWOT分析</option>
-                                        <option value="">職場勞動權益，停看聽</option>
-                                        <option value="">產業發展與就業趨勢</option>
-                                        <option value="">多元化就業新契機</option>
-                                        <option value="">就業競爭力強化</option>
+                                    <select name="productId" required id="productId">
+                                    <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseName}"></option>
                                     </select>
                                 </div>
                                 <!--  Select job items End-->
@@ -197,7 +170,7 @@
                                         <div class="count-job mb-35">
                                             <span>共 [[${total}]] 筆訂單</span>
                                             <!-- Select job items start -->
-
+										
                                             <div class="blog_right_sidebar">
                                                 <aside class="search_widget">
                                                     <form action="#">
@@ -215,7 +188,7 @@
                                                     </form>
                                                 </aside>
                                             </div>
-
+										
                                             <!--  Select job items End-->
                                         </div>
                                     </div>
@@ -233,20 +206,21 @@
                                             </a>
                                             <ul>
                                                 <li th:text="${'訂單日期:'+#dates.format(order.orderDate, 'yyyy-MM-dd')}"></li>
-                                                <li><i class="fas fa-map-marker-alt" th:text="${order.state}"></i></li>
+                                                <li><i class="fas fa-map-marker-alt" th:text="${order.courseBean.courseCategory}"></i></li>
                                                 <li th:text="'$'+${order.courseBean.price}"></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a class="genric-btn info-border" href="order_details.html">訂單審核</a>
+                                        <a class="genric-btn info-border" href="order_details.html" th:text="${order.state}"></a>
                                     </div>
                                     
                                     <div class="items-link items-link2 f-right">
                                         <a class="genric-btn info-border" th:href="@{'http://localhost:8080/user/Order/'+${order.orderId}}" >明細</a>
-                                        <a class="genric-btn danger-border" onclick="del(this.id)" th:id="${order.orderId}">取消訂單</a>
+                                        <a class="genric-btn danger-border" onclick="del(this.id)" th:id="${order.orderId}">申請退款</a>
                                     </div>
                                 </div>
+                                </table>
                                 <!-- single-job-content -->
                             </div>
                         </section>
@@ -324,6 +298,16 @@
         
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <!-- dataTables.js -->
+   	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+		
+		<script>
+		$("#productId").change(function() {
+			var option =$(this).find("option:selected");
+			$("#totalPrice").val(option.text().trim());
+		});
+		</script>
 		
 		<script>
         function del(id) {
@@ -346,7 +330,7 @@
 				})
 				setTimeout(() => {
 					$.ajax({
-                        url: '/enterprise/order/'+id,
+                        url: '/user/order/'+id,
                         type: 'DELETE',
                         success: function(result) {
                             window.location.href='./orders'
