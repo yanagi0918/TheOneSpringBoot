@@ -61,6 +61,7 @@ public class OrderServiceImpl  implements OrderService{
 		order.setTotalPrice(course.getPrice());
 		order.setProductId(course.getCourseName());
 		order.setOrderDate(new Date());
+		order.setState("已付款");
 		orderDao.save(order);
 //		Order order = orderDao.findById(6).get();
 		System.err.println(order.getCourseBean().getCoursePicUrl());

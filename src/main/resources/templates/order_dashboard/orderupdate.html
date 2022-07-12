@@ -77,10 +77,10 @@
                                 <label class="col-sm-2 col-form-label">狀態</label>
                                 <div class="col-sm-8">
                                  <select class="form-select mb-3" aria-label="Default select example" name="state" th:field='${order.state}' th:value='${order.state}' required id="state">
-                                   <option th:selected="${order.state =='完成'}" value="完成">完成</option>
-                                   <option th:selected="${order.state =='保留'}" value="保留">保留</option>
-                                   <option th:selected="${order.state =='取消'}" value="取消">取消</option>
-                               	   <option th:selected="${order.state =='等待付款'}" value="等待付款">等待付款</option>
+                                   <option th:selected="${order.state =='已付款'}" value="已付款">已付款</option>
+                                   <option th:selected="${order.state =='待審核'}" value="待審核">待審核</option>
+                                   <option th:selected="${order.state =='成功退款'}" value="成功退款">成功退款</option>
+                               	   <option th:selected="${order.state =='駁回申請'}" value="駁回申請">駁回申請</option>
                                 </select>       					
                                 </div>
                             </div>

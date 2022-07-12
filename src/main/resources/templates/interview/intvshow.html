@@ -76,12 +76,17 @@
                                          
 <!--  <img th:src="@{/assets/img/logo/theone.png}" -->
 												</div>
-                                            <div><span th:if="*{offer==1}">錄取</span>
-                                            <span th:if="*{offer==2}">未錄取</span>
-                                            <span>有考試</span>
+                                            <div>
+                                            <ul>
+                                            <li th:if="*{offer}==1">錄取&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
+                                           <li th:if="*{offer}==2"> 未錄取&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
                                             
                                             
+                                           <li th:if="*{test}==1"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
+                                           <li th:if="*{test}==2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 沒有考試</li>
                                             
+                                            
+                                            </ul>
                                             
                                             
                                             </div>

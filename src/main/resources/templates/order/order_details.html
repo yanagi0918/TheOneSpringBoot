@@ -129,8 +129,7 @@
                               <li>訂單日期 : <span th:text="${#dates.format(Order.orderDate, 'yyyy-MM-dd')}"></span></li>
                           </ul>
                          <div class="apply-btn2">
-                            <a class="btn head-btn1" href="#" >付款</a>
-                            <a class="btn head-btn2" href="job_listing.html">取消</a>
+                            <a class="btn head-btn2" th:href="@{'http://localhost:8080/user/orders'}">返回</a>
                          </div>
                        </div>
                         <div class="post-details4  mb-50">

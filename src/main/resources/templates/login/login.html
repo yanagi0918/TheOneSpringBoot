@@ -21,6 +21,11 @@
 	href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
 	color="#111" />
 <link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet">
+<style>
+.error{
+color:red;
+}
+</style>
 </head>
 <body>
 	<!-- welcome card -->
@@ -103,43 +108,48 @@
 						<button type="button" class="switcher-member switcher-signup">
 							Sign Up <span class="underline"></span>
 						</button>
-						
-						<form class="form form-signup shadow card-body" th:action="@{/signup}" th:method="post">
+						<form class="form form-signup shadow card-body" th:action="@{/user/member}" th:method="post">
 							<fieldset>
 								<div class="input-block card-body">
-									<h2 class="card-title">Create Account</h2>
-									<p class="card-text">
-										Enter your personal details<br />and start journey with us
-									</p>
-									<p class="badge-wrap">
-										<a class="badge"><i class="fab fa-facebook-f"></i></a><a
-											class="badge"><i class="fab fa-google"></i></a><a
-											class="badge"><i class="fab fa-twitter"></i></a><a
-											class="badge"><i class="fab fa-github"></i></a>
-									</p>
-									<p>or use your identity number for registration</p>
+									<h2 class="card-title">註冊帳號</h2>
+<!-- 									<p class="card-text"> -->
+<!-- 										Enter your personal details<br />and start journey with us -->
+<!-- 									</p> -->
+<!-- 									<p class="badge-wrap"> -->
+<!-- 										<a class="badge"><i class="fab fa-facebook-f"></i></a><a -->
+<!-- 											class="badge"><i class="fab fa-google"></i></a><a -->
+<!-- 											class="badge"><i class="fab fa-twitter"></i></a><a -->
+<!-- 											class="badge"><i class="fab fa-github"></i></a> -->
+<!-- 									</p> -->
+<!-- 									<p>or use your identity number for registration</p> -->
 								</div>
 								<div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Name" required="required" name="username" id="username"/>
+										<input class="form-control" type="text" placeholder="姓名" id="username" required="required" />
+										<input class="form-control" type="hidden" name="idNumber"/>
+										
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Identity Number" required="required" name="userid" id="userid"/>
+										<input class="form-control" type="text" 
+											placeholder="身分證字號(帳號)" id="userid" required="required" />
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="password" placeholder="Password" required="required" name="pwd" id="pwd"/>
+										<input class="form-control" type="email" placeholder="Email" id="email"
+											required="required" />
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="email" placeholder="Email" required="required" name="email" id="email"/>
+										<input class="form-control" type="password"
+											placeholder="密碼"  id="pwd" required="required" />
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="date" placeholder="yyyy-mm-dd" required="required" name="birth" id="birth"/>
+										<input class="form-control" type="date"
+											placeholder="生日" id="birth" required="required" />
 									</div>
-									<div class="badge-wrap float-left m-1">
-										<a class="badge" data-toggle="tooltip" title="Quick insert" id=""><i class="fa fa-user-plus"></i></a>
-									</div>
+<!-- 									<div class="badge-wrap float-left m-1"> -->
+<!-- 										<a class="badge" data-toggle="tooltip" title="Quick insert" id=""><i class="fa fa-user-plus"></i></a> -->
+<!-- 									</div> -->
 									<div class="float-left">
-										<button class="btn btn-lg" type="submit">SIGN UP</button>
+										<button class="btn btn-lg" type="submit">註冊</button>
 									</div>
 								</div>
 							</fieldset>
@@ -178,11 +188,11 @@
 									<form>
 										<div class="form-group">
 											<input th:name="username" class="form-control" type="text"
-												placeholder="Tax ID Number" required="required" id="compid"/>
+												placeholder="Tax ID Number" required="required" id="compi"/>
 										</div>
 										<div class="form-group">
 											<input th:name="password" class="form-control"
-												type="password" placeholder="Password" required="required" id="compwd"/>
+												type="password" placeholder="Password" required="required" id="compw"/>
 										</div>
 										<p>
 											<a>Forgot your password?</a>
@@ -251,6 +261,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 <script th:src="@{/js/company_dashboard/checkCompanyForm.js}"></script>
 
+<script th:src="@{/js/member_front/checkSignupMemberForm.js}"></script>
 </body>
 
 </html>
