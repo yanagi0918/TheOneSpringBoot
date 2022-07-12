@@ -4,6 +4,7 @@ import com.theone.springboot.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.theone.springboot.entity.CourseBean;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -22,5 +23,6 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     List<CourseBean> getByMember(Member Member);
 
+    @Query
 
 }

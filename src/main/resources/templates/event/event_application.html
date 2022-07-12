@@ -86,7 +86,7 @@
 								<label>備註</label>
 								<textarea class="single-textarea" placeholder="最多可標註50字" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '最多可標註50字'" maxlength="50" name="remark"></textarea>
-								<input type="hidden" name="compId" required class="single-input" th:value="${company.compid}">
+								<input type="hidden" name="compId" required class="single-input" th:value="${session.loginEnterprise.compid}">
 								<input type="hidden" name="state" value="0">
 							</div>
 							<div class="mb-40">
