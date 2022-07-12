@@ -70,52 +70,52 @@
 							<div class="mt-10">
 								<label>身份證字號(帳號)</label>
 								<input type="hidden" name="idNumber" th:value="${session.loginMember.idNumber}">
-								<input type="text" name="userid" th:value="${session.loginMember.userid}" maxlength="10"
+								<input type="text" name="userid" id="userid" th:value="${session.loginMember.userid}" maxlength="10"
 									required class="form-control" readonly>
 							</div>
 							<div class="mt-10">
 								<label>密碼</label>
-								<input type="password" name="pwd" th:value="${session.loginMember.pwd}" maxlength="15"
+								<input type="password" name="pwd" id="pwd" th:value="${session.loginMember.pwd}" maxlength="15"
 									required class="form-control">
 								<input type="checkbox" onclick="ShowPwd()">顯示密碼
 							</div>
 							<div class="mt-10">
 								<label>姓名</label>
-								<input type="text" name="username" th:value="${session.loginMember.username}" maxlength="10"
+								<input type="text" name="username" id="username" th:value="${session.loginMember.username}" maxlength="10"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>性別</label>
-								<input type="text" name="gender" th:value="${session.loginMember.gender}" maxlength="1"
+								<input type="text" name="gender" id="gender" th:value="${session.loginMember.gender}" maxlength="1"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>生日</label>
-								<input type="date" name="birth" th:value="${#dates.format(session.loginMember.birth, 'yyyy-MM-dd')}"
+								<input type="date" name="birth"  id="birth" th:value="${#dates.format(session.loginMember.birth, 'yyyy-MM-dd')}"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>住宅電話</label>
-								<input type="text" name="tele" th:value="${session.loginMember.tele}" maxlength="10"
+								<input type="text" name="tele" id="tele" th:value="${session.loginMember.tele}" maxlength="10"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>手機</label>
-								<input type="text" name="phone" th:value="${session.loginMember.phone}" maxlength="10"
+								<input type="text" name="phone" id="phone" th:value="${session.loginMember.phone}" maxlength="10"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>通訊地址</label>
-								<input type="text" name="address" th:value="${session.loginMember.address}"
+								<input type="text" name="address" id="address" th:value="${session.loginMember.address}"
 									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>E-mail</label>
-								<input type="email" name="email" th:value="${session.loginMember.email}"
+								<input type="email" name="email" id="email" th:value="${session.loginMember.email}"
 									required class="form-control">
 							</div>
 							<br>
-							<button type="submit" class="genric-btn primary circle" name="create" value="confirm" id="btn-submit">完成修改</button>
+							<button type="button" class="genric-btn primary circle" name="create" value="confirm" id="btn-submit">完成修改</button>
 							<button type="button" class="genric-btn primary circle" id="correctInput">一鍵輸入</button>
 						</form>
 					</div>

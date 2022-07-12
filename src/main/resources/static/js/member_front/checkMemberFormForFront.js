@@ -26,9 +26,9 @@ $(function() {
 //		location.href = `./MemberServlet?UpdateId=${$(this).val()}`;
 //	})
 
-	$('#btn-toCreate').click(function() {
-		location.href = "/dashboard/member";
-	})
+//	$('#btn-toCreate').click(function() {
+//		location.href = "/dashboard/member";
+//	})
 
 	$('#btn-goBack').click(function() {
 		location.href = "/user/members";
@@ -117,7 +117,7 @@ $(function() {
 
 		$.ajax({
 			type: "post",
-			url: "/dashboard/members/checkID",
+			url: "/user/members/checkID",
 			dataType: "json",
 			contentType: "application/json;charset=utf-8",
 			data: JSON.stringify(postData),
@@ -269,10 +269,10 @@ $(function() {
 
 		let checkMemberForm = false;
 		
-		checkMemberForm = checkPackage()&& checkID();
-		console.log(checkPackage())
-		console.log(checkID())
-		console.log(checkMemberForm)
+		checkMemberForm = checkPackage();
+//		console.log(checkPackage())
+//		console.log(checkID())
+//		console.log(checkMemberForm)
 		if (checkMemberForm) {
 			$('#form').submit();
 		}
@@ -293,6 +293,7 @@ $(function() {
 		let v7 = validateUsername()
 		let v8 = validateGender()
 		let v9 = validateAddress()
+		console.log(v2)
 		if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9) {
 			checkMemberForm = true;
 		}
