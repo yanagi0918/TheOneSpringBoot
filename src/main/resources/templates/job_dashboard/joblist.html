@@ -76,7 +76,7 @@
 									<td th:text="${jobs.jobdescription}"></td>
 									<td th:text="${jobs.required_number}"></td>
 									<td th:text="${jobs.salary}"></td>
-									<td></td>
+									<td th:text="${jobs.compId}"></td>
 									<td>
 										<a class="btn btn-outline-secondary m-0 " th:href="@{jobdeatail/}+${jobs.job_id}">查看</a>
 										<a class="btn btn-outline-primary m-0 " th:href="@{showupdateinformation/}+${jobs.job_id}">更新</a> 

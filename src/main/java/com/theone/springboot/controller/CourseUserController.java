@@ -64,35 +64,26 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses/lecturers")
-    public String toCoursesBylecturer(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-//  Member lecturerMember = (Member)request.getSession().getAttribute("");
-//  lecturerMember.getUserid();
-        String lecturer = "王大陸"; //寫死
-        String url = "/user/courses/"+URLEncoder.encode(lecturer,"utf-8");
-        return "redirect:"+url;
-    }
-
-    //講師開課(之後要修改成session)
-    @GetMapping("/courses/{lecturer}")
-    public String findAllCourseByLecturer(@PathVariable String lecturer, Model model) {
-//    public String findAllCourseByLecturer(@PathVariable String lecturer, Model model) {
-        System.out.println(lecturer);
-        List<CourseBean> courseList = courseService.findByLecturer(lecturer);
+    public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
+        Member loginUser = (Member) session.getAttribute("loginMember");
+        List<CourseBean> courseList = courseService.findByMember(loginUser);
         model.addAttribute("courseList", courseList);
         return "course/lecturerCourseList";
     }
 
+
+
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
-    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
-        CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
-        if (bean != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(bean);
-        } else {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-    }
+//    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
+//        CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
+//        if (bean != null) {
+//            return ResponseEntity.status(HttpStatus.OK).body(bean);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//        }
+//    }
 
     @GetMapping("/courses/detail/{courseNo}")
     public String showDetail(@PathVariable Integer courseNo, Model model) {
@@ -115,15 +106,20 @@ public class CourseUserController {
     }
 
     @PostMapping("/courses")
-    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf) throws IOException {
+    public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
         System.out.println(CourseBean);
+        Member loginUser = (Member) session.getAttribute("loginMember");
+        if (CourseBean.getLecturer() == null) {
+            CourseBean.setLecturer(loginUser.getUsername());
+        }
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
-        //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
         if (mf.getOriginalFilename().length() != 0) {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
+        CourseBean.setUserid(loginUser.getUserid());
+        CourseBean.setMember(loginUser);
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";
     }
@@ -144,14 +140,6 @@ public class CourseUserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/courses")
-    @ResponseBody
-    public ResponseEntity<CourseBean> saveOrUpdate(@RequestBody CourseBean CourseBean) {
-        CourseBean courseBean = courseService.findCourse(CourseBean.getCourseNo()).orElseThrow();
-        courseBean.setStatus(CourseBean.getStatus());
-        courseService.saveOrUpdate(courseBean);
-        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
-    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {

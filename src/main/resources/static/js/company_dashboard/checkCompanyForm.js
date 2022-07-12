@@ -80,6 +80,15 @@ function checkcompid() {
 	});
 }
 
+$('#companyquicksignin').click(function() {
+	$('#compi').val('87654321')
+	$('#compw').val('Aabc123zzz')
+})
+
+$('#companyquickinsert').click(function() {
+	$('#compwd').val('Az145145')
+	$('#pwdagain').val('Az145145')
+})
 
 $('#wrongCompany').click(function() {
 	$('#compid').val('A7654321')
@@ -111,6 +120,18 @@ $('#correctCompany').click(function() {
 	$('#capital').val('1200萬')
 })
 $('#companyUpdate').click(function() {
+	$('#compwd').val('Cloud127')
+	$('#corpname').val('福雄食品集團')
+	$('#owner').val('王先生')
+	$('#contact').val('楊小姐')
+	$('#comptele').val('0939625321')
+	$('#fax').val('07-102635')
+	$('#compaddress').val('台北市萬華區廣州街211號')
+	$('#empnumber').val('52')
+	$('#website').val('iSpan4505@gmail.com')
+	$('#capital').val('900萬')
+})
+$('#companyCreate').click(function() {
 	$('#compwd').val('Az145145')
 	$('#corpname').val('友線株式會社')
 	$('#owner').val('陳先生')

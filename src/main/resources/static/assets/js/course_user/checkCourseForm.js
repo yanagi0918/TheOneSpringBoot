@@ -209,13 +209,13 @@ $(function () {
     }
 
     function validatelecturer() {
-        if ($('#lecturer').val() == "") {
-            $('#lecturer').attr("class", "form-control is-invalid")
-            return false;
-        } else {
-            $('#lecturer').attr("class", "form-control is-valid")
+        // if ($('#lecturer').val() == "") {
+        //     // $('#lecturer').attr("class", "form-control is-invalid")
+        //     return false;
+        // } else {
+        //     $('#lecturer').attr("class", "form-control is-valid")
             return true;
-        }
+        // }
     }
 
     function validateVedio() {
@@ -280,7 +280,7 @@ $(function () {
                 columnDefs: [
                     {orderable: false, targets: [5, 6]},
                     {
-                        "targets": [0, 1, 2, 3, 4, 5],
+                        "targets": [0, 1, 2, 3, 4, 5,6],
                         "className": "text-center",
                     },
                     {

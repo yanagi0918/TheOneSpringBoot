@@ -208,7 +208,7 @@
 													th:src="@{/assets/img/job/wewantyou.png}" alt="">
 											</div>
 											<div class="job-tittle job-tittle2">
-												<a th:href="@{jobdeatail/}+${jobs.job_id}">
+												<a th:href="@{jobdeatail/}+${jobs.job_id}"  target="_blank">
 													<h4 th:text="${jobs.title}"></h4>
 												</a>
 												<ul>
@@ -224,6 +224,7 @@
 													<li class="box" th:text="${jobs.description}"></li>
 												</ul>
 												<ul>
+													<li th:text="${jobs.company.corpname}"></li>
 													<li>薪資:<span th:text="${jobs.salary}"></span></li>
 												</ul>
 											</div>

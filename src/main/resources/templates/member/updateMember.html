@@ -40,7 +40,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>會員資訊</h2>
+							<h2>修改會員資訊</h2>
 						</div>
 					</div>
 				</div>
@@ -56,76 +56,67 @@
 			<div class="section-top-border">
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
-						<h3 class="mb-30">會員資訊:</h3>
-						<form action="#">
+						<h3 class="mb-30">會員資訊修改:</h3>
+						<form th:action="@{/user/members}" method="post" id="form" enctype="multipart/form-data">
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">照片</label>
 								<div class="col-sm-8 text-center">
-									<img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="assets/memberimages/images.png"
-										alt="請選擇您的照片" style="width: 320px; height: 200px;"> 
-									<!-- <input
-										class="form-control" type="file" name="imageFile" id="imgInp"
-										accept="image/jpeg, image/png" readonly> -->
+									<img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" th:src="${session.loginMember.image}"
+										alt="請選擇您的照片" style="width: 320px; height: 200px;">
+									<input type="hidden" class="form-control" name="image" th:value="${session.loginMember.image}"> 	 
+ 									<input class="form-control" type="file" name="imageFile" id="imgInp" accept="image/jpeg, image/png"> 
 								</div>
 							</div>
 							<div class="mt-10">
 								<label>身份證字號(帳號)</label>
-								<input type="text" name="first_name" placeholder="A123456789" value="A123456789" maxlength="10"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'A123456789'" required
-									class="form-control" readonly>
+								<input type="hidden" name="idNumber" th:value="${session.loginMember.idNumber}">
+								<input type="text" name="userid" id="userid" th:value="${session.loginMember.userid}" maxlength="10"
+									required class="form-control" readonly>
 							</div>
 							<div class="mt-10">
 								<label>密碼</label>
-								<input type="password" name="last_name" placeholder="密碼請勿超過15個字元" value="ABC123def" maxlength="15"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '密碼請勿超過15個字元'" required
-									class="form-control" readonly>
+								<input type="password" name="pwd" id="pwd" th:value="${session.loginMember.pwd}" maxlength="15"
+									required class="form-control">
 								<input type="checkbox" onclick="ShowPwd()">顯示密碼
 							</div>
 							<div class="mt-10">
 								<label>姓名</label>
-								<input type="text" name="last_name" placeholder="王小明" value="王小明" maxlength="10"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '王小明'" required
-									class="form-control" readonly>
+								<input type="text" name="username" id="username" th:value="${session.loginMember.username}" maxlength="10"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>性別</label>
-								<input type="text" name="last_name" placeholder="男" value="女" maxlength="1"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '男'" required
-									class="form-control" readonly>
+								<input type="text" name="gender" id="gender" th:value="${session.loginMember.gender}" maxlength="1"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>生日</label>
-								<input type="date" name="last_name" placeholder="生日" value="1994-02-28"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '生日'" required
-									class="form-control" readonly>
+								<input type="date" name="birth"  id="birth" th:value="${#dates.format(session.loginMember.birth, 'yyyy-MM-dd')}"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>住宅電話</label>
-								<input type="text" name="last_name" placeholder="0287654321" value="0287654321" maxlength="10"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '0287654321'" required
-									class="form-control" readonly>
+								<input type="text" name="tele" id="tele" th:value="${session.loginMember.tele}" maxlength="10"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>手機</label>
-								<input type="text" name="last_name" placeholder="0910123456" value="0910123456" maxlength="10"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '0910123456'" required
-									class="form-control" readonly>
+								<input type="text" name="phone" id="phone" th:value="${session.loginMember.phone}" maxlength="10"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>通訊地址</label>
-								<input type="text" name="last_name" placeholder="地址" value="台東縣蘭嶼鄉椰油村"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = '地址'" required
-									class="form-control" readonly>
+								<input type="text" name="address" id="address" th:value="${session.loginMember.address}"
+									required class="form-control">
 							</div>
 							<div class="mt-10">
 								<label>E-mail</label>
-								<input type="email" name="EMAIL" placeholder="EEIT45team5@gmail.com" value="EEIT45team5@gmail.com"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'EEIT45team5@gmail.com'" required
-									class="form-control" readonly>
+								<input type="email" name="email" id="email" th:value="${session.loginMember.email}"
+									required class="form-control">
 							</div>
 							<br>
-							<!-- <button type="submit" class="genric-btn primary circle" name="create" value="confirm" id="btn-submit">修改會員資訊</button> -->
-							<a href="yu_updateMember.html" class="genric-btn primary circle">修改會員資料</a>
+							<button type="button" class="genric-btn primary circle" name="create" value="confirm" id="btn-submit">完成修改</button>
+							<button type="button" class="genric-btn primary circle" id="correctInput">一鍵輸入</button>
 						</form>
 					</div>
 					
@@ -179,7 +170,8 @@
         
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+        <!-- 禹秀 -->
+		<script th:src="@{/js/member_front/checkMemberFormForFront.js}"></script>
        
     </body>
 </html>

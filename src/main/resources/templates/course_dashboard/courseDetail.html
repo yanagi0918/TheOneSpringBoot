@@ -55,6 +55,16 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">課程詳細資訊</h6>
                     </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">講師帳號</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="userid"
+                                   th:value="${CourseBean.userid}" readonly="readonly">
+                        </div>
+                    </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">課程編號</label>
                         <div class="col-sm-8">

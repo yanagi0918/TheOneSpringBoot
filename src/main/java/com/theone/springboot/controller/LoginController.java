@@ -17,6 +17,7 @@ import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.EventService;
 import com.theone.springboot.service.MemberService;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Controller
 public class LoginController {

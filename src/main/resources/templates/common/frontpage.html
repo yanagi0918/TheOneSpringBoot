@@ -12,7 +12,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img th:src="@{/assets/img/logo/logo.png}" alt="">
+                    <img th:src="@{/assets/img/logo/theone.png}" alt="">
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.html"><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
+                                <a th:href="@{/}"><img th:src="@{/assets/img/logo/theone.png}" alt=""></a>
                             </div>  
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -38,15 +38,23 @@
                                         <ul id="navigation">
                                             <li><a th:href="@{/}"><span style="font-size: large">首頁</span></a></li>
                                             <li><a th:href="@{/enterprise/job/list}"><span style="font-size: large">找工作</span></a></li>
-                                            <li><a href=""><span style="font-size: large">課程進修</span></a>
+                                            <li><a href="">課程進修</a>
                                                 <ul class="submenu">
-                                                    <li><a href=""><span style="font-size: large">講師專區</span></a></li>
+                                                    <li><a th:href="@{/user/courses}"><span style="font-size: large">所有課程</span></a></li>
+                                                    <li><a href=""><span style="font-size: large">收藏</span></a></li>
+                                                    <li><a th:href="@{/user/courses/lecturers}"><span style="font-size: large">講師專區</span></a></li>
                                                     <li><a href=""><span style="font-size: large">我的課程</span></a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href=""><span style="font-size: large">討論區</span></a>
+<!--                                            <li><a href=""><span style="font-size: large">課程進修</span></a>-->
+<!--                                                <ul class="submenu">-->
+<!--                                                    <li><a href=""><span style="font-size: large">講師專區</span></a></li>-->
+<!--                                                    <li><a href=""><span style="font-size: large">我的課程</span></a></li>-->
+<!--                                                </ul>-->
+<!--                                            </li>-->
+                                            <li><a th:href="@{/forum}"><span style="font-size: large">討論區</span></a>
                                                 <ul class="submenu">
-                                                    <li><a href=""><span style="font-size: large">面試經驗談</span></a></li>
+                                                    <li><a th:href="@{/intvlist}"><span style="font-size: large">面試經驗談</span></a></li>
                                                     <li><a th:href="@{/comments}"><span style="font-size: large">職場甘苦談</span></a></li>
                                                 </ul>
                                             </li>
