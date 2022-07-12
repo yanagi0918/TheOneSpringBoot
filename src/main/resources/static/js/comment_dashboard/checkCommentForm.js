@@ -272,11 +272,19 @@ $(document).ready(function() {
 		//don't display search bar
 		searching: false,
 
+		//x 方向卷軸
+		scrollX: true,
+
+
 		//remove column 3,5,7 sorter
+		//hide column
 		columnDefs: [{
 			orderable: false,
-			targets: [3, 5, 7]
-		}
+			targets: [5, 7]
+		},{
+			visible: false,
+			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14 ,15 ,16]
+			}
 		],
 
 		//position of entire
@@ -287,32 +295,42 @@ $(document).ready(function() {
 			[10, 25, 50, -1],
 			[10, 25, 50, 'All'],
 		],
-
-		orderCellsTop: true,
-		fixedHeader: true,
-		autoWidth: true,
-
+		
 	});
 
-	// // Setup - add a text input to each footer cell
-	// $('#commentTable thead #test th').each( function () {
-	//     var title = $(this).text();
-	//     $(this).html( '<input type="text" placeholder="'+title+'" />' );
-	// } );
+	//dynamicall column
+	$('input.toggle-vis').on('change', function(e) {
+		e.preventDefault();
+
+		// Get the column API object
+		var column = table.column($(this).attr('data-column'));
+
+		// Toggle the visibility
+		if ($(this).is(":checked")) {
+			column.visible(true);
+		} else {
+			column.visible(false);
+
+		}
 
 
-	// // Apply the search
-	// table.columns().every( function () {
-	//     var that = this;
-
-	//     $( 'input', this.header() ).on( 'keyup change', function () {
-	//         if ( that.search() !== this.value ) {
-	//             that
-	//                 .search( this.value )
-	//                 .draw();
-	//         }
-	//     } );
-	// } );
-
-
+	});
+//	$('input#all').on('change', function(e) {
+//		e.preventDefault();
+//		
+//		var column = table.column($(this).attr('data-column'));
+//		
+//		if ($(this).is(":checked")) {
+//			$('input.toggle-vis').prop('checked',true);
+//			for(var i = 0 , i < 18 ; i++){
+//				table.column(i).visible(true);
+//			};
+//		}else {
+//			$('input.toggle-vis').prop('checked',false);
+//			column.visible(false);
+//
+//		}
+//	});
 });
+
+
