@@ -22,5 +22,4 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     List<CourseBean> getByMember(Member Member);
 
-
 }

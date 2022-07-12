@@ -37,6 +37,20 @@ public class Member {
     @JsonManagedReference
     private List<CourseBean> lecturerCourses;
 
+
+
+    //	 VINCENT COLLECTION MANY(member講師) TO MANY(收藏多個課程)
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "members")
+    private List<CourseBean> collectionCourses;
+
+    public List<CourseBean> getCollectionCourses() {
+        return collectionCourses;
+    }
+
+    public void setCollectionCourses(List<CourseBean> collectionCourses) {
+        this.collectionCourses = collectionCourses;
+    }
+
     //Constructor
     public Member() {
     }
