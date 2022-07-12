@@ -35,7 +35,7 @@ import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.MemberService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user")////////
 public class MemberUserController {
 
 	@Autowired
