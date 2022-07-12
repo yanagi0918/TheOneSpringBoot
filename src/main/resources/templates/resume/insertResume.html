@@ -1,45 +1,46 @@
 <!doctype html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-         <title>The One </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>The One</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="site.webmanifest">
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/img/favicon.ico">
 
-		<!-- CSS here -->
-        <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
-        <link rel="stylesheet" th:href="@{/assets/css/style.css}">
-   </head>
+<!-- CSS here -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+<link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+<link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+<link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
 
-   <body>
-    <!-- Preloader Start -->
-   <div th:replace="~{common/frontpage::preloader}"></div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-	<div th:replace="~{common/frontpage::header}"></div>
-	 <!-- Header End -->
-    </header>
+<body>
+	<!-- Preloader Start -->
+	<div th:replace="~{common/frontpage::preloader}"></div>
+	<!-- Preloader Start -->
+	<header>
+		<!-- Header Start -->
+		<div th:replace="~{common/frontpage::header}"></div>
+		<!-- Header End -->
+	</header>
 	<main>
 
 		<!-- Hero Area Start-->
 		<div class="slider-area ">
 			<div
 				class="single-slider section-overly slider-height2 d-flex align-items-center"
-				th:data-background="@{/assets/img/hero/event_application.jpg}">
+				th:data-background="@{/assets/img/hero/resume.png}">
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-12">
@@ -68,10 +69,12 @@
                                 </div> -->
 									<div class="job-tittle">
 										<h2>
-											<input type="hidden" class="form-control" name="resumeId" value="0" id="resumeId"/>
-											<input type="hidden" class="form-control" name="userId" th:value="${session.loginMember.userid}" id="userId"/>
-											
-											<input type="text" placeholder="請輸入履歷名稱" name="resumeName" id="resumeName">
+											<input type="hidden" class="form-control" name="resumeId"
+												value="0" id="resumeId" /> <input type="hidden"
+												class="form-control" name="userId"
+												th:value="${session.loginMember.userid}" id="userId" /> <input
+												type="text" placeholder="請輸入履歷名稱" name="resumeName"
+												id="resumeName">
 										</h2>
 										<!-- <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="images.png" alt="請選擇您的照片" style="width: 320px; height: 200px;">  -->
 										<!-- <input class="form-control" type="file" name="imageFile" id="imgInp" accept="image/jpeg, image/png"> -->
@@ -86,14 +89,16 @@
 									<div class="small-section-tittle">
 										<h4>自傳</h4>
 									</div>
-									<textarea name="autobiography" id="autobiography" cols="65" rows="15" placeholder="請輸入自傳" required></textarea>
+									<textarea name="autobiography" id="autobiography" cols="65"
+										rows="15" placeholder="請輸入自傳" required></textarea>
 								</div>
 								<div class="post-details2  mb-50">
 									<!-- Small Section Tittle  -->
 									<div class="small-section-tittle">
 										<h4>工作經驗</h4>
 									</div>
-									<textarea name="workExp" id="workExp" cols="65" rows="12" placeholder="請輸入工作經驗" required></textarea>
+									<textarea name="workExp" id="workExp" cols="65" rows="12"
+										placeholder="請輸入工作經驗" required></textarea>
 								</div>
 							</div>
 
@@ -130,10 +135,10 @@
 									</select>
 									</li>
 									<li>畢業學校 : <input type="text" name="school"
-										class="form-control" id="school" required/>
+										class="form-control" id="school" required />
 									</li>
 									<li>畢業科系: <input type="text" name="dept"
-										class="form-control" id="dept" required/>
+										class="form-control" id="dept" required />
 									</li>
 								</ul>
 							</div>
@@ -282,7 +287,7 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script th:src="@{/assets/js/plugins.js}"></script>
 	<script th:src="@{/assets/js/main.js}"></script>
-	
+
 	<!-- 禹秀 -->
 	<script th:src="@{/js/resume_front/checkResumeFormForFront.js}"></script>
 
