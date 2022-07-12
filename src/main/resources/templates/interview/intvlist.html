@@ -135,6 +135,7 @@
                      
                     </div>
                     <!-- Featured_job_end -->
+                   
                     <!-- 右邊欄位Head -->
                     <div class="col-xl-3 col-lg-3 col-md-4">
                         <div class="blog_right_sidebar">
@@ -198,38 +199,13 @@
 
                             <aside class="single_sidebar_widget instagram_feeds">
                                 <h4 class="widget_title">廣告</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_5.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_6.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="row">
+                        <div th:each="event:${events}" class="col-md-4 mb-4">
+                            <div class="single-defination">
+                                <a th:href="${event.eventLinkUrl}"><img th:src="${event.imgUrl}" style="width: 50px; height: 50px;" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
+                    </div>
                             </aside>
                             <aside class="single_sidebar_widget newsletter_widget">
                                 <h4 class="widget_title">Newsletter</h4>
@@ -246,6 +222,7 @@
                         </div>
                     </div>
                     <!-- 右邊欄位尾 -->
+                    
                 </div>
             </div>
         </div>
