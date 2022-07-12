@@ -65,23 +65,25 @@ public class EventDashBoardController {
 			imageFile.transferTo(new File(saveFilePath));
 		}
 
-		if (event.getState() == 1 || event.getState() == 2) {
-			String result = null;
-			if (event.getState() == 1) {
-				result = "審核通過";
-			}else {
-				result = "退件";
-			}
-			String msg = "廣告編號: " + event.getEventId() + "\n" +
-						 "審核結果: " + result + "\n" +
-						 "備註: " + event.getRemark() + "\n" +
-						 "連結: http://localhost:8080/enterprise/events";
-			eventService.sendNotifyEmail("aass13172@gmail.com", "TheOne 廣告審核通知", msg);
-		}
-
 		eventService.saveOrUpdate(event);
 
 		return "redirect:/dashboard/events";
+	}
+	
+	@ResponseBody
+	@GetMapping("/event/sendemail")
+	public boolean sendNotifyEmail(String id, String result, String remark) {
+		if ("1".equals(result) || "2".equals(result)) {
+			result = ("1".equals(result))?"審核通過":"退件";
+			
+			String msg = "廣告編號: " + id + "\n" +
+						 "審核結果: " + result + "\n" +
+						 "備註: " + remark + "\n" +
+						 "連結: http://localhost:8080/enterprise/events";
+			eventService.sendNotifyEmail("yc20150701@gmail.com", "TheOne 廣告審核通知", msg);
+			return true;
+		}
+		return false;
 	}
 
 	@GetMapping("/event/{id}")
@@ -102,11 +104,7 @@ public class EventDashBoardController {
 	@GetMapping("/event/compid_exist/{compid}")
 	public boolean checkUser(@PathVariable("compid") Integer compid) {
 		Company company = companyService.getByCompid(compid);
-		if (company == null) {
-			return false;
-		} else {
-			return true;
-		}
+		return ((company == null) ? false : true );
 	}
 	
 	@ResponseBody
