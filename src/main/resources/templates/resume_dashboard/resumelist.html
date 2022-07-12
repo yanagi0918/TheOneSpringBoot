@@ -74,17 +74,17 @@
 						</thead>
 						<tbody>
 							<tr th:each="resume:${resumes}">
-								<td	th:text="${resume.resume_id}"></td>
-								<td	th:text="${resume.resume_name}"></td>
+								<td	th:text="${resume.resumeId}"></td>
+								<td	th:text="${resume.resumeName}"></td>
 								<td	th:text="${resume.edu}"></td>
 								<td	th:text="${resume.school}"></td>
 								<td	th:text="${resume.dept}"></td>
 								<td	th:text="${resume.skills}"></td>
 								<td>
-									<a  class="btn btn-outline-primary m-0 btn-resumeUpdate" th:href="@{resume/}+${resume.resume_id}">更新</a>
+									<a  class="btn btn-outline-primary m-0 btn-resumeUpdate" th:href="@{resume/}+${resume.resumeId}">更新</a>
 								</td>
 								<td>
-									<a  class="btn btn-outline-danger m-0" th:id="${resume.resume_id}" onclick="del(this.id)">刪除</a>
+									<a  class="btn btn-outline-danger m-0" th:id="${resume.resumeId}" onclick="del(this.id)">刪除</a>
 								</td>
 							</tr>
 						</tbody>
