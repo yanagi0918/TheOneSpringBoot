@@ -67,9 +67,9 @@
                                         <h4 th:text="${Order.courseBean.courseName}"></h4>
                                     </a>
                                     <ul>
-                                        <li th:text="${#dates.format(Order.orderDate, 'yyyy-MM-dd')}"></li>
-                                        <li th:value='${Order.state}'></li>
-                                        <li th:text="'$'+${Order.courseBean.price}"></li>
+                                        <li class="fa fa-calendar-alt" th:text="${#dates.format(Order.orderDate, 'yyyy-MM-dd')}"></li>
+                                        <li class="fa fa-table" th:text='${Order.courseBean.courseCategory}'></li>
+                                        <li class="fa fa-dollar-sign" th:text="${Order.courseBean.price}"></li>
                                     </ul>
                                 </div>
                             </div>
