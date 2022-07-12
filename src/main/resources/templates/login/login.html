@@ -104,33 +104,32 @@
 							註冊 <span class="underline"></span>
 						</button>
 						<form class="form form-signup shadow card-body"
-							th:action="@{/user/member}" th:method="post">
+							th:action="@{/signup}" th:method="post">
 							<fieldset>
 								<div class="input-block card-body">
 									<h2 class="card-title">註冊帳號</h2>
 								</div>
 								<div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="姓名"
-											id="username" required="required" /> <input
-											class="form-control" type="hidden" name="idNumber" />
+									<input class="form-control" type="text" placeholder="姓名"  name="username" id="username" required="required" /> 
+									<input class="form-control" type="hidden" name="idNumber" />
 
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="text"
-											placeholder="身分證字號(帳號)" id="userid" required="required" />
+											placeholder="身分證字號(帳號)" id="userid" name="userid" required="required" />
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="email" placeholder="Email"
-											id="email" required="required" />
+											id="email" name="email" required="required" />
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="password" placeholder="密碼"
-											id="pwd" required="required" />
+											id="pwd" name="pwd"  required="required" />
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="date" placeholder="生日"
-											id="birth" required="required" />
+											id="birth" name="birth"  required="required" />
 									</div>
 									<div class="badge-wrap float-left py-2">
 										<a class="badge" data-toggle="tooltip" title="Quick insert"
