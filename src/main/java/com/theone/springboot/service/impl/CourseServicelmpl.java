@@ -52,6 +52,16 @@ public class CourseServicelmpl implements CourseService {
     }
 
     @Override
+    public List<CourseBean> findAllCoursesByStatus(String status) {
+        return courseDao.getByStatus(status);
+    }
+
+    @Override
+    public List<CourseBean> findByCourseCategoryAndStatus(String courseCategory, String status) {
+        return courseDao.getByCourseCategoryAndStatus(courseCategory,status);
+    }
+
+    @Override
     public Optional<CourseBean> findCourse(Integer pk) {
         return courseDao.findById(pk);
     }
