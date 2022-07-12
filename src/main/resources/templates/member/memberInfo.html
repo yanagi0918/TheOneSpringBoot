@@ -79,7 +79,7 @@
 								<label>密碼</label>
 								<input type="password" name="pwd" id="pwd" placeholder="密碼請勿超過15個字元" th:value="${session.loginMember.pwd}" maxlength="15" required
 									class="form-control" readonly>
-								<input type="checkbox" onclick="ShowPwd()">顯示密碼
+								<input type="checkbox" onclick="ShowPwd()" id="pwdcheck">顯示密碼
 							</div>
 							<div class="mt-10">
 								<label>姓名</label>
@@ -172,7 +172,7 @@
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- 禹秀 -->
-<!-- 		<script th:src="@{/js/member_front/checkMemberFormForFront.js}"></script> -->
+		<script th:src="@{/js/member_front/checkMemberFormForFront.js}"></script>
        
     </body>
 </html>
