@@ -195,7 +195,7 @@
                                 </div>
                                 <!-- Count of Job list End -->
                                 <!-- single-job-content -->
-                                <div th:each="order:${orders}" class="single-job-items mb-30">
+                                <div th:each="order:${orders}" class="single-job-items mb-30 blog_area">
                                     <div class="job-items">
                                         <div class="company-img">
                                             <a><img src="" alt="" th:text="${'訂單編號:'+order.orderId}"></a>
@@ -205,22 +205,21 @@
                                                 <h4 th:text="${order.courseBean.courseName}"></h4>
                                             </a>
                                             <ul>
-                                                <li th:text="${'訂單日期:'+#dates.format(order.orderDate, 'yyyy-MM-dd')}"></li>
-                                                <li><i class="fas fa-map-marker-alt" th:text="${order.courseBean.courseCategory}"></i></li>
-                                                <li th:text="'$'+${order.courseBean.price}"></li>
+                                                <li class="fa fa-calendar-alt" th:text="${'訂單日期:'+#dates.format(order.orderDate, 'yyyy-MM-dd')}"></li>
+                                                <li class="fa fa-table" th:text="${order.courseBean.courseCategory}"></li>
+                                                <li class="fa fa-dollar-sign" th:text="${order.courseBean.price}"></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a class="genric-btn info-border" href="order_details.html" th:text="${order.state}"></a>
+                                        <button class="genric-btn info-border circle" href="order_details.html" th:text="${order.state}"></button>
                                     </div>
                                     
                                     <div class="items-link items-link2 f-right">
-                                        <a class="genric-btn info-border" th:href="@{'http://localhost:8080/user/Order/'+${order.orderId}}" >明細</a>
-                                        <a class="genric-btn danger-border" onclick="del(this.id)" th:id="${order.orderId}">申請退款</a>
+                                    	<button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
+                                        <button class="genric-btn danger circle" onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
                                     </div>
                                 </div>
-                                </table>
                                 <!-- single-job-content -->
                             </div>
                         </section>
@@ -238,11 +237,8 @@
                         <div class="single-wrap d-flex justify-content-center">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-start">
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
                                     <li class="page-item"><a class="page-link" href="#"><span
-                                                class="ti-angle-right"></span></a></li>
+                                                class="ti-angle-left"></span></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -301,6 +297,8 @@
         
         <!-- dataTables.js -->
    	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+   	    
+		<script th:src="@{/js/order_dashboard/checkOrderForm.js}" src="js/checkOrderForm.js"></script>
 		
 		<script>
 		$("#productId").change(function() {
