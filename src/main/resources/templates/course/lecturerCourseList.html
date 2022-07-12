@@ -209,28 +209,29 @@
                                           th:href="@{'/user/courses/detail/'+${course.courseNo}}">
                                     </span>
                                 </span>
-                            <!--                            <i class="fa fa-check-circle fa-lg" th:id="${course.courseNo}"-->
-                            <!--                               onclick="statusOkAjax(this.id)"></i>-->
-                            <!--                            <i class="fa fa-circle-xmark fa-lg" th:id="${course.courseNo}"-->
-                            <!--                               onclick="statusRejectAjax(this.id)"></i>-->
                         </td>
 
-                        <!--                            <td>-->
-                        <!--                                <a class="btn btn-outline-warning m-0" th:text="${course.status}"-->
-                        <!--                                   th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">-->
-                        <!--                                </a>-->
-                        <!--                                <i class="fa fa-check-circle"></i>-->
-                        <!--                                <i class="fa fa-circle-xmark"></i>-->
-                        <!--                            </td>-->
+                        <td th:switch="${course.status}">
+                            <div th:case="'待審核'">
+                                <a class="genric-btn info-border circle"
+                                   th:href="@{'/user/courses/detail/'+${course.courseNo}}">詳細</a>
+                                <a class="genric-btn success-border circle btn-courseUpdate"
+                                   th:href="@{'/user/toUpdatePage/'+${course.courseNo}}">更新</a>
+                                <!-- <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>-->
+                                <a class="genric-btn danger-border circle btn-courseDelete" th:id="${course.courseNo}"
+                                   id="">刪除</a>
+                            </div>
 
-                        <td th:case="">
-                            <a class="genric-btn info-border circle"
-                               th:href="@{'/user/courses/detail/'+${course.courseNo}}">詳細</a>
-                            <a class="genric-btn success-border circle btn-courseUpdate"
-                               th:href="@{'/user/toUpdatePage/'+${course.courseNo}}">更新</a>
-                            <!-- <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>-->
-                            <a class="genric-btn danger-border circle btn-courseDelete" th:id="${course.courseNo}"
-                               id="">刪除</a>
+                            <div th:case="'已審核'">
+                                <a class="genric-btn info-border circle"
+                                   th:href="@{'/user/courses/detail/'+${course.courseNo}}">詳細</a>
+
+                            </div>
+
+                            <div th:case="'駁回'">
+                                <a class="genric-btn danger-border circle btn-courseDelete" th:id="${course.courseNo}">刪除</a>
+                            </div>
+
                         </td>
 
                     </tr>
