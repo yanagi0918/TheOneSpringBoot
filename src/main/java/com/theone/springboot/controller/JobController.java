@@ -18,7 +18,7 @@ import com.theone.springboot.entity.Job;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
-@RequestMapping("/enterprise/job")
+//@RequestMapping("/enterprise/job")
 @Controller	
 public class JobController {
 	@Autowired
@@ -27,7 +27,7 @@ public class JobController {
 	private CompanyService companyService;
 	
 	
-	@GetMapping("/companylist")
+	@GetMapping("/enterprise/job/companylist")
 	private String companyJobs(HttpSession session,Model m){
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		List<Job> jobList = jobService.findByCompany(company);
@@ -36,7 +36,7 @@ public class JobController {
 	}
 	
 	
-	@GetMapping("/list")
+	@GetMapping("/enterprise/job/list")
 	private String listJobs(Model m){
 		m.addAttribute("companyList",companyService.getAllCompanies());
 		List<Job> jobs = jobService.getAllJobs();
@@ -44,14 +44,22 @@ public class JobController {
 		return "job/job_list";
 	}
 	
-	@GetMapping("/showForm")
+	@GetMapping("/job/list")
+	private String allCanSeeListJobs(Model m){
+		m.addAttribute("companyList",companyService.getAllCompanies());
+		List<Job> jobs = jobService.getAllJobs();
+		m.addAttribute("jobs", jobs);
+		return "job/job_list";
+	}
+	
+	@GetMapping("/enterprise/job/showForm")
 	private String showFormForAdd(HttpSession session,Model m){
 //		Company company = (Company)session.getAttribute("loginEnterprise");
 //		m.addAttribute("company",company);
 		return "job/job_create";
 	}
 	
-	@PostMapping("/saveJob")
+	@PostMapping("/enterprise/job/saveJob")
 	private String saveJob(HttpSession session, Job job){
 		Company loginCompany = (Company)session.getAttribute("loginEnterprise");
 		job.setCompany(loginCompany);
@@ -59,7 +67,7 @@ public class JobController {
 		return "redirect:/enterprise/job/companylist";
 	}
 	
-	@GetMapping("/jobdeatail/{pk}")
+	@GetMapping("/enterprise/job/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m,Company company){
 		
 		Job jobdeatail = jobService.getJob(detailId).get();
@@ -67,7 +75,7 @@ public class JobController {
 		return "job/job_detail";
 	}
 	
-	@GetMapping("/showupdateinformation/{pk}")
+	@GetMapping("/enterprise/job/showupdateinformation/{pk}")
 	private String showupdateinformation(@PathVariable("pk") Integer updateId,Model m){
 		Job jobupdate = jobService.getJob(updateId).get();
 		m.addAttribute("jobupdate", jobupdate);
@@ -75,7 +83,7 @@ public class JobController {
 	}
 
 	@ResponseBody
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/enterprise/job/delete/{id}")
 	private String processDelete(@PathVariable("id") Integer id){
 		jobService.delete(id);
 		return "ok";

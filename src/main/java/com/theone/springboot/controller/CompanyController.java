@@ -58,12 +58,19 @@ public class CompanyController {
 	
 	
 	@PostMapping("/enterprise/companydetail")
-	@GetMapping("/enterprise/companydetail")
 	public String processShowDetail(HttpSession session,Model m,Company company){
 		company = companyService.saveOrUpdate(company);
 		session.setAttribute("loginEnterprise", company);
 		return "company/company_detail";
 	}
+	
+	@GetMapping("/enterprise/companydetail")
+	public String processShowDetailCompany(HttpSession session,Model m,Company company){
+		company = companyService.saveOrUpdate(company);
+		session.setAttribute("loginEnterprise", company);
+		return "company/company_detail";
+	}
+	
 	@GetMapping("/enterprise/company/showupdateinformation/{pk}")
 	public String showInformaionFromUpdate(@PathVariable("pk") Integer updateId,Model m){
 		Company companyupdate = companyService.getCompany(updateId).get();
