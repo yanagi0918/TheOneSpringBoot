@@ -293,7 +293,6 @@ $(function() {
 		let v7 = validateUsername()
 		let v8 = validateGender()
 		let v9 = validateAddress()
-		console.log(v2)
 		if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9) {
 			checkMemberForm = true;
 		}
