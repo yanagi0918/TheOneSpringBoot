@@ -57,12 +57,37 @@ $(function() {
 
 //一鍵輸入
 $(function() {
-	$('#MemberQuick').click(function() {
+	$('#memberA').click(function() {
 		$('#username').val('A123456789')
-		$('#password').val('123456')
+		$('#password').val('12345')
 	})
 	$('#Admin').click(function() {
 		$('#username').val('admin')
 		$('#password').val('12345')
 	})
+	$('#compA').click(function() {
+		$('#compid').val('87654321')
+		$('#compwd').val('Aabc123zzz')
+	})
+	$('#compB').click(function() {
+		$('#username').val('admin')
+		$('#password').val('12345')
+	})
+	//memeber signup 一鍵
+	$('#memberSignup').click(function() {
+		$('#username').val('A123456789')
+		$('#password').val('12345')
+		
+		
+		
+	})	
+	//company signup 一鍵
+		$('#companySignup').click(function() {
+		$('#username').val('A123456789')
+		$('#password').val('12345')
+		
+		
+		
+	})
+
 });
