@@ -14,19 +14,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,12 +45,12 @@ public class CourseUserController {
             model.addAttribute("CourseBean", findCourse.orElseThrow());
             return "course/customerDetail";
         } else if (courseCategory != null) {
-            List<CourseBean> courseList = courseService.findByCourseCategory(courseCategory);
+            List<CourseBean> courseList = courseService.findByCourseCategoryAndStatus(courseCategory,"已審核");
             model.addAttribute("courseCategory", courseCategory);
             model.addAttribute("courseList", courseList);
             return "course/allCustomerListByCategory";
         } else {
-            List<CourseBean> courseList = courseService.findAllCourses();
+            List<CourseBean> courseList = courseService.findAllCoursesByStatus("已審核");
             model.addAttribute("courseList", courseList);
             return "course/allCustomerList";
         }
