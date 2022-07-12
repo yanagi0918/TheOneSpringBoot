@@ -102,7 +102,18 @@ $(function() {
 		})
 
 	});
-
+	$('#intTime').change(function() {
+		let postStartDate = new Date($("#intTime").val());
+		if ($('#intTime').val() == "") {
+			$('#postStartError').text("請輸入刊登開始日期")
+			$('#intTime').attr("class","form-control is-invalid")
+		} else if(postStartDate > new Date()){
+			$('#intTimeError').text("面試日期不可設於今日之後")
+			$('#intTime').attr("class","form-control is-invalid")
+		} else {
+			$('#intTime').attr("class","form-control is-valid")
+		}
+	})
 
 	$('.btn-intvDelete').click(function() {
 		Swal.fire({
