@@ -85,6 +85,11 @@ $('#companyquicksignin').click(function() {
 	$('#compw').val('Aabc123zzz')
 })
 
+$('#companyquicksignin2').click(function() {
+	$('#compi').val('87654320')
+	$('#compw').val('Apach5200')
+})
+
 $('#companyquickinsert').click(function() {
 	$('#compwd').val('Az145145')
 	$('#pwdagain').val('Az145145')
