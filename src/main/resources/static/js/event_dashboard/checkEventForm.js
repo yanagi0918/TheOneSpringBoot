@@ -7,13 +7,13 @@ $(function() {
 		$('#compId').val('1234567A')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
 		$('#postStart').val('2022-08-20')
-		$('#postEnd').val('2022-08-15')
+		$('#postEnd').val('2022-06-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
 		$('#compId').val('11111111')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
-		$('#postStart').val('2022-08-15')
+		$('#postStart').val('2022-06-15')
 		$('#postEnd').val('2022-08-20')
 	})
 
@@ -83,9 +83,9 @@ $(function() {
 		if ($('#postStart').val() == "") {
 			$('#postStartError').text("請輸入刊登開始日期")
 			$('#postStart').attr("class","form-control is-invalid")
-		} else if(postStartDate < new Date()){
+		/*} else if(postStartDate < new Date()){
 			$('#postStartError').text("刊登開始日期不可設於今日之前")
-			$('#postStart').attr("class","form-control is-invalid")
+			$('#postStart').attr("class","form-control is-invalid")*/
 		} else {
 			$('#postStart').attr("class","form-control is-valid")
 		}
@@ -166,10 +166,10 @@ $(function() {
 			$('#postStartError').text("請輸入刊登開始日期")
 			$('#postStart').attr("class","form-control is-invalid")
 			checkEventForm = false;
-		} else if (postStartDate < new Date()) {
+		/*} else if (postStartDate < new Date()) {
 			$('#postStartError').text("刊登開始日期不可設於今日之前")
 			$('#postStart').attr("class","form-control is-invalid")
-			checkEventForm = false;
+			checkEventForm = false;*/
 		} else {
 			$('#postStart').attr("class","form-control is-valid")
 		}
@@ -189,24 +189,20 @@ $(function() {
 
 
 
-		let confirmStr = '';
-		let waitingtime = 800;
-		let text = "";
-		let title = "";
+		let confirmStr = '確認修改廣告?';
+		let text = '';
+		let title = '';
 		if ($('#btn-submit').val() == 0) {
 			confirmStr = '確認新增廣告?';
-			waitingtime = 800;
 			text = '';
 			title = '已完成!';
 		}
 		
 		if ($('#btn-submit').val() == 1) {
 			confirmStr = '確認修改廣告?';
-		    waitingtime = 800;
 		    text = '';
 		    title = '已完成!';
 		    if ($('#state').val()==1||$('#state').val()==2){
-				waitingtime = 3000;
 				text = "審核結果將寄送E-mail通知";
 		    	title = "審核結果通知寄送中";
 			}
@@ -228,9 +224,17 @@ $(function() {
 						icon: 'success',
 						title: title,
 						showConfirmButton: false,
-						timer: waitingtime
+						timer: 800
 					})
-					$('#form').submit();
+					$.ajax({
+                		url: '/dashboard/event/sendemail?id='+$('#eventId').val()+
+                											'&result='+$('#state').val()+
+                											'&remark='+$('#floatingTextarea').val(),
+                		type: 'GET'
+            		});
+					setTimeout(() => {
+						$('#form').submit();
+					}, 800)
 				}
 			})
 		} else {

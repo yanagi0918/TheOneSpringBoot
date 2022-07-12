@@ -47,9 +47,7 @@ public class EventUserController {
 	}
 	
 	@GetMapping("/event")
-	public String toCreatePage(HttpSession session, Model model) {
-		Company company = (Company)session.getAttribute("loginEnterprise");
-		model.addAttribute("company",company);
+	public String toCreatePage() {
 		return "event/event_application";
 	}
 	
@@ -78,11 +76,12 @@ public class EventUserController {
 		return "ok";
 	}
 	
+	/*
 	@GetMapping("/event/detail")
 	public String test() {
 		return "event/event_detail";
 	}
-	
+	*/
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {

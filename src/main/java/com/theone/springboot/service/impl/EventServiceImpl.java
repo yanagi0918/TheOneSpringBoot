@@ -74,6 +74,7 @@ public class EventServiceImpl implements EventService {
 		return eventDao.findByCompId(compId);
 	}
 
+	@CachePut(cacheNames = "events", key = "#pk")
 	@Override
 	public Event revokeEvent(Integer pk) {
 		Event event = eventDao.findById(pk).get();
