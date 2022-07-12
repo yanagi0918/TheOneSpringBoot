@@ -1,9 +1,13 @@
 package com.theone.springboot.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -24,6 +28,9 @@ public class Resume {
 	private String workExp;
 	private String skills;
 	private String userId;
+	
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="resumes")
+    private Set<Job> jobs;
 	
 	
 	
