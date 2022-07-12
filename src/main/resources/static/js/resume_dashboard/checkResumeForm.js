@@ -2,13 +2,13 @@
 $(function() {
 
 	$('#correctInput').click(function() {
-		$('#resume_name').val('for國貿人員')
+		$('#resumeName').val('for國貿人員')
 		$('#userId').val('N123456789')
 		$('#edu').val('大學')
 		$('#school').val('國立東華大學')
 		$('#dept').val('國際企業學系')
 		$('#autobiography').val('我是王曉明，個性熱情活潑...')
-		$('#work_exp').val('數據分析')
+		$('#workExp').val('數據分析')
 		$('#skills').val('多益825')
 	});
 
@@ -27,7 +27,7 @@ $(function() {
 
 
 	//event事件
-	$('#resume_name').keyup(function() {
+	$('#resumeName').keyup(function() {
 		validateResumename();
 	})
 
@@ -48,7 +48,7 @@ $(function() {
 		validateAutobiography();
 	})
 
-	$('#work_exp').keyup(function() {
+	$('#workExp').keyup(function() {
 		validateWorkexp();
 	})
 
@@ -57,11 +57,11 @@ $(function() {
 	})
 
 	function validateResumename() {
-		if ($('#resume_name').val() == "") {
-			$('#resume_name').attr("class", "form-control is-invalid")
+		if ($('#resumeName').val() == "") {
+			$('#resumeName').attr("class", "form-control is-invalid")
 			return false;
 		} else {
-			$('#resume_name').attr("class", "form-control is-valid")
+			$('#resumeName').attr("class", "form-control is-valid")
 			return true;
 		}
 	}
@@ -89,11 +89,11 @@ $(function() {
 
 
 	function validateDept() {
-		if ($('#school').val() == "") {
-			$('#school').attr("class", "form-control is-invalid")
+		if ($('#dept').val() == "") {
+			$('#dept').attr("class", "form-control is-invalid")
 			return false;
 		} else {
-			$('#school').attr("class", "form-control is-valid")
+			$('#dept').attr("class", "form-control is-valid")
 			return true;
 		}
 	}
@@ -110,11 +110,11 @@ $(function() {
 
 
 	function validateWorkexp() {
-		if ($('#work_exp').val() == "") {
-			$('#work_exp').attr("class", "form-control is-invalid")
+		if ($('#workExp').val() == "") {
+			$('#workExp').attr("class", "form-control is-invalid")
 			return false;
 		} else {
-			$('#work_exp').attr("class", "form-control is-valid")
+			$('#workExp').attr("class", "form-control is-valid")
 			return true;
 		}
 	}
