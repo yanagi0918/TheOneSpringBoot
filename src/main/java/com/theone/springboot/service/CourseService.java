@@ -19,6 +19,10 @@ public interface CourseService {
 	List<CourseBean> findByLecturer(String lecturer);
 
 	List<CourseBean> findAllCourses();
+
+	List<CourseBean> findAllCoursesByStatus(String status);
+
+	List<CourseBean> findByCourseCategoryAndStatus(String courseCategory,String status);
 	
 	Optional<CourseBean> findCourse(Integer pk);
 
