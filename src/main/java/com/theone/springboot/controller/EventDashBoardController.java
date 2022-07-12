@@ -110,11 +110,17 @@ public class EventDashBoardController {
 	@ResponseBody
 	@GetMapping("/event/chartdata")
 	public int[] getChartData() {
-		int[] chartdata = new int[4];
-		chartdata[0] = eventService.countByState(0);
-		chartdata[1] = eventService.countByState(1);
-		chartdata[2] = eventService.countByState(2);
-		chartdata[3] = eventService.countByState(3);
+		int[] chartdata = {0,0,0,0};
+		List<Event> allEvents = eventService.getAllEvents();
+		for (Event event : allEvents) {
+			switch (event.getState()) {
+			case 0: chartdata[0]++; break;
+			case 1: chartdata[1]++; break;
+			case 2: chartdata[2]++; break;
+			case 3: chartdata[3]++; break;
+			default: break;
+			}
+		}
 		return chartdata;
 	}
 	
