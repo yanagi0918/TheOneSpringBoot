@@ -68,6 +68,7 @@
                                     <input class="form-control valid" name="userId" id="userId" type="text"
                                         onfocus="this.placeholder = '輸入會員帳號'" onblur="this.placeholder = '輸入會員帳號'"
                                         placeholder="輸入會員帳號" required>
+                                          <div class="invalid-feedback" id="userIdError" ></div>
                                 </div>
                             </div>
 
@@ -92,6 +93,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control valid" name="jobName" id="jobName"
                                         size="10" placeholder="輸入工作內容" required>
+                                         <div class="invalid-feedback" id="jobNameError" ></div>
                                 </div>
                             </div>
                             <div class="col-6 " >
@@ -172,6 +174,7 @@
                                         onfocus="this.placeholder = '備註最多200字'"
                                         onblur="this.placeholder = 'Enter Message'" placeholder=" 備註最多200字"
                                         maxlength="200" required></textarea>
+                                         <div class="invalid-feedback" id="qAError" ></div>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -181,6 +184,7 @@
                                         onfocus="this.placeholder = '備註最多1000字'"
                                         onblur="this.placeholder = 'Enter Message'" placeholder=" 備註最多1000字"
                                         maxlength="1000" required></textarea>
+                                         <div class="invalid-feedback" id="shareError" ></div>
                                 </div>
                             </div>
 
@@ -192,7 +196,7 @@
 
                                 <div class="button-group-area col-lg-8 col-md-8">
 
-                                   <button type="submit" class="genric-btn primary mr-10" id="intv_submit" name="intv_submit" value="confirm">新增</button>
+                                   <button type="button" class="genric-btn primary mr-10" id="intv_submit" name="intv_submit" value="confirm">新增</button>
 								<button type="reset" class="genric-btn success mr-10" >還原</button>
 								<button type="button" class="genric-btn primary mr-10" onclick="window.location.href='intvlist'; return false;">返回</button>
 

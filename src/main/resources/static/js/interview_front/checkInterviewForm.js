@@ -1,19 +1,12 @@
 
 //錯誤輸入
 $('#InterviewwrongInput').click(function () {
-     $('#userId').val('123456789')
     $('#intTime').val('2022-12-30')
-    $('#compName').val('多拉A夢共和國')
-    $('#jobName').val('竹蜻蜓修復員')
-    $('#offer').val('否')
-    $('#test').val('有')
-    $('#qA').val('出了一張A4紙上面是個綜合試題國文/英文/數學/邏輯'); 
-    $('#share').val('現場 一入廠先去警衛室進行換證 被小夫帶至會議室進行人事資料表填寫考智力測驗，不說我還以為在寫什麼綜合試題 國文/英文/數學/邏輯 邏輯爆幹難 我嚴重懷疑是我智商不足 接著就面主管，看起來好像胖虎,之後就自我介紹完後進行簡報分享' 
- )
+   
 })
 //正確輸入
 $('#InterviewcorrectInput').click(function () {
-    $('#userId').val('A123456789')
+    $('#userId').val('benjamin666')
     $('#intTime').val('2022-05-20')
     $('#compName').val('多拉A夢共和國')
     $('#jobName').val('竹蜻蜓修復員')
@@ -89,6 +82,7 @@ $(function() {
 
 	function validateuserId() {
 		if ($('#userId').val() == "") {
+			$('#userIdError').text("請輸下您的帳號吧")
 			$('#userId').attr("class", "form-control is-invalid")
 			return false;
 		} else {
@@ -98,13 +92,16 @@ $(function() {
 	}
 
 	function validateintTime() {
-		let intTime = new Date($("#intTime").val());
-		let nowDate = new Date();
+		let postDate = new Date($("#intTime").val());
+        let nowDate = new Date();
 		if ($('#intTime').val() == "") {
-			
 			$('#intTime').attr("class", "form-control is-invalid")
 			return false;
-		}  else {
+		} else if (postDate > nowDate) {
+            $('#intTimeError').text("面試日期不可設定於今日之後!!")
+            $('#intTime').attr("class", "form-control is-invalid")
+            return false;
+        } else {
 			$('#intTime').attr("class", "form-control is-valid")
 			return true;
 		}
@@ -132,6 +129,7 @@ $(function() {
 	}
 	function validateqA() {
 		if ($('#qA').val() == "") {
+			$('#qAError').text("寫些東西吧")
 			$('#qA').attr("class", "form-control is-invalid")
 			return false;
 		} else {
@@ -141,6 +139,7 @@ $(function() {
 	}
 	function validateshare() {
 		if ($('#share').val() == "") {
+			$('#shareError').text("分享些資訊吧")
 			$('#share').attr("class", "form-control is-invalid")
 			return false;
 		} else {
@@ -173,7 +172,7 @@ $(function() {
 					timer: 1500
 				})
 				setTimeout(() => {
-					$('#idform').submit();
+					$('#form').submit();
 				}, 1500)
 			} else {
 			}
