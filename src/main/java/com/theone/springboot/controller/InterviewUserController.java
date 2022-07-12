@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Interview;
+import com.theone.springboot.service.EventService;
 import com.theone.springboot.service.InterviewService;
 
 
@@ -34,19 +36,29 @@ import com.theone.springboot.service.InterviewService;
 public class InterviewUserController {
 	
 	@Autowired
-	private InterviewService interviewService;
-
+	InterviewService interviewService;
+	@Autowired
+	EventService eventService;
 	
 	@GetMapping("/intvlist")//目錄
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
-
+		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+		model.addAttribute("events",events);
 		return "interview/intvlist";
 	}
+//	@GetMapping("/intvaside")//aside目錄
+//	public String getTointvaside(Model model) {
+//		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+//		model.addAttribute("events",events);
+//		return "interview/intvaside";
+//	}
 
 	@GetMapping("/intv")//進入新增頁面
-	public String toCreate() {
+	public String toCreate(Model model) {
+		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+		model.addAttribute("events",events);
 		return "interview/intvedit";
 	}
 	
@@ -66,10 +78,12 @@ public class InterviewUserController {
 		return "redirect:/intvlist";
 	}
 
-	@GetMapping("/intv/{id}")
+	@GetMapping("/intv/{id}")//進入修改頁面
 	public String toUpdate(@PathVariable Integer id, Model model) {
 		Interview intv = interviewService.getInterview(id).get();
 		model.addAttribute("intvs", intv);
+		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+		model.addAttribute("events",events);
 		return "interview/intvupdate";
 
 	}
@@ -83,6 +97,8 @@ public class InterviewUserController {
 	public String toShow(@PathVariable Integer id, Model model) {
 		Interview intv = interviewService.getInterview(id).get();
 		model.addAttribute("intvs", intv);
+		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+		model.addAttribute("events",events);
 		return "interview/intvshow";
 		
 	}
