@@ -1,11 +1,15 @@
 package com.theone.springboot.entity;
 import java.io.*;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @SuppressWarnings("serial")
@@ -26,6 +30,17 @@ public class Job implements Serializable{
 	@ManyToOne
 	@JoinColumn
 	private Company company;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	        name="T_JOB_RESUME",
+	        joinColumns={@JoinColumn(name="RESUME_FK")},
+	        inverseJoinColumns={@JoinColumn(name="JOB_FK")}
+	    )
+	    private Set<Resume> resumes;
+	
+	
+	
 	
 	public Integer getCompId() {
 		return compId;
