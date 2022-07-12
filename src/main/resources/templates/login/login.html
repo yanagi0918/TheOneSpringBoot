@@ -21,6 +21,11 @@
 	href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
 	color="#111" />
 <link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet">
+<style>
+.error{
+color:red;
+}
+</style>
 </head>
 <body>
 	<!-- welcome card -->
@@ -178,11 +183,11 @@
 									<form>
 										<div class="form-group">
 											<input th:name="username" class="form-control" type="text"
-												placeholder="Tax ID Number" required="required" id="compid"/>
+												placeholder="Tax ID Number" required="required" id="compi"/>
 										</div>
 										<div class="form-group">
 											<input th:name="password" class="form-control"
-												type="password" placeholder="Password" required="required" id="compwd"/>
+												type="password" placeholder="Password" required="required" id="compw"/>
 										</div>
 										<p>
 											<a>Forgot your password?</a>

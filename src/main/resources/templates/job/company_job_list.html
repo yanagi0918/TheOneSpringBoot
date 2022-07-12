@@ -24,7 +24,8 @@
 		<link rel="stylesheet" th:href="@{/assets/css/style.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/imgUpload.css}">
-
+ 		<!-- datatable的CSS -->
+   		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <style>
         .box {
             width: 500px;
@@ -142,54 +143,80 @@
                         <!-- Job Category Listing End -->
                     </div>
                     <!-- Right content -->
-                    <div class="col-xl-9 col-lg-9 col-md-8">
+<!--                     <div class="col-xl-9 col-lg-9 col-md-8"> -->
                         <!-- Featured_job_start -->
-                        <div th:each="job:${jobList}">
 							<section class="featured-job-area">
-								<div class="container">
-									<div class="single-job-items mb-30">
-										<div class="job-items">
-											<div class="company-img">
-												<img class="imgsize"
-													th:src="@{/assets/img/job/wewantyou.png}" alt="">
-											</div>
-											<div class="job-tittle job-tittle2">
-													<h4 th:text="${job.title}"></h4>
-												<ul>
+							<div class="table-responsive">
+						<table id="lee" class="table align-middle table-bordered table-hover mb-0">
+							<thead>
+								<tr class="text-dark">
+									<th scope="col">職缺名稱</th>
+									<th scope="col">職缺性質</th>
+									<th scope="col">需求人數</th>
+									<th scope="col">每月薪資</th>
+									<th scope="col">工作性質</th>
+									<th scope="col">工作內容</th>
+									<th scope="col">動作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="job:${jobList}">
+									<td th:text="${job.title}"></td>
+									<td th:text="${job.jobdescription}"></td>
+									<td th:text="${job.required_number}"></td>
+									<td th:text="${job.salary}"></td>
+									<td th:text="${job.jobdescription}"></td>
+									<td th:text="${job.description}"></td>
+									<td>
+<!-- 										<a class="btn btn-outline-secondary m-0 " th:href="@{jobdeatail/}+${jobs.job_id}">查看</a> -->
+										<a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a>
+										<a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+<!-- 								<div class="container"> -->
+<!-- 									<div class="single-job-items mb-30"> -->
+<!-- 										<div class="job-items"> -->
+<!-- 											<div class="company-img"> -->
+<!-- 												<img class="imgsize" -->
+<!-- 													th:src="@{/assets/img/job/wewantyou.png}" alt=""> -->
+<!-- 											</div> -->
+<!-- 											<div class="job-tittle job-tittle2"> -->
+<!-- 													<h4 th:text="${job.title}"></h4> -->
+<!-- 												<ul> -->
 													
-													<li>工作性質:<span th:text="${job.jobdescription}"></span></li>
+<!-- 													<li>工作性質:<span th:text="${job.jobdescription}"></span></li> -->
 													
-													<li>徵才條件:<span th:text="${job.qualification}"></span></li>
+<!-- 													<li>徵才條件:<span th:text="${job.qualification}"></span></li> -->
 
 
 
-												</ul>
-												<ul>
-													<li class="box" th:text="${job.description}"></li>
-												</ul>
-												<ul>
-													<li>薪資:<span th:text="${job.salary}"></span></li>
-												</ul>
-											</div>
-										</div>
-                                    <div class="items-link items-link2 f-right">
-                                        <a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a>
-                                        <a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a>
-                                    </div>
-									</div>
-								</div>
+<!-- 												</ul> -->
+<!-- 												<ul> -->
+<!-- 													<li class="box" th:text="${job.description}"></li> -->
+<!-- 												</ul> -->
+<!-- 												<ul> -->
+<!-- 													<li>薪資:<span th:text="${job.salary}"></span></li> -->
+<!-- 												</ul> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!--                                     <div class="items-link items-link2 f-right"> -->
+<!--                                         <a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a> -->
+<!--                                         <a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a> -->
+<!--                                     </div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 							</section>
 						</div>
                         <div class="header-btn d-none f-right d-lg-block">
                             <a th:href="@{/enterprise/job/showForm}" class="btn head-btn2">新增職缺</a>
                         </div>
-                            </div>
+<!--                             </div> -->
                         <!-- Featured_job_end -->
-                        </section>
                     </div>
                 </div>
-            </div>
-        </div>
         <!-- Job List Area End -->
         <!--Pagination Start  -->
         <div class="pagination-area pb-115 text-center">
@@ -319,7 +346,8 @@
         
 		<!-- my js、jquery -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script th:src="@{/js/job_dashboard/checkJobForm.js}" src="js/job_dashboard/checkJobForm.js"></script>
+        <script th:src="@{/js/job_dashboard/checkJobForm.js}"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> 
 	<script>
 	function del(id) {
 		Swal.fire({
