@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
@@ -36,17 +36,41 @@ public class JobController {
 	}
 	
 	
-	@GetMapping("/enterprise/job/list")
-	private String listJobs(Model m){
-		m.addAttribute("companyList",companyService.getAllCompanies());
-		List<Job> jobs = jobService.getAllJobs();
-		m.addAttribute("jobs", jobs);
+	
+	
+	
+	
+	
+	
+	@GetMapping("/job/choicejoblist")
+	private String pickChoiceListJobs(@RequestParam(required = false) String jobdescription,
+            						  Model m,Job job) {
+		if (jobdescription != null) {
+		List<Job> jobs = jobService.findByJobdescription(jobdescription);
+		m.addAttribute("jobdescription",jobdescription);
+		m.addAttribute("jobs",jobs);
+		
+	}
 		return "job/job_list";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/job/list")
 	private String allCanSeeListJobs(Model m){
-		m.addAttribute("companyList",companyService.getAllCompanies());
 		List<Job> jobs = jobService.getAllJobs();
 		m.addAttribute("jobs", jobs);
 		return "job/job_list";

@@ -17,8 +17,6 @@ public interface JobService {
 
 	void delete(Integer pk);
 
-	List<Job> getByJobdescription(String jobdescription);
-
 	List<Job> getBySalary(String salary);
 
 	List<Job> getByJobdescriptionAndSalary(String jobdescription, String salary);
@@ -28,5 +26,7 @@ public interface JobService {
 	List<Job> findByCompany(Company company);
 
 	Job saveOrUpdate2(Job job);
+
+	List<Job> findByJobdescription(String jobdescription);
 
 }

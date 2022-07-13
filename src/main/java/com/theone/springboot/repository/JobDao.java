@@ -9,7 +9,7 @@ import com.theone.springboot.entity.Job;
 
 public interface JobDao extends JpaRepository<Job, Integer>{
 
-	List<Job> getByJobdescription(String jobdescription);
+	List<Job> findByJobdescription(String jobdescription);
 	
 	List<Job> getBySalary(String salary);
 	
