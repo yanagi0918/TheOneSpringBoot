@@ -52,7 +52,7 @@
                                                     <li><a th:href="@{/comments}"><span style="font-size: large">職場甘苦談</span></a></li>
                                                 </ul>
                                             </li>
-                                            <li th:if="${session.loginEnterprise!=null}"><a href=""><span style="font-size: large">企業中心</span></a>
+                                            <li th:if="${session.loginEnterprise!=null}"><a th:href="@{/enterprise/companydetail}"><span style="font-size: large">企業中心</span></a>
                                                 <ul class="submenu">
                                                     <li><a th:href="@{/enterprise/job/companylist}"><span style="font-size: large">職缺管理</span></a></li>
                                                     <li><a th:href="@{/enterprise/events}"><span style="font-size: large">廣告管理</span></a></li>
@@ -73,7 +73,7 @@
                                     <a th:href="@{/login}" class="btn head-btn2">登入/註冊</a>
                                 </div>
                                 <div th:if="${session.loginEnterprise!=null}" class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginEnterprise.compid}">帳號</a>
+                                    <a th:href="@{/enterprise/companydetail}" class="genric-btn default e-large" th:text="${'Hi !  '+session.loginEnterprise.compid}">帳號</a>
                                     <a th:href="@{/logout}" class="btn head-btn2">登出</a>
                                 </div>
                                 <div th:if="${session.loginMember!=null}" class="header-btn d-none f-right d-lg-block">
