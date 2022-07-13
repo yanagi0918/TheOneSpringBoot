@@ -50,6 +50,9 @@
         textarea {
             resize: none;
         }
+        .error{
+        	color: red;
+        }
     </style>
 
 </head>
@@ -63,7 +66,6 @@
 		<div th:replace="~{common/frontpage::header}"></div>
         <!-- Header End -->
     </header>
-    <main>
 
         <!-- Hero Area Start-->
         <div class="slider-area ">
@@ -86,7 +88,7 @@
 
         <div class="job-listing-area pt-120 pb-120">
             <div class="container">
-                <form th:action="@{/enterprise/companydetail}" method="post"
+                <form th:action="@{/enterprise/company}" method="post"
 							enctype="multipart/form-data"
 							onsubmit="return checkCompanyForm()" id="companycreateform">
 							<div class="row mb-3">

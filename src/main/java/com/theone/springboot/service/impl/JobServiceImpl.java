@@ -56,8 +56,8 @@ public class JobServiceImpl implements JobService{
 		jobDao.deleteById(pk);
 	}
 	@Override
-	public List<Job> getByJobdescription(String jobdescription) {
-		return jobDao.getByJobdescription(jobdescription);
+	public List<Job> findByJobdescription(String jobdescription) {
+		return jobDao.findByJobdescription(jobdescription);
 	}
 	@Override
 	public List<Job> getBySalary(String salary) {
@@ -74,6 +74,10 @@ public class JobServiceImpl implements JobService{
 	@Override
 	public List<Job> findByCompany(Company company) {
 		return jobDao.findByCompany(company);
+	}
+	@Override
+	public List<Job> findByTitleContaining(String title) {
+		return jobDao.findByTitleContaining(title);
 	}
 
 

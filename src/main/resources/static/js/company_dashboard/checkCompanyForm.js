@@ -87,7 +87,7 @@ $('#companyquicksignin').click(function() {
 
 $('#companyquicksignin2').click(function() {
 	$('#compi').val('87654320')
-	$('#compw').val('Apach5200')
+	$('#compw').val('Cloud127')
 })
 
 $('#companyquickinsert').click(function() {
