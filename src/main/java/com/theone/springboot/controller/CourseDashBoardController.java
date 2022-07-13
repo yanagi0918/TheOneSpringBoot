@@ -74,7 +74,6 @@ public class CourseDashBoardController {
         Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
         model.addAttribute("CourseBean", findCourse.orElseThrow());
         return "course_dashboard/courseDetail";
-
     }
 
     @GetMapping("/toCreatePage")
