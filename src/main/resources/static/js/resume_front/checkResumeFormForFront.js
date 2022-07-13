@@ -12,13 +12,24 @@ $(function() {
 		$('#skills').val('多益825')
 	});
 
-//	$('.btn-resumeUpdate').click(function() {
-//		location.href = `./ResumeServlet?UpdateId=${$(this).val()}`;
-//	})
-//
-//	$('#btn-toCreate').click(function() {
-//		location.href = "/dashboard/resume";
-//	})
+	$('#updateInput').click(function() {
+		$('#resumeName').val('java工程師')
+		//$('#userId').val('N123456789')
+		$('#edu').val('研究所')
+		$('#school').val('國立台灣大學')
+		$('#dept').val('資訊管理學系')
+		$('#autobiography').val('我是王曉明，個性熱情活潑...')
+		$('#workExp').val('Java開發3年經驗')
+		$('#skills').val('Java認證')
+	});
+
+	//	$('.btn-resumeUpdate').click(function() {
+	//		location.href = `./ResumeServlet?UpdateId=${$(this).val()}`;
+	//	})
+	//
+	//	$('#btn-toCreate').click(function() {
+	//		location.href = "/dashboard/resume";
+	//	})
 
 	$('#btn-goBack').click(function() {
 		location.href = "/user/resumes";
@@ -132,7 +143,7 @@ $(function() {
 		let checkResumeForm = false;
 		checkResumeForm = checkPackage();
 		if (checkResumeForm) {
-			
+
 			$('#form').submit();
 		}
 	})
@@ -152,7 +163,7 @@ $(function() {
 		}
 		return checkResumeForm;
 	}
-		
+
 
 
 

@@ -61,15 +61,17 @@ $(function() {
 		var userid = $('#userid').val();
 		var postData = { "userid": userid };
 		let result = false;
-
+		console.log('這邊有沒有?')
+		
 		$.ajax({
 			type: "post",
 			url: "/user/members/checkID",
 			dataType: "json",
 			contentType: "application/json;charset=utf-8",
 			data: JSON.stringify(postData),
-			async: false,
+			async: true,
 			success: function(data) {
+			console.log('有進來function')
 				if (data != null) {
 					console.log(data)
 					$('#idError').text('帳號不可重複 !')
@@ -80,6 +82,7 @@ $(function() {
 				}
 			}
 		})
+		
 		console.log('checkID'+result)
 		return result;
 	}
@@ -96,11 +99,13 @@ $(function() {
 
 
 	function validateUsername() {
-		if ($('#username').val() == "") {
-			$('#username').attr("class", "form-control is-invalid")
+		if ($('#userName').val() == "") {
+			console.log('123沒值')
+			$('#userName').attr("class", "form-control is-invalid")
 			return false;
 		} else {
-			$('#username').attr("class", "form-control is-valid")
+			$('#userName').attr("class", "form-control is-valid")
+			//console.log($('#userName').val())
 			return true;
 		}
 	}
@@ -160,12 +165,12 @@ $(function() {
 
 		let checkMemberForm = false;
 		
-		checkMemberForm = checkPackage();
+		checkMemberForm = checkPackage() && checkID();
 //		console.log(checkPackage())
 //		console.log(checkID())
 //		console.log(checkMemberForm)
 		if (checkMemberForm) {
-			$('#form').submit();
+			$('#form2').submit();
 		}
 	});
 
@@ -180,6 +185,11 @@ $(function() {
 		let v3 = validateEmail()
 		let v4 = validatePwd()
 		let v5 = validateUsername()
+//		console.log(v1)
+//		console.log(v2)
+//		console.log(v3)
+//		console.log(v4)
+//		console.log(v5)
 		if (v1 && v2 && v3 && v4 && v5) {
 			checkMemberForm = true;
 		}

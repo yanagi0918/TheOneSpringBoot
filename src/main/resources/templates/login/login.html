@@ -68,11 +68,11 @@
 									<form>
 										<div class="form-group">
 											<input th:name="username" class="form-control" id="username"
-												type="text" placeholder="身分證字號(帳號)" required="required" />
+												type="text" placeholder="身分證字號(帳號)" required="required" maxlength="10"/>
 										</div>
 										<div class="form-group">
 											<input th:name="password" id="password" class="form-control"
-												type="password" placeholder="密碼" required="required" />
+												type="password" placeholder="密碼" required="required" maxlength="15"/>
 										</div>
 										<p>
 											<a>忘記密碼?</a>
@@ -104,20 +104,21 @@
 							註冊 <span class="underline"></span>
 						</button>
 						<form class="form form-signup shadow card-body"
-							th:action="@{/signup}" th:method="post">
+							th:action="@{/signup}" th:method="post" id="form2">
 							<fieldset>
 								<div class="input-block card-body">
 									<h2 class="card-title">註冊帳號</h2>
 								</div>
 								<div>
 									<div class="form-group">
-									<input class="form-control" type="text" placeholder="姓名"  name="username" id="username" required="required" /> 
+									<input class="form-control" type="text" placeholder="姓名"  name="username" id="userName" required="required" maxlength="10"/> 
 									<input class="form-control" type="hidden" name="idNumber" />
 
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="text"
-											placeholder="身分證字號(帳號)" id="userid" name="userid" required="required" />
+											placeholder="身分證字號(帳號)" id="userid" name="userid" required="required" maxlength="10"/>
+											<div class="invalid-feedback" id="idError">請輸入身分證!!</div>
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="email" placeholder="Email"
@@ -125,7 +126,7 @@
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="password" placeholder="密碼"
-											id="pwd" name="pwd"  required="required" />
+											id="pwd" name="pwd"  required="required" maxlength="15"/>
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="date" placeholder="生日"
@@ -136,7 +137,7 @@
 											id="memberSignup"><i class="fa fa-user-plus"></i></a>
 									</div>
 									<div class="float-left">
-										<button class="btn btn-lg my-0 w-50" type="submit">註冊</button>
+										<button class="btn btn-lg my-0 w-50" type="button" id="btn-submit">註冊</button>
 									</div>
 								</div>
 							</fieldset>
