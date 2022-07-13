@@ -18,4 +18,6 @@ public interface JobDao extends JpaRepository<Job, Integer>{
 	List<Job> findByCompId(Integer compId);
 	
 	List<Job> findByCompany(Company company);
+	
+	List<Job> findByTitleContaining(String title);
 }

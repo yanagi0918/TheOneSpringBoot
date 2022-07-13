@@ -26,6 +26,7 @@
 <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
 <link rel="stylesheet" th:href="@{/assets/css/imgUpload.css}">
 
+
 <style>
 .box {
 	width: 500px;
@@ -36,6 +37,7 @@
 	width: 40px;
 	height: 40px;
 }
+
 </style>
 </head>
 
@@ -55,7 +57,7 @@
 		<div class="slider-area ">
 			<div
 				class="single-slider section-overly slider-height2 d-flex align-items-center"
-				th:data-background="@{/assets/img/job/jobneedyou.jpg}">
+				th:data-background="@{/assets/img/gallery/cv_bg.jpg}">
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-12">
@@ -64,10 +66,26 @@
 							</div>
 						</div>
 					</div>
+					
+<!-- 					search Start-->
+						<div class="row mt-5">
+					<div class="col-xl-12">
+						<!-- form -->
+						<form th:action="@{/job/search}" class="search-box">
+							<div class="input-form ">
+								<input type="text" placeholder="職缺快速搜索"  name="title">
+							</div>
+							<button type="submit" class="genric-btn primary-border e-large">搜尋</button>
+						</form>
+					</div>
+				</div>
+<!-- 					search End-->				
+				
 				</div>
 			</div>
 		</div>
 		<!-- Hero Area End -->
+		
 		<!-- Job List Area Start -->
 		<div class="job-listing-area pt-120 pb-120">
 			<div class="container">
@@ -94,19 +112,36 @@
 							<div class="job-category-listing mb-50">
 								<!-- single one -->
 								<div class="single-listing">
+								<!-- select-Categories Start -->
 									<div class="small-section-tittle2">
 										<h4>職缺型態</h4>
 									</div>
+                        <a th:href="@{'/job/jobdescriptionchoicejoblist?jobdescription=全職'}"><button class="genric-btn e-large success-border" >全職</button></a>
+                        <a th:href="@{'/job/jobdescriptionchoicejoblist?jobdescription=兼職'}"><button class="genric-btn e-large success-border" >兼職</button></a>
+                        <a th:href="@{'/job/jobdescriptionchoicejoblist?jobdescription=工讀'}"><button class="genric-btn e-large success-border" >工讀</button></a>
+                        <a th:href="@{'/job/jobdescriptionchoicejoblist?jobdescription=其他'}"><button class="genric-btn e-large success-border" >其他</button></a>
 									<!-- select-Categories End -->
-                        <a th:href="@{'/job/choicejoblist?jobdescription=全職'}"><button class="genric-btn e-large success-border" >全職</button></a>
-                        <a th:href="@{'/job/choicejoblist?jobdescription=兼職'}"><button class="genric-btn e-large success-border" >兼職</button></a>
-                        <a th:href="@{'/job/choicejoblist?jobdescription=工讀'}"><button class="genric-btn e-large success-border" >工讀</button></a>
-                        <a th:href="@{'/job/choicejoblist?jobdescription=其他'}"><button class="genric-btn e-large success-border" >其他</button></a>
+                        			
+                        			
+                        		<!-- select-Salary Start-->
+                        			<div class="small-section-tittle2">
+										<h4>每月薪資</h4>
+									</div>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=面議'}"><button class="genric-btn e-large success-border" >面議</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=25001~30000'}"><button class="genric-btn e-large success-border" >25001~30000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=30001~35000'}"><button class="genric-btn e-large success-border" >30001~35000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=35001~40000'}"><button class="genric-btn e-large success-border" >35001~40000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=40001~45000'}"><button class="genric-btn e-large success-border" >40001~45000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=45001~50000'}"><button class="genric-btn e-large success-border" >45001~50000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=50001~55000'}"><button class="genric-btn e-large success-border" >50001~55000</button></a>
+                        <a th:href="@{'/job/salarychoicejoblist?salary=55000以上'}"><button class="genric-btn e-large success-border" >55000以上</button></a>
+                        
+									<!-- select-Salary End -->
 								</div>
-
+								
 							</div>
 					</div>
-					
+						
 					
 					
 						<!-- Job Category Listing End -->

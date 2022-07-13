@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,6 @@ import com.theone.springboot.entity.Job;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
 
-//@RequestMapping("/enterprise/job")
 @Controller	
 public class JobController {
 	@Autowired
@@ -36,14 +36,8 @@ public class JobController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	@GetMapping("/job/choicejoblist")
-	private String pickChoiceListJobs(@RequestParam(required = false) String jobdescription,
+	@GetMapping("/job/jobdescriptionchoicejoblist")
+	private String jobdescriptionChoiceListJobs(@RequestParam(required = false) String jobdescription,
             						  Model m,Job job) {
 		if (jobdescription != null) {
 		List<Job> jobs = jobService.findByJobdescription(jobdescription);
@@ -56,17 +50,26 @@ public class JobController {
 	
 	
 	
+	@GetMapping("/job/salarychoicejoblist")
+	private String salaryChoiceListJobs(@RequestParam(required = false) String salary,
+            						  Model m,Job job) {
+		if (salary != null) {
+		List<Job> jobs = jobService.getBySalary(salary);
+		m.addAttribute("salary",salary);
+		m.addAttribute("jobs",jobs);
+		
+	}
+		return "job/job_list";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/job/search")
+	private String jobSearch(String title,Model m) {
+		System.out.println("-------------------------------");
+		List<Job> jobs = jobService.findByTitleContaining(title);
+		m.addAttribute("jobs", jobs);
+		m.addAttribute("title",title);
+		return "job/job_list";
+	}
 	
 	
 	@GetMapping("/job/list")
@@ -78,8 +81,6 @@ public class JobController {
 	
 	@GetMapping("/enterprise/job/showForm")
 	private String showFormForAdd(HttpSession session,Model m){
-//		Company company = (Company)session.getAttribute("loginEnterprise");
-//		m.addAttribute("company",company);
 		return "job/job_create";
 	}
 	
@@ -91,7 +92,7 @@ public class JobController {
 		return "redirect:/enterprise/job/companylist";
 	}
 	
-	@GetMapping("/enterprise/job/jobdeatail/{pk}")
+	@GetMapping("/job/jobdeatail/{pk}")
 	public String processShowDetail(@PathVariable("pk") Integer detailId,Model m,Company company){
 		
 		Job jobdeatail = jobService.getJob(detailId).get();

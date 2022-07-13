@@ -28,5 +28,6 @@ public interface JobService {
 	Job saveOrUpdate2(Job job);
 
 	List<Job> findByJobdescription(String jobdescription);
-
+	
+	List<Job> findByTitleContaining(String title);
 }
