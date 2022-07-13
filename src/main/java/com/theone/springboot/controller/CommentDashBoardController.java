@@ -75,24 +75,27 @@ public class CommentDashBoardController {
 		return "comment_dashboard/commentdetail";
 	}
 
-	@RequestMapping("/comments/jobtypejson")
+	@GetMapping("/comments/jobtypejson")
 	@ResponseBody
 	public int[] getJobTypeJson() {
 		int[] jobtype = { 0, 0, 0, 0 };
+		System.out.println("OK");
 		List<Comment> allComments = commentService.findAll();
+		System.out.println(allComments);
 		for (Comment comment : allComments) {
-
-			if (comment.getJob_description() == "全職") {
+			System.out.println(comment);
+			
+			if (comment.getJob_description().equals("全職")) {
 				jobtype[0]++;
-			} else if (comment.getJob_description() == "兼職") {
+			} else if (comment.getJob_description().equals("兼職")) {
 				jobtype[1]++;
-			} else if (comment.getJob_description() == "工讀") {
+			} else if (comment.getJob_description().equals("工讀")) {
 				jobtype[2]++;
-			} else if (comment.getJob_description() == "實習") {
+			} else if (comment.getJob_description().equals("實習")) {
 				jobtype[3]++;
 			}
 		}
-
+		System.out.println("OK");
 		return jobtype;
 	}
 

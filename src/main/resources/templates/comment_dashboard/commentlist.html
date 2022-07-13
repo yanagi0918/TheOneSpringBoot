@@ -114,9 +114,14 @@
 			<!-- Navbar End -->
 
 			<!-- Content Start -->
-			<div>
-				<canvas id="jobTypeChart"></canvas>
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light text-center rounded p-4">
+					<div class="col-sm-12 col-xl-3">
+						<canvas id="jobTypeChart"></canvas>
+					</div>
+				</div>
 			</div>
+
 			<div class="container-fluid pt-4 px-4">
 				<div class="bg-light text-center rounded p-4">
 					<div class="d-flex align-items-center justify-content-between mb-4">
@@ -294,6 +299,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script th:src="@{/js/comment_dashboard/jquery.raty.js}"
 			src="js/comment_dashboard/jquery.raty.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
 		<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
 			src="js/comment_dashboard/checkCommentForm.js"></script>
 		<script th:src="@{/js/comment_dashboard/commentChart.js}"
