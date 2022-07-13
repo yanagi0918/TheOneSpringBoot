@@ -20,4 +20,13 @@ public interface OrderService {
 	
 	void saveOrder(String id,Member member);
 
+	Order findByOrderId (Integer orderId);
+	
+	List<Order> findByCourseBeanCourseName(String courseName);
+	
+	List<Order> findByCourseBeanCourseCategory(String courseCategory);
+	
+	List<Order> findByState(String State);
+	
+	List<Order> findByMember(Member member);
 }

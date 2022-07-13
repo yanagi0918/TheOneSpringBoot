@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board HTML-5 Template </title>
+    <title>The One</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -84,9 +84,19 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
-                                    <select name="productId" required id="productId">
-                                    <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseCategory}"></option>
+                                <form action="./orders" method="get" id="fromMax">
+                                    <select name="courseCategory" required id="courseCategory">
+<!--                                     <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseCategory}"></option> -->
+                                    	<option>全部</option>
+                                        <option>英文證照</option>
+                                        <option>日語證照</option>
+                                        <option>韓語證照</option>
+                                        <option>自我認知</option>
+                                        <option>求職技巧</option>
+                                        <option>生涯轉換與轉業</option>
+                                        <option>就業市場現況趨勢</option>
                                     </select>
+                                    </form>
                                 </div>
                                 <!--  Select job items End-->
                                 <!-- select-Categories start -->
@@ -195,7 +205,7 @@
                                 </div>
                                 <!-- Count of Job list End -->
                                 <!-- single-job-content -->
-                                <div th:each="order:${orders}" class="single-job-items mb-30 blog_area">
+                                <div th:each="order:${orders}" class="single-job-items mb-30 blog_area" id="orderlist">
                                     <div class="job-items">
                                         <div class="company-img">
                                             <a><img src="" alt="" th:text="${'訂單編號:'+order.orderId}"></a>
@@ -303,11 +313,14 @@
 		<script>
 		$("#productId").change(function() {
 			var option =$(this).find("option:selected");
-			$("#totalPrice").val(option.text().trim());
+			$("#courseCategory").val(option.text().trim());
+		});
+		$("#courseCategory").change(function() {
+			$("#fromMax").submit();
 		});
 		</script>
 		
-		<script>
+		<script>		
         function del(id) {
 		Swal.fire({
 			title: '確認是否刪除?',
@@ -340,6 +353,7 @@
 	    }
         
     </script>
+    
 </body>
 
 </html>
