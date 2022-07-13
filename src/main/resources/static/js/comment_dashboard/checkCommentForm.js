@@ -281,10 +281,10 @@ $(document).ready(function() {
 		columnDefs: [{
 			orderable: false,
 			targets: [5, 7]
-		},{
+		}, {
 			visible: false,
-			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14 ,15 ,16]
-			}
+			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+		}
 		],
 
 		//position of entire
@@ -295,7 +295,7 @@ $(document).ready(function() {
 			[10, 25, 50, -1],
 			[10, 25, 50, 'All'],
 		],
-		
+
 	});
 
 	//dynamicall column
@@ -315,22 +315,19 @@ $(document).ready(function() {
 
 
 	});
-//	$('input#all').on('change', function(e) {
-//		e.preventDefault();
-//		
-//		var column = table.column($(this).attr('data-column'));
-//		
-//		if ($(this).is(":checked")) {
-//			$('input.toggle-vis').prop('checked',true);
-//			for(var i = 0 , i < 18 ; i++){
-//				table.column(i).visible(true);
-//			};
-//		}else {
-//			$('input.toggle-vis').prop('checked',false);
-//			column.visible(false);
-//
-//		}
-//	});
 });
 
+//menu tab
+$(document).ready(function() {
+	//  $('div#txt_cont div:gt(0)').css('display', 'none');
+	$('div.txt_tab#graph:visible').hide();
+	$('#menu ul li a').click(function(event) {
+		event.preventDefault();
+		var id_tab = $(this).attr('href');
+		$('#menu ul li a').removeClass('hover_tab');
+		$(this).addClass('hover_tab');
+		$('div.txt_tab:visible').hide();
+		$(id_tab).show('slide');
+	});
+});
 
