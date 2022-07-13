@@ -65,9 +65,6 @@
 						<div align="center">
 							<h2>評論內容</h2>
 						</div>
-						<!-- 						<form -->
-						<!-- 		enctype="multipart/form-data"					th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentConfirm'" -->
-						<!-- 							method="post" id="form" th:modelAttribute="comment"> -->
 						<form th:action="@{/dashboard/CommentInsert}"
 							method="post" th:modelAttribute="comment" th:object="${comment}" id="form">
 							<div align="center">

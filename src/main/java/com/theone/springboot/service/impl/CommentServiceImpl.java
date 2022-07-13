@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Iterable<Comment> findAll() {
+	public List<Comment> findAll() {
 		return commentDao.findAll();
 	}
 

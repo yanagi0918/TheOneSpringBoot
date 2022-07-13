@@ -50,21 +50,18 @@
 	rel="stylesheet">
 <!-- 莊詠筑 -->
 <style>
-
-.multiselect { 
+.multiselect {
 	width: 200px;
-	text-align:left;
+	text-align: left;
 	z-index: 15;
- }
+}
 
 .selectBox {
 	position: relative;
-	
 }
 
 .selectBox select {
 	width: 100%;
-	
 }
 
 .overSelect {
@@ -73,33 +70,27 @@
 	right: 0;
 	top: 0;
 	bottom: 0;
-	
 }
 
 #checkboxes {
 	display: none;
- 	border: 1px #dadada solid;
- 	position: relative;
- 	z-index: 15;
-	
+	border: 1px #dadada solid;
+	position: relative;
+	z-index: 15;
 }
 
-.table{
+.table {
 	position: relative;
 	z-index: 10
-
 }
 
 #checkboxes label {
 	display: block;
 	background-color: white;
-	
 }
-
 
 #checkboxes label:hover {
 	background-color: #1e90ff;
-	
 }
 </style>
 
@@ -123,6 +114,9 @@
 			<!-- Navbar End -->
 
 			<!-- Content Start -->
+			<div>
+				<canvas id="jobTypeChart"></canvas>
+			</div>
 			<div class="container-fluid pt-4 px-4">
 				<div class="bg-light text-center rounded p-4">
 					<div class="d-flex align-items-center justify-content-between mb-4">
@@ -151,29 +145,50 @@
 									<div class="overSelect"></div>
 								</div>
 								<div id="checkboxes">
-<!-- 									<label for="all"> <input class="toggle-vis" type="checkbox" id="all" checked/>全選</label>  -->
-									<label for="share_id"> <input class="toggle-vis" type="checkbox" id="share_id" data-column="0" checked/>編號</label> 
-									<label for="create_time"> <input class="toggle-vis" type="checkbox" id="create_time" data-column="1"checked/>新增時間</label> 
-									<label for="userId"> <input class="toggle-vis" type="checkbox" id="userId" data-column="2" checked/>帳號</label>
-									<label for="ref_time"> <input class="toggle-vis" type="checkbox" id="ref_time" data-column="3" />參考時間</label>
-									<label for="comp_name"> <input class="toggle-vis" type="checkbox" id="comp_name" data-column="4" checked/>公司名稱</label>
-									<label for="comp_score"> <input class="toggle-vis" type="checkbox" id="comp_score" data-column="5"/>公司評分</label>
-									<label for="job_name"> <input class="toggle-vis" type="checkbox" id="job_name" data-column="6" checked/>職位</label>
-									<label for="job_score"> <input class="toggle-vis" type="checkbox" id="job_score" data-column="7"/>職位評分</label>
-									<label for="job_description"> <input class="toggle-vis" type="checkbox" id="job_description" data-column="8"/>職務型態</label>
-									<label for="std_hour"> <input class="toggle-vis" type="checkbox" id="std_hour" data-column="9"/>表定工時</label>
-									<label for="real_hour"> <input class="toggle-vis" type="checkbox" id="real_hour" data-column="10"/>實際工時</label>
-									<label for="over_freq"> <input class="toggle-vis" type="checkbox" id="over_freq" data-column="11"/>加班頻率</label>
-									<label for="seniority"> <input class="toggle-vis" type="checkbox" id="seniority" data-column="12"/>服務年資</label>
-									<label for="total_seniority"> <input class="toggle-vis" type="checkbox" id="total_seniority" data-column="13"/>總年資</label>
-									<label for="monthly_salary"> <input class="toggle-vis" type="checkbox" id="std_hour" data-column="14"/>月薪</label>
-									<label for="yearly_salary"> <input class="toggle-vis" type="checkbox" id="std_hour" data-column="15"/>年薪</label>
-									<label for="bonus_count"> <input class="toggle-vis" type="checkbox" id="bonus_count" data-column="16"/>獎金次數</label>
-									<label for="share"> <input class="toggle-vis" type="checkbox" id="share" data-column="17" checked/>心得分享</label>
+									<!-- 									<label for="all"> <input class="toggle-vis" type="checkbox" id="all" checked/>全選</label>  -->
+									<label for="share_id"> <input class="toggle-vis"
+										type="checkbox" id="share_id" data-column="0" checked />編號
+									</label> <label for="create_time"> <input class="toggle-vis"
+										type="checkbox" id="create_time" data-column="1" checked />新增時間
+									</label> <label for="userId"> <input class="toggle-vis"
+										type="checkbox" id="userId" data-column="2" checked />帳號
+									</label> <label for="ref_time"> <input class="toggle-vis"
+										type="checkbox" id="ref_time" data-column="3" />參考時間
+									</label> <label for="comp_name"> <input class="toggle-vis"
+										type="checkbox" id="comp_name" data-column="4" checked />公司名稱
+									</label> <label for="comp_score"> <input class="toggle-vis"
+										type="checkbox" id="comp_score" data-column="5" />公司評分
+									</label> <label for="job_name"> <input class="toggle-vis"
+										type="checkbox" id="job_name" data-column="6" checked />職位
+									</label> <label for="job_score"> <input class="toggle-vis"
+										type="checkbox" id="job_score" data-column="7" />職位評分
+									</label> <label for="job_description"> <input
+										class="toggle-vis" type="checkbox" id="job_description"
+										data-column="8" />職務型態
+									</label> <label for="std_hour"> <input class="toggle-vis"
+										type="checkbox" id="std_hour" data-column="9" />表定工時
+									</label> <label for="real_hour"> <input class="toggle-vis"
+										type="checkbox" id="real_hour" data-column="10" />實際工時
+									</label> <label for="over_freq"> <input class="toggle-vis"
+										type="checkbox" id="over_freq" data-column="11" />加班頻率
+									</label> <label for="seniority"> <input class="toggle-vis"
+										type="checkbox" id="seniority" data-column="12" />服務年資
+									</label> <label for="total_seniority"> <input
+										class="toggle-vis" type="checkbox" id="total_seniority"
+										data-column="13" />總年資
+									</label> <label for="monthly_salary"> <input class="toggle-vis"
+										type="checkbox" id="std_hour" data-column="14" />月薪
+									</label> <label for="yearly_salary"> <input class="toggle-vis"
+										type="checkbox" id="std_hour" data-column="15" />年薪
+									</label> <label for="bonus_count"> <input class="toggle-vis"
+										type="checkbox" id="bonus_count" data-column="16" />獎金次數
+									</label> <label for="share"> <input class="toggle-vis"
+										type="checkbox" id="share" data-column="17" checked />心得分享
+									</label>
 								</div>
 							</div>
 						</form>
-						
+
 					</div>
 					<div class="container">
 						<table
@@ -203,7 +218,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="comment : ${listComment} ">
+								<tr th:each="comment : ${listComment}" id="commentlist">
 									<td th:text="${comment.share_id}"></td>
 									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
 									<td th:text="${comment.userId}"></td>
@@ -281,6 +296,8 @@
 			src="js/comment_dashboard/jquery.raty.js"></script>
 		<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
 			src="js/comment_dashboard/checkCommentForm.js"></script>
+		<script th:src="@{/js/comment_dashboard/commentChart.js}"
+			src="js/comment_dashboard/commentChart.js"></script>
 
 		<!-- Template Javascript -->
 		<script th:src="@{/js/main.js}" src="js/main.js"></script>

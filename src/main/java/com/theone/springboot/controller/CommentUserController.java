@@ -90,12 +90,6 @@ public class CommentUserController {
 		model.addAttribute("comment", comment);
 		return "comment/commentdetail";
 	}
-//
-//	// 確認新增評論的資料
-//	@RequestMapping("/CommentConfirm")
-//	public String showConfirmForm(@ModelAttribute("comment") Comment comment) {
-//		return "comment/commentdetail";
-//	}
 	
 	//討論區分頁
 	@RequestMapping("/forum")

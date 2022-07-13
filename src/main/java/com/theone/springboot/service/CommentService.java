@@ -11,12 +11,12 @@ public interface CommentService {
 
 	boolean existsById(Integer pk);
 
-	Iterable<Comment> findAll();
+	List<Comment> findAll();
 
 	Optional<Comment> findById(Integer pk);
 
 	void deleteById(Integer pk);
 	
 	List<Comment> findByUserId(String userId);
-
+	
 }
