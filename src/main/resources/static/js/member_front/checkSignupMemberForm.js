@@ -65,11 +65,11 @@ $(function() {
 		
 		$.ajax({
 			type: "post",
-			url: "/user/members/checkID",
+			url: "/members/checkID",
 			dataType: "json",
 			contentType: "application/json;charset=utf-8",
 			data: JSON.stringify(postData),
-			async: true,
+			async: false,
 			success: function(data) {
 			console.log('有進來function')
 				if (data != null) {
