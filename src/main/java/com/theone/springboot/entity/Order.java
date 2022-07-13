@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -33,6 +36,11 @@ public class Order {
     @JoinColumn(name="Order_Course_ID")
 	private CourseBean courseBean;
 	
+	@ManyToOne
+    @JoinColumn(name="Order_Member_ID")
+    @JsonBackReference
+    private Member member;
+	
 	public Order() {	}
 	
 	public Order(Integer orderId, String userId, String productId, Integer totalPrice, Date orderDate, String state) {
@@ -45,6 +53,15 @@ public class Order {
 		this.state = state;
 	}
 
+	
+	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 	public CourseBean getCourseBean() {
 		return courseBean;

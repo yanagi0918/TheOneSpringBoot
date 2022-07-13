@@ -12,6 +12,7 @@ import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 import com.theone.springboot.repository.CourseDao;
+import com.theone.springboot.repository.MemberDao;
 import com.theone.springboot.repository.OrderDao;
 import com.theone.springboot.service.OrderService;
 
@@ -24,6 +25,9 @@ public class OrderServiceImpl  implements OrderService{
 	
 	@Autowired
 	CourseDao courseDao;
+	
+	@Autowired
+	MemberDao memberDao;
 	
 	@Override
 	public boolean isDup(Integer pk) {
@@ -57,6 +61,7 @@ public class OrderServiceImpl  implements OrderService{
 		CourseBean course = courseDao.findById(Integer.parseInt(courseid)).get();
 		Order order = new Order();
 		order.setCourseBean(course);
+		order.setMember(member);
 		order.setUserId(member.getUserid());
 		order.setTotalPrice(course.getPrice());
 		order.setProductId(course.getCourseName());
@@ -67,5 +72,32 @@ public class OrderServiceImpl  implements OrderService{
 		System.err.println(order.getCourseBean().getCoursePicUrl());
 		
 	}
+
+	@Override
+	public Order findByOrderId(Integer orderId) {
+		return orderDao.findById(orderId).get();
+	}
+
+	@Override
+	public List<Order> findByCourseBeanCourseName(String courseName) {
+		return orderDao.findByCourseBeanCourseName(courseName);
+	}
+
+	@Override
+	public List<Order> findByCourseBeanCourseCategory(String courseCategory) {
+		return orderDao.findByCourseBeanCourseCategory(courseCategory);
+	}
+
+	@Override
+	public List<Order> findByState(String State) {
+		return orderDao.findByState(State);
+	}
+
+	@Override
+	public List<Order> findByMember(Member member) {
+		return orderDao.getByMember(member);
+	}
+
+	
 	
 }
