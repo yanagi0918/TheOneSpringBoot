@@ -52,8 +52,7 @@
 <style>
 .multiselect {
 	width: 200px;
-	text-align: left;
-	z-index: 15;
+	text-align: left
 }
 
 .selectBox {
@@ -76,12 +75,10 @@
 	display: none;
 	border: 1px #dadada solid;
 	position: relative;
-	z-index: 15;
 }
 
 .table {
-	position: relative;
-	z-index: 10
+	position: relative
 }
 
 #checkboxes label {
@@ -91,6 +88,70 @@
 
 #checkboxes label:hover {
 	background-color: #1e90ff;
+}
+
+/*  menu tab */
+.pt-34 {
+	padding-top: 33px;
+}
+
+#menu {
+	float: left;
+	position: relative;
+	left: 0;
+	text-align: left;
+}
+
+#menu ul {
+	position: relative;
+	left: 0;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#menu li {
+	float: left;
+	position: relative;
+	margin: 0 2px 0 0;
+	border-bottom: 0;
+	width: 106px;
+	text-align: center;
+}
+
+#menu li a {
+	text-decoration: none;
+	display: block;
+	padding: 8px 15px;
+	color: #ffffff;
+	font: 15px 'Trebuchet MS', Trebuchet, sans-serif;
+	border-radius: 10px 10px 0 0;
+	background-color: #4D5960;
+}
+
+#menu li a:hover {
+	background-color: #DBE4EA;
+	color: #0b5394;
+}
+
+#txt_cont {
+	position: relative;
+	width: 536px;
+	font: 13px 'Trebuchet MS', Trebuchet, sans-serif;
+	line-height: 20px;
+	border: 1px solid #ccc;
+	border-top: 0;
+	margin-left: -270px;
+	left: 50%;
+}
+
+.txt_tab {
+	padding: 8px;
+}
+
+#menu ul li a.hover_tab {
+	background-color: #F3F6F9;
+	color: #0b5394;
 }
 </style>
 
@@ -115,17 +176,25 @@
 
 			<!-- Content Start -->
 			<div class="container-fluid pt-4 px-4">
-				<div class="bg-light text-center rounded p-4">
+				<div id="menu">
+					<ul>
+						<li><a class="hover_tab" href="#list"><i class="fa-solid fa-list"></i>&nbspList</a></li>
+						<li><a href="#graph"><i class="fa-solid fa-chart-pie"></i>&nbspGraph</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both"></div>
+			<div class="container-fluid px-4">
+				<div class="bg-light text-center rounded p-4 txt_tab" id="graph">
 					<div class="col-sm-12 col-xl-3">
 						<canvas id="jobTypeChart"></canvas>
 					</div>
 				</div>
 			</div>
-
-			<div class="container-fluid pt-4 px-4">
-				<div class="bg-light text-center rounded p-4">
+			<div class="container-fluid px-4" >
+				<div class="bg-light text-center rounded p-4 txt_tab" id="list">
 					<div class="d-flex align-items-center justify-content-between mb-4">
-						<h6 class="mb-0">公司職位評論</h6>
+						<h6 class="mb-0">職場甘苦談</h6>
 						<div class="form-control-sm w-75 rounded-pill bg-white">
 							<span class="float-start mx-1 my-2 rounded-circle"> <i
 								class="fa-solid fa-magnifying-glass"></i>
@@ -263,65 +332,66 @@
 				<div th:replace="~{common/dashboard::footer}"></div>
 				<!-- Footer End -->
 			</div>
-			<!-- Content End -->
-
-
-			<!-- Back to Top -->
-			<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-				class="bi bi-arrow-up"></i></a>
 		</div>
+		<!-- Content End -->
 
-		<!-- JavaScript Libraries -->
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
-		<script
-			src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-		<script th:src="@{/lib/chart/chart.min.js}"
-			src="lib/chart/chart.min.js"></script>
-		<script th:src="@{/lib/easing/easing.min.js}"
-			src="lib/easing/easing.min.js"></script>
-		<script th:src="@{/lib/waypoints/waypoints.min.js}"
-			src="lib/waypoints/waypoints.min.js"></script>
-		<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
-			src="lib/owlcarousel/owl.carousel.min.js"></script>
-		<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
-			src="lib/tempusdominus/js/moment.min.js"></script>
-		<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
-			src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-		<script
-			th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
-			src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script th:src="@{/js/comment_dashboard/jquery.raty.js}"
-			src="js/comment_dashboard/jquery.raty.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
-		<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
-			src="js/comment_dashboard/checkCommentForm.js"></script>
-		<script th:src="@{/js/comment_dashboard/commentChart.js}"
-			src="js/comment_dashboard/commentChart.js"></script>
 
-		<!-- Template Javascript -->
-		<script th:src="@{/js/main.js}" src="js/main.js"></script>
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
 
-		<script>
-			var expanded = false;
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script th:src="@{/lib/chart/chart.min.js}"
+		src="lib/chart/chart.min.js"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"
+		src="lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"
+		src="lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
+		src="lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script
+		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/comment_dashboard/jquery.raty.js}"
+		src="js/comment_dashboard/jquery.raty.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
+	<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
+		src="js/comment_dashboard/checkCommentForm.js"></script>
+	<script th:src="@{/js/comment_dashboard/commentChart.js}"
+		src="js/comment_dashboard/commentChart.js"></script>
 
-			function showCheckboxes() {
-				var checkboxes = document.getElementById("checkboxes");
-				if (!expanded) {
-					checkboxes.style.display = "block";
-					expanded = true;
-				} else {
-					checkboxes.style.display = "none";
-					expanded = false;
-				}
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="js/main.js"></script>
+
+	<script>
+		var expanded = false;
+
+		function showCheckboxes() {
+			var checkboxes = document.getElementById("checkboxes");
+			if (!expanded) {
+				checkboxes.style.display = "block";
+				expanded = true;
+			} else {
+				checkboxes.style.display = "none";
+				expanded = false;
 			}
-		</script>
+		}
+	</script>
 </body>
 </html>
