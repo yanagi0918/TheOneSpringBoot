@@ -170,7 +170,7 @@ $(function () {
         var test;
         $.ajax({
             type: "post",
-            url: "/dashboard/courses/checkName",
+            url: "/user/courses/checkName",
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify(postData),

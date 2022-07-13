@@ -68,16 +68,16 @@ public class CourseUserController {
 
 
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
-//    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
-//        CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
-//        if (bean != null) {
-//            return ResponseEntity.status(HttpStatus.OK).body(bean);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//        }
-//    }
+    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
+        CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
+        if (bean != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+    }
 
     @GetMapping("/courses/detail/{courseNo}")
     public String showDetail(@PathVariable Integer courseNo, Model model) {
