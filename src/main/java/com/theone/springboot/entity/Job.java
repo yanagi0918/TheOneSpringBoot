@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,7 @@ public class Job implements Serializable{
 	private String qualification;
 	private Integer required_number;
 	private String salary;
+	@Column(length = 1000)
 	private String description;
 	private Integer compId;
 

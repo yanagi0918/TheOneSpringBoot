@@ -37,7 +37,9 @@
 	width: 40px;
 	height: 40px;
 }
-
+.ellipsis{
+text-overflow: ellipsis;
+}
 </style>
 </head>
 
@@ -171,7 +173,7 @@
 
 												</ul>
 												<ul>
-													<li class="box" th:text="${jobs.description}"></li>
+													<li class="box ellipsis" th:text="${jobs.description}"></li>
 												</ul>
 												<ul>
 													<li th:text="${jobs.company.corpname}"></li>
