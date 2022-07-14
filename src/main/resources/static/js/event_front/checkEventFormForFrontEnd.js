@@ -4,13 +4,13 @@ $(function() {
 	})
 
 	$('#eventWrongInput').click(function() {
-		$('#eventLinkURL').val('https://www.google.com.tw/')
+		$('#eventLinkURL').val('http://localhost:8080/job/jobdeatail/1')
 		$('#postStart').val('2022-08-20')
 		$('#postEnd').val('2022-06-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
-		$('#eventLinkURL').val('https://www.google.com.tw/')
+		$('#eventLinkURL').val('http://localhost:8080/job/jobdeatail/1')
 		$('#postStart').val('2022-06-15')
 		$('#postEnd').val('2022-08-20')
 	})

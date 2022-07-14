@@ -5,14 +5,14 @@ $(function() {
 
 	$('#eventWrongInput').click(function() {
 		$('#compId').val('1234567A')
-		$('#eventLinkURL').val('https://www.google.com.tw/')
+		$('#eventLinkURL').val('http://localhost:8080/job/jobdeatail/1')
 		$('#postStart').val('2022-08-20')
 		$('#postEnd').val('2022-06-15')
 	})
 
 	$('#eventCorrectInput').click(function() {
 		$('#compId').val('87654321')
-		$('#eventLinkURL').val('https://www.google.com.tw/')
+		$('#eventLinkURL').val('http://localhost:8080/job/jobdeatail/1')
 		$('#postStart').val('2022-06-15')
 		$('#postEnd').val('2022-08-20')
 	})
