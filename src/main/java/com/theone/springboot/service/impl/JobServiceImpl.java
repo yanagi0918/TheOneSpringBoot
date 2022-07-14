@@ -79,6 +79,10 @@ public class JobServiceImpl implements JobService{
 	public List<Job> findByTitleContaining(String title) {
 		return jobDao.findByTitleContaining(title);
 	}
+	@Override
+	public Job findByJobid(Integer jobid) {
+		return jobDao.findByJobid(jobid);
+	}
 
 
 }

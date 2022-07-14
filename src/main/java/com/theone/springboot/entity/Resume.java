@@ -1,16 +1,23 @@
 package com.theone.springboot.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Resume_Table")
@@ -29,21 +36,32 @@ public class Resume {
 	private String skills;
 	private String userId;
 	
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="resumes")
-    private Set<Job> jobs;
+	
+	@JsonIgnore
+	@Fetch(value = FetchMode.JOIN)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+	        name="T_JOB_RESUME",
+	        joinColumns={@JoinColumn(name="RESUME_FK")},
+	        inverseJoinColumns={@JoinColumn(name="JOB_FK")}
+	    )
+    private Set<Job> collectionJobs = new HashSet<Job>();
 	
 	
-	public Set<Job> getJobs() {
-		return jobs;
+	
+	
+	public Set<Job> getCollectionJobs() {
+		return collectionJobs;
 	}
-	
-	
-	
-	public void setJobs(Set<Job> jobs) {
-		this.jobs = jobs;
+
+
+
+	public void setCollectionJobs(Set<Job> collectionJobs) {
+		this.collectionJobs = collectionJobs;
 	}
-	
-	
+
+
+
 	public Integer getResumeId() {
 		return resumeId;
 	}

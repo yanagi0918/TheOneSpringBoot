@@ -1,10 +1,12 @@
 package com.theone.springboot.controller;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
+import com.theone.springboot.entity.Resume;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.JobService;
+import com.theone.springboot.service.ResumeService;
 
 @Controller	
 public class JobController {
@@ -25,6 +29,8 @@ public class JobController {
 	private JobService jobService;
 	@Autowired
 	private CompanyService companyService;
+	@Autowired
+	private ResumeService resumeService;
 	
 	
 	@GetMapping("/enterprise/job/companylist")
@@ -37,7 +43,7 @@ public class JobController {
 	
 	
 	@GetMapping("/job/jobdescriptionchoicejoblist")
-	private String jobdescriptionChoiceListJobs(@RequestParam(required = false) String jobdescription,
+	private String jobdescriptionChoiceListJobs(@RequestParam String jobdescription,
             						  Model m,Job job) {
 		if (jobdescription != null) {
 		List<Job> jobs = jobService.findByJobdescription(jobdescription);
@@ -51,7 +57,7 @@ public class JobController {
 	
 	
 	@GetMapping("/job/salarychoicejoblist")
-	private String salaryChoiceListJobs(@RequestParam(required = false) String salary,
+	private String salaryChoiceListJobs(@RequestParam String salary,
             						  Model m,Job job) {
 		if (salary != null) {
 		List<Job> jobs = jobService.getBySalary(salary);
@@ -114,4 +120,19 @@ public class JobController {
 		return "ok";
 	}
 
+	
+	@GetMapping("/enterprise/job/showResumes/{jobid}")
+	@ResponseBody
+	public ResponseEntity<Job> showResumes(@PathVariable Integer jobid,HttpSession session,Job job) {
+		Resume resume = (Resume) session.getAttribute("loginEnterprise");
+		Set<Job> collectionJobs = resume.getCollectionJobs();
+		job = jobService.findByJobid(jobid);
+		collectionJobs.remove(job);
+		resume.setCollectionJobs(collectionJobs);
+		resumeService.saveOrUpdate(resume);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(job);
+		
+	}
+	
 }

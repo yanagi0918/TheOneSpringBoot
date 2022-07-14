@@ -9,4 +9,5 @@ import com.theone.springboot.entity.Resume;
 public interface ResumeDao extends JpaRepository<Resume, Integer> {
 
 	List<Resume> findByUserId(String userId);
+	
 }

@@ -78,9 +78,9 @@
 									<td th:text="${jobs.salary}"></td>
 									<td th:text="${jobs.compId}"></td>
 									<td>
-										<a class="btn btn-outline-secondary m-0 " th:href="@{jobdeatail/}+${jobs.job_id}">查看</a>
-										<a class="btn btn-outline-primary m-0 " th:href="@{showupdateinformation/}+${jobs.job_id}">更新</a> 
-										<a class="btn btn-outline-danger m-0 "  th:id="${jobs.job_id}" onclick="del(this.id)">刪除</a>
+										<a class="btn btn-outline-secondary m-0 " th:href="@{jobdeatail/}+${jobs.jobid}">查看</a>
+										<a class="btn btn-outline-primary m-0 " th:href="@{showupdateinformation/}+${jobs.jobid}">更新</a> 
+										<a class="btn btn-outline-danger m-0 "  th:id="${jobs.jobid}" onclick="del(this.id)">刪除</a>
 									</td>
 								</tr>
 							</tbody>

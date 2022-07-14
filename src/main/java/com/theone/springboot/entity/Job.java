@@ -1,15 +1,16 @@
 package com.theone.springboot.entity;
 import java.io.*;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,17 +18,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Job_Table")
 public class Job implements Serializable{
-	public Set<Resume> getResumes() {
-		return resumes;
-	}
-
-	public void setResumes(Set<Resume> resumes) {
-		this.resumes = resumes;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer job_id;
+	private Integer jobid;
 	private String title;
 	private String jobdescription;
 	private String qualification;
@@ -41,17 +35,21 @@ public class Job implements Serializable{
 	@JoinColumn
 	private Company company;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-	        name="T_JOB_RESUME",
-	        joinColumns={@JoinColumn(name="JOB_FK")},
-	        inverseJoinColumns={@JoinColumn(name="RESUME_FK")}
-	    )
-	    private Set<Resume> resumes;
+	@ManyToMany(cascade=CascadeType.ALL , fetch = FetchType.EAGER , mappedBy="collectionJobs")
+	
+	    private Set<Resume> collectonResumes = new HashSet<Resume>();
 	
 	
 	
 	
+	public Set<Resume> getCollectonResumes() {
+		return collectonResumes;
+	}
+
+	public void setCollectonResumes(Set<Resume> collectonResumes) {
+		this.collectonResumes = collectonResumes;
+	}
+
 	public Integer getCompId() {
 		return compId;
 	}
@@ -77,12 +75,12 @@ public class Job implements Serializable{
 		this.description = description;
 	}
 
-	public Integer getJob_id() {
-		return job_id;
+	public Integer getJobid() {
+		return jobid;
 	}
 
-	public void setJob_id(Integer job_id) {
-		this.job_id = job_id;
+	public void setJobid(Integer jobid) {
+		this.jobid = jobid;
 	}
 
 	public String getTitle() {
@@ -125,9 +123,9 @@ public class Job implements Serializable{
 		this.salary = salary;
 	}
 
-	public Job(Integer job_id) {
+	public Job(Integer jobid) {
 		super();
-		this.job_id = job_id;
+		this.jobid = jobid;
 	}
 	
 	
