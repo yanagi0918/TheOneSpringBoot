@@ -33,17 +33,18 @@ public class CourseServicelmpl implements CourseService {
 
     @Override
     public CourseBean findByCourseName(String courseName) {
-        return courseDao.getByCourseName(courseName);
+        return courseDao.findByCourseName(courseName);
     }
 
+
     @Override
-    public  List<CourseBean> findByCourseCategory(String courseCategory) {
-        return courseDao.getByCourseCategory(courseCategory);
+    public List<CourseBean> findByCourseCategory(String courseCategory) {
+        return courseDao.findByCourseCategory(courseCategory);
     }
 
     @Override
     public List<CourseBean> findByLecturer(String lecturer) {
-        return courseDao.getByLecturer(lecturer);
+        return courseDao.findByLecturer(lecturer);
     }
 
     @Override
@@ -53,12 +54,12 @@ public class CourseServicelmpl implements CourseService {
 
     @Override
     public List<CourseBean> findAllCoursesByStatus(String status) {
-        return courseDao.getByStatus(status);
+        return courseDao.findByStatus(status);
     }
 
     @Override
     public List<CourseBean> findByCourseCategoryAndStatus(String courseCategory, String status) {
-        return courseDao.getByCourseCategoryAndStatus(courseCategory,status);
+        return courseDao.findByCourseCategoryAndStatus(courseCategory, status);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class CourseServicelmpl implements CourseService {
 
     @Override
     public List<CourseBean> findByMember(Member member) {
-        return courseDao.getByMember(member);
+        return courseDao.findByMember(member);
     }
 
 

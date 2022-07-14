@@ -3,6 +3,7 @@ package com.theone.springboot.controller;
 import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CourseService;
+import com.theone.springboot.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Controller
@@ -30,10 +33,12 @@ import java.util.Optional;
 public class CourseUserController {
 
     private final CourseService courseService;
+    private final MemberService memberService;
 
     @Autowired
-    public CourseUserController(CourseService courseService) {
+    public CourseUserController(CourseService courseService, MemberService memberService) {
         this.courseService = courseService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/courses")
@@ -45,7 +50,7 @@ public class CourseUserController {
             model.addAttribute("CourseBean", findCourse.orElseThrow());
             return "course/customerDetail";
         } else if (courseCategory != null) {
-            List<CourseBean> courseList = courseService.findByCourseCategoryAndStatus(courseCategory,"已審核");
+            List<CourseBean> courseList = courseService.findByCourseCategoryAndStatus(courseCategory, "已審核");
             model.addAttribute("courseCategory", courseCategory);
             model.addAttribute("courseList", courseList);
             return "course/allCustomerListByCategory";
@@ -64,7 +69,6 @@ public class CourseUserController {
         model.addAttribute("courseList", courseList);
         return "course/lecturerCourseList";
     }
-
 
 
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
@@ -87,8 +91,61 @@ public class CourseUserController {
 
     }
 
+    @GetMapping("/collections")
+    public  String findAllCollections (Model model,HttpSession session){
+        Member member = (Member) session.getAttribute("loginMember");
+        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        model.addAttribute("collectionCourses",collectionCourses);
+        return "course/collections";
+    }
+
+    @GetMapping("/collectionInsert/{courseNo}")
+    @ResponseBody
+    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
+        boolean b = true;
+        Member member = (Member) session.getAttribute("loginMember");
+        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
+        collectionCourses.add(courseBean);
+        member.setCollectionCourses(collectionCourses);
+        memberService.saveOrUpdate(member);
+        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+    }
+    @GetMapping("/collectionDelete/{courseNo}")
+    @ResponseBody
+    public ResponseEntity<CourseBean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
+        boolean b = true;
+        Member member = (Member) session.getAttribute("loginMember");
+        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
+        collectionCourses.remove(courseBean);
+        member.setCollectionCourses(collectionCourses);
+        memberService.saveOrUpdate(member);
+        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+    }
+
     @GetMapping("/toCreatePage")
     public String toCreate() {
+
+
+        Member member2 = memberService.getByUserid("N123456789");
+        Member member3 = memberService.getByUserid("X123456789");
+        Member member4 = memberService.getByUserid("a123456785");
+        CourseBean courseBean35 = courseService.findCourse(35).orElseThrow();
+        CourseBean courseBean36 = courseService.findCourse(36).orElseThrow();
+        CourseBean courseBean37 = courseService.findCourse(37).orElseThrow();
+        CourseBean courseBean38 = courseService.findCourse(38).orElseThrow();
+        CourseBean courseBean40 = courseService.findCourse(40).orElseThrow();
+
+        Set<CourseBean> collectionCourses = member3.getCollectionCourses();
+        collectionCourses.add(courseBean35);
+        collectionCourses.add(courseBean36);
+        collectionCourses.add(courseBean37);
+        collectionCourses.add(courseBean38);
+        collectionCourses.add(courseBean40);
+        member3.setCollectionCourses(collectionCourses);
+        memberService.saveOrUpdate(member3);
+
         return "course/lecturerCourseInset";
     }
 

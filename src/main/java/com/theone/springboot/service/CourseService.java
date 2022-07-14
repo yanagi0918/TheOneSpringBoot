@@ -30,5 +30,4 @@ public interface CourseService {
 
 	void deleteCourse(Integer pk);
 
-	//List<CourseBean> getCourseByMultiQuery(String courseCategory, String courseName, String lecturer);
 }

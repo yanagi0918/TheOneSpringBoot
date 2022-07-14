@@ -1,9 +1,7 @@
 package com.theone.springboot.entity;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -38,16 +36,19 @@ public class Member {
     private List<CourseBean> lecturerCourses;
 
 
-
     //	 VINCENT COLLECTION MANY(member講師) TO MANY(收藏多個課程)
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "members")
-    private List<CourseBean> collectionCourses;
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "member_course",
+            joinColumns = {@JoinColumn(name = "memberPk", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "courseNo", nullable = false)})
+    private Set<CourseBean> collectionCourses= new HashSet<>();
 
-    public List<CourseBean> getCollectionCourses() {
+    public Set<CourseBean> getCollectionCourses() {
         return collectionCourses;
     }
 
-    public void setCollectionCourses(List<CourseBean> collectionCourses) {
+    public void setCollectionCourses(Set<CourseBean> collectionCourses) {
         this.collectionCourses = collectionCourses;
     }
 

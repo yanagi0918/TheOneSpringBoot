@@ -1,7 +1,9 @@
 package com.theone.springboot.entity;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -49,19 +51,19 @@ public class CourseBean {
     private Member member;
 
 
-
     //	 VINCENT COLLECTION MANY(member講師) TO MANY(收藏多個課程)
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "member_course",
-                joinColumns = {@JoinColumn(name = "courseNo",nullable = false)},
-                inverseJoinColumns = {@JoinColumn(name = "memberPk",nullable = false)})
-    private List<Member> members;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "member_course",
+//                joinColumns = {@JoinColumn(name = "courseNo", nullable = false)},
+//                inverseJoinColumns = {@JoinColumn(name = "memberPk", nullable = false)})
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "collectionCourses")
+    private Set<Member> members = new HashSet<>();
 
-    public List<Member> getMembers() {
+    public Set<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(Set<Member> members) {
         this.members = members;
     }
 
