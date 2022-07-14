@@ -1,27 +1,3 @@
-//function checkcompid() {
-//	var compId = document.getElementById("compId").value;
-//	$.ajax({
-//		type: "POST",
-//		url: "CheckUserFromCompId",
-//		data: "compId=" + compId,
-//		success: function(data) {
-//			if (data == true) {
-//				document.getElementById("show_compid").innerHTML = "<font color='red'>此統編不存在，請先註冊</font>";
-//				document.getElementById('submit').disabled = true;
-//				return true;
-//			} else {
-//				document.getElementById("show_compid").innerHTML = "<font color='red'></font>";
-//				document.getElementById('submit').disabled = false;
-//				return false;
-//			}
-//		}
-//	});
-//}
-
-
-
-
-
 $(function(){
 	$('#jobcreateform').validate({
 		rules:{
@@ -39,14 +15,8 @@ $(function(){
 				required: true,
 				maxlength:500
 			},
-			
-			
 		},
-		
-		
-		
 	})
-	
 })
 
 
@@ -92,40 +62,26 @@ function checkJobForm() {
 		return checkJobForm;
 	
 	}
-	
-//	let compIdRegex = /^\d{8}$/;
-//	if (!compIdRegex.test($("#compId").val())) {
-//		Swal.fire('Warning!',
-//			'統編為8個數字!',
-//			'warning');
-//		checkJobForm = false;
-//		return checkJobForm;
-//	}
-	
-	
 }
 
 $('#jobInput').click(function() {
-//	$('#compId').val('87654321')
-	$('#title').val('流程規劃管理師')
-	$('#qualification').val('商業及管理學科類、土木工程相關系所')
-	$('#required_number').val('5')
-	$('#description').val('1.協調公司各部門內及部門間之合作，與同仁共同規劃作業流程解決方案。\n2.參與資訊系統導入與產品開發，針對新需求進行分析、系統設計。\n3.與團隊進行系統功能測試計畫/案例編寫與測試執行和驗證。\n4.系統功能驗收、上線後教育訓練以及擔任系統操作諮詢窗口。')
-})
+	$('#title').val('食品安全專員')
+	$('#qualification').val('熟悉食品安全相關法規')
+	$('#required_number').val('2')
+	$('#description').val('1.國內外食安相關政策、趨勢之資訊蒐集、彙整、解析及因應方案建議提出2.食安示警事項監視、影響評估、彙整分析、疑慮提出與因應方案追蹤管理3.法源依據諮詢及原則建議4.食安相關政策/法規研討會參加5.食安內部教育訓練6.食安預警資訊庫建置與維護')})
 
 $('#jobwrongInput').click(function() {
 //	$('#compId').val('Z1234567')
 	$('#title').val('')
 	$('#qualification').val('')
 	$('#required_number').val('5人')
-	$('#description').val('主要負責完成公司承接的軟體程式開發案及後續更新維護等工作。對金融交易有高度興趣者，歡迎加入我們的行列，共同創造高效能、穩定、業界最好的金融交易系統。')
-})
+	$('#description').val('1.國內外食安相關政策、趨勢之資訊蒐集、彙整、解析及因應方案建議提出2.食安示警事項監視、影響評估、彙整分析、疑慮提出與因應方案追蹤管理3.法源依據諮詢及原則建議4.食安相關政策/法規研討會參加5.食安內部教育訓練6.食安預警資訊庫建置與維護')})
 
 $('#jobUpdate').click(function() {
-	$('#title').val('會計人員')
-	$('#qualification').val('曾經製作過相關專題')
+	$('#title').val('保健食品/食品專員')
+	$('#qualification').val('公共衛生相關、藥學相關、食品營養相關')
 	$('#required_number').val('1')
-	$('#description').val('1、成本帳務\n2、營業稅申報\n3、營收及一般公開公司上傳資料\n4、應收應付帳務處理\n5、主管交辦事項')
+	$('#description').val('1. 研究國內外食品市場資訊收集2. 研究開發保健營養食品配方設計、商品行銷規劃3. 協助保健食品及食品的新品開發與國外代工生產管理(成本估算/樣品試製)4. 熟悉特殊營養食品、健康食品及食品等相關法規 (包含產品標籤/外盒包裝/說明書/原料表/營養標示/商標...等規範) 5. 負責國外營養品進口的查驗登記資料作業/展延申請 6.負責保健食品教育訓練、諮詢及教材製作及對內對外相關產品教育訓練、話術教育訓練')
 })
 
 $(document).ready( function () {
