@@ -16,6 +16,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Job_Table")
 public class Job implements Serializable{
+	public Set<Resume> getResumes() {
+		return resumes;
+	}
+
+	public void setResumes(Set<Resume> resumes) {
+		this.resumes = resumes;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer job_id;
@@ -34,8 +42,8 @@ public class Job implements Serializable{
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 	        name="T_JOB_RESUME",
-	        joinColumns={@JoinColumn(name="RESUME_FK")},
-	        inverseJoinColumns={@JoinColumn(name="JOB_FK")}
+	        joinColumns={@JoinColumn(name="JOB_FK")},
+	        inverseJoinColumns={@JoinColumn(name="RESUME_FK")}
 	    )
 	    private Set<Resume> resumes;
 	

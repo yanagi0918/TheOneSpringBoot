@@ -81,7 +81,6 @@
                         <!-- Job Category Listing End -->
                     </div>
                     <!-- Right content -->
-<!--                     <div class="col-xl-9 col-lg-9 col-md-8"> -->
                         <!-- Featured_job_start -->
 							<section class="featured-job-area">
 							<div class="table-responsive">
@@ -106,7 +105,7 @@
 									<td th:text="${job.jobdescription}"></td>
 									<td th:text="${job.description}"></td>
 									<td>
-<!-- 										<a class="btn btn-outline-secondary m-0 " th:href="@{jobdeatail/}+${jobs.job_id}">查看</a> -->
+<!-- 										<a class="btn btn-outline-secondary m-0 " th:href="#">查看</a> -->
 										<a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a>
 										<a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a>
 									</td>
@@ -114,44 +113,11 @@
 							</tbody>
 						</table>
 					</div>
-<!-- 								<div class="container"> -->
-<!-- 									<div class="single-job-items mb-30"> -->
-<!-- 										<div class="job-items"> -->
-<!-- 											<div class="company-img"> -->
-<!-- 												<img class="imgsize" -->
-<!-- 													th:src="@{/assets/img/job/wewantyou.png}" alt=""> -->
-<!-- 											</div> -->
-<!-- 											<div class="job-tittle job-tittle2"> -->
-<!-- 													<h4 th:text="${job.title}"></h4> -->
-<!-- 												<ul> -->
-													
-<!-- 													<li>工作性質:<span th:text="${job.jobdescription}"></span></li> -->
-													
-<!-- 													<li>徵才條件:<span th:text="${job.qualification}"></span></li> -->
-
-
-
-<!-- 												</ul> -->
-<!-- 												<ul> -->
-<!-- 													<li class="box" th:text="${job.description}"></li> -->
-<!-- 												</ul> -->
-<!-- 												<ul> -->
-<!-- 													<li>薪資:<span th:text="${job.salary}"></span></li> -->
-<!-- 												</ul> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!--                                     <div class="items-link items-link2 f-right"> -->
-<!--                                         <a th:href="@{showupdateinformation/}+${job.job_id}" class="genric-btn info-border circle">更新</a> -->
-<!--                                         <a class="genric-btn danger-border circle" th:id="${job.job_id}" onclick="del(this.id)">刪除</a> -->
-<!--                                     </div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
 							</section>
 						</div>
                         <div class="header-btn d-none f-right d-lg-block">
                             <a th:href="@{/enterprise/job/showForm}" class="btn head-btn2">新增職缺</a>
                         </div>
-<!--                             </div> -->
                         <!-- Featured_job_end -->
                     </div>
                 </div>
@@ -175,7 +141,6 @@
     <!-- Footer Start-->
 		<div th:replace="~{common/frontpage::footer}"></div>
         <!-- Footer End-->
-	</footer>
 
     <!-- JS here -->
 
