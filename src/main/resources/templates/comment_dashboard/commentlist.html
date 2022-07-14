@@ -155,12 +155,11 @@
 }
 
 .a-ellipsis {
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 
 </head>
@@ -189,9 +188,11 @@
 						<li><a class="hover_tab" href="#list"><i
 								class="fa-solid fa-list"></i>&nbspList</a></li>
 						<li><a href="#graph"><i class="fa-solid fa-chart-pie"></i>&nbspGraph</a></li>
+						<li><a href="#message"><i class="fa-solid fa-comments"></i></i>&nbspReply</a></li>
 					</ul>
 				</div>
 			</div>
+			<!-- 圖表 -->
 			<div style="clear: both"></div>
 			<div class="container-fluid px-4">
 				<div class="bg-light text-center rounded p-4 txt_tab" id="graph">
@@ -203,7 +204,7 @@
 			<div class="container-fluid px-4">
 				<div class="bg-light text-center rounded p-4 txt_tab" id="list">
 					<div class="d-flex align-items-center justify-content-between mb-4">
-						<h6 class="mb-0">職場甘苦談</h6>
+						<h6 class="mb-0">職場甘苦談 (文章)</h6>
 						<div class="form-control-sm w-75 rounded-pill bg-white">
 							<span class="float-start mx-1 my-2 rounded-circle"> <i
 								class="fa-solid fa-magnifying-glass"></i>
@@ -218,6 +219,7 @@
 						<button type="button" class="btn btn-primary mb-0"
 							onclick="location.href='/dashboard/CommentNew'">新增評論</button>
 					</div>
+					<!-- 欄位顯示選單 -->
 					<div>
 						<form>
 							<div class="multiselect">
@@ -273,6 +275,7 @@
 						</form>
 
 					</div>
+					<!-- list 內容 -->
 					<div class="container">
 						<table
 							class="table table-bordered order-table cell-border hover nowrap"
@@ -329,18 +332,77 @@
 										class="btn btn-outline-primary m-0">修改</a>
 										<button type="button"
 											class="btn btn-outline-danger m-0 comment-delete"
-											th:value='${comment.commentId}'>刪除</button>
+											th:value='${comment.commentId}'>刪除</button></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<!-- 	Content End -->
-
-				<!-- Footer Start -->
-				<div th:replace="~{common/dashboard::footer}"></div>
-				<!-- Footer End -->
 			</div>
+			<div class="container-fluid px-4">
+				<div class="bg-light text-center rounded p-4 txt_tab" id="message">
+					<div class="d-flex align-items-center justify-content-between mb-4">
+						<h6 class="mb-0">職場甘苦談 (留言)</h6>
+						<div class="form-control-sm w-75 rounded-pill bg-white">
+							<span class="float-start mx-1 my-2 rounded-circle"> <i
+								class="fa-solid fa-magnifying-glass"></i>
+							</span>
+							<div class="">
+								<input
+									class="form-control float-start bg-transparent border-0 w-75 searchBar"
+									type="search" data-table="order-table" placeholder="搜尋...">
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-primary mb-0"
+							onclick="location.href='/dashboard/CommentNew'">新增評論</button>
+					</div>
+					<div class="container">
+						<table
+							class="table table-bordered order-table cell-border hover nowrap"
+							id="commentTable" style="width: 100%">
+							<thead>
+								<tr class="text-dark">
+									<th>編號</th>
+									<th>文章編號</th>
+									<th>留言編號</th>
+									<th>留言時間</th>
+									<th>帳號</th>
+									<th>留言內容</th>
+									<th>回覆</th>
+									<th>喜歡</th>
+									<th>動作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="commentMessage : ${listCommentMessage}" id="commentmessagelist">
+									<td th:text="${commentMessage.messageId}"></td>
+									<td th:text="${commentMessage.comment_Id}"></td>
+									<td th:text="${commentMessage.messageOrder}"></td>
+									<td th:text="${#datetime.format(commentMessage.messageTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+									<td th:text="${commentMessage.userId}"></td>
+									<td th:text="${commentMessage.messageContent}"></td>
+									<td th:text="${commentMessage.messageReply}"></td>
+									<td th:text="${commentMessage.messageLike}"></td>
+									<td><a
+										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.commentId})}"
+										class="btn btn-outline-info m-0">內容</a> <a
+										th:href="@{/dashboard/CommentEdit/{id}(id=${comment.commentId})}"
+										class="btn btn-outline-primary m-0">修改</a>
+										<button type="button"
+											class="btn btn-outline-danger m-0 comment-delete"
+											th:value='${comment.commentId}'>刪除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- 	Content End -->
+
+			<!-- Footer Start -->
+			<div th:replace="~{common/dashboard::footer}"></div>
+			<!-- Footer End -->
 		</div>
 		<!-- Content End -->
 
@@ -391,18 +453,7 @@
 	<script th:src="@{/js/main.js}" src="js/main.js"></script>
 
 	<script>
-		var expanded = false;
-
-		function showCheckboxes() {
-			var checkboxes = document.getElementById("checkboxes");
-			if (!expanded) {
-				checkboxes.style.display = "block";
-				expanded = true;
-			} else {
-				checkboxes.style.display = "none";
-				expanded = false;
-			}
-		}
+		
 	</script>
 </body>
 </html>

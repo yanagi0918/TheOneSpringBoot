@@ -264,11 +264,30 @@ $(function() {
 	})(document);
 })
 
+//留言管理
+function format(commentMessage) {
+	return (
+		'<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+		'<thead>' + '<tr>' +
+		'<th>留言時間</th>' + '<th>留言編號</th>' + '<th>帳號</th>' + '<th>內容</th>' + '<th>回覆</th>' + '<th>喜歡</th>' + '<th>動作</th>' +
+		'</tr>' + '</thead>' +
+		'<tbody>' + '<tr>' +
+		'<td>' + commentMessage.messageTime + '</td>' +
+		'<td>' + commentMessage.messageOrder + '</td>' +
+		'<td>' + commentMessage.userId + '</td>' +
+		'<td>' + commentMessage.messageContent + '</td>' +
+		'<td>' + commentMessage.messageReply + '</td>' +
+		'<td>' + commentMessage.messageLike + '</td>' +
+		'<td>' + '' + '</td>' +
+		'</tr>' + '</tbody>' + '</table>'
+	);
+}
 //Data Table
 $(document).ready(function() {
 
 
 	var table = $('#commentTable').DataTable({
+
 
 		//don't display search bar
 		searching: false,
@@ -329,6 +348,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	//  $('div#txt_cont div:gt(0)').css('display', 'none');
 	$('div.txt_tab#graph:visible').hide();
+	$('div.txt_tab#message:visible').hide();
 	$('#menu ul li a').click(function(event) {
 		event.preventDefault();
 		var id_tab = $(this).attr('href');
@@ -339,3 +359,16 @@ $(document).ready(function() {
 	});
 });
 
+//欄位選擇
+var expanded = false;
+
+function showCheckboxes() {
+	var checkboxes = document.getElementById("checkboxes");
+	if (!expanded) {
+		checkboxes.style.display = "block";
+		expanded = true;
+	} else {
+		checkboxes.style.display = "none";
+		expanded = false;
+	}
+}
