@@ -22,6 +22,8 @@
         <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
         <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
         <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+  
    </head>
 
    <body>
@@ -107,25 +109,38 @@
 									<span class="listComp text-muted"
 										th:attr="data-score=${intv.compScore}"></span>
                                     <ul>
-                                        <li class="fa fa-user" th:text="' '+${intv.userId}"></li>
+<!--                                         <li class="fa fa-user" th:text="' '+${intv.userId}"></li> -->
                                         <li th:text="'職缺:'+${intv.jobName}"></li>
                                         <li th:text="'面試時間:'+${intv.intTime}"></li>
+                                    </ul>
+                                    <ul>
+                                    <li th:text="'編輯時間:'+${intv.createTime}"></li>
                                     </ul>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <figure>
+                                    
                                         <div class="items-link items-link2 f-right">
                                             
                                           <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
                                            class="genric-btn primary-border  "th:href="@{/intv/}+${intv.cvNo}">編輯</a>
                                             <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
                                              class="genric-btn danger-border  " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </a>
-                                             
-                                            <figcaption th:text="'編輯時間:'+${intv.createTime}" style="font-size: 12px "></figcaption>
-                                        </div>
-                                    </figure>
+                                            <div>
+                                             <button class="genric-btn warning-border circle  small" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px ; color:black"> &nbsp檢舉 <i class="fa fa-exclamation-circle" > </i> </button>
+                                           		</div>	
+                                            
+                                           <span th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" >&nbsp</span>
+                                            <div>
+                                             <button class="genric-btn primary-border circle arrow medium" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp留言 <i class="fa fa-comments"> </i> </button>
+                                           		</div>
+                                           		 <span th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" >&nbsp</span>		
+                                           	<div>
+                                             <button class="genric-btn  danger-border circle arrow medium" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp喜歡 <i class="fa fa-heart" id=heart> </i> </button>
+                                            </div>
+                                        </div>																																								
+                                    
 
                                 </div>
                                 
