@@ -284,11 +284,11 @@ $(document).ready(function() {
 		}, {
 			visible: false,
 			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+		}, {
+			targets: 17,
+			render: $.fn.dataTable.render.ellipsis(15)
+
 		}
-//		,{
-//			width: 10,
-//			targets:[17]
-//		}
 		],
 
 		//position of entire
