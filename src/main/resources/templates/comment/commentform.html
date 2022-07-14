@@ -85,7 +85,7 @@ i {
 						</form>
 					</aside>
 					<article>
-						<div class="testimonial-bg shadow-sm pt-5 border">
+						<div class="testimonial-bg shadow-sm p-3 border">
 							<form
 								th:action="${comment.share_id != null} ? '/CommentUpdate' : '/CommentInsert'"
 								method="post" id="form" th:modelAttribute="comment">
@@ -94,6 +94,9 @@ i {
 										<td><input type="hidden" class="form-control valid"
 											th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
 											name="create_time" readonly></td>
+										<td><input type="hidden" class="form-control"
+											name="share_id"
+											th:value="${comment.share_id}" readonly></td>
 									</tr>
 									<tr>
 										<th>帳號:</th>
