@@ -38,6 +38,13 @@ public class InterviewServiceImpl implements InterviewService {
 		return interviewDao.findById(pk);
 	}
 
+	
+	
+	@Override
+	public List<Interview> findByUserId(String userId) {
+		return interviewDao.findByUserId(userId);
+	}
+
 	@Override
 	public void deleteInterview(Integer pk) {
 		interviewDao.deleteById(pk);

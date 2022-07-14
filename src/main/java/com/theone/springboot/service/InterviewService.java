@@ -16,6 +16,9 @@ public interface InterviewService {
 
 	Optional<Interview> getInterview(Integer pk);
 
+
 	void deleteInterview(Integer pk);
+
+	List<Interview> findByUserId(String userid);
 
 }
