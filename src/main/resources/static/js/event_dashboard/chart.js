@@ -13,7 +13,7 @@
 				data: {
 					labels: ["未審核", "審核通過", "已退件", "已撤銷"],
 					datasets: [{
-						label: '總筆數',
+						label: '筆數',
 						backgroundColor: [
 							"rgba(0, 156, 255, .7)",
 							"rgba(0, 156, 255, .6)",

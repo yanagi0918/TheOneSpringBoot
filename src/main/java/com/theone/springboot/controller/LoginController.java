@@ -17,7 +17,6 @@ import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CompanyService;
 import com.theone.springboot.service.EventService;
 import com.theone.springboot.service.MemberService;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Controller
 public class LoginController {
@@ -33,7 +32,8 @@ public class LoginController {
 	
 	@GetMapping("/")
 	public String toIndex(Model model) {
-		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+		Date today = new Date();
+		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, today, today);
 		model.addAttribute("events",events);
 		return "index";
 	}
