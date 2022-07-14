@@ -33,7 +33,7 @@ public class CommentUserController {
 	}
 	
 	// 個人評論list
-	@RequestMapping("/comments/my")
+	@RequestMapping("/user/comments")
 	public String listMyComments(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("loginMember");
 		List<Comment> myComments = commentService.findByUserId(member.getUserid());

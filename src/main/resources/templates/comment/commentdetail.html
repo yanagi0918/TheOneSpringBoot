@@ -57,10 +57,6 @@
 	color: #888888
 }
 
-.share-box {
-	height: 400px
-}
-
 .comment-delete {
 	background-color: transparent;
 	border: 0
@@ -132,7 +128,7 @@
 							<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 							<li><a th:href="@{/comments}"><span>總覽</span></a></li>
 							<li><a href="single_comment.html"><span
-									th:text="'編號:'+ ${comment.share_id} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
+									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
 						</ul>
 						<article class="testimonial-bg border shadow-sm">
 							<form th:action="@{/CommentInsert}" method="post"
@@ -142,7 +138,7 @@
 										<a
 											th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
 											class="m-2 edit-delete"
-											th:href="@{/CommentEdit/{id}(id=${comment.share_id})}"> <i
+											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}"> <i
 											class="fa fa-pencil-alt"></i></a>
 
 									</div>
@@ -205,8 +201,8 @@
 										</tr>
 									</table>
 								</div>
-								<div class="white-bg w-100 slider-height2">
-									<div class="mx-4 p-3 share-box">
+								<div class="white-bg w-100">
+									<div class="mx-4 p-3">
 										<span>心得分享</span>
 										<p th:text="${comment.share}"></p>
 									</div>
@@ -214,7 +210,7 @@
 										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
 										type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
-										th:value='${comment.share_id}'>
+										th:value='${comment.commentId}'>
 										<i class="fa fa-trash-alt"></i>
 									</button>
 								</div>

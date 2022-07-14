@@ -79,18 +79,18 @@
 			<div class="container-fluid pt-4 px-4">
 				<div class="col-sm-12 col-xl-11">
 					<div class="bg-light rounded h-100 p-4">
-						<h6 th:text="${comment.share_id != null} ? '編輯評論' : '新增評論'"></h6>
+						<h6 th:text="${comment.commentId != null} ? '編輯評論' : '新增評論'"></h6>
 						<form
-							th:action="${comment.share_id != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentInsert'"
+							th:action="${comment.commentId != null} ? '/dashboard/CommentUpdate' : '/dashboard/CommentInsert'"
 							method="post" id="form" th:modelAttribute="comment">
 							<div class="row mb-3">
 								<div class="row mb-3">
 
 									<table class="table-responsive">
-										<tr th:if="${comment.share_id != null}">
+										<tr th:if="${comment.commentId != null}">
 											<th>評論編號:</th>
-											<td><input type="text" name="share_id"
-												class="form-control" th:value="${comment.share_id}" readonly>
+											<td><input type="text" name="commentId"
+												class="form-control" th:value="${comment.commentId}" readonly>
 											</td>
 										</tr>
 										<tr>
@@ -207,10 +207,10 @@
 							<div align="center">
 								<button type="submit" th:if="${comment.userId != null}"
 									class="btn btn-primary" name="submit" value="更新">更新</button>
-								<button type="button" th:if="${comment.share_id == null}"
+								<button type="button" th:if="${comment.commentId == null}"
 									class="btn btn-outline-dark" name="oneInput" value="一鍵輸入"
 									id="OneInput">範例</button>
-								<button type="submit" th:if="${comment.share_id == null}"
+								<button type="submit" th:if="${comment.commentId == null}"
 									class="btn btn-primary" name="new" value="新增"
 									formaction="/dashboard/CommentInsert">新增</button>
 								<button type="button" class="btn btn-secondary"
