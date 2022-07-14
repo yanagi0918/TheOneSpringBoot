@@ -67,17 +67,22 @@
                                         <div class="count-job mb-35">
 
                                             <!-- Select job items start -->
-                                            <div class="select-job-items">
-                                                <span>頁數</span>
-                                                <select name="select">
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                    <option value="">4</option>
-                                                </select>
+                                            <div >
+                                                
+							<a th:href="@{/intvlist}" id="overview"
+								class="genric-btn primary e-large float-left w-30" th:text="總覽"> </a>
+							
+							<a th:if="${session.loginMember!=null}" th:href="@{/intvlist/me}"
+								id="myintv" class="genric-btn primary-border e-large float-left w-30">
+								我的</a>
+						
+                                                
+                                                
                                             </div>
                                             <!--  Select job items End-->
-                                            <button class="genric-btn primary e-large" onclick="window.location.href='intv'; return false;">分享心得</button>
+                                        <form th:action="@{/intv}">    
+                                            <button class="genric-btn primary e-large" type="submit" >分享心得</button>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +96,7 @@
                                         <div class="job-tittle job-tittle2">
                                            
                                             <ul>
-                                           <li><h4><a th:text="${intv.compName}" th:href="@{intvshow/}+${intv.cvNo}"> </a></h4>
+                                           <li><h4><a th:text="${intv.compName}" th:href="@{/intvshow/{id}(id=${intv.cvNo})}"> </a></h4>
                                            </li>
                                            
                                            </ul>
@@ -101,17 +106,11 @@
                                            
 									<span class="listComp text-muted"
 										th:attr="data-score=${intv.compScore}"></span>
-									
-								
-                                            
-                                            
-                                            
-                                                
-                                                <ul>
-                                                    <li class="fa fa-user" th:text="' '+${intv.userId}"></li>
-                                                    <li th:text="'職缺:'+${intv.jobName}"></li>
-                                                    <li th:text="'面試時間:'+${intv.intTime}"></li>
-                                                </ul>
+                                    <ul>
+                                        <li class="fa fa-user" th:text="' '+${intv.userId}"></li>
+                                        <li th:text="'職缺:'+${intv.jobName}"></li>
+                                        <li th:text="'面試時間:'+${intv.intTime}"></li>
+                                    </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -119,8 +118,10 @@
                                     <figure>
                                         <div class="items-link items-link2 f-right">
                                             
-                                          <a class="genric-btn primary-border  "th:href="@{intv/}+${intv.cvNo}">編輯</a>
-                                            <a class="genric-btn danger-border  " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </a>
+                                          <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
+                                           class="genric-btn primary-border  "th:href="@{/intv/}+${intv.cvNo}">編輯</a>
+                                            <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
+                                             class="genric-btn danger-border  " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </a>
                                              
                                             <figcaption th:text="'編輯時間:'+${intv.createTime}" style="font-size: 12px "></figcaption>
                                         </div>

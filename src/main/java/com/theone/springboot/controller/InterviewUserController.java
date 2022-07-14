@@ -3,9 +3,10 @@ package com.theone.springboot.controller;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -15,16 +16,15 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
-import com.theone.springboot.entity.Comment;
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Interview;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.EventService;
 import com.theone.springboot.service.InterviewService;
 
@@ -40,7 +40,7 @@ public class InterviewUserController {
 	@Autowired
 	EventService eventService;
 	
-	@GetMapping("/intvlist")//目錄
+	@GetMapping("/intvlist")//所有目錄
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
@@ -48,6 +48,18 @@ public class InterviewUserController {
 		model.addAttribute("events",events);
 		return "interview/intvlist";
 	}
+	
+	// 個人list
+		@RequestMapping("/intvlist/me")
+		public String listMyintv(HttpSession session, Model model) {
+			Member member = (Member)session.getAttribute("loginMember");
+			List<Interview> findByUserId = interviewService.findByUserId(member.getUserid());
+			model.addAttribute("intvs", findByUserId);
+			List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
+			model.addAttribute("events",events);
+			return "interview/intvlist";
+		}
+	
 //	@GetMapping("/intvaside")//aside目錄
 //	public String getTointvaside(Model model) {
 //		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
