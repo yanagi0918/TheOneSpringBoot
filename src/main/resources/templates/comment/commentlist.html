@@ -202,7 +202,7 @@
 										th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
 								</div>
 								<a class="d-inline-block"
-									th:href="@{/CommentDetail/{id}(id=${comment.share_id})}">
+									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
 									<h2 class="float-left" th:text="${comment.comp_name}"></h2>
 									<h4 class="float-left">&nbsp&nbsp</h4>
 									<h4 class="float-left" th:text="${comment.job_name}"></h4>
@@ -222,13 +222,13 @@
 									<button type="button"
 										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
 										class="genric-btn danger circle float-right comment-delete"
-										th:value='${comment.share_id}'>
+										th:value='${comment.commentId}'>
 										<i class="fa fa-trash-alt"></i>
 									</button>
 									<button type="button"
 										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
 										class="genric-btn success circle float-right"
-										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.share_id})} + '\''">
+										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.commentId})} + '\''">
 										<i class="fa fa-pencil-alt"></i>
 									</button>
 								</div>

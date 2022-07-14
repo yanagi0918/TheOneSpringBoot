@@ -229,8 +229,8 @@
 								</div>
 								<div id="checkboxes">
 									<!-- 									<label for="all"> <input class="toggle-vis" type="checkbox" id="all" checked/>全選</label>  -->
-									<label for="share_id"> <input class="toggle-vis"
-										type="checkbox" id="share_id" data-column="0" checked />編號
+									<label for="commentId"> <input class="toggle-vis"
+										type="checkbox" id="commentId" data-column="0" checked />編號
 									</label> <label for="create_time"> <input class="toggle-vis"
 										type="checkbox" id="create_time" data-column="1" checked />新增時間
 									</label> <label for="userId"> <input class="toggle-vis"
@@ -302,7 +302,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="comment : ${listComment}" id="commentlist">
-									<td th:text="${comment.share_id}"></td>
+									<td th:text="${comment.commentId}"></td>
 									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
 									<td th:text="${comment.userId}"></td>
 									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
@@ -323,13 +323,13 @@
 									<td th:text="${comment.bonus_count}"></td>
 									<td th:text="${comment.share}" class="a-ellipsis"></td>
 									<td><a
-										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.share_id})}"
+										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.commentId})}"
 										class="btn btn-outline-info m-0">內容</a> <a
-										th:href="@{/dashboard/CommentEdit/{id}(id=${comment.share_id})}"
+										th:href="@{/dashboard/CommentEdit/{id}(id=${comment.commentId})}"
 										class="btn btn-outline-primary m-0">修改</a>
 										<button type="button"
 											class="btn btn-outline-danger m-0 comment-delete"
-											th:value='${comment.share_id}'>刪除</button>
+											th:value='${comment.commentId}'>刪除</button>
 								</tr>
 							</tbody>
 						</table>

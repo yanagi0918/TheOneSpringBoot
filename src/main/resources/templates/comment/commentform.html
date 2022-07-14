@@ -73,7 +73,7 @@ i {
 				<div class="col-12">
 					<aside class="single_sidebar_widget">
 						<h5 class="float-left p-3 px-5"
-							th:text="${comment.share_id != null} ? '編輯評論' : '新增評論'"></h5>
+							th:text="${comment.commentId != null} ? '編輯評論' : '新增評論'"></h5>
 						<h5 class="float-left py-3"
 							th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></h5>
 
@@ -87,7 +87,7 @@ i {
 					<article>
 						<div class="testimonial-bg shadow-sm p-3 border">
 							<form
-								th:action="${comment.share_id != null} ? '/CommentUpdate' : '/CommentInsert'"
+								th:action="${comment.commentId != null} ? '/CommentUpdate' : '/CommentInsert'"
 								method="post" id="form" th:modelAttribute="comment">
 								<table class="table table-borderless">
 									<tr>
@@ -95,8 +95,8 @@ i {
 											th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
 											name="create_time" readonly></td>
 										<td><input type="hidden" class="form-control"
-											name="share_id"
-											th:value="${comment.share_id}" readonly></td>
+											name="commentId"
+											th:value="${comment.commentId}" readonly></td>
 									</tr>
 									<tr>
 										<th>帳號:</th>
@@ -209,12 +209,12 @@ i {
 									<button type="submit" th:if="${comment.userId != null}"
 										class="genric-btn success radius" name="submit"
 										value="更新"><i class="fa fa-paper-plane"></i></button>
-									<button type="button" th:if="${comment.share_id == null}"
+									<button type="button" th:if="${comment.commentId == null}"
 										class="genric-btn primary radius" name="oneInput" value="一鍵輸入"
 										id="OneInput">
 										<i class="fa fa-list"></i>
 									</button>
-									<button type="submit" th:if="${comment.share_id == null}"
+									<button type="submit" th:if="${comment.commentId == null}"
 										class="genric-btn success radius" name="new" value="新增">
 										<i class="fa fa-paper-plane"></i>
 									</button>

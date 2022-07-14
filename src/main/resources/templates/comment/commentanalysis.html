@@ -136,8 +136,8 @@
 								<li
 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
 									href="single_comment.html"><span>OO公司XX職缺</span></a></li>
-								<li th:if="${#httpServletRequest.requestURI == '/comments/my'}"><a
-									th:href="@{/comments/my}"><span>我的分享</span></a></li>
+								<li th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
+									th:href="@{/user/comments}"><span>我的分享</span></a></li>
 							</ul>
 						</div>
 						<ul class="blog-info-link">
@@ -145,7 +145,7 @@
 								class="genric-btn success-border float-left w-25"> 總覽</a>
 							<a th:href="@{/comments/analysis}" id="analysis"
 								class="genric-btn success-border float-left w-25">分析</a>
-							<a th:if="${session.loginMember!=null}" th:href="@{/comments/my}"
+							<a th:if="${session.loginMember!=null}" th:href="@{/user/comments}"
 								id="mycomment" class="genric-btn success-border float-left w-25">
 								我的心得</a>
 						</ul>

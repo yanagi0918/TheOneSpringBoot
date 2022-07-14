@@ -223,7 +223,7 @@ $(document).ready(function () {
 			$('#overview').removeClass('success-border').addClass('success');
 			break;
 
-		case '/comments/my':
+		case '/user/comments':
 			$('#mycomment').removeClass('success-border').addClass('success');
 			break;
 		case '/comments/analysis':

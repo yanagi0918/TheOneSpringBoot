@@ -1,19 +1,12 @@
 package com.theone.springboot.entity;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,81 +18,66 @@ import org.springframework.stereotype.Component;
 public class Comment {
 
 	@Id
-	@Column(name = "share_id")
+	@Column(name = "comment_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer share_id;
+	private Integer commentId;
 
-	@Column(name = "ref_time", columnDefinition = "Date")
+	@Column(columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ref_time;
 
-	@Column(name = "create_time", columnDefinition = "Date")
+	@Column(columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date create_time;
 
-	@Column(name = "comp_name")
 	private String comp_name;
 
-	@Column(name = "comp_score")
 	private Integer comp_score;
 
-	@Column(name = "job_name")
 	private String job_name;
 
-	@Column(name = "job_score")
 	private Integer job_score;
 
-	@Column(name = "job_description")
 	private String job_description;
 
-	@Column(name = "std_hour")
 	private Integer std_hour;
 
-	@Column(name = "real_hour")
 	private Integer real_hour;
 
-	@Column(name = "over_freq")
 	private Integer over_freq;
 
-	@Column(name = "seniority")
 	private Float seniority;
 
-	@Column(name = "total_seniority")
 	private Float total_seniority;
 
-	@Column(name = "monthly_salary")
 	private Integer monthly_salary;
 
-	@Column(name = "yearly_salary")
 	private Integer yearly_salary;
 
-	@Column(name = "bonus_count")
 	private Integer bonus_count;
 
-	@Column(name = "share", length = 1000)
+	@Column(length = 1000)
 	private String share;
 
-	@Column(name = "userId")
 	private String userId;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "comment_comment_record",
-			joinColumns = @JoinColumn(name = "share_id"),
-			inverseJoinColumns = @JoinColumn(name = "record_id")
-			)
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinTable(
+//			name = "comment_comment_message",
+//			joinColumns = @JoinColumn(name = "share_id"),
+//			inverseJoinColumns = @JoinColumn(name = "message_id")
+//			)
+//	
+//	private Set<CommentMessage> messages = new HashSet<>();
 	
-	private Set<CommentRecord> records = new HashSet<>();
-	
-
 	public Comment() {
 	}
 
-	public Comment(Integer share_id, Date ref_time, Date create_time, String comp_name, Integer comp_score,
+	public Comment(Integer commentId, Date ref_time, Date create_time, String comp_name, Integer comp_score,
 			String job_name, Integer job_score, String job_description, Integer std_hour, Integer real_hour,
 			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
 			Integer bonus_count, String share, String userId) {
-		this.share_id = share_id;
+		this.commentId = commentId;
 		this.ref_time = ref_time;
 		this.create_time = create_time;
 		this.comp_name = comp_name;
@@ -144,16 +122,16 @@ public class Comment {
 
 	}
 
-	public Comment(Integer share_id) {
-		this.share_id = share_id;
+	public Comment(Integer commentId) {
+		this.commentId = commentId;
 	}
 
-	public Integer getShare_id() {
-		return share_id;
+	public Integer getCommentId() {
+		return commentId;
 	}
 
-	public void setShare_id(Integer share_id) {
-		this.share_id = share_id;
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
 	}
 
 	public Date getRef_time() {
@@ -292,18 +270,21 @@ public class Comment {
 		this.userId = userId;
 	}
 	
-
-	public Set<CommentRecord> getRecords() {
-		return records;
-	}
-
-	public void setRecords(Set<CommentRecord> records) {
-		this.records = records;
-	}
+//	public Set<CommentMessage> getMessages() {
+//		return messages;
+//	}
+//
+//	public void setMessages(Set<CommentMessage> messages) {
+//		this.messages = messages;
+//	}
+//	
+//	public void addMessage(CommentMessage commentMessage) {
+//		this.messages.add(commentMessage);
+//	}
 
 	@Override
 	public String toString() {
-		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", create_time=" + create_time
+		return "CommentBean [commentId=" + commentId + ", ref_time=" + ref_time + ", create_time=" + create_time
 				+ ", comp_name" + comp_name + ", comp_score" + comp_score + ", job_name" + job_name + ", job_score"
 				+ job_score + ", job_description" + job_description + ", std_hour" + std_hour + ", real_hour"
 				+ real_hour + ", over_freq" + over_freq + ", seniority" + seniority + ", total_seniority"
