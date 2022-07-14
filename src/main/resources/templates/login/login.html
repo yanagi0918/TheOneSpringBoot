@@ -75,7 +75,7 @@
 												type="password" placeholder="密碼" required="required" maxlength="15"/>
 										</div>
 										<p>
-											<a>忘記密碼?</a>
+											<a th:href="@{/forgetpwd}">忘記密碼?</a>
 										</p>
 									</form>
 									<div class="badge-wrap float-left m-1">
@@ -137,7 +137,8 @@
 											id="memberSignup"><i class="fa fa-user-plus"></i></a>
 									</div>
 									<div class="float-left">
-										<button class="btn btn-lg my-0 w-50" type="button" id="btn-submit">註冊</button>
+										<button class="btn btn-lg my-1" type="button" id="btn-submit">註冊</button>
+										       
 									</div>
 								</div>
 							</fieldset>
