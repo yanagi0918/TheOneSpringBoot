@@ -267,6 +267,7 @@ $(function() {
 //Data Table
 $(document).ready(function() {
 
+
 	var table = $('#commentTable').DataTable({
 
 		//don't display search bar
@@ -274,7 +275,6 @@ $(document).ready(function() {
 
 		//x 方向卷軸
 		scrollX: true,
-
 
 		//remove column 3,5,7 sorter
 		//hide column
@@ -285,6 +285,10 @@ $(document).ready(function() {
 			visible: false,
 			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 		}
+//		,{
+//			width: 10,
+//			targets:[17]
+//		}
 		],
 
 		//position of entire
@@ -295,6 +299,8 @@ $(document).ready(function() {
 			[10, 25, 50, -1],
 			[10, 25, 50, 'All'],
 		],
+
+
 
 	});
 
@@ -316,6 +322,8 @@ $(document).ready(function() {
 
 	});
 });
+
+
 
 //menu tab
 $(document).ready(function() {

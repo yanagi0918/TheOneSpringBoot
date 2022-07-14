@@ -1,6 +1,5 @@
 package com.theone.springboot.entity;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,73 +15,73 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "Comment_Table")
 @Component
-public class Comment{
+public class Comment {
 
 	@Id
 	@Column(name = "share_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer share_id;
-	
+
 	@Column(name = "ref_time", columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ref_time;
-	
+
 	@Column(name = "create_time", columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date create_time;
-	
+
 	@Column(name = "comp_name")
 	private String comp_name;
-	
+
 	@Column(name = "comp_score")
 	private Integer comp_score;
-	
+
 	@Column(name = "job_name")
 	private String job_name;
-	
+
 	@Column(name = "job_score")
 	private Integer job_score;
-	
+
 	@Column(name = "job_description")
 	private String job_description;
-	
+
 	@Column(name = "std_hour")
 	private Integer std_hour;
-	
+
 	@Column(name = "real_hour")
 	private Integer real_hour;
-	
+
 	@Column(name = "over_freq")
 	private Integer over_freq;
-	
+
 	@Column(name = "seniority")
 	private Float seniority;
-	
+
 	@Column(name = "total_seniority")
 	private Float total_seniority;
-	
+
 	@Column(name = "monthly_salary")
 	private Integer monthly_salary;
-	
+
 	@Column(name = "yearly_salary")
 	private Integer yearly_salary;
-	
+
 	@Column(name = "bonus_count")
 	private Integer bonus_count;
-	
-	@Column(name = "share")
+
+	@Column(name = "share", length = 1000)
 	private String share;
-	
+
 	@Column(name = "userId")
 	private String userId;
-
 
 	public Comment() {
 	}
 
-	public Comment(Integer share_id, Date ref_time,  Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
-			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
-			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String userId) {
+	public Comment(Integer share_id, Date ref_time, Date create_time, String comp_name, Integer comp_score,
+			String job_name, Integer job_score, String job_description, Integer std_hour, Integer real_hour,
+			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
+			Integer bonus_count, String share, String userId) {
 		this.share_id = share_id;
 		this.ref_time = ref_time;
 		this.create_time = create_time;
@@ -104,9 +103,10 @@ public class Comment{
 
 	}
 
-	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
-			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
-			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String userId) {
+	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name,
+			Integer job_score, String job_description, Integer std_hour, Integer real_hour, Integer over_freq,
+			Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary, Integer bonus_count,
+			String share, String userId) {
 		this.ref_time = ref_time;
 		this.create_time = create_time;
 		this.comp_name = comp_name;
@@ -146,7 +146,7 @@ public class Comment{
 	public void setRef_time(Date ref_time) {
 		this.ref_time = ref_time;
 	}
-	
+
 	public Date getCreate_time() {
 		return create_time;
 	}
@@ -154,6 +154,7 @@ public class Comment{
 	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
 	}
+
 	public String getComp_name() {
 		return comp_name;
 	}
@@ -273,15 +274,15 @@ public class Comment{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", create_time=" + create_time + ", comp_name" + comp_name + ", comp_score"
-				+ comp_score + ", job_name" + job_name + ", job_score" + job_score + ", job_description"
-				+ job_description + ", std_hour" + std_hour + ", real_hour" + real_hour + ", over_freq" + over_freq
-				+ ", seniority" + seniority + ", total_seniority" + total_seniority + ", monthly_salary"
-				+ monthly_salary + ", yearly_salary" + yearly_salary + ", bonus_count" + bonus_count + ", share" + share
-				+ ", userId" + userId + "]";
+		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", create_time=" + create_time
+				+ ", comp_name" + comp_name + ", comp_score" + comp_score + ", job_name" + job_name + ", job_score"
+				+ job_score + ", job_description" + job_description + ", std_hour" + std_hour + ", real_hour"
+				+ real_hour + ", over_freq" + over_freq + ", seniority" + seniority + ", total_seniority"
+				+ total_seniority + ", monthly_salary" + monthly_salary + ", yearly_salary" + yearly_salary
+				+ ", bonus_count" + bonus_count + ", share" + share + ", userId" + userId + "]";
 
 	}
 
