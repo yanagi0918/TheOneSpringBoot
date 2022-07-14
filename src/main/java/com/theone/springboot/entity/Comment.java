@@ -1,12 +1,19 @@
 package com.theone.springboot.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -74,6 +81,16 @@ public class Comment {
 
 	@Column(name = "userId")
 	private String userId;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "comment_comment_record",
+			joinColumns = @JoinColumn(name = "share_id"),
+			inverseJoinColumns = @JoinColumn(name = "record_id")
+			)
+	
+	private Set<CommentRecord> records = new HashSet<>();
+	
 
 	public Comment() {
 	}
@@ -273,6 +290,15 @@ public class Comment {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+
+	public Set<CommentRecord> getRecords() {
+		return records;
+	}
+
+	public void setRecords(Set<CommentRecord> records) {
+		this.records = records;
 	}
 
 	@Override
