@@ -154,6 +154,13 @@
 	color: #0b5394;
 }
 
+.a-ellipsis {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
 </style>
 
 </head>
@@ -314,7 +321,7 @@
 									<td th:text="${comment.monthly_salary}"></td>
 									<td th:text="${comment.yearly_salary}"></td>
 									<td th:text="${comment.bonus_count}"></td>
-									<td th:text="${comment.share}"></td>
+									<td th:text="${comment.share}" class="a-ellipsis"></td>
 									<td><a
 										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.share_id})}"
 										class="btn btn-outline-info m-0">內容</a> <a
@@ -353,6 +360,8 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>
 	<script th:src="@{/lib/chart/chart.min.js}"
 		src="lib/chart/chart.min.js"></script>
 	<script th:src="@{/lib/easing/easing.min.js}"
