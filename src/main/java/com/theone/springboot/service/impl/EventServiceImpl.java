@@ -104,7 +104,7 @@ public class EventServiceImpl implements EventService {
 			messageHelper.setFrom("eeit45theone@gmail.com");
 			messageHelper.setTo(recipient);
 			messageHelper.setSubject(subject);
-			messageHelper.setText(message);
+			messageHelper.setText(message, true);
 		};
 		try {
 			mailSender.send(messagePreparator);

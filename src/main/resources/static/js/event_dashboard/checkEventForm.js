@@ -11,7 +11,7 @@ $(function() {
 	})
 
 	$('#eventCorrectInput').click(function() {
-		$('#compId').val('11111111')
+		$('#compId').val('87654321')
 		$('#eventLinkURL').val('https://www.google.com.tw/')
 		$('#postStart').val('2022-06-15')
 		$('#postEnd').val('2022-08-20')

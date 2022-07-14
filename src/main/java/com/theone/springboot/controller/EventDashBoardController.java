@@ -76,10 +76,12 @@ public class EventDashBoardController {
 		if ("1".equals(result) || "2".equals(result)) {
 			result = ("1".equals(result))?"審核通過":"退件";
 			
-			String msg = "廣告編號: " + id + "\n" +
-						 "審核結果: " + result + "\n" +
-						 "備註: " + remark + "\n" +
-						 "連結: http://localhost:8080/enterprise/events";
+			String msg = "<p style=\"font-size: large;\">" +
+						 "廣告編號: " + id + "<br>" +
+						 "審核結果: <font color=\"blue\"><b>" + result + "</b></font><br>" +
+						 "備註: " + remark + "<br>" +
+						 "連結: http://localhost:8080/enterprise/events" +
+						 "</p>";
 			eventService.sendNotifyEmail("yc20150701@gmail.com", "TheOne 廣告審核通知", msg);
 			return true;
 		}
