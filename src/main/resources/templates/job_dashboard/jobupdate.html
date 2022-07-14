@@ -63,7 +63,7 @@
                         <h1 class="mb-4">更新職缺</h1>
 <form th:action="@{/dashboard/job/saveJob}" action="/jobupdate" method='post' enctype="multipart/form-data" >
 <div class="row mb-3">
-<input type='hidden' name='job_id' th:value="${jobupdate.job_id}"/>
+<input type='hidden' name='jobid' th:value="${jobupdate.jobid}"/>
 </div>
 
 <div class="row mb-3">

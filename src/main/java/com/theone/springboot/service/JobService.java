@@ -30,4 +30,6 @@ public interface JobService {
 	List<Job> findByJobdescription(String jobdescription);
 	
 	List<Job> findByTitleContaining(String title);
+	
+	Job findByJobid(Integer jobid);
 }
