@@ -56,7 +56,7 @@ public class CourseBean {
 //    @JoinTable(name = "member_course",
 //                joinColumns = {@JoinColumn(name = "courseNo", nullable = false)},
 //                inverseJoinColumns = {@JoinColumn(name = "memberPk", nullable = false)})
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "collectionCourses")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "collectionCourses")
     private Set<Member> members = new HashSet<>();
 
     public Set<Member> getMembers() {

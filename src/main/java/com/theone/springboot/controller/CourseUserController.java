@@ -22,10 +22,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -92,59 +89,72 @@ public class CourseUserController {
     }
 
     @GetMapping("/collections")
-    public  String findAllCollections (Model model,HttpSession session){
+    public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
-        model.addAttribute("collectionCourses",collectionCourses);
+        model.addAttribute("collectionCourses", collectionCourses);
         return "course/collections";
     }
 
     @GetMapping("/collectionInsert/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
-        boolean b = true;
         Member member = (Member) session.getAttribute("loginMember");
+
+
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
+
+
         CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
         collectionCourses.add(courseBean);
+
+        Set<CourseBean> empty = new HashSet<>();
+        member.setCollectionCourses(empty);
+        memberService.saveOrUpdate(member);
+
         member.setCollectionCourses(collectionCourses);
         memberService.saveOrUpdate(member);
+
         return ResponseEntity.status(HttpStatus.OK).body(courseBean);
     }
+
     @GetMapping("/collectionDelete/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
-        boolean b = true;
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
         CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
         collectionCourses.remove(courseBean);
         member.setCollectionCourses(collectionCourses);
         memberService.saveOrUpdate(member);
+
         return ResponseEntity.status(HttpStatus.OK).body(courseBean);
     }
 
     @GetMapping("/toCreatePage")
     public String toCreate() {
-
-
-        Member member2 = memberService.getByUserid("N123456789");
-        Member member3 = memberService.getByUserid("X123456789");
-        Member member4 = memberService.getByUserid("a123456785");
-        CourseBean courseBean35 = courseService.findCourse(35).orElseThrow();
-        CourseBean courseBean36 = courseService.findCourse(36).orElseThrow();
-        CourseBean courseBean37 = courseService.findCourse(37).orElseThrow();
-        CourseBean courseBean38 = courseService.findCourse(38).orElseThrow();
-        CourseBean courseBean40 = courseService.findCourse(40).orElseThrow();
-
-        Set<CourseBean> collectionCourses = member3.getCollectionCourses();
-        collectionCourses.add(courseBean35);
-        collectionCourses.add(courseBean36);
-        collectionCourses.add(courseBean37);
-        collectionCourses.add(courseBean38);
-        collectionCourses.add(courseBean40);
-        member3.setCollectionCourses(collectionCourses);
-        memberService.saveOrUpdate(member3);
+//
+//
+//        Member member2 = memberService.getByUserid("N123456789");
+//        Member member3 = memberService.getByUserid("X123456789");
+//        Member member4 = memberService.getByUserid("a123456785");
+//
+//        CourseBean courseBean35 = courseService.findCourse(35).orElseThrow();
+//        CourseBean courseBean36 = courseService.findCourse(36).orElseThrow();
+//        CourseBean courseBean37 = courseService.findCourse(37).orElseThrow();
+//        CourseBean courseBean38 = courseService.findCourse(38).orElseThrow();
+//        CourseBean courseBean40 = courseService.findCourse(40).orElseThrow();
+//
+//        Set<CourseBean> collectionCourses = member2.getCollectionCourses();
+//        collectionCourses.remove(courseBean36);
+//
+//        collectionCourses.add(courseBean35);
+//        collectionCourses.add(courseBean36);
+//        collectionCourses.add(courseBean37);
+//        collectionCourses.add(courseBean38);
+//        collectionCourses.add(courseBean40);
+//        member2.setCollectionCourses(collectionCourses);
+//        memberService.saveOrUpdate(member2);
 
         return "course/lecturerCourseInset";
     }
@@ -158,8 +168,9 @@ public class CourseUserController {
 
     @PostMapping("/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
-        System.out.println(CourseBean);
         Member loginUser = (Member) session.getAttribute("loginMember");
+
+
         if (CourseBean.getLecturer() == null) {
             CourseBean.setLecturer(loginUser.getUsername());
         }
@@ -169,7 +180,13 @@ public class CourseUserController {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
+
+
         CourseBean.setUserid(loginUser.getUserid());
+
+
+
+
         CourseBean.setMember(loginUser);
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";
