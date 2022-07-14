@@ -9,6 +9,6 @@ import antlr.collections.List;
 public interface MemberDao extends JpaRepository<Member, Integer> {
 	
 	Member getByUserid(String userid);
-
+	
 
 }

@@ -21,4 +21,6 @@ public interface MemberService {
 	
 	
 	
+	public void sendNotifyEmail(String recipient, String subject, String message);
+	
 }
