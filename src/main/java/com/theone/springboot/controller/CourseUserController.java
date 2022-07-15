@@ -92,6 +92,8 @@ public class CourseUserController {
     public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
+
+        model.addAttribute("username", member.getUsername());
         model.addAttribute("collectionCourses", collectionCourses);
         return "course/collections";
     }
@@ -123,17 +125,24 @@ public class CourseUserController {
     public ResponseEntity<CourseBean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
-        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
-        collectionCourses.remove(courseBean);
+        System.out.println("====================================================");
+        for (CourseBean collectionCours : collectionCourses) {
+            System.out.println(collectionCours.getCourseNo());
+        }
+        collectionCourses.removeIf(courseBean1 -> courseBean1.getCourseNo().equals(courseNo));
+        System.out.println("====================================================");
+        for (CourseBean collectionCours : collectionCourses) {
+            System.out.println(collectionCours.getCourseNo());
+        }
+
         member.setCollectionCourses(collectionCourses);
         memberService.saveOrUpdate(member);
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/toCreatePage")
     public String toCreate() {
-//
 //
 //        Member member2 = memberService.getByUserid("N123456789");
 //        Member member3 = memberService.getByUserid("X123456789");
@@ -170,9 +179,9 @@ public class CourseUserController {
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
         Member loginUser = (Member) session.getAttribute("loginMember");
 
-
         if (CourseBean.getLecturer() == null) {
             CourseBean.setLecturer(loginUser.getUsername());
+            CourseBean.setScore(5.0);
         }
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
@@ -180,13 +189,7 @@ public class CourseUserController {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
         }
-
-
         CourseBean.setUserid(loginUser.getUserid());
-
-
-
-
         CourseBean.setMember(loginUser);
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";

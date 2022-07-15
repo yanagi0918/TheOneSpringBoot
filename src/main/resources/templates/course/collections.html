@@ -71,120 +71,14 @@
 </div>
 <!-- Hero Area End -->
 <!--================Course Area =================-->
-<!-- Category Start -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程分類</h5>
-            <h2>精選進修主題</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-1.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" th:href="@{/user/courses}">
-                        <h4 class="text-white font-weight-medium">所有課程</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-2.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=英文證照'}">
-                        <h4 class="text-white font-weight-medium">英文證照</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-3.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=日語證照'}">
-                        <h4 class="text-white font-weight-medium">日語證照</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-4.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=韓語證照'}">
-                        <h4 class="text-white font-weight-medium">韓語證照</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=自我認知'}">
-                        <h4 class="text-white font-weight-medium">自我認知</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=求職技巧'}">
-                        <h4 class="text-white font-weight-medium">求職技巧</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=生涯轉換與轉業'}">
-                        <h4 class="text-white font-weight-medium">生涯轉換與轉業</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=就業市場現況趨勢'}">
-                        <h4 class="text-white font-weight-medium">就業市場現況趨勢</h4>
-                        <!--                        <span>100 Courses</span>-->
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Category end -->
 <!-- Courses Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程列表</h5>
-            <h2>所有課程</h2>
-
-            <!-- Search Form -->
-            <div class="mb-2 w-25 m-auto">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="輸入課程關鍵字">
-                        <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search"></i>
-                                    </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <h2 th:utext="' &lt;i class=&quot;fa fa-heart fa-2xl text-primary mr-2&quot;&gt;&lt;/i&gt;'+${username}+'的課程收藏'" class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"></h2>
         </div>
         <div class="row">
-            <div th:each="course:${courseList}" class="col-lg-4 col-md-6 mb-4">
+            <div th:each="course:${collectionCourses}" class="col-lg-4 col-md-6 mb-4">
                 <div class="rounded overflow-hidden mb-2">
                     <!-- 識別課程編號-->
                     <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
