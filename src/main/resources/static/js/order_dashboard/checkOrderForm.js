@@ -321,18 +321,18 @@ $(function () {
 		let checkOrderForm = true;
 		
 		//會員
-		let IdRegex = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
-    if (!IdRegex.test($("#userId").val())) {
-			Swal.fire(
-  				'格式錯誤',
-  				'請輸入正確身分證字號',
-  				'error'
-			)
-			$('#userId').attr("class","form-control is-invalid")
-        checkOrderForm = false;
-   		 }else{
-			$('#userId').attr("class","form-control is-valid")
-		 }
+//		let IdRegex = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
+//    if (!IdRegex.test($("#userId").val())) {
+//			Swal.fire(
+//  				'格式錯誤',
+//  				'請輸入正確身分證字號',
+//  				'error'
+//			)
+//			$('#userId').attr("class","form-control is-invalid")
+//        checkOrderForm = false;
+//   		 }else{
+//			$('#userId').attr("class","form-control is-valid")
+//		 }
 		
 		//日期
     if ($('#orderDate').val() == "") {

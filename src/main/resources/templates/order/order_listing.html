@@ -84,9 +84,8 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
-                                <form action="./orders" method="get" id="fromMax">
+                                <form th:action="@{/user/OrderCategory}" method="get" id="courseCategoryInquire">
                                     <select name="courseCategory" required id="courseCategory">
-<!--                                     <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseCategory}"></option> -->
                                     	<option>全部</option>
                                         <option>英文證照</option>
                                         <option>日語證照</option>
@@ -104,58 +103,37 @@
                                     <div class="small-section-tittle2">
                                         <h4>訂單狀態</h4>
                                     </div>
-                                    <label class="container">已付款
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">待審核
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">成功退款
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">駁回申請
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    <div class="select-job-items2">
+                                  <form th:action="@{/user/OrderState}" method="get" id="StateInquire">
+                                    <select name="state" required id="state">
+                                    	<option>全部</option>
+                                        <option>已付款</option>
+                                        <option>待審核</option>
+                                        <option>成功退款</option>
+                                        <option>駁回申請</option>
+                                    </select>
+                                   </form>
+                                </div>
                                 </div>
                                 <!-- select-Categories End -->
                             </div>
                             <!-- single two -->
                             <div class="single-listing">
                                 <div class="small-section-tittle2">
+                               	    <br/>
                                     <h4>課程</h4>
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
-                                    <select name="productId" required id="productId">
-                                    <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:text="${course.courseName}"></option>
+                                	<form th:action="@{/user/OrderCourseName}" method="get" id="CourseNameInquire">
+                                    <select name="courseName" required id="courseName">
+                                    <option th:each="course : ${courseList}" th:value="${course.courseName}" th:text="${course.courseName}"></option>
                                     </select>
+                             	    </form>
                                 </div>
                                 <!--  Select job items End-->
                                 <!-- select-Categories start -->
-                                <div class="select-Categories pt-80 pb-50">
-                                    <div class="small-section-tittle2">
-                                        <h4>訂單日期搜尋</h4>
-                                    </div>
-                                    <label class="container">一個月
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">三個月
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">半年
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">一年以上
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                <div class="select-Categories pt-30 pb-30">
                                 </div>
                                 <!-- select-Categories End -->
                             </div>
@@ -183,14 +161,13 @@
 										
                                             <div class="blog_right_sidebar">
                                                 <aside class="search_widget">
-                                                    <form action="#">
+                                                    <form th:action="@{/user/OrderSearch}">
                                                         <div class="form-group">
                                                             <div class="input-group mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    placeholder='查詢訂單編號' onfocus="this.placeholder = ''"
-                                                                    onblur="this.placeholder = '查詢訂單編號'">
+                                                                    placeholder='查詢訂單編號' onfocus="this.placeholder = ''" name="orderId">
                                                                 <div class="input-group-append">
-                                                                    <button class="btns" type="button"><i
+                                                                    <button class="btns" type="submit"><i
                                                                             class="ti-search"></i></button>
                                                                 </div>
                                                             </div>
@@ -222,12 +199,12 @@
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <button class="genric-btn info-border circle" href="order_details.html" th:text="${order.state}"></button>
+                                        <button class="genric-btn info-border circle" th:id="${order.orderId}+'s'" th:text="${order.state}"></button>
                                     </div>
                                     
                                     <div class="items-link items-link2 f-right">
                                     	<button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-                                        <button class="genric-btn danger circle" onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
+                                        <button class="genric-btn danger circle" th:onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
                                     </div>
                                 </div>
                                 <!-- single-job-content -->
@@ -311,49 +288,63 @@
 		<script th:src="@{/js/order_dashboard/checkOrderForm.js}" src="js/checkOrderForm.js"></script>
 		
 		<script>
-		$("#productId").change(function() {
-			var option =$(this).find("option:selected");
-			$("#courseCategory").val(option.text().trim());
-		});
 		$("#courseCategory").change(function() {
-			$("#fromMax").submit();
+			$("#courseCategoryInquire").submit();
+		});
+		
+		$("#state").change(function() {
+			$("#StateInquire").submit();
+		});
+		
+		$("#courseName").change(function() {
+			$("#CourseNameInquire").submit();
 		});
 		</script>
 		
-		<script>		
-        function del(id) {
-		Swal.fire({
-			title: '確認是否刪除?',
-			text: "刪除後將無法回復!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: '永久刪除',
-			cancelButtonText: '取消'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire({
-					icon: 'success',
-					title: '已刪除!',
-					showConfirmButton: false,
-					timer: 1500
-				})
-				setTimeout(() => {
-					$.ajax({
-                        url: '/user/order/'+id,
-                        type: 'DELETE',
-                        success: function(result) {
-                            window.location.href='./orders'
-                        }
-                    });
-				}, 1500)
-			}
-		})
-	    }
-        
-    </script>
-    
+		<script>
+		    function del(id) {
+		        var dataBean = {
+		            orderId: id,
+		            state: "待審核"
+		        };
+		        Swal.fire({
+		            title: '確定申請退款!?',
+		            text: "",
+		            icon: 'warning',
+		            showCancelButton: true,
+		            confirmButtonColor: '#3085d6',
+		            cancelButtonColor: '#d33',
+		            confirmButtonText: '確定',
+		            cancelButtonText: '取消'
+		        }).then((result) => {
+		            if (result.isConfirmed) {
+		                Swal.fire({
+		                    icon: 'success',
+		                    title: '待審核!',
+		                    showConfirmButton: false,
+		                    timer: 1000
+		                })
+		                setTimeout(() => {
+		                    $.ajax({
+		                        type: 'PUT',
+		                        url: '/user/orders',
+		                        contentType: "application/json;charset=utf-8",
+		                        data: JSON.stringify(dataBean),
+		                        success: function (data) {
+		                            let orderId = data.orderId;
+		                            console.log(orderId);
+		                            console.log(data.state);
+		                            let temp = orderId+'s';
+		                            document.getElementById(temp).innerText = data.state;
+		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle");
+		                        }
+		                    });
+		                }, 100)
+		            }
+		        })
+		    }
+		</script>
+		
 </body>
 
 </html>

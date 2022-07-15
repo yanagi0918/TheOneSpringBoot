@@ -3,6 +3,7 @@ package com.theone.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Order;
 
@@ -20,13 +21,15 @@ public interface OrderService {
 	
 	void saveOrder(String id,Member member);
 
-	Order findByOrderId (Integer orderId);
+	List<Order> findByOrderIdAndMember (Integer orderId,Member member);
 	
-	List<Order> findByCourseBeanCourseName(String courseName);
+	List<Order> findByCourseBeanCourseNameAndMember(String courseName,Member member);
 	
-	List<Order> findByCourseBeanCourseCategory(String courseCategory);
+	List<Order> findByCourseBeanCourseCategoryAndMember(String courseCategory,Member member);
 	
-	List<Order> findByState(String State);
+	List<Order> findByStateAndMember(String State,Member member);
 	
 	List<Order> findByMember(Member member);
+	
+	Optional<Order> findOrder(Integer pk);
 }

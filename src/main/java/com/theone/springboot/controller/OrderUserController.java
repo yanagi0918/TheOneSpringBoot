@@ -1,6 +1,4 @@
 package com.theone.springboot.controller;
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,11 +21,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.theone.springboot.ecpay.payment.integration.AllInOne;
 import com.theone.springboot.ecpay.payment.integration.domain.AioCheckOutALL;
@@ -66,57 +67,36 @@ public class OrderUserController {
 	 public String showData(Model model, HttpSession session) throws UnsupportedEncodingException {
 	        Member loginUser = (Member) session.getAttribute("loginMember");
 	        List<Order> orderList = orderService.findByMember(loginUser);
-	        model.addAttribute("member",memberService.getAllMembers());
 	        model.addAttribute("courseList", courseServicer.findAllCourses());
 	        model.addAttribute("orders", orderList);
 	        model.addAttribute("total",orderList.size());
 	        return "order/order_listing";
 	 }
 	
-	 @PostMapping("/orders")
-	    public String saveOrUpdate(Order Order, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
-	        System.out.println(Order);
-	        Member loginUser = (Member) session.getAttribute("loginMember");
-	        File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
-	        File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
-	        if (mf.getOriginalFilename().length() != 0) {
-	            mf.transferTo(savedFile);
-	        }
-	        Order.setUserId(loginUser.getUserid());
-	        Order.setMember(loginUser);
-	        orderService.saveOrUpdate(Order);
-	        return "redirect:/user/orders";
-	    }
-	 
-	 public File uploadDirInit() {
-	        String savedFilePath = new File("target\\classes\\static\\orderImg\\").getAbsolutePath();
-	        File uploadDir = new File(savedFilePath);
-	        if (!uploadDir.exists()) {
-	            uploadDir.mkdirs();
-	        }
-	        return uploadDir;
-	    }
+//	 @PostMapping("/orders")
+//	    public String saveOrUpdate(Order Order, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
+//	        System.out.println(Order);
+//	        Member loginUser = (Member) session.getAttribute("loginMember");
+//	        File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
+//	        File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
+//	        if (mf.getOriginalFilename().length() != 0) {
+//	            mf.transferTo(savedFile);
+//	        }
+//	        Order.setUserId(loginUser.getUserid());
+//	        Order.setMember(loginUser);
+//	        orderService.saveOrUpdate(Order);
+//	        return "redirect:/user/orders";
+//	    }
+//	 
+//	 public File uploadDirInit() {
+//	        String savedFilePath = new File("target\\classes\\static\\orderImg\\").getAbsolutePath();
+//	        File uploadDir = new File(savedFilePath);
+//	        if (!uploadDir.exists()) {
+//	            uploadDir.mkdirs();
+//	        }
+//	        return uploadDir;
+//	    }
 	
-//	@GetMapping(path = "/order")
-//	public String toAdd(Model model) {
-//		model.addAttribute("courseList", courseServicer.findAllCourses());
-//		return "order/order_details";
-//	}
-//	
-//	@PostMapping(path = "/order")
-//	public String processCreate(Order order) {
-//		orderService.saveOrUpdate(order);
-//		return "redirect:orders";
-//	}
-//	
-//	@GetMapping(path = "/order/{id}")
-//	public String processUpdate(@PathVariable("id") Integer id, Model model){
-//		Order order = orderService.getOrder(id).get();
-//		model.addAttribute("courseList", courseServicer.findAllCourses());
-//		model.addAttribute("order", order);
-//		return "order_dashboard/orderupdate";
-//	}
-//	
 	//刪除
 	@ResponseBody
 	@DeleteMapping(path = "/order/{id}")
@@ -177,44 +157,63 @@ public class OrderUserController {
 		}
 		
 		
-//		@GetMapping("/OrderType/{courseName}")
-//	    public ResponseEntity<List<Order>> findByType(@PathVariable String courseName) {
-//	        List<Order> OrderTypeList = null;
-//	        if ("全部".equals(courseName)) {
-//	        	OrderTypeList = orderService.getAllOrders();
-//	        } else {
-//	        	OrderTypeList = orderService.findByCourseBeanCourseName(courseName);
-//	        }
-//	        return ResponseEntity.status(HttpStatus.OK).body(OrderTypeList);
-//	    }
-		
-//		 @GetMapping("/orders")
-//		    public String findAllorder(@RequestParam(required = false) String courseCategory,
-//		                                @RequestParam(required = false) Integer orderId,
-//		                                Model model) {
-//		        if (orderId != null) {
-//		            Optional<Order> findOrder = orderService.getOrder(orderId);
-//		            model.addAttribute("CourseBean", findOrder.orElseThrow());
-//		            return "order/order_listing";
-//		        } 
-//		        else if (courseCategory != null) {
-//		            List<Order> orderList = orderService.findByCourseBeanCourseName(courseCategory);
-//		            model.addAttribute("courseCategory", courseCategory);
-//		            model.addAttribute("orderList", orderList);
-//		            return "order/order_listing";
-//		        } 
-//		        else {
-//		            List<Order> orderList = orderService.findByState("已付款");
-//		            model.addAttribute("courseList", orderList);
-//		            return "order/order_listing";
-//		        }
-//		    }
-		
-		@GetMapping("/order")
-		public String x(@RequestParam String courseCategory,Model model) {
-			List<Order> findByCourseBeanCourseCategory = orderService.findByCourseBeanCourseCategory(courseCategory);
-			model.addAttribute("orders",findByCourseBeanCourseCategory);
-			return  "order/order_details";
+		//查詢課程分類
+		@GetMapping("/OrderCategory")
+		public String OrderCategory(@RequestParam String courseCategory,Model model,HttpServletRequest request) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+			List<Order> orders = orderService.findByCourseBeanCourseCategoryAndMember(courseCategory,loginMember);
+			model.addAttribute("courseCategory",courseCategory);
+			model.addAttribute("loginMember",loginMember);
+			model.addAttribute("orders",orders);
+			model.addAttribute("total",orders.size());
+			return  "order/order_listing";
 		}
-
+		
+		//查詢訂單ID
+		@GetMapping("/OrderSearch")
+		public String OrderSearch(Integer orderId,Model model,HttpServletRequest request) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+			List<Order> orders = orderService.findByOrderIdAndMember(orderId,loginMember);
+			model.addAttribute("loginMember",loginMember);
+			model.addAttribute("orders",orders);
+			model.addAttribute("orderId",orderId);
+			model.addAttribute("total",orders.size());
+			return  "order/order_listing";
+		}
+		
+		//查詢狀態
+		@GetMapping("/OrderState")
+		public String OrderState(@RequestParam String state,Model model,HttpServletRequest request) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+			List<Order> orders = orderService.findByStateAndMember(state, loginMember);
+			model.addAttribute("state",state);
+			model.addAttribute("loginMember",loginMember);
+			model.addAttribute("orders",orders);
+			model.addAttribute("total",orders.size());
+			return  "order/order_listing";
+		}
+		
+		//查詢課程
+		@GetMapping("/OrderCourseName")
+		public String OrderCourseName(@RequestParam String courseName,Model model,HttpServletRequest request) {
+			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+			List<Order> orders = orderService.findByCourseBeanCourseNameAndMember(courseName, loginMember);
+			model.addAttribute("courseName",courseName);
+			model.addAttribute("loginMember",loginMember);
+			model.addAttribute("orders",orders);
+			model.addAttribute("total",orders.size());
+			return  "order/order_listing";
+		}
+	
+		//審核
+		@PutMapping("/orders")
+	    @ResponseBody
+	    public ResponseEntity<Order> saveOrUpdate(@RequestBody Order Order) {
+			Order orders = orderService.findOrder(Order.getOrderId()).orElseThrow();
+			orders.setState(Order.getState());
+	        orderService.saveOrUpdate(orders);
+	        return ResponseEntity.status(HttpStatus.OK).body(orders);
+	    }
+		
+		
 }
