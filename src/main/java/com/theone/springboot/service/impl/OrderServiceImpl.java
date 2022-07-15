@@ -64,7 +64,7 @@ public class OrderServiceImpl  implements OrderService{
 		order.setMember(member);
 		order.setUserId(member.getUserid());
 		order.setTotalPrice(course.getPrice());
-		order.setProductId(course.getCourseName());
+		order.setProductId(courseid);
 		order.setOrderDate(new Date());
 		order.setState("已付款");
 		orderDao.save(order);
@@ -74,28 +74,33 @@ public class OrderServiceImpl  implements OrderService{
 	}
 
 	@Override
-	public Order findByOrderId(Integer orderId) {
-		return orderDao.findById(orderId).get();
+	public List<Order> findByOrderIdAndMember (Integer orderId,Member member) {
+		return orderDao.findByOrderIdAndMember(orderId,member);
 	}
 
 	@Override
-	public List<Order> findByCourseBeanCourseName(String courseName) {
-		return orderDao.findByCourseBeanCourseName(courseName);
+	public List<Order> findByCourseBeanCourseNameAndMember(String courseName,Member member){
+		return orderDao.findByCourseBeanCourseNameAndMember(courseName, member);
 	}
 
 	@Override
-	public List<Order> findByCourseBeanCourseCategory(String courseCategory) {
-		return orderDao.findByCourseBeanCourseCategory(courseCategory);
+	public List<Order> findByCourseBeanCourseCategoryAndMember(String courseCategory,Member member) {
+		return orderDao.findByCourseBeanCourseCategoryAndMember(courseCategory,member);
 	}
 
 	@Override
-	public List<Order> findByState(String State) {
-		return orderDao.findByState(State);
+	public List<Order> findByStateAndMember(String State,Member member){
+		return orderDao.findByStateAndMember(State, member);
 	}
 
 	@Override
 	public List<Order> findByMember(Member member) {
 		return orderDao.getByMember(member);
+	}
+
+	@Override
+	public Optional<Order> findOrder(Integer pk) {
+		 return orderDao.findById(pk);
 	}
 
 	

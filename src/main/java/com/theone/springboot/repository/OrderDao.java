@@ -11,13 +11,15 @@ public interface OrderDao extends JpaRepository<Order, Integer>{
 	
 //	public String findByUserIdAndOrderId(String userId ,String orderId);
 	
-	List<Order> findByCourseBeanCourseName(String courseName);
+	List<Order> findByCourseBeanCourseNameAndMember(String courseName,Member member);
 	
-	List<Order> findByCourseBeanCourseCategory(String courseCategory);
+	List<Order> findByCourseBeanCourseCategoryAndMember(String courseCategory,Member member);
 	
-	List<Order> findByState(String State);
+	List<Order> findByStateAndMember(String State,Member member);
 	
 	List<Order> getByMember(Member Member);
+	
+	List<Order> findByOrderIdAndMember(Integer orderId,Member member);
 	
 }
 

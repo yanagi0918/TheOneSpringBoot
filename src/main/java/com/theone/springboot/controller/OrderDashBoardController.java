@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.theone.springboot.entity.Order;
 import com.theone.springboot.service.CourseService;
+import com.theone.springboot.service.MemberService;
 import com.theone.springboot.service.OrderService;
 
 //後台
@@ -32,9 +34,13 @@ public class OrderDashBoardController {
 	@Autowired
 	CourseService courseServicer;
 	
+	@Autowired
+	MemberService memberService;
+	
 	@GetMapping(path = "/orders")
 	public String showData(Model model) {
-		List<Order> orders = orderService.getAllOrders();	
+		List<Order> orders = orderService.getAllOrders();
+		model.addAttribute("memberList", memberService.getAllMembers());
 		model.addAttribute("courseList", courseServicer.findAllCourses());
 		model.addAttribute("orders", orders);
 		return "order_dashboard/orderlist";
@@ -42,12 +48,14 @@ public class OrderDashBoardController {
 	
 	@GetMapping(path = "/order")
 	public String toAdd(Model model) {
+		model.addAttribute("memberList", memberService.getAllMembers());
 		model.addAttribute("courseList", courseServicer.findAllCourses());
 		return "order_dashboard/ordercreate";
 	}
 	
 	@PostMapping(path = "/order")
 	public String processCreate(Order order) {
+		order.setMember(memberService.getMember(Integer.valueOf(order.getUserId())).get());
 		orderService.saveOrUpdate(order);
 		return "redirect:orders";
 	}
@@ -55,6 +63,7 @@ public class OrderDashBoardController {
 	@GetMapping(path = "/order/{id}")
 	public String processUpdate(@PathVariable("id") Integer id, Model model){
 		Order order = orderService.getOrder(id).get();
+		model.addAttribute("memberList", memberService.getAllMembers());
 		model.addAttribute("courseList", courseServicer.findAllCourses());
 		model.addAttribute("order", order);
 		return "order_dashboard/orderupdate";
