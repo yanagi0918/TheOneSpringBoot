@@ -209,10 +209,11 @@
                         <!--                            <i class="fa-regular fa-bookmark fa-lg text-primary mr-2"></i>-->
                         <!--                        </h6></a>-->
 
-                        <h6 class="m-0 f-right "><i class="fa-regular fa-bookmark fa-xl text-primary mr-2"
-                                                   th:id="${course.courseNo}+'ok'"></i></h6>
-                        <h6 class="m-0 f-right "><i class="fa-solid fa-bookmark fa-xl text-primary mr-2"
-                                                           th:id="${course.courseNo}+'no'"></i></h6>
+                        <h6 class="m-0 f-right" th:id="${course.courseNo}+'ok'" >
+                            <i class="fa-regular fa-bookmark fa-xl text-primary mr-2" th:id="${course.courseNo}" onclick="collectionInsert(this.id)"></i></h6>
+                        <h6 class="m-0 f-right" th:id="${course.courseNo}+'no'">
+                            <i class="fa-solid fa-bookmark fa-xl text-primary mr-2" th:id="${course.courseNo}+'del'" onclick="collectionDelete(this.id)"></i></h6>
+
                         <div class="border-top mt-4 pt-4">
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"
@@ -361,13 +362,12 @@
 
 <script>
     $(function () {
-
         var courseNoSelectors = $('.courseNo');
         for (let i = 0; i < courseNoSelectors.length; i++) {
-            var  courseNo = courseNoSelectors[i].value
+            let courseNo = courseNoSelectors[i].value
             console.log(courseNo)
-            var ok = courseNo+'ok'
-            var no = courseNo+'no'
+            let ok = courseNo + 'ok'
+            let no = courseNo + 'no'
             console.log(ok)
             console.log(no)
             console.log('-------------------------------')
@@ -379,26 +379,59 @@
                     console.log(data)
                     console.log(ok)
                     console.log(no)
-
-                    if (data){
-                        document.getElementById(ok).hidden= true;
+                    if (data) {
+                        document.getElementById(ok).hidden = true;
                         $('#ok').hide();
-                    }else {
-                        document.getElementById(no).hidden= true;
+                    } else {
+                        document.getElementById(no).hidden = true;
                         $('#no').hide();
                     }
-
                     // document.getElementById(courseNo).innerText = data.status;
                     // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
-
                 }
             });
         }
-
-
     })
 
+    function collectionInsert(courseNo) {
+        $.ajax({
+            type: 'get',
+            url: '/user/collectionInsert/' + courseNo,
+            success: function (data) {
+                console.log(data)
+                if (data) {
+                    console.log("hi")
+                    document.getElementById(courseNo).setAttribute("class", "fa-solid fa-bookmark fa-xl text-primary mr-2");
+                }
+                // document.getElementById(courseNo).innerText = data.status;
+                // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+            }
+        });
 
+    }
+    function collectionDelete(courseNo) {
+        var str = courseNo;
+        var id = str.substring(0,2);
+        let no = id;
+        console.log(no);
+        $.ajax({
+            type: 'get',
+            url: '/user/collectionDelete/' + no,
+            success: function (data) {
+                console.log(data)
+                if (data) {
+                    console.log("hi DELETE")
+                    // $('#no':first-child)
+                    $("i:contains('John')")
+                    document.getElementById(courseNo).setAttribute("class", "fa-regular fa-bookmark fa-xl text-primary mr-2");
+                }
+                // document.getElementById(courseNo).innerText = data.status;
+                // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+            }
+
+        });
+
+    }
 </script>
 
 </body>

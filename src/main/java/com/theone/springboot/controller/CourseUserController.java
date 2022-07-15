@@ -116,7 +116,7 @@ public class CourseUserController {
 
     @GetMapping("/collectionInsert/{courseNo}")
     @ResponseBody
-    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
+    public ResponseEntity<Boolean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<Member> members = new HashSet<>();
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
@@ -133,7 +133,7 @@ public class CourseUserController {
         courseBean.setMembers(members);
         members.add(member);
         memberService.saveAllAndFlush(members);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     //backup
@@ -154,7 +154,7 @@ public class CourseUserController {
 
     @GetMapping("/collectionDelete/{courseNo}")
     @ResponseBody
-    public ResponseEntity<CourseBean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
+    public ResponseEntity<Boolean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
 
@@ -168,7 +168,7 @@ public class CourseUserController {
         member.setCollectionCourses(collectionCourses);
         memberService.saveOrUpdate(member);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @GetMapping("/toCreatePage")
