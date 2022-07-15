@@ -2,6 +2,7 @@ package com.theone.springboot.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class MemberServiceImpl implements MemberService {
 	public Member saveOrUpdate(Member member) {
 		return memberDao.save(member);
 	}
+
+	@Override
+	public void saveAllAndFlush(Set<Member> members) {
+		memberDao.saveAllAndFlush(members);
+	}
+
 
 	@Override
 	public List<Member> getAllMembers() {

@@ -97,7 +97,9 @@
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
-                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>
+                        <div></div>
+<!--                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i>-->
+<!--                        </h6></a>-->
                         <div class="border-top mt-4 pt-4">
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"
@@ -250,6 +252,9 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/assets/js/plugins.js}"></script>
 <script th:src="@{/assets/js/main.js}"></script>
+
+<!-- fontawesome JS here -->
+<script src="https://kit.fontawesome.com/339c616d98.js" crossorigin="anonymous"></script>
 
 
 <!-- assets_course JS here -->

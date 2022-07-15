@@ -190,7 +190,7 @@
                     <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
 
                     <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
-                        <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
+                        <img class="img-fluid " th:src="${course.coursePicUrl}" alt="" height="250px">
                     </a>
                     <div class="bg-secondary p-4">
                         <div class="d-flex justify-content-between mb-3">
@@ -203,7 +203,11 @@
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
-                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>
+                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right ">
+<!--                            <i class="fa-solid fa-bookmark fa-lg text-primary mr-2"></i>-->
+                            <i class="fa-regular fa-bookmark fa-lg text-primary mr-2"></i>
+                        </h6></a>
+                        <h5><i class="fa-regular fa-bookmark fa-lg text-primary mr-2" id="test"></i></h5>
                         <div class="border-top mt-4 pt-4">
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"
@@ -217,31 +221,6 @@
                     </div>
                 </div>
             </div>
-            <!--            <div class="col-lg-4 col-md-6 mb-4">-->
-            <!--                <div class="rounded overflow-hidden mb-2">-->
-            <!--                    <a href="">-->
-            <!--                        <img class="img-fluid" th:src="@{/assets_course/img/course-2.jpg}" alt="">-->
-            <!--                    </a>-->
-            <!--                    <div class="bg-secondary p-4">-->
-            <!--                        <div class="d-flex justify-content-between mb-3">-->
-            <!--                            <h6 class="m-0"><i class="fa fa-table fa-lg text-primary mr-2"></i>英文認證</h6>-->
-            <!--                            <h6 class="m-0"><i class="fa fa-calendar-alt fa-lg text-primary mr-2"></i>2022-01-01</h6>-->
-            <!--                        </div>-->
-            <!--                        <a class="h5" href="">Web design & development courses for beginner</a>-->
-            <!--                        <div></div>-->
-            <!--                        <a href="" class="h5"><h6 class="m-0 f-right "><i-->
-            <!--                                class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>-->
-            <!--                        <div class="border-top mt-4 pt-4">-->
-            <!--                            <div class="d-flex justify-content-between">-->
-            <!--                                <h6 class="m-0"><i class="fa fa-user-circle fa-lg text-primary mr-2"></i>王大維</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-dollar-sign fa-lg text-primary mr-2"></i>NT1999</h6>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
         </div>
 
 
@@ -357,6 +336,9 @@
 <script th:src="@{/assets/js/plugins.js}"></script>
 <script th:src="@{/assets/js/main.js}"></script>
 
+<!-- fontawesome JS here -->
+<script src="https://kit.fontawesome.com/339c616d98.js" crossorigin="anonymous"></script>
+
 
 <!-- assets_course JS here -->
 <!-- JavaScript Libraries -->
@@ -372,6 +354,25 @@
 <!-- Template Javascript -->
 <script th:src="@{/assets_course/js/main.js}"></script>
 
+<script>
+    $(function () {
+        $('#test').click(function () {
+            $('#test').attr("class","fa-solid fa-bookmark fa-lg text-primary mr-2");
+            $('#test').attr("id","test2");
+            console.log("done")
+        })
+
+    })
+    $(function () {
+        $('#test2').click(function () {
+            $('#test2').attr("class","fa-regular fa-bookmark fa-lg text-primary mr-2");
+            $('#test2').attr("id","test");
+            console.log("done2")
+        })
+
+    })
+
+</script>
 
 </body>
 </html>

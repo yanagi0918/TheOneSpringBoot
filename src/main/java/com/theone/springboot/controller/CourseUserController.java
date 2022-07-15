@@ -100,40 +100,54 @@ public class CourseUserController {
 
     @GetMapping("/collectionInsert/{courseNo}")
     @ResponseBody
-    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
+    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
-
-
+        Set<Member> members = new HashSet<>();
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
-
 
         CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
         collectionCourses.add(courseBean);
 
         Set<CourseBean> empty = new HashSet<>();
         member.setCollectionCourses(empty);
-        memberService.saveOrUpdate(member);
+        members.add(member);
+        memberService.saveAllAndFlush(members);
 
         member.setCollectionCourses(collectionCourses);
-        memberService.saveOrUpdate(member);
-
-        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+        courseBean.setMembers(members);
+        members.add(member);
+        memberService.saveAllAndFlush(members);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    //backup
+//    @GetMapping("/collectionInsert/{courseNo}")
+//    @ResponseBody
+//    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
+//        Member member = (Member) session.getAttribute("loginMember");
+//        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+//        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
+//        collectionCourses.add(courseBean);
+//        Set<CourseBean> empty = new HashSet<>();
+//        member.setCollectionCourses(empty);
+//        memberService.saveOrUpdate(member);
+//        member.setCollectionCourses(collectionCourses);
+//        memberService.saveOrUpdate(member);
+//        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
+//    }
 
     @GetMapping("/collectionDelete/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
-        System.out.println("====================================================");
-        for (CourseBean collectionCours : collectionCourses) {
-            System.out.println(collectionCours.getCourseNo());
-        }
+
         collectionCourses.removeIf(courseBean1 -> courseBean1.getCourseNo().equals(courseNo));
-        System.out.println("====================================================");
-        for (CourseBean collectionCours : collectionCourses) {
-            System.out.println(collectionCours.getCourseNo());
-        }
+
+        Set<CourseBean> empty = new HashSet<>();
+        member.setCollectionCourses(empty);
+        memberService.saveOrUpdate(member);
+
 
         member.setCollectionCourses(collectionCourses);
         memberService.saveOrUpdate(member);
