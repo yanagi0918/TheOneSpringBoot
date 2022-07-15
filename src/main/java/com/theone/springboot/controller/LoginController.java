@@ -1,8 +1,5 @@
 package com.theone.springboot.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.theone.springboot.entity.Company;
-import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CompanyService;
-import com.theone.springboot.service.EventService;
 import com.theone.springboot.service.MemberService;
 
 @Controller
@@ -26,17 +21,6 @@ public class LoginController {
 	
 	@Autowired
 	MemberService memberService;
-	
-	@Autowired
-	EventService eventService;
-	
-	@GetMapping("/")
-	public String toIndex(Model model) {
-		Date today = new Date();
-		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, today, today);
-		model.addAttribute("events",events);
-		return "index";
-	}
 	
 	@GetMapping("/login")
 	public String toLoginPage() {
