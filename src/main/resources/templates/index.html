@@ -52,22 +52,22 @@
                         <div class="row">
                             <div class="col-xl-8">
                                 <!-- form -->
-                                <form action="#" class="search-box">
+                                <form th:action="@{/job/search}" class="search-box" id="searchsubmit">
                                     <div class="input-form">
-                                        <input type="text" placeholder="職缺查詢">
+                                        <input type="text" placeholder="職缺查詢" name="title">
                                     </div>
                                     <div class="select-form">
                                         <div class="select-itms">
-                                            <select name="select" id="select1">
-                                                <option value="">台北</option>
-                                                <option value="">新竹</option>
-                                                <option value="">台中</option>
-                                                <option value="">高雄</option>
+                                            <select name="jobdescription">
+                                                <option>全職</option>
+                                                <option>兼職</option>
+                                                <option>工讀</option>
+                                                <option>其他</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="search-form">
-                                        <a href="#">找工作</a>
+                                        <a href="#" onclick="document.getElementById('searchsubmit').submit()">找工作</a>
                                     </div>	
                                 </form>
                             </div>
@@ -81,7 +81,7 @@
         <div class="whole-wrap">
             <div class="container box_1170">
                 <div class="section-top-border">
-                    <h3 class="mb-30">熱門職缺</h3>
+                    <h3 class="mb-30">職缺推薦</h3>
                     <div class="row">
                         <div th:each="event:${events}" class="col-md-4 mb-20">
                             <div class="single-defination">
@@ -90,9 +90,93 @@
                         </div>
                     </div>
                 </div>
+                <div class="section-top-border">
+                    <h3 class="mb-30">熱門職缺</h3>
+                    <div class="row">
+                        <ul th:each="jobs:${jobs}">
+							<section class="featured-job-area">
+								<div class="container">
+									<div class="single-job-items mb-10">
+										<div class="job-items">
+											<div class="job-tittle job-tittle2">
+												<a th:href="@{/job/jobdeatail/}+${jobs.jobid}"  target="_blank">
+													<h4 th:text="${jobs.title}"></h4>
+												</a>
+												<ul>
+													<li>工作性質:<span th:text="${jobs.jobdescription}"></span></li>
+													<li>徵才條件:<span th:text="${jobs.qualification}"></span></li>
+												</ul>
+												<ul>
+													<li class="box ellipsis" th:text="${jobs.description}"></li>
+												</ul>
+												<ul>
+													<li th:text="${jobs.company.corpname}"></li>
+													<li>薪資:<span th:text="${jobs.salary}"></span></li>
+												</ul>
+											</div>
+										</div>
+										<div class="items-link items-link2 f-right">
+											<a href="#">應徵</a>
+										</div>
+									</div>
+								</div>
+							</section>
+						</ul>
+                    </div>
+                </div>
             </div>
         </div>
- 		<!-- Event End -->       
+ 		<!-- Event End -->
+ 		<!-- How  Apply Process Start-->
+        <div class="apply-process-area apply-bg pt-150 pb-150" data-background="assets/img/gallery/how-applybg.png">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle white-text text-center">
+                            <h2> 使用說明</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Apply Process Caption -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-search"></span>
+                            </div>
+                            <div class="process-cap">
+                               <h5>1. 搜尋職缺</h5>
+                               <p>點擊上方找工作進入職缺專區，或是直接在首頁搜尋欄輸入職缺關鍵字。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-curriculum-vitae"></span>
+                            </div>
+                            <div class="process-cap">
+                               <h5>2. 履歷投遞</h5>
+                               <p>點擊職缺標題進入職缺描述，瀏覽職缺相關需求與待遇，點擊我要應徵並投遞履歷。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-tour"></span>
+                            </div>
+                            <div class="process-cap">
+                               <h5>3. 獲取最適合你的工作</h5>
+                               <p>等待企業通知面試，也可於討論區瀏覽他人工作與面試經驗，準備迎接面試與職場。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <!-- How  Apply Process End-->     
 
     </main>
     <footer>
