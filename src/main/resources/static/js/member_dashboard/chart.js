@@ -47,18 +47,16 @@
 							"rgba(0, 156, 255, .5)",
 							"rgba(0, 156, 255, .4)"
 						],
-						data: result
+						data: result,
+						yAxisID: 'yAxis'
 					}]
 				},
-				options: {
-					responsive: true,
-					scales: {
-						yAxes: [{
-							ticks: {
-								stepSize: 1
-							}
-						}]
-					}
+				options: {  
+    				scales: {
+        				yAxis: {
+                			ticks:{stepSize:1}
+        				}
+    				}
 				}
 			})
 		}
