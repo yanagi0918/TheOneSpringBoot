@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Interview {
 	@Id
-	@Column(name = "cv_no")
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cvNo;
 
@@ -44,20 +44,32 @@ public class Interview {
 
 	private String userId;
 	
-	private String userName;
-	
 	
 
 	public Interview() {
 	}
 
 
-	
+
+	public Interview(Date intTime, Timestamp createTime, String compName, String jobName, String offer, String test,
+			String qA, String share, Integer compScore, String userId) {
+		super();
+		this.intTime = intTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.jobName = jobName;
+		this.offer = offer;
+		this.test = test;
+		QA = qA;
+		this.share = share;
+		this.compScore = compScore;
+		this.userId = userId;
+	}
+
 
 
 	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
-			String test, String qA, String share, Integer compScore, String userId, String userName
-			) {
+			String test, String qA, String share, Integer compScore, String userId) {
 		super();
 		this.cvNo = cvNo;
 		this.intTime = intTime;
@@ -70,39 +82,21 @@ public class Interview {
 		this.share = share;
 		this.compScore = compScore;
 		this.userId = userId;
-		this.userName = userName;
-		
 	}
 
 
 
-	public Interview(Date intTime, Timestamp createTime, String compName, String jobName, String offer, String test,
-			String qA, String share, Integer compScore, String userId, String userName) {
-		super();
-		this.intTime = intTime;
-		this.createTime = createTime;
-		this.compName = compName;
-		this.jobName = jobName;
-		this.offer = offer;
-		this.test = test;
-		QA = qA;
-		this.share = share;
-		this.compScore = compScore;
-		this.userId = userId;
-		this.userName = userName;
-	
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
 
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+
+
+
+
+
+
+
+
 
 
 
@@ -200,9 +194,12 @@ public class Interview {
 	public String toString() {
 		return "Interview [cvNo=" + cvNo + ", intTime=" + intTime + ", createTime=" + createTime + ", compName="
 				+ compName + ", jobName=" + jobName + ", offer=" + offer + ", test=" + test + ", QA=" + QA + ", share="
-				+ share + ", compScore=" + compScore + ", userId=" + userId + ", userName=" + userName + "]";
+				+ share + ", compScore=" + compScore + ", userId=" + userId + "]";
 	}
 
+
+
+	
 	
 
 }
