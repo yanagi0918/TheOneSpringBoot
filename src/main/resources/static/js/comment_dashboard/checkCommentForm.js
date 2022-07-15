@@ -286,7 +286,7 @@ function format(commentMessage) {
 $(document).ready(function() {
 
 
-	var table = $('#commentTable').DataTable({
+	var table1 = $('#commentTable').DataTable({
 
 
 		//don't display search bar
@@ -320,6 +320,26 @@ $(document).ready(function() {
 		],
 
 
+
+	});
+
+	var table2 = $('#commentMessageTable').DataTable({
+
+
+		//don't display search bar
+		searching: false,
+
+		//x 方向卷軸
+		scrollX: true,
+		
+		//position of entire
+		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
+		
+		//Menu
+		lengthMenu: [
+			[10, 25, 50, -1],
+			[10, 25, 50, 'All'],
+		],
 
 	});
 

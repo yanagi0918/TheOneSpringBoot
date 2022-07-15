@@ -355,12 +355,12 @@
 						</div>
 
 						<button type="button" class="btn btn-primary mb-0"
-							onclick="location.href='/dashboard/CommentNew'">新增評論</button>
+							onclick="location.href='/dashboard/CommentMessageNew'">新增留言</button>
 					</div>
 					<div class="container">
 						<table
 							class="table table-bordered order-table cell-border hover nowrap"
-							id="commentTable" style="width: 100%">
+							id="commentMessageTable" style="width: 100%">
 							<thead>
 								<tr class="text-dark">
 									<th>編號</th>
@@ -375,15 +375,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="commentMessage : ${listCommentMessage}" id="commentmessagelist">
-									<td th:text="${commentMessage.messageId}"></td>
-									<td th:text="${commentMessage.comment_Id}"></td>
-									<td th:text="${commentMessage.messageOrder}"></td>
-									<td th:text="${#datetime.format(commentMessage.messageTime,'yyyy-MM-dd hh:mm:ss')}"></td>
-									<td th:text="${commentMessage.userId}"></td>
-									<td th:text="${commentMessage.messageContent}"></td>
-									<td th:text="${commentMessage.messageReply}"></td>
-									<td th:text="${commentMessage.messageLike}"></td>
+								<tr th:each="commentMessages : ${listCommentMessages}" id="commentmessageslist">
+									<td th:text="${commentMessages.messageId}"></td>
+									<td th:text="${commentMessages.comment_Id}"></td>
+									<td th:text="${commentMessages.messageOrder}"></td>
+									<td th:text="${#datetime.format(commentMessages.messageTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+									<td th:text="${commentMessages.userId}"></td>
+									<td th:text="${commentMessages.messageContent}"></td>
+									<td th:text="${commentMessages.messageReply}"></td>
+									<td th:text="${commentMessages.messageLike}"></td>
 									<td><a
 										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.commentId})}"
 										class="btn btn-outline-info m-0">內容</a> <a

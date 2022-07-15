@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.CommentMessage;
+import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
 
 @Controller
@@ -24,18 +26,29 @@ public class CommentDashBoardController {
 
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	CommentMessageService commentMessageService;
 
 	// 所有評論list
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		model.addAttribute("listComment", commentService.findAll());
+		model.addAttribute("listCommentMessages", commentMessageService.findAll());
 		return "comment_dashboard/commentlist";
 	}
-
+	
 	// 新增評論
 	@PostMapping("/CommentInsert")
 	public String addComment(@ModelAttribute("comment") Comment comment, Model model) {
 		commentService.saveOrUpdate(comment);
+		return "redirect:./comments";
+	}
+	
+	// 新增留言
+	@PostMapping("/CommentMessageInsert")
+	public String addCommentMessage(@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
+		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:./comments";
 	}
 
@@ -58,6 +71,12 @@ public class CommentDashBoardController {
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
 		return "comment_dashboard/commentform";
 	}
+	
+	// 送出新增留言的空白表單
+		@RequestMapping("/CommentMessageNew")
+		public String showCommentMessageForm(@ModelAttribute("commentMessage") CommentMessage commentMessage) {
+			return "comment_dashboard/commentmessageform";
+		}
 
 	// 送出新增評價的空白表單
 	@RequestMapping("/CommentEdit/{id}")
