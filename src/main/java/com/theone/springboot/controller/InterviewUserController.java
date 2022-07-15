@@ -50,7 +50,7 @@ public class InterviewUserController {
 	}
 	
 	// 個人list
-		@RequestMapping("/intvlist/me")
+		@RequestMapping("/user/intvlist")
 		public String listMyintv(HttpSession session, Model model) {
 			Member member = (Member)session.getAttribute("loginMember");
 			List<Interview> findByUserId = interviewService.findByUserId(member.getUserid());

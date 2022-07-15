@@ -74,7 +74,7 @@
 							<a th:href="@{/intvlist}" id="overview"
 								class="genric-btn primary e-large float-left w-30" th:text="總覽"> </a>
 							
-							<a th:if="${session.loginMember!=null}" th:href="@{/intvlist/me}"
+							<a th:if="${session.loginMember!=null}" th:href="@{/user/intvlist}"
 								id="myintv" class="genric-btn primary-border e-large float-left w-30">
 								我的</a>
 						
@@ -137,7 +137,7 @@
                                            		</div>
                                            		 <span th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" >&nbsp</span>		
                                            	<div>
-                                             <button class="genric-btn  danger-border circle arrow medium" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp喜歡 <i class="fa fa-heart" id=heart> </i> </button>
+                                             <button id=heart class="genric-btn  danger-border circle arrow medium " th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp喜歡 <i class="fa fa-heart" id=heart style="color:black"> </i> </button>
                                             </div>
                                         </div>																																								
                                     
@@ -347,6 +347,15 @@
 	    }
         
     </script>
+        <script>
+        var heart= document.getElementById("heart");
+        var heart1= document.getElementsByClassName("fa fa-heart");
         
+        heart.addEventListener("click",function(){
+        	this.style.color= "red";
+        	this.innerText="like it";
+        })
+        
+        </script>
     </body>
 </html>
