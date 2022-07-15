@@ -124,10 +124,11 @@ text-overflow: ellipsis;
 							</div>
 						</div>
 						<!-- Job Category Listing start -->
-							<div class="job-category-listing mb-50">
+							<div class="job-category-listing mb-30">
 								<!-- single one -->
 								<div class="single-listing">
 								<!-- select-Categories Start -->
+								
 									<div class="small-section-tittle2">
 										<h4>職缺型態</h4>
 									</div>
@@ -209,7 +210,7 @@ text-overflow: ellipsis;
 											</div>
 										</div>
 										<div class="items-link items-link2 f-right">
-											<a href="#">應徵</a>
+											<a th:href="@{'/user/joblist/'+${jobs.jobid}}">應徵</a>
 										</div>
 									</div>
 								</div>

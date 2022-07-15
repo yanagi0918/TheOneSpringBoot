@@ -3,11 +3,16 @@ package com.theone.springboot.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -36,6 +41,35 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false)
     @JsonManagedReference
     private List<CourseBean> lecturerCourses;
+    
+    
+    
+    
+    
+    
+    @Fetch(value = FetchMode.JOIN)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+	        name="T_JOB_MEMBER",
+	        joinColumns={@JoinColumn(name="MEMBER_FK")},
+	        inverseJoinColumns={@JoinColumn(name="JOB_FK")}
+	    )
+    private Set<Job> collectionJobs = new HashSet<Job>();
+	
+	
+	
+	
+	public Set<Job> getCollectionJobs() {
+		return collectionJobs;
+	}
+
+
+
+	public void setCollectionJobs(Set<Job> collectionJobs) {
+		this.collectionJobs = collectionJobs;
+	}
+    
+    
 
     //Constructor
     public Member() {

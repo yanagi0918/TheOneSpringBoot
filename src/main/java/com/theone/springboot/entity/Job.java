@@ -33,13 +33,6 @@ public class Job implements Serializable{
 	private String description;
 	private Integer compId;
 	
-	@Override
-	public String toString() {
-		return "Job [jobid=" + jobid + ", title=" + title + ", jobdescription=" + jobdescription + ", qualification="
-				+ qualification + ", required_number=" + required_number + ", salary=" + salary + ", description="
-				+ description + ", compId=" + compId + ", company=" + company + ", collectonResumes=" + collectonResumes
-				+ "]";
-	}
 
 	@JsonIgnore
 	@ManyToOne
@@ -48,17 +41,18 @@ public class Job implements Serializable{
 	
 	@ManyToMany(cascade=CascadeType.ALL , fetch = FetchType.EAGER , mappedBy="collectionJobs")
 	
-	    private Set<Resume> collectonResumes = new HashSet<Resume>();
+	    private Set<Member> collectonJobMembers = new HashSet<Member>();
 	
 	
 	
 	
-	public Set<Resume> getCollectonResumes() {
-		return collectonResumes;
+
+	public Set<Member> getCollectonJobMembers() {
+		return collectonJobMembers;
 	}
 
-	public void setCollectonResumes(Set<Resume> collectonResumes) {
-		this.collectonResumes = collectonResumes;
+	public void setCollectonJobMembers(Set<Member> collectonJobMembers) {
+		this.collectonJobMembers = collectonJobMembers;
 	}
 
 	public Integer getCompId() {
