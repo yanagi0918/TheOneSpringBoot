@@ -88,6 +88,22 @@ public class CourseUserController {
 
     }
 
+    @GetMapping("/checkFavorite")
+    @ResponseBody
+    public boolean isFavorite(@RequestParam Integer courseNo, HttpSession session) {
+        boolean isFavorite = false;
+        Member member = (Member) session.getAttribute("loginMember");
+        Set<CourseBean> courses = member.getCollectionCourses();
+        for (CourseBean course : courses) {
+            if (course.getCourseNo().equals(courseNo)) {
+                isFavorite = true;
+                break;
+            }
+        }
+        return isFavorite;
+    }
+
+
     @GetMapping("/collections")
     public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");

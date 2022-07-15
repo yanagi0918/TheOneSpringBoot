@@ -75,7 +75,7 @@
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h2 th:utext="' &lt;i class=&quot;fa fa-heart fa-2xl text-primary mr-2&quot;&gt;&lt;/i&gt;'+${username}+'的課程收藏'" class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"></h2>
+            <h2 th:utext="' &lt;i class=&quot;fa fa-heart fa-xl text-primary mr-2&quot;&gt;&lt;/i&gt;'+${username}+'的課程收藏'" class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"></h2>
         </div>
         <div class="row">
             <div th:each="course:${collectionCourses}" class="col-lg-4 col-md-6 mb-4">
@@ -113,31 +113,6 @@
                     </div>
                 </div>
             </div>
-            <!--            <div class="col-lg-4 col-md-6 mb-4">-->
-            <!--                <div class="rounded overflow-hidden mb-2">-->
-            <!--                    <a href="">-->
-            <!--                        <img class="img-fluid" th:src="@{/assets_course/img/course-2.jpg}" alt="">-->
-            <!--                    </a>-->
-            <!--                    <div class="bg-secondary p-4">-->
-            <!--                        <div class="d-flex justify-content-between mb-3">-->
-            <!--                            <h6 class="m-0"><i class="fa fa-table fa-lg text-primary mr-2"></i>英文認證</h6>-->
-            <!--                            <h6 class="m-0"><i class="fa fa-calendar-alt fa-lg text-primary mr-2"></i>2022-01-01</h6>-->
-            <!--                        </div>-->
-            <!--                        <a class="h5" href="">Web design & development courses for beginner</a>-->
-            <!--                        <div></div>-->
-            <!--                        <a href="" class="h5"><h6 class="m-0 f-right "><i-->
-            <!--                                class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>-->
-            <!--                        <div class="border-top mt-4 pt-4">-->
-            <!--                            <div class="d-flex justify-content-between">-->
-            <!--                                <h6 class="m-0"><i class="fa fa-user-circle fa-lg text-primary mr-2"></i>王大維</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-dollar-sign fa-lg text-primary mr-2"></i>NT1999</h6>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
         </div>
 
 
@@ -167,21 +142,7 @@
                     </div>
                 </a>
             </div>
-
-            <!-- Tag Cloud -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                <div class="d-flex flex-wrap m-n1">
-                    <a href="" class="btn btn-outline-primary m-1">Design</a>
-                    <a href="" class="btn btn-outline-primary m-1">Development</a>
-                    <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                    <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                    <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                    <a href="" class="btn btn-outline-primary m-1">Consulting</a>
-                </div>
-            </div>
         </div>
-
 
         <div class="col-12">
             <nav aria-label="Page navigation">

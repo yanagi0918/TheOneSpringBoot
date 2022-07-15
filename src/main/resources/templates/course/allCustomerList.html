@@ -187,7 +187,7 @@
             <div th:each="course:${courseList}" class="col-lg-4 col-md-6 mb-4">
                 <div class="rounded overflow-hidden mb-2">
                     <!-- 識別課程編號-->
-                    <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
+                    <input type="hidden" class="courseNo" name="courseNo" id="courseNo" th:value="${course.courseNo}">
 
                     <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
                         <img class="img-fluid " th:src="${course.coursePicUrl}" alt="" height="250px">
@@ -203,11 +203,16 @@
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
-                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right ">
-<!--                            <i class="fa-solid fa-bookmark fa-lg text-primary mr-2"></i>-->
-                            <i class="fa-regular fa-bookmark fa-lg text-primary mr-2"></i>
-                        </h6></a>
-                        <h5><i class="fa-regular fa-bookmark fa-lg text-primary mr-2" id="test"></i></h5>
+
+
+                        <!--                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right">-->
+                        <!--                            <i class="fa-regular fa-bookmark fa-lg text-primary mr-2"></i>-->
+                        <!--                        </h6></a>-->
+
+                        <h6 class="m-0 f-right "><i class="fa-regular fa-bookmark fa-xl text-primary mr-2"
+                                                   th:id="${course.courseNo}+'ok'"></i></h6>
+                        <h6 class="m-0 f-right "><i class="fa-solid fa-bookmark fa-xl text-primary mr-2"
+                                                           th:id="${course.courseNo}+'no'"></i></h6>
                         <div class="border-top mt-4 pt-4">
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"
@@ -356,21 +361,43 @@
 
 <script>
     $(function () {
-        $('#test').click(function () {
-            $('#test').attr("class","fa-solid fa-bookmark fa-lg text-primary mr-2");
-            $('#test').attr("id","test2");
-            console.log("done")
-        })
+
+        var courseNoSelectors = $('.courseNo');
+        for (let i = 0; i < courseNoSelectors.length; i++) {
+            var  courseNo = courseNoSelectors[i].value
+            console.log(courseNo)
+            var ok = courseNo+'ok'
+            var no = courseNo+'no'
+            console.log(ok)
+            console.log(no)
+            console.log('-------------------------------')
+            $.ajax({
+                type: 'get',
+                url: '/user/checkFavorite?courseNo=' + courseNoSelectors[i].value,
+                async: false,
+                success: function (data) {
+                    console.log(data)
+                    console.log(ok)
+                    console.log(no)
+
+                    if (data){
+                        document.getElementById(ok).hidden= true;
+                        $('#ok').hide();
+                    }else {
+                        document.getElementById(no).hidden= true;
+                        $('#no').hide();
+                    }
+
+                    // document.getElementById(courseNo).innerText = data.status;
+                    // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+
+                }
+            });
+        }
+
 
     })
-    $(function () {
-        $('#test2').click(function () {
-            $('#test2').attr("class","fa-regular fa-bookmark fa-lg text-primary mr-2");
-            $('#test2').attr("id","test");
-            console.log("done2")
-        })
 
-    })
 
 </script>
 
