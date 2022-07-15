@@ -269,7 +269,7 @@ $(function() {
 
 		let checkMemberForm = false;
 		
-		checkMemberForm = checkPackage()&& checkID();
+		checkMemberForm = checkPackage() && checkID();
 		console.log(checkMemberForm)
 		if (checkMemberForm) {
 			$('#form').submit();

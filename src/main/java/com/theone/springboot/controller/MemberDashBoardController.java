@@ -46,11 +46,8 @@ public class MemberDashBoardController {
 		return "member_dashboard/memberlist";
 	}
 	
-//	@ResponseBody
-//	@GetMapping("/member/user/{userid}")
 //	public Member aaa(@PathVariable("userid")String userid) {
 //		return memberService.getByUserid(userid);
-//	}
 	
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
     @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,9 +63,35 @@ public class MemberDashBoardController {
 	
 	@GetMapping("/member")
 	public String toCreatePage() {
-		return "member_dashboard/membercreate";
+			return "member_dashboard/membercreate";
 	}
-	//target下資料夾還沒建立
+	
+	//後端檢查不重複身分證，若重複就導回新增頁面
+	@PostMapping("/CheckMember")
+	public String checkMember(@RequestParam String userid, Member member, MultipartFile imageFile)throws IllegalStateException, IOException {
+
+		Member memberid = memberService.getByUserid(userid);
+		if (memberid == null) {
+			String newFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+			String ImgUrl = "/memberimages/" + newFileName;
+
+			String saveFilePath = new File("target\\classes\\static\\memberimages\\" + newFileName).getAbsolutePath();
+
+			if (imageFile.getOriginalFilename().length() != 0) {
+				member.setImage(ImgUrl);
+				imageFile.transferTo(new File(saveFilePath));
+			}
+			memberService.saveOrUpdate(member);
+			return "redirect:/dashboard/members";
+		
+		}else {
+			System.err.println("這是重複身分證字號，重導至新增畫面");
+			return "redirect:member";
+		}
+		
+	}
+	
+	
 	@PostMapping("/member")
 	public String saveOrUpdate(Member member, MultipartFile imageFile) throws IllegalStateException, IOException {
 
@@ -111,15 +134,6 @@ public class MemberDashBoardController {
     }
 	
 	
-	@PostMapping(value = "/CheckMember")
-	public @ResponseBody boolean checkMember(@RequestParam String userid) {
-		Member member = memberService.getByUserid(userid);
-		if(member == null) {
-			System.out.println("in");
-			return true;
-		}
-		System.out.println("out");
-		return false;
-	}
+	
 	
 }
