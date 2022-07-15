@@ -46,17 +46,18 @@ public class Interview {
 	
 	private String userName;
 	
-	private Integer like;
 	
-	private Integer report;
 
 	public Interview() {
 	}
 
 
+	
+
+
 	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
-			String test, String qA, String share, Integer compScore, String userId, String userName, Integer like,
-			Integer report) {
+			String test, String qA, String share, Integer compScore, String userId, String userName
+			) {
 		super();
 		this.cvNo = cvNo;
 		this.intTime = intTime;
@@ -70,14 +71,13 @@ public class Interview {
 		this.compScore = compScore;
 		this.userId = userId;
 		this.userName = userName;
-		this.like = like;
-		this.report = report;
+		
 	}
 
 
 
 	public Interview(Date intTime, Timestamp createTime, String compName, String jobName, String offer, String test,
-			String qA, String share, Integer compScore, String userId, String userName, Integer like, Integer report) {
+			String qA, String share, Integer compScore, String userId, String userName) {
 		super();
 		this.intTime = intTime;
 		this.createTime = createTime;
@@ -90,8 +90,7 @@ public class Interview {
 		this.compScore = compScore;
 		this.userId = userId;
 		this.userName = userName;
-		this.like = like;
-		this.report = report;
+	
 	}
 
 
