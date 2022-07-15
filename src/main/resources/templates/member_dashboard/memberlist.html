@@ -1,136 +1,183 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>THE ONE</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<title>THE ONE</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+	href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link
+	th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+	href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
-    
-    <!-- datatable的CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+
+<!-- datatable的CSS -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div th:replace="~{common/dashboard::spinner}"></div>
-        <!-- Spinner End -->
+	<div class="container-xxl position-relative bg-white d-flex p-0">
+		<!-- Spinner Start -->
+		<div th:replace="~{common/dashboard::spinner}"></div>
+		<!-- Spinner End -->
 
 
-        <!-- Sidebar Start -->
-        <div th:replace="~{common/dashboard::sidebar(1)}"></div>
-        <!-- Sidebar End -->
+		<!-- Sidebar Start -->
+		<div th:replace="~{common/dashboard::sidebar(1)}"></div>
+		<!-- Sidebar End -->
 
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <div th:replace="~{common/dashboard::navbar}"></div>
-            <!-- Navbar End -->
+		<!-- Content Start -->
+		<div class="content">
+			<!-- Navbar Start -->
+			<div th:replace="~{common/dashboard::navbar}"></div>
+			<!-- Navbar End -->
 
 
-		<!-- Content Start --> 
-        <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">會員資訊</h6>
-                        <button type="button" class="btn btn-primary mb-0" id="btn-toCreate">新增會員</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0" id="table_id">
-                            <thead>
-                                <tr class="text-dark">
-                                	<th scope="col">會員編號</th>
-                                    <th scope="col">帳號(身分證)</th>
-                                    <th scope="col">密碼</th>
-                                    <th scope="col">姓名</th>
-                                    <th scope="col">性別</th>
-<!--                                     <th scope="col">會員點數</th> -->
-                                    <th scope="col">修改</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="member:${members}">
-                               	 	<td th:text="${member.idNumber}"></td>
-                                    <td th:text="${member.userid}"></td>
-                                    <td th:text="${member.pwd}"></td>
-                                    <td th:text="${member.username}"></td>
-                                    <td th:text="${member.gender}"></td>
-<!--                                     <td th:text="${member.point}"></td> -->
-                                    <td>
-                                        <a class="btn btn-outline-primary m-0" th:href="@{member/}+${member.idNumber}">修改會員</a>
-                                       
-                                        <a class="btn btn-outline-danger m-0" th:id="${member.idNumber}" onclick="del(this.id)">刪除會員</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                </div>
-            </div>
-            <!-- Content End -->
-            
+			<!-- Content Start -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light text-center rounded p-4">
+					<div class="row g-4">
+
+						<div class="col-sm-12 col-xl-4">
+							<div class="bg-light rounded h-100 p-4">
+								<h5 class="mb-4">會員性別占比</h5>
+								<canvas id="doughnut-chart"></canvas>
+							</div>
+						</div>
+
+						<div class="col-sm-12 col-xl-8">
+							<div class="bg-light rounded h-100 p-4">
+								<h5 class="mb-4">會員年齡分布圖</h5>
+								<canvas id="bar-chart"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light text-center rounded p-4">
+					<div class="d-flex align-items-center justify-content-between mb-4">
+						<h6 class="mb-0">會員資訊</h6>
+						<button type="button" class="btn btn-primary mb-0"
+							id="btn-toCreate">新增會員</button>
+					</div>
+					<div class="table-responsive">
+						<table class="table align-middle table-bordered table-hover mb-0"
+							id="table_id">
+							<thead>
+								<tr class="text-dark">
+									<th scope="col">會員編號</th>
+									<th scope="col">帳號(身分證)</th>
+									<th scope="col">密碼</th>
+									<th scope="col">姓名</th>
+									<th scope="col">性別</th>
+									<!--                                     <th scope="col">會員點數</th> -->
+									<th scope="col">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="member:${members}">
+									<td th:text="${member.idNumber}"></td>
+									<td th:text="${member.userid}"></td>
+									<td th:text="${member.pwd}"></td>
+									<td th:text="${member.username}"></td>
+									<td th:text="${member.gender}"></td>
+									<!--                                     <td th:text="${member.point}"></td> -->
+									<td><a class="btn btn-outline-primary m-0"
+										th:href="@{member/}+${member.idNumber}">修改會員</a> <a
+										class="btn btn-outline-danger m-0" th:id="${member.idNumber}"
+										onclick="del(this.id)">刪除會員</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+			<!-- Content End -->
+
 			<!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">The One</a>, All Right Reserved.
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
-        </div>
-        <!-- Content End -->
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded-top p-4">
+					<div class="row">
+						<div class="col-12 col-sm-6 text-center text-sm-start">
+							&copy; <a href="#">The One</a>, All Right Reserved.
+						</div>
+						<div class="col-12 col-sm-6 text-center text-sm-end">
+							Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer End -->
+		</div>
+		<!-- Content End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/lib/chart/chart.min.js}" src="lib/chart/chart.min.js"></script>
-    <script th:src="@{/lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
-    <script th:src="@{/lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
-    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/js/member_dashboard/checkMemberForm.js}" src="js/checkMemberForm.js"></script>
-    <!-- datatable的script -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script>
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/lib/chart/chart.min.js}"
+		src="lib/chart/chart.min.js"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"
+		src="lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"
+		src="lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}"
+		src="lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script
+		th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/member_dashboard/checkMemberForm.js}"
+		src="js/checkMemberForm.js"></script>
+	<!-- datatable的script -->
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+	<script>
         function del(id) {
 		Swal.fire({
 			title: '確認是否刪除?',
@@ -164,8 +211,8 @@
         
     </script>
 
-    <!-- Template Javascript -->
-    <script th:src="@{/js/main.js}" src="js/main.js"></script>
-
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="js/main.js"></script>
+	<script th:src="@{/js/member_dashboard/chart.js}" src="js/main.js"></script>
 </body>
 </html>

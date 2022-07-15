@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.MemberService;
 
@@ -46,8 +45,7 @@ public class MemberDashBoardController {
 		return "member_dashboard/memberlist";
 	}
 	
-//	public Member aaa(@PathVariable("userid")String userid) {
-//		return memberService.getByUserid(userid);
+
 	
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
     @PostMapping(path = "/members/checkID", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -132,6 +130,47 @@ public class MemberDashBoardController {
         CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
         binder.registerCustomEditor(java.util.Date.class, ce);
     }
+	
+	
+	@ResponseBody
+	@GetMapping("/member/chartdata1")
+	public int[] getChartData1() {
+		int[] chartdata = {0,0};
+		List<Member> allmembers = memberService.getAllMembers();
+		for (Member member : allmembers) {
+			switch (member.getGender()) {
+			case "男": chartdata[0]++; 
+			break;
+			case "女": chartdata[1]++; 
+			break;
+			default: break;
+			}
+		}
+		return chartdata;
+	}	
+	
+	@ResponseBody
+	@GetMapping("/member/chartdata2")
+	public int[] getChartData2() {
+		Calendar cal = Calendar.getInstance();
+		int yearNow = cal.get(Calendar.YEAR);
+		
+		int[] chartdata = {0,0,0,0};
+		List<Member> allmembers = memberService.getAllMembers();
+		for (Member member : allmembers) {
+			if(yearNow - Integer.valueOf(member.getBirth().toString().substring(0, 4)) <= 18){
+			chartdata[0]++ ;
+			}
+			else if(yearNow - Integer.valueOf(member.getBirth().toString().substring(0, 4)) > 19 && yearNow - Integer.valueOf(member.getBirth().toString().substring(0, 4)) <= 40 ){
+			chartdata[1]++ ;
+			}else if(yearNow - Integer.valueOf(member.getBirth().toString().substring(0, 4)) > 41 && yearNow - Integer.valueOf(member.getBirth().toString().substring(0, 4)) <= 65 ) {
+			chartdata[2]++ ;
+			}else {
+			chartdata[3]++ ;	
+			}
+		}
+		return chartdata;
+	}
 	
 	
 	
