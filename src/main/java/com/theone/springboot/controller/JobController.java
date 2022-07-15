@@ -1,4 +1,5 @@
 package com.theone.springboot.controller;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class JobController {
 		return "job/company_job_list";
 	}
 	
-	
+	//用職缺型態查詢
 	@GetMapping("/job/jobdescriptionchoicejoblist")
 	private String jobdescriptionChoiceListJobs(@RequestParam String jobdescription,
             						  Model m,Job job) {
@@ -55,7 +56,7 @@ public class JobController {
 	}
 	
 	
-	
+	//用薪水查詢
 	@GetMapping("/job/salarychoicejoblist")
 	private String salaryChoiceListJobs(@RequestParam String salary,
             						  Model m,Job job) {
@@ -68,16 +69,19 @@ public class JobController {
 		return "job/job_list";
 	}
 	
+	//用職缺名稱模糊+型態查詢
 	@GetMapping("/job/search")
-	private String jobSearch(String title,Model m) {
-		System.out.println("-------------------------------");
-		List<Job> jobs = jobService.findByTitleContaining(title);
-		m.addAttribute("jobs", jobs);
+	private String jobSearch(String jobdescription,String title,Model m ) {
+		List<Job> jobs = jobService.findByTitleContainingAndJobdescription(title,jobdescription);
+		
 		m.addAttribute("title",title);
+		m.addAttribute("jobdescription",jobdescription);
+		m.addAttribute("jobs",jobs);
+		
 		return "job/job_list";
 	}
 	
-	
+	//公共頁面
 	@GetMapping("/job/list")
 	private String allCanSeeListJobs(Model m){
 		List<Job> jobs = jobService.getAllJobs();
@@ -119,12 +123,30 @@ public class JobController {
 		jobService.delete(id);
 		return "ok";
 	}
-
 	
-	@GetMapping("/enterprise/job/showResumes/{jobid}")
+	@GetMapping("/user/resume/joblist/{resumeId}")
 	@ResponseBody
-	public ResponseEntity<Job> showResumes(@PathVariable Integer jobid,HttpSession session,Job job) {
-		Resume resume = (Resume) session.getAttribute("loginEnterprise");
+	public void insertResume(@PathVariable Integer resumeId,HttpSession session,Job job) {
+		Resume resume = (Resume) session.getAttribute("loginMember");
+		Set<Job> collectionJobs = resume.getCollectionJobs();
+		Set<Job> newcollection = new HashSet<Job>();
+		resume.setCollectionJobs(newcollection);
+		
+		
+//		collectionJobs.add(resume);
+		resume.setCollectionJobs(collectionJobs);
+		resumeService.saveOrUpdate(resume);
+	}
+	
+	
+	
+	
+	
+	
+	@GetMapping("/user/resume/deleteResume/{jobid}")
+	@ResponseBody
+	public ResponseEntity<Job> deleteResume(@PathVariable Integer jobid,HttpSession session,Job job) {
+		Resume resume = (Resume) session.getAttribute("loginMember");
 		Set<Job> collectionJobs = resume.getCollectionJobs();
 		job = jobService.findByJobid(jobid);
 		collectionJobs.remove(job);

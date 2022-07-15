@@ -32,4 +32,6 @@ public interface JobService {
 	List<Job> findByTitleContaining(String title);
 	
 	Job findByJobid(Integer jobid);
+	
+	List<Job> findByTitleContainingAndJobdescription(String title,String jobdescription);
 }

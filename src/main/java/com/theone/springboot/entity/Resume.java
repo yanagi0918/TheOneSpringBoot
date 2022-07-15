@@ -37,7 +37,6 @@ public class Resume {
 	private String userId;
 	
 	
-	@JsonIgnore
 	@Fetch(value = FetchMode.JOIN)
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(

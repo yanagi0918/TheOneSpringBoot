@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Job_Table")
@@ -30,7 +32,16 @@ public class Job implements Serializable{
 	@Column(length = 1000)
 	private String description;
 	private Integer compId;
+	
+	@Override
+	public String toString() {
+		return "Job [jobid=" + jobid + ", title=" + title + ", jobdescription=" + jobdescription + ", qualification="
+				+ qualification + ", required_number=" + required_number + ", salary=" + salary + ", description="
+				+ description + ", compId=" + compId + ", company=" + company + ", collectonResumes=" + collectonResumes
+				+ "]";
+	}
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Company company;
