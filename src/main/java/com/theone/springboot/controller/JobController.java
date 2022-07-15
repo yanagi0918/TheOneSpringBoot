@@ -1,12 +1,12 @@
 package com.theone.springboot.controller;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,19 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.entity.Job;
-import com.theone.springboot.entity.Resume;
-import com.theone.springboot.service.CompanyService;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.JobService;
-import com.theone.springboot.service.ResumeService;
+import com.theone.springboot.service.MemberService;
 
 @Controller	
 public class JobController {
 	@Autowired
 	private JobService jobService;
 	@Autowired
-	private CompanyService companyService;
-	@Autowired
-	private ResumeService resumeService;
+	private MemberService memberService;
 	
 	
 	@GetMapping("/enterprise/job/companylist")
@@ -41,7 +38,7 @@ public class JobController {
 		return "job/company_job_list";
 	}
 	
-	
+	//用職缺型態查詢
 	@GetMapping("/job/jobdescriptionchoicejoblist")
 	private String jobdescriptionChoiceListJobs(@RequestParam String jobdescription,
             						  Model m,Job job) {
@@ -55,7 +52,7 @@ public class JobController {
 	}
 	
 	
-	
+	//用薪水查詢
 	@GetMapping("/job/salarychoicejoblist")
 	private String salaryChoiceListJobs(@RequestParam String salary,
             						  Model m,Job job) {
@@ -68,16 +65,19 @@ public class JobController {
 		return "job/job_list";
 	}
 	
+	//用職缺名稱模糊+型態查詢
 	@GetMapping("/job/search")
-	private String jobSearch(String title,Model m) {
-		System.out.println("-------------------------------");
-		List<Job> jobs = jobService.findByTitleContaining(title);
-		m.addAttribute("jobs", jobs);
+	private String jobSearch(String jobdescription,String title,Model m ) {
+		List<Job> jobs = jobService.findByTitleContainingAndJobdescription(title,jobdescription);
+		
 		m.addAttribute("title",title);
+		m.addAttribute("jobdescription",jobdescription);
+		m.addAttribute("jobs",jobs);
+		
 		return "job/job_list";
 	}
 	
-	
+	//公共頁面
 	@GetMapping("/job/list")
 	private String allCanSeeListJobs(Model m){
 		List<Job> jobs = jobService.getAllJobs();
@@ -119,20 +119,44 @@ public class JobController {
 		jobService.delete(id);
 		return "ok";
 	}
-
 	
-	@GetMapping("/enterprise/job/showResumes/{jobid}")
-	@ResponseBody
-	public ResponseEntity<Job> showResumes(@PathVariable Integer jobid,HttpSession session,Job job) {
-		Resume resume = (Resume) session.getAttribute("loginEnterprise");
-		Set<Job> collectionJobs = resume.getCollectionJobs();
-		job = jobService.findByJobid(jobid);
-		collectionJobs.remove(job);
-		resume.setCollectionJobs(collectionJobs);
-		resumeService.saveOrUpdate(resume);
+	@GetMapping("/user/joblist/{jobid}")
+	public String insertResume(@PathVariable Integer jobid,HttpSession session) {
 		
-		return ResponseEntity.status(HttpStatus.OK).body(job);
+		Member member = (Member) session.getAttribute("loginMember");
+		Set<Job> collectionJobs = member.getCollectionJobs();
 		
+		Job job = jobService.findByJobid(jobid);
+		collectionJobs.add(job);
+		
+		Set<Job> empty = new HashSet<Job>();
+		member.setCollectionJobs(empty);
+		memberService.saveOrUpdate(member);
+		
+		member.setCollectionJobs(collectionJobs);
+		memberService.saveOrUpdate(member);
+		
+		return "job/job_list";
 	}
+	
+	
+	@GetMapping("/enterprise/job/showmember/{jobid}")
+	public String showMember(@PathVariable Integer jobid,HttpSession session,Model m) {
+		System.out.println("-------------------------------");
+		Company loginCompany = (Company)session.getAttribute("loginEnterprise");
+		List<Job> jobs = loginCompany.getJobs();
+		Set<Member> collectonJobMembers =new HashSet<Member>();
+		Iterator<Job> iterator = jobs.iterator();
+		while (iterator.hasNext()) {
+			Job job = (Job) iterator.next();
+			if (job.getJobid().equals(jobid)) {
+				 collectonJobMembers = job.getCollectonJobMembers();
+			}
+			m.addAttribute("collectonJobMembers",collectonJobMembers);
+		}
+		System.out.println("-------------------------------");
+		return "job/job_member";
+	}
+	
 	
 }

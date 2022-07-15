@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,10 +35,18 @@ public class Company implements Serializable{
  private Integer empnumber;
  private String website;
  private String capital;
- @OneToMany(mappedBy = "company")
+ @OneToMany(mappedBy = "company",fetch = FetchType.EAGER)
  private List<Job> jobs;
  
  
+public List<Job> getJobs() {
+	return jobs;
+}
+
+public void setJobs(List<Job> jobs) {
+	this.jobs = jobs;
+}
+
 public Company() {}
 
 public Integer getComppk() {

@@ -23,4 +23,6 @@ public interface JobDao extends JpaRepository<Job, Integer>{
 	
 	Job findByJobid(Integer jobid);
 	
+	List<Job> findByTitleContainingAndJobdescription(String title,String jobdescription);
+	
 }

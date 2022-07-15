@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Job_Table")
@@ -30,24 +32,27 @@ public class Job implements Serializable{
 	@Column(length = 1000)
 	private String description;
 	private Integer compId;
+	
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Company company;
 	
 	@ManyToMany(cascade=CascadeType.ALL , fetch = FetchType.EAGER , mappedBy="collectionJobs")
 	
-	    private Set<Resume> collectonResumes = new HashSet<Resume>();
+	    private Set<Member> collectonJobMembers = new HashSet<Member>();
 	
 	
 	
 	
-	public Set<Resume> getCollectonResumes() {
-		return collectonResumes;
+
+	public Set<Member> getCollectonJobMembers() {
+		return collectonJobMembers;
 	}
 
-	public void setCollectonResumes(Set<Resume> collectonResumes) {
-		this.collectonResumes = collectonResumes;
+	public void setCollectonJobMembers(Set<Member> collectonJobMembers) {
+		this.collectonJobMembers = collectonJobMembers;
 	}
 
 	public Integer getCompId() {

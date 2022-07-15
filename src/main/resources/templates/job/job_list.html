@@ -73,11 +73,24 @@ text-overflow: ellipsis;
 						<div class="row mt-5">
 					<div class="col-xl-12">
 						<!-- form -->
-						<form th:action="@{/job/search}" class="search-box">
+						<form th:action="@{/job/search}" class="search-box" enctype="multipart/form-data" method="get" id="searchsubmit">
 							<div class="input-form ">
 								<input type="text" placeholder="職缺快速搜索"  name="title">
 							</div>
-							<button type="submit" class="genric-btn primary-border e-large">搜尋</button>
+							<div class="select-form">
+                                        <div class="select-itms">
+                                    <select name="jobdescription">
+                                        <option>全職</option>
+                                        <option>兼職</option>
+                                        <option>工讀</option>
+                                        <option>其他</option>
+                                    </select>
+                                        </div>
+                                    </div>
+                                    <div class="search-form">
+                                        <a href="#" onclick="document.getElementById('searchsubmit').submit()">搜尋</a>
+                                    </div>
+<!-- 							<button type="submit" class="genric-btn primary-border e-large">搜尋</button> -->
 						</form>
 					</div>
 				</div>
@@ -111,10 +124,11 @@ text-overflow: ellipsis;
 							</div>
 						</div>
 						<!-- Job Category Listing start -->
-							<div class="job-category-listing mb-50">
+							<div class="job-category-listing mb-30">
 								<!-- single one -->
 								<div class="single-listing">
 								<!-- select-Categories Start -->
+								
 									<div class="small-section-tittle2">
 										<h4>職缺型態</h4>
 									</div>
@@ -196,7 +210,7 @@ text-overflow: ellipsis;
 											</div>
 										</div>
 										<div class="items-link items-link2 f-right">
-											<a href="#">應徵</a>
+											<a th:href="@{'/user/joblist/'+${jobs.jobid}}">應徵</a>
 										</div>
 									</div>
 								</div>
@@ -324,7 +338,6 @@ text-overflow: ellipsis;
 			$('#salarychoicejoblist').submit();
 			
 		})
-		
 		
 		</script>
 </body>
