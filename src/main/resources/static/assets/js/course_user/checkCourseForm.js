@@ -278,7 +278,7 @@ $(function () {
                 //     $("#example_filter").detach().appendTo('#new-search-area');
                 // },
                 columnDefs: [
-                    {orderable: false, targets: [5, 6]},
+                    {orderable: false, targets: [6]},
                     {
                         "targets": [0, 1, 2, 3, 4, 5,6],
                         "className": "text-center",

@@ -70,8 +70,6 @@
     </div>
 </div>
 <!-- Hero Area End -->
-
-
 <!--================Course Area =================-->
 <!-- Category Start -->
 <div class="container-fluid py-5">
@@ -189,10 +187,10 @@
             <div th:each="course:${courseList}" class="col-lg-4 col-md-6 mb-4">
                 <div class="rounded overflow-hidden mb-2">
                     <!-- 識別課程編號-->
-                    <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
+                    <input type="hidden" class="courseNo" name="courseNo" id="courseNo" th:value="${course.courseNo}">
 
                     <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
-                        <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
+                        <img class="img-fluid " th:src="${course.coursePicUrl}" alt="" height="250px">
                     </a>
                     <div class="bg-secondary p-4">
                         <div class="d-flex justify-content-between mb-3">
@@ -205,7 +203,17 @@
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
-                        <a href="#"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>
+
+
+                        <!--                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right">-->
+                        <!--                            <i class="fa-regular fa-bookmark fa-lg text-primary mr-2"></i>-->
+                        <!--                        </h6></a>-->
+
+                        <h6 class="m-0 f-right" th:id="${course.courseNo}+'ok'" >
+                            <i class="fa-regular fa-bookmark fa-xl text-primary mr-2" th:id="${course.courseNo}" onclick="collectionInsert(this.id)"></i></h6>
+                        <h6 class="m-0 f-right" th:id="${course.courseNo}+'no'">
+                            <i class="fa-solid fa-bookmark fa-xl text-primary mr-2" th:id="${course.courseNo}+'del'" onclick="collectionDelete(this.id)"></i></h6>
+
                         <div class="border-top mt-4 pt-4">
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"
@@ -219,31 +227,6 @@
                     </div>
                 </div>
             </div>
-            <!--            <div class="col-lg-4 col-md-6 mb-4">-->
-            <!--                <div class="rounded overflow-hidden mb-2">-->
-            <!--                    <a href="">-->
-            <!--                        <img class="img-fluid" th:src="@{/assets_course/img/course-2.jpg}" alt="">-->
-            <!--                    </a>-->
-            <!--                    <div class="bg-secondary p-4">-->
-            <!--                        <div class="d-flex justify-content-between mb-3">-->
-            <!--                            <h6 class="m-0"><i class="fa fa-table fa-lg text-primary mr-2"></i>英文認證</h6>-->
-            <!--                            <h6 class="m-0"><i class="fa fa-calendar-alt fa-lg text-primary mr-2"></i>2022-01-01</h6>-->
-            <!--                        </div>-->
-            <!--                        <a class="h5" href="">Web design & development courses for beginner</a>-->
-            <!--                        <div></div>-->
-            <!--                        <a href="" class="h5"><h6 class="m-0 f-right "><i-->
-            <!--                                class="fa fa-bookmark fa-lg text-primary mr-2"></i></h6></a>-->
-            <!--                        <div class="border-top mt-4 pt-4">-->
-            <!--                            <div class="d-flex justify-content-between">-->
-            <!--                                <h6 class="m-0"><i class="fa fa-user-circle fa-lg text-primary mr-2"></i>王大維</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5</h6>-->
-            <!--                                <h6 class="m-0"><i class="fa fa-dollar-sign fa-lg text-primary mr-2"></i>NT1999</h6>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
         </div>
 
 
@@ -359,6 +342,9 @@
 <script th:src="@{/assets/js/plugins.js}"></script>
 <script th:src="@{/assets/js/main.js}"></script>
 
+<!-- fontawesome JS here -->
+<script src="https://kit.fontawesome.com/339c616d98.js" crossorigin="anonymous"></script>
+
 
 <!-- assets_course JS here -->
 <!-- JavaScript Libraries -->
@@ -374,6 +360,79 @@
 <!-- Template Javascript -->
 <script th:src="@{/assets_course/js/main.js}"></script>
 
+<script>
+    $(function () {
+        var courseNoSelectors = $('.courseNo');
+        for (let i = 0; i < courseNoSelectors.length; i++) {
+            let courseNo = courseNoSelectors[i].value
+            console.log(courseNo)
+            let ok = courseNo + 'ok'
+            let no = courseNo + 'no'
+            console.log(ok)
+            console.log(no)
+            console.log('-------------------------------')
+            $.ajax({
+                type: 'get',
+                url: '/user/checkFavorite?courseNo=' + courseNoSelectors[i].value,
+                async: false,
+                success: function (data) {
+                    console.log(data)
+                    console.log(ok)
+                    console.log(no)
+                    if (data) {
+                        document.getElementById(ok).hidden = true;
+                        $('#ok').hide();
+                    } else {
+                        document.getElementById(no).hidden = true;
+                        $('#no').hide();
+                    }
+                    // document.getElementById(courseNo).innerText = data.status;
+                    // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+                }
+            });
+        }
+    })
+
+    function collectionInsert(courseNo) {
+        $.ajax({
+            type: 'get',
+            url: '/user/collectionInsert/' + courseNo,
+            success: function (data) {
+                console.log(data)
+                if (data) {
+                    console.log("hi")
+                    document.getElementById(courseNo).setAttribute("class", "fa-solid fa-bookmark fa-xl text-primary mr-2");
+                }
+                // document.getElementById(courseNo).innerText = data.status;
+                // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+            }
+        });
+
+    }
+    function collectionDelete(courseNo) {
+        var str = courseNo;
+        var id = str.substring(0,2);
+        let no = id;
+        console.log(no);
+        $.ajax({
+            type: 'get',
+            url: '/user/collectionDelete/' + no,
+            success: function (data) {
+                console.log(data)
+                if (data) {
+                    console.log("hi DELETE")
+                    // $('#no':first-child)
+                    $("i:contains('John')")
+                    document.getElementById(courseNo).setAttribute("class", "fa-regular fa-bookmark fa-xl text-primary mr-2");
+                }
+                // document.getElementById(courseNo).innerText = data.status;
+                // document.getElementById(courseNo).setAttribute("class", "btn btn-danger btn-sm");
+            }
+
+        });
+
+    }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>The One</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/price_rangs.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+
+    <!-- assets_course CSS here -->
+    <!-- Favicon -->
+    <!--    <link href="img/favicon.ico" rel="icon">-->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/assets_course/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/assets_course/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+<!-- Preloader Start -->
+<div th:replace="~{common/frontpage::preloader}"></div>
+<!-- Preloader Start-->
+<header>
+    <!-- Header Start -->
+    <div th:replace="~{common/frontpage::header}"></div>
+    <!-- Header End -->
+</header>
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+         th:data-background="@{/assets/img/hero/course1.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>TheOne精選課程</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+<!--================Course Area =================-->
+<!-- Courses Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 th:utext="' &lt;i class=&quot;fa fa-heart fa-xl text-primary mr-2&quot;&gt;&lt;/i&gt;'+${username}+'的課程收藏'" class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"></h2>
+        </div>
+        <div class="row">
+            <div th:each="course:${collectionCourses}" class="col-lg-4 col-md-6 mb-4">
+                <div class="rounded overflow-hidden mb-2">
+                    <!-- 識別課程編號-->
+                    <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
+
+                    <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                        <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
+                    </a>
+                    <div class="bg-secondary p-4">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="m-0"
+                                th:utext="'&lt;i class=&quot;fa fa-table fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.courseCategory}"></h6>
+                            <h6 class="m-0"
+                                th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
+                        </div>
+                        <a class="h5" th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                            <div th:text="${course.courseName}"></div>
+                        </a>
+                        <div></div>
+                        <div></div>
+<!--                        <a th:href="@{'/user/collectionInsert/'+${course.courseNo}}"><h6 class="m-0 f-right "><i class="fa fa-bookmark fa-lg text-primary mr-2"></i>-->
+<!--                        </h6></a>-->
+                        <div class="border-top mt-4 pt-4">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-user-circle fa- text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.lecturer}"></h6>
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-star text-primary mr-2&quot;&gt;&lt;/i&gt;'+${course.score}"></h6>
+                                <h6 class="m-0"
+                                    th:utext="'&lt;i class=&quot;fa fa-dollar-sign fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+'NT'+${course.price}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 mt-5 mt-lg-0">
+            <!-- Recent Post -->
+            <div class="mb-5">
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
+                    <div class="pl-3">
+                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
+                        <small>Jan 01, 2050</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-lg justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Courses End -->
+<!--================Course Area =================-->
+
+
+<footer>
+    <!-- Footer Start-->
+    <div th:replace="~{common/frontpage::footer}"></div>
+    <!-- Footer End-->
+</footer>
+
+<!-- JS here -->
+<!-- All JS Custom Plugins Link Here here -->
+<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Jquery Mobile Menu -->
+<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/price_rangs.js}"></script>
+
+<!-- One Page, Animated-HeadLin -->
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/animated.headline.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.js}"></script>
+
+<!-- Scrollup, nice-select, sticky -->
+<script th:src="@{/assets/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery.sticky.js}"></script>
+
+<!-- contact js -->
+<script th:src="@{/assets/js/contact.js}"></script>
+<script th:src="@{/assets/js/jquery.form.js}"></script>
+<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/js/mail-script.js}"></script>
+<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script th:src="@{/assets/js/plugins.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+
+<!-- fontawesome JS here -->
+<script src="https://kit.fontawesome.com/339c616d98.js" crossorigin="anonymous"></script>
+
+
+<!-- assets_course JS here -->
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets_course/lib/easing/easing.min.js}"></script>
+<script th:src="@{/assets_course/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Contact Javascript File -->
+<script th:src="@{/assets_course/mail/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{/assets_course/mail/contact.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/assets_course/js/main.js}"></script>
+
+
+</body>
+</html>
