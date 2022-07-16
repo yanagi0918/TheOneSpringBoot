@@ -162,6 +162,7 @@ public class OrderUserController {
 		public String OrderCategory(@RequestParam String courseCategory,Model model,HttpServletRequest request) {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			List<Order> orders = orderService.findByCourseBeanCourseCategoryAndMember(courseCategory,loginMember);
+			model.addAttribute("courseList", courseServicer.findAllCourses());
 			model.addAttribute("courseCategory",courseCategory);
 			model.addAttribute("loginMember",loginMember);
 			model.addAttribute("orders",orders);
@@ -174,6 +175,7 @@ public class OrderUserController {
 		public String OrderSearch(Integer orderId,Model model,HttpServletRequest request) {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			List<Order> orders = orderService.findByOrderIdAndMember(orderId,loginMember);
+			model.addAttribute("courseList", courseServicer.findAllCourses());
 			model.addAttribute("loginMember",loginMember);
 			model.addAttribute("orders",orders);
 			model.addAttribute("orderId",orderId);
@@ -186,6 +188,7 @@ public class OrderUserController {
 		public String OrderState(@RequestParam String state,Model model,HttpServletRequest request) {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			List<Order> orders = orderService.findByStateAndMember(state, loginMember);
+			model.addAttribute("courseList", courseServicer.findAllCourses());
 			model.addAttribute("state",state);
 			model.addAttribute("loginMember",loginMember);
 			model.addAttribute("orders",orders);
@@ -198,6 +201,7 @@ public class OrderUserController {
 		public String OrderCourseName(@RequestParam String courseName,Model model,HttpServletRequest request) {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			List<Order> orders = orderService.findByCourseBeanCourseNameAndMember(courseName, loginMember);
+			model.addAttribute("courseList", courseServicer.findAllCourses());
 			model.addAttribute("courseName",courseName);
 			model.addAttribute("loginMember",loginMember);
 			model.addAttribute("orders",orders);

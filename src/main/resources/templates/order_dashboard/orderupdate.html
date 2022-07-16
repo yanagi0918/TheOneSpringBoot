@@ -64,7 +64,7 @@
                                 <label class="col-sm-2 col-form-label">會員帳號</label>
                                 <div class="col-sm-8">
 <!--                                     <input type="text" class="form-control" name="userId"  th:value='${order.userId }' maxlength="10" required id="userId"> -->
-                               		<select  class="form-select mb-3" aria-label="Default select example" name="userId" required id="userId" th:field='${order.member.idNumber}' th:value='${order.member.idNumber}'>
+                               		<select  class="form-select mb-3" aria-label="Default select example" name="userId" required id="userId" th:value='${order.member.idNumber}'>
                       					<option th:each="member : ${memberList}" th:value="${member.idNumber}" th:label="${member.userid}" th:text="${member.idNumber}"></option>
                                		</select>
                                 </div>
@@ -80,18 +80,21 @@
                                 <label class="col-sm-2 col-form-label">狀態</label>
                                 <div class="col-sm-8">
                                  <select class="form-select mb-3" aria-label="Default select example" name="state" th:field='${order.state}' th:value='${order.state}' required id="state">
-                                   <option th:selected="${order.state =='已付款'}" value="已付款">已付款</option>
-                                   <option th:selected="${order.state =='待審核'}" value="待審核">待審核</option>
-                                   <option th:selected="${order.state =='成功退款'}" value="成功退款">成功退款</option>
-                               	   <option th:selected="${order.state =='駁回申請'}" value="駁回申請">駁回申請</option>
+<!--                                    <option th:selected="${order.state =='已付款'}" value="已付款">已付款</option> -->
+<!--                                    <option th:selected="${order.state =='待審核'}" value="待審核">待審核</option> -->
+<!--                                    <option th:selected="${order.state =='已退款'}" value="已退款">已退款</option> -->
+<!--                                	   <option th:selected="${order.state =='駁回'}" value="駁回">駁回</option> -->
+									<option value="已付款" th:selected="${order.state eq '已付款'}">已付款</option>
+                               	    <option value="待審核" th:selected="${order.state eq '待審核'}">待審核</option>
+                                    <option value="已退款" th:selected="${order.state eq '已退款'}">已退款</option>
+                                    <option value="已駁回" th:selected="${order.state eq '已駁回'}">已駁回</option>
                                 </select>       					
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">購買課程</label>
                                 <div class="col-sm-8">
-<!--                                     <input type="text" class="form-control" name="productId" th:value="${order.productId }" required id="productId" placeholder="請輸入課程 例:1,2,3,4"> -->
-                                <select class="form-select mb-3" aria-label="Default select example" name="productId" th:field='${order.productId}' th:value='${order.productId}' required id="productId">
+                               		 <select class="form-select mb-3" aria-label="Default select example" name="productId" th:field='${order.productId}' th:value='${order.productId}' required id="productId">
                                			 <option th:each="course : ${courseList}" th:value="${course.courseNo}" th:label="${course.courseName}" th:text="${course.price}"></option>
 									 </select>
                                 </div>

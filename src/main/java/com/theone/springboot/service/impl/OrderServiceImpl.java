@@ -103,6 +103,11 @@ public class OrderServiceImpl  implements OrderService{
 		 return orderDao.findById(pk);
 	}
 
+	@Override
+	public Integer findTotalPrice() {
+		return orderDao.findTotalPrice();
+	}
+
 	
 	
 }
