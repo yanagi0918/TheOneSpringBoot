@@ -1,5 +1,7 @@
 package com.theone.springboot.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,19 +44,16 @@ public class CommentDashBoardController {
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
-	
+
 	// 新增留言
 	@PostMapping("/{id}/CommentMessageInsert")
-	public String addCommentMessage(
-			@PathVariable("id") Integer id,
-			@ModelAttribute("commentMessage") CommentMessage commentMessage, 
-			Model model) {
+	public String addCommentMessage(@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/dashboard/comments";
 	}
-	
 
 	// 刪除評論
 	@GetMapping(value = "/CommentDelete")
@@ -63,10 +62,24 @@ public class CommentDashBoardController {
 		return "redirect:./comments";
 	}
 
+	// 刪除留言
+	@GetMapping(value = "/CommentMessageDelete")
+	public String deleteCommentMessage(@RequestParam("id") Integer id) {
+		commentMessageService.deleteByMessageId(id);
+		return "redirect:./comments";
+	}
+
 	// 更新評論
 	@RequestMapping("/CommentUpdate")
 	public String updateComment(@ModelAttribute("comment") Comment comment) {
 		commentService.saveOrUpdate(comment);
+		return "redirect:/dashboard/comments";
+	}
+
+	// 更新留言
+	@RequestMapping("/CommentMessageUpdate")
+	public String updateCommentMessage(@ModelAttribute("commentMessage") CommentMessage commentMessage) {
+		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/dashboard/comments";
 	}
 
@@ -78,13 +91,15 @@ public class CommentDashBoardController {
 
 	// 送出新增留言的空白表單
 	@RequestMapping("/CommentDetail/{id}/CommentMessageNew")
-	public String showCommentMessageForm(
-			@ModelAttribute("commentMessage") CommentMessage commentMessage,
-			@PathVariable("id") Integer id,
-			Model model) {
+	public String showCommentMessageForm(@ModelAttribute("commentMessage") CommentMessage commentMessage,
+			@PathVariable("id") Integer id, Model model) {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
 		model.addAttribute("commentMessage", commentMessage);
+		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
+		CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
+				.get();
+		commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
 		return "comment_dashboard/commentmessageform";
 	}
 
@@ -102,6 +117,17 @@ public class CommentDashBoardController {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
 		return "comment_dashboard/commentdetail";
+	}
+
+	// 送出留言的詳細資料
+	@RequestMapping("/Comment/{cid}/Message/{mid}")
+	public String showMessageDetailForm(@PathVariable("cid") Integer cid, @PathVariable("mid") Integer mid,
+			Model model) {
+		Comment comment = commentService.findById(cid).get();
+		CommentMessage commentMessage = commentMessageService.findById(mid).get();
+		model.addAttribute("comment", comment);
+		model.addAttribute("commentMessage", commentMessage);
+		return "comment_dashboard/commentmessageform";
 	}
 
 	@GetMapping("/comments/jobtypejson")

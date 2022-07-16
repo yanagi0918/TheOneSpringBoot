@@ -1,6 +1,5 @@
 package com.theone.springboot.entity;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,8 +39,9 @@ public class CommentMessage {
 
 	@Column(columnDefinition = "smalldatetime")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private String messageTime;
+	private Date messageTime;
 
+	
 	private boolean messageLike;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -94,6 +94,16 @@ public class CommentMessage {
 	public void setMessageReply(String messageReply) {
 		this.messageReply = messageReply;
 	}
+	
+	public Date getMessageTime() {
+		return messageTime;
+	}
+
+
+	public void setMessageTime(Date messageTime) {
+		this.messageTime = messageTime;
+	}
+
 
 	public boolean isMessageLike() {
 		return messageLike;

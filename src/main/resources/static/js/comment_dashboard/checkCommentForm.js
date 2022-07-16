@@ -1,6 +1,7 @@
 //Sweet Alert
 
 $(function() {
+	//評論刪除
 	$('.comment-delete').click(function() {
 		Swal.fire({
 			title: '確定刪除嗎？',
@@ -29,7 +30,8 @@ $(function() {
 		})
 
 	});
-
+	
+	//評論新增
 	$('.comment-new').click(function() {
 		Swal.fire({
 			title: '提示',
@@ -52,6 +54,36 @@ $(function() {
 					$('#form').submit();
 				}, 1500)
 			} else {
+			}
+
+		})
+
+	});
+	
+	//留言刪除
+	$('.commentMessage-delete').click(function() {
+		Swal.fire({
+			title: '確定刪除嗎？',
+			text: '資料將永久刪除！',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '刪除',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已刪除!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					location.href = `/dashboard/CommentMessageDelete?id=${$(this).val()}`;
+				}, 1500)
+			} else {
+				location.href = './comments'
 			}
 
 		})
@@ -176,9 +208,9 @@ $(function() {
 	});
 })
 
-
 //One key input js
 $(function() {
+	//comment
 	$('#OneInput').click(function() {
 		$('#userId').show()
 		$('#userId').val('A123456789')
@@ -197,7 +229,15 @@ $(function() {
 		$('#yearly_salary').val('55')
 		$('#bonus_count').val('2')
 		$('#share').val('老闆親切，加班可報')
-	})
+	});
+
+	//message
+	$('#OneInputMessage').click(function() {
+		$('#replyUserId').val('B123456789')
+		$('#messageContent').val('感謝大大無私的分享~~')
+		$('#mlike').attr('checked', 'checked')
+	});
+
 });
 //anonymous/user show
 
@@ -210,6 +250,18 @@ $(function() {
 	$('#user').click(function() {
 		$('#userId').val('');
 		$('#userId').show();
+	});
+
+})
+
+//message like
+$(function() {
+	$('#mlike').click(function() {
+		$('#messageLike').val('true');
+	})
+
+	$('#munlike').click(function() {
+		$('#messageLike').val('false');
 	});
 
 })
@@ -331,10 +383,10 @@ $(document).ready(function() {
 
 		//x 方向卷軸
 		scrollX: true,
-		
+
 		//position of entire
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
-		
+
 		//Menu
 		lengthMenu: [
 			[10, 25, 50, -1],

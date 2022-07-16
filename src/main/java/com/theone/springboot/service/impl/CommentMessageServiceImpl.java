@@ -1,6 +1,7 @@
 package com.theone.springboot.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,11 @@ public class CommentMessageServiceImpl implements CommentMessageService {
 	@Override
 	public void deleteByMessageId(Integer messageId) {
 		commentmessageDao.deleteById(messageId);
+	}
+
+	@Override
+	public Optional<CommentMessage> findById(Integer messageId) {
+		return commentmessageDao.findById(messageId);
 	}
 
 
