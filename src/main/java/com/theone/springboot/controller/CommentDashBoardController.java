@@ -2,8 +2,6 @@ package com.theone.springboot.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.CommentMessage;
+import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
 
 @Controller
@@ -25,10 +25,14 @@ public class CommentDashBoardController {
 	@Autowired
 	CommentService commentService;
 
+	@Autowired
+	CommentMessageService commentMessageService;
+
 	// 所有評論list
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		model.addAttribute("listComment", commentService.findAll());
+		model.addAttribute("listCommentMessages", commentMessageService.findAll());
 		return "comment_dashboard/commentlist";
 	}
 
@@ -38,6 +42,19 @@ public class CommentDashBoardController {
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
+	
+	// 新增留言
+	@PostMapping("/{id}/CommentMessageInsert")
+	public String addCommentMessage(
+			@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, 
+			Model model) {
+		Comment comment = commentService.findById(id).get();
+		commentMessage.setComment(comment);
+		commentMessageService.saveOrUpdate(commentMessage);
+		return "redirect:/dashboard/comments";
+	}
+	
 
 	// 刪除評論
 	@GetMapping(value = "/CommentDelete")
@@ -57,6 +74,18 @@ public class CommentDashBoardController {
 	@RequestMapping("/CommentNew")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
 		return "comment_dashboard/commentform";
+	}
+
+	// 送出新增留言的空白表單
+	@RequestMapping("/CommentDetail/{id}/CommentMessageNew")
+	public String showCommentMessageForm(
+			@ModelAttribute("commentMessage") CommentMessage commentMessage,
+			@PathVariable("id") Integer id,
+			Model model) {
+		Comment comment = commentService.findById(id).get();
+		model.addAttribute("comment", comment);
+		model.addAttribute("commentMessage", commentMessage);
+		return "comment_dashboard/commentmessageform";
 	}
 
 	// 送出新增評價的空白表單
@@ -84,7 +113,7 @@ public class CommentDashBoardController {
 		System.out.println(allComments);
 		for (Comment comment : allComments) {
 			System.out.println(comment);
-			
+
 			if (comment.getJob_description().equals("全職")) {
 				jobtype[0]++;
 			} else if (comment.getJob_description().equals("兼職")) {

@@ -1,8 +1,8 @@
 package com.theone.springboot.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,20 +32,20 @@ public class CommentMessage {
 
 	private Integer messageOrder;
 
-	private String userId;
+	private String replyUserId;
 
 	private String messageContent;
 
 	private String messageReply;
 
 	@Column(columnDefinition = "smalldatetime")
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-	private Date messageTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private String messageTime;
 
 	private boolean messageLike;
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "comment_Id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "comment_commentId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Comment comment;
@@ -53,6 +53,7 @@ public class CommentMessage {
 	public CommentMessage() {
 
 	}
+
 
 	public Integer getMessageId() {
 		return messageId;
@@ -70,12 +71,12 @@ public class CommentMessage {
 		this.messageOrder = messageOrder;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getReplyUserId() {
+		return replyUserId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setReplyUserId(String replyUserId) {
+		this.replyUserId = replyUserId;
 	}
 
 	public String getMessageContent() {
@@ -94,14 +95,6 @@ public class CommentMessage {
 		this.messageReply = messageReply;
 	}
 
-	public Date getMessageTime() {
-		return messageTime;
-	}
-
-	public void setMessageTime(Date messageTime) {
-		this.messageTime = messageTime;
-	}
-
 	public boolean isMessageLike() {
 		return messageLike;
 	}
@@ -118,5 +111,4 @@ public class CommentMessage {
 		this.comment = comment;
 	}
 
-	
 }
