@@ -24,6 +24,8 @@
 		<link rel="stylesheet" th:href="@{/assets/css/style.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/imgUpload.css}">
+		<!-- datatable的CSS -->
+   		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
             <style>
                 .imgsize{
                     width: 50px;
@@ -55,7 +57,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>職缺及公司詳細內容</h2>
+                            <h2>公司查詢投遞頁面</h2>
                         </div>
                     </div>
                 </div>
@@ -64,54 +66,38 @@
         </div>
         <!-- Hero Area End -->
         
-        
-        
-        
-        
-        
-        
-        
-        
+        <!-- Job List Area Start -->
+        <div class="job-listing-area pt-120 pb-120">
+            <div class="container">
+                        <!-- Featured_job_start -->
+							<section class="featured-job-area">
         <table id="lee" class="table align-middle table-bordered table-hover mb-0">
 							<thead>
 								<tr class="text-dark">
 									<th scope="col">會員名稱</th>
-									<th scope="col">職缺性質</th>
-									<th scope="col">需求人數</th>
-									<th scope="col">每月薪資</th>
-									<th scope="col">工作性質</th>
-									<th scope="col">工作內容</th>
+									<th scope="col">住宅電話</th>
+									<th scope="col">手機</th>
+									<th scope="col">信箱</th>
+									<th scope="col">性別</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="member:${collectonJobMembers}">
 									<td th:text="${member.username}"></td>
-<!-- 									<td th:text="${job.jobdescription}"></td> -->
-<!-- 									<td th:text="${job.required_number}"></td> -->
-<!-- 									<td th:text="${job.salary}"></td> -->
-<!-- 									<td th:text="${job.jobdescription}"></td> -->
-<!-- 									<td th:text="${job.description}"></td> -->
+									<td th:text="${member.tele}"></td>
+									<td th:text="${member.phone}"></td>
+									<td th:text="${member.email}"></td>
+									<td th:text="${member.gender}"></td>
 								</tr>
 							</tbody>
 						</table>
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+							</section>
+       </div>
+						</div>
+                        <!-- Featured_job_end -->
+        <!-- Job List Area End -->
         
         </main>
     <footer>
@@ -156,6 +142,10 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script th:src="@{/assets/js/plugins.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
+		<!--         MY JS -->
+		<script th:src="@{/js/job_dashboard/checkJobForm.js}"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        
 
 </body>
 

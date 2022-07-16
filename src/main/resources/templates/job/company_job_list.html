@@ -52,7 +52,7 @@
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-               th:data-background="@{/assets/img/job/jobneedyou.jpg}">
+               th:data-background="@{/assets/img/job/resume_job.webp}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -107,7 +107,7 @@
 									<td>
 <!-- 										<a class="btn btn-outline-secondary m-0 " th:href="#">查看</a> -->
 										<a th:href="@{showupdateinformation/}+${job.jobid}" class="genric-btn info-border circle">更新</a>
-										<a class="genric-btn warning-border circle" th:href="@{/enterprise/job/showmember/}+${job.jobid}" >收件</a>
+										<a class="genric-btn primary-border circle" th:href="@{/enterprise/job/showmember/}+${job.jobid}" >收件</a>
 										<a class="genric-btn danger-border circle" th:id="${job.jobid}" onclick="del(this.id)">刪除</a>
 									</td>
 								</tr>
