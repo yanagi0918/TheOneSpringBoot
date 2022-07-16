@@ -109,8 +109,8 @@
                                     	<option>全部</option>
                                         <option>已付款</option>
                                         <option>待審核</option>
-                                        <option>成功退款</option>
-                                        <option>駁回申請</option>
+                                        <option>已退款</option>
+                                        <option>已駁回</option>
                                     </select>
                                    </form>
                                 </div>
@@ -127,7 +127,7 @@
                                 <div class="select-job-items2">
                                 	<form th:action="@{/user/OrderCourseName}" method="get" id="CourseNameInquire">
                                     <select name="courseName" required id="courseName">
-                                    <option th:each="course : ${courseList}" th:value="${course.courseName}" th:text="${course.courseName}"></option>
+                                    <option th:selected="${courseName==course.courseName}" th:each="course : ${courseList}" th:value="${course.courseName}" th:text="${course.courseName}"></option>
                                     </select>
                              	    </form>
                                 </div>
@@ -336,7 +336,7 @@
 		                            console.log(data.state);
 		                            let temp = orderId+'s';
 		                            document.getElementById(temp).innerText = data.state;
-		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle");
+		                            document.getElementById(temp).setAttribute("class", "genric-btn info-border circle");
 		                        }
 		                    });
 		                }, 100)
