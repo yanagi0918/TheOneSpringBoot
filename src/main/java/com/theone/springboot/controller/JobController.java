@@ -136,13 +136,12 @@ public class JobController {
 		member.setCollectionJobs(collectionJobs);
 		memberService.saveOrUpdate(member);
 		
-		return "job/job_list";
+		return "redirect:/job/list";
 	}
 	
 	
 	@GetMapping("/enterprise/job/showmember/{jobid}")
 	public String showMember(@PathVariable Integer jobid,HttpSession session,Model m) {
-		System.out.println("-------------------------------");
 		Company loginCompany = (Company)session.getAttribute("loginEnterprise");
 		List<Job> jobs = loginCompany.getJobs();
 		Set<Member> collectonJobMembers =new HashSet<Member>();

@@ -128,7 +128,7 @@
                               <li>每月薪資 : <span th:text="${jobdeatail.salary}"></span><span>/月</span></li>
                           </ul>
                          <div>
-                            <a href="#" class="btn head-btn2">我要應徵</a>
+                            <a th:href="@{'/user/joblist/'+${jobdeatail.jobid}}" class="btn head-btn2">我要應徵</a>
                          </div>
                        </div>
                         <div class="post-details4  mb-50">
