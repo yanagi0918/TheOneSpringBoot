@@ -61,15 +61,7 @@ public class Comment {
 
 	private String userId;
 	
-//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinTable(
-//			name = "comment_comment_message",
-//			joinColumns = @JoinColumn(name = "share_id"),
-//			inverseJoinColumns = @JoinColumn(name = "message_id")
-//			)
-//	
-//	private Set<CommentMessage> messages = new HashSet<>();
-	
+
 	public Comment() {
 	}
 
@@ -270,16 +262,12 @@ public class Comment {
 		this.userId = userId;
 	}
 	
-//	public Set<CommentMessage> getMessages() {
+//	public List<CommentMessage> getMessages() {
 //		return messages;
 //	}
 //
-//	public void setMessages(Set<CommentMessage> messages) {
+//	public void setMessages(List<CommentMessage> messages) {
 //		this.messages = messages;
-//	}
-//	
-//	public void addMessage(CommentMessage commentMessage) {
-//		this.messages.add(commentMessage);
 //	}
 
 	@Override

@@ -38,7 +38,8 @@
 	rel="stylesheet">
 
 <!-- Template Stylesheet -->
-<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">\
+<link th:href="@{/css/style.css}" href="css/style.css" rel="stylesheet">
+\
 
 <style>
 /*for validation*/
@@ -57,7 +58,7 @@
 
 
 		<!-- Sidebar Start -->
-		<div th:replace="~{common/dashboard::sidebar(1)}"></div>
+		<div th:replace="~{common/dashboard::sidebar(6)}"></div>
 		<!-- Sidebar End -->
 
 
@@ -71,89 +72,113 @@
 			<div class="container-fluid pt-4 px-4">
 				<div class="col-sm-12 col-xl-10">
 					<div class="bg-light rounded h-100 p-4">
-						<h6 th:text="${commentMessage.messageId != null} ? '編輯留言' : '新增留言'"></h6>
-						<form
-							th:action="${commentMessage.messageId != null} ? '/dashboard/CommentMessageUpdate' : '/dashboard/CommentMessageInsert'"
-							method="post" id="form" th:modelAttribute="commentMessage">
-
-							<div class="row mb-3" th:if="${commentMessage.messageId != null}"> 
-								<label class="col-sm-2 col-form-label">留言編號</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										name="messageId" required id="messageId" th:value="${commentMessage.messageId}">
-								</div>
-							</div>
-
+						<div align="center">
+							<h2>評論內容</h2>
+						</div>
+						<form method="post" th:modelAttribute="comment"
+							th:object="${comment}" id="form">
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">目標文章</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										name="comment_Id" required id="comment_Id">
-<!-- 										 th:value="${commentMessage.comment.comment_Id}" -->
+									<input type="text" class="form-control" name="commentId"
+										th:value="${comment.commentId}" readonly>
+								</div>
+							</div>
+						</form>
+
+						<form
+							th:action="@{/dashboard/{id}/CommentMessageInsert(id=${comment.commentId})}"
+							method="post" id="form" th:modelAttribute="commentMessage">
+							<h6
+								th:text="${commentMessage.messageId != null} ? '編輯留言' : '新增留言'"></h6>
+
+							<div class="row mb-3" th:if="${commentMessage.messageId != null}">
+								<label class="col-sm-2 col-form-label">留言編號</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="messageId"
+										required id="messageId" th:value="${commentMessage.messageId}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言順序</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										name="messageOrder" required id="messageOrder" th:value="${commentMessage.messageOrder}">
+									<input type="text" class="form-control" name="messageOrder"
+										required id="messageOrder"
+										th:value="${commentMessage.messageOrder}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言時間</label>
 								<div class="col-sm-8">
-									<input th:if="${commentMessage.messageId == null}" 
-									type="datetime-local" class="form-control" name="messageTime" required id="messageTime"
-									th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" readonly>
-									<input th:if="${commentMessage.messageId != null}" 
-									type="datetime-local" class="form-control" name="messageTime" required id="messageTime"
-									th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+									<input th:if="${commentMessage.messageId == null}" type="text"
+										class="form-control" name="messageTime" required
+										id="messageTime"
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
+										readonly> 
+									<input
+										th:if="${commentMessage.messageId != null}"
+										type="datetime-local" class="form-control" name="messageTime"
+										required id="messageTime"
+										th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
+										readonly>
 								</div>
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">帳號</label>
+								<label class="col-sm-2 col-form-label">留言者</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="userId" required
-										id="userId" th:value="${commentMessage.userId}">
+									<input type="text" class="form-control" name="replyUserId"
+										required id="replyUserId"
+										th:value="${commentMessage.replyUserId}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言內容</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										name="messageContent" required id="messageContent" th:value="${commentMessage.messageContent}">
+									<input type="text" class="form-control" name="messageContent"
+										required id="messageContent"
+										th:value="${commentMessage.messageContent}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">回覆</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										name="messageReply" required id="messageReply" th:value="${commentMessage.messageReply}">
+									<input type="text" class="form-control" name="messageReply"
+										required id="messageReply"
+										th:value="${commentMessage.messageReply}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">喜歡</label>
 								<div class="col-sm-8">
-									<input type="radio"
-										name="mLike" required id="like">喜歡
-									<input type="radio" 
-										name="mLike" required id="unlike" >不喜歡
-									<input type="text" class="form-control"
-										name="messageLike" required id="messageLike" th:value="${commentMessage.messageLike}">
+									<input type="radio" name="mLike" required id="like">喜歡
+									<input type="radio" name="mLike" required id="unlike">不喜歡
+									<input type="text" class="form-control" name="messageLike"
+										required id="messageLike"
+										th:value="${commentMessage.messageLike}">
 								</div>
 							</div>
 
-							<button type="button" class="btn btn-primary" name="create"
-								value="confirm" id="btn-submit">確認新增</button>
-							<button type="button" class="btn btn-primary" id="btn-goBack">取消</button>
-							<button type="button" class="btn btn-primary" id="wrongInput">輸入錯誤範例</button>
-							<button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>
+							<div align="center">
+								<button type="submit"
+									th:if="${commentMessage.messageId != null}"
+									class="btn btn-primary" name="submit" value="更新">更新</button>
+								<button type="button"
+									th:if="${commentMessage.messageId == null}"
+									class="btn btn-outline-dark" name="oneInput" value="一鍵輸入"
+									id="OneInputMessage	">範例</button>
+								<button type="submit"
+									th:if="${commentMessage.messageId == null}"
+									class="btn btn-primary" name="submit" value="新增">新增</button>
+								<button type="button" class="btn btn-secondary"
+									onclick="location.href='/dashboard/comments'">取消</button>
+
+							</div>
 						</form>
 					</div>
 				</div>

@@ -348,7 +348,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		// Get the column API object
-		var column = table.column($(this).attr('data-column'));
+		var column = table1.column($(this).attr('data-column'));
 
 		// Toggle the visibility
 		if ($(this).is(":checked")) {
