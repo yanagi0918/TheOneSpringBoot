@@ -11,17 +11,17 @@ import java.util.List;
 public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
 
-    CourseBean getByCourseName(String courseName);
+    CourseBean findByCourseName(String courseName);
 
-    List<CourseBean> getByCourseCategory(String courseCategory);
+    List<CourseBean> findByCourseCategory(String courseCategory);
 
-    List<CourseBean> getByCourseCategoryAndStatus(String courseCategory,String status);
+    List<CourseBean> findByCourseCategoryAndStatus(String courseCategory,String status);
 
-    List<CourseBean> getByStatus(String status);
+    List<CourseBean> findByStatus(String status);
 
-    List<CourseBean> getByLecturer(String lecturer);
+    List<CourseBean> findByLecturer(String lecturer);
 
-    List<CourseBean> getByMember(Member Member);
+    List<CourseBean> findByMember(Member Member);
 
 
 }

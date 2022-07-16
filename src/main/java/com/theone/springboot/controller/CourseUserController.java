@@ -173,28 +173,6 @@ public class CourseUserController {
 
     @GetMapping("/toCreatePage")
     public String toCreate() {
-//
-//        Member member2 = memberService.getByUserid("N123456789");
-//        Member member3 = memberService.getByUserid("X123456789");
-//        Member member4 = memberService.getByUserid("a123456785");
-//
-//        CourseBean courseBean35 = courseService.findCourse(35).orElseThrow();
-//        CourseBean courseBean36 = courseService.findCourse(36).orElseThrow();
-//        CourseBean courseBean37 = courseService.findCourse(37).orElseThrow();
-//        CourseBean courseBean38 = courseService.findCourse(38).orElseThrow();
-//        CourseBean courseBean40 = courseService.findCourse(40).orElseThrow();
-//
-//        Set<CourseBean> collectionCourses = member2.getCollectionCourses();
-//        collectionCourses.remove(courseBean36);
-//
-//        collectionCourses.add(courseBean35);
-//        collectionCourses.add(courseBean36);
-//        collectionCourses.add(courseBean37);
-//        collectionCourses.add(courseBean38);
-//        collectionCourses.add(courseBean40);
-//        member2.setCollectionCourses(collectionCourses);
-//        memberService.saveOrUpdate(member2);
-
         return "course/lecturerCourseInset";
     }
 
@@ -221,6 +199,7 @@ public class CourseUserController {
         }
         CourseBean.setUserid(loginUser.getUserid());
         CourseBean.setMember(loginUser);
+        CourseBean.setStatus("待審核");
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/user/courses/lecturers";
     }

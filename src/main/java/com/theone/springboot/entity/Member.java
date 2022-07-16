@@ -6,6 +6,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -38,11 +40,12 @@ public class Member {
 
     //	 VINCENT COLLECTION MANY(member講師) TO MANY(收藏多個課程)
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "member_course",
             joinColumns = {@JoinColumn(name = "memberPk", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "courseNo", nullable = false)})
-    private Set<CourseBean> collectionCourses= new HashSet<>();
+    private Set<CourseBean> collectionCourses = new HashSet<>();
+
 
     public Set<CourseBean> getCollectionCourses() {
         return collectionCourses;
@@ -51,6 +54,24 @@ public class Member {
     public void setCollectionCourses(Set<CourseBean> collectionCourses) {
         this.collectionCourses = collectionCourses;
     }
+
+    public Set<Job> getCollectionJobs() {
+        return collectionJobs;
+    }
+
+    public void setCollectionJobs(Set<Job> collectionJobs) {
+        this.collectionJobs = collectionJobs;
+    }
+
+    @Fetch(value = FetchMode.JOIN)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "T_JOB_MEMBER",
+            joinColumns = {@JoinColumn(name = "MEMBER_FK")},
+            inverseJoinColumns = {@JoinColumn(name = "JOB_FK")}
+    )
+    private Set<Job> collectionJobs = new HashSet<Job>();
+
 
     //Constructor
     public Member() {
