@@ -81,7 +81,7 @@
 						<div align="center">
 							<h2>評論內容</h2>
 						</div>
-						<form th:action="@{/dashboard/CommentInsert}" method="post"
+						<form th:action="@{/dashboard/CommentSave}" method="post"
 							th:modelAttribute="comment" th:object="${comment}" id="form">
 							<div align="center">
 								<table
@@ -144,12 +144,8 @@
 							</div>
 							<br>
 							<div align="center">
-								<!-- 															onclick="form.action='/dashboard/CommentInsert'" -->
 								<button th:if="${comment.commentId == null}" type="submit"
 									class="btn btn-primary" name="submit" form="form" value="送出">確認</button>
-								<!-- 									<a th:if="${comment.commentId == null}" -->
-								<!-- 									th:href="@{/dashboard/CommentInsert}" -->
-								<!-- 									class="btn btn-primary m-0">確認</a> -->
 								<button th:if="${comment.commentId == null}" type="button"
 									class="btn btn-secondary"
 									onclick="location.href='/dashboard/comments'">取消</button>

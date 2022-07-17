@@ -87,7 +87,7 @@ i {
 					<article>
 						<div class="testimonial-bg shadow-sm p-3 border">
 							<form
-								th:action="${comment.commentId != null} ? '/CommentUpdate' : '/CommentInsert'"
+								th:action="@{/CommentSave}"
 								method="post" id="form" th:modelAttribute="comment">
 								<table class="table table-borderless">
 									<tr>

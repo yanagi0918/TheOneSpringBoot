@@ -390,10 +390,7 @@
 									<td th:text="${commentMessages.messageLike}"></td>
 									<td><a
 										th:href="@{/dashboard/Comment/{cid}/Message/{mid}(cid=${commentMessages.comment.commentId},mid=${commentMessages.messageId})}"
-										class="btn btn-outline-info m-0">內容</a> 
-										<a
-										th:href="@{/dashboard/CommentEdit/{id}(id=${commentMessages.messageId})}"
-										class="btn btn-outline-primary m-0">修改</a>
+										class="btn btn-outline-primary m-0">修改</a> 
 										<button type="button"
 											class="btn btn-outline-danger m-0 commentMessage-delete"
 											th:value='${commentMessages.messageId}'>刪除</button></td>

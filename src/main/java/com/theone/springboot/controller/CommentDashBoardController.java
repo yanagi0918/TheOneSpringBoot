@@ -1,6 +1,5 @@
 package com.theone.springboot.controller;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,16 +37,16 @@ public class CommentDashBoardController {
 		return "comment_dashboard/commentlist";
 	}
 
-	// 新增評論
-	@PostMapping("/CommentInsert")
-	public String addComment(@ModelAttribute("comment") Comment comment, Model model) {
+	// 儲存評論
+	@PostMapping("/CommentSave")
+	public String saveComment(@ModelAttribute("comment") Comment comment) {
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
 
-	// 新增留言
-	@PostMapping("/{id}/CommentMessageInsert")
-	public String addCommentMessage(@PathVariable("id") Integer id,
+	// 儲存留言
+	@PostMapping("/{id}/CommentMessageSave")
+	public String saveCommentMessage(@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
@@ -69,27 +68,13 @@ public class CommentDashBoardController {
 		return "redirect:./comments";
 	}
 
-	// 更新評論
-	@RequestMapping("/CommentUpdate")
-	public String updateComment(@ModelAttribute("comment") Comment comment) {
-		commentService.saveOrUpdate(comment);
-		return "redirect:/dashboard/comments";
-	}
-
-	// 更新留言
-	@RequestMapping("/CommentMessageUpdate")
-	public String updateCommentMessage(@ModelAttribute("commentMessage") CommentMessage commentMessage) {
-		commentMessageService.saveOrUpdate(commentMessage);
-		return "redirect:/dashboard/comments";
-	}
-
-	// 送出新增評價的空白表單
+	// 送出評價的空白表單
 	@RequestMapping("/CommentNew")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
 		return "comment_dashboard/commentform";
 	}
 
-	// 送出新增留言的空白表單
+	// 送出留言的空白表單
 	@RequestMapping("/CommentDetail/{id}/CommentMessageNew")
 	public String showCommentMessageForm(@ModelAttribute("commentMessage") CommentMessage commentMessage,
 			@PathVariable("id") Integer id, Model model) {
@@ -127,6 +112,8 @@ public class CommentDashBoardController {
 		CommentMessage commentMessage = commentMessageService.findById(mid).get();
 		model.addAttribute("comment", comment);
 		model.addAttribute("commentMessage", commentMessage);
+		commentMessage.setComment(comment);
+		commentMessageService.saveOrUpdate(commentMessage);
 		return "comment_dashboard/commentmessageform";
 	}
 

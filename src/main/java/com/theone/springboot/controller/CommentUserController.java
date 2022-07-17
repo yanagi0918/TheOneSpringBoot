@@ -48,9 +48,9 @@ public class CommentUserController {
 			return "comment/commentanalysis";
 		}
 
-	// 新增評論
-	@PostMapping("/CommentInsert")
-	public String addComment(@ModelAttribute("comment") Comment comment, Model model) {
+	// 儲存評論
+	@PostMapping("/CommentSave")
+	public String saveComment(@ModelAttribute("comment") Comment comment) {
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
@@ -62,15 +62,8 @@ public class CommentUserController {
 		return "redirect:/comments";
 	}
 
-	// 更新評論
-	@RequestMapping("/CommentUpdate")
-	public String updateComment(@ModelAttribute("comment") Comment comment) {
-		commentService.saveOrUpdate(comment);
-		return "redirect:/comments";
-	}
-
 	// 送出新增評價的空白表單
-	@RequestMapping("/CommentNew")
+	@RequestMapping("/comment/new")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
 		return "comment/commentform";
 	}

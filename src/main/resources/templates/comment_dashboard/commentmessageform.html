@@ -88,10 +88,8 @@
 								</div>
 							</div>
 						</form>
-
-<!-- 							th:action="@{/dashboard/{id}/CommentMessageInsert(id=${comment.commentId})}" -->
 						<form 
-							th:action="${commentMessage.messageId != null} ? '/dashboard/CommentMessageUpdate' : '@{/dashboard/{id}/CommentMessageInsert(id=${comment.commentId})}'"
+							th:action="@{/dashboard/{id}/CommentMessageSave(id=${comment.commentId})}"
 							method="post" id="form" th:modelAttribute="commentMessage">
 							<div class="row mb-3" th:if="${commentMessage.messageId != null}">
 								<label class="col-sm-2 col-form-label">留言編號</label>
@@ -156,8 +154,8 @@
 								<label class="col-sm-2 col-form-label">喜歡</label>
 								<div class="col-sm-8 col-form-label">
 									<input type="radio" name="messageLike" id="mlike"
-										th:value="true">喜歡 <input type="radio"
-										name="messageLike" id="munlike" th:value="false">不喜歡
+										th:value="true" th:checked="${commentMessage.messageLike} ? 'checked'">喜歡 <input type="radio"
+										name="messageLike" id="munlike" th:value="false" th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡
 								</div>
 							</div>
 
