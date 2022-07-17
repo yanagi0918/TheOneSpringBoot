@@ -176,3 +176,58 @@ $('#lee').DataTable({
             }
 
 	}
+	
+	
+	
+	(function($) {
+	"use strict";
+
+	$.ajax({
+		url: '/dashboard/company/companychartdata',
+		type: 'GET',
+		success: function(result) {
+
+			// Doughnut Chart
+			var ctx6 = $("#pie-chart").get(0).getContext("2d");
+			var myChart6 = new Chart(ctx6, {
+				type: "pie",
+				data: {
+					labels: ["金融業", "科技業", "文教相關", "餐飲服務","旅遊相關","運輸倉儲","一般服務業","建築及不動產","政治及宗教相關","醫療保健及環境衛生","礦業及土石開發採取","批發零售及傳直銷產業","法律/會計/顧問/研發/設計業"],
+					datasets: [{
+						backgroundColor: [
+							"rgba(0, 156, 255, .7)",
+							"rgba(255, 193, 7, .7)",
+							"rgba(25,135,  84, .7)",
+							"rgba(220,53,  69, .7)",
+							"rgba(50 ,205 ,50, .7)",
+							"rgba(176, 226, 255, .7)",
+							"rgba(0, 0 ,139, .7)",
+							"rgba(139, 119 ,101, .7)",
+							"rgba(218 ,112, 214, .7)",
+							"rgba(205 ,133 ,63, .7)",
+							"rgba(255,215,  0, .7)",
+							"rgba(230,230,  250, .7)",
+							"rgba(0,0,  0, .7)"
+						],
+						data: result
+					}]
+				},
+				options: {
+					responsive: true
+				}
+			});
+		}
+	});
+
+
+})(jQuery);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
