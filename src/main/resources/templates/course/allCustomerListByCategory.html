@@ -84,7 +84,7 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-1.jpg}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" th:href="@{/user/courses}">
+                    <a class="cat-overlay text-white text-decoration-none" th:href="@{/courses}">
                         <h4 class="text-white font-weight-medium">所有課程</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -94,7 +94,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-2.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=英文證照'}">
+                       th:href="@{'/courses?courseCategory=英文證照'}">
                         <h4 class="text-white font-weight-medium">英文證照</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -104,7 +104,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-3.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=日語證照'}">
+                       th:href="@{'/courses?courseCategory=日語證照'}">
                         <h4 class="text-white font-weight-medium">日語證照</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -114,7 +114,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-4.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=韓語證照'}">
+                       th:href="@{'/courses?courseCategory=韓語證照'}">
                         <h4 class="text-white font-weight-medium">韓語證照</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -124,7 +124,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=自我認知'}">
+                       th:href="@{'/courses?courseCategory=自我認知'}">
                         <h4 class="text-white font-weight-medium">自我認知</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -134,7 +134,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=求職技巧'}">
+                       th:href="@{'/courses?courseCategory=求職技巧'}">
                         <h4 class="text-white font-weight-medium">求職技巧</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -144,7 +144,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=生涯轉換與轉業'}">
+                       th:href="@{'/courses?courseCategory=生涯轉換與轉業'}">
                         <h4 class="text-white font-weight-medium">生涯轉換與轉業</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -154,7 +154,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
                     <a class="cat-overlay text-white text-decoration-none"
-                       th:href="@{'/user/courses?courseCategory=就業市場現況趨勢'}">
+                       th:href="@{'/courses?courseCategory=就業市場現況趨勢'}">
                         <h4 class="text-white font-weight-medium">就業市場現況趨勢</h4>
                         <!--                        <span>100 Courses</span>-->
                     </a>
@@ -190,7 +190,7 @@
                     <!-- 識別課程編號-->
                     <input type="hidden" class="courseNo" name="courseNo" id="courseNo" th:value="${course.courseNo}">
 
-                    <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                    <a th:href="@{'/courses?courseNo='+${course.courseNo}}">
                         <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
                     </a>
                     <div class="bg-secondary p-4">
@@ -200,7 +200,7 @@
                             <h6 class="m-0"
                                 th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
                         </div>
-                        <a class="h5" th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                        <a class="h5" th:href="@{'/courses?courseNo='+${course.courseNo}}">
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
@@ -320,73 +320,6 @@
 <!-- Courses End -->
 
 
-<!--old-->
-<!--<section class="blog_area section-padding">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-8 mb-5 mb-lg-0">-->
-<!--                <div class="blog_left_sidebar">-->
-
-<!--                    <nav class="blog-pagination justify-content-center d-flex">-->
-<!--                        <ul class="pagination">-->
-<!--                            <li class="page-item">-->
-<!--                                <a href="#" class="page-link" aria-label="Previous">-->
-<!--                                    <i class="ti-angle-left"></i>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item">-->
-<!--                                <a href="#" class="page-link">1</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item active">-->
-<!--                                <a href="#" class="page-link">2</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item">-->
-<!--                                <a href="#" class="page-link" aria-label="Next">-->
-<!--                                    <i class="ti-angle-right"></i>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-lg-4">-->
-<!--                <div class="blog_right_sidebar">-->
-<!--                    <aside class="single_sidebar_widget search_widget">-->
-<!--                        <form action="#">-->
-<!--                            <div class="form-group">-->
-<!--                                <div class="input-group mb-3">-->
-<!--                                    <input type="text" class="form-control" placeholder='Search Keyword'-->
-<!--                                           onfocus="this.placeholder = ''"-->
-<!--                                           onblur="this.placeholder = 'Search Keyword'">-->
-<!--                                    <div class="input-group-append">-->
-<!--                                        <button class="btns" type="button"><i class="ti-search"></i></button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"-->
-<!--                                    type="submit">Search-->
-<!--                            </button>-->
-<!--                        </form>-->
-<!--                    </aside>-->
-<!--                    <aside class="single_sidebar_widget popular_post_widget">-->
-<!--                        <h3 class="widget_title">好評課程推薦</h3>-->
-<!--                        <div th:each="courseRecommend:${courseRecommends}" class="media post_item">-->
-<!--                            <img th:src="@{courseRecommend.coursePicUrl}" alt="post" width="80" height="80">-->
-<!--                            <div class="media-body">-->
-<!--                                <a href="#">-->
-<!--                                    <h3 th:text="${courseRecommend.courseName}"></h3>-->
-<!--                                </a>-->
-<!--                                <p th:text="${courseRecommend.lecturer}"></p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </aside>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-<!--================Course Area =================-->
-
 
 <footer>
     <!-- Footer Start-->
@@ -440,6 +373,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/assets_course/lib/easing/easing.min.js}"></script>
 <script th:src="@{/assets_course/lib/owlcarousel/owl.carousel.min.js}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Contact Javascript File -->
 <script th:src="@{/assets_course/mail/jqBootstrapValidation.min.js}"></script>
@@ -457,7 +391,7 @@
             let no = courseNo + 'no'
             $.ajax({
                 type: 'get',
-                url: '/user/checkFavorite?courseNo=' + courseNoSelectors[i].value,
+                url: '/checkFavorite?courseNo=' + courseNoSelectors[i].value,
                 async: false,
                 success: function (data) {
                     console.log(data)
@@ -471,14 +405,28 @@
         }
     })
 
+
     function collectionInsert(courseNo) {
+        var ok = courseNo+'ok';
+        var no = courseNo+'no';
         $.ajax({
             type: 'get',
-            url: '/user/collectionInsert/' + courseNo,
+            url: '/collectionInsert/' + courseNo,
             success: function (data) {
-                console.log(data)
                 if (data) {
-                    document.getElementById(courseNo).setAttribute("class", "fa-solid fa-bookmark fa-xl text-primary mr-2");
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        width:'20%',
+                        title: '已收藏',
+                        background:'#F0F0F0',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    document.getElementById(no).hidden = false;
+                    document.getElementById(ok).hidden = true;
+                }else {
+                    location.href="/login";
                 }
             }
         });
@@ -496,15 +444,27 @@
             id = str.substring(0, 3);
         }
         let no = id;
-        console.log(no);
+        var ok = no+'ok';
+        var no2 = no+'no';
         $.ajax({
             type: 'get',
-            url: '/user/collectionDelete/' + no,
+            url: '/collectionDelete/' + no,
             success: function (data) {
                 console.log(data)
                 if (data) {
-                    console.log("hi DELETE")
-                    document.getElementById(courseNo).setAttribute("class", "fa-regular fa-bookmark fa-xl text-primary mr-2");
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        width:'20%',
+                        title: '取消收藏',
+                        background:'#F0F0F0',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    document.getElementById(no2).hidden = true;
+                    document.getElementById(ok).hidden = false;
+                }else {
+                    location.href="/login";
                 }
             }
         });

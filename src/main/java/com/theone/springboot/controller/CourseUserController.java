@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,6 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping("/user")
 public class CourseUserController {
 
     private final CourseService courseService;
@@ -59,7 +60,7 @@ public class CourseUserController {
 
     }
 
-    @GetMapping("/courses/lecturers")
+    @GetMapping("/user/courses/lecturers")
     public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
         Member loginUser = (Member) session.getAttribute("loginMember");
         List<CourseBean> courseList = courseService.findByMember(loginUser);
@@ -69,7 +70,7 @@ public class CourseUserController {
 
 
     //ajax (jquery)檢查課程名稱是否重複，並回傳JSON物件給前端，顯示課程編號幾號與之重複
-    @PostMapping(path = "/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/user/courses/checkName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<CourseBean> findByCourseName(@RequestBody CourseBean courseBean) {
         CourseBean bean = courseService.findByCourseName(courseBean.getCourseName());
@@ -80,7 +81,7 @@ public class CourseUserController {
         }
     }
 
-    @GetMapping("/courses/detail/{courseNo}")
+    @GetMapping("/user/courses/detail/{courseNo}")
     public String showDetail(@PathVariable Integer courseNo, Model model) {
         Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
         model.addAttribute("CourseBean", findCourse.orElseThrow());
@@ -93,18 +94,20 @@ public class CourseUserController {
     public boolean isFavorite(@RequestParam Integer courseNo, HttpSession session) {
         boolean isFavorite = false;
         Member member = (Member) session.getAttribute("loginMember");
-        Set<CourseBean> courses = member.getCollectionCourses();
-        for (CourseBean course : courses) {
-            if (course.getCourseNo().equals(courseNo)) {
-                isFavorite = true;
-                break;
+        if (member != null) {
+            Set<CourseBean> courses = member.getCollectionCourses();
+            for (CourseBean course : courses) {
+                if (course.getCourseNo().equals(courseNo)) {
+                    isFavorite = true;
+                    break;
+                }
             }
         }
         return isFavorite;
     }
 
 
-    @GetMapping("/collections")
+    @GetMapping("/user/collections")
     public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
@@ -116,24 +119,29 @@ public class CourseUserController {
 
     @GetMapping("/collectionInsert/{courseNo}")
     @ResponseBody
-    public ResponseEntity<Boolean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
+    public ResponseEntity<Boolean> collectionInsertCourse(@PathVariable Integer courseNo,HttpSession session)   {
+        boolean check = true;
         Member member = (Member) session.getAttribute("loginMember");
-        Set<Member> members = new HashSet<>();
-        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        if (member == null) {
+            check =false;
+        }else {
+            Set<Member> members = new HashSet<>();
+            Set<CourseBean> collectionCourses = member.getCollectionCourses();
 
-        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
-        collectionCourses.add(courseBean);
+            CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
+            collectionCourses.add(courseBean);
 
-        Set<CourseBean> empty = new HashSet<>();
-        member.setCollectionCourses(empty);
-        members.add(member);
-        memberService.saveAllAndFlush(members);
+            Set<CourseBean> empty = new HashSet<>();
+            member.setCollectionCourses(empty);
+            members.add(member);
+            memberService.saveAllAndFlush(members);
 
-        member.setCollectionCourses(collectionCourses);
-        courseBean.setMembers(members);
-        members.add(member);
-        memberService.saveAllAndFlush(members);
-        return ResponseEntity.status(HttpStatus.OK).body(true);
+            member.setCollectionCourses(collectionCourses);
+            courseBean.setMembers(members);
+            members.add(member);
+            memberService.saveAllAndFlush(members);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(check);
     }
 
     //backup
@@ -154,36 +162,39 @@ public class CourseUserController {
 
     @GetMapping("/collectionDelete/{courseNo}")
     @ResponseBody
-    public ResponseEntity<Boolean> collectionDeleteCourse(@PathVariable Integer courseNo, Model model, HttpSession session) {
+    public ResponseEntity<Boolean> collectionDeleteCourse(@PathVariable Integer courseNo,HttpSession session)  {
+        boolean check = true;
         Member member = (Member) session.getAttribute("loginMember");
-        Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        if (member == null) {
+            check=false;
+        }else {
+            Set<CourseBean> collectionCourses = member.getCollectionCourses();
 
-        collectionCourses.removeIf(courseBean1 -> courseBean1.getCourseNo().equals(courseNo));
+            collectionCourses.removeIf(courseBean1 -> courseBean1.getCourseNo().equals(courseNo));
 
-        Set<CourseBean> empty = new HashSet<>();
-        member.setCollectionCourses(empty);
-        memberService.saveOrUpdate(member);
+            Set<CourseBean> empty = new HashSet<>();
+            member.setCollectionCourses(empty);
+            memberService.saveOrUpdate(member);
 
-
-        member.setCollectionCourses(collectionCourses);
-        memberService.saveOrUpdate(member);
-
-        return ResponseEntity.status(HttpStatus.OK).body(true);
+            member.setCollectionCourses(collectionCourses);
+            memberService.saveOrUpdate(member);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(check);
     }
 
-    @GetMapping("/toCreatePage")
+    @GetMapping("/user/toCreatePage")
     public String toCreate() {
         return "course/lecturerCourseInset";
     }
 
-    @GetMapping("/toUpdatePage/{courseNo}")
+    @GetMapping("/user/toUpdatePage/{courseNo}")
     public String toUpdate(@PathVariable Integer courseNo, Model model) {
         Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
         model.addAttribute("CourseBean", findCourse.orElseThrow());
         return "course/lecturerCourseUpdate";
     }
 
-    @PostMapping("/courses")
+    @PostMapping("/user/courses")
     public String saveOrUpdate(CourseBean CourseBean, @RequestParam("imgURL") MultipartFile mf, HttpSession session) throws IOException {
         Member loginUser = (Member) session.getAttribute("loginMember");
 
@@ -213,7 +224,7 @@ public class CourseUserController {
         return uploadDir;
     }
 
-    @DeleteMapping("/courses/{courseNo}")
+    @DeleteMapping("/user/courses/{courseNo}")
     @ResponseBody
     public ResponseEntity<CourseBean> deleteCourseByNo(@PathVariable Integer courseNo) {
         courseService.deleteCourse(courseNo);
