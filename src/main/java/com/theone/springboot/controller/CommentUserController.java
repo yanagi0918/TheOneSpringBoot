@@ -1,5 +1,6 @@
 package com.theone.springboot.controller;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,38 +16,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.CommentMessage;
 import com.theone.springboot.entity.Member;
+import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
 
 @Controller
-@RequestMapping({"/"})
+@RequestMapping({ "/" })
 public class CommentUserController {
 
 	@Autowired
 	CommentService commentService;
 
+	@Autowired
+	CommentMessageService commentMessageService;
+
 	// 所有評論list
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
-		model.addAttribute("listComment", commentService.findAll());
+		List<Comment> listcomment = commentService.findAll();
+		model.addAttribute("listComment", listcomment);
+		model.addAttribute("commentMessageService", commentMessageService);
 		return "comment/commentlist";
 	}
-	
+
 	// 個人評論list
 	@RequestMapping("/user/comments")
 	public String listMyComments(HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("loginMember");
+		Member member = (Member) session.getAttribute("loginMember");
 		List<Comment> myComments = commentService.findByUserId(member.getUserid());
 		model.addAttribute("listComment", myComments);
 		return "comment/commentlist";
 	}
-	
+
 	// list分析
-		@RequestMapping("/comments/analysis")
-		public String listAnalysisComments(Model model) {
-			model.addAttribute("listComment", commentService.findAll());
-			return "comment/commentanalysis";
-		}
+	@RequestMapping("/comments/analysis")
+	public String listAnalysisComments(Model model) {
+		model.addAttribute("listComment", commentService.findAll());
+		return "comment/commentanalysis";
+	}
 
 	// 儲存評論
 	@PostMapping("/CommentSave")
@@ -60,6 +68,13 @@ public class CommentUserController {
 	public String deleteComment(@RequestParam("id") Integer id) {
 		commentService.deleteById(id);
 		return "redirect:/comments";
+	}
+
+	// 刪除留言
+	@GetMapping(value = "/CommentMessageDelete")
+	public String deleteCommentMessage(@RequestParam("id") Integer id) {
+		commentMessageService.deleteByMessageId(id);
+		return "redirect:./comments";
 	}
 
 	// 送出新增評價的空白表單
@@ -78,13 +93,35 @@ public class CommentUserController {
 
 	// 送出評價的詳細資料
 	@RequestMapping("/CommentDetail/{id}")
-	public String showDetailForm(@PathVariable("id") Integer id, Model model) {
+	public String showDetailForm(@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
+
+		// show comment detail
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
+		// get reply list
+		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
+		model.addAttribute("messages", messages);
+		// get message count
+		model.addAttribute("commentMessage", commentMessage);
+		CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
+				.get();
+		commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+
 		return "comment/commentdetail";
 	}
-	
-	//討論區分頁
+
+	// 儲存留言
+	@PostMapping("/{id}/CommentMessageSave")
+	public String saveCommentMessage(@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
+		Comment comment = commentService.findById(id).get();
+		commentMessage.setComment(comment);
+		commentMessageService.saveOrUpdate(commentMessage);
+		return "redirect:/comments";
+	}
+
+	// 討論區分頁
 	@RequestMapping("/forum")
 	public String showForum() {
 		return "interview/page";

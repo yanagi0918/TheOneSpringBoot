@@ -196,25 +196,24 @@
 									<h4 class="float-right">&nbsp&nbsp</h4>
 									<a class="float-right text-muted"><i
 										class="fa fa-thumbs-up">讚</i></a>
-									<h6 class="float-left text-muted">工作經驗</h6>
-									<h6 class="float-left text-muted">-</h6>
-									<h6 class="text-muted"
-										th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
+									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
 								</div>
 								<a class="d-inline-block"
 									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
-									<h2 class="float-left" th:text="${comment.comp_name}"></h2>
-									<h4 class="float-left">&nbsp&nbsp</h4>
+									<h2 class="float-left" th:text="${comment.comp_name} + '&nbsp&nbsp'"></h2>
 									<h4 class="float-left" th:text="${comment.job_name}"></h4>
 								</a>
 								<p th:text="${comment.share}"></p>
-								<ul class="blog-info-link w-50 f-left d-inline">
+								<ul class="blog-info-link w-75 f-left d-inline">
 									<li><span class="listComp text-muted"
 										th:attr="data-score=${comment.comp_score}"><i
 											class="fa fa-building"></i>公司&nbsp&nbsp</span></li>
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
 											class="fa fa-briefcase"></i>職位&nbsp&nbsp</span></li>
+									<li><span class="text-muted"><i class="fa fa-comments"></i></span>
+									<span class="text-muted" th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span>
+									</li>
 									<li><span class="text-muted" th:text="${comment.job_description}"><i
 											class="fa fa-briefcase"></i></span></li>
 								</ul>

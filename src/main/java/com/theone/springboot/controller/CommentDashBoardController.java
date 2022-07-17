@@ -74,7 +74,7 @@ public class CommentDashBoardController {
 		return "comment_dashboard/commentform";
 	}
 
-	// 送出留言的空白表單
+	// 送出留言的表單
 	@RequestMapping("/CommentDetail/{id}/CommentMessageNew")
 	public String showCommentMessageForm(@ModelAttribute("commentMessage") CommentMessage commentMessage,
 			@PathVariable("id") Integer id, Model model) {
