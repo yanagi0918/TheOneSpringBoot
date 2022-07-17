@@ -43,7 +43,7 @@
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-                th:data-background="@{/assets/img/hero/about.jpg}">
+                th:data-background="@{/assets/img/hero/resume.png}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -228,13 +228,36 @@
 			                                    </span>
 			                                </span>
 			                                </td>
-			                                </tr>
-			                                </table>
+			                            </tr>
+			                        </table>
 <!--                                         </button> -->
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                    	<button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-                                        <button class="genric-btn danger circle" th:onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
+                                    	<table>
+	                                  		 <tr>
+	                                  		    <td th:switch="${order.state}">
+				                               		<div th:case="'已付款'">
+						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
+	                                        			<button class="genric-btn danger circle" th:onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
+						                            </div>
+						                            <div th:case="'待審核'">
+						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
+						                          	    <button class="genric-btn danger disable circle">申請退款</button>
+						                            </div> 
+						                            <div th:case="'已退款'">
+						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
+						                           		<button class="genric-btn danger disable circle">申請退款</button>
+						                            </div>
+						                            <div th:case="'已駁回'">
+						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
+						                           		<button class="genric-btn danger disable circle">申請退款</button>
+						                            </div>
+						                        </td>
+						                     </tr>
+	                                      </table>
+                                    
+<!--                                     	<button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button> -->
+<!--                                         <button class="genric-btn danger circle" th:onclick="del(this.id)" th:id="${order.orderId}">申請退款</button> -->
                                     </div>
                                 </div>
                                 <!-- single-job-content -->
@@ -367,8 +390,8 @@
 		                            console.log(data.state);
 		                            let temp = orderId;
 		                            $("#"+temp).text(data.state)
-		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle");
-		                        }
+		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle")
+		                        },
 		                    });
 		                }, 100)
 		            }
