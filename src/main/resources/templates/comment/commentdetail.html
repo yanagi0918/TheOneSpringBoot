@@ -89,6 +89,14 @@
 	clear: both;
 	display: table
 }
+
+.rounded-80 {
+	border-radius: .80rem !important
+}
+
+.blog_left_sidebar i {
+	font-size: 16px;
+}
 </style>
 </head>
 
@@ -138,8 +146,9 @@
 										<a
 											th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
 											class="m-2 edit-delete"
-											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}"> <i
-											class="fa fa-pencil-alt"></i></a>
+											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}">
+											<i class="fa fa-pencil-alt"></i>
+										</a>
 
 									</div>
 									<div class="float-right mt-55">
@@ -216,28 +225,115 @@
 								</div>
 							</form>
 						</article>
+
+						<!-- 新增留言 -->
 						<div class="comments-area">
-							<h4>留言(00)</h4>
-							<div class="comment-list">
-								<div class="single-comment justify-content-between d-flex">
-									<div class="user justify-content-between d-flex">
-										<div class="thumb">
-											<img src="assets/img/comment/comment_1.png" alt="">
+							<div class="comment_form brand-bg rounded-80 p-3 border">
+								<form
+									th:action="@{/{id}/CommentMessageSave(id=${comment.commentId})}"
+									method="post" id="form" th:modelAttribute="commentMessage">
+									<div class="row">
+										<div class="col-12">
+											<div class="form-group">
+												<textarea
+													class="form-control w-100 bg-white rounded-80 shadow-sm"
+													name="messageContent"
+													th:value="${commentMessage.messageContent}"
+													id="messageContent" placeholder="留言....."></textarea>
+												<h6 class="float-right" id="count_message"></h6>
+											</div>
 										</div>
-										<div class="desc">
-											<p class="comment">Multiply sea night grass fourth day
-												sea lesser rule open subdue female fill which them Blessed,
-												give fill lesser bearing multiply sea night grass fourth day
-												sea lesser</p>
-											<div class="d-flex justify-content-between">
-												<div class="d-flex align-items-center">
-													<h5>
-														<a href="#">Emilly Blunt</a>
-													</h5>
-													<p class="date">December 4, 2017 at 3:12 pm</p>
+										<div class="">
+											<div class="form-group">
+												<input class="form-control" name="messageOrder"
+													id="messageOrder" type="hidden"
+													th:value="${commentMessage.messageOrder}" readonly>
+											</div>
+										</div>
+										<div class="">
+											<div class="form-group">
+												<input th:if="${commentMessage.messageId == null}"
+													type="hidden" class="form-control" name="messageTime"
+													required id="messageTime"
+													th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
+													readonly> <input
+													th:if="${commentMessage.messageId != null}" type="hidden"
+													class="form-control" name="messageTime" required
+													id="messageTime"
+													th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
+													readonly>
+											</div>
+										</div>
+										<div class="col-sm-2">
+											<div class="form-group">
+												<input type="text" class="form-control" name="replyUserId"
+													required id="replyUserId"
+													th:value="${commentMessage.replyUserId}">留言者
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<input type="text" class="form-control" name="messageReply"
+													id="messageReply" th:value="${commentMessage.messageReply}">回覆
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<input type="radio" name="messageLike" id="mlike"
+													th:value="true"
+													th:checked="${commentMessage.messageLike} ? 'checked'">喜歡
+												<input type="radio" name="messageLike" id="munlike"
+													th:value="false"
+													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<button type="submit"
+											th:if="${commentMessage.messageId == null}"
+											class="genric-btn success radius" name="submit" value="送出">
+											<i class="fa fa-paper-plane"></i>
+										</button>
+									</div>
+								</form>
+								<!-- 留言list -->
+								<div class="comments-area">
+									<h4 th:text="'留言(' + ${messages.size()} + ')'"></h4>
+									<div class="comment-list" th:each="messages : ${messages}">
+										<div
+											class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+											<div class="user justify-content-between d-flex">
+												<div class="thumb">
+													<img src="assets/img/comment/comment_1.png" alt="">
 												</div>
-												<div class="reply-btn">
-													<a href="#" class="btn-reply text-uppercase">reply</a>
+												<div class="desc">
+													<div class="float-right m-1">
+														<!-- 													th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" -->
+														<a class="m-2 edit-delete"
+															th:href="@{/CommentEdit/{id}(id=${comment.commentId})}">
+															<i class="fa fa-pencil-alt"></i>
+														</a>
+													</div>
+													<p class="comment" th:text="${messages.messageContent}"></p>
+													<div class="d-flex justify-content-between">
+														<div class="d-flex align-items-center">
+															<h5>
+																<a href="#">Emilly Blunt</a>
+															</h5>
+															<p class="date"
+																th:text="${#dates.format(messages.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+														</div>
+														<div class="reply-btn">
+															<a href="#" class="btn-reply text-uppercase">reply</a>
+														</div>
+<!-- 														th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" -->
+														<button
+															type="button"
+															class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
+															th:value='${messages.messageId}'>
+															<i class="fa fa-trash-alt"></i>
+														</button>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -296,7 +392,6 @@
 								<li><a href="#">#科技</a></li>
 							</ul>
 						</aside>
-
 					</div>
 				</div>
 			</div>

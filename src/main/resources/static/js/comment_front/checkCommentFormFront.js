@@ -133,10 +133,38 @@ $(function () {
 		})
 
 	});
+	
+	//留言刪除
+	$('.commentMessage-delete').click(function() {
+		Swal.fire({
+			title: '確定刪除嗎？',
+			text: '資料將永久刪除！',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '刪除',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已刪除!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					location.href = `/CommentMessageDelete?id=${$(this).val()}`;
+				}, 1500)
+			} else {
+				location.href = './comments'
+			}
+
+		})
+
+	});
 
 });
-
-
 
 
 //Star rating js
@@ -307,7 +335,17 @@ $(function () {
 	});
 });
 
+//Text limit
 
+var text_max = 200;
+$('#count_message').html(text_max + '/200字');
+
+$('#messageContent').keyup(function() {
+  var text_length = $('#messageContent').val().length;
+  var text_remaining = text_max - text_length;
+  
+  $('#count_message').html(text_remaining + '/200字');
+});
 
 
 
