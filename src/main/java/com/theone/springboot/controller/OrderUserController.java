@@ -189,6 +189,7 @@ public class OrderUserController {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			List<Order> orders = orderService.findByStateAndMember(state, loginMember);
 			model.addAttribute("courseList", courseServicer.findAllCourses());
+			model.addAttribute("orderList",orderService.getAllOrders());
 			model.addAttribute("state",state);
 			model.addAttribute("loginMember",loginMember);
 			model.addAttribute("orders",orders);
