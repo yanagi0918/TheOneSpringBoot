@@ -1,5 +1,6 @@
 package com.theone.springboot.service.impl;
 
+import java.io.Writer;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import com.theone.springboot.repository.CourseDao;
 import com.theone.springboot.repository.MemberDao;
 import com.theone.springboot.repository.OrderDao;
 import com.theone.springboot.service.OrderService;
+import com.theone.springboot.utils.OrderCsvExporter;
 
 @Service
 @Transactional
@@ -28,6 +30,9 @@ public class OrderServiceImpl  implements OrderService{
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	OrderCsvExporter csvExporter;
 	
 	@Override
 	public boolean isDup(Integer pk) {
@@ -106,6 +111,12 @@ public class OrderServiceImpl  implements OrderService{
 	@Override
 	public Integer findTotalPrice() {
 		return orderDao.findTotalPrice();
+	}
+
+	@Override
+	public void csvExport(Writer writer) {
+		List<Order> orders = orderDao.findAll();
+		csvExporter.csvExport(writer, orders);
 	}
 
 	
