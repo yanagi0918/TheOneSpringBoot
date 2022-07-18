@@ -1,5 +1,6 @@
 package com.theone.springboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.entity.Resume;
 import com.theone.springboot.service.ResumeService;
 
@@ -54,4 +56,47 @@ public class ResumeDashBoardController {
 		return "ok";
 	}
 	
+	@ResponseBody
+	@GetMapping("/resume/chartdata1")
+	public int[] getChartData1() {
+		int[] chartdata = {0,0,0,0,0,0};
+		List<Resume> allresumes = resumeService.getAllResumes();
+		for (Resume resume : allresumes) {
+			switch (resume.getEdu()) {
+			case "大學": chartdata[0]++; 
+			break;
+			case "科技大學": chartdata[1]++; 
+			break;
+			case "研究所": chartdata[2]++; 
+			break;
+			case "博士": chartdata[3]++; 
+			break;
+			case "高中職": chartdata[4]++; 
+			break;
+			case "五專": chartdata[5]++; 
+			break;
+			default: break;
+			}
+		}
+		return chartdata;
+	}	
+	
+	
+//	@ResponseBody
+//	@GetMapping("/resume/chartdata2")
+//	public int[] getChartData2() {
+//		int[] chartdata = {0,0};
+//		List<Resume> allresumes = resumeService.getAllResumes();
+//		for (Resume resume : allresumes) {
+//			switch (resume.getSkills()) {
+//			case "男": chartdata[0]++; 
+//			break;
+//			case "女": chartdata[1]++; 
+//			break;
+//			default: break;
+//			}
+//		}
+//		return chartdata;
+//	}	
+//	
 }
