@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Interview {
 	@Id
-	
+	@Column(name = "cv_no")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cvNo;
 
@@ -37,66 +37,56 @@ public class Interview {
 	private String test;
 
 	private String QA;
-
+	
+	@Column(length = 1000)
 	private String share;
 
 	private Integer compScore;
 
 	private String userId;
 	
+	private String userName;
 	
+	private Integer heart;
+	
+	private Integer report;
 
 	public Interview() {
 	}
 
 
+	public Integer getHeart() {
+		return heart;
+	}
 
-	public Interview(Date intTime, Timestamp createTime, String compName, String jobName, String offer, String test,
-			String qA, String share, Integer compScore, String userId) {
-		super();
-		this.intTime = intTime;
-		this.createTime = createTime;
-		this.compName = compName;
-		this.jobName = jobName;
-		this.offer = offer;
-		this.test = test;
-		QA = qA;
-		this.share = share;
-		this.compScore = compScore;
-		this.userId = userId;
+
+	public void setHeart(Integer heart) {
+		this.heart = heart;
+	}
+
+
+	public Integer getReport() {
+		return report;
+	}
+
+
+	public void setReport(Integer report) {
+		this.report = report;
+	}
+
+
+	
+
+
+	public String getUserName() {
+		return userName;
 	}
 
 
 
-	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
-			String test, String qA, String share, Integer compScore, String userId) {
-		super();
-		this.cvNo = cvNo;
-		this.intTime = intTime;
-		this.createTime = createTime;
-		this.compName = compName;
-		this.jobName = jobName;
-		this.offer = offer;
-		this.test = test;
-		QA = qA;
-		this.share = share;
-		this.compScore = compScore;
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,18 +178,53 @@ public class Interview {
 		this.userId = userId;
 	}
 
+	public Interview(Integer cvNo, Date intTime, Timestamp createTime, String compName, String jobName, String offer,
+			String test, String qA, String share, Integer compScore, String userId, String userName, Integer like,
+			Integer report) {
+		super();
+		this.cvNo = cvNo;
+		this.intTime = intTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.jobName = jobName;
+		this.offer = offer;
+		this.test = test;
+		QA = qA;
+		this.share = share;
+		this.compScore = compScore;
+		this.userId = userId;
+		this.userName = userName;
+		this.heart = like;
+		this.report = report;
+	}
 
+
+
+	public Interview(Date intTime, Timestamp createTime, String compName, String jobName, String offer, String test,
+			String qA, String share, Integer compScore, String userId, String userName, Integer like, Integer report) {
+		super();
+		this.intTime = intTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.jobName = jobName;
+		this.offer = offer;
+		this.test = test;
+		QA = qA;
+		this.share = share;
+		this.compScore = compScore;
+		this.userId = userId;
+		this.userName = userName;
+		this.heart = like;
+		this.report = report;
+	}
 
 	@Override
 	public String toString() {
 		return "Interview [cvNo=" + cvNo + ", intTime=" + intTime + ", createTime=" + createTime + ", compName="
 				+ compName + ", jobName=" + jobName + ", offer=" + offer + ", test=" + test + ", QA=" + QA + ", share="
-				+ share + ", compScore=" + compScore + ", userId=" + userId + "]";
+				+ share + ", compScore=" + compScore + ", userId=" + userId + ", userName=" + userName + "]";
 	}
 
-
-
-	
 	
 
 }

@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,8 +25,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Interview;
+import com.theone.springboot.entity.InterviewMessage;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.EventService;
+import com.theone.springboot.service.InterviewMessageService;
 import com.theone.springboot.service.InterviewService;
 
 
@@ -39,11 +42,14 @@ public class InterviewUserController {
 	InterviewService interviewService;
 	@Autowired
 	EventService eventService;
+	@Autowired
+	InterviewMessageService interviewMessageService;
 	
 	@GetMapping("/intvlist")//所有目錄
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
+		//放入廣告頁面
 		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 		model.addAttribute("events",events);
 		return "interview/intvlist";
@@ -55,6 +61,7 @@ public class InterviewUserController {
 			Member member = (Member)session.getAttribute("loginMember");
 			List<Interview> findByUserId = interviewService.findByUserId(member.getUserid());
 			model.addAttribute("intvs", findByUserId);
+			//放入廣告頁面
 			List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 			model.addAttribute("events",events);
 			return "interview/intvlist";
@@ -99,21 +106,50 @@ public class InterviewUserController {
 		return "interview/intvupdate";
 
 	}
-	// 更新資料
-//			@RequestMapping("/intvUpdate")
-//			public String updateComment(@ModelAttribute("intv") Interview intv) {
-//				interviewService.saveOrUpdate(intv);
-//				return "redirect:/intvlist";
-//			}
-	@GetMapping("/intvshow/{id}")
+	
+	//進入show
+	@RequestMapping("/intvshow/{id}")
 	public String toShow(@PathVariable Integer id, Model model) {
+		System.out.println("---- 進入show----");
 		Interview intv = interviewService.getInterview(id).get();
 		model.addAttribute("intvs", intv);
+		List<InterviewMessage> intvmess = interviewMessageService.findByInterviewCvNo(id);//留言陣列
+		model.addAttribute("intvmess",intvmess);
 		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 		model.addAttribute("events",events);
 		return "interview/intvshow";
 		
 	}
+	
+//	@PostMapping
+//	public Map<String,Object>addMessage(InterviewMessage interviewMessage) {
+//		
+//		return interviewMessageService.addMessage(interviewMessage);
+//		
+//	}
+	
+	//新增留言
+	@PostMapping("/addmess")
+	public String saveMessagae(InterviewMessage interviewMessage) {
+		System.out.println("---新增留言--");
+		Timestamp ts= new Timestamp(System.currentTimeMillis());
+		interviewMessage.setTime(ts);
+		interviewMessageService.save(interviewMessage);
+		return "redirect:/intvshow/";
+		
+	}
+	
+//	//顯示留言
+//	@PostMapping("/findmess/")
+//	public String findMess(@PathVariable Integer id,Model model) {
+//		
+//		System.out.println("--進入顯示留言區---");
+//		List<InterviewMessage> intvmess=interviewMessageService.findByInterviewCvNo(id);
+//		model.addAttribute("intvmess",intvmess);
+//		return "interview/intvshow";
+//		
+//	}
+	
 	@ResponseBody
 	@DeleteMapping("/delete/{id}")
 	public String delete(@PathVariable("id")Integer id) {
