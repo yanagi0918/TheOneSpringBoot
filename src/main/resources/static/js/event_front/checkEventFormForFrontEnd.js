@@ -41,7 +41,7 @@ $(function() {
 	$('#postStart').change(function() {
 		let postStartDate = new Date($("#postStart").val());
 		if ($('#postStart').val() == "") {
-			$('#postStartError').text("請輸入刊登開始日期")
+			$('#postStartError').text("請輸入上架日期")
 			$('#postStart').attr("class","form-control is-invalid")
 		/*} else if(postStartDate < new Date()){
 			$('#postStartError').text("刊登開始日期不可設於今日之前")
@@ -55,10 +55,10 @@ $(function() {
 		let postStartDate = new Date($("#postStart").val());
 		let postEndDate = new Date($("#postEnd").val());
 		if ($('#postEnd').val() == "") {
-			$('#postEndError').text("請輸入刊登結束日期")
+			$('#postEndError').text("請輸入下架日期")
 			$('#postEnd').attr("class","form-control is-invalid")
 		}else if (postStartDate > postEndDate) {
-			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
+			$('#postEndError').text("下架日期不可設於上架日期之前")
 			$('#postEnd').attr("class","form-control is-invalid")
 		}else{
 			$('#postEnd').attr("class","form-control is-valid")
@@ -89,7 +89,7 @@ $(function() {
 		let postStartDate = new Date($("#postStart").val());
 		let postEndDate = new Date($("#postEnd").val());
 		if ($('#postStart').val() == "") {
-			$('#postStartError').text("請輸入刊登開始日期")
+			$('#postStartError').text("請輸入上架日期")
 			$('#postStart').attr("class","form-control is-invalid")
 			checkEventForm = false;
 		/*} else if (postStartDate < new Date()) {
@@ -102,11 +102,11 @@ $(function() {
 		
 		
 		if ($('#postEnd').val() == "") {
-			$('#postEndError').text("請輸入刊登結束日期")
+			$('#postEndError').text("請輸入下架日期")
 			$('#postEnd').attr("class","form-control is-invalid")
 			checkEventForm = false;
 		}else if (postStartDate > postEndDate) {
-			$('#postEndError').text("刊登開始日期不可設於刊登結束日期之後")
+			$('#postEndError').text("下架日期不可設於上架日期之前")
 			$('#postEnd').attr("class","form-control is-invalid")
 			checkEventForm = false;
 		}else{
