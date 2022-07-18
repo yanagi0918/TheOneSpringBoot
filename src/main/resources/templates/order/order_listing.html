@@ -106,12 +106,12 @@
                                     <div class="select-job-items2">
                                   <form th:action="@{/user/OrderState}" method="get" id="StateInquire">
                                     <select name="state" required id="state">
-                                    <option th:selected="${state==orderList}" th:each="order:${orders}" th:value="${order.state}" th:label="${order.state}" th:text="${order.state}"></option>
-<!--                                     	<option>全部</option> -->
-<!--                                         <option>已付款</option> -->
-<!--                                         <option>待審核</option> -->
-<!--                                         <option>已退款</option> -->
-<!--                                         <option>已駁回</option> -->
+<!--                                     <option th:selected="${state==orderList}" th:each="order:${orders}" th:value="${order.state}" th:label="${order.state}" th:text="${order.state}"></option> -->
+                                    	<option>全部</option>
+                                        <option>已付款</option>
+                                        <option>待審核</option>
+                                        <option>已退款</option>
+                                        <option>已駁回</option>
                                     </select>
                                    </form>
                                 </div>
