@@ -24,7 +24,7 @@
 <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 </head>
 
-<body>
+<body >
 	<!-- Preloader Start -->
 	<div th:replace="~{common/frontpage::preloader}"></div>
 	<!-- Preloader Start -->
@@ -146,24 +146,29 @@
 								<div class="col-xl-12 col-lg-12 col-md-12">
 									<div id="send">
 										<h3>來留言吧</h3>
+<!-- 										<form th:action="@{/addmess}"  method="post"> -->
+								
 										<hr>
 										<h4>您的暱稱</h4>
 										<input type="text" id="user_name">
 										<h4>您的留言</h4>
 										<textarea id="content" row="8"></textarea>
-										
+										<input type="hidden"  id="time">
 										<div>
 										<button class="genric-btn primary-border  arrow small" id="sendBtn">發佈</button>
+									</form>
 									</div></div>
 									<hr> 
 									<!-- 全部留言 -->
 									<div id="list">
 										<h3>留言板</h3>
 										<hr>
-										<div id="list">
-											<div style="background-color: rgb(248, 230, 196)" id="article">
-												<b>範例 說:</b>
-												<p>這是一個範例留言</p>
+										<div id="massage">
+											<div style="background-color: rgb(248, 230, 196)" id="item">
+												<b class="user_name">範例 說:</b>
+												<p class="words">這是一個範例留言</p>
+												<p class="time">time</p>
+												<hr class="wordsgap">
 
 											</div>
 										</div>
@@ -179,7 +184,7 @@
 					</div>
 					<button class="genric-btn primary-border  arrow"
 						onclick="window.location.href='../intvlist'; return false;">
-						返回前頁<span class="lnr lnr-arrow-right"></span></a>
+						返回前頁<span class="lnr lnr-arrow-right"></span></button>
 						<!-- Testimonial End -->
 				</div>
 				<!-- 右邊欄位Head -->
@@ -324,28 +329,59 @@
 		src="js/interview_front/jquery.raty.js"></script>
 	<script th:src="@{/js/interview_front/checkInterviewForm.js}"
 		src="js/interview_front/checkInterviewForm.js"></script>
-	<script>
-var user_name =document.getElementById("user_name")
-var content =document.getElementById("content")
-var list =document.getElementById("list")
-var sendBtn =document.getElementById("sendBtn")
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script>
+    //發表留言
+    $("#sendBtn").on("click",function(){
+        
+       
+    $.ajax({
+url: "/intvshow/addmess",
+type: "POST",
+data: {
+name: $("#type_user_name").val(),
+words: $("#type_content").val()
 
-sendBtn.addEventListener("click",function(){
-    list.innerHTML=list.innerHTML+ `
-    
-    <div style="background-color: rgb(248, 230, 196)" id="article">  
-        <b >${user_name.value}</b>
-        <p >${content.value}</p>
-        <p class="state">time</p>
-        <hr class="wordsgap">
-     </div>  
-    
-    
-    `
-})
+},
+resultType:"JSON",
+success:function(result){
+    displayAll();
+    alert(result.message);
+    $("#type_user_name").val("");
+    $("#type_content").val("");
+     
+},
+error: function (result){
+alert( result.message) ;
+ }
+}) ;
+}) ;
+//申请显示所有留言信息
+function displayall(){
+$.ajax({
 
-
+type: "POST",
+dataType: "JSON",
+success: function (data){
+var message = "";
+for (var i = 0;i<data.length; i++){
+message += '<div class="item">'+
+'<b class="user_name">'+data[i].name+ ' 說:+'+'</b>'+
+'<p class="words">'+data[i].words+'</p>'+
+'<p class="time">'+data[i] . time+'</p>'+
+'<hr class="wordsgap">'+
+'</div>'
+}
+$("#message" ) .empty() ;
+$("#message") . append(message);
+},
+error: function (){
+alert("獲取留言數據異常");
+}
+}) ;
+}
 </script>
+
 
 
 </body>
