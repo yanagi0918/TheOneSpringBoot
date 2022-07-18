@@ -1,5 +1,5 @@
 //Form rule
-$(function () {
+$(function() {
 	$('#form').validate({
 		rules: {
 			user: {
@@ -76,8 +76,8 @@ $(function () {
 
 //Sweet Alert
 
-$(function () {
-	$('.comment-delete').click(function () {
+$(function() {
+	$('.comment-delete').click(function() {
 		Swal.fire({
 			title: '確定刪除嗎？',
 			text: '資料將永久刪除！',
@@ -106,7 +106,7 @@ $(function () {
 
 	});
 
-	$('#comment-new').click(function () {
+	$('#comment-new').click(function() {
 		Swal.fire({
 			title: '提示',
 			text: '確定要新增?',
@@ -133,7 +133,7 @@ $(function () {
 		})
 
 	});
-	
+
 	//留言刪除
 	$('.commentMessage-delete').click(function() {
 		Swal.fire({
@@ -157,7 +157,7 @@ $(function () {
 					location.href = `/CommentMessageDelete?id=${$(this).val()}`;
 				}, 1500)
 			} else {
-				location.href = './comments'
+				location.href = '/comments'
 			}
 
 		})
@@ -170,7 +170,7 @@ $(function () {
 //Star rating js
 $.raty.path = '/img';
 
-$(function () {
+$(function() {
 
 	$('#compScore').raty({
 		targetScore: '#comp_score',
@@ -207,8 +207,8 @@ $(function () {
 
 
 //One key input js
-$(function () {
-	$('#OneInput').click(function () {
+$(function() {
+	$('#OneInput').click(function() {
 		$('#userId').show()
 		$('#userId').val('A123456789')
 		$('#comp_name').val('狗來富寵物廣場')
@@ -230,13 +230,13 @@ $(function () {
 });
 //anonymous/user show
 
-$(function () {
-	$('#anonymous').click(function () {
+$(function() {
+	$('#anonymous').click(function() {
 		$('#userId').val('匿名');
 		$('#userId').hide();
 	})
 
-	$('#user').click(function () {
+	$('#user').click(function() {
 		$('#userId').val('');
 		$('#userId').show();
 	});
@@ -244,7 +244,7 @@ $(function () {
 })
 
 //function bar controller
-$(document).ready(function () {
+$(document).ready(function() {
 	var identifier = window.location.pathname;
 	switch (identifier) {
 		case '/comments':
@@ -260,6 +260,26 @@ $(document).ready(function () {
 	}
 
 });
+
+//控制修改留言視窗
+
+function editMessage(id) {
+	
+	var messageId = '#'+ id;
+	var editArea = '#messageEditArea' + id;
+	var editCancel = '#editCancel' + id;
+	var currentMessage = '#currentMessage' + id;
+	
+	$(messageId).click(function() {
+		$(editArea).removeClass('d-none');
+		$(currentMessage).addClass('d-none');
+	})
+	$(editCancel).click(function() {
+		$(editArea).addClass('d-none');
+		$(currentMessage).removeClass('d-none');
+	})
+
+}
 
 //分頁
 
@@ -287,7 +307,7 @@ function getPageList(totalPages, page, maxLength) {
 	return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
 }
 
-$(function () {
+$(function() {
 	var numberOfItems = $(".blog_area .blog_item").length;
 	var limitPerPage = 5;
 	var totalPages = Math.ceil(numberOfItems / limitPerPage);
@@ -322,15 +342,15 @@ $(function () {
 	$(".blog_area").show();
 	showPage(1);
 
-	$(document).on("click", ".pagination li.current-page:not(.active)", function () {
+	$(document).on("click", ".pagination li.current-page:not(.active)", function() {
 		return showPage(+$(this).text());
 	});
 
-	$(".next-page").on("click",function(){
+	$(".next-page").on("click", function() {
 		return showPage(currentPage + 1);
 	});
-	
-	$(".previous-page").on("click",function(){
+
+	$(".previous-page").on("click", function() {
 		return showPage(currentPage - 1);
 	});
 });
@@ -341,10 +361,10 @@ var text_max = 200;
 $('#count_message').html(text_max + '/200字');
 
 $('#messageContent').keyup(function() {
-  var text_length = $('#messageContent').val().length;
-  var text_remaining = text_max - text_length;
-  
-  $('#count_message').html(text_remaining + '/200字');
+	var text_length = $('#messageContent').val().length;
+	var text_remaining = text_max - text_length;
+
+	$('#count_message').html(text_remaining + '/200字');
 });
 
 
