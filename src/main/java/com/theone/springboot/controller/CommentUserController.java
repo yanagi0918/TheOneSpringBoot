@@ -44,7 +44,8 @@ public class CommentUserController {
 	@RequestMapping("/user/comments")
 	public String listMyComments(HttpSession session, Model model) {
 		Member member = (Member) session.getAttribute("loginMember");
-		List<Comment> myComments = commentService.findByUserId(member.getUserid());
+		List<Comment> myComments = commentService.findByMemberIdNumber(null);
+//		List<Comment> myComments = commentService.findByUserId(member.getUserid());
 		model.addAttribute("listComment", myComments);
 		return "comment/commentlist";
 	}

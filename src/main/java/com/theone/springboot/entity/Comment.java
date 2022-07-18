@@ -66,9 +66,12 @@ public class Comment {
 	@Column(length = 1000)
 	private String share;
 	
+	// 0:刊登中 1:下架 2:撤銷
 	private Integer status;
 
-	private String userId;
+//	private String userId;
+	
+	private String nickName;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "member_idNumber", nullable = false)
@@ -76,15 +79,13 @@ public class Comment {
 	@JsonIgnore
 	private Member member;
 	
-
 	public Comment() {
 	}
 
 	public Comment(Integer commentId, Date ref_time, Date create_time, String comp_name, Integer comp_score,
 			String job_name, Integer job_score, String job_description, Integer std_hour, Integer real_hour,
 			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
-			Integer bonus_count, String share, Integer status, String userId) {
-		super();
+			Integer bonus_count, String share, Integer status, String nickName) {
 		this.commentId = commentId;
 		this.ref_time = ref_time;
 		this.create_time = create_time;
@@ -103,13 +104,14 @@ public class Comment {
 		this.bonus_count = bonus_count;
 		this.share = share;
 		this.status = status;
-		this.userId = userId;
+		this.nickName = nickName;
 	}
+
 
 	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name,
 			Integer job_score, String job_description, Integer std_hour, Integer real_hour, Integer over_freq,
 			Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary, Integer bonus_count,
-			String share, Integer status, String userId) {
+			String share, Integer status, String nickName) {
 		this.ref_time = ref_time;
 		this.create_time = create_time;
 		this.comp_name = comp_name;
@@ -127,7 +129,7 @@ public class Comment {
 		this.bonus_count = bonus_count;
 		this.share = share;
 		this.status = status;
-		this.userId = userId;
+		this.nickName = nickName;
 	}
 
 	public Comment(Integer commentId) {
@@ -278,14 +280,20 @@ public class Comment {
 		this.status = status;
 	}
 
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 	
-
-	public String getUserId() {
-		return userId;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 	public Member getMember() {
@@ -303,8 +311,6 @@ public class Comment {
 				+ job_score + ", job_description=" + job_description + ", std_hour=" + std_hour + ", real_hour="
 				+ real_hour + ", over_freq=" + over_freq + ", seniority=" + seniority + ", total_seniority="
 				+ total_seniority + ", monthly_salary=" + monthly_salary + ", yearly_salary=" + yearly_salary
-				+ ", bonus_count=" + bonus_count + ", share=" + share + ", status=" + status + ", userId=" + userId
-				+ "]";
+				+ ", bonus_count=" + bonus_count + ", share=" + share + ", status=" + status + ", nickName=" + nickName + "]";
 	}
-	
 }

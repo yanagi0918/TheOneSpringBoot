@@ -55,6 +55,81 @@
 .error {
 	color: #F00;
 }
+
+/* switch */
+.switch {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+.switch + .switch-body {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  cursor: pointer;
+  float: left;
+  margin-right: 10px;
+}
+.switch + .switch-body:before {
+  content: "";
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  border-radius: 100px;
+  top: auto;
+}
+.switch + .switch-body + .switch-text {
+  display: inline-block;
+  padding-top: 5px;
+}
+.switch.switch-bootstrap + .switch-body:before {
+  background-color: #d2d9e1;
+  width: 50px;
+  height: 30px;
+  -webkit-transition: background 0.1s ease;
+  -o-transition: background 0.1s ease;
+  transition: background 0.1s ease;
+}
+.switch.switch-bootstrap + .switch-body:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  border: 4px solid #fff;
+  -webkit-transition: left 0.2s ease;
+  -o-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.switch.switch-bootstrap:checked + .switch-body:after {
+  left: 21px;
+  background-color: #FFF;
+  border: 4px solid #FFF;
+  text-shadow: 0 -1px 0 rgba(0, 200, 0, 0.25);
+}
+/* CSS3 on/off switches */
+.switch-primary > .switch.switch-bootstrap:checked + .switch-body::before {
+  background-color: #1dcc7d;
+}
+.switch-success > .switch.switch-bootstrap:checked + .switch-body::before {
+  background-color: #5cb85c;
+}
+.switch-danger > .switch.switch-bootstrap:checked + .switch-body::before {
+  background-color: #d9534f;
+}
+.switch-info > .switch.switch-bootstrap:checked + .switch-body::before {
+  background-color: #5bc0de;
+}
+.switch-warning > .switch.switch-bootstrap:checked + .switch-body::before {
+  background-color: #f0ad4e;
+}
+
 </style>
 </head>
 <body>
@@ -80,8 +155,8 @@
 				<div class="col-sm-12 col-xl-11">
 					<div class="bg-light rounded h-100 p-4">
 						<h6 th:text="${comment.commentId != null} ? '編輯評論' : '新增評論'"></h6>
-						<form
-							th:action="@{/dashboard/CommentSave(userid=A123456789)}"
+						<!-- 						userid=${comment.userId} -->
+						<form th:action="@{/dashboard/CommentSave?idNumber=1}"
 							method="post" id="form" th:modelAttribute="comment">
 							<div class="row mb-3">
 								<div class="row mb-3">
@@ -90,27 +165,29 @@
 										<tr th:if="${comment.commentId != null}">
 											<th>評論編號:</th>
 											<td><input type="text" name="commentId"
-												class="form-control" th:value="${comment.commentId}" readonly>
-											</td>
+												class="form-control" th:value="${comment.commentId}"
+												readonly></td>
+											<th>會員編號:</th>
+											<td th:if="${comment.commentId}">[[${comment.member.idNumber}]]</td>
 										</tr>
 										<tr>
 											<th>新增時間:</th>
 											<td><input class="form-control" type="text"
 												th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
 												name="create_time" readonly></td>
-											<th>帳號:</th>
-											<td th:if="${comment.userId == null}">
-												<input type="radio" id="anonymous" name="user" >匿名
-												<input type="radio" id="user" name="user" >會員
+											<th>暱稱:</th>
+											<td>
+												<label class="switch-primary"> 
+												<input type="checkbox" class="switch switch-bootstrap status"
+														name="status" id="" value="1"> 
+												<span class="switch-body"></span>
+												<span class="switch-text float-left">匿名</span>
+											</label> 
 											</td>
-											<td th:if="${comment.userId != null}">
-												<input type="radio" id="anonymous" name="user" th:checked="${comment.userId.contains('匿名')} ? 'checked'">匿名
-												<input type="radio" id="user" name="user" th:checked="${!comment.userId.contains('匿名')} ? 'checked'">會員
-											</td>
-											<td colspan="2">
-												<input type="text" class="form-control" th:style="${comment.userId != null && comment.userId.contains('匿名') ? 'display: none' : 'display: block'}"
-												id="userId" name="userId"	th:value="${comment.userId}" placeholder="請輸入帳號">
-											</td>
+											<td  colspan="2"><input type="text" class="form-control float-left"
+												th:style="${comment.nickName != null && comment.nickName.contains('匿名') ? 'display: none' : 'display: block'}"
+												id="nickName" name="nickName" th:value="${comment.nickName}"
+												placeholder="怎麼稱呼你"></td>
 										</tr>
 										<tr>
 											<th>公司名稱:</th>
@@ -126,7 +203,8 @@
 											</td>
 											<th>參考時間:</th>
 											<td><input type="date" class="form-control"
-												name="ref_time" id="ref_time" th:value="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"
+												name="ref_time" id="ref_time"
+												th:value="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"
 												th:max="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
 											</td>
 										</tr>
@@ -179,6 +257,17 @@
 											<td><input type="text" class="form-control"
 												th:value="${comment.total_seniority}" id="total_seniority"
 												name="total_seniority" placeholder="年"></td>
+											<td>文章狀態:</td>
+											<td><select class="form-select" name="status"
+												id="status" size="1">
+													<option value="0"
+														th:selected="${comment.status== 0}">刊登中</option>
+													<option value="1"
+														th:selected="${comment.status== 1}">下架</option>
+													<option value="2"
+														th:selected="${comment.status== 2}">撤銷</option>
+											</select>
+											</td>								
 										</tr>
 										<tr>
 											<th>月薪(元):</th>
@@ -259,7 +348,8 @@
 			th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
 			src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script th:src="@{/js/comment_dashboard/jquery.raty.js}" src="js/comment_dashboard/jquery.raty.js"></script>
+		<script th:src="@{/js/comment_dashboard/jquery.raty.js}"
+			src="js/comment_dashboard/jquery.raty.js"></script>
 		<script th:src="@{/js/comment_dashboard/checkCommentForm.js}"
 			src="js/comment_dashboard/checkCommentForm.js"></script>
 

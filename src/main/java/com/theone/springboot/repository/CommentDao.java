@@ -13,7 +13,7 @@ import com.theone.springboot.entity.Comment;
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
-	List<Comment> findByUserId(String userId);
+//	List<Comment> findByUserId(String userId);
 
 	List<Comment> findByMemberIdNumber(Integer idNumber);
 

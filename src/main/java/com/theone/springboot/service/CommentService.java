@@ -20,7 +20,7 @@ public interface CommentService {
 
 	void deleteById(Integer pk);
 
-	List<Comment> findByUserId(String userId);
+//	List<Comment> findByUserId(String userId);
 
 	List<Comment> findByMemberIdNumber(Integer idNumber);
 	

@@ -307,7 +307,7 @@
 								<tr th:each="comment : ${listComment}" id="commentlist">
 									<td th:text="${comment.commentId}"></td>
 									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.userId}"></td>
+									<td th:text="${comment.member.userid}"></td>
 									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
 									<td th:text="${comment.comp_name}"></td>
 									<td class="listComp" data-score=""

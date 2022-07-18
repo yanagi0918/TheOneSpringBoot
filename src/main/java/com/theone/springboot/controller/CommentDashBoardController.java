@@ -45,8 +45,8 @@ public class CommentDashBoardController {
 	// 儲存評論
 	@PostMapping("/CommentSave")
 	public String saveComment(@ModelAttribute("comment") Comment comment,
-			@RequestParam("userid") String userid) {
-		Member member = memberService.getByUserid(userid);
+			@RequestParam("idNumber") Integer idNumber) {
+		Member member = memberService.getMember(idNumber).get();
 		comment.setMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
