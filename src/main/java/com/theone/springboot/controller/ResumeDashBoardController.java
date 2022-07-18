@@ -1,7 +1,10 @@
 package com.theone.springboot.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -98,5 +101,14 @@ public class ResumeDashBoardController {
 //		}
 //		return chartdata;
 //	}	
-//	
+
+	
+	@GetMapping("/resumes/csvExport")
+	public void csvExport(HttpServletResponse response) throws IOException {
+		response.setContentType("text/csv;charset=UTF-8");
+		response.addHeader("Content-Disposition","attachment; filename=resumes.csv");
+		resumeService.csvExport(response.getWriter());
+	}
+	
+	
 }

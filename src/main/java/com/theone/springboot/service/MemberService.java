@@ -1,9 +1,9 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import com.theone.springboot.entity.Member;
 
 public interface MemberService {
@@ -25,5 +25,7 @@ public interface MemberService {
 	
 	
 	public void sendNotifyEmail(String recipient, String subject, String message);
+	
+	void csvExport(Writer writer);
 	
 }

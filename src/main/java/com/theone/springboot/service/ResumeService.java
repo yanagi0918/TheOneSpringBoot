@@ -1,5 +1,6 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,6 @@ public interface ResumeService {
 	
 	List<Resume> findByUserId(String userId);
 	
-	
+	void csvExport(Writer writer);
 	
 }

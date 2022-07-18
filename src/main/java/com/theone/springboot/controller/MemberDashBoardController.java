@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
@@ -171,6 +173,15 @@ public class MemberDashBoardController {
 		}
 		return chartdata;
 	}
+	
+	
+	@GetMapping("/members/csvExport")
+	public void csvExport(HttpServletResponse response) throws IOException {
+		response.setContentType("text/csv;charset=UTF-8");
+		response.addHeader("Content-Disposition","attachment; filename=members.csv");
+		memberService.csvExport(response.getWriter());
+	}
+	
 	
 	
 	

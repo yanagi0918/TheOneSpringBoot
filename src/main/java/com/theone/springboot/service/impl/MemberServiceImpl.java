@@ -1,9 +1,9 @@
 package com.theone.springboot.service.impl;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,10 +11,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.repository.MemberDao;
 import com.theone.springboot.service.MemberService;
+import com.theone.springboot.utils.MemberCsvExporter;
 
 
 @Service
@@ -26,6 +26,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	JavaMailSender mailSender;
+	
+	@Autowired
+	MemberCsvExporter csvExporter;
 	
 	@Override
 	public boolean isDup(Integer pk) {
@@ -84,6 +87,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public void csvExport(Writer writer) {
+		List<Member> members = memberDao.findAll();
+		csvExporter.csvExport(writer, members);
+	}
 
 	
 }
