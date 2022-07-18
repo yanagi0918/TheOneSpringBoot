@@ -71,61 +71,185 @@
                                     </div>
                                 </div>
                                 <!-- Count of Job list End -->
-                                <!-- single-job-content -->
-                                <div th:each="event:${events}" class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="job-tittle job-tittle2">
-                                            <a th:href="${event.eventLinkUrl}">
-                                                <h4>職缺連結</h4>
-                                            </a>
-                                            <ul>
-                                                <li th:text="${'廣告編號:'+event.eventId}"></li>
-                                                <li th:text="${'上架日期:'+#dates.format(event.postStart, 'yyyy/MM/dd')}"></li>
-                                                <li th:text="${'下架日期:'+#dates.format(event.postEnd, 'yyyy/MM/dd')}"></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="f-right">
-                                    	<button th:if="${event.state==0}" class="genric-btn info-border circle">審核中</button>
-                                    	<button th:if="${event.state==1}" class="genric-btn success-border circle">審核通過</button>
-                                    	<button th:if="${event.state==2}" class="genric-btn danger-border circle">已退件</button>
-                                        <a href="#" class="genric-btn primary circle" data-toggle="modal" th:data-target="${'#detail'+event.eventId}">查看</a>
-                                        <div class="modal fade" th:id="${'detail'+event.eventId}" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" th:text="${'廣告編號:'+event.eventId}">Modal title</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          													<span aria-hidden="true">&times;</span>
-       													</button>
-                                                    </div>
-                                                    <div class="modal-body">
-														<div class="form-group text-center">
-															<img th:src="${event.imgUrl}" id="image" style="width: 320px; height: 210px;" class="img-fluid">
-														</div>
-														<div class="form-group">
-															<label class="col-form-label">職缺連結:</label>
-															<input th:value="${event.eventLinkUrl}" type="text" disabled class="single-input">
-														</div>
-														<div class="form-group">
-															<label class="col-form-label">上架日期:</label>
-															<input th:value="${#dates.format(event.postStart, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
-														</div>
-														<div class="form-group">
-															<label class="col-form-label">下架日期:</label>
-															<input th:value="${#dates.format(event.postEnd, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
-														</div>
-														<div class="form-group">
-															<label class="col-form-label">備註:</label>
-															<textarea class="single-textarea" disabled th:text="${event.remark}"></textarea>
-														</div>
-                                                    </div>
+                                 <ul class="nav nav-tabs" role="tablist">
+    								<li class="nav-item">
+      									<a class="nav-link active" data-toggle="tab" href="#process"><h4>審核中</h4></a>
+    								</li>
+    								<li class="nav-item">
+      									<a class="nav-link" data-toggle="tab" href="#pass"><h4>審核通過</h4></a>
+    								</li>
+    								<li class="nav-item">
+      									<a class="nav-link" data-toggle="tab" href="#return"><h4>已退件</h4></a>
+    								</li>
+  								</ul>
+  								
+  								
+  								<div class="tab-content">
+    								<div class="tab-pane fade show active" id="process">
+										<div th:each="event:${events0}" class="single-job-items mb-30">
+                                            <div class="job-items">
+                                                <div class="job-tittle job-tittle2">
+                                                    <a th:href="${event.eventLinkUrl}">
+                                                        <h4>職缺連結</h4>
+                                                    </a>
+                                                    <ul>
+                                                        <li th:text="${'廣告編號:'+event.eventId}"></li>
+                                                        <li th:text="${'上架日期:'+#dates.format(event.postStart, 'yyyy/MM/dd')}"></li>
+                                                        <li th:text="${'下架日期:'+#dates.format(event.postEnd, 'yyyy/MM/dd')}"></li>
+                                                    </ul>
                                                 </div>
                                             </div>
+                                            <div class="f-right">
+                                            	<button class="genric-btn info-border circle">審核中</button>
+                                                <a href="#" class="genric-btn primary circle" data-toggle="modal" th:data-target="${'#detail'+event.eventId}">查看</a>
+                                                <div class="modal fade" th:id="${'detail'+event.eventId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" th:text="${'廣告編號:'+event.eventId}">Modal title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          							        						<span aria-hidden="true">&times;</span>
+       								        					</button>
+                                                            </div>
+                                                            <div class="modal-body">
+									        					<div class="form-group text-center">
+									        						<img th:src="${event.imgUrl}" id="image" style="width: 320px; height: 210px;" class="img-fluid">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">職缺連結:</label>
+									        						<input th:value="${event.eventLinkUrl}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">上架日期:</label>
+									        						<input th:value="${#dates.format(event.postStart, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">下架日期:</label>
+									        						<input th:value="${#dates.format(event.postEnd, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">備註:</label>
+									        						<textarea class="single-textarea" disabled th:text="${event.remark}"></textarea>
+									        					</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
+                                            </div>
                                         </div>
-                                        <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
-                                    </div>
-                                </div>
+    								</div>
+    								<div class="tab-pane fade" id="pass">
+										<div th:each="event:${events1}" class="single-job-items mb-30">
+                                            <div class="job-items">
+                                                <div class="job-tittle job-tittle2">
+                                                    <a th:href="${event.eventLinkUrl}">
+                                                        <h4>職缺連結</h4>
+                                                    </a>
+                                                    <ul>
+                                                        <li th:text="${'廣告編號:'+event.eventId}"></li>
+                                                        <li th:text="${'上架日期:'+#dates.format(event.postStart, 'yyyy/MM/dd')}"></li>
+                                                        <li th:text="${'下架日期:'+#dates.format(event.postEnd, 'yyyy/MM/dd')}"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="f-right">
+                                            	<button class="genric-btn success-border circle">審核通過</button>
+                                                <a href="#" class="genric-btn primary circle" data-toggle="modal" th:data-target="${'#detail'+event.eventId}">查看</a>
+                                                <div class="modal fade" th:id="${'detail'+event.eventId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" th:text="${'廣告編號:'+event.eventId}">Modal title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          							        						<span aria-hidden="true">&times;</span>
+       								        					</button>
+                                                            </div>
+                                                            <div class="modal-body">
+									        					<div class="form-group text-center">
+									        						<img th:src="${event.imgUrl}" id="image" style="width: 320px; height: 210px;" class="img-fluid">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">職缺連結:</label>
+									        						<input th:value="${event.eventLinkUrl}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">上架日期:</label>
+									        						<input th:value="${#dates.format(event.postStart, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">下架日期:</label>
+									        						<input th:value="${#dates.format(event.postEnd, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">備註:</label>
+									        						<textarea class="single-textarea" disabled th:text="${event.remark}"></textarea>
+									        					</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
+                                            </div>
+                                        </div>
+    								</div>
+    								<div class="tab-pane fade" id="return">
+										<div th:each="event:${events2}" class="single-job-items mb-30">
+                                            <div class="job-items">
+                                                <div class="job-tittle job-tittle2">
+                                                    <a th:href="${event.eventLinkUrl}">
+                                                        <h4>職缺連結</h4>
+                                                    </a>
+                                                    <ul>
+                                                        <li th:text="${'廣告編號:'+event.eventId}"></li>
+                                                        <li th:text="${'上架日期:'+#dates.format(event.postStart, 'yyyy/MM/dd')}"></li>
+                                                        <li th:text="${'下架日期:'+#dates.format(event.postEnd, 'yyyy/MM/dd')}"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="f-right">
+                                            	<button class="genric-btn danger-border circle">已退件</button>
+                                                <a href="#" class="genric-btn primary circle" data-toggle="modal" th:data-target="${'#detail'+event.eventId}">查看</a>
+                                                <div class="modal fade" th:id="${'detail'+event.eventId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" th:text="${'廣告編號:'+event.eventId}">Modal title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          							        						<span aria-hidden="true">&times;</span>
+       								        					</button>
+                                                            </div>
+                                                            <div class="modal-body">
+									        					<div class="form-group text-center">
+									        						<img th:src="${event.imgUrl}" id="image" style="width: 320px; height: 210px;" class="img-fluid">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">職缺連結:</label>
+									        						<input th:value="${event.eventLinkUrl}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">上架日期:</label>
+									        						<input th:value="${#dates.format(event.postStart, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">下架日期:</label>
+									        						<input th:value="${#dates.format(event.postEnd, 'yyyy/MM/dd')}" type="text" disabled class="single-input">
+									        					</div>
+									        					<div class="form-group">
+									        						<label class="col-form-label">備註:</label>
+									        						<textarea class="single-textarea" disabled th:text="${event.remark}"></textarea>
+									        					</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="genric-btn danger circle" th:id="${event.eventId}" onclick="del(this.id)">撤銷申請</button>
+                                            </div>
+                                        </div>
+    								</div>
+  								</div>
+
+                                
                             </div>
                         </section>
                         <!-- Featured_job_end -->

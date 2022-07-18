@@ -18,10 +18,10 @@ public class LoginController {
 
 	@Autowired
 	CompanyService companyService;
-	
+
 	@Autowired
 	MemberService memberService;
-	
+
 	@GetMapping("/login")
 	public String toLoginPage() {
 		return "login/login";
@@ -52,8 +52,7 @@ public class LoginController {
 		}
 		return "redirect:login";
 	}
-	
-	
+
 	@GetMapping("/logout")
 	public String logOut(HttpSession session) {
 		session.invalidate();

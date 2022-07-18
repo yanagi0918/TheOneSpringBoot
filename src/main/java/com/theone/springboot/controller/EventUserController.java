@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,7 +42,14 @@ public class EventUserController {
 		Company company = (Company)session.getAttribute("loginEnterprise");
 		String compid = String.valueOf(company.getCompid());
 		List<Event> events = eventService.findByCompIdAndStateNot(compid, 3);
-		model.addAttribute("events",events);
+		
+		List<Event> events0 = events.stream().filter((Event e) -> e.getState()==0).collect(Collectors.toList());
+		List<Event> events1 = events.stream().filter((Event e) -> e.getState()==1).collect(Collectors.toList());
+		List<Event> events2 = events.stream().filter((Event e) -> e.getState()==2).collect(Collectors.toList());
+		
+		model.addAttribute("events0",events0);
+		model.addAttribute("events1",events1);
+		model.addAttribute("events2",events2);
 		model.addAttribute("total",events.size());
 		return "event/event_listing";
 	}
