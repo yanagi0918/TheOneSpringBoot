@@ -70,13 +70,6 @@ public class CommentUserController {
 		return "redirect:/comments";
 	}
 
-	// 刪除留言
-	@GetMapping(value = "/CommentMessageDelete")
-	public String deleteCommentMessage(@RequestParam("id") Integer id) {
-		commentMessageService.deleteByMessageId(id);
-		return "redirect:./comments";
-	}
-
 	// 送出新增評價的空白表單
 	@RequestMapping("/comment/new")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
@@ -93,8 +86,11 @@ public class CommentUserController {
 
 	// 送出評價的詳細資料
 	@RequestMapping("/CommentDetail/{id}")
-	public String showDetailForm(@PathVariable("id") Integer id,
-			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
+	public String showDetailForm(
+			@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage,
+			HttpSession httpSession,
+			Model model) {
 
 		// show comment detail
 		Comment comment = commentService.findById(id).get();
@@ -104,9 +100,19 @@ public class CommentUserController {
 		model.addAttribute("messages", messages);
 		// get message count
 		model.addAttribute("commentMessage", commentMessage);
-		CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
-				.get();
-		commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+
+		if (messages.size() != 0) {
+			CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
+					.get();
+			commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		}else {
+			commentMessage.setMessageOrder(1);
+		}
+//		
+//		Object editMessage = httpSession.getAttribute("sessionMessage");
+//		model.addAttribute("editMessage", editMessage);
+		
+//		model.addAttribute("editMessage",commentMessageService.findById(mid));
 
 		return "comment/commentdetail";
 	}
@@ -114,11 +120,34 @@ public class CommentUserController {
 	// 儲存留言
 	@PostMapping("/{id}/CommentMessageSave")
 	public String saveCommentMessage(@PathVariable("id") Integer id,
-			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
+			@ModelAttribute("commentMessage") CommentMessage commentMessage,
+			@ModelAttribute("message") CommentMessage message,
+			Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/comments";
+	}
+	
+	// 儲存留言
+		@PostMapping("/{cid}/{mid}/CommentMessageUpdate")
+		public String saveCommentMessage(
+				@PathVariable("cid") Integer cid,
+				@PathVariable("mid") Integer mid,
+				@ModelAttribute("message") CommentMessage message,
+				Model model) {
+			Comment comment = commentService.findById(cid).get();
+			message.setComment(comment);
+			message.setMessageId(mid);
+			commentMessageService.saveOrUpdate(message);
+			return "redirect:/comments";
+		}
+
+	// 刪除留言
+	@GetMapping(value = "/CommentMessageDelete")
+	public String deleteCommentMessage(@RequestParam("id") Integer id) {
+		commentMessageService.deleteByMessageId(id);
+		return "redirect:comments";
 	}
 
 	// 討論區分頁
