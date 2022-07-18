@@ -106,7 +106,7 @@
                                     <div class="select-job-items2">
                                   <form th:action="@{/user/OrderState}" method="get" id="StateInquire">
                                     <select name="state" required id="state">
-<!--                                     <option th:selected="${state==order.state}" th:each="order:${orders}" th:value="${order.state}" th:label="${order.state}" th:text="${order.state}"></option> -->
+<!--                                     <option th:selected="${state==orderList}" th:each="order:${orders}" th:value="${order.state}" th:label="${order.state}" th:text="${order.state}"></option> -->
                                     	<option>全部</option>
                                         <option>已付款</option>
                                         <option>待審核</option>
@@ -238,19 +238,19 @@
 	                                  		    <td th:switch="${order.state}">
 				                               		<div th:case="'已付款'">
 						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-	                                        			<button class="genric-btn danger circle" th:onclick="del(this.id)" th:id="${order.orderId}">申請退款</button>
+	                                        			<button class="genric-btn danger circle" th:onclick="|del('${order.orderId}')|" th:id="${order.orderId}+'s'">申請退款</button>
 						                            </div>
 						                            <div th:case="'待審核'">
 						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-						                          	    <button class="genric-btn danger disable circle">申請退款</button>
+						                          	    <button class="genric-btn danger disable circle" >申請退款</button>
 						                            </div> 
 						                            <div th:case="'已退款'">
 						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-						                           		<button class="genric-btn danger disable circle">申請退款</button>
+						                           		<button class="genric-btn danger disable circle" >申請退款</button>
 						                            </div>
 						                            <div th:case="'已駁回'">
 						                                <button class="genric-btn info circle" type="button" th:onclick="'window.location.href=\'' + @{/user/Order/{id}(id=${order.orderId})} + '\''">明細</button>
-						                           		<button class="genric-btn danger disable circle">申請退款</button>
+						                           		<button class="genric-btn danger disable circle" >申請退款</button>
 						                            </div>
 						                        </td>
 						                     </tr>
@@ -356,6 +356,7 @@
 		
 		<script>
 		    function del(id) {
+		    	var test =id+'s';
 		        var dataBean = {
 		            orderId: id,
 		            state: "待審核"
@@ -390,8 +391,9 @@
 		                            console.log(data.state);
 		                            let temp = orderId;
 		                            $("#"+temp).text(data.state)
-		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle")
-		                        },
+		                            document.getElementById(temp).setAttribute("class", "genric-btn warning-border circle");
+		                            document.getElementById(test).setAttribute("class", "genric-btn danger disable circle");
+		                        }
 		                    });
 		                }, 100)
 		            }

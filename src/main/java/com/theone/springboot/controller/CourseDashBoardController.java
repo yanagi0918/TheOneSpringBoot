@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
+import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,26 @@ public class CourseDashBoardController {
         }
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/dashboard/courses";
+    }
+
+    @GetMapping("/courses/chartdata")
+    @ResponseBody
+    public int[] getChartData() {
+        int[] chartdata = {0, 0, 0, 0, 0, 0, 0};
+        List<CourseBean> courses = courseService.findAllCourses();
+        for (CourseBean course : courses) {
+            switch (course.getCourseCategory()) {
+                case "英文證照" : chartdata[0]++; break;
+                case "日語證照": chartdata[1]++; break;
+                case "韓語證照": chartdata[2]++; break;
+                case "求職技巧": chartdata[3]++; break;
+                case "自我認知": chartdata[4]++; break;
+                case "生涯轉換與轉業": chartdata[5]++; break;
+                case "就業市場現況與趨勢": chartdata[6]++; break;
+                default: break;
+            }
+        }
+        return chartdata;
     }
 
     @PutMapping("/courses")
