@@ -314,11 +314,9 @@ $(function () {
     $(document).ready(function () {
         $('#table_id').DataTable(
             {
-                // initComplete: function () {
-                //     $("#example_filter").detach().appendTo('#new-search-area');
-                // },
                 columnDefs: [
-                    {orderable: false, targets: [ 6]},
+
+                    {orderable: false, targets: [6]},
                     {
                         "targets": [0, 1, 2, 3, 4, 5],
                         "className": "text-center",
@@ -327,7 +325,7 @@ $(function () {
                         "search": "text-center"
                     }
                 ],
-                'language': {
+                language: {
                     "processing": "處理中...",
                     "loadingRecords": "載入中...",
                     "lengthMenu": "顯示 _MENU_ 項結果",
