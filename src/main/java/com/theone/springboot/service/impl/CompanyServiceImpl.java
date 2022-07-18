@@ -1,5 +1,6 @@
 package com.theone.springboot.service.impl;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.theone.springboot.entity.Company;
 import com.theone.springboot.repository.CompanyDao;
 import com.theone.springboot.service.CompanyService;
+import com.theone.springboot.utils.CompanyCsvExporter;
 
 @Transactional
 @Service
@@ -22,7 +24,8 @@ public class CompanyServiceImpl implements CompanyService{
 	private CompanyDao companyDao;
 	@Autowired
 	JavaMailSender mailSender;
-	
+	@Autowired
+	CompanyCsvExporter companyCsvExporter;
 	
 	@Override
 	public boolean isDup(Integer compid) {
@@ -75,5 +78,10 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public Company getByWebsite(String website) {
 		return companyDao.getByWebsite(website);
+	}
+	@Override
+	public void csvExport(Writer writer) {
+		List<Company> companies = companyDao.findAll();
+		companyCsvExporter.csvExport(writer, companies);
 	}
 }

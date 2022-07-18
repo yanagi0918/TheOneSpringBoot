@@ -84,7 +84,7 @@ public class CompanyController {
 			System.out.println(randomPwd);
 			String msg = "帳號: " + compid + "\n" + "臨時密碼:" + randomPwd + "\n" + "登入後記得更改成新密碼" + "\n" + "重新登入:   "
 					+ "http://localhost:8080/login";
-			companyService.sendNewPwd(website, "公司忘記密碼", msg);
+			companyService.sendNewPwd(website, "找回密碼信件", msg);
 			return "新密碼已發送至公司信箱";
 		} else {
 			return "帳號或信箱錯誤";
