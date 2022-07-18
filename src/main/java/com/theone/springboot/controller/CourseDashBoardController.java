@@ -114,9 +114,9 @@ public class CourseDashBoardController {
                 case "英文證照" : chartdata[0]++; break;
                 case "日語證照": chartdata[1]++; break;
                 case "韓語證照": chartdata[2]++; break;
-                case "生涯轉換與轉業": chartdata[3]++; break;
+                case "求職技巧": chartdata[3]++; break;
                 case "自我認知": chartdata[4]++; break;
-                case "求職技巧": chartdata[5]++; break;
+                case "生涯轉換與轉業": chartdata[5]++; break;
                 case "就業市場現況與趨勢": chartdata[6]++; break;
                 default: break;
             }
