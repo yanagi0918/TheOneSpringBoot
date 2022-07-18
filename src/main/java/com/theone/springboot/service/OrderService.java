@@ -1,5 +1,6 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,4 +39,7 @@ public interface OrderService {
 	
 	//價格加總
 	Integer findTotalPrice();
+	
+	//CSV
+	void csvExport(Writer writer);
 }

@@ -1,7 +1,10 @@
 package com.theone.springboot.controller;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -127,5 +130,12 @@ public class OrderDashBoardController {
 		}
 		return chartdata;
 	}
-
+	
+	//CSV
+	@GetMapping("/orders/csvExport")
+	public void csvExport(HttpServletResponse response) throws IOException {
+		response.setContentType("text/csv;charset=UTF-8");
+		response.addHeader("Content-Disposition","attachment; filename=resumes.csv");
+		orderService.csvExport(response.getWriter());
+	}
 }
