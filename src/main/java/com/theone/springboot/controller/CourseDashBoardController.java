@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.ServletContext;
 
@@ -46,6 +44,7 @@ public class CourseDashBoardController {
     public String findAllCourse(Model model) {
         List<CourseBean> courseList = courseService.findAllCourses();
         model.addAttribute("courseList", courseList);
+        model.addAttribute("courseCounts", courseList.size());
         return "course_dashboard/courseList";
     }
 
@@ -106,22 +105,33 @@ public class CourseDashBoardController {
 
     @GetMapping("/courses/chartdata")
     @ResponseBody
-    public int[] getChartData() {
-        int[] chartdata = {0, 0, 0, 0, 0, 0, 0};
+    public Map<String, Object> getChartData() {
+        Map<String, Object> dataMap =new HashMap();
+        int[] dataCategory = {0, 0, 0, 0, 0, 0, 0};
+        int[] dataStatus = {0, 0, 0};
         List<CourseBean> courses = courseService.findAllCourses();
         for (CourseBean course : courses) {
             switch (course.getCourseCategory()) {
-                case "英文證照" : chartdata[0]++; break;
-                case "日語證照": chartdata[1]++; break;
-                case "韓語證照": chartdata[2]++; break;
-                case "求職技巧": chartdata[3]++; break;
-                case "自我認知": chartdata[4]++; break;
-                case "生涯轉換與轉業": chartdata[5]++; break;
-                case "就業市場現況與趨勢": chartdata[6]++; break;
+                case "英文證照" : dataCategory[0]++; break;
+                case "日語證照": dataCategory[1]++; break;
+                case "韓語證照": dataCategory[2]++; break;
+                case "求職技巧": dataCategory[3]++; break;
+                case "自我認知": dataCategory[4]++; break;
+                case "生涯轉換與轉業": dataCategory[5]++; break;
+                case "就業市場現況與趨勢": dataCategory[6]++; break;
+                default: break;
+            }
+            switch (course.getStatus()) {
+                case "待審核" : dataStatus[0]++; break;
+                case "已審核": dataStatus[1]++; break;
+                case "駁回": dataStatus[2]++; break;
                 default: break;
             }
         }
-        return chartdata;
+        dataMap.put("dataCategory",dataCategory);
+        dataMap.put("dataStatus",dataStatus);
+
+        return dataMap;
     }
 
     @PutMapping("/courses")

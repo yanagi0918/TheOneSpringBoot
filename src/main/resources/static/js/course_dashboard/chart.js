@@ -6,15 +6,15 @@
         type: 'GET',
         success: function (result) {
 
-            // Doughnut Chart
-            var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+            // pie Chart
+            var ctx6 = $("#pie-chart")[0].getContext("2d");
             var myChart6 = new Chart(ctx6, {
-                type: "doughnut",
+                type: "pie",
                 data: {
                     labels: ["英文證照", "日語證照",
 						"韓語證照", "求職技巧",
-                        "自我認知", "生涯轉換與轉業",
-                        "就業市場現況與趨勢"],
+                        "自我認知", "生涯轉換轉業",
+                        "就業市場現況趨勢"],
                     datasets: [{
                         backgroundColor: [
                             "rgba(0, 156, 255, .7)",
@@ -25,7 +25,7 @@
                             "rgba(144,63,217,0.6)",
                             "rgba(183,255,0,0.5)",
                         ],
-                        data: result
+                        data: result.dataCategory
                     }]
                 },
                 options: {
@@ -38,16 +38,15 @@
             var myChart4 = new Chart(ctx4, {
                 type: "bar",
                 data: {
-                    labels: ["未審核", "審核通過", "已退件", "已撤銷"],
+                    labels: ["待審核", "已審核", "駁回"],
                     datasets: [{
-                        label: '筆數',
+                        label: "筆數",
                         backgroundColor: [
-                            "rgba(0, 156, 255, .7)",
-                            "rgba(0, 156, 255, .6)",
-                            "rgba(0, 156, 255, .5)",
-                            "rgba(0, 156, 255, .4)"
+                            "rgba(0,196,255,0.7)",
+                            "rgba(0,196,255,0.7)",
+                            "rgba(0,196,255,0.7)",
                         ],
-                        data: result
+                        data: result.dataStatus
                     }]
                 },
                 options: {
