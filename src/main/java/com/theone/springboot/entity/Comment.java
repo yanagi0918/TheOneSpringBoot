@@ -4,13 +4,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Comment_Table")
@@ -58,8 +65,16 @@ public class Comment {
 
 	@Column(length = 1000)
 	private String share;
+	
+	private Integer status;
 
 	private String userId;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "member_idNumber", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Member member;
 	
 
 	public Comment() {
@@ -68,7 +83,8 @@ public class Comment {
 	public Comment(Integer commentId, Date ref_time, Date create_time, String comp_name, Integer comp_score,
 			String job_name, Integer job_score, String job_description, Integer std_hour, Integer real_hour,
 			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
-			Integer bonus_count, String share, String userId) {
+			Integer bonus_count, String share, Integer status, String userId) {
+		super();
 		this.commentId = commentId;
 		this.ref_time = ref_time;
 		this.create_time = create_time;
@@ -86,14 +102,14 @@ public class Comment {
 		this.yearly_salary = yearly_salary;
 		this.bonus_count = bonus_count;
 		this.share = share;
+		this.status = status;
 		this.userId = userId;
-
 	}
 
 	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name,
 			Integer job_score, String job_description, Integer std_hour, Integer real_hour, Integer over_freq,
 			Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary, Integer bonus_count,
-			String share, String userId) {
+			String share, Integer status, String userId) {
 		this.ref_time = ref_time;
 		this.create_time = create_time;
 		this.comp_name = comp_name;
@@ -110,8 +126,8 @@ public class Comment {
 		this.yearly_salary = yearly_salary;
 		this.bonus_count = bonus_count;
 		this.share = share;
+		this.status = status;
 		this.userId = userId;
-
 	}
 
 	public Comment(Integer commentId) {
@@ -253,6 +269,16 @@ public class Comment {
 	public void setShare(String share) {
 		this.share = share;
 	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	
 
 	public String getUserId() {
 		return userId;
@@ -262,23 +288,23 @@ public class Comment {
 		this.userId = userId;
 	}
 	
-//	public List<CommentMessage> getMessages() {
-//		return messages;
-//	}
-//
-//	public void setMessages(List<CommentMessage> messages) {
-//		this.messages = messages;
-//	}
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 	@Override
 	public String toString() {
-		return "CommentBean [commentId=" + commentId + ", ref_time=" + ref_time + ", create_time=" + create_time
-				+ ", comp_name" + comp_name + ", comp_score" + comp_score + ", job_name" + job_name + ", job_score"
-				+ job_score + ", job_description" + job_description + ", std_hour" + std_hour + ", real_hour"
-				+ real_hour + ", over_freq" + over_freq + ", seniority" + seniority + ", total_seniority"
-				+ total_seniority + ", monthly_salary" + monthly_salary + ", yearly_salary" + yearly_salary
-				+ ", bonus_count" + bonus_count + ", share" + share + ", userId" + userId + "]";
-
+		return "Comment [commentId=" + commentId + ", ref_time=" + ref_time + ", create_time=" + create_time
+				+ ", comp_name=" + comp_name + ", comp_score=" + comp_score + ", job_name=" + job_name + ", job_score="
+				+ job_score + ", job_description=" + job_description + ", std_hour=" + std_hour + ", real_hour="
+				+ real_hour + ", over_freq=" + over_freq + ", seniority=" + seniority + ", total_seniority="
+				+ total_seniority + ", monthly_salary=" + monthly_salary + ", yearly_salary=" + yearly_salary
+				+ ", bonus_count=" + bonus_count + ", share=" + share + ", status=" + status + ", userId=" + userId
+				+ "]";
 	}
-
+	
 }

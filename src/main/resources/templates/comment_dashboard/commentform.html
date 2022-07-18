@@ -81,7 +81,7 @@
 					<div class="bg-light rounded h-100 p-4">
 						<h6 th:text="${comment.commentId != null} ? '編輯評論' : '新增評論'"></h6>
 						<form
-							th:action="@{/dashboard/CommentSave}"
+							th:action="@{/dashboard/CommentSave(userid=A123456789)}"
 							method="post" id="form" th:modelAttribute="comment">
 							<div class="row mb-3">
 								<div class="row mb-3">
