@@ -1,5 +1,6 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,9 @@ public interface CompanyService {
 	
 	Company getByCompid(Integer compid);
 	
+	Company getByWebsite(String website);
+	
+	public void sendNewPwd(String recipient, String subject, String message);
+	
+	void csvExport(Writer writer);
 }
