@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Free HTML Templates" name="keywords">
+<meta content="Free HTML Templates" name="description">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Handlee|Josefin+Sans:300,600&amp;display=swap">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="shortcut icon" type="image/x-icon"
+	href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="image/x-icon"
+	href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+	color="#111" />
+<link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet">
+<style>
+.error {
+	color: red;
+}
+.btncolor{
+background-color: black;
+}
+</style>
+</head>
+<body>
+	<!-- welcome card -->
+	<div class="container">
+		<div class="card-wrap">
+			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<a class="btn btn-back-home js-btn" th:href="@{/login}"> <i
+					class="fa fa-home"></i>
+				</a>
+				<div class="card-body">
+					<h2 class="card-title">資料驗證</h2>
+					<h4>請填入帳號(統編)與公司信箱</h4>
+					<br>
+					<div class="btn-wrap">
+						<form th:action="@{/forgetcompanypwd}" method="post" id="form">
+							<input class="form-control" type="text" placeholder="帳號(統編)"
+								required="required" maxlength="10" name="compid" id="compid"/>
+								 <input
+								class="form-control" type="email" placeholder="公司信箱"
+								required="required" name="website" id="website"/>
+							<button type="submit" class="btn btn-lg my-1 btncolor" onclick="msg()">發送密碼重設信</button>
+							
+						</form>     
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script th:src="@{/js/login/login.js}" src="login.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/localization/messages_zh_TW.min.js"></script>
+	<script>
+	function msg(){
+		alert("驗證及寄信中，不要關閉視窗!!")
+	}
+	</script>
+</body>
+
+</html>

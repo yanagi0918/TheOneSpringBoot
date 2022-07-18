@@ -20,4 +20,8 @@ public interface CompanyService {
 	
 	Company getByCompid(Integer compid);
 	
+	Company getByWebsite(String website);
+	
+	public void sendNewPwd(String recipient, String subject, String message);
+	
 }

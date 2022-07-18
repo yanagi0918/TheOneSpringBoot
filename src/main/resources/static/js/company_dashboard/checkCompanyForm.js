@@ -119,7 +119,7 @@ $('#correctCompany').click(function() {
 	$('#contact').val('黃小姐')
 	$('#comptele').val('0939393939')
 	$('#fax').val('07-1325462')
-	$('#compaddress').val('新北市土城工業區26號')
+	$('#compaddress').val('台北市內湖區民善街')
 	$('#empnumber').val('300')
 	$('#website').val('iSpan4505@gmail.com')
 	$('#capital').val('1200萬')
