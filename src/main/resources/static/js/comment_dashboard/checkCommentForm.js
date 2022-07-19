@@ -231,9 +231,8 @@ $(function() {
 
 	//message
 	$('#OneInputMessage').click(function() {
-		$('#replyUserId').val('B123456789')
+		$('#replyNickName').val('徬徨的畢業生')
 		$('#messageContent').val('感謝大大無私的分享~~')
-		$('#mlike').attr('checked', 'checked')
 	});
 
 });
@@ -380,6 +379,17 @@ $(document).ready(function() {
 
 		//x 方向卷軸
 		scrollX: true,
+		
+		//hide column
+		columnDefs: [{
+			visible: false,
+			targets: [3, 5, 6, 7, 8]
+		}, {
+			targets: 6,
+			render: $.fn.dataTable.render.ellipsis(15)
+
+		}
+		],
 
 		//position of entire
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
@@ -393,7 +403,8 @@ $(document).ready(function() {
 	});
 
 	//dynamicall column
-	$('input.toggle-vis').on('change', function(e) {
+	//comment
+	$('#commentSelect input.toggle-vis').on('change', function(e) {
 		e.preventDefault();
 
 		// Get the column API object
@@ -406,8 +417,21 @@ $(document).ready(function() {
 			column.visible(false);
 
 		}
+	});
+	//message
+	$('#messageSelect input.toggle-vis').on('change', function(e) {
+		e.preventDefault();
 
+		// Get the column API object
+		var column = table2.column($(this).attr('data-column'));
 
+		// Toggle the visibility
+		if ($(this).is(":checked")) {
+			column.visible(true);
+		} else {
+			column.visible(false);
+
+		}
 	});
 });
 
@@ -433,6 +457,17 @@ var expanded = false;
 
 function showCheckboxes() {
 	var checkboxes = document.getElementById("checkboxes");
+	if (!expanded) {
+		checkboxes.style.display = "block";
+		expanded = true;
+	} else {
+		checkboxes.style.display = "none";
+		expanded = false;
+	}
+}
+
+function showCheckboxesM() {
+	var checkboxes = document.getElementById("checkboxesM");
 	if (!expanded) {
 		checkboxes.style.display = "block";
 		expanded = true;

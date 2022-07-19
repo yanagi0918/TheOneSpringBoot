@@ -88,26 +88,40 @@
 								</div>
 							</div>
 						</form>
-						<form 
+						<form
 							th:action="@{/dashboard/{id}/CommentMessageSave/(id=${comment.commentId})} + 1"
 							method="post" id="form" th:modelAttribute="commentMessage">
 							<div class="row mb-3" th:if="${commentMessage.messageId != null}">
 								<label class="col-sm-2 col-form-label">留言編號</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="messageId"
-										 id="messageId" th:value="${commentMessage.messageId}" required>
+										id="messageId" th:value="${commentMessage.messageId}" readonly>
 								</div>
 							</div>
-
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言順序</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="messageOrder"
-										 id="messageOrder"
-										th:value="${commentMessage.messageOrder}" required readonly>
+										id="messageOrder" th:value="${commentMessage.messageOrder}"
+										readonly>
 								</div>
 							</div>
-
+							<div class="row mb-3" th:if="${commentMessage.messageId != null}">
+								<label class="col-sm-2 col-form-label">會員編號</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="" required id=""
+										th:value="${commentMessage.member.idNumber}" readonly>
+									<!-- 										th:value="${memberid}"> -->
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">暱稱</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control replyNickName" name="replyNickName"
+										id="replyNickName" th:value="${commentMessage.replyNickName}"
+										required>
+								</div>
+							</div>
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言時間</label>
 								<div class="col-sm-8">
@@ -116,31 +130,13 @@
 										id="messageTime"
 										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
 										readonly> <input
-										th:if="${commentMessage.messageId != null}"
-										type="text" class="form-control" name="messageTime"
-										required id="messageTime"
+										th:if="${commentMessage.messageId != null}" type="text"
+										class="form-control" name="messageTime" required
+										id="messageTime"
 										th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
 										readonly>
 								</div>
 							</div>
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">會員編號</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" name="memberid"
-										required id="memberid">
-<!-- 										th:value="${memberid}"> -->
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">留言者</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" name="replyNickName"
-										required id="replyNickName"
-										th:value="${commentMessage.replyNickName}">
-								</div>
-							</div>
-
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言內容</label>
 								<div class="col-sm-8">
@@ -149,12 +145,21 @@
 										th:value="${commentMessage.messageContent}">
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">回復編號</label>
+								<label class="col-sm-2 col-form-label">回復文章編號</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="messageReply"
 										id="messageReply" th:value="${commentMessage.messageReply}">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">狀態</label>
+								<div class="col-sm-8">
+									<select class="form-select" name="status" id="status" size="1">
+										<option value="0" th:selected="${comment.status== 0}">刊登中</option>
+										<option value="1" th:selected="${comment.status== 1}">下架</option>
+										<option value="2" th:selected="${comment.status== 2}">撤銷</option>
+									</select>
 								</div>
 							</div>
 
@@ -162,8 +167,11 @@
 								<label class="col-sm-2 col-form-label">喜歡</label>
 								<div class="col-sm-8 col-form-label">
 									<input type="radio" name="messageLike" id="mlike"
-										th:value="true" th:checked="${commentMessage.messageLike} ? 'checked'">喜歡 <input type="radio"
-										name="messageLike" id="munlike" th:value="false" th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡
+										th:value="true"
+										th:checked="${commentMessage.messageLike} ? 'checked'">喜歡
+									<input type="radio" name="messageLike" id="munlike"
+										th:value="false"
+										th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡
 								</div>
 							</div>
 

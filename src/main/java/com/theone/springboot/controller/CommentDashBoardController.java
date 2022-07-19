@@ -128,9 +128,12 @@ public class CommentDashBoardController {
 			Model model) {
 		Comment comment = commentService.findById(cid).get();
 		CommentMessage commentMessage = commentMessageService.findById(mid).get();
+		Member member = commentMessage.getMember();
 		model.addAttribute("comment", comment);
+		model.addAttribute("member", member);
 		model.addAttribute("commentMessage", commentMessage);
 		commentMessage.setComment(comment);
+		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "comment_dashboard/commentmessageform";
 	}

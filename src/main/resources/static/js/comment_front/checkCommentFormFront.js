@@ -230,9 +230,8 @@ $(function() {
 	
 	//message
 	$('#OneInputMessage').click(function() {
-		$('#replyUserId').val('B123456789')
+		$('#replyNickName').val('徬徨的畢業生')
 		$('#messageContent').val('感謝大大無私的分享~~')
-		$('#mlike').attr('checked', 'checked')
 	});
 });
 //anonymous/user show
