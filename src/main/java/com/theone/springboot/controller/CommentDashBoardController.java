@@ -45,8 +45,9 @@ public class CommentDashBoardController {
 	// 儲存評論
 	@PostMapping("/CommentSave")
 	public String saveComment(@ModelAttribute("comment") Comment comment,
-			@RequestParam("idNumber") Integer idNumber) {
-		Member member = memberService.getMember(idNumber).get();
+			@RequestParam("userid") String userid) {
+//		Member member = memberService.getMember(idNumber).get();
+		Member member = memberService.getByUserid(userid);
 		comment.setMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
@@ -88,11 +89,17 @@ public class CommentDashBoardController {
 			@PathVariable("id") Integer id, Model model) {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
+//		Member member = memberService.getMember(1).get();
+//		model.addAttribute("member", member);
 		model.addAttribute("commentMessage", commentMessage);
 		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
-		CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
-				.get();
-		commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		if (messages.size() != 0) {
+			CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
+					.get();
+			commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		}else {
+			commentMessage.setMessageOrder(1);
+		}
 		return "comment_dashboard/commentmessageform";
 	}
 

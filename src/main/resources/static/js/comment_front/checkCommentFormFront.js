@@ -1,79 +1,3 @@
-//Form rule
-$(function() {
-	$('#form').validate({
-		rules: {
-			user: {
-				required: true,
-			},
-			userId: {
-				required: true,
-			},
-			ref_time: {
-				required: true,
-			},
-			comp_name: {
-				required: true,
-			},
-			job_name: {
-				required: true,
-			},
-			job_description: {
-				required: true,
-			},
-			std_hour: {
-				required: true,
-				number: true,
-				range: [0, 24],
-			},
-			real_hour: {
-				required: true,
-				number: true,
-				range: [0, 24],
-			},
-			over_freq: {
-				required: true,
-				digits: true,
-				range: [0, 7],
-			},
-			seniority: {
-				required: true,
-				number: true,
-				range: [0, 100],
-			},
-			total_seniority: {
-				required: true,
-				number: true,
-				range: [0, 100],
-			},
-			monthly_salary: {
-				required: true,
-				digits: true,
-				min: 0,
-			},
-			yearly_salary: {
-				required: true,
-				number: true,
-				min: 0,
-			},
-			bonus_count: {
-				required: true,
-				digits: true,
-				min: 0,
-			},
-
-		},
-		messages: {
-			job_description: {
-				required: '請選擇類別',
-			},
-			monthly_salary: {
-				digits: '請輸入大於0的整數',
-			},
-		},
-	})
-
-})
-
 //Sweet Alert
 
 $(function() {
@@ -166,6 +90,82 @@ $(function() {
 
 });
 
+//Form rule
+$(function() {
+	$('#form').validate({
+		rules: {
+			user: {
+				required: true,
+			},
+			userId: {
+				required: true,
+			},
+			ref_time: {
+				required: true,
+			},
+			comp_name: {
+				required: true,
+			},
+			job_name: {
+				required: true,
+			},
+			job_description: {
+				required: true,
+			},
+			std_hour: {
+				required: true,
+				number: true,
+				range: [0, 24],
+			},
+			real_hour: {
+				required: true,
+				number: true,
+				range: [0, 24],
+			},
+			over_freq: {
+				required: true,
+				digits: true,
+				range: [0, 7],
+			},
+			seniority: {
+				required: true,
+				number: true,
+				range: [0, 100],
+			},
+			total_seniority: {
+				required: true,
+				number: true,
+				range: [0, 100],
+			},
+			monthly_salary: {
+				required: true,
+				digits: true,
+				min: 0,
+			},
+			yearly_salary: {
+				required: true,
+				number: true,
+				min: 0,
+			},
+			bonus_count: {
+				required: true,
+				digits: true,
+				min: 0,
+			},
+
+		},
+		messages: {
+			job_description: {
+				required: '請選擇類別',
+			},
+			monthly_salary: {
+				digits: '請輸入大於0的整數',
+			},
+		},
+	})
+
+})
+
 
 //Star rating js
 $.raty.path = '/img';
@@ -209,13 +209,13 @@ $(function() {
 //One key input js
 $(function() {
 	$('#OneInput').click(function() {
-		$('#userId').show()
-		$('#userId').val('A123456789')
+//		$('#userId').show()
+//		$('#userId').val('A123456789')
 		$('#comp_name').val('狗來富寵物廣場')
 		$('#ref_time').val('2000-01-01')
 		$('#job_name').val('美容師')
 		$('#job_description option[value="全職"]').attr('selected', 'selected')
-		$('#user').attr('checked', 'checked')
+		$('#nickName').val('愛德華')
 		$('#std_hour').val('10')
 		$('#real_hour').val('12')
 		$('#over_freq').val('2')
@@ -225,20 +225,26 @@ $(function() {
 		$('#monthly_salary').val('40000')
 		$('#yearly_salary').val('55')
 		$('#bonus_count').val('2')
-		$('#share').val('老闆親切，加班可報')
+		$('#share').val('我們一天的工時幾乎都10小時，休假很少超過6天也沒有年終，當爸爸媽媽把重要的毛孩子交到我手上時，所有的責任就已經落在我身上，所以我們得時時刻刻觀察牠的身體狀況，這時很考驗個人經驗跟敏銳度，幫寶貝洗澡不單只是洗澡那麼表面的意義，很多時候毛孩子來洗澡很容易可以知道狗狗是不是有其它疾病，連主人都不知道呢，因為在過程中我們會從頭到尾摸透透，這也是我們必須要有的觀察力。')
 	})
+	
+	//message
+	$('#OneInputMessage').click(function() {
+		$('#replyUserId').val('B123456789')
+		$('#messageContent').val('感謝大大無私的分享~~')
+		$('#mlike').attr('checked', 'checked')
+	});
 });
 //anonymous/user show
 
 $(function() {
-	$('#anonymous').click(function() {
-		$('#userId').val('匿名');
-		$('#userId').hide();
-	})
-
-	$('#user').click(function() {
-		$('#userId').val('');
-		$('#userId').show();
+	$('#confirm-switch').click(function() {
+		$('#nickName').toggle();
+		if ($('#confirm-switch').prop('checked')) {
+			$('#nickName').val('匿名');
+		} else {
+			$('#nickName').val('');
+		}
 	});
 
 })
@@ -367,7 +373,10 @@ $('#messageContent').keyup(function() {
 	$('#count_message').html(text_remaining + '/200字');
 });
 
-
+/* 浮動提示 */
+$(function() {
+	$('[data-toggle="tooltip"]').tooltip();
+});
 
 
 

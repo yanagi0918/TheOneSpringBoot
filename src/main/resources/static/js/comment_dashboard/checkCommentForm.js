@@ -212,13 +212,11 @@ $(function() {
 $(function() {
 	//comment
 	$('#OneInput').click(function() {
-		$('#userId').show()
-		$('#userId').val('A123456789')
 		$('#comp_name').val('狗來富寵物廣場')
 		$('#ref_time').val('2000-01-01')
 		$('#job_name').val('美容師')
 		$('#job_description option[value="全職"]').attr('selected', 'selected')
-		$('#user').attr('checked', 'checked')
+		$('#nickName').val('愛德華')
 		$('#std_hour').val('10')
 		$('#real_hour').val('12')
 		$('#over_freq').val('2')
@@ -228,7 +226,7 @@ $(function() {
 		$('#monthly_salary').val('40000')
 		$('#yearly_salary').val('55')
 		$('#bonus_count').val('2')
-		$('#share').val('老闆親切，加班可報')
+		$('#share').val('我們一天的工時幾乎都10小時，休假很少超過6天也沒有年終，當爸爸媽媽把重要的毛孩子交到我手上時，所有的責任就已經落在我身上，所以我們得時時刻刻觀察牠的身體狀況，這時很考驗個人經驗跟敏銳度，幫寶貝洗澡不單只是洗澡那麼表面的意義，很多時候毛孩子來洗澡很容易可以知道狗狗是不是有其它疾病，連主人都不知道呢，因為在過程中我們會從頭到尾摸透透，這也是我們必須要有的觀察力。')
 	});
 
 	//message
@@ -242,9 +240,9 @@ $(function() {
 //anonymous/user show
 
 $(function() {
-	$('#status').click(function() {
+	$('#anonymous').click(function() {
 		$('#nickName').toggle();
-		if ($('#status').prop('checked')) {
+		if ($('#anonymous').prop('checked')) {
 			$('#nickName').val('匿名');
 		} else {
 			$('#nickName').val('');
