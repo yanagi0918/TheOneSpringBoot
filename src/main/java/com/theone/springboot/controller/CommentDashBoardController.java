@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
 import com.theone.springboot.entity.CommentMessage;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
+import com.theone.springboot.service.MemberService;
 
 @Controller
 @RequestMapping("/dashboard")
 public class CommentDashBoardController {
 
+	@Autowired
+	MemberService memberService;
+	
 	@Autowired
 	CommentService commentService;
 
@@ -39,7 +44,10 @@ public class CommentDashBoardController {
 
 	// 儲存評論
 	@PostMapping("/CommentSave")
-	public String saveComment(@ModelAttribute("comment") Comment comment) {
+	public String saveComment(@ModelAttribute("comment") Comment comment,
+			@RequestParam("idNumber") Integer idNumber) {
+		Member member = memberService.getMember(idNumber).get();
+		comment.setMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}

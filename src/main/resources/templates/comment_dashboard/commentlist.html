@@ -236,39 +236,43 @@
 									</label> <label for="create_time"> <input class="toggle-vis"
 										type="checkbox" id="create_time" data-column="1" checked />新增時間
 									</label> <label for="userId"> <input class="toggle-vis"
-										type="checkbox" id="userId" data-column="2" checked />帳號
+										type="checkbox" id="userId" data-column="2" checked>帳號
+									</label><label for="nickName"> <input class="toggle-vis"
+										type="checkbox" id="nickName" data-column="3"/>暱稱
 									</label> <label for="ref_time"> <input class="toggle-vis"
-										type="checkbox" id="ref_time" data-column="3" />參考時間
+										type="checkbox" id="ref_time" data-column="4" />參考時間
 									</label> <label for="comp_name"> <input class="toggle-vis"
-										type="checkbox" id="comp_name" data-column="4" checked />公司名稱
+										type="checkbox" id="comp_name" data-column="5" />公司名稱
 									</label> <label for="comp_score"> <input class="toggle-vis"
-										type="checkbox" id="comp_score" data-column="5" />公司評分
+										type="checkbox" id="comp_score" data-column="6" />公司評分
 									</label> <label for="job_name"> <input class="toggle-vis"
-										type="checkbox" id="job_name" data-column="6" checked />職位
+										type="checkbox" id="job_name" data-column="7" />職位
 									</label> <label for="job_score"> <input class="toggle-vis"
-										type="checkbox" id="job_score" data-column="7" />職位評分
+										type="checkbox" id="job_score" data-column="8" />職位評分
 									</label> <label for="job_description"> <input
 										class="toggle-vis" type="checkbox" id="job_description"
-										data-column="8" />職務型態
+										data-column="9" />職務型態
 									</label> <label for="std_hour"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="9" />表定工時
+										type="checkbox" id="std_hour" data-column="10" />表定工時
 									</label> <label for="real_hour"> <input class="toggle-vis"
-										type="checkbox" id="real_hour" data-column="10" />實際工時
+										type="checkbox" id="real_hour" data-column="11" />實際工時
 									</label> <label for="over_freq"> <input class="toggle-vis"
-										type="checkbox" id="over_freq" data-column="11" />加班頻率
+										type="checkbox" id="over_freq" data-column="12" />加班頻率
 									</label> <label for="seniority"> <input class="toggle-vis"
-										type="checkbox" id="seniority" data-column="12" />服務年資
+										type="checkbox" id="seniority" data-column="13" />服務年資
 									</label> <label for="total_seniority"> <input
 										class="toggle-vis" type="checkbox" id="total_seniority"
-										data-column="13" />總年資
+										data-column="14" />總年資
 									</label> <label for="monthly_salary"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="14" />月薪
+										type="checkbox" id="std_hour" data-column="15" />月薪
 									</label> <label for="yearly_salary"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="15" />年薪
+										type="checkbox" id="std_hour" data-column="16" />年薪
 									</label> <label for="bonus_count"> <input class="toggle-vis"
-										type="checkbox" id="bonus_count" data-column="16" />獎金次數
+										type="checkbox" id="bonus_count" data-column="17" />獎金次數
 									</label> <label for="share"> <input class="toggle-vis"
-										type="checkbox" id="share" data-column="17" checked />心得分享
+										type="checkbox" id="share" data-column="18" />心得分享
+									</label><label for="status"> <input class="toggle-vis"
+										type="checkbox" id="status" data-column="19" checked />狀態
 									</label>
 								</div>
 							</div>
@@ -285,6 +289,7 @@
 									<th>編號</th>
 									<th>新增時間</th>
 									<th>帳號</th>
+									<th>暱稱</th>
 									<th>參考時間</th>
 									<th>公司名稱</th>
 									<th>公司評分</th>
@@ -300,6 +305,7 @@
 									<th>年薪</th>
 									<th>獎金次數</th>
 									<th>心得分享</th>
+									<th>狀態</th>
 									<th>動作</th>
 								</tr>
 							</thead>
@@ -307,7 +313,8 @@
 								<tr th:each="comment : ${listComment}" id="commentlist">
 									<td th:text="${comment.commentId}"></td>
 									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.userId}"></td>
+									<td th:text="${comment.member.userid}"></td>
+									<td th:text="${comment.nickName}"></td>
 									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
 									<td th:text="${comment.comp_name}"></td>
 									<td class="listComp" data-score=""
@@ -325,6 +332,7 @@
 									<td th:text="${comment.yearly_salary}"></td>
 									<td th:text="${comment.bonus_count}"></td>
 									<td th:text="${comment.share}" class="a-ellipsis"></td>
+									<td th:text="${comment.status}"></td>
 									<td><a
 										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.commentId})}"
 										class="btn btn-outline-info m-0">內容</a>

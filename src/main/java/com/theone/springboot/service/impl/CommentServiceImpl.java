@@ -43,10 +43,20 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.deleteById(pk);
 	}
 
+//	@Override
+//	public List<Comment> findByUserId(String userId) {
+//		
+//		return commentDao.findByUserId(userId);
+//	}
+
 	@Override
-	public List<Comment> findByUserId(String userId) {
-		
-		return commentDao.findByUserId(userId);
+	public List<Comment> findByMemberIdNumber(Integer idNumber) {
+		return commentDao.findByMemberIdNumber(idNumber);
+	}
+
+	@Override
+	public void deleteByMemberIdNumber(Integer idNumber) {
+		commentDao.deleteByMemberIdNumber(idNumber);
 	}
 
 }
