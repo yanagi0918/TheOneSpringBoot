@@ -30,7 +30,7 @@ $(function() {
 		})
 
 	});
-	
+
 	//評論新增
 	$('.comment-new').click(function() {
 		Swal.fire({
@@ -59,7 +59,7 @@ $(function() {
 		})
 
 	});
-	
+
 	//留言刪除
 	$('.commentMessage-delete').click(function() {
 		Swal.fire({
@@ -242,14 +242,13 @@ $(function() {
 //anonymous/user show
 
 $(function() {
-	$('#anonymous').click(function() {
-		$('#userId').val('匿名');
-		$('#userId').hide();
-	})
-
-	$('#user').click(function() {
-		$('#userId').val('');
-		$('#userId').show();
+	$('#status').click(function() {
+		$('#nickName').toggle();
+		if ($('#status').prop('checked')) {
+			$('#nickName').val('匿名');
+		} else {
+			$('#nickName').val('');
+		}
 	});
 
 })
@@ -354,7 +353,7 @@ $(document).ready(function() {
 			targets: [5, 7]
 		}, {
 			visible: false,
-			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+			targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 		}, {
 			targets: 17,
 			render: $.fn.dataTable.render.ellipsis(15)
