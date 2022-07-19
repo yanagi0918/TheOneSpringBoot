@@ -135,7 +135,7 @@
 						<ul class="comment-link">
 							<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 							<li><a th:href="@{/comments}"><span>總覽</span></a></li>
-							<li><a href="single_comment.html"><span
+							<li><a href=""><span
 									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
 						</ul>
 						<!-- 評論內容 start-->
@@ -268,9 +268,9 @@
 										</div>
 										<div class="col-sm-2">
 											<div class="form-group">
-												<input type="text" class="form-control" name="replyUserId"
-													required id="replyUserId"
-													th:value="${commentMessage.replyUserId}">留言者
+												<input type="text" class="form-control" name="replyNickName"
+													required id="replyNickName"
+													th:value="${commentMessage.replyNickName}">留言者
 											</div>
 										</div>
 										<div class="col-sm-3">
@@ -374,8 +374,8 @@
 												</div>
 												<div class="f-left">
 													<div class="">
-														<input type="hidden" class="" name="replyUserId"
-															th:value="${message.replyUserId}">
+														<input type="hidden" class="" name="replyNickName"
+															th:value="${message.replyNickName}">
 													</div>
 												</div>
 												<div class="f-left">

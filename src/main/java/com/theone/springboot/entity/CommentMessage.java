@@ -31,17 +31,19 @@ public class CommentMessage {
 
 	private Integer messageOrder;
 
-	private String replyUserId;
+	private String replyNickName;
 
 	private String messageContent;
 
-	private String messageReply;
+	private Integer messageReply;
+	
+	// 0:刊登中 1:下架 2:撤銷
+	private Integer status;
 
 	@Column(columnDefinition = "smalldatetime")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date messageTime;
 
-	
 	private boolean messageLike;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,10 +52,15 @@ public class CommentMessage {
 	@JsonIgnore
 	private Comment comment;
 
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "member_idNumber", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Member member;
+	
 	public CommentMessage() {
 
 	}
-
 
 	public Integer getMessageId() {
 		return messageId;
@@ -71,12 +78,12 @@ public class CommentMessage {
 		this.messageOrder = messageOrder;
 	}
 
-	public String getReplyUserId() {
-		return replyUserId;
+	public String getReplyNickName() {
+		return replyNickName;
 	}
 
-	public void setReplyUserId(String replyUserId) {
-		this.replyUserId = replyUserId;
+	public void setReplyNickName(String replyNickName) {
+		this.replyNickName = replyNickName;
 	}
 
 	public String getMessageContent() {
@@ -87,23 +94,29 @@ public class CommentMessage {
 		this.messageContent = messageContent;
 	}
 
-	public String getMessageReply() {
+	public Integer getMessageReply() {
 		return messageReply;
 	}
 
-	public void setMessageReply(String messageReply) {
+	public void setMessageReply(Integer messageReply) {
 		this.messageReply = messageReply;
 	}
-	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public Date getMessageTime() {
 		return messageTime;
 	}
 
-
 	public void setMessageTime(Date messageTime) {
 		this.messageTime = messageTime;
 	}
-
 
 	public boolean isMessageLike() {
 		return messageLike;
@@ -120,5 +133,15 @@ public class CommentMessage {
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	
 
 }

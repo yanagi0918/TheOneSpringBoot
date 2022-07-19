@@ -54,11 +54,14 @@ public class CommentDashBoardController {
 	}
 
 	// 儲存留言
-	@PostMapping("/{id}/CommentMessageSave")
+	@PostMapping("/{id}/CommentMessageSave/{member}")
 	public String saveCommentMessage(@PathVariable("id") Integer id,
+			@PathVariable("member") Member member,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
+//		Member member = memberService.getMember(rid).get();
+		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/dashboard/comments";
 	}

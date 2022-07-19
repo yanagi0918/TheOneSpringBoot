@@ -89,7 +89,7 @@
 							</div>
 						</form>
 						<form 
-							th:action="@{/dashboard/{id}/CommentMessageSave(id=${comment.commentId})}"
+							th:action="@{/dashboard/{id}/CommentMessageSave/(id=${comment.commentId})} + 1"
 							method="post" id="form" th:modelAttribute="commentMessage">
 							<div class="row mb-3" th:if="${commentMessage.messageId != null}">
 								<label class="col-sm-2 col-form-label">留言編號</label>
@@ -123,13 +123,21 @@
 										readonly>
 								</div>
 							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">會員編號</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="memberid"
+										required id="memberid">
+<!-- 										th:value="${memberid}"> -->
+								</div>
+							</div>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">留言者</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="replyUserId"
-										required id="replyUserId"
-										th:value="${commentMessage.replyUserId}">
+									<input type="text" class="form-control" name="replyNickName"
+										required id="replyNickName"
+										th:value="${commentMessage.replyNickName}">
 								</div>
 							</div>
 
@@ -143,14 +151,14 @@
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">回覆</label>
+								<label class="col-sm-2 col-form-label">回復編號</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="messageReply"
 										id="messageReply" th:value="${commentMessage.messageReply}">
 								</div>
 							</div>
 
-							<div class="row mb-3">
+							<div class="row mb-3 d-none">
 								<label class="col-sm-2 col-form-label">喜歡</label>
 								<div class="col-sm-8 col-form-label">
 									<input type="radio" name="messageLike" id="mlike"

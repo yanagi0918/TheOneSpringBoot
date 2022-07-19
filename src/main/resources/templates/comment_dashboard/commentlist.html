@@ -365,8 +365,7 @@
 									type="search" data-table="order-table" placeholder="搜尋...">
 							</div>
 						</div>
-
-						<button type="button" class="btn btn-primary mb-0"
+						<button type="button" class="btn btn-primary mb-0 invisible"
 							onclick="location.href='/dashboard/CommentMessageNew'">新增留言</button>
 					</div>
 					<div class="container">
@@ -392,7 +391,7 @@
 									<td th:text="${commentMessages.comment.commentId}"></td>
 									<td th:text="${commentMessages.messageOrder}"></td>
 									<td th:text="${#dates.format(commentMessages.messageTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-									<td th:text="${commentMessages.replyUserId}"></td>
+									<td th:text="${commentMessages.replyNickName}"></td>
 									<td th:text="${commentMessages.messageContent}"></td>
 									<td th:text="${commentMessages.messageReply}"></td>
 									<td th:text="${commentMessages.messageLike}"></td>
