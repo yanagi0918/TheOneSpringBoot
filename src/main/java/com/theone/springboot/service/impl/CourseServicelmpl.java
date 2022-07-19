@@ -1,10 +1,16 @@
 package com.theone.springboot.service.impl;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
 import com.theone.springboot.entity.Member;
+import com.theone.springboot.utils.CourseCsvExporter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,13 +18,24 @@ import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.repository.CourseDao;
 import com.theone.springboot.service.CourseService;
 
+import javax.mail.internet.MimeMessage;
+
 
 @Service
 @Transactional
 public class CourseServicelmpl implements CourseService {
 
+    private final CourseDao courseDao;
+    private final CourseCsvExporter courseCsvExporter;
+    private final JavaMailSender javaMailSender;
+
     @Autowired
-    private CourseDao courseDao;
+    public CourseServicelmpl(CourseDao courseDao, CourseCsvExporter courseCsvExporter, JavaMailSender javaMailSender) {
+        this.courseDao = courseDao;
+        this.courseCsvExporter = courseCsvExporter;
+        this.javaMailSender = javaMailSender;
+    }
+
 
     @Override
     public boolean isDup(Integer pk) {
@@ -76,5 +93,41 @@ public class CourseServicelmpl implements CourseService {
     @Override
     public void deleteCourse(Integer pk) {
         courseDao.deleteById(pk);
+    }
+
+    @Override
+    public void csvExport(Writer writer) {
+        List<CourseBean> courseBeans = courseDao.findAll();
+        courseCsvExporter.csvExport(writer, courseBeans);
+    }
+
+    @Override
+    public void sendNotifyEmail(String recipient, String subject, String message) {
+        MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+                messageHelper.setFrom("eeit45theone@gmail.com");
+                messageHelper.setTo(recipient);
+                messageHelper.setSubject(subject);
+                messageHelper.setText(message, true);
+            }
+        };
+//        MimeMessagePreparator messagePreparator = mimeMessage -> {
+//            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+//            messageHelper.setFrom("eeit45theone@gmail.com");
+//            messageHelper.setTo(recipient);
+//            messageHelper.setSubject(subject);
+//            messageHelper.setText(message, true);
+//        };
+        try {
+            javaMailSender.send(messagePreparator);
+            System.out.println("sent success");
+            System.out.println("=================================================================");
+        } catch (MailException e) {
+            System.out.println("mail error");
+            e.printStackTrace();
+        }
+
     }
 }

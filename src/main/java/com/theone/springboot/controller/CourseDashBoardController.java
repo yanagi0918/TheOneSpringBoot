@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Member;
@@ -157,6 +158,33 @@ public class CourseDashBoardController {
     public ResponseEntity<CourseBean> deleteCourseByNo(@PathVariable Integer courseNo) {
         courseService.deleteCourse(courseNo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/courses/csvExport")
+    public void csvExport(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv;charset=UTF-8");
+        response.addHeader("Content-Disposition", "attachment; filename=courses.csv");
+        courseService.csvExport(response.getWriter());
+    }
+
+    @GetMapping("/course/sendemail")
+    @ResponseBody
+    public boolean sendNotifyEmail(@RequestParam Integer courseNo, @RequestParam String result) {
+        CourseBean course = courseService.findCourse(courseNo).orElseThrow();
+        if ("已審核".equals(result) || "駁回".equals(result)) {
+            result = ("已審核".equals(result))?"\"blue\"><b>通過 !":"\"red\"><b>駁回，請修正課程資訊後重新送審，謝謝 !";
+            String msg = "<p style=\"font-size: large;\">" +
+                    "親愛的 "+course.getLecturer()+" 講師您好: <br>"+
+                    "<br>"+
+                    "課程編號: " + courseNo + "<br>" +
+                    "課程名稱: " + course.getCourseName() + "<br>" +
+                    "審核結果: <font color=" + result + "</b></font><br>" +
+                    "講師專區連結: http://localhost:8080/user/courses/lecturers" +
+                    "</p>";
+            courseService.sendNotifyEmail("eeit45@gmail.com", "TheOne 講師課程審核通知", msg);
+            return true;
+        }
+        return false;
     }
 
     @InitBinder

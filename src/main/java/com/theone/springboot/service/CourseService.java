@@ -1,5 +1,6 @@
 package com.theone.springboot.service;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +30,10 @@ public interface CourseService {
 	List<CourseBean> findByMember(Member member);
 
 	void deleteCourse(Integer pk);
+
+	void csvExport(Writer writer);
+
+	void sendNotifyEmail(String recipient, String subject, String message);
+
 
 }
