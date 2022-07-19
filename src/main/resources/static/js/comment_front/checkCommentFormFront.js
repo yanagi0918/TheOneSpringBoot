@@ -245,6 +245,15 @@ $(function() {
 			$('#nickName').val('');
 		}
 	});
+	
+	$('#messageNickName #confirm-switch').click(function() {
+		$('#replyNickName').toggle();
+		if ($('#confirm-switch').prop('checked')) {
+			$('#replyNickName').val('匿名');
+		} else {
+			$('#replyNickName').val('');
+		}
+	});
 
 })
 

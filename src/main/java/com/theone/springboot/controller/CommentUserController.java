@@ -20,11 +20,15 @@ import com.theone.springboot.entity.CommentMessage;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
+import com.theone.springboot.service.MemberService;
 
 @Controller
 @RequestMapping({ "/" })
 public class CommentUserController {
 
+	@Autowired
+	MemberService memberService;
+	
 	@Autowired
 	CommentService commentService;
 
@@ -121,13 +125,16 @@ public class CommentUserController {
 	}
 
 	// 儲存留言
-	@PostMapping("/{id}/CommentMessageSave")
+	@PostMapping("/user/{id}/CommentMessageSave")
 	public String saveCommentMessage(@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage,
 			@ModelAttribute("message") CommentMessage message,
+			HttpSession session,
 			Model model) {
+		Member member = (Member) session.getAttribute("loginMember");
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
+		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/comments";
 	}
