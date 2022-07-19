@@ -92,16 +92,18 @@
 										<td>新增時間:</td>
 										<td
 											th:text="${#calendars.format(comment.create_time, 'yyyy-MM-dd')}"></td>
-										<td>帳號:</td>
-										<td th:text="${comment.member.userid}"></td>
+										<td>狀態:</td>
+										<td th:text="${comment.status}"></td>
+
 									</tr>
 									<tr>
+										<td>會員編號:</td>
+										<td th:text="${comment.member.idNumber}"></td>
 										<td>帳號:</td>
 										<td th:text="${comment.member.userid}"></td>
 										<td>暱稱:</td>
 										<td th:text="${comment.nickName}"></td>
-										<td>狀態:</td>
-										<td th:text="${comment.status}"></td>
+
 									</tr>
 									<tr>
 										<td>公司名稱:</td>
