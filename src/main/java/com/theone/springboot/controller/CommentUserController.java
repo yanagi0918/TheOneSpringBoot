@@ -44,9 +44,9 @@ public class CommentUserController {
 	@RequestMapping("/user/comments")
 	public String listMyComments(HttpSession session, Model model) {
 		Member member = (Member) session.getAttribute("loginMember");
-		List<Comment> myComments = commentService.findByMemberIdNumber(null);
-//		List<Comment> myComments = commentService.findByUserId(member.getUserid());
+		List<Comment> myComments = commentService.findByMemberIdNumber(member.getIdNumber());
 		model.addAttribute("listComment", myComments);
+		model.addAttribute("commentMessageService", commentMessageService);
 		return "comment/commentlist";
 	}
 
@@ -59,7 +59,9 @@ public class CommentUserController {
 
 	// 儲存評論
 	@PostMapping("/CommentSave")
-	public String saveComment(@ModelAttribute("comment") Comment comment) {
+	public String saveComment(HttpSession session, @ModelAttribute("comment") Comment comment) {
+		Member member = (Member) session.getAttribute("loginMember");
+		comment.setMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
@@ -72,7 +74,7 @@ public class CommentUserController {
 	}
 
 	// 送出新增評價的空白表單
-	@RequestMapping("/comment/new")
+	@RequestMapping("/user/comment/new")
 	public String showCommentForm(@ModelAttribute("comment") Comment comment) {
 		return "comment/commentform";
 	}

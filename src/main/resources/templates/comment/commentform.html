@@ -35,6 +35,7 @@
 i {
 	font-size: 16px;
 }
+
 </style>
 </head>
 
@@ -86,41 +87,49 @@ i {
 					</aside>
 					<article>
 						<div class="testimonial-bg shadow-sm p-3 border">
-							<form
-								th:action="@{/CommentSave}"
-								method="post" id="form" th:modelAttribute="comment">
+							<form th:action="@{/CommentSave}" method="post" id="form"
+								th:modelAttribute="comment">
 								<table class="table table-borderless">
 									<tr>
 										<td><input type="hidden" class="form-control valid"
 											th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
 											name="create_time" readonly></td>
 										<td><input type="hidden" class="form-control"
-											name="commentId"
-											th:value="${comment.commentId}" readonly></td>
+											name="commentId" th:value="${comment.commentId}" readonly></td>
 									</tr>
 									<tr>
 										<th>帳號:</th>
-										<td th:if="${comment.userId == null}"><input
-											type="radio" id="anonymous" name="user">匿名 <input
-											type="radio" id="user" name="user">會員</td>
-										<td th:if="${comment.userId != null}"><input
-											type="radio" id="anonymous" name="user"
-											th:checked="${comment.userId.contains('匿名')} ? 'checked'">匿名
-											<input type="radio" id="user" name="user"
-											th:checked="${!comment.userId.contains('匿名')} ? 'checked'">會員
+										<td>[[${session.loginMember.userid}]]</td>
+										<th>暱稱:</th>
+										<td colspan="">
+										<label class="f-left pr-1">匿名</label>
+											<div class="switch-wrap justify-content-between f-left">
+												<div class="confirm-switch">
+													<input type="checkbox" id="confirm-switch" name="anonymous"
+														th:checked="${comment.nickName != null && comment.nickName.contains('匿名')}">
+													<label for="confirm-switch" class="f-left"></label>
+												</div>
+											</div>
+											<div class="f-right w-75">
+												<input type="text" class="form-control"
+													th:style="${comment.nickName != null && comment.nickName.contains('匿名') ? 'display: none' : 'display: block'}"
+													id="nickName" name="nickName"
+													th:value="${comment.nickName == null ? 	session.loginMember.username : comment.nickName }" placeholder="來個暱稱">
+											</div>
 										</td>
-										<td colspan="2"><input type="text" class="form-control"
-											th:style="${comment.userId != null && comment.userId.contains('匿名') ? 'display: none' : 'display: block'}"
-											id="userId" name="userId" th:value="${comment.userId}"
-											placeholder="請輸入帳號"></td>
+										<th class="d-none">狀態:</th>
+										<td class="d-none"><input type="text" class="form-control"
+											id="status" name="status"
+											th:value="0" readonly>
+										</td>
+									</tr>
+									<tr>
 										<th>參考時間:</th>
 										<td><input type="date" class="form-control"
 											name="ref_time" id="ref_time"
 											th:value="${#dates.format(comment.ref_time, 'yyyy-MM-dd')}"
 											th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 										</td>
-									</tr>
-									<tr>
 										<th>公司名稱:</th>
 										<td><input type="text" class="form-control"
 											id="comp_name" name="comp_name"
@@ -142,7 +151,7 @@ i {
 										<th>職務型態:</th>
 										<td><select class="form-select" name="job_description"
 											id="job_description" size="1">
-												<option value="" selected>請選擇</option>
+												<option value="">請選擇</option>
 												<option value="全職"
 													th:selected="${comment.job_description== '全職'}">全職</option>
 												<option value="兼職"
@@ -206,9 +215,10 @@ i {
 
 								</table>
 								<div align="center">
-									<button type="submit" th:if="${comment.userId != null}"
-										class="genric-btn success radius" name="submit"
-										value="更新"><i class="fa fa-paper-plane"></i></button>
+									<button type="submit" th:if="${comment.commentId != null}"
+										class="genric-btn success radius" name="submit" value="更新">
+										<i class="fa fa-paper-plane"></i>
+									</button>
 									<button type="button" th:if="${comment.commentId == null}"
 										class="genric-btn primary radius" name="oneInput" value="一鍵輸入"
 										id="OneInput">

@@ -145,7 +145,7 @@
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
 										<a
-											th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+											th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
 											class="m-2 edit-delete"
 											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}"
 											data-target="editMessage"> <i class="fa fa-pencil-alt"></i>
@@ -154,7 +154,7 @@
 									</div>
 									<div class="float-right mt-55">
 										<h6 class="text-muted"
-											th:text="'新增時間: ' + ${#calendars.format(comment.create_time, 'yyyy-MM-dd')}">
+											th:text="${comment.nickName} + ' - ' + '新增時間: ' + ${#calendars.format(comment.create_time, 'yyyy-MM-dd')}">
 										</h6>
 									</div>
 									<div class="m-4">
@@ -217,7 +217,7 @@
 										<p th:text="${comment.share}"></p>
 									</div>
 									<button
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
 										type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
 										th:value='${comment.commentId}'>
@@ -311,8 +311,8 @@
 														<img src="assets/img/comment/comment_1.png" alt="">
 													</div>
 													<div class="desc p-3">
-														<div class="float-right m-1">
-															<!-- th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" 
+														<div class="float-right m-1" th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}">
+															<!--  
 														th:href="@{/CommentEdit/{id}(id=${comment.commentId})}" -->
 															<a class="m-2 edit-delete editMessage"
 																th:id="${message.messageId}"
@@ -333,11 +333,11 @@
 																<a href="#" class="btn-reply text-uppercase">reply</a>
 															</div>
 															<button type="button"
+																th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
 																class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
 																th:value='${message.messageId}'>
 																<i class="fa fa-trash-alt"></i>
 															</button>
-															<!-- 	th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}" -->
 														</div>
 													</div>
 												</div>
@@ -414,9 +414,9 @@
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
-							<form th:action="@{/comment/new}">
+							<form th:action="@{/user/comment/new}">
 								<button class="genric-btn success circle w-100 e-larg"
-									type="submit">
+									type="submit" data-toggle="tooltip" title="需登入分享">
 									<i class="fa fa-bullhorn"></i>&nbsp我要分享
 								</button>
 							</form>

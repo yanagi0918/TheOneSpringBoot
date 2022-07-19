@@ -101,6 +101,15 @@
     color: #fff
 }
 
+/* 限制顯示行數 */
+.blog_details p{
+		overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+}
+
 </style>
 </head>
 
@@ -217,15 +226,15 @@
 									<li><span class="text-muted" th:text="${comment.job_description}"><i
 											class="fa fa-briefcase"></i></span></li>
 								</ul>
-								<div class="modify-btn w-50 f-left d-inline">
+								<div class="modify-btn w-25 f-right d-inline">
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
 										class="genric-btn danger circle float-right comment-delete"
 										th:value='${comment.commentId}'>
 										<i class="fa fa-trash-alt"></i>
 									</button>
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
 										class="genric-btn success circle float-right"
 										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.commentId})} + '\''">
 										<i class="fa fa-pencil-alt"></i>
@@ -242,9 +251,9 @@
 				<div class="col-lg-4 blog_area">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
-							<form th:action="@{/comment/new}">
-								<button class="genric-btn success circle w-100 e-larg"
-									type="submit">
+							<form th:action="@{/user/comment/new}">
+								<button class="genric-btn success circle w-100 e-larg" 
+									type="submit" data-toggle="tooltip" title="需登入分享">
 									<i class="fa fa-bullhorn"></i>&nbsp我要分享
 								</button>
 							</form>

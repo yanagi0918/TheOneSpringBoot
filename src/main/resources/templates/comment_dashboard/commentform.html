@@ -181,7 +181,7 @@
 											<td>
 												<label class="switch-primary"> 
 												<input type="checkbox" class="switch switch-bootstrap status"
-														name="status" id="status" value="1"
+														name="anonymous" id="anonymous" value="1"
 														th:checked="${comment.nickName != null && comment.nickName.contains('匿名')}"> 
 												<span class="switch-body"></span>
 												<span class="switch-text float-left">匿名</span>
@@ -191,7 +191,7 @@
 											<input type="text" class="form-control float-left"
 												th:style="${comment.nickName != null && comment.nickName.contains('匿名') ? 'display: none' : 'display: block'}"
 												id="nickName" name="nickName" th:value="${comment.nickName}"
-												placeholder="怎麼稱呼你">
+												placeholder="來個暱稱">
 												
 											</td>
 										</tr>
