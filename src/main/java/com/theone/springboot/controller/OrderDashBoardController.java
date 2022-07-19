@@ -138,4 +138,23 @@ public class OrderDashBoardController {
 		response.addHeader("Content-Disposition","attachment; filename=resumes.csv");
 		orderService.csvExport(response.getWriter());
 	}
+	
+	@ResponseBody
+	@GetMapping("/order/sendemail")
+	public boolean sendNotifyEmail(String id, String result, String remark) {
+		if ("1".equals(result) || "2".equals(result)) {
+			result = ("1".equals(result))?"審核通過":"退件";
+				
+			String msg = "<p style=\"font-size: large;\">" +
+						 "廣告編號: " + id + "<br>" +
+						 "審核結果: <font color=\"blue\"><b>" + result + "</b></font><br>" +
+						 "備註: " + remark + "<br>" +
+						 "連結: http://localhost:8080/user/orders" +
+						 "</p>";
+			orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 廣告審核通知", msg);
+			return true;
+		}
+		return false;
+	}
+	
 }
