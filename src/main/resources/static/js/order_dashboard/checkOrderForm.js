@@ -372,15 +372,59 @@ $(function () {
 			$('#totalPrice').attr("class","form-control is-valid")
 		}
 
-		let confirmStr = '確認修改訂單?';
+//		let confirmStr = '確認修改訂單?';
+//		if ($('#btn-submit').val() == 0) {
+//			confirmStr = '確認新增訂單?';
+//		}
+//
+//		if (checkOrderForm) {
+//			Swal.fire({
+//				title: confirmStr,
+//				text: "",
+//				icon: 'warning',
+//				showCancelButton: true,
+//				confirmButtonColor: '#3085d6',
+//				cancelButtonColor: '#d33',
+//				confirmButtonText: '確認',
+//				cancelButtonText: '取消'
+//			}).then((result) => {
+//				if (result.isConfirmed) {
+//					Swal.fire({
+//						icon: 'success',
+//						title: '已完成!',
+//						showConfirmButton: false,
+//						timer: 1500
+//					})
+//					setTimeout(() => {
+//						$('#form').submit();
+//					}, 1500)
+//				}
+//			})
+//		} 
+		
+		let confirmStr = '';
+		let text = '';
+		let title = '';
 		if ($('#btn-submit').val() == 0) {
 			confirmStr = '確認新增訂單?';
+			text = '';
+			title = '已完成!';
 		}
-
+		
+		if ($('#btn-submit').val() == 1) {
+			confirmStr = '確認修改訂單?';
+		    text = '';
+		    title = '已完成!';
+		    if ($('#state').val()=='已退款'||$('#state').val()=='已駁回'){
+				text = "審核結果將寄送E-mail通知";
+		    	title = "審核結果通知寄送中";
+			}
+		}
+		
 		if (checkOrderForm) {
 			Swal.fire({
 				title: confirmStr,
-				text: "",
+				text: text,
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -391,13 +435,18 @@ $(function () {
 				if (result.isConfirmed) {
 					Swal.fire({
 						icon: 'success',
-						title: '已完成!',
+						title: title,
 						showConfirmButton: false,
-						timer: 1500
+						timer: 800
 					})
+					$.ajax({
+                		url: '/dashboard/order/sendemail?id='+$('#orderId').val()+
+                											'&result='+$('#state').val(),
+                		type: 'GET'
+            		});
 					setTimeout(() => {
 						$('#form').submit();
-					}, 1500)
+					}, 800)
 				}
 			})
 		} 

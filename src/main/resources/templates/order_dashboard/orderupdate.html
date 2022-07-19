@@ -79,10 +79,6 @@
                                 <label class="col-sm-2 col-form-label">狀態</label>
                                 <div class="col-sm-8">
                                  <select class="form-select mb-3" aria-label="Default select example" name="state" th:field='${order.state}' th:value='${order.state}' required id="state">
-<!--                                    <option th:selected="${order.state =='已付款'}" value="已付款">已付款</option> -->
-<!--                                    <option th:selected="${order.state =='待審核'}" value="待審核">待審核</option> -->
-<!--                                    <option th:selected="${order.state =='已退款'}" value="已退款">已退款</option> -->
-<!--                                	   <option th:selected="${order.state =='駁回'}" value="駁回">駁回</option> -->
 									<option value="已付款" th:selected="${order.state eq '已付款'}">已付款</option>
                                	    <option value="待審核" th:selected="${order.state eq '待審核'}">待審核</option>
                                     <option value="已退款" th:selected="${order.state eq '已退款'}">已退款</option>
