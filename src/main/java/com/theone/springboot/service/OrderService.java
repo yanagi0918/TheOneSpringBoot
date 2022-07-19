@@ -42,4 +42,7 @@ public interface OrderService {
 	
 	//CSV
 	void csvExport(Writer writer);
+	
+	//寄信
+	public void sendNotifyEmail(String recipient, String subject, String message);
 }
