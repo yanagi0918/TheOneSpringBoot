@@ -172,9 +172,9 @@
 							<ul class="comment-link">
 								<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 								<li><a th:href="@{/comments}"><span>總覽</span></a></li>
-								<li
-									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
-									href="single_comment.html"><span>分析</span></a></li>
+<!-- 								<li -->
+<!-- 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a -->
+<!-- 									href="single_comment.html"><span>分析</span></a></li> -->
 								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
 									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司'"></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
@@ -186,8 +186,8 @@
 						<ul class="blog-info-link">
 							<a th:href="@{/comments}" id="overview"
 								class="genric-btn success-border float-left w-25"> 總覽</a>
-							<a th:href="@{/comments/analysis}" id="analysis"
-								class="genric-btn success-border float-left w-25">分析</a>
+<!-- 							<a th:href="@{/comments/analysis}" id="analysis" -->
+<!-- 								class="genric-btn success-border float-left w-25">分析</a> -->
 							<a th:if="${session.loginMember!=null}" th:href="@{/user/comments}"
 								id="mycomment" class="genric-btn success-border float-left w-25">
 								我的心得</a>

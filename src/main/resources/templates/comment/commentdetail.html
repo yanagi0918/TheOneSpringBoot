@@ -230,14 +230,16 @@
 						<!-- 留言區塊 start-->
 						<div class="comments-area">
 							<div class="comment_form brand-bg rounded-80 p-3">
-								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember != null}">
-									<img class="p-0" 
-										th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/user_1.png} : ${session.loginMember.image}}"
+								<div class="thumb f-left col-sm-1 p-0"
+									th:if="${session.loginMember != null}">
+									<img class="p-0"
+										th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/comment_4.png} : ${session.loginMember.image}}"
 										alt="">
 								</div>
-								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember == null}">
+								<div class="thumb f-left col-sm-1 p-0"
+									th:if="${session.loginMember == null}">
 									<img class="p-0" th:if="${session.loginMember == null}"
-										th:src="@{/assets/img/comment/user_1.png}" alt="">
+										th:src="@{/assets/img/comment/comment_4.png}" alt="">
 								</div>
 								<!-- 新增留言 start -->
 								<div class="pt-1">
@@ -249,9 +251,11 @@
 												<div class="form-group">
 													<textarea
 														class="form-control w-100 bg-white rounded-80 shadow-sm"
-														name="messageContent" data-toggle="tooltip" th:title="${session.loginMember == null}? '需登入分享'"
+														name="messageContent" data-toggle="tooltip"
+														th:title="${session.loginMember == null}? '需登入分享'"
 														th:value="${commentMessage.messageContent}"
-														id="messageContent" placeholder="留言....." th:readonly="${session.loginMember == null}? 'true'"></textarea>
+														id="messageContent" placeholder="留言....."
+														th:readonly="${session.loginMember == null}? 'true'"></textarea>
 													<h6 class="float-right" id="count_message"></h6>
 												</div>
 											</div>
@@ -282,7 +286,8 @@
 														readonly>
 												</div>
 											</div>
-											<div class="col-sm-10" id="messageNickName" th:if="${session.loginMember != null}">
+											<div class="col-sm-10" id="messageNickName"
+												th:if="${session.loginMember != null}">
 												<div class="form-group">
 													<div class="f-left">
 														<input type="text" class="form-control"
@@ -302,12 +307,12 @@
 													</div>
 												</div>
 											</div>
-											<!-- 										<div class="col-sm-3"> -->
-											<!-- 											<div class="form-group"> -->
-											<!-- 												<input type="text" class="form-control" name="messageReply" -->
-											<!-- 													id="messageReply" th:value="${commentMessage.messageReply}">回覆 -->
-											<!-- 											</div> -->
-											<!-- 										</div> -->
+											<div class="">
+												<div class="form-group">
+													<input type="hidden" class="form-control"
+														name="messageReply" id="messageReply" th:value=0>
+												</div>
+											</div>
 											<!-- 										<div class="col-sm-3"> -->
 											<!-- 											<div class="form-group"> -->
 											<!-- 												<input type="radio" name="messageLike" id="mlike" -->
@@ -318,8 +323,9 @@
 											<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
 											<!-- 											</div> -->
 											<!-- 										</div> -->
-											<div class="form-group col-sm-2 f-right" th:if="${session.loginMember != null}">
-												<button type="submit" 
+											<div class="form-group col-sm-2 f-right"
+												th:if="${session.loginMember != null}">
+												<button type="submit"
 													th:if="${commentMessage.messageId == null}"
 													class="genric-btn success radius" name="submit" value="送出">
 													<i class="fa fa-paper-plane"></i>
@@ -334,11 +340,11 @@
 									<div class="comment-list" th:each="message : ${messages}">
 										<!-- 留言list start-->
 										<div th:id="'currentMessage' + ${message.messageId}">
-													<div class="thumb f-left">
-														<img
-															th:src="@{${message.replyNickName.equals('匿名') || message.member.image == null} ? @{/assets/img/comment/user_1.png} : ${message.member.image}}"
-															alt="">
-													</div>
+											<div class="thumb f-left">
+												<img
+													th:src="@{${message.replyNickName.equals('匿名') || message.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${message.member.image}}"
+													alt="">
+											</div>
 											<div
 												class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
 												<div class="user justify-content-between d-flex">
@@ -357,9 +363,13 @@
 																<h5 class="date">[[${message.replyNickName}]]</h5>
 																<p class="date"
 																	th:text="${#dates.format(message.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
-															</div>
-															<div class="reply-btn">
-																<a href="#" class="btn-reply text-uppercase">reply</a>
+																<div class="reply-btn"
+																	th:id="'reply' + ${message.messageId}"
+																	th:if="${session.loginMember != null}">
+																	<a class="btn-reply d-flex align-items-center"
+																		th:id="${message.messageId}"
+																		onmouseover="replyMessage(this.id)">回覆</a>
+																</div>
 															</div>
 															<button type="button"
 																th:if="${session.loginMember != null && session.loginMember.userid == message.member.userid}"
@@ -433,11 +443,174 @@
 											</form>
 										</div>
 										<!-- 回復區 -->
+										<!-- 回覆留言區 start -->
+										<div class="comment_form brand-bg rounded-80 pt-3 d-none"
+											th:id="'replyMessageArea' + ${message.messageId}">
+											<div class="thumb f-right col-sm-1 p-0"
+												th:if="${session.loginMember != null}">
+												<img class="p-0"
+													th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/comment_4.png} : ${session.loginMember.image}}"
+													alt="">
+											</div>
+											<div class="thumb f-right col-sm-1 p-0"
+												th:if="${session.loginMember == null}">
+												<img class="p-0" th:if="${session.loginMember == null}"
+													th:src="@{/assets/img/comment/comment_4.png}" alt="">
+											</div>
+											<form
+												th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}"
+												method="post" id="form" th:modelAttribute="commentMessage">
+												<div class="row">
+													<div class="col-12">
+														<div class="form-group">
+															<textarea
+																class="form-control w-100 bg-white rounded-80 shadow-sm"
+																name="messageContent"
+																th:value="${commentMessage.messageContent}"
+																id="messageContent" placeholder="留言....."></textarea>
+															<h6 class="float-right" id="count_message"></h6>
+														</div>
+													</div>
+													<div class="">
+														<div class="form-group">
+															<input class="form-control" name="messageOrder"
+																id="messageOrder" type="hidden"
+																th:value="${commentMessage.messageOrder}" readonly>
+														</div>
+													</div>
+													<div class="">
+														<div class="form-group">
+															<input class="form-control" name="status" id="status"
+																type="hidden" th:value=0 readonly>
+														</div>
+													</div>
+													<div class="">
+														<div class="form-group">
+															<input th:if="${commentMessage.messageId == null}"
+																type="hidden" class="form-control" name="messageTime"
+																required id="messageTime"
+																th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
+																readonly> <input
+																th:if="${commentMessage.messageId != null}"
+																type="hidden" class="form-control" name="messageTime"
+																required id="messageTime"
+																th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
+																readonly>
+														</div>
+													</div>
+													<div class="col-sm-10" id="messageNickName"
+														th:if="${session.loginMember != null}">
+														<div class="form-group">
+															<div class="f-left">
+																<input type="text" class="form-control"
+																	th:style="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名') ? 'display: none' : 'display: block'}"
+																	id="replyNickName" name="replyNickName"
+																	th:value="${commentMessage.replyNickName == null ? 	session.loginMember.username : commentMessage.replyNickName}"
+																	placeholder="來個暱稱">
+															</div>
+															<label class="f-left pr-1">匿名</label>
+															<div class="switch-wrap justify-content-between f-left">
+																<div class="confirm-switch">
+																	<input type="checkbox" id="confirm-switch"
+																		name="anonymous"
+																		th:checked="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名')}">
+																	<label for="confirm-switch" class="f-left"></label>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="">
+														<div class="form-group">
+															<input type="hidden" class="form-control"
+																name="messageReply" id="messageReply"
+																th:value="${message.messageId}">
+														</div>
+													</div>
+													<!-- 										<div class="col-sm-3"> -->
+													<!-- 											<div class="form-group"> -->
+													<!-- 												<input type="radio" name="messageLike" id="mlike" -->
+													<!-- 													th:value="true" -->
+													<!-- 													th:checked="${commentMessage.messageLike} ? 'checked'">喜歡 -->
+													<!-- 												<input type="radio" name="messageLike" id="munlike" -->
+													<!-- 													th:value="false" -->
+													<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
+													<!-- 											</div> -->
+													<!-- 										</div> -->
+													<div class="form-group col-sm-2 f-right"
+														th:if="${session.loginMember != null}">
+														<button type="submit"
+															class="edit-delete testimonial-bg border-0" name="sent"
+															value="送出">
+															<i class="fa fa-paper-plane"></i>
+														</button>
+														<button type="button"
+															class="edit-delete testimonial-bg border-0"
+															th:id="'replyCancel'+${message.messageId}" name="back"
+															value="取消">
+															<i class="fa fa-reply"></i>
+														</button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<!-- 回覆留言區 end -->
+										<!-- 回覆留言list start-->
+<!-- 										<form -->
+<!-- 											th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}" th:with="${model.addAttribute('replymessage',commentMessageService.findByMessageReply(${message.messageId}))}" -->
+<!-- 											method="post" id="form" th:modelAttribute="replymessage"> -->
+											<div class="comment-list"
+												th:each="replymessage : ${replymessage}">
+												<div th:id="'currentMessage' + ${replymessage.messageId}">
+													<div class="thumb f-left">
+														<img
+															th:src="@{${replymessage.replyNickName.equals('匿名') || replymessage.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
+															alt="">
+													</div>
+													<div
+														class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+														<div class="user justify-content-between d-flex">
+															<div class="desc p-3">
+																<div class="float-right m-1"
+																	th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}">
+																	<a class="m-2 edit-delete editMessage"
+																		th:id="${message.messageId}"
+																		onmouseover="editMessage(this.id)"> <i
+																		class="fa fa-pencil-alt"></i>
+																	</a>
+																</div>
+																<p class="comment" th:text="${replymessage.messageContent}"></p>
+																<div class="d-flex justify-content-between">
+																	<div class="d-flex align-items-center">
+																		<h5 class="date">[[${message.replyNickName}]]</h5>
+																		<p class="date"
+																			th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+																		<div class="reply-btn"
+																			th:id="'reply' + ${message.messageId}"
+																			th:if="${session.loginMember != null}">
+																			<a class="btn-reply d-flex align-items-center"
+																				th:id="${message.messageId}"
+																				onmouseover="replyMessage(this.id)">回覆</a>
+																		</div>
+																	</div>
+																	<button type="button"
+																		th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}"
+																		class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
+																		th:value='${message.messageId}'>
+																		<i class="fa fa-trash-alt"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+<!-- 										</form> -->
+										<!-- 回覆留言list end-->
 									</div>
 								</div>
 							</div>
+							<!-- 留言區塊 end-->
 						</div>
-						<!-- 留言區塊 end-->
 					</div>
 				</div>
 				<div class="col-lg-4">
