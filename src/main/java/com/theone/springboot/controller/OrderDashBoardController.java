@@ -110,8 +110,18 @@ public class OrderDashBoardController {
 	@ResponseBody
 	public ResponseEntity<Order> saveOrUpdate(@RequestBody Order Order) {
 		Order orders = orderService.findOrder(Order.getOrderId()).orElseThrow();
-		orders.setState(Order.getState());
+		String state = Order.getState();		
+		orders.setState(state);
 		orderService.saveOrUpdate(orders);
+		if("已退款".equals(state) || "已駁回".equals(state)) {
+			Integer id = Order.getOrderId();			
+			String msg = "<p style=\"font-size: large;\">" +
+					 "訂單編號: " + id + "<br>" +
+					 "審核結果: <font color=\"blue\"><b>" + state + "</b></font><br>" +
+					 "連結: http://localhost:8080/user/orders" +
+					 "</p>";
+		orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 訂單審核通知", msg);
+		}
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
 	
@@ -157,6 +167,7 @@ public class OrderDashBoardController {
 			orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 訂單審核通知", msg);
 			return true;
 		}
+		
 		return false;
 	}
 	
