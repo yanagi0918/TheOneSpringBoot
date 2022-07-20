@@ -77,6 +77,12 @@
 	position: relative;
 }
 
+#checkboxesM {
+	display: none;
+	border: 1px #dadada solid;
+	position: relative;
+}
+
 .table {
 	position: relative
 }
@@ -86,7 +92,16 @@
 	background-color: white;
 }
 
+#checkboxesM label {
+	display: block;
+	background-color: white;
+}
+
 #checkboxes label:hover {
+	background-color: #1e90ff;
+}
+
+#checkboxesM label:hover {
 	background-color: #1e90ff;
 }
 
@@ -222,7 +237,7 @@
 					<!-- 欄位顯示選單 -->
 					<div>
 						<form>
-							<div class="multiselect">
+							<div class="multiselect" id="commentSelect">
 								<div class="selectBox" onclick="showCheckboxes()">
 									<select>
 										<option>選擇顯示欄位</option>
@@ -233,47 +248,50 @@
 									<!-- 									<label for="all"> <input class="toggle-vis" type="checkbox" id="all" checked/>全選</label>  -->
 									<label for="commentId"> <input class="toggle-vis"
 										type="checkbox" id="commentId" data-column="0" checked />編號
-									</label> <label for="create_time"> <input class="toggle-vis"
-										type="checkbox" id="create_time" data-column="1" checked />新增時間
+									</label> <label for="createTime"> <input class="toggle-vis"
+										type="checkbox" id="createTime" data-column="1" checked />新增時間
 									</label> <label for="userId"> <input class="toggle-vis"
-										type="checkbox" id="userId" data-column="2" checked />帳號
-									</label> <label for="ref_time"> <input class="toggle-vis"
-										type="checkbox" id="ref_time" data-column="3" />參考時間
-									</label> <label for="comp_name"> <input class="toggle-vis"
-										type="checkbox" id="comp_name" data-column="4" checked />公司名稱
-									</label> <label for="comp_score"> <input class="toggle-vis"
-										type="checkbox" id="comp_score" data-column="5" />公司評分
-									</label> <label for="job_name"> <input class="toggle-vis"
-										type="checkbox" id="job_name" data-column="6" checked />職位
+										type="checkbox" id="userId" data-column="2" checked>帳號
+									</label><label for="nickName"> <input class="toggle-vis"
+										type="checkbox" id="nickName" data-column="3" />暱稱
+									</label> <label for="refTime"> <input class="toggle-vis"
+										type="checkbox" id="refTime" data-column="4" />參考時間
+									</label> <label for="compName"> <input class="toggle-vis"
+										type="checkbox" id="compName" data-column="5" />公司名稱
+									</label> <label for="compScore"> <input class="toggle-vis"
+										type="checkbox" id="compScore" data-column="6" />公司評分
+									</label> <label for="jobName"> <input class="toggle-vis"
+										type="checkbox" id="jobName" data-column="7" />職位
 									</label> <label for="job_score"> <input class="toggle-vis"
-										type="checkbox" id="job_score" data-column="7" />職位評分
-									</label> <label for="job_description"> <input
-										class="toggle-vis" type="checkbox" id="job_description"
-										data-column="8" />職務型態
+										type="checkbox" id="job_score" data-column="8" />職位評分
+									</label> <label for="jobDescription"> <input
+										class="toggle-vis" type="checkbox" id="jobDescription"
+										data-column="9" />職務型態
 									</label> <label for="std_hour"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="9" />表定工時
+										type="checkbox" id="std_hour" data-column="10" />表定工時
 									</label> <label for="real_hour"> <input class="toggle-vis"
-										type="checkbox" id="real_hour" data-column="10" />實際工時
+										type="checkbox" id="real_hour" data-column="11" />實際工時
 									</label> <label for="over_freq"> <input class="toggle-vis"
-										type="checkbox" id="over_freq" data-column="11" />加班頻率
+										type="checkbox" id="over_freq" data-column="12" />加班頻率
 									</label> <label for="seniority"> <input class="toggle-vis"
-										type="checkbox" id="seniority" data-column="12" />服務年資
+										type="checkbox" id="seniority" data-column="13" />服務年資
 									</label> <label for="total_seniority"> <input
 										class="toggle-vis" type="checkbox" id="total_seniority"
-										data-column="13" />總年資
+										data-column="14" />總年資
 									</label> <label for="monthly_salary"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="14" />月薪
+										type="checkbox" id="std_hour" data-column="15" />月薪
 									</label> <label for="yearly_salary"> <input class="toggle-vis"
-										type="checkbox" id="std_hour" data-column="15" />年薪
+										type="checkbox" id="std_hour" data-column="16" />年薪
 									</label> <label for="bonus_count"> <input class="toggle-vis"
-										type="checkbox" id="bonus_count" data-column="16" />獎金次數
+										type="checkbox" id="bonus_count" data-column="17" />獎金次數
 									</label> <label for="share"> <input class="toggle-vis"
-										type="checkbox" id="share" data-column="17" checked />心得分享
+										type="checkbox" id="share" data-column="18" />心得分享
+									</label><label for="status"> <input class="toggle-vis"
+										type="checkbox" id="status" data-column="19" checked />狀態
 									</label>
 								</div>
 							</div>
 						</form>
-
 					</div>
 					<!-- list 內容 -->
 					<div class="container">
@@ -285,6 +303,7 @@
 									<th>編號</th>
 									<th>新增時間</th>
 									<th>帳號</th>
+									<th>暱稱</th>
 									<th>參考時間</th>
 									<th>公司名稱</th>
 									<th>公司評分</th>
@@ -300,22 +319,24 @@
 									<th>年薪</th>
 									<th>獎金次數</th>
 									<th>心得分享</th>
+									<th>狀態</th>
 									<th>動作</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="comment : ${listComment}" id="commentlist">
 									<td th:text="${comment.commentId}"></td>
-									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.userId}"></td>
-									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.comp_name}"></td>
+									<td th:text="${#dates.format(comment.createTime,'yyyy-MM')}"></td>
+									<td th:text="${comment.commentMember.userid}"></td>
+									<td th:text="${comment.nickName}"></td>
+									<td th:text="${#dates.format(comment.refTime,'yyyy-MM')}"></td>
+									<td th:text="${comment.compName}"></td>
 									<td class="listComp" data-score=""
-										th:attr="data-score=${comment.comp_score}"></td>
-									<td th:text="${comment.job_name}"></td>
+										th:attr="data-score=${comment.compScore}"></td>
+									<td th:text="${comment.jobName}"></td>
 									<td class="listJob" data-score=""
 										th:attr="data-score=${comment.job_score}"></td>
-									<td th:text="${comment.job_description}"></td>
+									<td th:text="${comment.jobDescription}"></td>
 									<td th:text="${comment.std_hour}"></td>
 									<td th:text="${comment.real_hour}"></td>
 									<td th:text="${comment.over_freq}"></td>
@@ -325,13 +346,12 @@
 									<td th:text="${comment.yearly_salary}"></td>
 									<td th:text="${comment.bonus_count}"></td>
 									<td th:text="${comment.share}" class="a-ellipsis"></td>
+									<td th:text="${comment.status}"></td>
 									<td><a
 										th:href="@{/dashboard/CommentDetail/{id}(id=${comment.commentId})}"
-										class="btn btn-outline-info m-0">內容</a>
-										<a
+										class="btn btn-outline-info m-0">內容</a> <a
 										th:href="@{/dashboard/CommentDetail/{id}/CommentMessageNew(id=${comment.commentId})}"
-										class="btn btn-outline-success m-0">留言</a>
-										<a
+										class="btn btn-outline-success m-0">留言</a> <a
 										th:href="@{/dashboard/CommentEdit/{id}(id=${comment.commentId})}"
 										class="btn btn-outline-primary m-0">修改</a>
 										<button type="button"
@@ -357,10 +377,48 @@
 									type="search" data-table="order-table" placeholder="搜尋...">
 							</div>
 						</div>
-
-						<button type="button" class="btn btn-primary mb-0"
+						<button type="button" class="btn btn-primary mb-0 invisible"
 							onclick="location.href='/dashboard/CommentMessageNew'">新增留言</button>
 					</div>
+					<!-- 選單 -->
+					<div>
+						<form>
+							<div class="multiselect" id="messageSelect">
+								<div class="selectBox" onclick="showCheckboxesM()">
+									<select>
+										<option>選擇顯示欄位</option>
+									</select>
+									<div class="overSelect"></div>
+								</div>
+								<div id="checkboxesM">
+									<label for="messageId"> <input class="toggle-vis"
+										type="checkbox" id="messageId" data-column="0" checked />編號
+									</label> <label for="comment.commentId"> <input
+										class="toggle-vis" type="checkbox" id="comment.commentId"
+										data-column="1" checked />文章編號
+									</label> <label for="messageOrder"> <input class="toggle-vis"
+										type="checkbox" id="messageOrder" data-column="2" checked />留言排序
+									</label> <label for="messageTime"> <input class="toggle-vis"
+										type="checkbox" id="messageTime" data-column="3">留言時間
+									</label><label for="commentMember.userid"> <input class="toggle-vis"
+										type="checkbox" id="commentMember.userid" data-column="4" checked/>帳號
+									</label> <label for="replyNickName"> <input class="toggle-vis"
+										type="checkbox" id="replyNickName" data-column="5" />暱稱
+									</label> <label for="messageContent"> <input class="toggle-vis"
+										type="checkbox" id="messageContent" data-column="6" />留言內容
+									</label> <label for="messageReply"> <input class="toggle-vis"
+										type="checkbox" id="messageReply" data-column="7" />回復文章編號
+									</label> <label for="messageLike"> <input class="toggle-vis"
+										type="checkbox" id="messageLike" data-column="8" />喜歡
+									</label> <label for="status"> <input class="toggle-vis"
+										type="checkbox" id="status" data-column="9" checked/>狀態
+									</label>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- 留言list -->
 					<div class="container">
 						<table
 							class="table table-bordered order-table cell-border hover nowrap"
@@ -369,28 +427,34 @@
 								<tr class="text-dark">
 									<th>編號</th>
 									<th>文章編號</th>
-									<th>留言編號</th>
+									<th>留言排序</th>
 									<th>留言時間</th>
 									<th>帳號</th>
+									<th>暱稱</th>
 									<th>留言內容</th>
-									<th>回覆</th>
+									<th>回覆留言編號</th>
 									<th>喜歡</th>
+									<th>狀態</th>
 									<th>動作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="commentMessages : ${listCommentMessages}" id="commentmessageslist">
+								<tr th:each="commentMessages : ${listCommentMessages}"
+									id="commentmessageslist">
 									<td th:text="${commentMessages.messageId}"></td>
 									<td th:text="${commentMessages.comment.commentId}"></td>
 									<td th:text="${commentMessages.messageOrder}"></td>
-									<td th:text="${#dates.format(commentMessages.messageTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-									<td th:text="${commentMessages.replyUserId}"></td>
+									<td
+										th:text="${#dates.format(commentMessages.messageTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:text="${commentMessages.member.userid}"></td>
+									<td th:text="${commentMessages.replyNickName}"></td>
 									<td th:text="${commentMessages.messageContent}"></td>
 									<td th:text="${commentMessages.messageReply}"></td>
 									<td th:text="${commentMessages.messageLike}"></td>
+									<td th:text="${commentMessages.status}"></td>
 									<td><a
 										th:href="@{/dashboard/Comment/{cid}/Message/{mid}(cid=${commentMessages.comment.commentId},mid=${commentMessages.messageId})}"
-										class="btn btn-outline-primary m-0">修改</a> 
+										class="btn btn-outline-primary m-0">修改</a>
 										<button type="button"
 											class="btn btn-outline-danger m-0 commentMessage-delete"
 											th:value='${commentMessages.messageId}'>刪除</button></td>

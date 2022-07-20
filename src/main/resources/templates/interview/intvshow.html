@@ -66,29 +66,32 @@
 
 							<div class="single-job-items mb-30">
 								<div class="job-items">
-									<form th:action="@{/enterprise/saveintv}" action="/saveintv"
-										th:object="${intvs}" method="post" id="form">
+									<form th:action="@{/saveintv}" action="/saveintv"
+										th:object="${intvs}" th:modelAttribute="intvs" method="post" id="form">
 										<div class="job-tittle job-tittle2">
 
-											<h2 th:text="*{compName}"></h2>
+											<h2 th:text="${intvs.compName}"></h2>
 
 											<div>
-												<div>
-													<span class="listComp text-muted"
-														th:attr="data-score=*{compScore}"></span>
+												<div><ul>
+												
+									<li >	<img alt="" th:text="'X'+${intvs.compScore}" th:src="@{/img/star-on.png}"> </li>
+										
+										
+										</ul>
 
 													<!--  <img th:src="@{/assets/img/logo/theone.png}" -->
 												</div>
 												<div>
 													<ul>
-														<li th:if="*{offer}==1">錄取&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
-														<li th:if="*{offer}==2">
+														<li th:if="${intvs.offer}==1">錄取&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
+														<li th:if="${intvs.offer}==2">
 															未錄取&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
 
 
-														<li th:if="*{test}==1">
-															&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
-														<li th:if="*{test}==2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+														<li th:if="${intvs.test}==1">
+															          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
+														<li th:if="${intvs.test}==2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 															沒有考試</li>
 
 
@@ -99,10 +102,11 @@
 
 
 												<ul>
-													<li class="fa fa-user " th:text="'  '+*{userId}"></li>
-													<li th:text="'職缺:'+*{jobName}"></li>
-													<li th:text="'面試時間:'+*{intTime}"></li>
-													<li th:text="'編輯時間:'+*{createTime}"></li>
+													
+<!-- 													<li class="fa fa-user " th:text="'  '+${intvs.userId}"></li> -->
+													<li th:text="'職缺:'+${intvs.jobName}"></li>
+													<li th:text="'面試時間:'+${intvs.intTime}"></li>
+													<li th:text="'編輯時間:'+${intvs.createTime}"></li>
 												</ul>
 											</div>
 										</div>
@@ -146,32 +150,38 @@
 								<div class="col-xl-12 col-lg-12 col-md-12">
 									<div id="send">
 										<h3>來留言吧</h3>
-<!-- 										<form th:action="@{/addmess}"  method="post"> -->
+										<form th:action="@{/{id}/addmess(id=${intvs.cvNo})}"  method="post"
+										id="form" th:modelAttribute="interviewMessage">
 								
 										<hr>
 										<h4>您的暱稱</h4>
-										<input type="text" id="user_name">
+										<input type="text" id="user_name" name="name">
 										<h4>您的留言</h4>
-										<textarea id="content" row="8"></textarea>
-										<input type="hidden"  id="time">
+										<textarea id="content" name="words" row="8"></textarea>
+										<input type="hidden"  name="messageOrder" th:value="${interviewMessage.messageOrder}">
 										<div>
-										<button class="genric-btn primary-border  arrow small" id="sendBtn">發佈</button>
+										<button type="submit" class="genric-btn primary-border  arrow small" id="sendBtn">發佈</button>
 									</form>
 									</div></div>
 									<hr> 
 									<!-- 全部留言 -->
-									<div id="list">
 										<h3>留言板</h3>
 										<hr>
-										<div id="massage">
-											<div style="background-color: rgb(248, 230, 196)" id="item">
-												<b class="user_name">範例 說:</b>
-												<p class="words">這是一個範例留言</p>
-												<p class="time">time</p>
+									<div id="list" th:each="intvm:${intvmess}">
+										<div >
+										<div id="list" >
+											<div style="background-color:#faf2de" id=article >
+												<p th:id="'currentMessage' + ${intvm.messageId}">
+												<b th:text="'&nbsp&nbsp'+${intvm.name}+'&nbsp'+'說:'">&nbsp&nbsp範例 說:</b>
+												<p th:text="'&nbsp&nbsp'+${intvm.words}">&nbsp&nbsp這是一個範例留言</p>
+												<p th:text="'&nbsp&nbsp'+${intvm.time}">&nbsp&nbsp time</p>
 												<hr class="wordsgap">
 
 											</div>
+											
 										</div>
+										</div>
+										
 									</div>
 								</div>
 							
@@ -190,93 +200,65 @@
 				<!-- 右邊欄位Head -->
 				<div class="col-xl-3 col-lg-3 col-md-4">
 					<div class="blog_right_sidebar">
-						<aside class="single_sidebar_widget search_widget">
-							<form action="#">
-								<div class="form-group">
-									<div class="input-group mb-3">
-										<input type="text" class="form-control"
-											placeholder='Search Keyword' onfocus="this.placeholder = ''"
-											onblur="this.placeholder = 'Search Keyword'">
-										<div class="input-group-append">
-											<button class="btns" type="button">
-												<i class="ti-search"></i>
-											</button>
-										</div>
-									</div>
-								</div>
-								<button
-									class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-									type="submit">Search</button>
-							</form>
-						</aside>
+						
 
-						<aside class="single_sidebar_widget popular_post_widget">
-							<h3 class="widget_title" th:each="course:${courseList}">推薦課程</h3>
+						    <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title" >推薦課程</h3>
+                                 <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=自我認知'}">
+                        <h4 class="text-black font-weight-small">自我認知</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=求職技巧'}">
+                        <h4 class="text-black font-weight-small">求職技巧</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=生涯轉換與轉業'}">
+                        <h4 class="text-black font-weight-small">生涯轉換與轉業</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=就業市場現況趨勢'}">
+                        <h4 class="text-black font-weight-small">就業與市場趨勢</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+                               
+                            </aside>
 
-							<div class="media post_item">
-								<img th:src="@{/assets/img/post/post_1.png}" alt="">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>教你如何釣魚</h3>
-									</a>
-
-								</div>
-							</div>
-							<div class="media post_item">
-								<img th:src="@{/assets/img/post/post_2.png}" alt="">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>職場就像秀</h3>
-									</a>
-
-								</div>
-							</div>
-							<div class="media post_item">
-								<img th:src="@{/assets/img/post/post_3.png}" alt="">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>享受工作</h3>
-									</a>
-
-								</div>
-							</div>
-							<div class="media post_item">
-								<img th:src="@{/assets/img/post/post_4.png}" alt="">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>Asteroids telescope</h3>
-									</a>
-
-								</div>
-							</div>
-						</aside>
-
-						<aside class="single_sidebar_widget instagram_feeds">
-							<h4 class="widget_title">廣告</h4>
-							<div class="row">
-								<div th:each="event:${events}" class="col-md-4 mb-4">
-									<div class="single-defination">
-										<a th:href="${event.eventLinkUrl}"><img
-											th:src="${event.imgUrl}" style="width: 50px; height: 50px;"
-											alt="" class="img-fluid"></a>
-									</div>
-								</div>
-							</div>
-						</aside>
-						<aside class="single_sidebar_widget newsletter_widget">
-							<h4 class="widget_title">Newsletter</h4>
-							<form action="#">
-								<div class="form-group">
-									<input type="email" class="form-control"
-										onfocus="this.placeholder = ''"
-										onblur="this.placeholder = 'Enter email'"
-										placeholder='Enter email' required>
-								</div>
-								<button
-									class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-									type="submit">Subscribe</button>
-							</form>
-						</aside>
+                            <aside class="single_sidebar_widget instagram_feeds  py-5" >
+                                <h4 class="widget_title">廣告</h4>
+                                <div class="row">
+                        <div th:each="event:${events}" class="col-12">
+                            <div class="single-defination">
+                                <a th:href="${event.eventLinkUrl}"><img th:src="${event.imgUrl}" style="max-width: 80%;height: auto" alt="" class="mx-auto d-block"></a>
+                           <hr >
+                            </div>
+                        </div>
+                    </div>
+                            </aside>
+						
 					</div>
 				</div>
 				<!-- 右邊欄位尾 -->
@@ -325,62 +307,13 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script th:src="@{/assets/js/plugins.js}"></script>
 	<script th:src="@{/assets/js/main.js}"></script>
-	<script th:src="@{/js/interview_front/jquery.raty.js}"
-		src="js/interview_front/jquery.raty.js"></script>
-	<script th:src="@{/js/interview_front/checkInterviewForm.js}"
-		src="js/interview_front/checkInterviewForm.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script>
-    //發表留言
-    $("#sendBtn").on("click",function(){
+	
+	
+		     <script th:src="@{.../js/interview_front/jquery.raty.js}" ></script>
+    	<script th:src="@{.../js/interview_front/checkInterviewForm.js}" ></script>
         
-       
-    $.ajax({
-url: "/intvshow/addmess",
-type: "POST",
-data: {
-name: $("#type_user_name").val(),
-words: $("#type_content").val()
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
-},
-resultType:"JSON",
-success:function(result){
-    displayAll();
-    alert(result.message);
-    $("#type_user_name").val("");
-    $("#type_content").val("");
-     
-},
-error: function (result){
-alert( result.message) ;
- }
-}) ;
-}) ;
-//申请显示所有留言信息
-function displayall(){
-$.ajax({
-
-type: "POST",
-dataType: "JSON",
-success: function (data){
-var message = "";
-for (var i = 0;i<data.length; i++){
-message += '<div class="item">'+
-'<b class="user_name">'+data[i].name+ ' 說:+'+'</b>'+
-'<p class="words">'+data[i].words+'</p>'+
-'<p class="time">'+data[i] . time+'</p>'+
-'<hr class="wordsgap">'+
-'</div>'
-}
-$("#message" ) .empty() ;
-$("#message") . append(message);
-},
-error: function (){
-alert("獲取留言數據異常");
-}
-}) ;
-}
-</script>
 
 
 

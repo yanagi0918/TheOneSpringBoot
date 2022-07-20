@@ -30,7 +30,7 @@ $(function() {
 		})
 
 	});
-	
+
 	//評論新增
 	$('.comment-new').click(function() {
 		Swal.fire({
@@ -59,7 +59,7 @@ $(function() {
 		})
 
 	});
-	
+
 	//留言刪除
 	$('.commentMessage-delete').click(function() {
 		Swal.fire({
@@ -104,16 +104,16 @@ $(function() {
 			userId: {
 				required: true,
 			},
-			ref_time: {
+			refTime: {
 				required: true,
 			},
-			comp_name: {
+			compName: {
 				required: true,
 			},
-			job_name: {
+			jobName: {
 				required: true,
 			},
-			job_description: {
+			jobDescription: {
 				required: true,
 			},
 			std_hour: {
@@ -159,7 +159,7 @@ $(function() {
 
 		},
 		messages: {
-			job_description: {
+			jobDescription: {
 				required: '請選擇類別',
 			},
 			monthly_salary: {
@@ -175,8 +175,8 @@ $.raty.path = '/img';
 
 $(function() {
 
-	$('#compScore').raty({
-		targetScore: '#comp_score',
+	$('#comp_Score').raty({
+		targetScore: '#compScore',
 	});
 
 	$('#jobScore').raty({
@@ -212,13 +212,11 @@ $(function() {
 $(function() {
 	//comment
 	$('#OneInput').click(function() {
-		$('#userId').show()
-		$('#userId').val('A123456789')
-		$('#comp_name').val('狗來富寵物廣場')
-		$('#ref_time').val('2000-01-01')
-		$('#job_name').val('美容師')
-		$('#job_description option[value="全職"]').attr('selected', 'selected')
-		$('#user').attr('checked', 'checked')
+		$('#compName').val('狗來富寵物廣場')
+		$('#refTime').val('2000-01-01')
+		$('#jobName').val('美容師')
+		$('#jobDescription option[value="全職"]').attr('selected', 'selected')
+		$('#nickName').val('愛德華')
 		$('#std_hour').val('10')
 		$('#real_hour').val('12')
 		$('#over_freq').val('2')
@@ -228,14 +226,13 @@ $(function() {
 		$('#monthly_salary').val('40000')
 		$('#yearly_salary').val('55')
 		$('#bonus_count').val('2')
-		$('#share').val('老闆親切，加班可報')
+		$('#share').val('我們一天的工時幾乎都10小時，休假很少超過6天也沒有年終，當爸爸媽媽把重要的毛孩子交到我手上時，所有的責任就已經落在我身上，所以我們得時時刻刻觀察牠的身體狀況，這時很考驗個人經驗跟敏銳度，幫寶貝洗澡不單只是洗澡那麼表面的意義，很多時候毛孩子來洗澡很容易可以知道狗狗是不是有其它疾病，連主人都不知道呢，因為在過程中我們會從頭到尾摸透透，這也是我們必須要有的觀察力。')
 	});
 
 	//message
 	$('#OneInputMessage').click(function() {
-		$('#replyUserId').val('B123456789')
+		$('#replyNickName').val('徬徨的畢業生')
 		$('#messageContent').val('感謝大大無私的分享~~')
-		$('#mlike').attr('checked', 'checked')
 	});
 
 });
@@ -243,13 +240,12 @@ $(function() {
 
 $(function() {
 	$('#anonymous').click(function() {
-		$('#userId').val('匿名');
-		$('#userId').hide();
-	})
-
-	$('#user').click(function() {
-		$('#userId').val('');
-		$('#userId').show();
+		$('#nickName').toggle();
+		if ($('#anonymous').prop('checked')) {
+			$('#nickName').val('匿名');
+		} else {
+			$('#nickName').val('');
+		}
 	});
 
 })
@@ -354,7 +350,7 @@ $(document).ready(function() {
 			targets: [5, 7]
 		}, {
 			visible: false,
-			targets: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+			targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 		}, {
 			targets: 17,
 			render: $.fn.dataTable.render.ellipsis(15)
@@ -383,6 +379,17 @@ $(document).ready(function() {
 
 		//x 方向卷軸
 		scrollX: true,
+		
+		//hide column
+		columnDefs: [{
+			visible: false,
+			targets: [3, 5, 6, 7, 8]
+		}, {
+			targets: 6,
+			render: $.fn.dataTable.render.ellipsis(15)
+
+		}
+		],
 
 		//position of entire
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
@@ -396,7 +403,8 @@ $(document).ready(function() {
 	});
 
 	//dynamicall column
-	$('input.toggle-vis').on('change', function(e) {
+	//comment
+	$('#commentSelect input.toggle-vis').on('change', function(e) {
 		e.preventDefault();
 
 		// Get the column API object
@@ -409,8 +417,21 @@ $(document).ready(function() {
 			column.visible(false);
 
 		}
+	});
+	//message
+	$('#messageSelect input.toggle-vis').on('change', function(e) {
+		e.preventDefault();
 
+		// Get the column API object
+		var column = table2.column($(this).attr('data-column'));
 
+		// Toggle the visibility
+		if ($(this).is(":checked")) {
+			column.visible(true);
+		} else {
+			column.visible(false);
+
+		}
 	});
 });
 
@@ -436,6 +457,17 @@ var expanded = false;
 
 function showCheckboxes() {
 	var checkboxes = document.getElementById("checkboxes");
+	if (!expanded) {
+		checkboxes.style.display = "block";
+		expanded = true;
+	} else {
+		checkboxes.style.display = "none";
+		expanded = false;
+	}
+}
+
+function showCheckboxesM() {
+	var checkboxes = document.getElementById("checkboxesM");
 	if (!expanded) {
 		checkboxes.style.display = "block";
 		expanded = true;

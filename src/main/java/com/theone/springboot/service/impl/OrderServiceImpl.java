@@ -1,10 +1,15 @@
 package com.theone.springboot.service.impl;
 
+import java.io.Writer;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,7 @@ import com.theone.springboot.repository.CourseDao;
 import com.theone.springboot.repository.MemberDao;
 import com.theone.springboot.repository.OrderDao;
 import com.theone.springboot.service.OrderService;
+import com.theone.springboot.utils.OrderCsvExporter;
 
 @Service
 @Transactional
@@ -28,6 +34,12 @@ public class OrderServiceImpl  implements OrderService{
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	OrderCsvExporter csvExporter;
+	
+	@Autowired
+	JavaMailSender mailSender;
 	
 	@Override
 	public boolean isDup(Integer pk) {
@@ -106,6 +118,29 @@ public class OrderServiceImpl  implements OrderService{
 	@Override
 	public Integer findTotalPrice() {
 		return orderDao.findTotalPrice();
+	}
+
+	@Override
+	public void csvExport(Writer writer) {
+		List<Order> orders = orderDao.findAll();
+		csvExporter.csvExport(writer, orders);
+	}
+
+	@Override
+	public void sendNotifyEmail(String recipient, String subject, String message) {
+		MimeMessagePreparator messagePreparator = mimeMessage -> {
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+			messageHelper.setFrom("eeit45theone@gmail.com");
+			messageHelper.setTo(recipient);
+			messageHelper.setSubject(subject);
+			messageHelper.setText(message, true);
+		};
+		try {
+			mailSender.send(messagePreparator);
+			 System.out.println("sent");
+		} catch (MailException e) {
+			 System.out.println(e);
+		}
 	}
 
 	

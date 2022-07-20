@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.theone.springboot.entity.Comment;
 
 public interface CommentService {
-	
+
 	Comment saveOrUpdate(Comment comment);
 
 	boolean existsById(Integer pk);
@@ -16,7 +16,17 @@ public interface CommentService {
 	Optional<Comment> findById(Integer pk);
 
 	void deleteById(Integer pk);
-	
-	List<Comment> findByUserId(String userId);
-	
+
+//	List<Comment> findByUserId(String userId);
+
+	List<Comment> findByCommentMemberIdNumber(Integer idNumber);
+
+	void deleteByCommentMemberIdNumber(Integer idNumber);
+
+	List<Comment> findByCompNameLike(String compName);
+
+	List<Comment> findByJobNameLike(String jobName);
+
+//	List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name, String job_name);
+
 }

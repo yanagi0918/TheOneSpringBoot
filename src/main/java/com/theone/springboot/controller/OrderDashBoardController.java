@@ -1,7 +1,10 @@
 package com.theone.springboot.controller;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -95,6 +98,8 @@ public class OrderDashBoardController {
 	//查看頁面
 	@GetMapping(path = "/Order/{id}")
 	public String processDetail(@PathVariable("id") Integer id, Model model){
+		model.addAttribute("memberList", memberService.getAllMembers());
+		model.addAttribute("courseList", courseServicer.findAllCourses());
 		Order order = orderService.getOrder(id).get();
 		model.addAttribute("Order", order);
 		return "order_dashboard/orderdetail";
@@ -105,8 +110,18 @@ public class OrderDashBoardController {
 	@ResponseBody
 	public ResponseEntity<Order> saveOrUpdate(@RequestBody Order Order) {
 		Order orders = orderService.findOrder(Order.getOrderId()).orElseThrow();
-		orders.setState(Order.getState());
+		String state = Order.getState();		
+		orders.setState(state);
 		orderService.saveOrUpdate(orders);
+		if("已退款".equals(state) || "已駁回".equals(state)) {
+			Integer id = Order.getOrderId();			
+			String msg = "<p style=\"font-size: large;\">" +
+					 "訂單編號: " + id + "<br>" +
+					 "審核結果: <font color=\"blue\"><b>" + state + "</b></font><br>" +
+					 "連結: http://localhost:8080/user/orders" +
+					 "</p>";
+		orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 訂單審核通知", msg);
+		}
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
 	
@@ -127,5 +142,33 @@ public class OrderDashBoardController {
 		}
 		return chartdata;
 	}
-
+	
+	//CSV
+	@GetMapping("/orders/csvExport")
+	public void csvExport(HttpServletResponse response) throws IOException {
+		response.setContentType("text/csv;charset=UTF-8");
+		response.addHeader("Content-Disposition","attachment; filename=resumes.csv");
+		orderService.csvExport(response.getWriter());
+	}
+	
+	
+	//寄信
+	@ResponseBody
+	@GetMapping("/order/sendemail")
+	public boolean sendNotifyEmail(String id, String result) {
+		if ("已退款".equals(result) || "已駁回".equals(result)) {
+			result = ("已退款".equals(result))?"已退款":"已駁回";
+				
+			String msg = "<p style=\"font-size: large;\">" +
+						 "訂單編號: " + id + "<br>" +
+						 "審核結果: <font color=\"blue\"><b>" + result + "</b></font><br>" +
+						 "連結: http://localhost:8080/user/orders" +
+						 "</p>";
+			orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 訂單審核通知", msg);
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

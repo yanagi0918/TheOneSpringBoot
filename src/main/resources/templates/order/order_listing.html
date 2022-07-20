@@ -86,14 +86,13 @@
                                 <div class="select-job-items2">
                                 <form th:action="@{/user/OrderCategory}" method="get" id="courseCategoryInquire">
                                     <select name="courseCategory" required id="courseCategory">
-                                    	<option>全部</option>
-                                        <option>英文證照</option>
-                                        <option>日語證照</option>
-                                        <option>韓語證照</option>
-                                        <option>自我認知</option>
-                                        <option>求職技巧</option>
-                                        <option>生涯轉換與轉業</option>
-                                        <option>就業市場現況趨勢</option>
+                                        <option th:selected="${courseCategory=='英文證照'}">英文證照</option>
+                                        <option th:selected="${courseCategory=='日語證照'}">日語證照</option>
+                                        <option th:selected="${courseCategory=='韓語證照'}">韓語證照</option>
+                                        <option th:selected="${courseCategory=='自我認知'}">自我認知</option>
+                                        <option th:selected="${courseCategory=='求職技巧'}">求職技巧</option>
+                                        <option th:selected="${courseCategory=='生涯轉換與轉業'}">生涯轉換與轉業</option>
+                                        <option th:selected="${courseCategory=='就業市場現況趨勢'}">就業市場現況趨勢</option>
                                     </select>
                                     </form>
                                 </div>
@@ -107,11 +106,10 @@
                                   <form th:action="@{/user/OrderState}" method="get" id="StateInquire">
                                     <select name="state" required id="state">
 <!--                                     <option th:selected="${state==orderList}" th:each="order:${orders}" th:value="${order.state}" th:label="${order.state}" th:text="${order.state}"></option> -->
-                                    	<option>全部</option>
-                                        <option>已付款</option>
-                                        <option>待審核</option>
-                                        <option>已退款</option>
-                                        <option>已駁回</option>
+                                        <option th:selected="${state=='已付款'}">已付款</option>
+                                        <option th:selected="${state=='待審核'}">待審核</option>
+                                        <option th:selected="${state=='已退款'}">已退款</option>
+                                        <option th:selected="${state=='已駁回'}">已駁回</option>
                                     </select>
                                    </form>
                                 </div>

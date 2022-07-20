@@ -91,25 +91,35 @@
 										<td th:text="${comment.commentId}"></td>
 										<td>新增時間:</td>
 										<td
-											th:text="${#calendars.format(comment.create_time, 'yyyy-MM-dd')}"></td>
+											th:text="${#calendars.format(comment.createTime, 'yyyy-MM-dd')}"></td>
+										<td>狀態:</td>
+										<td th:text="${comment.status}"></td>
+
+									</tr>
+									<tr>
+										<td>會員編號:</td>
+										<td th:text="${comment.commentMember.idNumber}"></td>
 										<td>帳號:</td>
-										<td th:text="${comment.userId}"></td>
+										<td th:text="${comment.commentMember.userid}"></td>
+										<td>暱稱:</td>
+										<td th:text="${comment.nickName}"></td>
+
 									</tr>
 									<tr>
 										<td>公司名稱:</td>
-										<td th:text="${comment.comp_name}"></td>
+										<td th:text="${comment.compName}"></td>
 										<td>公司評分:</td>
 										<td id="confirmComp"
-											th:attr="data-score=${comment.comp_score}"></td>
+											th:attr="data-score=${comment.compScore}"></td>
 										<td>參考時間:</td>
 										<td
-											th:text="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"></td>
+											th:text="${#calendars.format(comment.refTime, 'yyyy-MM-dd')}"></td>
 									</tr>
 									<tr>
 										<td>職位:</td>
-										<td th:text="${comment.job_name}"></td>
+										<td th:text="${comment.jobName}"></td>
 										<td>職務型態:</td>
-										<td th:text="${comment.job_description}"></td>
+										<td th:text="${comment.jobDescription}"></td>
 										<td>職位評分:</td>
 										<td id="confirmJob" th:attr="data-score=${comment.job_score}"></td>
 									</tr>

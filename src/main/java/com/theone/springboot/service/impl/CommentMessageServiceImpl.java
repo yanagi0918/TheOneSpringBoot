@@ -48,5 +48,25 @@ public class CommentMessageServiceImpl implements CommentMessageService {
 		return commentmessageDao.findById(messageId);
 	}
 
+	@Override
+	public List<CommentMessage> findByMemberIdNumber(Integer idNumber) {
+		return commentmessageDao.findByMemberIdNumber(idNumber);
+	}
+
+	@Override
+	public void deleteByMemberIdNumber(Integer idNumber) {
+		commentmessageDao.deleteByMemberIdNumber(idNumber);
+	}
+
+	@Override
+	public List<CommentMessage> findByMessageReply(Integer messageReply) {
+		return commentmessageDao.findByMessageReply(messageReply);
+	}
+
+	@Override
+	public List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply) {
+		return commentmessageDao.findByCommentCommentIdAndMessageReply(comment_id, messageReply);
+	}
+
 
 }

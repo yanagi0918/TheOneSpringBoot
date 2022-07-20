@@ -26,9 +26,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class InterviewMessage {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "messageId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id ;
+	private Integer messageId ;
+	
+	private Integer messageOrder;
 	
 	private String name ;
 	
@@ -36,20 +38,19 @@ public class InterviewMessage {
 	
 	private Timestamp time ;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "cv_no", nullable = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne( fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "interview_cvNo", nullable = false)
 	@JsonIgnore
 	private Interview interview ;
 	
 	public InterviewMessage() {}
 
-	public Integer getId() {
-		return id;
+	public Integer getMessageId() {
+		return messageId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMessageId(Integer id) {
+		this.messageId = id;
 	}
 
 	public String getName() {
@@ -82,6 +83,14 @@ public class InterviewMessage {
 
 	public void setInterview(Interview interview) {
 		this.interview = interview;
+	}
+
+	public Integer getMessageOrder() {
+		return messageOrder;
+	}
+
+	public void setMessageOrder(Integer messageOrder) {
+		this.messageOrder = messageOrder;
 	}
 	
 }

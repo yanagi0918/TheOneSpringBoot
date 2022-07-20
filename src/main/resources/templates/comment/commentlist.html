@@ -101,6 +101,15 @@
     color: #fff
 }
 
+/* 限制顯示行數 */
+.blog_details p{
+		overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+}
+
 </style>
 </head>
 
@@ -130,23 +139,20 @@
 				<div class="row mt-5">
 					<div class="col-xl-12">
 						<!-- form -->
-						<form action="#" class="search-box">
+						<form th:action="@{/comments/search}" class="search-box" id="commentSearch">
 							<div class="input-form ">
-								<input type="text" placeholder="搜尋職缺或公司">
+								<input type="text" placeholder="搜尋職缺或公司" name="title">
 							</div>
 							<div class="select-form">
 								<div class="select-itms">
-									<select name="select" id="select1">
-										<option value="">全部</option>
-										<option value="">全職</option>
-										<option value="">兼職</option>
-										<option value="">工讀</option>
-										<option value="">實習</option>
+									<select name="searchType" id="searchBar">
+										<option value="compName">公司</option>
+										<option value="jobName">職缺</option>
 									</select>
 								</div>
 							</div>
 							<div class="search-form">
-								<a href="#"><i class="fa fa-search"></i></a>
+									<a href="#" onclick="document.getElementById('commentSearch').submit()"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
 					</div>
@@ -166,12 +172,13 @@
 							<ul class="comment-link">
 								<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 								<li><a th:href="@{/comments}"><span>總覽</span></a></li>
-								<li
-									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
-									href="single_comment.html"><span>分析</span></a></li>
-								<li
-									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
-									href="single_comment.html"><span>OO公司XX職缺</span></a></li>
+<!-- 								<li -->
+<!-- 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a -->
+<!-- 									href="single_comment.html"><span>分析</span></a></li> -->
+								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司'"></span></a></li>
+								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 職缺'"></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
 									th:href="@{/user/comments}"><span>我的分享</span></a></li>
 							</ul>
@@ -179,8 +186,8 @@
 						<ul class="blog-info-link">
 							<a th:href="@{/comments}" id="overview"
 								class="genric-btn success-border float-left w-25"> 總覽</a>
-							<a th:href="@{/comments/analysis}" id="analysis"
-								class="genric-btn success-border float-left w-25">分析</a>
+<!-- 							<a th:href="@{/comments/analysis}" id="analysis" -->
+<!-- 								class="genric-btn success-border float-left w-25">分析</a> -->
 							<a th:if="${session.loginMember!=null}" th:href="@{/user/comments}"
 								id="mycomment" class="genric-btn success-border float-left w-25">
 								我的心得</a>
@@ -196,17 +203,17 @@
 									<h4 class="float-right">&nbsp&nbsp</h4>
 									<a class="float-right text-muted"><i
 										class="fa fa-thumbs-up">讚</i></a>
-									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
+									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
 								</div>
 								<a class="d-inline-block"
 									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
-									<h2 class="float-left" th:text="${comment.comp_name} + '&nbsp&nbsp'"></h2>
-									<h4 class="float-left" th:text="${comment.job_name}"></h4>
+									<h2 class="float-left" th:text="${comment.compName} + '&nbsp&nbsp'"></h2>
+									<h4 class="float-left" th:text="${comment.jobName}"></h4>
 								</a>
 								<p th:text="${comment.share}"></p>
 								<ul class="blog-info-link w-75 f-left d-inline">
 									<li><span class="listComp text-muted"
-										th:attr="data-score=${comment.comp_score}"><i
+										th:attr="data-score=${comment.compScore}"><i
 											class="fa fa-building"></i>公司&nbsp&nbsp</span></li>
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
@@ -214,18 +221,18 @@
 									<li><span class="text-muted"><i class="fa fa-comments"></i></span>
 									<span class="text-muted" th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span>
 									</li>
-									<li><span class="text-muted" th:text="${comment.job_description}"><i
+									<li><span class="text-muted" th:text="${comment.jobDescription}"><i
 											class="fa fa-briefcase"></i></span></li>
 								</ul>
-								<div class="modify-btn w-50 f-left d-inline">
+								<div class="modify-btn w-25 f-right d-inline">
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										class="genric-btn danger circle float-right comment-delete"
 										th:value='${comment.commentId}'>
 										<i class="fa fa-trash-alt"></i>
 									</button>
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.userId}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										class="genric-btn success circle float-right"
 										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.commentId})} + '\''">
 										<i class="fa fa-pencil-alt"></i>
@@ -242,9 +249,9 @@
 				<div class="col-lg-4 blog_area">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
-							<form th:action="@{/comment/new}">
-								<button class="genric-btn success circle w-100 e-larg"
-									type="submit">
+							<form th:action="@{/user/comment/new}">
+								<button class="genric-btn success circle w-100 e-larg" 
+									type="submit" data-toggle="tooltip" title="需登入分享">
 									<i class="fa fa-bullhorn"></i>&nbsp我要分享
 								</button>
 							</form>
@@ -255,7 +262,7 @@
 							<ul class="list cat-list">
 								<li><a href="#" class="d-flex">
 										<p>全部</p>
-										<p>(21)</p>
+										<p>([[${listComment.size()}]])</p>
 								</a></li>
 								<li><a href="#" class="d-flex">
 										<p>正職</p>
@@ -278,15 +285,17 @@
 
 						<aside class="single_sidebar_widget tag_cloud_widget_comment">
 							<h4 class="widget_title">熱門搜尋</h4>
+							<form th:action="@{/comments/search}" class="search-box" id="commentHotSearch">
 							<ul class="list">
-								<li><a href="#">#工程師</a></li>
-								<li><a href="#">#軟體</a></li>
-								<li><a href="#">#行政助理</a></li>
-								<li><a href="#">#護理師</a></li>
-								<li><a href="#">#專員</a></li>
-								<li><a href="#">#銀行</a></li>
-								<li><a href="#">#科技</a></li>
+								<li><a th:href="@{/comments/search} + '?title=工程師&searchType=jobName'" >#工程師</a></li>
+								<li><a th:href="@{/comments/search} + '?title=軟體&searchType=jobName'" >#軟體</a></li>
+								<li><a th:href="@{/comments/search} + '?title=行政助理&searchType=jobName'" >#行政助理</a></li>
+								<li><a th:href="@{/comments/search} + '?title=銀行&searchType=compName'" >#銀行</a></li>
+								<li><a th:href="@{/comments/search} + '?title=專員&searchType=jobName'" >#專員</a></li>
+								<li><a th:href="@{/comments/search} + '?title=java&searchType=jobName'" >#java</a></li>
+								<li><a th:href="@{/comments/search} + '?title=科技&searchType=compName'" >#科技</a></li>
 							</ul>
+							</form>
 						</aside>
 
 					</div>
@@ -347,6 +356,31 @@
 
 	<!-- Comment Front JS -->
 	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
+
+<script>
+
+// $('#searchBar').change(function(){
+// 	$('#commentSearch').submit();
+	
+// })
+
+// function ajaxtest() {
+// 	//職務型態比例
+// 	$.ajax({
+// 		type: 'GET',
+// 		url: '/comments/commentlistjson',
+// 		data: data,
+// 		success: function(data) {
+// 			var arr = data;
+// 			console.log(arr.filter(function(item) {
+// 				return item.nickName == "剪刀手";
+// 			}));
+// 		}
+// 	})
+
+// }
+
+</script>
 
 
 </body>

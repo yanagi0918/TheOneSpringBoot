@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
 import com.theone.springboot.entity.CommentMessage;
+import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
+import com.theone.springboot.service.MemberService;
 
 @Controller
 @RequestMapping("/dashboard")
 public class CommentDashBoardController {
+
+	@Autowired
+	MemberService memberService;
 
 	@Autowired
 	CommentService commentService;
@@ -39,17 +44,22 @@ public class CommentDashBoardController {
 
 	// 儲存評論
 	@PostMapping("/CommentSave")
-	public String saveComment(@ModelAttribute("comment") Comment comment) {
+	public String saveComment(@ModelAttribute("comment") Comment comment, @RequestParam("userid") String userid) {
+//		Member member = memberService.getMember(idNumber).get();
+		Member member = memberService.getByUserid(userid);
+		comment.setCommentMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
 
 	// 儲存留言
-	@PostMapping("/{id}/CommentMessageSave")
-	public String saveCommentMessage(@PathVariable("id") Integer id,
+	@PostMapping("/{id}/CommentMessageSave/{member}")
+	public String saveCommentMessage(@PathVariable("id") Integer id, @PathVariable("member") Member member,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
+//		Member member = memberService.getMember(rid).get();
+		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/dashboard/comments";
 	}
@@ -80,11 +90,17 @@ public class CommentDashBoardController {
 			@PathVariable("id") Integer id, Model model) {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
+//		Member member = memberService.getMember(1).get();
+//		model.addAttribute("member", member);
 		model.addAttribute("commentMessage", commentMessage);
 		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
-		CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
-				.get();
-		commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		if (messages.size() != 0) {
+			CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
+					.get();
+			commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		} else {
+			commentMessage.setMessageOrder(1);
+		}
 		return "comment_dashboard/commentmessageform";
 	}
 
@@ -110,9 +126,12 @@ public class CommentDashBoardController {
 			Model model) {
 		Comment comment = commentService.findById(cid).get();
 		CommentMessage commentMessage = commentMessageService.findById(mid).get();
+		Member member = commentMessage.getMember();
 		model.addAttribute("comment", comment);
+		model.addAttribute("member", member);
 		model.addAttribute("commentMessage", commentMessage);
 		commentMessage.setComment(comment);
+		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "comment_dashboard/commentmessageform";
 	}
@@ -127,18 +146,20 @@ public class CommentDashBoardController {
 		for (Comment comment : allComments) {
 			System.out.println(comment);
 
-			if (comment.getJob_description().equals("全職")) {
+			if (comment.getJobDescription().equals("全職")) {
 				jobtype[0]++;
-			} else if (comment.getJob_description().equals("兼職")) {
+			} else if (comment.getJobDescription().equals("兼職")) {
 				jobtype[1]++;
-			} else if (comment.getJob_description().equals("工讀")) {
+			} else if (comment.getJobDescription().equals("工讀")) {
 				jobtype[2]++;
-			} else if (comment.getJob_description().equals("實習")) {
+			} else if (comment.getJobDescription().equals("實習")) {
 				jobtype[3]++;
 			}
 		}
 		System.out.println("OK");
 		return jobtype;
 	}
+
+	
 
 }

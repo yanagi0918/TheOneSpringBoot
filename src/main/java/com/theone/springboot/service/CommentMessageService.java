@@ -19,4 +19,12 @@ public interface CommentMessageService {
 	
 	Optional<CommentMessage> findById(Integer messageId);
 	
+	List<CommentMessage> findByMemberIdNumber(Integer idNumber);
+	
+	void deleteByMemberIdNumber(Integer idNumber);
+	
+	List<CommentMessage> findByMessageReply(Integer messageReply);
+	
+	List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply);
+
 }
