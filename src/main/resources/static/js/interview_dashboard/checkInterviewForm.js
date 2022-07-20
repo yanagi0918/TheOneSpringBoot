@@ -1,14 +1,14 @@
 function checkIntvForm() {
 	let checkIntvForm = true;
 
-	let userID = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
+/*	let userID = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
 	if (!userID.test($("#userId").val())) {
 		Swal.fire('Warning!',
 			'身分證格式錯誤!',
 			'warning');
 		checkIntvForm = false;
 		return checkIntvForm;
-	}
+	} */
 
 		let postDate = new Date($('#intTime').val());
 		let nowDate = new Date();

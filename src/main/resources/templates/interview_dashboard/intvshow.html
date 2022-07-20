@@ -112,19 +112,38 @@
 			</div></div>
 			<div class="row mb-3">
 				<label>心得分享</label>
-				<div class="col-sm-8 text-center">
-				<textarea class="form-control" placeholder="備註最多600字" id="share"
+				<div class="col-sm-8 text-center" >
+				<textarea  class="form-control" placeholder="備註最多600字" id="share"
 					style="height: 150px;" name="share" maxlength="600" th:text="*{share}" readonly></textarea>
 			</div></div>
 			<div class="row mb-3">
 				<label>評分該公司</label> 
-				<div class="col-sm-8 text-center">
+				<div class="col-sm-8 text-center" >
 				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="1" onclick="return false">1 
 				<input type="radio"	th:field="*{compScore}" name="compScore" id="compScore" value="2" onclick="return false">2 
 				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="3" onclick="return false">3 
 				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="4" onclick="return false">4 
 				<input type="radio" th:field="*{compScore}" name="compScore" id="compScore" value="5" onclick="return false">5
 			</div></div>
+			
+					<h3>留言板</h3>
+										<hr>
+									<div class="col-sm-8" id="list" th:each="intvm:${intvmess}">
+										<div >
+										<div id="list" >
+											<div style="background-color:#def2fa" id=article >
+												<p th:id="'currentMessage' + ${intvm.messageId}">
+												<b th:text="'&nbsp&nbsp'+${intvm.name}+'&nbsp'+'說:'">&nbsp&nbsp範例 說:</b>
+												<p th:text="'&nbsp&nbsp'+${intvm.words}">&nbsp&nbsp這是一個範例留言</p>
+												<p th:text="'&nbsp&nbsp'+${intvm.time}">&nbsp&nbsp time</p>
+												<hr class="wordsgap">
+
+											</div>
+											
+										</div>
+										</div>
+										
+									</div>
                             <button type="button" class="btn btn-primary"  onclick="window.location.href='../intvlist'; return false;">取消</button>
                         </form>
                     </div>

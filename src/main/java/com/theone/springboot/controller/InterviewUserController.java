@@ -3,6 +3,7 @@ package com.theone.springboot.controller;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.theone.springboot.entity.CommentMessage;
 import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Interview;
 import com.theone.springboot.entity.InterviewMessage;
@@ -45,10 +48,12 @@ public class InterviewUserController {
 	@Autowired
 	InterviewMessageService interviewMessageService;
 	
-	@GetMapping("/intvlist")//所有目錄
+	@RequestMapping("/intvlist")//所有目錄
 	public String getIntvListPage(Model model) {
 		List<Interview> Allintvs = interviewService.getAllInterviews();
 		model.addAttribute("intvs",Allintvs);
+		model.addAttribute("interviewMessageService",interviewMessageService);
+		
 		//放入廣告頁面
 		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 		model.addAttribute("events",events);
@@ -61,6 +66,7 @@ public class InterviewUserController {
 			Member member = (Member)session.getAttribute("loginMember");
 			List<Interview> findByUserId = interviewService.findByUserId(member.getUserid());
 			model.addAttribute("intvs", findByUserId);
+			model.addAttribute("interviewMessageService",interviewMessageService);
 			//放入廣告頁面
 			List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 			model.addAttribute("events",events);
@@ -74,7 +80,7 @@ public class InterviewUserController {
 //		return "interview/intvaside";
 //	}
 
-	@GetMapping("/intv")//進入新增頁面
+		@RequestMapping("/intv")//進入新增頁面
 	public String toCreate(Model model) {
 		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 		model.addAttribute("events",events);
@@ -86,9 +92,6 @@ public class InterviewUserController {
 		//新增資料
 		@PostMapping("/saveintv")
 	public String saveOrUpdate( Interview intv) {
-//		 SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间 
-//	        sdf.applyPattern("yyyy-MM-dd HH:mm:ss"); 
-//	        LocalDate date = new LocalDate();
 		Timestamp ts=new Timestamp(System.currentTimeMillis());
 		intv.setCreateTime(ts);
 		System.out.println(ts);
@@ -109,12 +112,28 @@ public class InterviewUserController {
 	
 	//進入show
 	@RequestMapping("/intvshow/{id}")
-	public String toShow(@PathVariable Integer id, Model model) {
+	public String toShow(@PathVariable("id") Integer id,
+			Model model,@ModelAttribute("interviewMessage") InterviewMessage interviewMessage,
+			HttpSession httpSession) {
 		System.out.println("---- 進入show----");
+		
+		//分享的心得區
 		Interview intv = interviewService.getInterview(id).get();
 		model.addAttribute("intvs", intv);
+		
+		//留言區
 		List<InterviewMessage> intvmess = interviewMessageService.findByInterviewCvNo(id);//留言陣列
 		model.addAttribute("intvmess",intvmess);
+		model.addAttribute("interviewMessage",interviewMessage);
+		
+		if (intvmess.size() != 0) {
+			InterviewMessage maxMessageId = intvmess.stream().max(Comparator.comparing(InterviewMessage::getMessageOrder))
+					.get();
+			interviewMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
+		}else {
+			interviewMessage.setMessageOrder(1);
+		}
+		//廣告區
 		List<Event> events = eventService.findByStateAndPostStartBeforeAndPostEndAfter(1, new Date(), new Date());
 		model.addAttribute("events",events);
 		return "interview/intvshow";
@@ -129,13 +148,17 @@ public class InterviewUserController {
 //	}
 	
 	//新增留言
-	@PostMapping("/addmess")
-	public String saveMessagae(InterviewMessage interviewMessage) {
+	@PostMapping("/{id}/addmess")
+	public String saveMessagae(@PathVariable("id") Integer id,
+			@ModelAttribute("interviewMessage") InterviewMessage interviewMessage, Model model) {
 		System.out.println("---新增留言--");
 		Timestamp ts= new Timestamp(System.currentTimeMillis());
+		Interview intv = interviewService.getInterview(id).get();
 		interviewMessage.setTime(ts);
+		interviewMessage.setInterview(intv);
+		
 		interviewMessageService.save(interviewMessage);
-		return "redirect:/intvshow/";
+		return "redirect:/intvshow/{id}";
 		
 	}
 	

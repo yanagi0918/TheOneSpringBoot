@@ -23,7 +23,17 @@
         <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
         <link rel="stylesheet" th:href="@{/assets/css/style.css}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
-  
+  		<link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+		<!-- jQuery Raty -->
+		<link rel="stylesheet" th:href="@{/css/jquery.raty.css}">
+		<style>
+		#intv-pagination .page-item.active .page-link {
+    background-color: #844cfc;
+    border-color: #d7c5fc;
+    color: #fff
+}
+		
+		</style>
    </head>
 
    <body>
@@ -90,61 +100,52 @@
                                 </div>
                                 <!-- Count of Job list End -->
                                 <!-- 面試Llist-content -->
-                                <div th:each="intv:${intvs}" class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="company-img">
-
-                                        </div>
-                                        <div class="job-tittle job-tittle2">
-                                           
-                                            <ul>
-                                           <li><h4><a th:text="${intv.compName}" th:href="@{/intvshow/{id}(id=${intv.cvNo})}"> </a></h4>
-                                           </li>
-                                           
-                                           </ul>
-                                           
-                                                                                           
-                                            <div >
-                                           
-									<span class="listComp text-muted"
-										th:attr="data-score=${intv.compScore}"></span>
-                                    <ul>
-<!--                                         <li class="fa fa-user" th:text="' '+${intv.userId}"></li> -->
-                                        <li th:text="'職缺:'+${intv.jobName}"></li>
-                                        <li th:text="'面試時間:'+${intv.intTime}"></li>
-                                    </ul>
-                                    <ul>
-                                    <li th:text="'編輯時間:'+${intv.createTime}"></li>
-                                    </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
-                                        <div class="items-link items-link2 f-right">
-                                            
-                                          <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
-                                           class="genric-btn primary-border  "th:href="@{/intv/}+${intv.cvNo}">編輯</a>
-                                            <a th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
-                                             class="genric-btn danger-border  " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </a>
-                                            <div>
-                                             <button class="genric-btn warning-border circle  small" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px ; color:black"> &nbsp檢舉 <i class="fa fa-exclamation-circle" > </i> </button>
-                                           		</div>	
-                                            
-                                           <span th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" >&nbsp</span>
-                                            <div>
-                                             <button class="genric-btn primary-border circle arrow medium" th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp留言 <i class="fa fa-comments"> </i> </button>
-                                           		</div>
-                                           		 <span th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" >&nbsp</span>		
-                                           	<div>
-                                             <button id=heart class="genric-btn  danger-border circle arrow medium " th:if="${session.loginMember != null && session.loginMember.userid != intv.userId}" style="font-size:24 px"> &nbsp喜歡 <i class="fa fa-heart" id=heart style="color:black"> </i> </button>
-                                            </div>
-                                        </div>																																								
-                                    
-
-                                </div>
+                              
                                 
-                                
+                                <!-- Blog Start -->
+                                <div class="blog_area blog_left_sidebar"
+						th:each="intv:${intvs} ">
+						<article class="blog_item">
+							<div class="blog_details py-5">
+								<div  >
+								
+									
+									
+								<h4><a th:text="${intv.compName}" th:href="@{/intvshow/{id}(id=${intv.cvNo})}"> </a></h4>
+								</div>
+								<b class="listComp text-muted"
+										th:attr="data-score=${intv.compScore}"></b>
+								<p th:text="${intv.share}"></p>
+								<ul class="blog-info-link w-75 f-left d-inline">
+									
+									<li><span class="listJob text-muted" 
+										th:text="'職缺:'+${intv.jobName}+'&nbsp&nbsp&nbsp&nbsp'"><i
+											class="fa fa-briefcase"></i></span></li>
+<!-- 									<li><span class="text-muted"> -->
+<!-- 									<i class="fa fa-comments"></i></span> -->
+<!-- 									<span class="text-muted" th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span> -->
+<!-- 									</li> -->
+									<li><span class="text-muted" th:text="'面試時間:'+${intv.intTime}">
+											</span></li>
+									<li><span class="text-muted" th:text="'編輯時間:'+${intv.createTime}">
+											</span></li>
+								</ul>
+								<div class="modify-btn w-25 f-right d-inline">
+								<button  class="genric-btn primary-border small " th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"   th:onclick="'window.location.href=\'' + @{/intv/{id}(id=${intv.cvNo})}+ '\''">編輯</button>
+																				
+								<button th:if="${session.loginMember != null && session.loginMember.userid == intv.userId}"
+                                             class="genric-btn danger-border small " th:id="${intv.cvNo}" onclick="del(this.id)">刪除 </button>
+									
+									
+								</div>
+							</div>
+						</article>
+					</div>
+                           <!-- blog end --> 
+                            <nav class="blog-pagination justify-content-center d-flex" id="intv-pagination">
+						<ul class="pagination">
+						</ul>
+					</nav>    
                             </div>    <span class="lnr lnr-arrow-right"></span>
                             
                           </section>
@@ -155,86 +156,65 @@
                     <!-- 右邊欄位Head -->
                     <div class="col-xl-3 col-lg-3 col-md-4">
                         <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
-                                                onfocus="this.placeholder = ''"
-                                                onblur="this.placeholder = 'Search Keyword'">
-                                            <div class="input-group-append">
-                                                <button class="btns" type="button"><i class="ti-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                        type="submit">Search</button>
-                                </form>
-                            </aside>
+                           
 
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" th:each="course:${courseList}">推薦課程</h3>
-                                
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="">
-                                    <div class="media-body">
-                                        <a href="single-blog.html">
-                                            <h3 >教你如何釣魚</h3>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_2.png}" alt="">
-                                    <div class="media-body">
-                                        <a href="single-blog.html">
-                                            <h3>職場就像秀</h3>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_3.png}" alt="">
-                                    <div class="media-body">
-                                        <a href="single-blog.html">
-                                            <h3>享受工作</h3>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_4.png}" alt="">
-                                    <div class="media-body">
-                                        <a href="single-blog.html">
-                                            <h3>Asteroids telescope</h3>
-                                        </a>
-
-                                    </div>
-                                </div>
+                                <h3 class="widget_title" >推薦課程</h3>
+                                 <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-5.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=自我認知'}">
+                        <h4 class="text-black font-weight-small">自我認知</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-6.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=求職技巧'}">
+                        <h4 class="text-black font-weight-small">求職技巧</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-7.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=生涯轉換與轉業'}">
+                        <h4 class="text-black font-weight-small">生涯轉換與轉業</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" th:src="@{/assets_course/img/cat-8.jpg}" alt="">
+                    <a class="cat-overlay text-white text-decoration-none"
+                       th:href="@{'/courses?courseCategory=就業市場現況趨勢'}">
+                        <h4 class="text-black font-weight-small">就業與市場趨勢</h4>
+                        <!--                        <span>100 Courses</span>-->
+                    </a>
+                </div>
+            </div>
+                               
                             </aside>
 
                             <aside class="single_sidebar_widget instagram_feeds">
                                 <h4 class="widget_title">廣告</h4>
                                 <div class="row">
-                        <div th:each="event:${events}" class="col-md-4 mb-4">
+                        <div th:each="event:${events}" class="col-12">
                             <div class="single-defination">
-                                <a th:href="${event.eventLinkUrl}"><img th:src="${event.imgUrl}" style="width: 50px; height: 50px;" alt="" class="img-fluid"></a>
+                                <a th:href="${event.eventLinkUrl}"><img th:src="${event.imgUrl}" style="max-width: 80%;height: auto" alt="" class="mx-auto d-block"></a>
+                             <hr >
                             </div>
                         </div>
                     </div>
                             </aside>
-                            <aside class="single_sidebar_widget newsletter_widget">
-                                <h4 class="widget_title">Newsletter</h4>
-                                <form action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Enter email'" placeholder='Enter email'
-                                            required>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                        type="submit">Subscribe</button>
-                                </form>
-                            </aside>
+                          
                         </div>
                     </div>
                     <!-- 右邊欄位尾 -->
@@ -244,27 +224,7 @@
         </div>
         <!-- Job List Area End -->
 
-        <!--Pagination Start  頁數-->
-        <div class="pagination-area pb-115 text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single-wrap d-flex justify-content-center">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><span
-                                                class="ti-angle-right"></span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Pagination End  -->
+      
 
     </main>
     <footer>
