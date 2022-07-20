@@ -189,7 +189,6 @@ $(function () {
     function checkName() {
         var courseName = $('#courseName').val();
         var postData = {"courseName": courseName};
-        var test;
         $.ajax({
             type: "post",
             url: "/dashboard/courses/checkName",
@@ -207,6 +206,29 @@ $(function () {
             }
         })
     }
+    function checkUserid() {
+        var userid = $("#userid").val();
+        var postData = {"userid": userid};
+        $.ajax({
+            type: "post",
+            url: "/dashboard/courses/checkUserid",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                console.log(data)
+                if (data) {
+                    $('#userid').attr("class", "form-control is-valid")
+                    // $('#btn-submit').attr("disabled", true);
+                } else {
+                    $('#userid').attr("class", "form-control is-invalid")
+                    $('#useridError').text("講師帳號未註冊!!")
+
+                    // $('#btn-submit').attr("disabled", false);
+                }
+            }
+        })
+    }
 
     function validateName() {
         checkName();
@@ -220,7 +242,7 @@ $(function () {
     }
 
     function validateId() {
-
+        checkUserid();
         let IdRegex = /^[a-z,A-Z][1-2,8-9]\d{8}$/;
         if ($("#userid").val() === "") {
             $('#userid').attr("class", "form-control is-invalid")
@@ -286,6 +308,7 @@ $(function () {
 
     //一鍵輸入
     $('#correctInput').click(function () {
+        $("#userid").val("A123456789")
         $('#courseName').val('面試必勝10招')
         $('#courseCategory').val('求職技巧')
         $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')
@@ -298,6 +321,7 @@ $(function () {
         checkPackage();
     })
     $('#wrongInput').click(function () {
+        $("#userid").val("Z228456789")
         $('#courseName').val('面試必勝100招')
         $('#courseCategory').val('求職技巧')
         $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')

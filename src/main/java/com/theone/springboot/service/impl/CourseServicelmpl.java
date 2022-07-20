@@ -123,7 +123,6 @@ public class CourseServicelmpl implements CourseService {
         try {
             javaMailSender.send(messagePreparator);
             System.out.println("sent success");
-            System.out.println("=================================================================");
         } catch (MailException e) {
             System.out.println("mail error");
             e.printStackTrace();

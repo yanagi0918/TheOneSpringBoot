@@ -60,6 +60,20 @@ public class CourseDashBoardController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
+    //ajax (jquery)檢查userid是否有註冊
+    @PostMapping(path = "/courses/checkUserid", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Boolean> isUseridExsist(@RequestBody CourseBean courseBean) {
+        Member byUserid = memberService.getByUserid(courseBean.getUserid());
+        if (byUserid!=null){
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(false);
+        }
+
+    }
+
+
 
     @GetMapping("/courses/{courseNo}")
     public String findCourseByNo(@PathVariable Integer courseNo, Model model) {
