@@ -96,7 +96,7 @@ public class CommentUserController {
 	public String showDetailForm(
 			@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage,
-			HttpSession httpSession,
+			HttpSession session,
 			Model model) {
 
 		// show comment detail

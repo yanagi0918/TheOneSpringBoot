@@ -232,12 +232,12 @@
 							<div class="comment_form brand-bg rounded-80 p-3">
 								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember != null}">
 									<img class="p-0" 
-										th:src="@{session.loginMember.image ? '/assets/img/comment/user.jpg' : session.loginMember.image}"
+										th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/user_1.png} : ${session.loginMember.image}}"
 										alt="">
 								</div>
 								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember == null}">
 									<img class="p-0" th:if="${session.loginMember == null}"
-										th:src="@{/assets/img/comment/user.jpg}" alt="">
+										th:src="@{/assets/img/comment/user_1.png}" alt="">
 								</div>
 								<!-- 新增留言 start -->
 								<div class="pt-1">
@@ -336,7 +336,7 @@
 										<div th:id="'currentMessage' + ${message.messageId}">
 													<div class="thumb f-left">
 														<img
-															th:src="@{${message.replyNickName != null && message.replyNickName.contains('匿名')} ? '/assets/img/comment/user.jpg' : ${message.member.image}}"
+															th:src="@{${message.replyNickName != null && message.replyNickName.contains('匿名')} ? @{/assets/img/comment/user_1.png} : ${message.member.image}}"
 															alt="">
 													</div>
 											<div
