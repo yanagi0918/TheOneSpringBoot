@@ -35,5 +35,8 @@ public interface CourseService {
 
 	void sendNotifyEmail(String recipient, String subject, String message);
 
+	List<CourseBean> findByCourseNameOrCourseCategoryOrLecturerContaining(String courseName,String courseCategory,String lecturer);
+
+
 
 }

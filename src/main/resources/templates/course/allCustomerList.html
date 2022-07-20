@@ -41,6 +41,11 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{/assets_course/css/style.css}" rel="stylesheet">
 
+    <style>
+        ::placeholder {
+            font-style: italic;
+        }
+    </style>
 
 </head>
 
@@ -72,10 +77,10 @@
 <!-- Hero Area End -->
 <!--================Course Area =================-->
 <!-- Category Start -->
-<div class="container-fluid py-5">
+<div class="container-fluid py-2">
     <div class="container pt-5 pb-3">
         <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程分類</h5>
+            <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程分類</h4>
             <h2>精選進修主題</h2>
         </div>
         <div class="row">
@@ -163,17 +168,17 @@
 </div>
 <!-- Category end -->
 <!-- Courses Start -->
-<div class="container-fluid py-5">
+<div class="container-fluid py-2">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程列表</h5>
+            <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">課程列表</h4>
             <h2>所有課程</h2>
 
             <!-- Search Form -->
-            <div class="mb-2 w-25 m-auto">
+            <div class="p-3 w-25 m-auto">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="輸入課程關鍵字">
+                        <input type="text" class="form-control form-control-xl" placeholder="查詢以課名/分類/講師.." name="search">
                         <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary">
                                         <i class="fa fa-search"></i>

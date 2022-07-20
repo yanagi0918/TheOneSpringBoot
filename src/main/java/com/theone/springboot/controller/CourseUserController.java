@@ -60,6 +60,20 @@ public class CourseUserController {
 
     }
 
+    @GetMapping(path="/conditionsSearch", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<CourseBean>> findByCondition(@RequestParam String search,
+//                                  @RequestParam(required = false) String courseCategory,
+//                                  @RequestParam(required = false) String lecturer,
+                                  Model model) {
+        List<CourseBean> courseList = courseService.findByCourseNameOrCourseCategoryOrLecturerContaining(search, search, search);
+//        model.addAttribute("courseList", courseList);
+        return ResponseEntity.status(HttpStatus.OK).body(courseList);
+//        return "course/allCustomerList";
+    }
+
+
+
     @GetMapping("/user/courses/lecturers")
     public String toCoursesBylecturer(Model model, HttpSession session) throws UnsupportedEncodingException {
         Member loginUser = (Member) session.getAttribute("loginMember");

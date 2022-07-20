@@ -129,4 +129,9 @@ public class CourseServicelmpl implements CourseService {
         }
 
     }
+
+    @Override
+    public List<CourseBean> findByCourseNameOrCourseCategoryOrLecturerContaining(String courseName, String courseCategory, String lecturer) {
+        return courseDao.findByCourseNameOrCourseCategoryOrLecturerContaining(courseName,courseCategory,lecturer);
+    }
 }

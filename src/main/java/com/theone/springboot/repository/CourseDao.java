@@ -23,5 +23,6 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     List<CourseBean> findByMember(Member Member);
 
+    List<CourseBean> findByCourseNameOrCourseCategoryOrLecturerContaining(String courseName,String courseCategory,String lecturer);
 
 }
