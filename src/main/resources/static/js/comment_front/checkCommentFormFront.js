@@ -265,6 +265,10 @@ $(document).ready(function() {
 			$('#overview').removeClass('success-border').addClass('success');
 			break;
 
+		case '/comments/search':
+			$('#overview').removeClass('success-border').addClass('success');
+			break;
+
 		case '/user/comments':
 			$('#mycomment').removeClass('success-border').addClass('success');
 			break;
@@ -390,7 +394,11 @@ $(function() {
 ////////////////////////////////////////////////////
 
 
+$(function() {
+	var data = eval('('+'${listComment}'+')');
+    console.log(data);
 
+});
 
 
 

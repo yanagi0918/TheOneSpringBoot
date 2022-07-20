@@ -59,6 +59,16 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.deleteByCommentMemberIdNumber(idNumber);
 	}
 
+	@Override
+	public List<Comment> findByCompNameLike(String compName) {
+		return commentDao.findByCompNameLike(compName);
+	}
+
+	@Override
+	public List<Comment> findByJobNameLike(String jobName) {
+		return commentDao.findByJobNameLike(jobName);
+	}
+
 //	@Override
 //	public List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name,
 //			String job_name) {

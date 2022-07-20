@@ -30,7 +30,7 @@ public class CommentUserController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	CommentService commentService;
 
@@ -41,8 +41,11 @@ public class CommentUserController {
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		List<Comment> listcomment = commentService.findAll();
+		
+		
 		model.addAttribute("listComment", listcomment);
 		model.addAttribute("commentMessageService", commentMessageService);
+		
 		return "comment/commentlist";
 	}
 
@@ -95,11 +98,8 @@ public class CommentUserController {
 
 	// 送出評價的詳細資料
 	@RequestMapping("/CommentDetail/{id}")
-	public String showDetailForm(
-			@PathVariable("id") Integer id,
-			@ModelAttribute("commentMessage") CommentMessage commentMessage,
-			HttpSession session,
-			Model model) {
+	public String showDetailForm(@PathVariable("id") Integer id,
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, HttpSession session, Model model) {
 
 		// show comment detail
 		Comment comment = commentService.findById(id).get();
@@ -114,26 +114,18 @@ public class CommentUserController {
 			CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
 					.get();
 			commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
-		}else {
+		} else {
 			commentMessage.setMessageOrder(1);
 		}
-//		
-//		Object editMessage = httpSession.getAttribute("sessionMessage");
-//		model.addAttribute("editMessage", editMessage);
-		
-//		model.addAttribute("editMessage",commentMessageService.findById(mid));
 
 		return "comment/commentdetail";
 	}
 
 	// 儲存留言
 	@PostMapping("/user/{id}/CommentMessageSave")
-	public String saveCommentMessage(
-			@PathVariable("id") Integer id,
+	public String saveCommentMessage(@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage,
-			@ModelAttribute("message") CommentMessage message,
-			HttpSession session,
-			Model model) {
+			@ModelAttribute("message") CommentMessage message, HttpSession session, Model model) {
 		Member member = (Member) session.getAttribute("loginMember");
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
@@ -141,23 +133,19 @@ public class CommentUserController {
 		commentMessageService.saveOrUpdate(commentMessage);
 		return "redirect:/comments";
 	}
-	
+
 	// 儲存留言
-		@PostMapping("/{cid}/{mid}/CommentMessageUpdate")
-		public String saveCommentMessage(
-				@PathVariable("cid") Integer cid,
-				@PathVariable("mid") Integer mid,
-				@ModelAttribute("message") CommentMessage message,
-				HttpSession session,
-				Model model) {
-			Member member = (Member) session.getAttribute("loginMember");
-			Comment comment = commentService.findById(cid).get();
-			message.setComment(comment);
-			message.setMessageId(mid);
-			message.setMember(member);
-			commentMessageService.saveOrUpdate(message);
-			return "redirect:/comments";
-		}
+	@PostMapping("/{cid}/{mid}/CommentMessageUpdate")
+	public String saveCommentMessage(@PathVariable("cid") Integer cid, @PathVariable("mid") Integer mid,
+			@ModelAttribute("message") CommentMessage message, HttpSession session, Model model) {
+		Member member = (Member) session.getAttribute("loginMember");
+		Comment comment = commentService.findById(cid).get();
+		message.setComment(comment);
+		message.setMessageId(mid);
+		message.setMember(member);
+		commentMessageService.saveOrUpdate(message);
+		return "redirect:/comments";
+	}
 
 	// 刪除留言
 	@GetMapping(value = "/CommentMessageDelete")
@@ -165,23 +153,29 @@ public class CommentUserController {
 		commentMessageService.deleteByMessageId(id);
 		return "redirect:comments";
 	}
+
+	// 評論查詢
+	@RequestMapping("/comments/search")
+	private String jobSearch(String title, String searchType, Model model) {
+
+		if (searchType.contains("compName")) {
+			List<Comment> commentByComp = commentService.findByCompNameLike("%" + title + "%");
+			model.addAttribute("listComment", commentByComp);
+
+		} else if (searchType.equals("jobName")) {
+			List<Comment> commentByJob = commentService.findByJobNameLike("%" + title + "%");
+			model.addAttribute("listComment", commentByJob);
+		}
+
+		System.out.println(model);
+
+		model.addAttribute("commentMessageService", commentMessageService);
+
+		return "comment/commentlist";
+	}
 	
-	//評論查詢
-//	@GetMapping("/comments/search")
-//	private String jobSearch(String job_description,String comp_name, String job_name, Model model) {
-//		List<Comment> comment = commentService.findByJob_DescriptionAndComp_NameOrJob_Name(job_description, comp_name, job_name);
-//		
-//		model.addAttribute("job_description",job_description);
-//		model.addAttribute("comp_name",comp_name);
-//		model.addAttribute("job_name",job_name);
-//		model.addAttribute("comment",comment);
-//		
-//		return "comment/commentlist";
-//	}
-	
-	
-	
-	//test
+
+	// test
 	@GetMapping("/comments/commentlistjson")
 	public @ResponseBody List<Comment> getCommentListJson(@RequestBody(required = false) Comment comment) {
 		List<Comment> allComments = commentService.findAll();

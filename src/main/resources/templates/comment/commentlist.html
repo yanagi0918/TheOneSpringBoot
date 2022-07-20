@@ -139,23 +139,20 @@
 				<div class="row mt-5">
 					<div class="col-xl-12">
 						<!-- form -->
-						<form action="#" class="search-box">
+						<form th:action="@{/comments/search}" class="search-box" id="commentSearch">
 							<div class="input-form ">
-								<input type="text" placeholder="搜尋職缺或公司">
+								<input type="text" placeholder="搜尋職缺或公司" name="title">
 							</div>
 							<div class="select-form">
 								<div class="select-itms">
-									<select name="jobDescription" id="jobDescription">
-										<option value="*">全部</option>
-										<option value="全職">全職</option>
-										<option value="兼職">兼職</option>
-										<option value="工讀">工讀</option>
-										<option value="實習">實習</option>
+									<select name="searchType" id="searchBar">
+										<option value="compName">公司</option>
+										<option value="jobName">職缺</option>
 									</select>
 								</div>
 							</div>
 							<div class="search-form">
-								<a href="#" onclick="ajaxtest"><i class="fa fa-search"></i></a>
+									<a href="#" onclick="document.getElementById('commentSearch').submit()"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
 					</div>
@@ -178,9 +175,10 @@
 								<li
 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
 									href="single_comment.html"><span>分析</span></a></li>
-								<li
-									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a
-									href=""><span>OO公司XX職缺</span></a></li>
+								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司'"></span></a></li>
+								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 職缺'"></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
 									th:href="@{/user/comments}"><span>我的分享</span></a></li>
 							</ul>
@@ -264,7 +262,7 @@
 							<ul class="list cat-list">
 								<li><a href="#" class="d-flex">
 										<p>全部</p>
-										<p>(21)</p>
+										<p>([[${listComment.size()}]])</p>
 								</a></li>
 								<li><a href="#" class="d-flex">
 										<p>正職</p>
@@ -287,15 +285,17 @@
 
 						<aside class="single_sidebar_widget tag_cloud_widget_comment">
 							<h4 class="widget_title">熱門搜尋</h4>
+							<form th:action="@{/comments/search}" class="search-box" id="commentHotSearch">
 							<ul class="list">
-								<li><a href="#">#工程師</a></li>
-								<li><a href="#">#軟體</a></li>
-								<li><a href="#">#行政助理</a></li>
-								<li><a href="#">#護理師</a></li>
-								<li><a href="#">#專員</a></li>
-								<li><a href="#">#銀行</a></li>
-								<li><a href="#">#科技</a></li>
+								<li><a th:href="@{/comments/search} + '?title=工程師&searchType=jobName'" >#工程師</a></li>
+								<li><a th:href="@{/comments/search} + '?title=軟體&searchType=jobName'" >#軟體</a></li>
+								<li><a th:href="@{/comments/search} + '?title=行政助理&searchType=jobName'" >#行政助理</a></li>
+								<li><a th:href="@{/comments/search} + '?title=銀行&searchType=compName'" >#銀行</a></li>
+								<li><a th:href="@{/comments/search} + '?title=專員&searchType=jobName'" >#專員</a></li>
+								<li><a th:href="@{/comments/search} + '?title=java&searchType=jobName'" >#java</a></li>
+								<li><a th:href="@{/comments/search} + '?title=科技&searchType=compName'" >#科技</a></li>
 							</ul>
+							</form>
 						</aside>
 
 					</div>
@@ -357,7 +357,12 @@
 	<!-- Comment Front JS -->
 	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
 
-<!-- <script> -->
+<script>
+
+// $('#searchBar').change(function(){
+// 	$('#commentSearch').submit();
+	
+// })
 
 // function ajaxtest() {
 // 	//職務型態比例
@@ -375,7 +380,7 @@
 
 // }
 
-<!-- </script> -->
+</script>
 
 
 </body>
