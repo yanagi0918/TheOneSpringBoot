@@ -27,7 +27,7 @@ public class CommentDashBoardController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	CommentService commentService;
 
@@ -44,19 +44,17 @@ public class CommentDashBoardController {
 
 	// 儲存評論
 	@PostMapping("/CommentSave")
-	public String saveComment(@ModelAttribute("comment") Comment comment,
-			@RequestParam("userid") String userid) {
+	public String saveComment(@ModelAttribute("comment") Comment comment, @RequestParam("userid") String userid) {
 //		Member member = memberService.getMember(idNumber).get();
 		Member member = memberService.getByUserid(userid);
-		comment.setMember(member);
+		comment.setCommentMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
 
 	// 儲存留言
 	@PostMapping("/{id}/CommentMessageSave/{member}")
-	public String saveCommentMessage(@PathVariable("id") Integer id,
-			@PathVariable("member") Member member,
+	public String saveCommentMessage(@PathVariable("id") Integer id, @PathVariable("member") Member member,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage, Model model) {
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
@@ -100,7 +98,7 @@ public class CommentDashBoardController {
 			CommentMessage maxMessageId = messages.stream().max(Comparator.comparing(CommentMessage::getMessageOrder))
 					.get();
 			commentMessage.setMessageOrder((maxMessageId.getMessageOrder()) + 1);
-		}else {
+		} else {
 			commentMessage.setMessageOrder(1);
 		}
 		return "comment_dashboard/commentmessageform";
@@ -148,18 +146,20 @@ public class CommentDashBoardController {
 		for (Comment comment : allComments) {
 			System.out.println(comment);
 
-			if (comment.getJob_description().equals("全職")) {
+			if (comment.getJobDescription().equals("全職")) {
 				jobtype[0]++;
-			} else if (comment.getJob_description().equals("兼職")) {
+			} else if (comment.getJobDescription().equals("兼職")) {
 				jobtype[1]++;
-			} else if (comment.getJob_description().equals("工讀")) {
+			} else if (comment.getJobDescription().equals("工讀")) {
 				jobtype[2]++;
-			} else if (comment.getJob_description().equals("實習")) {
+			} else if (comment.getJobDescription().equals("實習")) {
 				jobtype[3]++;
 			}
 		}
 		System.out.println("OK");
 		return jobtype;
 	}
+
+	
 
 }

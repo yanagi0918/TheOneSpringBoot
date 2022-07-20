@@ -50,13 +50,19 @@ public class CommentServiceImpl implements CommentService {
 //	}
 
 	@Override
-	public List<Comment> findByMemberIdNumber(Integer idNumber) {
-		return commentDao.findByMemberIdNumber(idNumber);
+	public List<Comment> findByCommentMemberIdNumber(Integer idNumber) {
+		return commentDao.findByCommentMemberIdNumber(idNumber);
 	}
 
 	@Override
-	public void deleteByMemberIdNumber(Integer idNumber) {
-		commentDao.deleteByMemberIdNumber(idNumber);
+	public void deleteByCommentMemberIdNumber(Integer idNumber) {
+		commentDao.deleteByCommentMemberIdNumber(idNumber);
 	}
+
+//	@Override
+//	public List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name,
+//			String job_name) {
+//		return commentDao.findByJob_DescriptionAndComp_NameOrJob_Name(job_description, comp_name, job_name);
+//	}
 
 }

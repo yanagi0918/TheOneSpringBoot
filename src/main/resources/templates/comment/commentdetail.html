@@ -136,7 +136,7 @@
 							<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 							<li><a th:href="@{/comments}"><span>總覽</span></a></li>
 							<li><a href=""><span
-									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
+									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.compName} + ' ' + ${comment.jobName}"></span></a></li>
 						</ul>
 						<!-- 評論內容 start-->
 						<article class="testimonial-bg border shadow-sm">
@@ -145,7 +145,7 @@
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
 										<a
-											th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+											th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 											class="m-2 edit-delete"
 											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}"
 											data-target="editMessage"> <i class="fa fa-pencil-alt"></i>
@@ -154,18 +154,18 @@
 									</div>
 									<div class="float-right mt-55">
 										<h6 class="text-muted"
-											th:text="${comment.nickName} + ' - ' + '新增時間: ' + ${#calendars.format(comment.create_time, 'yyyy-MM-dd')}">
+											th:text="${comment.nickName} + ' - ' + '新增時間: ' + ${#calendars.format(comment.createTime, 'yyyy-MM-dd')}">
 										</h6>
 									</div>
 									<div class="m-4">
 										<div>
 											<ul>
 												<li>
-													<h3 class="float-left mr-3" th:text="${comment.comp_name}"></h3>
+													<h3 class="float-left mr-3" th:text="${comment.compName}"></h3>
 												</li>
 												<li>
 													<h3 class="justify-content-md-center"
-														th:text="${comment.job_name}"></h3>
+														th:text="${comment.jobName}"></h3>
 												</li>
 											</ul>
 										</div>
@@ -177,17 +177,17 @@
 										<tr class="">
 											<td>公司評分:</td>
 											<td class="listComp"
-												th:attr="data-score=${comment.comp_score}"></td>
+												th:attr="data-score=${comment.compScore}"></td>
 											<td>職位評分:</td>
 											<td class="listJob" th:attr="data-score=${comment.job_score}">
 											</td>
 											<td>參考時間:</td>
 											<td
-												th:text="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"></td>
+												th:text="${#calendars.format(comment.refTime, 'yyyy-MM-dd')}"></td>
 										</tr>
 										<tr>
 											<td>職務型態:</td>
-											<td th:text="${comment.job_description}"></td>
+											<td th:text="${comment.jobDescription}"></td>
 											<td>服務年資:</td>
 											<td th:text="${comment.seniority} + ' 年'"></td>
 											<td>總年資:</td>
@@ -217,7 +217,7 @@
 										<p th:text="${comment.share}"></p>
 									</div>
 									<button
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
 										th:value='${comment.commentId}'>

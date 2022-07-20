@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
 import com.theone.springboot.entity.CommentMessage;
@@ -48,7 +50,7 @@ public class CommentUserController {
 	@RequestMapping("/user/comments")
 	public String listMyComments(HttpSession session, Model model) {
 		Member member = (Member) session.getAttribute("loginMember");
-		List<Comment> myComments = commentService.findByMemberIdNumber(member.getIdNumber());
+		List<Comment> myComments = commentService.findByCommentMemberIdNumber(member.getIdNumber());
 		model.addAttribute("listComment", myComments);
 		model.addAttribute("commentMessageService", commentMessageService);
 		return "comment/commentlist";
@@ -65,7 +67,7 @@ public class CommentUserController {
 	@PostMapping("/CommentSave")
 	public String saveComment(HttpSession session, @ModelAttribute("comment") Comment comment) {
 		Member member = (Member) session.getAttribute("loginMember");
-		comment.setMember(member);
+		comment.setCommentMember(member);
 		commentService.saveOrUpdate(comment);
 		return "redirect:./comments";
 	}
@@ -162,6 +164,29 @@ public class CommentUserController {
 	public String deleteCommentMessage(@RequestParam("id") Integer id) {
 		commentMessageService.deleteByMessageId(id);
 		return "redirect:comments";
+	}
+	
+	//評論查詢
+//	@GetMapping("/comments/search")
+//	private String jobSearch(String job_description,String comp_name, String job_name, Model model) {
+//		List<Comment> comment = commentService.findByJob_DescriptionAndComp_NameOrJob_Name(job_description, comp_name, job_name);
+//		
+//		model.addAttribute("job_description",job_description);
+//		model.addAttribute("comp_name",comp_name);
+//		model.addAttribute("job_name",job_name);
+//		model.addAttribute("comment",comment);
+//		
+//		return "comment/commentlist";
+//	}
+	
+	
+	
+	//test
+	@GetMapping("/comments/commentlistjson")
+	public @ResponseBody List<Comment> getCommentListJson(@RequestBody(required = false) Comment comment) {
+		List<Comment> allComments = commentService.findAll();
+
+		return allComments;
 	}
 
 	// 討論區分頁

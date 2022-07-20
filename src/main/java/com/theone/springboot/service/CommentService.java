@@ -3,10 +3,7 @@ package com.theone.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import com.theone.springboot.entity.Comment;
-import com.theone.springboot.entity.CommentMessage;
 
 public interface CommentService {
 
@@ -22,7 +19,10 @@ public interface CommentService {
 
 //	List<Comment> findByUserId(String userId);
 
-	List<Comment> findByMemberIdNumber(Integer idNumber);
+	List<Comment> findByCommentMemberIdNumber(Integer idNumber);
 	
-	void deleteByMemberIdNumber(Integer idNumber);
+	void deleteByCommentMemberIdNumber(Integer idNumber);
+	
+//	List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name, String job_name);
+
 }

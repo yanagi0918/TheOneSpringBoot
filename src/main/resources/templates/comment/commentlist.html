@@ -145,17 +145,17 @@
 							</div>
 							<div class="select-form">
 								<div class="select-itms">
-									<select name="select" id="select1">
-										<option value="">全部</option>
-										<option value="">全職</option>
-										<option value="">兼職</option>
-										<option value="">工讀</option>
-										<option value="">實習</option>
+									<select name="jobDescription" id="jobDescription">
+										<option value="*">全部</option>
+										<option value="全職">全職</option>
+										<option value="兼職">兼職</option>
+										<option value="工讀">工讀</option>
+										<option value="實習">實習</option>
 									</select>
 								</div>
 							</div>
 							<div class="search-form">
-								<a href="#"><i class="fa fa-search"></i></a>
+								<a href="#" onclick="ajaxtest"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
 					</div>
@@ -205,17 +205,17 @@
 									<h4 class="float-right">&nbsp&nbsp</h4>
 									<a class="float-right text-muted"><i
 										class="fa fa-thumbs-up">讚</i></a>
-									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.ref_time,'yyyy-MM')}"></h6>
+									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
 								</div>
 								<a class="d-inline-block"
 									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
-									<h2 class="float-left" th:text="${comment.comp_name} + '&nbsp&nbsp'"></h2>
-									<h4 class="float-left" th:text="${comment.job_name}"></h4>
+									<h2 class="float-left" th:text="${comment.compName} + '&nbsp&nbsp'"></h2>
+									<h4 class="float-left" th:text="${comment.jobName}"></h4>
 								</a>
 								<p th:text="${comment.share}"></p>
 								<ul class="blog-info-link w-75 f-left d-inline">
 									<li><span class="listComp text-muted"
-										th:attr="data-score=${comment.comp_score}"><i
+										th:attr="data-score=${comment.compScore}"><i
 											class="fa fa-building"></i>公司&nbsp&nbsp</span></li>
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
@@ -223,18 +223,18 @@
 									<li><span class="text-muted"><i class="fa fa-comments"></i></span>
 									<span class="text-muted" th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span>
 									</li>
-									<li><span class="text-muted" th:text="${comment.job_description}"><i
+									<li><span class="text-muted" th:text="${comment.jobDescription}"><i
 											class="fa fa-briefcase"></i></span></li>
 								</ul>
 								<div class="modify-btn w-25 f-right d-inline">
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										class="genric-btn danger circle float-right comment-delete"
 										th:value='${comment.commentId}'>
 										<i class="fa fa-trash-alt"></i>
 									</button>
 									<button type="button"
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										class="genric-btn success circle float-right"
 										th:onclick="'window.location.href=\'' + @{/CommentEdit/{id}(id=${comment.commentId})} + '\''">
 										<i class="fa fa-pencil-alt"></i>
@@ -356,6 +356,26 @@
 
 	<!-- Comment Front JS -->
 	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
+
+<!-- <script> -->
+
+// function ajaxtest() {
+// 	//職務型態比例
+// 	$.ajax({
+// 		type: 'GET',
+// 		url: '/comments/commentlistjson',
+// 		data: data,
+// 		success: function(data) {
+// 			var arr = data;
+// 			console.log(arr.filter(function(item) {
+// 				return item.nickName == "剪刀手";
+// 			}));
+// 		}
+// 	})
+
+// }
+
+<!-- </script> -->
 
 
 </body>
