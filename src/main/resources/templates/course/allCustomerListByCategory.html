@@ -172,13 +172,15 @@
             <h2 th:text="${courseCategory}+' 系列'"></h2>
 
             <!-- Search Form -->
-            <div class="mb-2 w-25 m-auto">
-                <form action="">
+            <div class="p-3 w-25 m-auto">
+                <form th:action="@{/conditionsSearch}" id="searchform">
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="輸入課程關鍵字">
+                        <input type="text" class="form-control form-control-xl" placeholder="查詢以課名/分類/講師.."
+                               name="search" id="search">
                         <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary"><i
-                                            class="fa fa-search"></i></span>
+                                 <span class="input-group-text bg-transparent text-primary" id="searchbtn">
+                                        <i class="fa fa-search"></i>
+                                    </span>
                         </div>
                     </div>
                 </form>
@@ -251,44 +253,20 @@
         </div>
 
 
-        <div class="col-lg-4 mt-5 mt-lg-0">
-            <!-- Recent Post -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
-            </div>
+        <div class="col-lg-4 mt-5 mt-lg-0 ">
+            <div class="mb-5" >
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">最新熱門課程</h3>
 
-            <!-- Tag Cloud -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                <div class="d-flex flex-wrap m-n1">
-                    <a href="" class="btn btn-outline-primary m-1">Design</a>
-                    <a href="" class="btn btn-outline-primary m-1">Development</a>
-                    <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                    <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                    <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                    <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                <div th:each="courseR:${courseListRecent}">
+                    <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseR.courseNo}}">
+                        <img class="img-fluid rounded" th:src="${courseR.coursePicUrl}" alt="" width="80px" height="65px">
+                        <div class="pl-3">
+                            <h6 class="m-1" th:text="${courseR.courseName}"></h6>
+                            <small th:text="${#dates.format(courseR.date,'yyyy-MM-dd')}"></small>
+                        </div>
+                    </a>
                 </div>
+
             </div>
         </div>
 
@@ -469,6 +447,33 @@
             }
         });
     }
+
+    // 輪播
+    $(document).ready(function() {
+        $("#myCarousel").on("slide.bs.carousel", function(e) {
+            var $e = $(e.relatedTarget);
+            var idx = $e.index();
+            var itemsPerSlide = 3;
+            var totalItems = $(".carousel-item").length;
+
+            if (idx >= totalItems - (itemsPerSlide - 1)) {
+                var it = itemsPerSlide - (totalItems - idx);
+                for (var i = 0; i < it; i++) {
+                    // append slides to end
+                    if (e.direction == "left") {
+                        $(".carousel-item")
+                            .eq(i)
+                            .appendTo(".carousel-inner");
+                    } else {
+                        $(".carousel-item")
+                            .eq(0)
+                            .appendTo($(this).find(".carousel-inner"));
+                    }
+                }
+            }
+        });
+    });
+
 </script>
 
 

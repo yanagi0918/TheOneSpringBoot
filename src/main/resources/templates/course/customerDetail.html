@@ -23,6 +23,9 @@
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
     <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
     <link rel="stylesheet" th:href="@{/assets/css/imgUpload.css}">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/assets_course/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -100,6 +103,11 @@
                     </div>
 
                 </div>
+
+
+
+
+
                 <!-- Right Content -->
                 <div class="col-xl-4 col-lg-4">
                     <div class="post-details3  mb-50">
@@ -135,6 +143,38 @@
                             <li>網址: <span> TheOne.com</span></li>
                             <li>信箱: <span>bir0405work@gmail.com</span></li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0 ">
+                    <div class="mb-5" >
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">猜你喜歡這些課程</h3>
+
+                        <div th:each="courseC:${courseListCate}">
+                            <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseC.courseNo}}">
+                                <img class="img-fluid rounded" th:src="${courseC.coursePicUrl}" alt="" width="65px" height="65px">
+                                <div class="pl-3">
+                                    <h6 class="m-1" th:text="${courseC.courseName}"></h6>
+                                    <small th:text="${#dates.format(courseC.date,'yyyy-MM-dd')}"></small>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0 ">
+                    <div class="mb-5" >
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">最新熱門課程</h3>
+                        <div th:each="courseR:${courseListRecent}">
+                            <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseR.courseNo}}">
+                                <img class="img-fluid rounded" th:src="${courseR.coursePicUrl}" alt="" width="80px" height="65px">
+                                <div class="pl-3">
+                                    <h6 class="m-1" th:text="${courseR.courseName}"></h6>
+                                    <small th:text="${#dates.format(courseR.date,'yyyy-MM-dd')}"></small>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

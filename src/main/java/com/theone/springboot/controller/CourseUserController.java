@@ -43,33 +43,35 @@ public class CourseUserController {
     public String findAllCourse(@RequestParam(required = false) String courseCategory,
                                 @RequestParam(required = false) Integer courseNo,
                                 Model model) {
+        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByDateDesc("已審核");
         if (courseNo != null) {
             Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
+            List<CourseBean> courseListCate = courseService.findTop5ByCourseCategoryAndStatus(findCourse.orElseThrow().getCourseCategory(), "已審核");
             model.addAttribute("CourseBean", findCourse.orElseThrow());
+            model.addAttribute("courseListCate", courseListCate);
+            model.addAttribute("courseListRecent", courseListRecent);
+
             return "course/customerDetail";
         } else if (courseCategory != null) {
             List<CourseBean> courseList = courseService.findByCourseCategoryAndStatus(courseCategory, "已審核");
             model.addAttribute("courseCategory", courseCategory);
+            model.addAttribute("courseListRecent", courseListRecent);
             model.addAttribute("courseList", courseList);
             return "course/allCustomerListByCategory";
         } else {
             List<CourseBean> courseList = courseService.findAllCoursesByStatus("已審核");
             model.addAttribute("courseList", courseList);
+            model.addAttribute("courseListRecent", courseListRecent);
             return "course/allCustomerList";
         }
 
     }
 
-    @GetMapping(path="/conditionsSearch", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<CourseBean>> findByCondition(@RequestParam String search,
-//                                  @RequestParam(required = false) String courseCategory,
-//                                  @RequestParam(required = false) String lecturer,
-                                  Model model) {
+    @GetMapping("/conditionsSearch")
+    public String findByCondition(@RequestParam String search, Model model) {
         List<CourseBean> courseList = courseService.findByCourseNameOrCourseCategoryOrLecturerContaining(search, search, search);
-//        model.addAttribute("courseList", courseList);
-        return ResponseEntity.status(HttpStatus.OK).body(courseList);
-//        return "course/allCustomerList";
+        model.addAttribute("courseList", courseList);
+        return "course/allCustomerList";
     }
 
 
