@@ -126,7 +126,8 @@ public class CommentUserController {
 
 	// 儲存留言
 	@PostMapping("/user/{id}/CommentMessageSave")
-	public String saveCommentMessage(@PathVariable("id") Integer id,
+	public String saveCommentMessage(
+			@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage,
 			@ModelAttribute("message") CommentMessage message,
 			HttpSession session,
@@ -145,10 +146,13 @@ public class CommentUserController {
 				@PathVariable("cid") Integer cid,
 				@PathVariable("mid") Integer mid,
 				@ModelAttribute("message") CommentMessage message,
+				HttpSession session,
 				Model model) {
+			Member member = (Member) session.getAttribute("loginMember");
 			Comment comment = commentService.findById(cid).get();
 			message.setComment(comment);
 			message.setMessageId(mid);
+			message.setMember(member);
 			commentMessageService.saveOrUpdate(message);
 			return "redirect:/comments";
 		}

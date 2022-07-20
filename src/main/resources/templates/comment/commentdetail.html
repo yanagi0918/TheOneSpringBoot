@@ -249,9 +249,9 @@
 												<div class="form-group">
 													<textarea
 														class="form-control w-100 bg-white rounded-80 shadow-sm"
-														name="messageContent"
+														name="messageContent" data-toggle="tooltip" th:title="${session.loginMember == null}? '需登入分享'"
 														th:value="${commentMessage.messageContent}"
-														id="messageContent" placeholder="留言....."></textarea>
+														id="messageContent" placeholder="留言....." th:readonly="${session.loginMember == null}? 'true'"></textarea>
 													<h6 class="float-right" id="count_message"></h6>
 												</div>
 											</div>
@@ -318,8 +318,8 @@
 											<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
 											<!-- 											</div> -->
 											<!-- 										</div> -->
-											<div class="form-group col-sm-2 f-right">
-												<button type="submit"
+											<div class="form-group col-sm-2 f-right" th:if="${session.loginMember != null}">
+												<button type="submit" 
 													th:if="${commentMessage.messageId == null}"
 													class="genric-btn success radius" name="submit" value="送出">
 													<i class="fa fa-paper-plane"></i>
@@ -336,7 +336,7 @@
 										<div th:id="'currentMessage' + ${message.messageId}">
 													<div class="thumb f-left">
 														<img
-															th:src="@{${message.replyNickName != null && message.replyNickName.contains('匿名')} ? @{/assets/img/comment/user_1.png} : ${message.member.image}}"
+															th:src="@{${message.replyNickName.equals('匿名') || message.member.image == null} ? @{/assets/img/comment/user_1.png} : ${message.member.image}}"
 															alt="">
 													</div>
 											<div
@@ -344,9 +344,7 @@
 												<div class="user justify-content-between d-flex">
 													<div class="desc p-3">
 														<div class="float-right m-1"
-															th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}">
-															<!--  
-														th:href="@{/CommentEdit/{id}(id=${comment.commentId})}" -->
+															th:if="${session.loginMember != null && session.loginMember.userid == message.member.userid}">
 															<a class="m-2 edit-delete editMessage"
 																th:id="${message.messageId}"
 																onmouseover="editMessage(this.id)"> <i
@@ -364,7 +362,7 @@
 																<a href="#" class="btn-reply text-uppercase">reply</a>
 															</div>
 															<button type="button"
-																th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+																th:if="${session.loginMember != null && session.loginMember.userid == message.member.userid}"
 																class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
 																th:value='${message.messageId}'>
 																<i class="fa fa-trash-alt"></i>
