@@ -254,6 +254,8 @@ $(function() {
 			$('#replyNickName').val('');
 		}
 	});
+	
+	
 
 })
 
@@ -282,7 +284,7 @@ $(document).ready(function() {
 //控制修改留言視窗
 
 function editMessage(id) {
-
+console.log(id);
 	var messageId = '#' + id;
 	var editArea = '#messageEditArea' + id;
 	var editCancel = '#editCancel' + id;
@@ -295,6 +297,23 @@ function editMessage(id) {
 	$(editCancel).click(function() {
 		$(editArea).addClass('d-none');
 		$(currentMessage).removeClass('d-none');
+	})
+
+}
+
+//控制回覆留言視窗
+
+function replyMessage(id) {
+	console.log(id);
+	var messageId = '#reply' + id;
+	var replyArea = '#replyMessageArea' + id;
+	var replyCancel = '#replyCancel' + id;
+
+	$(messageId).click(function() {
+		$(replyArea).removeClass('d-none');
+	})
+	$(replyCancel).click(function() {
+		$(replyArea).addClass('d-none');
 	})
 
 }
@@ -393,13 +412,13 @@ $(function() {
 
 ////////////////////////////////////////////////////
 
-
-$(function() {
-	var data = eval('('+'${listComment}'+')');
-    console.log(data);
-
-});
-
+//
+//$(function() {
+//	var data = eval('('+'${listComment}'+')');
+//    console.log(data);
+//
+//});
+//
 
 
 

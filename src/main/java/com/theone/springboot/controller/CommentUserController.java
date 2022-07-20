@@ -104,9 +104,12 @@ public class CommentUserController {
 		// show comment detail
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
-		// get reply list
-		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
+		// get reply comment list
+		List<CommentMessage> messages = commentMessageService.findByCommentCommentIdAndMessageReply(id, 0);
+//		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
 		model.addAttribute("messages", messages);
+//		model.addAttribute("replymessage", commentMessageService.findByMessageReply(messages));
+		
 		// get message count
 		model.addAttribute("commentMessage", commentMessage);
 
@@ -166,8 +169,6 @@ public class CommentUserController {
 			List<Comment> commentByJob = commentService.findByJobNameLike("%" + title + "%");
 			model.addAttribute("listComment", commentByJob);
 		}
-
-		System.out.println(model);
 
 		model.addAttribute("commentMessageService", commentMessageService);
 

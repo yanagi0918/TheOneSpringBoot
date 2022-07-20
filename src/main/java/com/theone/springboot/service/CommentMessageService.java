@@ -24,4 +24,7 @@ public interface CommentMessageService {
 	void deleteByMemberIdNumber(Integer idNumber);
 	
 	List<CommentMessage> findByMessageReply(Integer messageReply);
+	
+	List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply);
+
 }
