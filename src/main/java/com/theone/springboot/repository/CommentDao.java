@@ -15,8 +15,12 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
 //	List<Comment> findByUserId(String userId);
 
-	List<Comment> findByMemberIdNumber(Integer idNumber);
+	List<Comment> findByCommentMemberIdNumber(Integer idNumber);
 
 	@Transactional
-	void deleteByMemberIdNumber(Integer idNumber);
+	void deleteByCommentMemberIdNumber(Integer idNumber);
+	
+	List<Comment> findByCompNameLike(String compName);
+	
+	List<Comment> findByJobNameLike(String jobName);
 }

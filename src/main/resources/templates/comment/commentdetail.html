@@ -136,7 +136,7 @@
 							<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 							<li><a th:href="@{/comments}"><span>總覽</span></a></li>
 							<li><a href=""><span
-									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.comp_name} + ' ' + ${comment.job_name}"></span></a></li>
+									th:text="'編號:'+ ${comment.commentId} + ' ' + ${comment.compName} + ' ' + ${comment.jobName}"></span></a></li>
 						</ul>
 						<!-- 評論內容 start-->
 						<article class="testimonial-bg border shadow-sm">
@@ -145,7 +145,7 @@
 								<div class="brand-bg border-bottom border">
 									<div class="float-right m-1">
 										<a
-											th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+											th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 											class="m-2 edit-delete"
 											th:href="@{/CommentEdit/{id}(id=${comment.commentId})}"
 											data-target="editMessage"> <i class="fa fa-pencil-alt"></i>
@@ -154,18 +154,18 @@
 									</div>
 									<div class="float-right mt-55">
 										<h6 class="text-muted"
-											th:text="${comment.nickName} + ' - ' + '新增時間: ' + ${#calendars.format(comment.create_time, 'yyyy-MM-dd')}">
+											th:text="${comment.nickName} + ' - ' + '新增時間: ' + ${#calendars.format(comment.createTime, 'yyyy-MM-dd')}">
 										</h6>
 									</div>
 									<div class="m-4">
 										<div>
 											<ul>
 												<li>
-													<h3 class="float-left mr-3" th:text="${comment.comp_name}"></h3>
+													<h3 class="float-left mr-3" th:text="${comment.compName}"></h3>
 												</li>
 												<li>
 													<h3 class="justify-content-md-center"
-														th:text="${comment.job_name}"></h3>
+														th:text="${comment.jobName}"></h3>
 												</li>
 											</ul>
 										</div>
@@ -177,17 +177,17 @@
 										<tr class="">
 											<td>公司評分:</td>
 											<td class="listComp"
-												th:attr="data-score=${comment.comp_score}"></td>
+												th:attr="data-score=${comment.compScore}"></td>
 											<td>職位評分:</td>
 											<td class="listJob" th:attr="data-score=${comment.job_score}">
 											</td>
 											<td>參考時間:</td>
 											<td
-												th:text="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"></td>
+												th:text="${#calendars.format(comment.refTime, 'yyyy-MM-dd')}"></td>
 										</tr>
 										<tr>
 											<td>職務型態:</td>
-											<td th:text="${comment.job_description}"></td>
+											<td th:text="${comment.jobDescription}"></td>
 											<td>服務年資:</td>
 											<td th:text="${comment.seniority} + ' 年'"></td>
 											<td>總年資:</td>
@@ -217,7 +217,7 @@
 										<p th:text="${comment.share}"></p>
 									</div>
 									<button
-										th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+										th:if="${session.loginMember != null && session.loginMember.userid == comment.commentMember.userid}"
 										type="button"
 										class="comment-delete float-right mb-70 m-2 edit-delete"
 										th:value='${comment.commentId}'>
@@ -232,12 +232,12 @@
 							<div class="comment_form brand-bg rounded-80 p-3">
 								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember != null}">
 									<img class="p-0" 
-										th:src="@{session.loginMember.image ? '/assets/img/comment/user.jpg' : session.loginMember.image}"
+										th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/user_1.png} : ${session.loginMember.image}}"
 										alt="">
 								</div>
 								<div class="thumb f-left col-sm-1 p-0" th:if="${session.loginMember == null}">
 									<img class="p-0" th:if="${session.loginMember == null}"
-										th:src="@{/assets/img/comment/user.jpg}" alt="">
+										th:src="@{/assets/img/comment/user_1.png}" alt="">
 								</div>
 								<!-- 新增留言 start -->
 								<div class="pt-1">
@@ -249,9 +249,9 @@
 												<div class="form-group">
 													<textarea
 														class="form-control w-100 bg-white rounded-80 shadow-sm"
-														name="messageContent"
+														name="messageContent" data-toggle="tooltip" th:title="${session.loginMember == null}? '需登入分享'"
 														th:value="${commentMessage.messageContent}"
-														id="messageContent" placeholder="留言....."></textarea>
+														id="messageContent" placeholder="留言....." th:readonly="${session.loginMember == null}? 'true'"></textarea>
 													<h6 class="float-right" id="count_message"></h6>
 												</div>
 											</div>
@@ -318,8 +318,8 @@
 											<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
 											<!-- 											</div> -->
 											<!-- 										</div> -->
-											<div class="form-group col-sm-2 f-right">
-												<button type="submit"
+											<div class="form-group col-sm-2 f-right" th:if="${session.loginMember != null}">
+												<button type="submit" 
 													th:if="${commentMessage.messageId == null}"
 													class="genric-btn success radius" name="submit" value="送出">
 													<i class="fa fa-paper-plane"></i>
@@ -336,7 +336,7 @@
 										<div th:id="'currentMessage' + ${message.messageId}">
 													<div class="thumb f-left">
 														<img
-															th:src="@{${message.replyNickName != null && message.replyNickName.contains('匿名')} ? '/assets/img/comment/user.jpg' : ${message.member.image}}"
+															th:src="@{${message.replyNickName.equals('匿名') || message.member.image == null} ? @{/assets/img/comment/user_1.png} : ${message.member.image}}"
 															alt="">
 													</div>
 											<div
@@ -344,9 +344,7 @@
 												<div class="user justify-content-between d-flex">
 													<div class="desc p-3">
 														<div class="float-right m-1"
-															th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}">
-															<!--  
-														th:href="@{/CommentEdit/{id}(id=${comment.commentId})}" -->
+															th:if="${session.loginMember != null && session.loginMember.userid == message.member.userid}">
 															<a class="m-2 edit-delete editMessage"
 																th:id="${message.messageId}"
 																onmouseover="editMessage(this.id)"> <i
@@ -364,7 +362,7 @@
 																<a href="#" class="btn-reply text-uppercase">reply</a>
 															</div>
 															<button type="button"
-																th:if="${session.loginMember != null && session.loginMember.userid == comment.member.userid}"
+																th:if="${session.loginMember != null && session.loginMember.userid == message.member.userid}"
 																class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
 																th:value='${message.messageId}'>
 																<i class="fa fa-trash-alt"></i>

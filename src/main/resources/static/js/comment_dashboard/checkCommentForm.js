@@ -104,16 +104,16 @@ $(function() {
 			userId: {
 				required: true,
 			},
-			ref_time: {
+			refTime: {
 				required: true,
 			},
-			comp_name: {
+			compName: {
 				required: true,
 			},
-			job_name: {
+			jobName: {
 				required: true,
 			},
-			job_description: {
+			jobDescription: {
 				required: true,
 			},
 			std_hour: {
@@ -159,7 +159,7 @@ $(function() {
 
 		},
 		messages: {
-			job_description: {
+			jobDescription: {
 				required: '請選擇類別',
 			},
 			monthly_salary: {
@@ -175,8 +175,8 @@ $.raty.path = '/img';
 
 $(function() {
 
-	$('#compScore').raty({
-		targetScore: '#comp_score',
+	$('#comp_Score').raty({
+		targetScore: '#compScore',
 	});
 
 	$('#jobScore').raty({
@@ -212,10 +212,10 @@ $(function() {
 $(function() {
 	//comment
 	$('#OneInput').click(function() {
-		$('#comp_name').val('狗來富寵物廣場')
-		$('#ref_time').val('2000-01-01')
-		$('#job_name').val('美容師')
-		$('#job_description option[value="全職"]').attr('selected', 'selected')
+		$('#compName').val('狗來富寵物廣場')
+		$('#refTime').val('2000-01-01')
+		$('#jobName').val('美容師')
+		$('#jobDescription option[value="全職"]').attr('selected', 'selected')
 		$('#nickName').val('愛德華')
 		$('#std_hour').val('10')
 		$('#real_hour').val('12')

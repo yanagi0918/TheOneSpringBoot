@@ -166,13 +166,13 @@
 												class="form-control" th:value="${comment.commentId}"
 												readonly></td>
 											<th>會員編號:</th>
-											<td th:if="${comment.commentId}">[[${comment.member.idNumber}]]</td>
+											<td th:if="${comment.commentId}">[[${comment.commentMember.idNumber}]]</td>
 										</tr>
 										<tr>
 											<th>新增時間:</th>
 											<td><input class="form-control" type="text"
 												th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
-												name="create_time" readonly></td>
+												name="createTime" readonly></td>
 										</tr>
 										<tr>
 											<th>帳號:</th>
@@ -198,39 +198,39 @@
 										<tr>
 											<th>公司名稱:</th>
 											<td><input type="text" class="form-control"
-												id="comp_name" name="comp_name"
-												th:value="${comment.comp_name}" placeholder="請輸入公司名稱"></td>
+												id="compName" name="compName"
+												th:value="${comment.compName}" placeholder="請輸入公司名稱"></td>
 											<th>公司評分:</th>
-											<td th:switch="${comp_score==null}">
-												<div th:case="true" id="compScore" data-score="5"></div>
-												<div th:case="false" id="compScore"
-													th:data-score="${comment.comp_score}"></div> <input
-												type="hidden" id="comp_score" name="comp_score">
+											<td th:switch="${compScore==null}">
+												<div th:case="true" id="comp_Score" data-score="5"></div>
+												<div th:case="false" id="comp_Score"
+													th:data-score="${comment.compScore}"></div> <input
+												type="hidden" id="compScore" name="compScore">
 											</td>
 											<th>參考時間:</th>
 											<td><input type="date" class="form-control"
-												name="ref_time" id="ref_time"
-												th:value="${#calendars.format(comment.ref_time, 'yyyy-MM-dd')}"
+												name="refTime" id="refTime"
+												th:value="${#calendars.format(comment.refTime, 'yyyy-MM-dd')}"
 												th:max="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
 											</td>
 										</tr>
 										<tr>
 											<th>職位:</th>
 											<td><input type="text" class="form-control"
-												th:value="${comment.job_name}" name="job_name" id="job_name"
+												th:value="${comment.jobName}" name="jobName" id="jobName"
 												placeholder="請輸入職位名稱"></td>
 											<th>職務型態:</th>
-											<td><select class="form-select" name="job_description"
-												id="job_description" size="1">
+											<td><select class="form-select" name="jobDescription"
+												id="jobDescription" size="1">
 													<option value="" selected>請選擇</option>
 													<option value="全職"
-														th:selected="${comment.job_description== '全職'}">全職</option>
+														th:selected="${comment.jobDescription== '全職'}">全職</option>
 													<option value="兼職"
-														th:selected="${comment.job_description== '兼職'}">兼職</option>
+														th:selected="${comment.jobDescription== '兼職'}">兼職</option>
 													<option value="工讀"
-														th:selected="${comment.job_description== '工讀'}">工讀</option>
+														th:selected="${comment.jobDescription== '工讀'}">工讀</option>
 													<option value="實習"
-														th:selected="${comment.job_description== '實習'}">實習</option>
+														th:selected="${comment.jobDescription== '實習'}">實習</option>
 											</select></td>
 											<th>職位評分:</th>
 											<td th:switch="${job_score==null}">

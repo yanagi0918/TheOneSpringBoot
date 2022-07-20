@@ -100,16 +100,16 @@ $(function() {
 			userId: {
 				required: true,
 			},
-			ref_time: {
+			refTime: {
 				required: true,
 			},
-			comp_name: {
+			compName: {
 				required: true,
 			},
-			job_name: {
+			jobName: {
 				required: true,
 			},
-			job_description: {
+			jobDescription: {
 				required: true,
 			},
 			std_hour: {
@@ -155,7 +155,7 @@ $(function() {
 
 		},
 		messages: {
-			job_description: {
+			jobDescription: {
 				required: '請選擇類別',
 			},
 			monthly_salary: {
@@ -172,8 +172,8 @@ $.raty.path = '/img';
 
 $(function() {
 
-	$('#compScore').raty({
-		targetScore: '#comp_score',
+	$('#comp_Score').raty({
+		targetScore: '#compScore',
 	});
 
 	$('#jobScore').raty({
@@ -209,12 +209,12 @@ $(function() {
 //One key input js
 $(function() {
 	$('#OneInput').click(function() {
-//		$('#userId').show()
-//		$('#userId').val('A123456789')
-		$('#comp_name').val('狗來富寵物廣場')
-		$('#ref_time').val('2000-01-01')
-		$('#job_name').val('美容師')
-		$('#job_description option[value="全職"]').attr('selected', 'selected')
+		//		$('#userId').show()
+		//		$('#userId').val('A123456789')
+		$('#compName').val('狗來富寵物廣場')
+		$('#refTime').val('2000-01-01')
+		$('#jobName').val('美容師')
+		$('#jobDescription option[value="全職"]').attr('selected', 'selected')
 		$('#nickName').val('愛德華')
 		$('#std_hour').val('10')
 		$('#real_hour').val('12')
@@ -227,7 +227,7 @@ $(function() {
 		$('#bonus_count').val('2')
 		$('#share').val('我們一天的工時幾乎都10小時，休假很少超過6天也沒有年終，當爸爸媽媽把重要的毛孩子交到我手上時，所有的責任就已經落在我身上，所以我們得時時刻刻觀察牠的身體狀況，這時很考驗個人經驗跟敏銳度，幫寶貝洗澡不單只是洗澡那麼表面的意義，很多時候毛孩子來洗澡很容易可以知道狗狗是不是有其它疾病，連主人都不知道呢，因為在過程中我們會從頭到尾摸透透，這也是我們必須要有的觀察力。')
 	})
-	
+
 	//message
 	$('#OneInputMessage').click(function() {
 		$('#replyNickName').val('徬徨的畢業生')
@@ -245,7 +245,7 @@ $(function() {
 			$('#nickName').val('');
 		}
 	});
-	
+
 	$('#messageNickName #confirm-switch').click(function() {
 		$('#replyNickName').toggle();
 		if ($('#confirm-switch').prop('checked')) {
@@ -265,6 +265,10 @@ $(document).ready(function() {
 			$('#overview').removeClass('success-border').addClass('success');
 			break;
 
+		case '/comments/search':
+			$('#overview').removeClass('success-border').addClass('success');
+			break;
+
 		case '/user/comments':
 			$('#mycomment').removeClass('success-border').addClass('success');
 			break;
@@ -278,12 +282,12 @@ $(document).ready(function() {
 //控制修改留言視窗
 
 function editMessage(id) {
-	
-	var messageId = '#'+ id;
+
+	var messageId = '#' + id;
 	var editArea = '#messageEditArea' + id;
 	var editCancel = '#editCancel' + id;
 	var currentMessage = '#currentMessage' + id;
-	
+
 	$(messageId).click(function() {
 		$(editArea).removeClass('d-none');
 		$(currentMessage).addClass('d-none');
@@ -384,6 +388,16 @@ $('#messageContent').keyup(function() {
 /* 浮動提示 */
 $(function() {
 	$('[data-toggle="tooltip"]').tooltip();
+});
+
+
+////////////////////////////////////////////////////
+
+
+$(function() {
+	var data = eval('('+'${listComment}'+')');
+    console.log(data);
+
 });
 
 

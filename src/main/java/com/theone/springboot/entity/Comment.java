@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -31,21 +29,21 @@ public class Comment {
 
 	@Column(columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ref_time;
+	private Date refTime;
 
 	@Column(columnDefinition = "Date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date create_time;
+	private Date createTime;
 
-	private String comp_name;
+	private String compName;
 
-	private Integer comp_score;
+	private Integer compScore;
 
-	private String job_name;
+	private String jobName;
 
 	private Integer job_score;
 
-	private String job_description;
+	private String jobDescription;
 
 	private Integer std_hour;
 
@@ -75,25 +73,25 @@ public class Comment {
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "member_idNumber", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private Member member;
+	private Member commentMember;
 	
 	public Comment() {
 	}
 
-	public Comment(Integer commentId, Date ref_time, Date create_time, String comp_name, Integer comp_score,
-			String job_name, Integer job_score, String job_description, Integer std_hour, Integer real_hour,
+	public Comment(Integer commentId, Date refTime, Date createTime, String compName, Integer compScore,
+			String jobName, Integer job_score, String jobDescription, Integer std_hour, Integer real_hour,
 			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
 			Integer bonus_count, String share, Integer status, String nickName) {
 		this.commentId = commentId;
-		this.ref_time = ref_time;
-		this.create_time = create_time;
-		this.comp_name = comp_name;
-		this.comp_score = comp_score;
-		this.job_name = job_name;
+		this.refTime = refTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.compScore = compScore;
+		this.jobName = jobName;
 		this.job_score = job_score;
-		this.job_description = job_description;
+		this.jobDescription = jobDescription;
 		this.std_hour = std_hour;
 		this.real_hour = real_hour;
 		this.over_freq = over_freq;
@@ -108,17 +106,17 @@ public class Comment {
 	}
 
 
-	public Comment(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name,
-			Integer job_score, String job_description, Integer std_hour, Integer real_hour, Integer over_freq,
+	public Comment(Date refTime, Date createTime, String compName, Integer compScore, String jobName,
+			Integer job_score, String jobDescription, Integer std_hour, Integer real_hour, Integer over_freq,
 			Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary, Integer bonus_count,
 			String share, Integer status, String nickName) {
-		this.ref_time = ref_time;
-		this.create_time = create_time;
-		this.comp_name = comp_name;
-		this.comp_score = comp_score;
-		this.job_name = job_name;
+		this.refTime = refTime;
+		this.createTime = createTime;
+		this.compName = compName;
+		this.compScore = compScore;
+		this.jobName = jobName;
 		this.job_score = job_score;
-		this.job_description = job_description;
+		this.jobDescription = jobDescription;
 		this.std_hour = std_hour;
 		this.real_hour = real_hour;
 		this.over_freq = over_freq;
@@ -144,44 +142,44 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
-	public Date getRef_time() {
-		return ref_time;
+	public Date getRefTime() {
+		return refTime;
 	}
 
-	public void setRef_time(Date ref_time) {
-		this.ref_time = ref_time;
+	public void setRefTime(Date refTime) {
+		this.refTime = refTime;
 	}
 
-	public Date getCreate_time() {
-		return create_time;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	public String getComp_name() {
-		return comp_name;
+	public String getCompName() {
+		return compName;
 	}
 
-	public void setComp_name(String comp_name) {
-		this.comp_name = comp_name;
+	public void setCompName(String compName) {
+		this.compName = compName;
 	}
 
-	public Integer getComp_score() {
-		return comp_score;
+	public Integer getCompScore() {
+		return compScore;
 	}
 
-	public void setComp_score(Integer comp_score) {
-		this.comp_score = comp_score;
+	public void setCompScore(Integer compScore) {
+		this.compScore = compScore;
 	}
 
-	public String getJob_name() {
-		return job_name;
+	public String getJobName() {
+		return jobName;
 	}
 
-	public void setJob_name(String job_name) {
-		this.job_name = job_name;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
 	public Integer getJob_score() {
@@ -192,12 +190,12 @@ public class Comment {
 		this.job_score = job_score;
 	}
 
-	public String getJob_description() {
-		return job_description;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public void setJob_description(String job_description) {
-		this.job_description = job_description;
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
 
 	public Integer getStd_hour() {
@@ -296,19 +294,19 @@ public class Comment {
 		this.nickName = nickName;
 	}
 	
-	public Member getMember() {
-		return member;
+	public Member getCommentMember() {
+		return commentMember;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setCommentMember(Member commentMember) {
+		this.commentMember = commentMember;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", ref_time=" + ref_time + ", create_time=" + create_time
-				+ ", comp_name=" + comp_name + ", comp_score=" + comp_score + ", job_name=" + job_name + ", job_score="
-				+ job_score + ", job_description=" + job_description + ", std_hour=" + std_hour + ", real_hour="
+		return "Comment [commentId=" + commentId + ", refTime=" + refTime + ", createTime=" + createTime
+				+ ", compName=" + compName + ", compScore=" + compScore + ", jobName=" + jobName + ", job_score="
+				+ job_score + ", jobDescription=" + jobDescription + ", std_hour=" + std_hour + ", real_hour="
 				+ real_hour + ", over_freq=" + over_freq + ", seniority=" + seniority + ", total_seniority="
 				+ total_seniority + ", monthly_salary=" + monthly_salary + ", yearly_salary=" + yearly_salary
 				+ ", bonus_count=" + bonus_count + ", share=" + share + ", status=" + status + ", nickName=" + nickName + "]";

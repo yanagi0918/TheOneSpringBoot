@@ -248,24 +248,24 @@
 									<!-- 									<label for="all"> <input class="toggle-vis" type="checkbox" id="all" checked/>全選</label>  -->
 									<label for="commentId"> <input class="toggle-vis"
 										type="checkbox" id="commentId" data-column="0" checked />編號
-									</label> <label for="create_time"> <input class="toggle-vis"
-										type="checkbox" id="create_time" data-column="1" checked />新增時間
+									</label> <label for="createTime"> <input class="toggle-vis"
+										type="checkbox" id="createTime" data-column="1" checked />新增時間
 									</label> <label for="userId"> <input class="toggle-vis"
 										type="checkbox" id="userId" data-column="2" checked>帳號
 									</label><label for="nickName"> <input class="toggle-vis"
 										type="checkbox" id="nickName" data-column="3" />暱稱
-									</label> <label for="ref_time"> <input class="toggle-vis"
-										type="checkbox" id="ref_time" data-column="4" />參考時間
-									</label> <label for="comp_name"> <input class="toggle-vis"
-										type="checkbox" id="comp_name" data-column="5" />公司名稱
-									</label> <label for="comp_score"> <input class="toggle-vis"
-										type="checkbox" id="comp_score" data-column="6" />公司評分
-									</label> <label for="job_name"> <input class="toggle-vis"
-										type="checkbox" id="job_name" data-column="7" />職位
+									</label> <label for="refTime"> <input class="toggle-vis"
+										type="checkbox" id="refTime" data-column="4" />參考時間
+									</label> <label for="compName"> <input class="toggle-vis"
+										type="checkbox" id="compName" data-column="5" />公司名稱
+									</label> <label for="compScore"> <input class="toggle-vis"
+										type="checkbox" id="compScore" data-column="6" />公司評分
+									</label> <label for="jobName"> <input class="toggle-vis"
+										type="checkbox" id="jobName" data-column="7" />職位
 									</label> <label for="job_score"> <input class="toggle-vis"
 										type="checkbox" id="job_score" data-column="8" />職位評分
-									</label> <label for="job_description"> <input
-										class="toggle-vis" type="checkbox" id="job_description"
+									</label> <label for="jobDescription"> <input
+										class="toggle-vis" type="checkbox" id="jobDescription"
 										data-column="9" />職務型態
 									</label> <label for="std_hour"> <input class="toggle-vis"
 										type="checkbox" id="std_hour" data-column="10" />表定工時
@@ -326,17 +326,17 @@
 							<tbody>
 								<tr th:each="comment : ${listComment}" id="commentlist">
 									<td th:text="${comment.commentId}"></td>
-									<td th:text="${#dates.format(comment.create_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.member.userid}"></td>
+									<td th:text="${#dates.format(comment.createTime,'yyyy-MM')}"></td>
+									<td th:text="${comment.commentMember.userid}"></td>
 									<td th:text="${comment.nickName}"></td>
-									<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
-									<td th:text="${comment.comp_name}"></td>
+									<td th:text="${#dates.format(comment.refTime,'yyyy-MM')}"></td>
+									<td th:text="${comment.compName}"></td>
 									<td class="listComp" data-score=""
-										th:attr="data-score=${comment.comp_score}"></td>
-									<td th:text="${comment.job_name}"></td>
+										th:attr="data-score=${comment.compScore}"></td>
+									<td th:text="${comment.jobName}"></td>
 									<td class="listJob" data-score=""
 										th:attr="data-score=${comment.job_score}"></td>
-									<td th:text="${comment.job_description}"></td>
+									<td th:text="${comment.jobDescription}"></td>
 									<td th:text="${comment.std_hour}"></td>
 									<td th:text="${comment.real_hour}"></td>
 									<td th:text="${comment.over_freq}"></td>
@@ -400,8 +400,8 @@
 										type="checkbox" id="messageOrder" data-column="2" checked />留言排序
 									</label> <label for="messageTime"> <input class="toggle-vis"
 										type="checkbox" id="messageTime" data-column="3">留言時間
-									</label><label for="member.userid"> <input class="toggle-vis"
-										type="checkbox" id="member.userid" data-column="4" checked/>帳號
+									</label><label for="commentMember.userid"> <input class="toggle-vis"
+										type="checkbox" id="commentMember.userid" data-column="4" checked/>帳號
 									</label> <label for="replyNickName"> <input class="toggle-vis"
 										type="checkbox" id="replyNickName" data-column="5" />暱稱
 									</label> <label for="messageContent"> <input class="toggle-vis"

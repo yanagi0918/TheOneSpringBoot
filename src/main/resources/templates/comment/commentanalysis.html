@@ -198,10 +198,10 @@
 									</thead>
 									<tbody>
 										<tr th:each="comment : ${listComment}">
-											<td th:text="${#dates.format(comment.ref_time,'yyyy-MM')}"></td>
-											<td th:text="${comment.comp_name}"></td>
-											<td th:text="${comment.job_name}"></td>
-											<td th:text="${comment.job_description}"></td>
+											<td th:text="${#dates.format(comment.refTime,'yyyy-MM')}"></td>
+											<td th:text="${comment.compName}"></td>
+											<td th:text="${comment.jobName}"></td>
+											<td th:text="${comment.jobDescription}"></td>
 											<td th:text="${comment.seniority}"></td>
 											<td th:text="${comment.real_hour}"></td>
 											<td th:text="${comment.over_freq}"></td>
