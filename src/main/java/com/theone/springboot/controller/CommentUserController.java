@@ -41,8 +41,7 @@ public class CommentUserController {
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
 		List<Comment> listcomment = commentService.findAll();
-		
-		
+				
 		model.addAttribute("listComment", listcomment);
 		model.addAttribute("commentMessageService", commentMessageService);
 		
@@ -168,6 +167,9 @@ public class CommentUserController {
 		} else if (searchType.equals("jobName")) {
 			List<Comment> commentByJob = commentService.findByJobNameLike("%" + title + "%");
 			model.addAttribute("listComment", commentByJob);
+		} else if (searchType.equals("jobDescription")) {
+			List<Comment> commentByJobDescription = commentService.findByJobDescriptionLike("%" + title + "%");
+			model.addAttribute("listComment", commentByJobDescription);
 		}
 
 		model.addAttribute("commentMessageService", commentMessageService);

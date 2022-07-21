@@ -90,7 +90,7 @@
 
 
 														<li th:if="${intvs.test}==1">
-															          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
+															          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
 														<li th:if="${intvs.test}==2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 															沒有考試</li>
 
@@ -106,7 +106,7 @@
 <!-- 													<li class="fa fa-user " th:text="'  '+${intvs.userId}"></li> -->
 													<li th:text="'職缺:'+${intvs.jobName}"></li>
 													<li th:text="'面試時間:'+${intvs.intTime}"></li>
-													<li th:text="'編輯時間:'+${intvs.createTime}"></li>
+													<li ><i th:text="'編輯時間:'+${intvs.createTime}"></i></li>
 												</ul>
 											</div>
 										</div>
@@ -155,12 +155,15 @@
 								
 										<hr>
 										<h4>您的暱稱</h4>
-										<input type="text" id="user_name" name="name">
+										<input type="text" id="name" name="name">
 										<h4>您的留言</h4>
-										<textarea id="content" name="words" row="8"></textarea>
+										<textarea id="words" name="words" row="8"></textarea>
 										<input type="hidden"  name="messageOrder" th:value="${interviewMessage.messageOrder}">
-										<div>
-										<button type="submit" class="genric-btn primary-border  arrow small" id="sendBtn">發佈</button>
+										
+										<div><button  type="button" class="genric-btn info  radius small" id="MessagecorrectInput">一鍵</button>
+										<button type="submit" class="genric-btn primary-border  radius small" id="sendBtn">發佈</button>
+									
+									
 									</form>
 									</div></div>
 									<hr> 
@@ -174,7 +177,7 @@
 												<p th:id="'currentMessage' + ${intvm.messageId}">
 												<b th:text="'&nbsp&nbsp'+${intvm.name}+'&nbsp'+'說:'">&nbsp&nbsp範例 說:</b>
 												<p th:text="'&nbsp&nbsp'+${intvm.words}">&nbsp&nbsp這是一個範例留言</p>
-												<p th:text="'&nbsp&nbsp'+${intvm.time}">&nbsp&nbsp time</p>
+												<p ><i th:text="'&nbsp&nbsp'+${intvm.time}"></i></p>
 												<hr class="wordsgap">
 
 											</div>
@@ -309,8 +312,8 @@
 	<script th:src="@{/assets/js/main.js}"></script>
 	
 	
-		     <script th:src="@{.../js/interview_front/jquery.raty.js}" ></script>
-    	<script th:src="@{.../js/interview_front/checkInterviewForm.js}" ></script>
+		     <script th:src="@{../js/interview_front/jquery.raty.js}" ></script>
+    	<script th:src="@{../js/interview_front/checkInterviewForm.js}" ></script>
         
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 

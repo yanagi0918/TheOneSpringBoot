@@ -42,5 +42,39 @@ $(function() {
 			});
 		}
 	})
+	
+	//評論發布月份
+	$.ajax({
+		type: 'GET',
+		//		url: basePath + '/jobtypejson',
+		url: '/dashboard/comments/commenttimejson',
+		success: function(result) {
+
+			var ctx4 = $("#commentTimeChart").get(0).getContext("2d");
+			var commentTimeChart = new Chart(ctx4, {
+				type: "bar",
+				data: {
+					labels: ["Mon", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Agr", "Sep", "Oct", "Nov", "Dec"],
+					datasets: [{
+						label: '總筆數',
+						backgroundColor: [
+							'rgb(54, 162, 235)'
+							//							'rgb(153, 102, 255)'
+						],
+						data: result,
+						yAxisID: 'yAxis'
+					}]
+				},
+				options: {  
+    				scales: {
+        				yAxis: {
+                			ticks:{stepSize:1}
+        				}
+    				}
+				}
+
+			});
+		}
+	})
 
 });

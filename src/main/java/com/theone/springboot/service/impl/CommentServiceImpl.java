@@ -43,12 +43,6 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.deleteById(pk);
 	}
 
-//	@Override
-//	public List<Comment> findByUserId(String userId) {
-//		
-//		return commentDao.findByUserId(userId);
-//	}
-
 	@Override
 	public List<Comment> findByCommentMemberIdNumber(Integer idNumber) {
 		return commentDao.findByCommentMemberIdNumber(idNumber);
@@ -69,10 +63,9 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.findByJobNameLike(jobName);
 	}
 
-//	@Override
-//	public List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name,
-//			String job_name) {
-//		return commentDao.findByJob_DescriptionAndComp_NameOrJob_Name(job_description, comp_name, job_name);
-//	}
+	@Override
+	public List<Comment> findByJobDescriptionLike(String jobDescription) {
+		return commentDao.findByJobDescriptionLike(jobDescription);
+	}
 
 }

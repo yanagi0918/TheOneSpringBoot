@@ -160,6 +160,55 @@ public class CommentDashBoardController {
 		return jobtype;
 	}
 
-	
+	@GetMapping("/comments/commenttimejson")
+	@ResponseBody
+	public int[] getCommentTimeJson() {
+		int[] monthlist = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		List<Comment> allComments = commentService.findAll();
+		for (Comment comment : allComments) {
+			
+			int month = comment.getCreateTime().getMonth();
+			switch (month) {
+			case 1:
+				monthlist[0]++;
+				break;
+			case 2:
+				monthlist[1]++;
+				break;
+			case 3:
+				monthlist[2]++;
+				break;
+			case 4:
+				monthlist[3]++;
+				break;
+			case 5:
+				monthlist[4]++;
+				break;
+			case 6:
+				monthlist[5]++;
+				break;
+			case 7:
+				monthlist[6]++;
+				break;
+			case 8:
+				monthlist[7]++;
+				break;
+			case 9:
+				monthlist[8]++;
+				break;
+			case 10:
+				monthlist[9]++;
+				break;
+			case 11:
+				monthlist[10]++;
+				break;
+			case 12:
+				monthlist[11]++;
+				break;
+			}
+
+		}return monthlist;
+
+	}
 
 }

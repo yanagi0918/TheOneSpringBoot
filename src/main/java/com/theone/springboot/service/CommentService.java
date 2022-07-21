@@ -26,6 +26,8 @@ public interface CommentService {
 	List<Comment> findByCompNameLike(String compName);
 
 	List<Comment> findByJobNameLike(String jobName);
+	
+	List<Comment> findByJobDescriptionLike(String jobDescription);
 
 //	List<Comment> findByJob_DescriptionAndComp_NameOrJob_Name(String job_description, String comp_name, String job_name);
 

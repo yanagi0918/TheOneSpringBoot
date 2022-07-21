@@ -175,10 +175,12 @@
 <!-- 								<li -->
 <!-- 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a -->
 <!-- 									href="single_comment.html"><span>分析</span></a></li> -->
+								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobDescription')}"><a 
+								    href="@{/comments/search}"><span th:text=" ${param.title} + '(' + ${listComment.size()} + ')' "></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
-									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司'"></span></a></li>
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司' + '(' + ${listComment.size()} + ')' "></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
-									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 職缺'"></span></a></li>
+									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 職缺' + '(' + ${listComment.size()} + ')' "></span></a></li>
 								<li th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
 									th:href="@{/user/comments}"><span>我的分享</span></a></li>
 							</ul>
@@ -198,11 +200,11 @@
 						<article class="blog_item">
 							<div class="blog_details py-5">
 								<div class="">
-									<a class="float-right text-muted"><i
-										class="fa fa-thumbs-down">噓</i></a>
-									<h4 class="float-right">&nbsp&nbsp</h4>
-									<a class="float-right text-muted"><i
-										class="fa fa-thumbs-up">讚</i></a>
+<!-- 									<a class="float-right text-muted"><i -->
+<!-- 										class="fa fa-thumbs-down">噓</i></a> -->
+<!-- 									<h4 class="float-right">&nbsp&nbsp</h4> -->
+<!-- 									<a class="float-right text-muted"><i -->
+<!-- 										class="fa fa-thumbs-up">讚</i></a> -->
 									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
 								</div>
 								<a class="d-inline-block"
@@ -260,32 +262,32 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">分類</h4>
 							<ul class="list cat-list">
-								<li><a href="#" class="d-flex">
+								<li><a href="/comments" class="d-flex">
 										<p>全部</p>
-										<p>([[${listComment.size()}]])</p>
+<!-- 										<p>([[${listComment.size()}]])</p> -->
 								</a></li>
-								<li><a href="#" class="d-flex">
-										<p>正職</p>
-										<p>(37)</p>
+								<li><a th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'" class="d-flex">
+										<p>全職</p>
+<!-- 										<p>([[${listComment.size()}]])</p> -->
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'" class="d-flex">
 										<p>兼職</p>
-										<p>(10)</p>
+<!-- 										<p>([[${listComment.size()}]])</p> -->
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'" class="d-flex">
 										<p>工讀</p>
-										<p>(03)</p>
+<!-- 										<p>([[${listComment.size()}]])</p> -->
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'" class="d-flex">
 										<p>實習</p>
-										<p>(11)</p>
+<!-- 										<p>([[${listComment.size()}]])</p> -->
 								</a></li>
 							</ul>
 						</aside>
 
 						<aside class="single_sidebar_widget tag_cloud_widget_comment">
 							<h4 class="widget_title">熱門搜尋</h4>
-							<form th:action="@{/comments/search}" class="search-box" id="commentHotSearch">
+							<form th:action="@{/comments/search}" class="" id="commentHotSearch">
 							<ul class="list">
 								<li><a th:href="@{/comments/search} + '?title=工程師&searchType=jobName'" >#工程師</a></li>
 								<li><a th:href="@{/comments/search} + '?title=軟體&searchType=jobName'" >#軟體</a></li>

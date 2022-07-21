@@ -231,8 +231,11 @@ $(function() {
 	//message
 	$('#OneInputMessage').click(function() {
 		$('#replyNickName').val('徬徨的畢業生')
-		$('#messageContent').val('感謝大大無私的分享~~')
+		$('#messageContent').val('趕謝大大無私的分享~~')
 	});
+	
+	
+
 });
 //anonymous/user show
 
@@ -284,7 +287,6 @@ $(document).ready(function() {
 //控制修改留言視窗
 
 function editMessage(id) {
-console.log(id);
 	var messageId = '#' + id;
 	var editArea = '#messageEditArea' + id;
 	var editCancel = '#editCancel' + id;
@@ -304,17 +306,23 @@ console.log(id);
 //控制回覆留言視窗
 
 function replyMessage(id) {
-	console.log(id);
 	var messageId = '#reply' + id;
 	var replyArea = '#replyMessageArea' + id;
 	var replyCancel = '#replyCancel' + id;
-
+//	var modifybtn = '#modifybtn' + id;
+//	var modifyreply = '#modifyreply' + id;
+	
 	$(messageId).click(function() {
 		$(replyArea).removeClass('d-none');
 	})
 	$(replyCancel).click(function() {
 		$(replyArea).addClass('d-none');
 	})
+	
+	//一鍵輸入
+//	$(modifybtn).click(function() {
+//		$(modifyreply).val('謝大大無私的分享~~');
+//	})
 
 }
 
