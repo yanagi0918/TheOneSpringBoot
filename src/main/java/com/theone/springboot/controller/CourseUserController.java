@@ -69,7 +69,7 @@ public class CourseUserController {
 
     @GetMapping("/conditionsSearch")
     public String findByCondition(@RequestParam String search, Model model) {
-        List<CourseBean> courseList = courseService.findByCourseNameOrCourseCategoryOrLecturerContaining(search, search, search);
+        List<CourseBean> courseList = courseService.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(search, search, search);
         model.addAttribute("courseList", courseList);
         return "course/allCustomerList";
     }

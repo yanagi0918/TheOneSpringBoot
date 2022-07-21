@@ -6,10 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
-import com.theone.springboot.entity.Event;
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +70,6 @@ public class CourseDashBoardController {
         }
 
     }
-
 
 
     @GetMapping("/courses/{courseNo}")
