@@ -121,7 +121,7 @@ $('#correctCompany').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('台北市內湖區民善街')
 	$('#empnumber').val('300')
-	$('#website').val('iSpan4505@gmail.com')
+	$('#website').val('iSpaX555@gmail.com')
 	$('#capital').val('1200萬')
 })
 $('#companyUpdate').click(function() {
@@ -133,7 +133,7 @@ $('#companyUpdate').click(function() {
 	$('#fax').val('07-102635')
 	$('#compaddress').val('台北市萬華區廣州街211號')
 	$('#empnumber').val('52')
-	$('#website').val('iSpan4505@gmail.com')
+	$('#website').val('iSpaX3305@gmail.com')
 	$('#capital').val('900萬')
 })
 $('#companyCreate').click(function() {
@@ -145,7 +145,7 @@ $('#companyCreate').click(function() {
 	$('#fax').val('07-1325462')
 	$('#compaddress').val('台北市大安區26號')
 	$('#empnumber').val('199')
-	$('#website').val('iSpan4505@gmail.com')
+	$('#website').val('iSpDS33505@gmail.com')
 	$('#capital').val('1300萬')
 })
 $(document).ready( function () {

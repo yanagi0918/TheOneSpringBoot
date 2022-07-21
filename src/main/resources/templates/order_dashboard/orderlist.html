@@ -125,7 +125,7 @@
                                     <th scope="col">訂單日期</th>
                                     <th scope="col">會員帳號</th>
                                     <th scope="col">課程名稱</th>
-                                    <th scope="col">課程類別</th>
+<!--                                     <th scope="col">課程類別</th> -->
                                     <th scope="col">總價</th>
                                     <th scope="col">狀態</th>
                                     <th scope="col">查看/修改/刪除</th>
@@ -139,7 +139,7 @@
 									<td th:text="${order.member.userid}"></td>
 <!-- 									<td th:text="${order.productId}"></td> -->
 									<td th:text="${order.courseBean.courseName}"></td>
-									<td th:text="${order.courseBean.courseCategory}"></td>
+<!-- 									<td th:text="${order.courseBean.courseCategory}"></td> -->
 <!-- 									<td th:text="${order.totalPrice}"></td> -->
 									<td th:text="'$'+${order.courseBean.price}"></td>
 									<td th:switch="${order.state}">
@@ -223,13 +223,13 @@
         };
         Swal.fire({
             title: '審核通過確認!?',
-            text: "",
+            text: "審核結果將寄送E-mail通知",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: '確定',
-            cancelButtonText: '取消'
+            cancelButtonText: '取消',
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
@@ -264,7 +264,7 @@
         };
         Swal.fire({
             title: '駁回確認!?',
-            text: "",
+            text: "審核結果將寄送E-mail通知",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

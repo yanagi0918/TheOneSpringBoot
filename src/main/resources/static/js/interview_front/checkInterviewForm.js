@@ -6,7 +6,7 @@ $('#InterviewwrongInput').click(function () {
 })
 //正確輸入
 $('#InterviewcorrectInput').click(function () {
-    $('#userId').val('benjamin666')
+    $('#userId').val('A123456789')
     $('#intTime').val('2022-05-20')
     $('#compName').val('多拉A夢共和國')
     $('#jobName').val('竹蜻蜓修復員')

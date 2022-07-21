@@ -75,8 +75,12 @@ $(function() {
 	})
 	//memeber signup 一鍵
 	$('#memberSignup').click(function() {
-		$('#username').val('A123456789')
-		$('#password').val('12345')
+		$('#userName').val('王曉明')
+		$('#userid').val('L223456789')
+		$('#email').val('iSpan4505@gmail.com')
+		$('#pwd').val('12345')
+		$('#birth').val('1994-12-29')
+		
 		
 		
 		
