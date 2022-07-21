@@ -6,6 +6,7 @@ import com.theone.springboot.service.CourseService;
 import com.theone.springboot.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,9 @@ public class CourseUserController {
     }
 
     @GetMapping("/courses")
-    public String findAllCourse(@RequestParam(required = false) String courseCategory,
+    public String findAllCourse(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "9") int size,
+                                @RequestParam(required = false) String courseCategory,
                                 @RequestParam(required = false) Integer courseNo,
                                 Model model) {
         List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByDateDesc("已審核");
@@ -59,7 +62,7 @@ public class CourseUserController {
             model.addAttribute("courseList", courseList);
             return "course/allCustomerListByCategory";
         } else {
-            List<CourseBean> courseList = courseService.findAllCoursesByStatus("已審核");
+            Page<CourseBean> courseList = courseService.findAllCoursesByStatus(page,size,"已審核");
             model.addAttribute("courseList", courseList);
             model.addAttribute("courseListRecent", courseListRecent);
             return "course/allCustomerList";

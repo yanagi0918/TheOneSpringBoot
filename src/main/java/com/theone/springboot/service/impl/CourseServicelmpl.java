@@ -1,12 +1,17 @@
 package com.theone.springboot.service.impl;
 
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.theone.springboot.entity.Member;
 import com.theone.springboot.utils.CourseCsvExporter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -36,7 +41,6 @@ public class CourseServicelmpl implements CourseService {
         this.javaMailSender = javaMailSender;
     }
 
-
     @Override
     public boolean isDup(Integer pk) {
         return courseDao.existsById(pk);
@@ -55,23 +59,15 @@ public class CourseServicelmpl implements CourseService {
 
 
     @Override
-    public List<CourseBean> findByCourseCategory(String courseCategory) {
-        return courseDao.findByCourseCategory(courseCategory);
-    }
-
-    @Override
-    public List<CourseBean> findByLecturer(String lecturer) {
-        return courseDao.findByLecturer(lecturer);
-    }
-
-    @Override
     public List<CourseBean> findAllCourses() {
         return courseDao.findAll();
     }
 
     @Override
-    public List<CourseBean> findAllCoursesByStatus(String status) {
-        return courseDao.findByStatus(status);
+    public Page<CourseBean> findAllCoursesByStatus(int page, int size, String status) {
+
+        Sort sort = Sort.by(Sort.Direction.ASC,"courseNo");
+        return courseDao.findAllByStatus(PageRequest.of(page,size,sort),status);
     }
 
     @Override
@@ -132,13 +128,13 @@ public class CourseServicelmpl implements CourseService {
 
     @Override
     public List<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(String courseName, String courseCategory, String lecturer) {
-        return courseDao.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(courseName,courseCategory,lecturer);
+        return courseDao.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(courseName, courseCategory, lecturer);
     }
 
 
     @Override
     public List<CourseBean> findTop5ByCourseCategoryAndStatus(String courseCategory, String status) {
-        return courseDao.findTop5ByCourseCategoryAndStatus(courseCategory,status);
+        return courseDao.findTop5ByCourseCategoryAndStatus(courseCategory, status);
     }
 
     @Override

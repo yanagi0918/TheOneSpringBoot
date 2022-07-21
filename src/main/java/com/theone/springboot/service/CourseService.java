@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.theone.springboot.entity.CourseBean;
 import com.theone.springboot.entity.Member;
+import org.springframework.data.domain.Page;
 
 public interface CourseService {
 
@@ -15,13 +16,10 @@ public interface CourseService {
 
 	CourseBean findByCourseName(String courseName);
 
-	List<CourseBean> findByCourseCategory(String courseCategory);
-
-	List<CourseBean> findByLecturer(String lecturer);
 
 	List<CourseBean> findAllCourses();
 
-	List<CourseBean> findAllCoursesByStatus(String status);
+	Page<CourseBean> findAllCoursesByStatus(int page, int size, String status);
 
 	List<CourseBean> findByCourseCategoryAndStatus(String courseCategory,String status);
 	
