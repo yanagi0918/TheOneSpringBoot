@@ -40,6 +40,7 @@ public class InterviewMessage {
 	
 	@ManyToOne( fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "interview_cvNo", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Interview interview ;
 	
