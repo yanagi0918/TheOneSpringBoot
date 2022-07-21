@@ -155,12 +155,15 @@
 								
 										<hr>
 										<h4>您的暱稱</h4>
-										<input type="text" id="user_name" name="name">
+										<input type="text" id="name" name="name">
 										<h4>您的留言</h4>
-										<textarea id="content" name="words" row="8"></textarea>
+										<textarea id="words" name="words" row="8"></textarea>
 										<input type="hidden"  name="messageOrder" th:value="${interviewMessage.messageOrder}">
+										
 										<div>
-										<button type="submit" class="genric-btn primary-border  arrow small" id="sendBtn">發佈</button>
+										<button type="submit" class="genric-btn primary-border  radius small" id="sendBtn">發佈</button>
+									<hr>
+									<button  type="button" class="genric-btn info  radius small" id="MessagecorrectInput">一鍵</button>
 									</form>
 									</div></div>
 									<hr> 
@@ -309,8 +312,8 @@
 	<script th:src="@{/assets/js/main.js}"></script>
 	
 	
-		     <script th:src="@{.../js/interview_front/jquery.raty.js}" ></script>
-    	<script th:src="@{.../js/interview_front/checkInterviewForm.js}" ></script>
+		     <script th:src="@{../js/interview_front/jquery.raty.js}" ></script>
+    	<script th:src="@{../js/interview_front/checkInterviewForm.js}" ></script>
         
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
