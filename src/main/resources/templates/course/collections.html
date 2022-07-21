@@ -83,7 +83,7 @@
                     <!-- 識別課程編號-->
                     <input type="hidden" class="form-control" name="courseNo" th:value="${course.courseNo}">
 
-                    <a th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                    <a th:href="@{'/courses?courseNo='+${course.courseNo}}">
                         <img class="img-fluid" th:src="${course.coursePicUrl}" alt="" src="">
                     </a>
                     <div class="bg-secondary p-4">
@@ -93,7 +93,7 @@
                             <h6 class="m-0"
                                 th:utext="'&lt;i class=&quot;fa fa-calendar-alt fa-lg text-primary mr-2&quot;&gt;&lt;/i&gt;'+${#dates.format(course.date,'yyyy-MM-dd')}"></h6>
                         </div>
-                        <a class="h5" th:href="@{'/user/courses?courseNo='+${course.courseNo}}">
+                        <a class="h5" th:href="@{'/courses?courseNo='+${course.courseNo}}">
                             <div th:text="${course.courseName}"></div>
                         </a>
                         <div></div>
