@@ -16,7 +16,13 @@ $('#InterviewcorrectInput').click(function () {
     $('#share').val('現場 一入廠先去警衛室進行換證 被小夫帶至會議室進行人事資料表填寫考智力測驗，不說我還以為在寫什麼綜合試題 國文/英文/數學/邏輯 邏輯爆幹難 我嚴重懷疑是我智商不足 接著就面主管，看起來好像胖虎,之後就自我介紹完後進行簡報分享' 
  )
 })
-
+//一鍵輸入Message
+$('#MessagecorrectInput').click(function () {
+    $('#name').val('丹佛')
+   
+    $('#words').val('呵呵哈哈哈,這麼危險的工作,我爸爸一定不會給我去的,但他不知道的是我早已經報名了!!呵呵哈哈哈')
+   
+})
 		
 //Star rating js 星星產生器
 $.raty.path = '/img';
