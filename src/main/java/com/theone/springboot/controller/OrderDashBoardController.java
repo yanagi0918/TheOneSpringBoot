@@ -120,7 +120,7 @@ public class OrderDashBoardController {
 					 "審核結果: <font color=\"blue\"><b>" + state + "</b></font><br>" +
 					 "連結: http://localhost:8080/user/orders" +
 					 "</p>";
-		orderService.sendNotifyEmail("wl02968970@gmail.com", "TheOne 訂單審核通知", msg);
+		orderService.sendNotifyEmail("ispan4505@gmail.com", "TheOne 訂單審核通知", msg);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
