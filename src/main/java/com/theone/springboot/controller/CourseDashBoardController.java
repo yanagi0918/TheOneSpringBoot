@@ -195,7 +195,7 @@ public class CourseDashBoardController {
                     "審核結果: <font color=" + result + "</b></font><br>" +
                     "講師專區連結: http://localhost:8080/user/courses/lecturers" +
                     "</p>";
-            courseService.sendNotifyEmail("eeit45@gmail.com", "TheOne 講師課程審核通知", msg);
+            courseService.sendNotifyEmail("iSpan4505@gmail.com", "TheOne 講師課程審核通知", msg);
             return true;
         }
         return false;
