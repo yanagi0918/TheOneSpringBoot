@@ -33,7 +33,7 @@ public interface CourseService {
 
 	void sendNotifyEmail(String recipient, String subject, String message);
 
-	List<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(String courseName,String courseCategory,String lecturer);
+	Page<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(String search);
 
 	List<CourseBean> findTop5ByCourseCategoryAndStatus(String courseCategory,String status);
 

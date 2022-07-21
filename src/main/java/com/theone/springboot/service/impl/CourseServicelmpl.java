@@ -1,7 +1,6 @@
 package com.theone.springboot.service.impl;
 
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,6 @@ import com.theone.springboot.utils.CourseCsvExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -127,8 +125,9 @@ public class CourseServicelmpl implements CourseService {
     }
 
     @Override
-    public List<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(String courseName, String courseCategory, String lecturer) {
-        return courseDao.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(courseName, courseCategory, lecturer);
+    public Page<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(String search) {
+        Sort sort = Sort.by(Sort.Direction.ASC,"courseNo");
+        return courseDao.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(PageRequest.of(0,9,sort),search, search, search);
     }
 
 

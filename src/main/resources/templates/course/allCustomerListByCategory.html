@@ -360,6 +360,13 @@
 <!-- Template Javascript -->
 <script th:src="@{/assets_course/js/main.js}"></script>
 <script>
+
+    $(function () {
+        $('#searchbtn').click(function () {
+            $('#searchform').submit();
+        })
+    })
+
     $(function () {
         var courseNoSelectors = $('.courseNo');
         for (let i = 0; i < courseNoSelectors.length; i++) {

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -72,7 +70,7 @@ public class CourseUserController {
 
     @GetMapping("/conditionsSearch")
     public String findByCondition(@RequestParam String search, Model model) {
-        List<CourseBean> courseList = courseService.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(search, search, search);
+       Page<CourseBean> courseList = courseService.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(search);
         model.addAttribute("courseList", courseList);
         return "course/allCustomerList";
     }
