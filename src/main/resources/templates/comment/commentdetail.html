@@ -233,7 +233,7 @@
 								<div class="thumb f-left col-sm-1 p-0"
 									th:if="${session.loginMember != null}">
 									<img class="p-0"
-										th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/comment_4.png} : ${session.loginMember.image}}"
+										th:src="${(session.loginMember.image.contains('null') || session.loginMember.image == null) ? '/assets/img/comment/comment_4.png' : session.loginMember.image}"
 										alt="">
 								</div>
 								<div class="thumb f-left col-sm-1 p-0"
@@ -286,7 +286,7 @@
 														readonly>
 												</div>
 											</div>
-											<div class="col-sm-10" id="messageNickName"
+											<div class="col-sm-8" id="messageNickName"
 												th:if="${session.loginMember != null}">
 												<div class="form-group">
 													<div class="f-left">
@@ -323,8 +323,12 @@
 											<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
 											<!-- 											</div> -->
 											<!-- 										</div> -->
-											<div class="form-group col-sm-2 f-right"
+											<div class="form-group col-sm-4 f-right"
 												th:if="${session.loginMember != null}">
+												<button type="button" class="genric-btn primary radius"
+													name="OneInputMessage" value="一鍵輸入" id="OneInputMessage">
+													<i class="fa fa-list"></i>
+												</button>
 												<button type="submit"
 													th:if="${commentMessage.messageId == null}"
 													class="genric-btn success radius" name="submit" value="送出">
@@ -342,7 +346,7 @@
 										<div th:id="'currentMessage' + ${message.messageId}">
 											<div class="thumb f-left">
 												<img
-													th:src="@{${message.replyNickName.equals('匿名') || message.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${message.member.image}}"
+													th:src="@{${message.replyNickName.equals('匿名') || !message.member.image.contains('memberimages')} ? @{/assets/img/comment/comment_4.png} : ${message.member.image}}"
 													alt="">
 											</div>
 											<div
@@ -366,9 +370,9 @@
 																<div class="reply-btn"
 																	th:id="'reply' + ${message.messageId}"
 																	th:if="${session.loginMember != null}">
-																	<a class="btn-reply d-flex align-items-center"
-																		th:id="${message.messageId}"
-																		onmouseover="replyMessage(this.id)">回覆</a>
+<!-- 																	<a class="btn-reply d-flex align-items-center" -->
+<!-- 																		th:id="${message.messageId}" -->
+<!-- 																		onmouseover="replyMessage(this.id)">回覆</a> -->
 																</div>
 															</div>
 															<button type="button"
@@ -395,7 +399,7 @@
 														<textarea
 															class="form-control w-100 bg-white rounded-80 shadow-sm"
 															placeholder="留言....." name="messageContent"
-															th:text="${message.messageContent}"></textarea>
+															th:text="${message.messageContent}" th:id="'modifyreply' + ${message.messageId}"></textarea>
 														<h6 class="float-right" id="count_message"></h6>
 													</div>
 												</div>
@@ -429,6 +433,11 @@
 															th:value="${message.messageLike}">
 													</div>
 												</div>
+<!-- 												<button type="button" -->
+<!-- 													class="edit-delete testimonial-bg border-0" name="modify" th:id="'modifybtn'+${message.messageId}" -->
+<!-- 													value="一鍵"> -->
+<!-- 													<i class="fa fa-paste"></i> -->
+<!-- 												</button> -->
 												<button type="submit"
 													class="edit-delete testimonial-bg border-0" name="sent"
 													value="送出">
@@ -449,7 +458,7 @@
 											<div class="thumb f-right col-sm-1 p-0"
 												th:if="${session.loginMember != null}">
 												<img class="p-0"
-													th:src="@{${session.loginMember.image == null} ? @{/assets/img/comment/comment_4.png} : ${session.loginMember.image}}"
+													th:src="${(session.loginMember.image.contains('null') || session.loginMember.image == null) ? '/assets/img/comment/comment_4.png' : session.loginMember.image}"
 													alt="">
 											</div>
 											<div class="thumb f-right col-sm-1 p-0"
@@ -555,56 +564,57 @@
 										</div>
 										<!-- 回覆留言區 end -->
 										<!-- 回覆留言list start-->
-<!-- 										<form -->
-<!-- 											th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}" th:with="${model.addAttribute('replymessage',commentMessageService.findByMessageReply(${message.messageId}))}" -->
-<!-- 											method="post" id="form" th:modelAttribute="replymessage"> -->
-											<div class="comment-list"
-												th:each="replymessage : ${replymessage}">
-												<div th:id="'currentMessage' + ${replymessage.messageId}">
-													<div class="thumb f-left">
-														<img
-															th:src="@{${replymessage.replyNickName.equals('匿名') || replymessage.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
-															alt="">
-													</div>
-													<div
-														class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
-														<div class="user justify-content-between d-flex">
-															<div class="desc p-3">
-																<div class="float-right m-1"
-																	th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}">
-																	<a class="m-2 edit-delete editMessage"
-																		th:id="${message.messageId}"
-																		onmouseover="editMessage(this.id)"> <i
-																		class="fa fa-pencil-alt"></i>
-																	</a>
-																</div>
-																<p class="comment" th:text="${replymessage.messageContent}"></p>
-																<div class="d-flex justify-content-between">
-																	<div class="d-flex align-items-center">
-																		<h5 class="date">[[${message.replyNickName}]]</h5>
-																		<p class="date"
-																			th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
-																		<div class="reply-btn"
-																			th:id="'reply' + ${message.messageId}"
-																			th:if="${session.loginMember != null}">
-																			<a class="btn-reply d-flex align-items-center"
-																				th:id="${message.messageId}"
-																				onmouseover="replyMessage(this.id)">回覆</a>
-																		</div>
+										<!-- 										<form -->
+										<!-- 											th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}" th:with="${model.addAttribute('replymessage',commentMessageService.findByMessageReply(${message.messageId}))}" -->
+										<!-- 											method="post" id="form" th:modelAttribute="replymessage"> -->
+										<div class="comment-list"
+											th:each="replymessage : ${replymessage}">
+											<div th:id="'currentMessage' + ${replymessage.messageId}">
+												<div class="thumb f-left">
+													<img
+														th:src="@{${replymessage.replyNickName.equals('匿名') || replymessage.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
+														alt="">
+												</div>
+												<div
+													class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+													<div class="user justify-content-between d-flex">
+														<div class="desc p-3">
+															<div class="float-right m-1"
+																th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}">
+																<a class="m-2 edit-delete editMessage"
+																	th:id="${message.messageId}"
+																	onmouseover="editMessage(this.id)"> <i
+																	class="fa fa-pencil-alt"></i>
+																</a>
+															</div>
+															<p class="comment"
+																th:text="${replymessage.messageContent}"></p>
+															<div class="d-flex justify-content-between">
+																<div class="d-flex align-items-center">
+																	<h5 class="date">[[${message.replyNickName}]]</h5>
+																	<p class="date"
+																		th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+																	<div class="reply-btn"
+																		th:id="'reply' + ${message.messageId}"
+																		th:if="${session.loginMember != null}">
+																		<a class="btn-reply d-flex align-items-center"
+																			th:id="${message.messageId}"
+																			onmouseover="replyMessage(this.id)">回覆</a>
 																	</div>
-																	<button type="button"
-																		th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}"
-																		class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
-																		th:value='${message.messageId}'>
-																		<i class="fa fa-trash-alt"></i>
-																	</button>
 																</div>
+																<button type="button"
+																	th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}"
+																	class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
+																	th:value='${message.messageId}'>
+																	<i class="fa fa-trash-alt"></i>
+																</button>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-<!-- 										</form> -->
+										</div>
+										<!-- 										</form> -->
 										<!-- 回覆留言list end-->
 									</div>
 								</div>
@@ -627,40 +637,53 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">分類</h4>
 							<ul class="list cat-list">
-								<li><a href="#" class="d-flex">
+								<li><a href="/comments" class="d-flex">
 										<p>全部</p>
-										<p>(21)</p>
 								</a></li>
-								<li><a href="#" class="d-flex">
-										<p>正職</p>
-										<p>(37)</p>
+								<li><a
+									th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'"
+									class="d-flex">
+										<p>全職</p>
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'"
+									class="d-flex">
 										<p>兼職</p>
-										<p>(10)</p>
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'"
+									class="d-flex">
 										<p>工讀</p>
-										<p>(03)</p>
 								</a></li>
-								<li><a href="#" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'"
+									class="d-flex">
 										<p>實習</p>
-										<p>(11)</p>
 								</a></li>
 							</ul>
 						</aside>
 
 						<aside class="single_sidebar_widget tag_cloud_widget_comment">
 							<h4 class="widget_title">熱門搜尋</h4>
-							<ul class="list">
-								<li><a href="#">#工程師</a></li>
-								<li><a href="#">#軟體</a></li>
-								<li><a href="#">#行政助理</a></li>
-								<li><a href="#">#護理師</a></li>
-								<li><a href="#">#專員</a></li>
-								<li><a href="#">#銀行</a></li>
-								<li><a href="#">#科技</a></li>
-							</ul>
+							<form th:action="@{/comments/search}" class=""
+								id="commentHotSearch">
+								<ul class="list">
+									<li><a
+										th:href="@{/comments/search} + '?title=工程師&searchType=jobName'">#工程師</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=軟體&searchType=jobName'">#軟體</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=行政助理&searchType=jobName'">#行政助理</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=銀行&searchType=compName'">#銀行</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=專員&searchType=jobName'">#專員</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=java&searchType=jobName'">#java</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=科技&searchType=compName'">#科技</a></li>
+								</ul>
+							</form>
 						</aside>
 					</div>
 				</div>

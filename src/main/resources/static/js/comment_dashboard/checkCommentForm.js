@@ -213,6 +213,7 @@ $(function() {
 	//comment
 	$('#OneInput').click(function() {
 		$('#compName').val('狗來富寵物廣場')
+		$('#user').val('A123456789')
 		$('#refTime').val('2000-01-01')
 		$('#jobName').val('美容師')
 		$('#jobDescription option[value="全職"]').attr('selected', 'selected')
@@ -350,10 +351,10 @@ $(document).ready(function() {
 			targets: [5, 7]
 		}, {
 			visible: false,
-			targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+			targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19]
 		}, {
-			targets: 17,
-			render: $.fn.dataTable.render.ellipsis(15)
+			targets: 18,
+			render: $.fn.dataTable.render.ellipsis(20)
 
 		}
 		],
@@ -383,7 +384,7 @@ $(document).ready(function() {
 		//hide column
 		columnDefs: [{
 			visible: false,
-			targets: [3, 5, 6, 7, 8]
+			targets: [3, 5, 7, 8, 9]
 		}, {
 			targets: 6,
 			render: $.fn.dataTable.render.ellipsis(15)

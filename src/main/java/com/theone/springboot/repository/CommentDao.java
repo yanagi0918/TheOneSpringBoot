@@ -23,4 +23,6 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 	List<Comment> findByCompNameLike(String compName);
 	
 	List<Comment> findByJobNameLike(String jobName);
+	
+	List<Comment> findByJobDescriptionLike(String jobDescription);
 }
