@@ -201,7 +201,7 @@
 				<div id="menu">
 					<ul>
 						<li><a class="hover_tab" href="#list"><i
-								class="fa-solid fa-list"></i>&nbspList</a></li>
+								class="fa fa-paste"></i>&nbspList</a></li>
 						<li><a href="#graph"><i class="fa-solid fa-chart-pie"></i>&nbspGraph</a></li>
 						<li><a href="#message"><i class="fa-solid fa-comments"></i></i>&nbspReply</a></li>
 					</ul>
@@ -210,12 +210,19 @@
 			<!-- 圖表 -->
 			<div style="clear: both"></div>
 			<div class="container-fluid px-4">
-				<div class="bg-light text-center rounded p-4 txt_tab" id="graph">
-					<div class="col-sm-12 col-xl-3">
-						<canvas id="jobTypeChart"></canvas>
+				<div class="bg-light text-center rounded p-4 txt_tab"
+					id="graph">
+					<div class="row">
+						<div class="col-sm-12 col-xl-4 float-left">
+							<canvas id="jobTypeChart"></canvas>
+						</div>
+						<div class="col-sm-12 col-xl-8 float-left">
+							<canvas id="commentTimeChart"></canvas>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- 圖表 -->
 			<div class="container-fluid px-4">
 				<div class="bg-light text-center rounded p-4 txt_tab" id="list">
 					<div class="d-flex align-items-center justify-content-between mb-4">
@@ -264,9 +271,8 @@
 										type="checkbox" id="jobName" data-column="7" />職位
 									</label> <label for="job_score"> <input class="toggle-vis"
 										type="checkbox" id="job_score" data-column="8" />職位評分
-									</label> <label for="jobDescription"> <input
-										class="toggle-vis" type="checkbox" id="jobDescription"
-										data-column="9" />職務型態
+									</label> <label for="jobDescription"> <input class="toggle-vis"
+										type="checkbox" id="jobDescription" data-column="9" />職務型態
 									</label> <label for="std_hour"> <input class="toggle-vis"
 										type="checkbox" id="std_hour" data-column="10" />表定工時
 									</label> <label for="real_hour"> <input class="toggle-vis"
@@ -285,9 +291,9 @@
 									</label> <label for="bonus_count"> <input class="toggle-vis"
 										type="checkbox" id="bonus_count" data-column="17" />獎金次數
 									</label> <label for="share"> <input class="toggle-vis"
-										type="checkbox" id="share" data-column="18" />心得分享
+										type="checkbox" id="share" data-column="18" checked />心得分享
 									</label><label for="status"> <input class="toggle-vis"
-										type="checkbox" id="status" data-column="19" checked />狀態
+										type="checkbox" id="status" data-column="19" />狀態
 									</label>
 								</div>
 							</div>
@@ -400,18 +406,19 @@
 										type="checkbox" id="messageOrder" data-column="2" checked />留言排序
 									</label> <label for="messageTime"> <input class="toggle-vis"
 										type="checkbox" id="messageTime" data-column="3">留言時間
-									</label><label for="commentMember.userid"> <input class="toggle-vis"
-										type="checkbox" id="commentMember.userid" data-column="4" checked/>帳號
+									</label><label for="commentMember.userid"> <input
+										class="toggle-vis" type="checkbox" id="commentMember.userid"
+										data-column="4" checked />帳號
 									</label> <label for="replyNickName"> <input class="toggle-vis"
 										type="checkbox" id="replyNickName" data-column="5" />暱稱
 									</label> <label for="messageContent"> <input class="toggle-vis"
-										type="checkbox" id="messageContent" data-column="6" />留言內容
+										type="checkbox" id="messageContent" data-column="6" checked />留言內容
 									</label> <label for="messageReply"> <input class="toggle-vis"
 										type="checkbox" id="messageReply" data-column="7" />回復文章編號
 									</label> <label for="messageLike"> <input class="toggle-vis"
 										type="checkbox" id="messageLike" data-column="8" />喜歡
 									</label> <label for="status"> <input class="toggle-vis"
-										type="checkbox" id="status" data-column="9" checked/>狀態
+										type="checkbox" id="status" data-column="9" />狀態
 									</label>
 								</div>
 							</div>
