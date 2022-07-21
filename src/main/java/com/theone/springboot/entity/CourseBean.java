@@ -57,7 +57,7 @@ public class CourseBean {
 //                joinColumns = {@JoinColumn(name = "courseNo", nullable = false)},
 //                inverseJoinColumns = {@JoinColumn(name = "memberPk", nullable = false)})
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "collectionCourses")
-    @JsonBackReference
+//    @JsonBackReference
     private Set<Member> members = new HashSet<>();
 
     public Set<Member> getMembers() {

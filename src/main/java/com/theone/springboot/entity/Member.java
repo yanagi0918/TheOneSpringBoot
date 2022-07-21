@@ -41,7 +41,7 @@ public class Member {
     //	 VINCENT COLLECTION MANY(member講師) TO MANY(收藏多個課程)
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+//    @JsonManagedReference
     @JoinTable(name = "member_course",
             joinColumns = {@JoinColumn(name = "memberPk", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "courseNo", nullable = false)})
