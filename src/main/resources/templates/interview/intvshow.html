@@ -90,7 +90,7 @@
 
 
 														<li th:if="${intvs.test}==1">
-															          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
+															          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp有考試</li>
 														<li th:if="${intvs.test}==2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 															沒有考試</li>
 
@@ -106,7 +106,7 @@
 <!-- 													<li class="fa fa-user " th:text="'  '+${intvs.userId}"></li> -->
 													<li th:text="'職缺:'+${intvs.jobName}"></li>
 													<li th:text="'面試時間:'+${intvs.intTime}"></li>
-													<li th:text="'編輯時間:'+${intvs.createTime}"></li>
+													<li ><i th:text="'編輯時間:'+${intvs.createTime}"></i></li>
 												</ul>
 											</div>
 										</div>
@@ -160,10 +160,10 @@
 										<textarea id="words" name="words" row="8"></textarea>
 										<input type="hidden"  name="messageOrder" th:value="${interviewMessage.messageOrder}">
 										
-										<div>
+										<div><button  type="button" class="genric-btn info  radius small" id="MessagecorrectInput">一鍵</button>
 										<button type="submit" class="genric-btn primary-border  radius small" id="sendBtn">發佈</button>
-									<hr>
-									<button  type="button" class="genric-btn info  radius small" id="MessagecorrectInput">一鍵</button>
+									
+									
 									</form>
 									</div></div>
 									<hr> 
@@ -177,7 +177,7 @@
 												<p th:id="'currentMessage' + ${intvm.messageId}">
 												<b th:text="'&nbsp&nbsp'+${intvm.name}+'&nbsp'+'說:'">&nbsp&nbsp範例 說:</b>
 												<p th:text="'&nbsp&nbsp'+${intvm.words}">&nbsp&nbsp這是一個範例留言</p>
-												<p th:text="'&nbsp&nbsp'+${intvm.time}">&nbsp&nbsp time</p>
+												<p ><i th:text="'&nbsp&nbsp'+${intvm.time}"></i></p>
 												<hr class="wordsgap">
 
 											</div>
