@@ -18,12 +18,15 @@ public interface CommentMessageDao extends JpaRepository<CommentMessage, Integer
 	
 	List<CommentMessage> findByMessageReply(Integer messageReply);
 	
-	List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply);
+	List<CommentMessage> findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(Integer comment_id, Integer messageReply);
 
 	@Transactional
 	void deleteByCommentCommentId(Integer comment_id);
 	
 	@Transactional
 	void deleteByMemberIdNumber(Integer idNumber);
+	
+	List<CommentMessage> findAllByOrderByMessageIdDesc();
+
 	
 }

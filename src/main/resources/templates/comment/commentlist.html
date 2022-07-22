@@ -264,23 +264,23 @@
 							<ul class="list cat-list">
 								<li><a href="/comments" class="d-flex">
 										<p>全部</p>
-<!-- 										<p>([[${listComment.size()}]])</p> -->
+										<p id="allcount"></p>
 								</a></li>
 								<li><a th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'" class="d-flex">
 										<p>全職</p>
-<!-- 										<p>([[${listComment.size()}]])</p> -->
+										<p id="fullcount"></p>
 								</a></li>
 								<li><a th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'" class="d-flex">
 										<p>兼職</p>
-<!-- 										<p>([[${listComment.size()}]])</p> -->
+										<p id="helfcount"></p>
 								</a></li>
 								<li><a th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'" class="d-flex">
 										<p>工讀</p>
-<!-- 										<p>([[${listComment.size()}]])</p> -->
+										<p id="parttimecount"></p>
 								</a></li>
 								<li><a th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'" class="d-flex">
 										<p>實習</p>
-<!-- 										<p>([[${listComment.size()}]])</p> -->
+										<p id="intern"></p>
 								</a></li>
 							</ul>
 						</aside>
@@ -358,31 +358,6 @@
 
 	<!-- Comment Front JS -->
 	<script th:src="@{/js/comment_front/checkCommentFormFront.js}"></script>
-
-<script>
-
-// $('#searchBar').change(function(){
-// 	$('#commentSearch').submit();
-	
-// })
-
-// function ajaxtest() {
-// 	//職務型態比例
-// 	$.ajax({
-// 		type: 'GET',
-// 		url: '/comments/commentlistjson',
-// 		data: data,
-// 		success: function(data) {
-// 			var arr = data;
-// 			console.log(arr.filter(function(item) {
-// 				return item.nickName == "剪刀手";
-// 			}));
-// 		}
-// 	})
-
-// }
-
-</script>
 
 
 </body>

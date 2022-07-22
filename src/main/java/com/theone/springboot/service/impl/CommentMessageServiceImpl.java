@@ -64,8 +64,13 @@ public class CommentMessageServiceImpl implements CommentMessageService {
 	}
 
 	@Override
-	public List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply) {
-		return commentmessageDao.findByCommentCommentIdAndMessageReply(comment_id, messageReply);
+	public List<CommentMessage> findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(Integer comment_id, Integer messageReply) {
+		return commentmessageDao.findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(comment_id, messageReply);
+	}
+
+	@Override
+	public List<CommentMessage> findAllByOrderByMessageIdDesc() {
+		return commentmessageDao.findAllByOrderByMessageIdDesc();
 	}
 
 

@@ -370,9 +370,9 @@
 																<div class="reply-btn"
 																	th:id="'reply' + ${message.messageId}"
 																	th:if="${session.loginMember != null}">
-<!-- 																	<a class="btn-reply d-flex align-items-center" -->
-<!-- 																		th:id="${message.messageId}" -->
-<!-- 																		onmouseover="replyMessage(this.id)">回覆</a> -->
+																	<a class="btn-reply d-flex align-items-center"
+																		th:id="${message.messageId}"
+																		onmouseover="replyMessage(this.id)">回覆</a>
 																</div>
 															</div>
 															<button type="button"
@@ -399,7 +399,8 @@
 														<textarea
 															class="form-control w-100 bg-white rounded-80 shadow-sm"
 															placeholder="留言....." name="messageContent"
-															th:text="${message.messageContent}" th:id="'modifyreply' + ${message.messageId}"></textarea>
+															th:text="${message.messageContent}"
+															th:id="'modifyreply' + ${message.messageId}"></textarea>
 														<h6 class="float-right" id="count_message"></h6>
 													</div>
 												</div>
@@ -433,11 +434,11 @@
 															th:value="${message.messageLike}">
 													</div>
 												</div>
-<!-- 												<button type="button" -->
-<!-- 													class="edit-delete testimonial-bg border-0" name="modify" th:id="'modifybtn'+${message.messageId}" -->
-<!-- 													value="一鍵"> -->
-<!-- 													<i class="fa fa-paste"></i> -->
-<!-- 												</button> -->
+												<!-- 												<button type="button" -->
+												<!-- 													class="edit-delete testimonial-bg border-0" name="modify" th:id="'modifybtn'+${message.messageId}" -->
+												<!-- 													value="一鍵"> -->
+												<!-- 													<i class="fa fa-paste"></i> -->
+												<!-- 												</button> -->
 												<button type="submit"
 													class="edit-delete testimonial-bg border-0" name="sent"
 													value="送出">
@@ -567,47 +568,52 @@
 										<!-- 										<form -->
 										<!-- 											th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}" th:with="${model.addAttribute('replymessage',commentMessageService.findByMessageReply(${message.messageId}))}" -->
 										<!-- 											method="post" id="form" th:modelAttribute="replymessage"> -->
-										<div class="comment-list"
-											th:each="replymessage : ${replymessage}">
-											<div th:id="'currentMessage' + ${replymessage.messageId}">
-												<div class="thumb f-left">
-													<img
-														th:src="@{${replymessage.replyNickName.equals('匿名') || replymessage.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
-														alt="">
-												</div>
-												<div
-													class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
-													<div class="user justify-content-between d-flex">
-														<div class="desc p-3">
-															<div class="float-right m-1"
-																th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}">
-																<a class="m-2 edit-delete editMessage"
-																	th:id="${message.messageId}"
-																	onmouseover="editMessage(this.id)"> <i
-																	class="fa fa-pencil-alt"></i>
-																</a>
-															</div>
-															<p class="comment"
-																th:text="${replymessage.messageContent}"></p>
-															<div class="d-flex justify-content-between">
-																<div class="d-flex align-items-center">
-																	<h5 class="date">[[${message.replyNickName}]]</h5>
-																	<p class="date"
-																		th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
-																	<div class="reply-btn"
-																		th:id="'reply' + ${message.messageId}"
-																		th:if="${session.loginMember != null}">
-																		<a class="btn-reply d-flex align-items-center"
-																			th:id="${message.messageId}"
-																			onmouseover="replyMessage(this.id)">回覆</a>
-																	</div>
+										<div th:fragment="f_call(comment)"
+											th:unless="${#lists.isEmpty(commentMessage.children)}">
+											<div class="comment-list"
+												th:each="child  : ${commentMessage.children}" th:inline="text">
+												<div th:id="'currentMessage' + ${child.messageId}">
+													<div class="thumb f-left">
+														<img
+															th:src="@{${child.replyNickName.equals('匿名') || child.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
+															alt="">
+													</div>
+													<div
+														class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+														<div class="user justify-content-between d-flex">
+															<div class="desc p-3">
+																<div class="float-right m-1"
+																	th:if="${session.loginMember != null && session.loginMember.userid == child.member.userid}">
+																	<a class="m-2 edit-delete editMessage"
+																		th:id="${child.messageId}"
+																		onmouseover="editMessage(this.id)"> <i
+																		class="fa fa-pencil-alt"></i>
+																	</a>
 																</div>
-																<button type="button"
-																	th:if="${session.loginMember != null && session.loginMember.userid == replymessage.member.userid}"
-																	class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
-																	th:value='${message.messageId}'>
-																	<i class="fa fa-trash-alt"></i>
-																</button>
+																<p class="comment"
+																	th:text="${child.messageContent}"></p>
+																<div class="d-flex justify-content-between">
+																	<div class="d-flex align-items-center">
+																		<h5 class="date">[[${message.replyNickName}]]</h5>
+																		<p class="date"
+																			th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+																		<div class="reply-btn"
+																			th:id="'reply' + ${child.messageId}"
+																			th:if="${session.loginMember != null}">
+																			<a class="btn-reply d-flex align-items-center"
+																				th:id="${child.messageId}"
+																				onmouseover="replyMessage(this.id)">回覆</a>
+																		</div>
+																	</div>
+																	[[$child.messageContent]]
+																	<div th:replace="this::f_call(${child})"></div>
+																	<button type="button"
+																		th:if="${session.loginMember != null && session.loginMember.userid == child.member.userid}"
+																		class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
+																		th:value='${child.messageId}'>
+																		<i class="fa fa-trash-alt"></i>
+																	</button>
+																</div>
 															</div>
 														</div>
 													</div>

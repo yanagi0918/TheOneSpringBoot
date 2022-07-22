@@ -233,8 +233,8 @@ $(function() {
 		$('#replyNickName').val('徬徨的畢業生')
 		$('#messageContent').val('趕謝大大無私的分享~~')
 	});
-	
-	
+
+
 
 });
 //anonymous/user show
@@ -257,8 +257,8 @@ $(function() {
 			$('#replyNickName').val('');
 		}
 	});
-	
-	
+
+
 
 })
 
@@ -309,20 +309,20 @@ function replyMessage(id) {
 	var messageId = '#reply' + id;
 	var replyArea = '#replyMessageArea' + id;
 	var replyCancel = '#replyCancel' + id;
-//	var modifybtn = '#modifybtn' + id;
-//	var modifyreply = '#modifyreply' + id;
-	
+	//	var modifybtn = '#modifybtn' + id;
+	//	var modifyreply = '#modifyreply' + id;
+
 	$(messageId).click(function() {
 		$(replyArea).removeClass('d-none');
 	})
 	$(replyCancel).click(function() {
 		$(replyArea).addClass('d-none');
 	})
-	
+
 	//一鍵輸入
-//	$(modifybtn).click(function() {
-//		$(modifyreply).val('謝大大無私的分享~~');
-//	})
+	//	$(modifybtn).click(function() {
+	//		$(modifyreply).val('謝大大無私的分享~~');
+	//	})
 
 }
 
@@ -417,7 +417,30 @@ $(function() {
 	$('[data-toggle="tooltip"]').tooltip();
 });
 
+$(function() {
+	"use strict";
 
+	//職務型態比例
+	$.ajax({
+
+		//		url: basePath + '/jobtypejson',
+		url: '/comments/jobtypejson',
+		type: "get",
+		dataType: 'json',
+		success: function(data) {
+			
+			var all = data[0] + data[1] + data[2] + data[3]
+
+			$('#allcount').append('(' + all + ')');
+			$('#fullcount').append('(' + data[0] + ')');
+			$('#helfcount').append('(' + data[1] + ')');
+			$('#parttimecount').append('(' + data[2] + ')');
+			$('#intern').append('(' + data[3] + ')');
+
+		}
+	})
+
+});
 ////////////////////////////////////////////////////
 
 //
