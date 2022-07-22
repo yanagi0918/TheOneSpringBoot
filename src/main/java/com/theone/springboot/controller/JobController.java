@@ -157,5 +157,12 @@ public class JobController {
 		return "job/job_member";
 	}
 	
-	
+	@GetMapping("/enterprise/job/showmember")
+	public String shmember() {
+		return "job/job_member";
+	}
+	@GetMapping("/enterprise/job/job_member_detail")
+	public String jobmemberdetail() {
+		return "job/job_member_detail";
+	}
 }

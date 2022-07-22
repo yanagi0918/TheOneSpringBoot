@@ -35,10 +35,6 @@
                     text-decoration: underline;
                     color: blue;
                 }
-                a, button {
-    color: #4f00ff;
-    outline: medium none;
-}
             </style>
    </head>
 
@@ -52,16 +48,17 @@
         <!-- Header End -->
         <!-- Header End -->
     </header>
-    <main>
-
-        <!-- Hero Area Start-->
+	<main>
+	
+	
+	<!-- Hero Area Start-->
         <div class="slider-area ">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center" th:data-background="@{/assets/img/job/jobdetail.webp}">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>公司查詢投遞頁面</h2>
+                            <h2>應徵會員的履歷</h2>
                         </div>
                     </div>
                 </div>
@@ -78,28 +75,23 @@
         <table id="lee" class="table align-middle table-bordered table-hover mb-0">
 							<thead>
 								<tr class="text-dark">
-									<th scope="col">會員名稱</th>
-									<th scope="col">住宅電話</th>
-									<th scope="col">手機</th>
-									<th scope="col">信箱</th>
-									<th scope="col">性別</th>
+									<th scope="col">履歷名稱</th>
+									<th scope="col">自我介紹</th>
+									<th scope="col">工作經驗</th>
+									<th scope="col">畢業學校</th>
+									<th scope="col">科系</th>
+									<th scope="col">已取得證照</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-								<td><a th:href="@{/enterprise/job/job_member_detail}">唐洋基</a></td>
-								<td>0287654321</td>
-								<td>0910654321</td>
-								<td>hiremeplz@gmail.com</td>
-								<td>男</td>
+								<td>for國貿人員</td>
+								<td>我是王曉明，個性熱情活潑...</td>
+								<td>尚無</td>
+								<td>東華大學</td>
+								<td>國貿系</td>
+								<td>多益825</td>
 								<tr>
-<!-- 								<tr th:each="member:${collectonJobMembers}"> -->
-<!-- 									<td th:text="${member.username}"></td> -->
-<!-- 									<td th:text="${member.tele}"></td> -->
-<!-- 									<td th:text="${member.phone}"></td> -->
-<!-- 									<td th:text="${member.email}"></td> -->
-<!-- 									<td th:text="${member.gender}"></td> -->
-<!-- 								</tr> -->
 							</tbody>
 						</table>
         
@@ -109,9 +101,9 @@
 						</div>
                         <!-- Featured_job_end -->
         <!-- Job List Area End -->
-        
-        </main>
-    <footer>
+	
+	</main>
+	<footer>
 		<!-- Footer Start-->
 		<div th:replace="~{common/frontpage::footer}"></div>
         <!-- Footer End-->
