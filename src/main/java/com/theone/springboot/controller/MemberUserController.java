@@ -120,8 +120,8 @@ public class MemberUserController {
 	@ResponseBody
 	@PostMapping("/forgetpwd")
 	public String sendNotifyEmail(@RequestParam String userid, @RequestParam String email) {
-		if (memberService.getByUserid(userid).getUserid().equals(userid)
-				&& memberService.getByUserid(userid).getEmail().equals(email)) {
+		if (memberService.getByUserid(userid) !=null  && (userid).equals(memberService.getByUserid(userid).getUserid())
+				&& (email).equals(memberService.getByUserid(userid).getEmail())) {
 
 			Member member = memberService.getByUserid(userid);
 			String randomPwd = getRandomPassword();
