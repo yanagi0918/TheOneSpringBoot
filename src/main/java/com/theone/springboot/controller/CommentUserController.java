@@ -40,8 +40,8 @@ public class CommentUserController {
 	// 所有評論list
 	@RequestMapping("/comments")
 	public String listComments(Model model) {
-		List<Comment> listcomment = commentService.findAll();
-				
+//		List<Comment> listcomment = commentService.findAll();
+		List<Comment> listcomment = commentService.findAllByOrderByCommentIdDesc();//倒敘
 		model.addAttribute("listComment", listcomment);
 		model.addAttribute("commentMessageService", commentMessageService);
 		
@@ -104,7 +104,7 @@ public class CommentUserController {
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
 		// get reply comment list
-		List<CommentMessage> messages = commentMessageService.findByCommentCommentIdAndMessageReply(id, 0);
+		List<CommentMessage> messages = commentMessageService.findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(id, 0);
 //		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
 		model.addAttribute("messages", messages);
 //		model.addAttribute("replymessage", commentMessageService.findByMessageReply(messages));
@@ -175,6 +175,27 @@ public class CommentUserController {
 		model.addAttribute("commentMessageService", commentMessageService);
 
 		return "comment/commentlist";
+	}
+	
+	@GetMapping("/comments/jobtypejson")
+	@ResponseBody
+	public int[] getJobTypeJson() {
+		int[] jobtype = { 0, 0, 0, 0 };
+		List<Comment> allComments = commentService.findAll();
+		for (Comment comment : allComments) {
+			System.out.println(comment);
+
+			if (comment.getJobDescription().equals("全職")) {
+				jobtype[0]++;
+			} else if (comment.getJobDescription().equals("兼職")) {
+				jobtype[1]++;
+			} else if (comment.getJobDescription().equals("工讀")) {
+				jobtype[2]++;
+			} else if (comment.getJobDescription().equals("實習")) {
+				jobtype[3]++;
+			}
+		}
+		return jobtype;
 	}
 	
 

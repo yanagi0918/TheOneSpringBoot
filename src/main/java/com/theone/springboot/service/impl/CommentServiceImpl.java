@@ -68,4 +68,9 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.findByJobDescriptionLike(jobDescription);
 	}
 
+	@Override
+	public List<Comment> findAllByOrderByCommentIdDesc() {
+		return commentDao.findAllByOrderByCommentIdDesc();
+	}
+
 }

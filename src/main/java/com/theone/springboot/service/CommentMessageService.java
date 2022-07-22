@@ -25,6 +25,9 @@ public interface CommentMessageService {
 	
 	List<CommentMessage> findByMessageReply(Integer messageReply);
 	
-	List<CommentMessage> findByCommentCommentIdAndMessageReply(Integer comment_id, Integer messageReply);
+	List<CommentMessage> findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(Integer comment_id, Integer messageReply);
+	
+	List<CommentMessage> findAllByOrderByMessageIdDesc();
+
 
 }
