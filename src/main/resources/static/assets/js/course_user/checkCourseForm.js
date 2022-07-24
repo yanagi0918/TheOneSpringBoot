@@ -273,13 +273,14 @@ $(function () {
     $(document).ready(function () {
         $('#table_id').DataTable(
             {
-                // initComplete: function () {
-                //     $("#example_filter").detach().appendTo('#new-search-area');
-                // },
+                "order": [[0, "desc"]],
                 columnDefs: [
-                    {orderable: false, targets: [7]},
+                    { targets: 0, responsivePriority: 1  },
+                    { targets: 7, responsivePriority: 2  },
+                    { targets: 8, responsivePriority: 3  },
+                    // {orderable: false, targets: [7]},
                     {
-                        "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+                        "targets":  "_all",
                         "className": "text-center",
                     },
                     {

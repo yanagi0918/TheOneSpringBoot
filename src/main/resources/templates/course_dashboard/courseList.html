@@ -48,6 +48,7 @@
         .fa-circle-xmark {
             color: rgba(87, 99, 100, 0.9);
         }
+        /*table.dataTable.nowrap th, table.dataTable.nowrap td{white-space: normal !important;}*/
     </style>
 
 </head>
@@ -128,7 +129,7 @@
         <!--        chart end-->
 
 
-        <div class="container-fluid pt-4 px-4">
+        <div class="container-fluid pt-4 px-4"class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h5 class="mb-0">課程資訊</h5>
@@ -148,19 +149,22 @@
 
                 </div>
                 <div class="table-responsive">
-                    <table id="table_id" class="table align-middle table-bordered table-hover mb-0 display nowrap">
+                    <table id="table_id" class="table align-middle table-bordered table-hover display responsive nowrap" style="width:100%">
                         <thead>
                         <tr class="text-dark">
                             <th scope="col">編號</th>
                             <th scope="col">類別</th>
                             <th scope="col">名稱</th>
                             <th scope="col">講師</th>
-                            <!--                            <th scope="col">上架時間</th>-->
                             <th scope="col">講師帳號</th>
-                            <!--                            <th scope="col">評分</th>-->
-                            <!--                            <th scope="col">價錢</th>-->
+                                                        <th scope="col">評分</th>
+                                                        <th scope="col">價錢</th>
                             <th scope="col">狀態</th>
+                            <th scope="col">操作</th>
+                            <th scope="col">上架時間</th>
                             <th scope="col"></th>
+                            <th scope="col">影片連結</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -169,18 +173,15 @@
                             <td th:text="${course.courseCategory}"></td>
                             <td th:text="${course.courseName}"></td>
                             <td th:text="${course.lecturer}"></td>
-                            <!--                            <td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>-->
-                            <!--                            <td th:text="${course.score}"></td>-->
-                            <!--                            <td th:text="${course.price}"></td>-->
                             <td th:text="${course.userid}"></td>
+                                                        <td th:text="${course.score}"></td>
+                                                        <td th:text="${course.price}"></td>
                             <td th:switch="${course.status}">
-
                                 <span th:case="'待審核'">
                                     <span class="btn btn-warning btn-sm " th:text="${course.status}"
                                           th:id="${course.courseNo}">
                                     </span>
                                 </span>
-
                                 <span th:case="'已審核'">
                                     <span class="btn btn-success btn-sm " th:text="${course.status}"
                                           th:id="${course.courseNo}">
@@ -199,17 +200,18 @@
                                     <i class="fa fa-circle-xmark fa-lg" th:id="${course.courseNo}"
                                        onclick="statusRejectAjax(this.id)"></i>
                                 </a>
-
                             </td>
-
                             <td>
                                 <a class="btn btn-outline-success m-0"
                                    th:href="@{'/dashboard/courses/detail/'+${course.courseNo}}">詳細</a>
                                 <a class="btn btn-outline-primary m-0 btn-courseUpdate"
                                    th:href="@{'/dashboard/toUpdatePage/'+${course.courseNo}}">更新</a>
-                                <!-- <a class="btn btn-outline-danger m-0" th:id="${course.courseNo}" onclick="deleteByNo(this.id)">刪除</a>-->
                                 <a class="btn btn-outline-danger m-0 btn-courseDelete" th:id="${course.courseNo}" id="">刪除</a>
                             </td>
+                            <td th:text="${#dates.format(course.date, 'yyyy-MM-dd')}"></td>
+                            <td><img class="img-fluid mx-auto mb-4" th:src="${course.coursePicUrl}" style="width: 250px; height: 250px;"></td>
+                            <td th:text="${course.courseVedioUrl}" ></td>
+
                         </tr>
                         </tbody>
                     </table>

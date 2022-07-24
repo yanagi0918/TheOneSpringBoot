@@ -341,12 +341,16 @@ $(function () {
             {
                 "order": [[0, "desc"]],
                 columnDefs: [
-                    {orderable: false, targets: [6]},
+                    { targets: 0, responsivePriority: 1  },
+                    { targets: 1, responsivePriority: 2  },
+                    { targets: 2, responsivePriority: 3  },
+                    { targets: 7, responsivePriority: 4  },
+                    { targets: 8, responsivePriority: 5  },
+                    // {orderable: false, targets: [6]},
                     {
-                        "targets": [0, 1, 2, 3, 4, 5],
+                        "targets": "_all",
                         "className": "text-center"
-                    },
-                    {"search": "text-center"}
+                    }
                 ],
                 language: {
                     "processing": "處理中...",
