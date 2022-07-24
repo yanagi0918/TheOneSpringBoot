@@ -13,8 +13,6 @@ import com.theone.springboot.entity.Comment;
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
-//	List<Comment> findByUserId(String userId);
-
 	List<Comment> findByCommentMemberIdNumber(Integer idNumber);
 
 	@Transactional
@@ -27,5 +25,6 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 	List<Comment> findByJobDescriptionLike(String jobDescription);
 	
 	List<Comment> findAllByOrderByCommentIdDesc();
+	
 	
 }

@@ -96,20 +96,19 @@
 
 /* pagination css */
 #comment-pagination .page-item.active .page-link {
-    background-color: #4cd3e3;
-    border-color: #f0e9ff;
-    color: #fff
+	background-color: #4cd3e3;
+	border-color: #f0e9ff;
+	color: #fff
 }
 
 /* 限制顯示行數 */
-.blog_details p{
-		overflow : hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+.blog_details p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
-
 </style>
 </head>
 
@@ -139,7 +138,8 @@
 				<div class="row mt-5">
 					<div class="col-xl-12">
 						<!-- form -->
-						<form th:action="@{/comments/search}" class="search-box" id="commentSearch">
+						<form th:action="@{/comments/search}" class="search-box"
+							id="commentSearch">
 							<div class="input-form ">
 								<input type="text" placeholder="搜尋職缺或公司" name="title">
 							</div>
@@ -152,7 +152,9 @@
 								</div>
 							</div>
 							<div class="search-form">
-									<a href="#" onclick="document.getElementById('commentSearch').submit()"><i class="fa fa-search"></i></a>
+								<a href="#"
+									onclick="document.getElementById('commentSearch').submit()"><i
+									class="fa fa-search"></i></a>
 							</div>
 						</form>
 					</div>
@@ -172,44 +174,60 @@
 							<ul class="comment-link">
 								<li><a th:href="@{/comments}"><span>職場甘苦談</span></a></li>
 								<li><a th:href="@{/comments}"><span>總覽</span></a></li>
-<!-- 								<li -->
-<!-- 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a -->
-<!-- 									href="single_comment.html"><span>分析</span></a></li> -->
-								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobDescription')}"><a 
-								    href="@{/comments/search}"><span th:text=" ${param.title} + '(' + ${listComment.size()} + ')' "></span></a></li>
-								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
-									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 公司' + '(' + ${listComment.size()} + ')' "></span></a></li>
-								<li th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
-									href="@{/comments/search}"><span th:text="'[' + ${param.title} + ']' + ' 職缺' + '(' + ${listComment.size()} + ')' "></span></a></li>
-								<li th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
+								<!-- 								<li -->
+								<!-- 									th:if="${#httpServletRequest.requestURI == '/commentDetail'}"><a -->
+								<!-- 									href="single_comment.html"><span>分析</span></a></li> -->
+								<li
+									th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobDescription')}"><a
+									href="@{/comments/search}"><span
+										th:text=" ${param.title} + '(' + ${listComment.size()} + ')' "></span></a></li>
+								<li
+									th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('compName')}"><a
+									href="@{/comments/search}"><span
+										th:text="'[' + ${param.title} + ']' + ' 公司' + '(' + ${listComment.size()} + ')' "></span></a></li>
+								<li
+									th:if="${#httpServletRequest.requestURI == '/comments/search' && param.searchType.contains('jobName')}"><a
+									href="@{/comments/search}"><span
+										th:text="'[' + ${param.title} + ']' + ' 職缺' + '(' + ${listComment.size()} + ')' "></span></a></li>
+								<li
+									th:if="${#httpServletRequest.requestURI == '/user/comments'}"><a
 									th:href="@{/user/comments}"><span>我的分享</span></a></li>
 							</ul>
 						</div>
 						<ul class="blog-info-link">
 							<a th:href="@{/comments}" id="overview"
 								class="genric-btn success-border float-left w-25"> 總覽</a>
-<!-- 							<a th:href="@{/comments/analysis}" id="analysis" -->
-<!-- 								class="genric-btn success-border float-left w-25">分析</a> -->
-							<a th:if="${session.loginMember!=null}" th:href="@{/user/comments}"
-								id="mycomment" class="genric-btn success-border float-left w-25">
-								我的心得</a>
+							<!-- 							<a th:href="@{/comments/analysis}" id="analysis" -->
+							<!-- 								class="genric-btn success-border float-left w-25">分析</a> -->
+							<a th:if="${session.loginMember!=null}"
+								th:href="@{/user/comments}" id="mycomment"
+								class="genric-btn success-border float-left w-25"> 我的心得</a>
 						</ul>
 					</div>
 					<div class="blog_area blog_left_sidebar"
 						th:each="comment : ${listComment} ">
 						<article class="blog_item">
 							<div class="blog_details py-5">
-								<div class="">
-<!-- 									<a class="float-right text-muted"><i -->
-<!-- 										class="fa fa-thumbs-down">噓</i></a> -->
-<!-- 									<h4 class="float-right">&nbsp&nbsp</h4> -->
-<!-- 									<a class="float-right text-muted"><i -->
-<!-- 										class="fa fa-thumbs-up">讚</i></a> -->
-									<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
-								</div>
+<!-- 								<div class=""> -->
+<!-- 									<form method="post" id="form" -->
+<!-- 										th:modelAttribute="commentLike"> -->
+										
+<!-- 										<a class="float-right text-muted" th:data-commentId="${comment.commentId}" -->
+<!-- 										th:data-islike=2 -->
+<!-- 											onclick="commentLikeSave(this, this.getAttribute('data-commentId'), this.getAttribute('data-islike') ).submit()"><i -->
+<!-- 											class="fa fa-thumbs-down">噓</i></a> -->
+<!-- <!-- 											 <input type="text" th:value=2 th:name="${commentLike.islike}"> --> -->
+<!-- 										<h4 class="float-right">&nbsp&nbsp</h4> -->
+<!-- 										<a class="float-right text-muted"><i -->
+<!-- 											class="fa fa-thumbs-up">讚</i></a> -->
+<!-- 										<h6 class="text-muted" -->
+<!-- 											th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6> -->
+<!-- 									</form> -->
+<!-- 								</div> -->
 								<a class="d-inline-block"
 									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
-									<h2 class="float-left" th:text="${comment.compName} + '&nbsp&nbsp'"></h2>
+									<h2 class="float-left"
+										th:text="${comment.compName} + '&nbsp&nbsp'"></h2>
 									<h4 class="float-left" th:text="${comment.jobName}"></h4>
 								</a>
 								<p th:text="${comment.share}"></p>
@@ -220,10 +238,12 @@
 									<li><span class="listJob text-muted" data-score=""
 										th:attr="data-score=${comment.job_score}"><i
 											class="fa fa-briefcase"></i>職位&nbsp&nbsp</span></li>
-									<li><span class="text-muted"><i class="fa fa-comments"></i></span>
-									<span class="text-muted" th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span>
+									<li><span class="text-muted"><i
+											class="fa fa-comments"></i></span> <span class="text-muted"
+										th:text="'留言&nbsp&nbsp(' + ${commentMessageService.findByCommentCommentId(comment.commentId).size()} + ')'"></span>
 									</li>
-									<li><span class="text-muted" th:text="${comment.jobDescription}"><i
+									<li><span class="text-muted"
+										th:text="${comment.jobDescription}"><i
 											class="fa fa-briefcase"></i></span></li>
 								</ul>
 								<div class="modify-btn w-25 f-right d-inline">
@@ -243,7 +263,8 @@
 							</div>
 						</article>
 					</div>
-					<nav class="blog-pagination justify-content-center d-flex" id="comment-pagination">
+					<nav class="blog-pagination justify-content-center d-flex"
+						id="comment-pagination">
 						<ul class="pagination">
 						</ul>
 					</nav>
@@ -252,7 +273,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget">
 							<form th:action="@{/user/comment/new}">
-								<button class="genric-btn success circle w-100 e-larg" 
+								<button class="genric-btn success circle w-100 e-larg"
 									type="submit" data-toggle="tooltip" title="需登入分享">
 									<i class="fa fa-bullhorn"></i>&nbsp我要分享
 								</button>
@@ -266,19 +287,27 @@
 										<p>全部</p>
 										<p id="allcount"></p>
 								</a></li>
-								<li><a th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'"
+									class="d-flex">
 										<p>全職</p>
 										<p id="fullcount"></p>
 								</a></li>
-								<li><a th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'"
+									class="d-flex">
 										<p>兼職</p>
 										<p id="helfcount"></p>
 								</a></li>
-								<li><a th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'"
+									class="d-flex">
 										<p>工讀</p>
 										<p id="parttimecount"></p>
 								</a></li>
-								<li><a th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'" class="d-flex">
+								<li><a
+									th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'"
+									class="d-flex">
 										<p>實習</p>
 										<p id="intern"></p>
 								</a></li>
@@ -287,16 +316,24 @@
 
 						<aside class="single_sidebar_widget tag_cloud_widget_comment">
 							<h4 class="widget_title">熱門搜尋</h4>
-							<form th:action="@{/comments/search}" class="" id="commentHotSearch">
-							<ul class="list">
-								<li><a th:href="@{/comments/search} + '?title=工程師&searchType=jobName'" >#工程師</a></li>
-								<li><a th:href="@{/comments/search} + '?title=軟體&searchType=jobName'" >#軟體</a></li>
-								<li><a th:href="@{/comments/search} + '?title=行政助理&searchType=jobName'" >#行政助理</a></li>
-								<li><a th:href="@{/comments/search} + '?title=銀行&searchType=compName'" >#銀行</a></li>
-								<li><a th:href="@{/comments/search} + '?title=專員&searchType=jobName'" >#專員</a></li>
-								<li><a th:href="@{/comments/search} + '?title=java&searchType=jobName'" >#java</a></li>
-								<li><a th:href="@{/comments/search} + '?title=科技&searchType=compName'" >#科技</a></li>
-							</ul>
+							<form th:action="@{/comments/search}" class=""
+								id="commentHotSearch">
+								<ul class="list">
+									<li><a
+										th:href="@{/comments/search} + '?title=工程師&searchType=jobName'">#工程師</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=軟體&searchType=jobName'">#軟體</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=行政助理&searchType=jobName'">#行政助理</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=銀行&searchType=compName'">#銀行</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=專員&searchType=jobName'">#專員</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=java&searchType=jobName'">#java</a></li>
+									<li><a
+										th:href="@{/comments/search} + '?title=科技&searchType=compName'">#科技</a></li>
+								</ul>
 							</form>
 						</aside>
 
