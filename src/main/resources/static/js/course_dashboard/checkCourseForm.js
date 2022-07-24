@@ -53,7 +53,7 @@ $(function () {
     $('#date').change(function () {
         validateDate();
     })
-    $('#imgInp').change(function () {
+    $('#imgInput').change(function () {
         validateImg();
     })
     $('#courseName').keyup(function () {
@@ -177,11 +177,11 @@ $(function () {
     }
 
     function validateImg() {
-        if ($('#imgInp').val() == "" && $('#btn-submit').val() == "createSubmit") {
-            $('#imgInp').attr("class", "form-control is-invalid")
+        if ($('#imgInput').val() == "" && $('#btn-submit').val() == "createSubmit") {
+            $('#imgInput').attr("class", "form-control is-invalid")
             return false;
         } else {
-            $('#imgInp').attr("class", "form-control is-valid")
+            $('#imgInput').attr("class", "form-control is-valid")
             return true;
         }
     }
@@ -206,6 +206,7 @@ $(function () {
             }
         })
     }
+
     function checkUserid() {
         var userid = $("#userid").val();
         var postData = {"userid": userid};
@@ -299,7 +300,8 @@ $(function () {
         let v6 = validatePrice()
         let v7 = validateDate()
         let v8 = validateId()
-        if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8) {
+        let v9 = validateImg()
+        if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9) {
             checkResult = true;
             return checkResult
         }
@@ -309,26 +311,25 @@ $(function () {
     //一鍵輸入
     $('#correctInput').click(function () {
         $("#userid").val("A123456789")
-        $('#courseName').val('面試必勝10招')
+        $('#courseName').val('面試必勝心經')
         $('#courseCategory').val('求職技巧')
         $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')
-        $('#lecturer').val('王大陸')
+        $('#lecturer').val('王曉')
+        $('#status').val('已審核')
         $('#date').val('2022-08-01')
-        $('#coursePic').val('url')
-        $('#courseVedio').val('url')
-        $('#score').val('9.9')
+        $('#courseVedio').val('https://drive.google.com/file/view?usp=sharing')
+        $('#score').val('9.5')
         $('#price').val('1999')
         checkPackage();
     })
     $('#wrongInput').click(function () {
         $("#userid").val("Z228456789")
-        $('#courseName').val('面試必勝100招')
+        $('#courseName').val('TOEFL iBT檢定班')
         $('#courseCategory').val('求職技巧')
-        $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')
+        $('#courseIntroduction').val('')
         $('#lecturer').val('')
         $('#date').val('2022-01-01')
-        $('#coursePic').val('url')
-        $('#courseVedio').val('url')
+        $('#courseVedio').val('')
         $('#score').val('11')
         $('#price').val('abc')
         checkPackage();
@@ -338,16 +339,14 @@ $(function () {
     $(document).ready(function () {
         $('#table_id').DataTable(
             {
+                "order": [[0, "desc"]],
                 columnDefs: [
-
                     {orderable: false, targets: [6]},
                     {
                         "targets": [0, 1, 2, 3, 4, 5],
-                        "className": "text-center",
+                        "className": "text-center"
                     },
-                    {
-                        "search": "text-center"
-                    }
+                    {"search": "text-center"}
                 ],
                 language: {
                     "processing": "處理中...",

@@ -42,9 +42,9 @@
                     datasets: [{
                         label: "筆數",
                         backgroundColor: [
-                            "rgba(0,196,255,0.7)",
-                            "rgba(0,196,255,0.7)",
-                            "rgba(0,196,255,0.7)",
+                            "rgb(246,231,50)",
+                            "rgba(43,110,4,0.7)",
+                            "rgba(232,44,6,0.57)",
                         ],
                         data: result.dataStatus
                     }]

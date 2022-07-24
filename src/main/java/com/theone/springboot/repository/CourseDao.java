@@ -19,8 +19,6 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     List<CourseBean> findTop5ByCourseCategoryAndStatus(String courseCategory, String status);
 
-    List<CourseBean> findByStatus(String status);
-
     Page<CourseBean> findAllByStatus(Pageable pageable, String status);
 
     List<CourseBean> findByMember(Member Member);

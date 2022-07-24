@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Stream;
 
 
 @Controller
@@ -60,7 +61,7 @@ public class CourseUserController {
             model.addAttribute("courseList", courseList);
             return "course/allCustomerListByCategory";
         } else {
-            Page<CourseBean> courseList = courseService.findAllCoursesByStatus(page,size,"已審核");
+            Page<CourseBean> courseList = courseService.findAllCoursesByStatus(page, size, "已審核");
             model.addAttribute("courseList", courseList);
             model.addAttribute("courseListRecent", courseListRecent);
             return "course/allCustomerList";
@@ -70,11 +71,10 @@ public class CourseUserController {
 
     @GetMapping("/conditionsSearch")
     public String findByCondition(@RequestParam String search, Model model) {
-       Page<CourseBean> courseList = courseService.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(search);
+        Page<CourseBean> courseList = courseService.findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(search);
         model.addAttribute("courseList", courseList);
         return "course/allCustomerList";
     }
-
 
 
     @GetMapping("/user/courses/lecturers")
@@ -128,20 +128,25 @@ public class CourseUserController {
     public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
+        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByDateDesc("已審核");
+        List<CourseBean> courseListCate = courseService.findTop5ByCourseCategoryAndStatus(collectionCourses.stream().findFirst().get().getCourseCategory(),"已審核");
 
         model.addAttribute("username", member.getUsername());
         model.addAttribute("collectionCourses", collectionCourses);
+        model.addAttribute("courseListRecent", courseListRecent);
+        model.addAttribute("courseListCate", courseListCate);
+
         return "course/collections";
     }
 
     @GetMapping("/collectionInsert/{courseNo}")
     @ResponseBody
-    public ResponseEntity<Boolean> collectionInsertCourse(@PathVariable Integer courseNo,HttpSession session)   {
+    public ResponseEntity<Boolean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
         boolean check = true;
         Member member = (Member) session.getAttribute("loginMember");
         if (member == null) {
-            check =false;
-        }else {
+            check = false;
+        } else {
             Set<Member> members = new HashSet<>();
             Set<CourseBean> collectionCourses = member.getCollectionCourses();
 
@@ -161,30 +166,15 @@ public class CourseUserController {
         return ResponseEntity.status(HttpStatus.OK).body(check);
     }
 
-    //backup
-//    @GetMapping("/collectionInsert/{courseNo}")
-//    @ResponseBody
-//    public ResponseEntity<CourseBean> collectionInsertCourse(@PathVariable Integer courseNo, HttpSession session) {
-//        Member member = (Member) session.getAttribute("loginMember");
-//        Set<CourseBean> collectionCourses = member.getCollectionCourses();
-//        CourseBean courseBean = courseService.findCourse(courseNo).orElseThrow();
-//        collectionCourses.add(courseBean);
-//        Set<CourseBean> empty = new HashSet<>();
-//        member.setCollectionCourses(empty);
-//        memberService.saveOrUpdate(member);
-//        member.setCollectionCourses(collectionCourses);
-//        memberService.saveOrUpdate(member);
-//        return ResponseEntity.status(HttpStatus.OK).body(courseBean);
-//    }
 
     @GetMapping("/collectionDelete/{courseNo}")
     @ResponseBody
-    public ResponseEntity<Boolean> collectionDeleteCourse(@PathVariable Integer courseNo,HttpSession session)  {
+    public ResponseEntity<Boolean> collectionDeleteCourse(@PathVariable Integer courseNo, HttpSession session) {
         boolean check = true;
         Member member = (Member) session.getAttribute("loginMember");
         if (member == null) {
-            check=false;
-        }else {
+            check = false;
+        } else {
             Set<CourseBean> collectionCourses = member.getCollectionCourses();
 
             collectionCourses.removeIf(courseBean1 -> courseBean1.getCourseNo().equals(courseNo));
@@ -224,7 +214,10 @@ public class CourseUserController {
         if (mf.getOriginalFilename().length() != 0) {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
+        } else {
+            CourseBean.setCoursePicUrl(courseService.findCourse(CourseBean.getCourseNo()).get().getCoursePicUrl());
         }
+
         CourseBean.setUserid(loginUser.getUserid());
         CourseBean.setMember(loginUser);
         CourseBean.setStatus("待審核");

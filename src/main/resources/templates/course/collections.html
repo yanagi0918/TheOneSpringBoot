@@ -116,35 +116,34 @@
         </div>
 
 
-        <div class="col-lg-4 mt-5 mt-lg-0">
-            <!-- Recent Post -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
-                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                    <img class="img-fluid rounded" th:src="@{/assets_course/img/blog-80x80.jpg}" alt="">
-                    <div class="pl-3">
-                        <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                        <small>Jan 01, 2050</small>
-                    </div>
-                </a>
+        <div class="row">
+            <div class="col-6 mt-3 pt-3" >
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">猜你喜歡這些課程</h3>
+                <div th:each="courseC:${courseListCate}">
+                    <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseC.courseNo}}">
+                        <img class="img-fluid rounded" th:src="${courseC.coursePicUrl}" alt="" width="80px" height="80px">
+                        <div class="pl-3">
+                            <h6 class="m-1" th:text="${courseC.courseName}"></h6>
+                            <small th:text="${#dates.format(courseC.date,'yyyy-MM-dd')}"></small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 mt-3 pt-3" >
+                <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">最新課程推薦</h3>
+                <div th:each="courseR:${courseListRecent}">
+                    <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseR.courseNo}}">
+                        <img class="img-fluid rounded" th:src="${courseR.coursePicUrl}" alt="" width="80px" height="80px">
+                        <div class="pl-3">
+                            <h6 class="m-1" th:text="${courseR.courseName}"></h6>
+                            <small th:text="${#dates.format(courseR.date,'yyyy-MM-dd')}"></small>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mt-3 pt-3">
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-lg justify-content-center mb-0">
                     <li class="page-item disabled">

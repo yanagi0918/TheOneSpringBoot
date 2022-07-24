@@ -166,10 +166,10 @@
 
                 <div class="col-lg-4 mt-5 mt-lg-0 ">
                     <div class="mb-5" >
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">最新熱門課程</h3>
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">最新課程推薦</h3>
                         <div th:each="courseR:${courseListRecent}">
                             <a class="d-flex align-items-center text-decoration-none mb-3" th:href="@{'/courses?courseNo='+${courseR.courseNo}}">
-                                <img class="img-fluid rounded" th:src="${courseR.coursePicUrl}" alt="" width="80px" height="65px">
+                                <img class="img-fluid rounded" th:src="${courseR.coursePicUrl}" alt="" width="80px" height="80px">
                                 <div class="pl-3">
                                     <h6 class="m-1" th:text="${courseR.courseName}"></h6>
                                     <small th:text="${#dates.format(courseR.date,'yyyy-MM-dd')}"></small>

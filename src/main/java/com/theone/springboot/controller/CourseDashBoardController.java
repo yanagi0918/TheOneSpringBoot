@@ -58,14 +58,15 @@ public class CourseDashBoardController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
+
     //ajax (jquery)檢查userid是否有註冊
     @PostMapping(path = "/courses/checkUserid", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Boolean> isUseridExsist(@RequestBody CourseBean courseBean) {
         Member byUserid = memberService.getByUserid(courseBean.getUserid());
-        if (byUserid!=null){
+        if (byUserid != null) {
             return ResponseEntity.status(HttpStatus.OK).body(true);
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.OK).body(false);
         }
 
@@ -105,11 +106,12 @@ public class CourseDashBoardController {
         System.out.println(CourseBean);
         CourseBean.setMember(memberService.getByUserid(CourseBean.getUserid()));
         File imageFile = new File(System.currentTimeMillis() + "_" + mf.getOriginalFilename());
-        //String savedFilePath = new File("target\\classes\\static\\courseImg\\", imageFile.getName()).getAbsolutePath();
         File savedFile = new File(uploadDirInit().getAbsolutePath(), imageFile.getName());
         if (mf.getOriginalFilename().length() != 0) {
             mf.transferTo(savedFile);
             CourseBean.setCoursePicUrl("/courseImg" + File.separator + imageFile.getName());
+        } else {
+            CourseBean.setCoursePicUrl(courseService.findCourse(CourseBean.getCourseNo()).get().getCoursePicUrl());
         }
         courseService.saveOrUpdate(CourseBean);
         return "redirect:/dashboard/courses";
@@ -118,30 +120,52 @@ public class CourseDashBoardController {
     @GetMapping("/courses/chartdata")
     @ResponseBody
     public Map<String, Object> getChartData() {
-        Map<String, Object> dataMap =new HashMap();
+        Map<String, Object> dataMap = new HashMap();
         int[] dataCategory = {0, 0, 0, 0, 0, 0, 0};
         int[] dataStatus = {0, 0, 0};
         List<CourseBean> courses = courseService.findAllCourses();
         for (CourseBean course : courses) {
             switch (course.getCourseCategory()) {
-                case "英文證照" : dataCategory[0]++; break;
-                case "日語證照": dataCategory[1]++; break;
-                case "韓語證照": dataCategory[2]++; break;
-                case "求職技巧": dataCategory[3]++; break;
-                case "自我認知": dataCategory[4]++; break;
-                case "生涯轉換與轉業": dataCategory[5]++; break;
-                case "就業市場現況與趨勢": dataCategory[6]++; break;
-                default: break;
+                case "英文證照":
+                    dataCategory[0]++;
+                    break;
+                case "日語證照":
+                    dataCategory[1]++;
+                    break;
+                case "韓語證照":
+                    dataCategory[2]++;
+                    break;
+                case "求職技巧":
+                    dataCategory[3]++;
+                    break;
+                case "自我認知":
+                    dataCategory[4]++;
+                    break;
+                case "生涯轉換與轉業":
+                    dataCategory[5]++;
+                    break;
+                case "就業市場現況與趨勢":
+                    dataCategory[6]++;
+                    break;
+                default:
+                    break;
             }
             switch (course.getStatus()) {
-                case "待審核" : dataStatus[0]++; break;
-                case "已審核": dataStatus[1]++; break;
-                case "駁回": dataStatus[2]++; break;
-                default: break;
+                case "待審核":
+                    dataStatus[0]++;
+                    break;
+                case "已審核":
+                    dataStatus[1]++;
+                    break;
+                case "駁回":
+                    dataStatus[2]++;
+                    break;
+                default:
+                    break;
             }
         }
-        dataMap.put("dataCategory",dataCategory);
-        dataMap.put("dataStatus",dataStatus);
+        dataMap.put("dataCategory", dataCategory);
+        dataMap.put("dataStatus", dataStatus);
 
         return dataMap;
     }
@@ -183,10 +207,10 @@ public class CourseDashBoardController {
     public boolean sendNotifyEmail(@RequestParam Integer courseNo, @RequestParam String result) {
         CourseBean course = courseService.findCourse(courseNo).orElseThrow();
         if ("已審核".equals(result) || "駁回".equals(result)) {
-            result = ("已審核".equals(result))?"\"blue\"><b>通過 !":"\"red\"><b>駁回，請修正課程資訊後重新送審，謝謝 !";
+            result = ("已審核".equals(result)) ? "\"blue\"><b>通過 !" : "\"red\"><b>駁回，請修正課程資訊後重新送審，謝謝 !";
             String msg = "<p style=\"font-size: large;\">" +
-                    "親愛的 "+course.getLecturer()+" 講師您好: <br>"+
-                    "<br>"+
+                    "親愛的 " + course.getLecturer() + " 講師您好: <br>" +
+                    "<br>" +
                     "課程編號: " + courseNo + "<br>" +
                     "課程名稱: " + course.getCourseName() + "<br>" +
                     "審核結果: <font color=" + result + "</b></font><br>" +

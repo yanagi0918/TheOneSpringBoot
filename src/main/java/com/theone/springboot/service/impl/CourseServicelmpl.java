@@ -64,7 +64,7 @@ public class CourseServicelmpl implements CourseService {
     @Override
     public Page<CourseBean> findAllCoursesByStatus(int page, int size, String status) {
 
-        Sort sort = Sort.by(Sort.Direction.ASC,"courseNo");
+        Sort sort = Sort.by(Sort.Direction.DESC,"courseNo");
         return courseDao.findAllByStatus(PageRequest.of(page,size,sort),status);
     }
 
