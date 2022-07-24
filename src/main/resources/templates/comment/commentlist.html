@@ -208,22 +208,10 @@
 						th:each="comment : ${listComment} ">
 						<article class="blog_item">
 							<div class="blog_details py-5">
-<!-- 								<div class=""> -->
-<!-- 									<form method="post" id="form" -->
-<!-- 										th:modelAttribute="commentLike"> -->
-										
-<!-- 										<a class="float-right text-muted" th:data-commentId="${comment.commentId}" -->
-<!-- 										th:data-islike=2 -->
-<!-- 											onclick="commentLikeSave(this, this.getAttribute('data-commentId'), this.getAttribute('data-islike') ).submit()"><i -->
-<!-- 											class="fa fa-thumbs-down">噓</i></a> -->
-<!-- <!-- 											 <input type="text" th:value=2 th:name="${commentLike.islike}"> --> -->
-<!-- 										<h4 class="float-right">&nbsp&nbsp</h4> -->
-<!-- 										<a class="float-right text-muted"><i -->
-<!-- 											class="fa fa-thumbs-up">讚</i></a> -->
-<!-- 										<h6 class="text-muted" -->
-<!-- 											th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6> -->
-<!-- 									</form> -->
-<!-- 								</div> -->
+								<div class="">
+									<h6 class="text-muted"
+										th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
+								</div>
 								<a class="d-inline-block"
 									th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">
 									<h2 class="float-left"
