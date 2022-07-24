@@ -80,6 +80,8 @@ public class Comment {
 	public Comment() {
 	}
 
+	
+
 	public Comment(Integer commentId, Date refTime, Date createTime, String compName, Integer compScore,
 			String jobName, Integer job_score, String jobDescription, Integer std_hour, Integer real_hour,
 			Integer over_freq, Float seniority, Float total_seniority, Integer monthly_salary, Integer yearly_salary,
@@ -278,14 +280,6 @@ public class Comment {
 		this.status = status;
 	}
 
-//	public String getUserId() {
-//		return userId;
-//	}
-//
-//	public void setUserId(String userId) {
-//		this.userId = userId;
-//	}
-	
 	public String getNickName() {
 		return nickName;
 	}
@@ -301,6 +295,7 @@ public class Comment {
 	public void setCommentMember(Member commentMember) {
 		this.commentMember = commentMember;
 	}
+	
 
 	@Override
 	public String toString() {

@@ -97,6 +97,14 @@
 .blog_left_sidebar i {
 	font-size: 16px;
 }
+
+.pl-55 {
+	padding-left: 4 em;
+}
+
+.mr-55 {
+	margin-right: 5.3 em;
+}
 </style>
 </head>
 
@@ -313,21 +321,11 @@
 														name="messageReply" id="messageReply" th:value=0>
 												</div>
 											</div>
-											<!-- 										<div class="col-sm-3"> -->
-											<!-- 											<div class="form-group"> -->
-											<!-- 												<input type="radio" name="messageLike" id="mlike" -->
-											<!-- 													th:value="true" -->
-											<!-- 													th:checked="${commentMessage.messageLike} ? 'checked'">喜歡 -->
-											<!-- 												<input type="radio" name="messageLike" id="munlike" -->
-											<!-- 													th:value="false" -->
-											<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
-											<!-- 											</div> -->
-											<!-- 										</div> -->
 											<div class="form-group col-sm-4 f-right"
 												th:if="${session.loginMember != null}">
 												<button type="button" class="genric-btn primary radius"
 													name="OneInputMessage" value="一鍵輸入" id="OneInputMessage">
-													<i class="fa fa-list"></i>
+													<i class="fa fa-paste"></i>
 												</button>
 												<button type="submit"
 													th:if="${commentMessage.messageId == null}"
@@ -340,8 +338,8 @@
 								</div>
 								<!-- 新增留言 end -->
 								<div class="comments-area">
-									<h4 th:text="'留言(' + ${messages.size()} + ')'"></h4>
-									<div class="comment-list" th:each="message : ${messages}">
+									<h4 th:text="'留言(' + ${totelmessage.size()} + ')'"></h4>
+									<div class="comment-list pl-4" th:each="message : ${messages}">
 										<!-- 留言list start-->
 										<div th:id="'currentMessage' + ${message.messageId}">
 											<div class="thumb f-left">
@@ -350,7 +348,7 @@
 													alt="">
 											</div>
 											<div
-												class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+												class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm mr-55">
 												<div class="user justify-content-between d-flex">
 													<div class="desc p-3">
 														<div class="float-right m-1"
@@ -385,9 +383,230 @@
 													</div>
 												</div>
 											</div>
+											<!-- 回覆留言區 start -->
+											<div class="comment_form brand-bg rounded-80 pt-3 d-none"
+												th:id="'replyMessageArea' + ${message.messageId}">
+												<div class="thumb f-right col-sm-1 p-0"
+													th:if="${session.loginMember != null}">
+													<img class="p-0"
+														th:src="${(session.loginMember.image.contains('null') || session.loginMember.image == null) ? '/assets/img/comment/comment_4.png' : session.loginMember.image}"
+														alt="">
+												</div>
+												<div class="thumb f-right col-sm-1 p-0"
+													th:if="${session.loginMember == null}">
+													<img class="p-0" th:if="${session.loginMember == null}"
+														th:src="@{/assets/img/comment/comment_4.png}" alt="">
+												</div>
+												<form
+													th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}"
+													method="post" id="form" th:modelAttribute="commentMessage">
+													<div class="row">
+														<div class="col-12">
+															<div class="form-group">
+																<textarea
+																	class="form-control w-100 bg-white rounded-80 shadow-sm replyquickcontent"
+																	name="messageContent"
+																	th:value="${commentMessage.messageContent}"
+																	id="messageContent" placeholder="留言....."></textarea>
+																<h6 class="float-right" id="count_message"></h6>
+															</div>
+														</div>
+														<div class="">
+															<div class="form-group">
+																<input class="form-control" name="messageOrder"
+																	id="messageOrder" type="hidden"
+																	th:value="${commentMessage.messageOrder}" readonly>
+															</div>
+														</div>
+														<div class="">
+															<div class="form-group">
+																<input class="form-control" name="status" id="status"
+																	type="hidden" th:value=0 readonly>
+															</div>
+														</div>
+														<div class="">
+															<div class="form-group">
+																<input th:if="${commentMessage.messageId == null}"
+																	type="hidden" class="form-control" name="messageTime"
+																	required id="messageTime"
+																	th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
+																	readonly> <input
+																	th:if="${commentMessage.messageId != null}"
+																	type="hidden" class="form-control" name="messageTime"
+																	required id="messageTime"
+																	th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
+																	readonly>
+															</div>
+														</div>
+														<div class="col-sm-9" id="messageNickName"
+															th:if="${session.loginMember != null}">
+															<div class="form-group">
+																<div class="f-left">
+																	<input type="text" class="form-control"
+																		th:style="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名') ? 'display: none' : 'display: block'}"
+																		id="replyNickName" name="replyNickName"
+																		th:value="${commentMessage.replyNickName == null ? 	session.loginMember.username : commentMessage.replyNickName}"
+																		placeholder="來個暱稱">
+																</div>
+																<label class="f-left pr-1">匿名</label>
+																<div class="switch-wrap justify-content-between f-left">
+																	<div class="confirm-switch">
+																		<input type="checkbox" id="confirm-switch"
+																			name="anonymous"
+																			th:checked="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名')}">
+																		<label for="confirm-switch" class="f-left"></label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="">
+															<div class="form-group">
+																<input type="hidden" class="form-control"
+																	name="messageReply" id="messageReply"
+																	th:value="${message.messageId}">
+															</div>
+														</div>
+														<div class="form-group col-sm-3 f-right"
+															th:if="${session.loginMember != null}">
+															<button type="button"
+																class="edit-delete testimonial-bg border-0 replyquick"
+																name="sent" value="一鍵">
+																<i class="fa fa-paste"></i>
+															</button>
+															<button type="submit"
+																class="edit-delete testimonial-bg border-0" name="sent"
+																value="送出">
+																<i class="fa fa-paper-plane"></i>
+															</button>
+															<button type="button"
+																class="edit-delete testimonial-bg border-0"
+																th:id="'replyCancel'+${message.messageId}" name="back"
+																value="取消">
+																<i class="fa fa-reply"></i>
+															</button>
+														</div>
+													</div>
+												</form>
+											</div>
+											<!-- 回覆留言區 end -->
+											<!-- 回覆留言list start-->
+											<div class="comment_form brand-bg rounded-80 pt-3 pl-55"
+												th:each="messageChild : ${message.getChildren()}">
+												<div th:id="'currentMessage' + ${messageChild.messageId}">
+													<div class="thumb f-right ml-4">
+														<img
+															th:src="@{${message.replyNickName.equals('匿名') || !message.member.image.contains('memberimages')} ? @{/assets/img/comment/comment_4.png} : ${message.member.image}}"
+															alt="">
+													</div>
+													<div
+														class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
+														<div class="user justify-content-between d-flex">
+															<div class="desc p-3">
+																<div class="float-right m-1"
+																	th:if="${session.loginMember != null && session.loginMember.userid == messageChild.member.userid}">
+																	<a class="m-2 edit-delete editMessage"
+																		th:id="${messageChild.messageId}"
+																		onmouseover="editMessage(this.id)"> <i
+																		class="fa fa-pencil-alt"></i>
+																	</a>
+																</div>
+																<p class="comment"
+																	th:text="${messageChild.messageContent}"></p>
+																<div class="d-flex justify-content-between">
+																	<div class="d-flex align-items-center">
+																		<h5 class="date">[[${messageChild.replyNickName}]]</h5>
+																		<p class="date"
+																			th:text="${#dates.format(messageChild.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+																		<!-- 																	<div class="reply-btn" -->
+																		<!-- 																		th:id="'reply' + ${messageChild.messageId}" -->
+																		<!-- 																		th:if="${session.loginMember != null}"> -->
+																		<!-- 																		<a class="btn-reply d-flex align-items-center" -->
+																		<!-- 																			th:id="${messageChild.messageId}" -->
+																		<!-- 																			onmouseover="replyMessage(this.id)">回覆</a> -->
+																		<!-- 																	</div> -->
+																	</div>
+																	<button type="button"
+																		th:if="${session.loginMember != null && session.loginMember.userid == messageChild.member.userid}"
+																		class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
+																		th:value='${messageChild.messageId}'>
+																		<i class="fa fa-trash-alt"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- 編輯回覆留言區 start-->
+												<div class="d-none"
+													th:id="'messageEditArea' + ${messageChild.messageId}">
+													<form
+														th:action="@{/{cid}/{mid}/CommentMessageUpdate(cid=${comment.commentId},mid=${messageChild.messageId})}"
+														method="post" id="form" th:object="${messageChild}"
+														th:modelAttribue="messageChild">
+														<div class="">
+															<div class="form-group">
+																<textarea
+																	class="form-control w-100 bg-white rounded-80 shadow-sm updatequickcontent"
+																	placeholder="留言....." name="messageContent"
+																	th:text="${messageChild.messageContent}"
+																	th:id="'modifychildreply' + ${messageChild.messageId}"></textarea>
+																<h6 class="float-right" id="count_message"></h6>
+															</div>
+														</div>
+														<div class="f-left">
+															<div class="">
+																<input class="" type="hidden" name="messageOrder"
+																	th:value="${messageChild.messageOrder}">
+															</div>
+														</div>
+														<div class="f-left">
+															<div class="">
+																<input type="hidden" class="" name="messageTime"
+																	th:value="${#dates.format(messageChild.messageTime,'yyyy-MM-dd HH:mm:ss')}">
+															</div>
+														</div>
+														<div class="f-left">
+															<div class="">
+																<input type="hidden" class="" name="replyNickName"
+																	th:value="${messageChild.replyNickName}">
+															</div>
+														</div>
+														<div class="f-left">
+															<div class="">
+																<input type="hidden" class="" name="messageReply"
+																	th:value="${messageChild.messageReply}">
+															</div>
+														</div>
+														<div class="f-left">
+															<div class="">
+																<input type="hidden" class="" name="messageLike"
+																	th:value="${messageChild.messageLike}">
+															</div>
+														</div>
+														<button type="button"
+															class="edit-delete testimonial-bg border-0 updatemessagequick"
+															name="sent" value="一鍵">
+															<i class="fa fa-paste"></i>
+														</button>
+														<button type="submit"
+															class="edit-delete testimonial-bg border-0" name="sent"
+															value="送出">
+															<i class="fa fa-paper-plane"></i>
+														</button>
+														<button type="button"
+															class="edit-delete testimonial-bg border-0"
+															th:id="'editCancel'+${messageChild.messageId}"
+															name="back" value="取消">
+															<i class="fa fa-reply"></i>
+														</button>
+													</form>
+												</div>
+												<!-- 編輯回覆留言區 end-->
+											</div>
+											<!-- 回覆留言list end-->
 										</div>
 										<!-- 留言list end-->
-										<!-- 編輯留言區 -->
+										<!-- 編輯留言區 start-->
 										<div class="d-none"
 											th:id="'messageEditArea' + ${message.messageId}">
 											<form
@@ -397,7 +616,7 @@
 												<div class="">
 													<div class="form-group">
 														<textarea
-															class="form-control w-100 bg-white rounded-80 shadow-sm"
+															class="form-control w-100 bg-white rounded-80 shadow-sm updatequickcontent"
 															placeholder="留言....." name="messageContent"
 															th:text="${message.messageContent}"
 															th:id="'modifyreply' + ${message.messageId}"></textarea>
@@ -434,11 +653,11 @@
 															th:value="${message.messageLike}">
 													</div>
 												</div>
-												<!-- 												<button type="button" -->
-												<!-- 													class="edit-delete testimonial-bg border-0" name="modify" th:id="'modifybtn'+${message.messageId}" -->
-												<!-- 													value="一鍵"> -->
-												<!-- 													<i class="fa fa-paste"></i> -->
-												<!-- 												</button> -->
+												<button type="button"
+													class="edit-delete testimonial-bg border-0 updatemessagequick"
+													name="sent" value="一鍵">
+													<i class="fa fa-paste"></i>
+												</button>
 												<button type="submit"
 													class="edit-delete testimonial-bg border-0" name="sent"
 													value="送出">
@@ -452,176 +671,8 @@
 												</button>
 											</form>
 										</div>
-										<!-- 回復區 -->
-										<!-- 回覆留言區 start -->
-										<div class="comment_form brand-bg rounded-80 pt-3 d-none"
-											th:id="'replyMessageArea' + ${message.messageId}">
-											<div class="thumb f-right col-sm-1 p-0"
-												th:if="${session.loginMember != null}">
-												<img class="p-0"
-													th:src="${(session.loginMember.image.contains('null') || session.loginMember.image == null) ? '/assets/img/comment/comment_4.png' : session.loginMember.image}"
-													alt="">
-											</div>
-											<div class="thumb f-right col-sm-1 p-0"
-												th:if="${session.loginMember == null}">
-												<img class="p-0" th:if="${session.loginMember == null}"
-													th:src="@{/assets/img/comment/comment_4.png}" alt="">
-											</div>
-											<form
-												th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}"
-												method="post" id="form" th:modelAttribute="commentMessage">
-												<div class="row">
-													<div class="col-12">
-														<div class="form-group">
-															<textarea
-																class="form-control w-100 bg-white rounded-80 shadow-sm"
-																name="messageContent"
-																th:value="${commentMessage.messageContent}"
-																id="messageContent" placeholder="留言....."></textarea>
-															<h6 class="float-right" id="count_message"></h6>
-														</div>
-													</div>
-													<div class="">
-														<div class="form-group">
-															<input class="form-control" name="messageOrder"
-																id="messageOrder" type="hidden"
-																th:value="${commentMessage.messageOrder}" readonly>
-														</div>
-													</div>
-													<div class="">
-														<div class="form-group">
-															<input class="form-control" name="status" id="status"
-																type="hidden" th:value=0 readonly>
-														</div>
-													</div>
-													<div class="">
-														<div class="form-group">
-															<input th:if="${commentMessage.messageId == null}"
-																type="hidden" class="form-control" name="messageTime"
-																required id="messageTime"
-																th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"
-																readonly> <input
-																th:if="${commentMessage.messageId != null}"
-																type="hidden" class="form-control" name="messageTime"
-																required id="messageTime"
-																th:value="${#dates.format(commentMessage.messageTime, 'yyyy-MM-dd HH:mm:ss')}"
-																readonly>
-														</div>
-													</div>
-													<div class="col-sm-10" id="messageNickName"
-														th:if="${session.loginMember != null}">
-														<div class="form-group">
-															<div class="f-left">
-																<input type="text" class="form-control"
-																	th:style="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名') ? 'display: none' : 'display: block'}"
-																	id="replyNickName" name="replyNickName"
-																	th:value="${commentMessage.replyNickName == null ? 	session.loginMember.username : commentMessage.replyNickName}"
-																	placeholder="來個暱稱">
-															</div>
-															<label class="f-left pr-1">匿名</label>
-															<div class="switch-wrap justify-content-between f-left">
-																<div class="confirm-switch">
-																	<input type="checkbox" id="confirm-switch"
-																		name="anonymous"
-																		th:checked="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名')}">
-																	<label for="confirm-switch" class="f-left"></label>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="">
-														<div class="form-group">
-															<input type="hidden" class="form-control"
-																name="messageReply" id="messageReply"
-																th:value="${message.messageId}">
-														</div>
-													</div>
-													<!-- 										<div class="col-sm-3"> -->
-													<!-- 											<div class="form-group"> -->
-													<!-- 												<input type="radio" name="messageLike" id="mlike" -->
-													<!-- 													th:value="true" -->
-													<!-- 													th:checked="${commentMessage.messageLike} ? 'checked'">喜歡 -->
-													<!-- 												<input type="radio" name="messageLike" id="munlike" -->
-													<!-- 													th:value="false" -->
-													<!-- 													th:checked="${!commentMessage.messageLike} ? 'checked'">不喜歡 -->
-													<!-- 											</div> -->
-													<!-- 										</div> -->
-													<div class="form-group col-sm-2 f-right"
-														th:if="${session.loginMember != null}">
-														<button type="submit"
-															class="edit-delete testimonial-bg border-0" name="sent"
-															value="送出">
-															<i class="fa fa-paper-plane"></i>
-														</button>
-														<button type="button"
-															class="edit-delete testimonial-bg border-0"
-															th:id="'replyCancel'+${message.messageId}" name="back"
-															value="取消">
-															<i class="fa fa-reply"></i>
-														</button>
-													</div>
-												</div>
-											</form>
-										</div>
-										<!-- 回覆留言區 end -->
-										<!-- 回覆留言list start-->
-										<!-- 										<form -->
-										<!-- 											th:action="@{/user/{id}/CommentMessageSave(id=${comment.commentId})}" th:with="${model.addAttribute('replymessage',commentMessageService.findByMessageReply(${message.messageId}))}" -->
-										<!-- 											method="post" id="form" th:modelAttribute="replymessage"> -->
-										<div th:fragment="f_call(comment)"
-											th:unless="${#lists.isEmpty(commentMessage.children)}">
-											<div class="comment-list"
-												th:each="child  : ${commentMessage.children}" th:inline="text">
-												<div th:id="'currentMessage' + ${child.messageId}">
-													<div class="thumb f-left">
-														<img
-															th:src="@{${child.replyNickName.equals('匿名') || child.member.image == null} ? @{/assets/img/comment/comment_4.png} : ${replymessage.member.image}}"
-															alt="">
-													</div>
-													<div
-														class="single-comment justify-content-between d-flex testimonial-bg border rounded-80 shadow-sm">
-														<div class="user justify-content-between d-flex">
-															<div class="desc p-3">
-																<div class="float-right m-1"
-																	th:if="${session.loginMember != null && session.loginMember.userid == child.member.userid}">
-																	<a class="m-2 edit-delete editMessage"
-																		th:id="${child.messageId}"
-																		onmouseover="editMessage(this.id)"> <i
-																		class="fa fa-pencil-alt"></i>
-																	</a>
-																</div>
-																<p class="comment"
-																	th:text="${child.messageContent}"></p>
-																<div class="d-flex justify-content-between">
-																	<div class="d-flex align-items-center">
-																		<h5 class="date">[[${message.replyNickName}]]</h5>
-																		<p class="date"
-																			th:text="${#dates.format(replymessage.messageTime,'yyyy-MM-dd HH:mm:ss')}"></p>
-																		<div class="reply-btn"
-																			th:id="'reply' + ${child.messageId}"
-																			th:if="${session.loginMember != null}">
-																			<a class="btn-reply d-flex align-items-center"
-																				th:id="${child.messageId}"
-																				onmouseover="replyMessage(this.id)">回覆</a>
-																		</div>
-																	</div>
-																	[[$child.messageContent]]
-																	<div th:replace="this::f_call(${child})"></div>
-																	<button type="button"
-																		th:if="${session.loginMember != null && session.loginMember.userid == child.member.userid}"
-																		class="commentMessage-delete float-right mb-70 m-2 edit-delete testimonial-bg border-0"
-																		th:value='${child.messageId}'>
-																		<i class="fa fa-trash-alt"></i>
-																	</button>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- 										</form> -->
-										<!-- 回覆留言list end-->
+										<!-- 編輯留言區 end-->
+										<!-- 回覆區 -->
 									</div>
 								</div>
 							</div>
@@ -645,26 +696,31 @@
 							<ul class="list cat-list">
 								<li><a href="/comments" class="d-flex">
 										<p>全部</p>
+										<p id="allcount"></p>
 								</a></li>
 								<li><a
 									th:href="@{/comments/search} + '?title=全職&searchType=jobDescription'"
 									class="d-flex">
 										<p>全職</p>
+										<p id="fullcount"></p>
 								</a></li>
 								<li><a
 									th:href="@{/comments/search} + '?title=兼職&searchType=jobDescription'"
 									class="d-flex">
 										<p>兼職</p>
+										<p id="helfcount"></p>
 								</a></li>
 								<li><a
 									th:href="@{/comments/search} + '?title=工讀&searchType=jobDescription'"
 									class="d-flex">
 										<p>工讀</p>
+										<p id="parttimecount"></p>
 								</a></li>
 								<li><a
 									th:href="@{/comments/search} + '?title=實習&searchType=jobDescription'"
 									class="d-flex">
 										<p>實習</p>
+										<p id="intern"></p>
 								</a></li>
 							</ul>
 						</aside>

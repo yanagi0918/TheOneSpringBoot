@@ -81,7 +81,7 @@ $(function() {
 					location.href = `/CommentMessageDelete?id=${$(this).val()}`;
 				}, 1500)
 			} else {
-				location.href = '/comments'
+//				location.href = '/comments'
 			}
 
 		})
@@ -232,6 +232,16 @@ $(function() {
 	$('#OneInputMessage').click(function() {
 		$('#replyNickName').val('徬徨的畢業生')
 		$('#messageContent').val('趕謝大大無私的分享~~')
+	});
+	
+	//updatemessage
+	$('.updatemessagequick').click(function() {
+		$('.updatequickcontent').val('感謝大大無私的分享~~')
+	});
+	
+	//message reply
+	$('.replyquick').click(function() {
+		$('.replyquickcontent').val('感同身受')
 	});
 
 

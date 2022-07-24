@@ -1,11 +1,15 @@
 package com.theone.springboot.controller;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
+import com.theone.springboot.entity.CommentLike;
 import com.theone.springboot.entity.CommentMessage;
 import com.theone.springboot.entity.Member;
+import com.theone.springboot.repository.CommentDao;
+import com.theone.springboot.service.CommentLikeService;
 import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
 import com.theone.springboot.service.MemberService;
@@ -37,14 +44,17 @@ public class CommentUserController {
 	@Autowired
 	CommentMessageService commentMessageService;
 
+	@Autowired
+	CommentLikeService commentLikeService;
+
 	// 所有評論list
 	@RequestMapping("/comments")
-	public String listComments(Model model) {
-//		List<Comment> listcomment = commentService.findAll();
-		List<Comment> listcomment = commentService.findAllByOrderByCommentIdDesc();//倒敘
+	public String listComments(HttpSession session, @ModelAttribute("commentLike") CommentLike commentLike,
+			Model model) {
+		List<Comment> listcomment = commentService.findAllByOrderByCommentIdDesc();// 倒敘
 		model.addAttribute("listComment", listcomment);
 		model.addAttribute("commentMessageService", commentMessageService);
-		
+
 		return "comment/commentlist";
 	}
 
@@ -98,16 +108,19 @@ public class CommentUserController {
 	// 送出評價的詳細資料
 	@RequestMapping("/CommentDetail/{id}")
 	public String showDetailForm(@PathVariable("id") Integer id,
-			@ModelAttribute("commentMessage") CommentMessage commentMessage, HttpSession session, Model model) {
+			@ModelAttribute("commentMessage") CommentMessage commentMessage, 
+			HttpSession session, 
+			Model model) {
 
 		// show comment detail
 		Comment comment = commentService.findById(id).get();
 		model.addAttribute("comment", comment);
 		// get reply comment list
-		List<CommentMessage> messages = commentMessageService.findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(id, 0);
-//		List<CommentMessage> messages = commentMessageService.findByCommentCommentId(id);
+		List<CommentMessage> messages = commentMessageService
+				.findByCommentCommentIdAndMessageReplyOrderByMessageIdDesc(id, 0);
+		List<CommentMessage> totelmessage = commentMessageService.findByCommentCommentId(id);
 		model.addAttribute("messages", messages);
-//		model.addAttribute("replymessage", commentMessageService.findByMessageReply(messages));
+		model.addAttribute("totelmessage", totelmessage);
 		
 		// get message count
 		model.addAttribute("commentMessage", commentMessage);
@@ -127,33 +140,43 @@ public class CommentUserController {
 	@PostMapping("/user/{id}/CommentMessageSave")
 	public String saveCommentMessage(@PathVariable("id") Integer id,
 			@ModelAttribute("commentMessage") CommentMessage commentMessage,
-			@ModelAttribute("message") CommentMessage message, HttpSession session, Model model) {
+			@ModelAttribute("message") CommentMessage message, 
+			HttpSession session, 
+			HttpServletRequest request,
+			Model model) {
+		String referer = request.getHeader("Referer");
 		Member member = (Member) session.getAttribute("loginMember");
 		Comment comment = commentService.findById(id).get();
 		commentMessage.setComment(comment);
 		commentMessage.setMember(member);
 		commentMessageService.saveOrUpdate(commentMessage);
-		return "redirect:/comments";
+		return "redirect:"+ referer;
 	}
 
 	// 儲存留言
 	@PostMapping("/{cid}/{mid}/CommentMessageUpdate")
-	public String saveCommentMessage(@PathVariable("cid") Integer cid, @PathVariable("mid") Integer mid,
-			@ModelAttribute("message") CommentMessage message, HttpSession session, Model model) {
+	public String saveCommentMessage(@PathVariable("cid") Integer cid, 
+			@PathVariable("mid") Integer mid,
+			@ModelAttribute("message") CommentMessage message, 
+			HttpSession session,
+			HttpServletRequest request,
+			Model model) {
+		String referer = request.getHeader("Referer");
 		Member member = (Member) session.getAttribute("loginMember");
 		Comment comment = commentService.findById(cid).get();
 		message.setComment(comment);
 		message.setMessageId(mid);
 		message.setMember(member);
 		commentMessageService.saveOrUpdate(message);
-		return "redirect:/comments";
+		return "redirect:"+ referer;
 	}
 
 	// 刪除留言
 	@GetMapping(value = "/CommentMessageDelete")
-	public String deleteCommentMessage(@RequestParam("id") Integer id) {
+	public String deleteCommentMessage(@RequestParam("id") Integer id, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
 		commentMessageService.deleteByMessageId(id);
-		return "redirect:comments";
+		return "redirect:"+ referer;
 	}
 
 	// 評論查詢
@@ -176,14 +199,14 @@ public class CommentUserController {
 
 		return "comment/commentlist";
 	}
-	
+
 	@GetMapping("/comments/jobtypejson")
 	@ResponseBody
 	public int[] getJobTypeJson() {
 		int[] jobtype = { 0, 0, 0, 0 };
 		List<Comment> allComments = commentService.findAll();
 		for (Comment comment : allComments) {
-			System.out.println(comment);
+//			System.out.println(comment);
 
 			if (comment.getJobDescription().equals("全職")) {
 				jobtype[0]++;
@@ -198,15 +221,6 @@ public class CommentUserController {
 		return jobtype;
 	}
 	
-
-	// test
-	@GetMapping("/comments/commentlistjson")
-	public @ResponseBody List<Comment> getCommentListJson(@RequestBody(required = false) Comment comment) {
-		List<Comment> allComments = commentService.findAll();
-
-		return allComments;
-	}
-
 	// 討論區分頁
 	@RequestMapping("/forum")
 	public String showForum() {

@@ -17,8 +17,6 @@ public interface CommentService {
 
 	void deleteById(Integer pk);
 
-//	List<Comment> findByUserId(String userId);
-
 	List<Comment> findByCommentMemberIdNumber(Integer idNumber);
 
 	void deleteByCommentMemberIdNumber(Integer idNumber);
@@ -30,6 +28,6 @@ public interface CommentService {
 	List<Comment> findByJobDescriptionLike(String jobDescription);
 	
 	List<Comment> findAllByOrderByCommentIdDesc();
-
+	
 
 }
