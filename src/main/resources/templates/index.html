@@ -145,9 +145,6 @@
 						        <article class="blog_item">
 						    	    <div class="blog_details py-5">
 						    		    <div class="">
-						    			    <a class="float-right text-muted"><i class="fa fa-thumbs-down">噓</i></a>
-						    				<h4 class="float-right">&nbsp&nbsp</h4>
-						    				<a class="float-right text-muted"><i class="fa fa-thumbs-up">讚</i></a>
 						    				<h6 class="text-muted" th:text="'工作經驗 - ' + ${#dates.format(comment.refTime,'yyyy-MM')}"></h6>
 						    			</div>
 						    			<a class="d-inline-block" th:href="@{/CommentDetail/{id}(id=${comment.commentId})}">

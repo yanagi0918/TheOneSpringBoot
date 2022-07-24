@@ -1,6 +1,5 @@
 package com.theone.springboot.controller;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,25 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.theone.springboot.entity.Comment;
-import com.theone.springboot.entity.CommentLike;
 import com.theone.springboot.entity.CommentMessage;
 import com.theone.springboot.entity.Member;
-import com.theone.springboot.repository.CommentDao;
-import com.theone.springboot.service.CommentLikeService;
 import com.theone.springboot.service.CommentMessageService;
 import com.theone.springboot.service.CommentService;
 import com.theone.springboot.service.MemberService;
@@ -44,13 +37,9 @@ public class CommentUserController {
 	@Autowired
 	CommentMessageService commentMessageService;
 
-	@Autowired
-	CommentLikeService commentLikeService;
-
 	// 所有評論list
 	@RequestMapping("/comments")
-	public String listComments(HttpSession session, @ModelAttribute("commentLike") CommentLike commentLike,
-			Model model) {
+	public String listComments(Model model) {
 		List<Comment> listcomment = commentService.findAllByOrderByCommentIdDesc();// 倒敘
 		model.addAttribute("listComment", listcomment);
 		model.addAttribute("commentMessageService", commentMessageService);
