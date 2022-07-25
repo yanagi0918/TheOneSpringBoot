@@ -15,17 +15,20 @@ public class CourseCsvExporter {
 	public void csvExport(Writer writer, List<CourseBean> courses) {
 
 		try (CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT)) {
-			csvPrinter.printRecord("講師帳號", "講師", "狀態","課程編號","課程分類","評分","價錢","上架時間");
+			csvPrinter.printRecord("講師帳號", "講師", "狀態","課程編號","課程名稱","課程分類","評分","價錢","上架時間","影片連結");
 			for (CourseBean course : courses) {
 				csvPrinter.printRecord(
 						course.getUserid(),
 						course.getLecturer(),
 						course.getStatus(),
 						course.getCourseNo(),
+						course.getCourseIntroduction(),
 						course.getCourseCategory(),
 						course.getScore(),
 						course.getPrice(),
-						course.getDate()
+						course.getDate(),
+						course.getCourseVedioUrl()
+
 						);
 			}
 		} catch (IOException e) {
