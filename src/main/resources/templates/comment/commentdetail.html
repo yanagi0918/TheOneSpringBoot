@@ -442,19 +442,19 @@
 															th:if="${session.loginMember != null}">
 															<div class="form-group">
 																<div class="f-left">
-																	<input type="text" class="form-control"
+																	<input type="text" class="form-control replyanonymous"
 																		th:style="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名') ? 'display: none' : 'display: block'}"
-																		id="replyNickName" name="replyNickName"
+																		id="" name="replyNickName"
 																		th:value="${commentMessage.replyNickName == null ? 	session.loginMember.username : commentMessage.replyNickName}"
 																		placeholder="來個暱稱">
 																</div>
 																<label class="f-left pr-1">匿名</label>
 																<div class="switch-wrap justify-content-between f-left">
 																	<div class="confirm-switch">
-																		<input type="checkbox" id="confirm-switch"
+																		<input type="checkbox" th:id="confirm-switch2"
 																			name="anonymous"
 																			th:checked="${commentMessage.replyNickName != null && commentMessage.replyNickName.contains('匿名')}">
-																		<label for="confirm-switch" class="f-left"></label>
+																		<label for="confirm-switch2" class="f-left"></label>
 																	</div>
 																</div>
 															</div>
