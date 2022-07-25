@@ -37,5 +37,5 @@ public interface CourseService {
 
 	List<CourseBean> findTop5ByCourseCategoryAndStatus(String courseCategory,String status);
 
-	List<CourseBean> findTop5ByStatusOrderByDateDesc(String status);
+	List<CourseBean> findTop5ByStatusOrderByCourseNoDesc(String status);
 }

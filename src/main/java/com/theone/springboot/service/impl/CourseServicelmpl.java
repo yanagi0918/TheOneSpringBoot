@@ -137,7 +137,7 @@ public class CourseServicelmpl implements CourseService {
     }
 
     @Override
-    public List<CourseBean> findTop5ByStatusOrderByDateDesc(String status) {
-        return courseDao.findTop5ByStatusOrderByDateDesc(status);
+    public List<CourseBean> findTop5ByStatusOrderByCourseNoDesc(String status) {
+        return courseDao.findTop5ByStatusOrderByCourseNoDesc(status);
     }
 }

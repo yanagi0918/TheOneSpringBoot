@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.theone.springboot.entity.CourseBean;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -25,5 +24,5 @@ public interface CourseDao extends JpaRepository<CourseBean, Integer> {
 
     Page<CourseBean> findByCourseNameContainingOrCourseCategoryContainingOrLecturerContaining(Pageable pageable,String courseName, String courseCategory, String lecturer);
 
-    List<CourseBean> findTop5ByStatusOrderByDateDesc(String status);
+    List<CourseBean> findTop5ByStatusOrderByCourseNoDesc(String status);
 }
