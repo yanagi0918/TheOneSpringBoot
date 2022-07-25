@@ -267,8 +267,15 @@ $(function() {
 			$('#replyNickName').val('');
 		}
 	});
-
-
+	
+	$('#messageNickName #confirm-switch2').click(function() {
+		$('.replyanonymous').toggle();
+		if ($('#confirm-switch2').prop('checked')) {
+			$('.replyanonymous').val('匿名');
+		} else {
+			$('.replyanonymous').val('');
+		}
+	});
 
 })
 
