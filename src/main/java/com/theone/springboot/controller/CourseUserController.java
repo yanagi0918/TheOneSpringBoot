@@ -45,7 +45,7 @@ public class CourseUserController {
                                 @RequestParam(required = false) String courseCategory,
                                 @RequestParam(required = false) Integer courseNo,
                                 Model model) {
-        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByDateDesc("已審核");
+        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByCourseNoDesc("已審核");
         if (courseNo != null) {
             Optional<CourseBean> findCourse = courseService.findCourse(courseNo);
             List<CourseBean> courseListCate = courseService.findTop5ByCourseCategoryAndStatus(findCourse.orElseThrow().getCourseCategory(), "已審核");
@@ -128,7 +128,7 @@ public class CourseUserController {
     public String findAllCollections(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("loginMember");
         Set<CourseBean> collectionCourses = member.getCollectionCourses();
-        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByDateDesc("已審核");
+        List<CourseBean> courseListRecent = courseService.findTop5ByStatusOrderByCourseNoDesc("已審核");
         List<CourseBean> courseListCate = courseService.findTop5ByCourseCategoryAndStatus(collectionCourses.stream().findFirst().get().getCourseCategory(),"已審核");
 
         model.addAttribute("username", member.getUsername());
