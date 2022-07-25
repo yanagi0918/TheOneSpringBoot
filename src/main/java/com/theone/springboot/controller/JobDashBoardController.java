@@ -32,6 +32,7 @@ public class JobDashBoardController {
 		List<Job> jobs = jobService.getAllJobs();
 		m.addAttribute("companyList",companyService.getAllCompanies());
 		m.addAttribute("jobs", jobs);
+		m.addAttribute("total", jobs.size());
 		return "job_dashboard/joblist";
 	}
 	
